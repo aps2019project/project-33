@@ -6,6 +6,24 @@ public class Application {
     private ArrayList<Account> accounts;
     private ArrayList<Battle> battles;
 
+    public void runApplication(){
+        MainMenu mainMenu = new MainMenu();
+        mainMenu.inputCommandLine();
+    }
+
+    public Account createAccount(){
+        Account newAccount = new Account();
+        this.addAccount(newAccount);
+        return newAccount;
+    }
+
+    public void addAccount(Account account){
+        this.accounts.add(account);
+    }
+
+
+    // Here is Setters && Getters
+
     public Shop getShop() {
         return shop;
     }
