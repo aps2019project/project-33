@@ -21,6 +21,15 @@ public class Application {
         this.accounts.add(account);
     }
 
+    public Battle createBattle(){
+        Battle newBattle = new Battle();
+        this.addBattle(newBattle);
+        return newBattle;
+    }
+
+    public void addBattle(Battle battle){
+        this.battles.add(battle);
+    }
 
     // Here is Setters && Getters
 
@@ -46,5 +55,13 @@ public class Application {
 
     public void setBattles(ArrayList<Battle> battles) {
         this.battles = battles;
+    }
+
+    public Player getLogedInPlayer() {
+        return logedInPlayer;
+    }
+
+    public void setLogedInPlayer(Player logedInPlayer) {
+        this.logedInPlayer = logedInPlayer;
     }
 }
