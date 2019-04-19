@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Application {
     private Shop shop;
-    private Player logedInPlayer;
+    private Account loggedInAccount;
     private ArrayList<Account> accounts;
     private ArrayList<Battle> battles;
 
@@ -57,11 +57,11 @@ public class Application {
         this.battles = battles;
     }
 
-    public Player getLogedInPlayer() {
-        return logedInPlayer;
+    public Account getLoggedInAccount() {
+        return loggedInAccount;
     }
 
-    public void setLogedInPlayer(Player logedInPlayer) {
-        this.logedInPlayer = logedInPlayer;
+    public void setLoggedInAccount(Account loggedInAccount) {
+        this.loggedInAccount = loggedInAccount;
     }
 }
