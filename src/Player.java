@@ -1,5 +1,4 @@
-
-
+import java.util.ArrayList;
 
 public class Player {
     public CollectionItem getSelectedCollectionItem() {
@@ -72,21 +71,21 @@ public class Player {
 
     private Mana mana;
 
-    public Arraylist<CollectionItem> getUsedCards() {
+    public ArrayList<CollectionItem> getUsedCards() {
         return usedCards;
     }
 
-    private Arraylist<CollectionItem> usedCards = new Arraylist<CollectionItem>;
+    private ArrayList<CollectionItem> usedCards = new ArrayList<CollectionItem>;
 
     public void addNewUsedCards(CollectionItem collectionItem){
         usedCards.add(collectionItem);
     }
 
-    public Arraylist<CollectableItem> getCollectableItems() {
+    public ArrayList<CollectableItem> getCollectableItems() {
         return collectableItems;
     }
 
-    private Arraylist<CollectableItem> collectableItems = new Arraylist<CollectionItem>;
+    private ArrayList<CollectableItem> collectableItems = new ArrayList<CollectionItem>;
 
     public void addNewCollectableItems(CollectableItem collectableItem){
         collectableItems.add(collectableItem);
@@ -99,13 +98,12 @@ public class Player {
     public void showCollectableItems () {
         CollectableItem.showInfo();
     }
+
     //attack ha ro badan miznm:)
     public void attack (String opponentID, String maCardID) {
-
     }
 
     public void comboAttack (String opponentID, String myCardID,...){
-
     }
 
 }

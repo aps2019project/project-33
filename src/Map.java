@@ -1,13 +1,13 @@
-
+import java.util.ArrayList;
 
 public class Map {
-    private Arraylist<Cell> cells = new Arraylist<Cell>;
+    private ArrayList<Cell> cells = new ArrayList<Cell>();
 
     public void addNewCell (Cell cell) {
         cells.add(cell);
     }
 
-    public Arraylist<Cell> getCells (){
+    public ArrayList<Cell> getCells (){
         return cells;
     }
 
@@ -35,7 +35,6 @@ public class Map {
         for (Cell cell : cells){
             if (cell.getX() == x && cell.getY() == y) {
                 return cell;
-                break;
             }
         }
         return null;

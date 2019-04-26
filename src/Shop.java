@@ -1,6 +1,5 @@
 import java.awt.*;
 import java.sql.SQLOutput;
-import java.util.Collection;
 import java.util.Scanner;
 
 public class Shop extends Menu {
@@ -41,7 +40,7 @@ public class Shop extends Menu {
 
     public void buy(String name){
         CollectionItem collectionItem = this.collection.getCollectionItemByName(name);
-        if(collectionItem == NULL){
+        if(collectionItem == null){
             System.out.println("There isn't this thing in collection");
         }
         if(collectionItem instanceof UsableItem) this.buyItem((UsableItem)collectionItem);
