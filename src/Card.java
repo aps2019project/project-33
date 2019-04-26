@@ -5,10 +5,11 @@ public abstract class Card extends CollectionItem {
 
     public static Card getCardById(String ID){return null;}
     public static Card getCardByName(String name){return null;}
-    abstract public void showCardInCollcetion();
+    abstract public void showCardInCollection();
     abstract public void showCardInBattle();
-    public ArrayList<Cell> getImpactCell(){}
+    public ArrayList<Cell> getImpactCell(){ return null;}
     abstract public ArrayList<Cell> findImpactCell();
+    abstract public ArrayList<Cell> findImpactArea();
 
     //Here is Setters && Getters
 
