@@ -93,14 +93,12 @@ public class Player {
         CollectableItem.showInfo();
     }
 
-    //attack ha ro badan miznm:)
-
     public void attack(String opponentID, String maCardID) {
-
+        Battle.attackToOppenentCard(opponentID, maCardID);
     }
 
     public void comboAttack(String opponentID, String... myCardID) {
-
+        Battle.comboAttackToOppenentCard(opponentID, myCardID);
     }
 
 }
