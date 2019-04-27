@@ -78,7 +78,7 @@ public class Player {
 
     private Arraylist<CollectionItem> usedCards = new Arraylist<CollectionItem>;
 
-    public void addNewUsedCards(CollectionItem collectionItem){
+    public void addNewUsedCards(CollectionItem collectionItem) {
         usedCards.add(collectionItem);
     }
 
@@ -88,7 +88,7 @@ public class Player {
 
     private Arraylist<CollectableItem> collectableItems = new Arraylist<CollectionItem>;
 
-    public void addNewCollectableItems(CollectableItem collectableItem){
+    public void addNewCollectableItems(CollectableItem collectableItem) {
         collectableItems.add(collectableItem);
     }
 
@@ -96,15 +96,16 @@ public class Player {
         map.insertCard(cardName, x, y);
     }
 
-    public void showCollectableItems () {
+    public void showCollectableItems() {
         CollectableItem.showInfo();
     }
+
     //attack ha ro badan miznm:)
-    public void attack (String opponentID, String maCardID) {
+    public void attack(String opponentID, String maCardID) {
 
     }
 
-    public void comboAttack (String opponentID, String myCardID,...){
+    public void comboAttack(String opponentID, String myCardID,...) {
 
     }
 
