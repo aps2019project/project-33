@@ -1,7 +1,18 @@
-
-
+import java.util.ArrayList;
 
 public class Player {
+
+    private ArrayList<CollectionItem> usedCards = new ArrayList<CollectionItem>();
+    private ArrayList<CollectableItem> collectableItems = new ArrayList<CollectableItem>();
+    private CollectionItem selectedCollectionItem;
+    private Cell heroPosition;
+    private Mana mana;
+    private Hand hand;
+    private Hero hero;
+    private int numberOfFlags;
+    private int flagTurns;
+
+
     public CollectionItem getSelectedCollectionItem() {
         return selectedCollectionItem;
     }
@@ -9,8 +20,6 @@ public class Player {
     public void setSelectedCollectionItem(CollectionItem selectedCollectionItem) {
         this.selectedCollectionItem = selectedCollectionItem;
     }
-
-    private CollectionItem selectedCollectionItem;
 
     public Hand getHand() {
         return hand;
@@ -20,8 +29,6 @@ public class Player {
         this.hand = hand;
     }
 
-    private Hand hand;
-
     public Hero getHero() {
         return hero;
     }
@@ -29,8 +36,6 @@ public class Player {
     public void setHero(Hero hero) {
         this.hero = hero;
     }
-
-    private Hero hero;
 
     public int getNumberOfFlags() {
         return numberOfFlags;
@@ -40,8 +45,6 @@ public class Player {
         this.numberOfFlags = numberOfFlags;
     }
 
-    private int numberOfFlags;
-
     public int getFlagTurns() {
         return flagTurns;
     }
@@ -49,8 +52,6 @@ public class Player {
     public void setFlagTurns(int flagTurns) {
         this.flagTurns = flagTurns;
     }
-
-    private int flagTurns;
 
     public Cell getHeroPosition() {
         return heroPosition;
@@ -60,8 +61,6 @@ public class Player {
         this.heroPosition = heroPosition;
     }
 
-    private Cell heroPosition;
-
     public Mana getMana() {
         return mana;
     }
@@ -70,23 +69,17 @@ public class Player {
         this.mana = mana;
     }
 
-    private Mana mana;
-
-    public Arraylist<CollectionItem> getUsedCards() {
+    public ArrayList<CollectionItem> getUsedCards() {
         return usedCards;
     }
-
-    private Arraylist<CollectionItem> usedCards = new Arraylist<CollectionItem>;
 
     public void addNewUsedCards(CollectionItem collectionItem) {
         usedCards.add(collectionItem);
     }
 
-    public Arraylist<CollectableItem> getCollectableItems() {
+    public ArrayList<CollectableItem> getCollectableItems() {
         return collectableItems;
     }
-
-    private Arraylist<CollectableItem> collectableItems = new Arraylist<CollectionItem>;
 
     public void addNewCollectableItems(CollectableItem collectableItem) {
         collectableItems.add(collectableItem);
@@ -101,11 +94,12 @@ public class Player {
     }
 
     //attack ha ro badan miznm:)
+
     public void attack(String opponentID, String maCardID) {
 
     }
 
-    public void comboAttack(String opponentID, String myCardID,...) {
+    public void comboAttack(String opponentID, String... myCardID) {
 
     }
 

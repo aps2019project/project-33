@@ -4,6 +4,8 @@
 public class Match {
 
     private Player winner;
+    private Player loser;
+    private Double time;
 
     public Player getWinner() {
         return winner;
@@ -21,7 +23,6 @@ public class Match {
         this.loser = loser;
     }
 
-    private Player loser;
 
     public Double getTime() {
         return time;
@@ -30,8 +31,5 @@ public class Match {
     public void setTime(Double time) {
         this.time = time;
     }
-
-    private Double time;
-
 
 }
