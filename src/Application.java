@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 
 public class Application {
-    private Shop shop;
-    private Account loggedInAccount;
+
     private ArrayList<Account> accounts;
     private ArrayList<Battle> battles;
+    private Shop shop;
+    private Account loggedInAccount;
+
 
     public void runApplication(){
         MainMenu mainMenu = new MainMenu();

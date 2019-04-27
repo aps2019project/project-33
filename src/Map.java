@@ -1,13 +1,16 @@
-
+import java.util.ArrayList;
 
 public class Map {
-    private Arraylist<Cell> cells = new Arraylist<Cell>;
+
+    private ArrayList<Cell> cells = new ArrayList<Cell>();
+    private int height;
+    private int width;
 
     public void addNewCell (Cell cell) {
         cells.add(cell);
     }
 
-    public Arraylist<Cell> getCells (){
+    public ArrayList<Cell> getCells (){
         return cells;
     }
 
@@ -19,8 +22,6 @@ public class Map {
         this.height = height;
     }
 
-    private int height;
-
     public int getWidth() {
         return width;
     }
@@ -29,13 +30,10 @@ public class Map {
         this.width = width;
     }
 
-    private int width;
-
     public Cell getCellByCoordination (int x, int y){
         for (Cell cell : cells){
             if (cell.getX() == x && cell.getY() == y) {
                 return cell;
-                break;
             }
         }
         return null;
