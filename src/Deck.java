@@ -1,10 +1,12 @@
+import java.util.ArrayList;
+
 class Deck{
     public ArrayList<CollectionItem> getCards() {
         return cards;
     }
 
-    private ArrayList<CollectionItem> cards = new ArrayList<CollectionItem>;
-    private static ArrayList<Deck> decks = new ArrayList;
+    private ArrayList<CollectionItem> cards = new ArrayList<CollectionItem>();
+    private static ArrayList<Deck> decks = new ArrayList<>();
 
     public static Deck getDeckByName(String deckName){
         for(Deck deck : decks)
@@ -56,7 +58,7 @@ class Deck{
                 System.out.print(numberOfCards + " : Type : Minion - Name : " + collectionItem.getName() + " - Class: ");
                 System.out.print(collectionItem.getClass() + " - AP : " + collectionItem.getAP() + " - HP : ");
                 System.out.print(collectionItem.getHP() + " - MP : " + collectionItem.getMP() + " - Special power : ");
-                System.out.println(collectionItem.getSpecialPower);
+                System.out.println(collectionItem.getSpecialPower());
             }
         }
     }
@@ -91,7 +93,7 @@ class Deck{
     public static void removeCardFromDeck(String id, String deckName){
         Deck deck = getDeckByName(deckName);
         for(CollectionItem collectionItem: deck.getCards())
-            if(collectionItem.getID.equals(id)){
+            if(collectionItem.getID().equals(id)){
                 deck.removeCard(collectionItem);
                 break;
             }
