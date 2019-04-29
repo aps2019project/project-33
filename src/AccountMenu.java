@@ -13,16 +13,13 @@ public class AccountMenu extends Menu {
         } else if (inputLine.matches("login *.")) {
             String username = input[1];
             login(username);
-        } else if (inputLine.equals("show leaderboard")){
+        } else if (inputLine.equals("show leaderboard")) {
             Account.showLeaderBoard();
-        }
-        else if(inputLine.equals("save")){
+        } else if (inputLine.equals("save")) {
             Main.application.getLoggedInAccount().save();
-        }
-        else if(inputLine.equals("help")){
+        } else if (inputLine.equals("help")) {
             AccountMenu.showHelp();
-        }
-        else if(inputLine.equals("logout")){
+        } else if (inputLine.equals("logout")) {
             this.logout();
         }
     }
@@ -36,7 +33,7 @@ public class AccountMenu extends Menu {
         System.out.println("6. help");
     }
 
-    private void logout(){
+    private void logout() {
         Main.application.setLoggedInAccount(null);
     }
 
@@ -55,7 +52,7 @@ public class AccountMenu extends Menu {
             System.out.println("Invalid Username !!");
         }
         String password = Main.scanner.next();
-        if(!account.getPassword().equals(password)){
+        if (!account.getPassword().equals(password)) {
             System.out.println("Invalid password !!");
         }
         Main.application.setLoggedInAccount(account);
