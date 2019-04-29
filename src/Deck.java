@@ -1,3 +1,4 @@
+import java.net.Socket;
 import java.util.ArrayList;
 
 class Deck{
@@ -32,10 +33,13 @@ class Deck{
         for(CollectionItem collectionItem : deck.getCards()){
             if(collectionItem instanceof Hero){
                 numberOfHeroes++;
+                Hero hero = (Hero)collectionItem;
+                System.out.print(numberOfHeroes + " : ");
+                hero.showHero();
                 //desc bayaad too collectionitem bashe ? + class baraye hero
-                System.out.print(numberOfHeroes + " : Name : " + collectionItem.getName() + " - AP : " + collectionItem.getAP());
+               /* System.out.print(numberOfHeroes + " : Name : " + collectionItem.getName() + " - AP : " + collectionItem.getAP());
                 System.out.print(" - HP : " + collectionItem.getHP() + " Class : " + collectionItem.getClass());
-                System.out.println(" Special power: " + collectionItem.getSpecialPower());
+                System.out.println(" Special power: " + collectionItem.getSpecialPower());*/
             }
         }
         System.out.println("Items :");
@@ -50,15 +54,25 @@ class Deck{
         for(CollectionItem collectionItem : deck.getCards()){
             if(collectionItem instanceof Spell){
                 numberOfCards++;
-                System.out.print(numberOfCards + " : Type : Spell - Name : " + collectionItem.getName() + " - MP : ");
-                System.out.println(collectionItem.getMP() + " - Desc : " + collectionItem.getDesc());
+                Spell spell = (Spell)collectionItem;
+                System.out.print(numberOfCards + " : ");
+                spell.showSpell();
+
+
+                /*System.out.print(numberOfCards + " : Type : Spell - Name : " + collectionItem.getName() + " - MP : ");
+                System.out.println(collectionItem.getMP() + " - Desc : " + collectionItem.getDesc());*/
+
             }
             if(collectionItem instanceof Minion){
                 numberOfCards++;
+                Minion minion = (Minion)collectionItem;
+                System.out.print(numberOfCards + " : ");
+                minion.showMinion();
+                /*
                 System.out.print(numberOfCards + " : Type : Minion - Name : " + collectionItem.getName() + " - Class: ");
                 System.out.print(collectionItem.getClass() + " - AP : " + collectionItem.getAP() + " - HP : ");
                 System.out.print(collectionItem.getHP() + " - MP : " + collectionItem.getMP() + " - Special power : ");
-                System.out.println(collectionItem.getSpecialPower());
+                System.out.println(collectionItem.getSpecialPower());*/
             }
         }
     }
@@ -74,10 +88,10 @@ class Deck{
     //check kon ke 20 ta be hero e ya bedune hero
     public boolean checkValidateDeck(){
         ArrayList<CollectionItem> cards = this.getCards();
-        if(cards.size != 21)
+        if(cards.size() != 21)
             return false;
         int numberOfHeroes = 0;
-        for(CollectionItem collectionItem : cards){
+        for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem instanceof Hero)
                 numberOfHeroes++;
         }
@@ -86,37 +100,33 @@ class Deck{
         return true;
     }
 
-    public void removeCard(CollectionItem collectionItem){
+    public void removeCollectionItem(CollectionItem collectionItem){
         this.cards.remove(collectionItem);
     }
 
-    public static void removeCardFromDeck(String id, String deckName){
-        Deck deck = getDeckByName(deckName);
-        for(CollectionItem collectionItem: deck.getCards())
-            if(collectionItem.getID().equals(id)){
-                deck.removeCard(collectionItem);
-                break;
-            }
+    CollectionItem findCollectionItemInDeck(String ID){
+        for(CollectionItem collectionItem : this.getCards()){
+            if(collectionItem.getID().equals(ID))
+                return collectionItem;
+        }
+        return null;
     }
 
     public void addCard(CollectionItem collectionItem){
         this.cards.add(collectionItem);
     }
 
-    public static void addCardToDeck(String id, String deckName){
-        Deck deck = getDeckByName(deckName);
-        CollectionItem collectionItem = getCollectionItemByID(id);
-        deck.addCard(collectionItem);
-    }
-
-
     public static void deleteDeck(String deckName){
+        boolean find = false;
         for(Deck deck : decks){
             if(deck.getName().equals(deckName)){
                 decks.remove(deck);
-                break;
+                find = true;
+                return;
             }
         }
+        if(!find)
+            System.out.println("deck not found");
     }
     //too cell havaset bashe hamaro besazi avval
     public static void createDeck(String deckName){

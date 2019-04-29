@@ -2,8 +2,21 @@ import java.util.ArrayList;
 
 public abstract class CollectionItem {
     private String name;
+    private String ID;
     public static ArrayList<LivingCard> allCards = new ArrayList<>();
     public static ArrayList<Item> allItems = new ArrayList<>();
+
+    public String getID(){
+        return this.ID;
+    }
+
+    public static CollectionItem getCollectionItemByID(String ID){
+        for(CollectionItem collectionItem : allCards){
+            if(collectionItem.ID.equals(ID))
+                return collectionItem;
+        }
+        return null;
+    }
 
     abstract public void doImpact();
 
