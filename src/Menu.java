@@ -1,16 +1,13 @@
-public class Menu {
+abstract public class Menu {
     private Menu previousMenu;
 
-    public void inputCommandLine(){}
-    public void exit(){}
-    public void showHelp(){}
+    abstract public void inputCommandLine();
 
     //Here is Setters && Getters
 
     public Menu getPreviousMenu() {
         return previousMenu;
     }
-
     public void setPreviousMenu(Menu previousMenu) {
         this.previousMenu = previousMenu;
     }
