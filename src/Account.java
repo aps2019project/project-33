@@ -10,6 +10,18 @@ public class Account {
     private int budget;
     private int numberOfItems;
 
+    public static void createAccount(String username, String password){
+
+    }
+    public static void login(String username, String password){
+
+    }
+    public void removeCard(CollectionItem collectionItem){
+
+    }
+    public static void showLeaderBoard(){}
+    public void save(){}
+    public static void logout(){}
 
     //Here is Setters && Getters
 
