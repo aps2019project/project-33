@@ -50,8 +50,7 @@ public class Account {
         Account.getAcccounts().add(account);
     }
 
-    public void removeCard(CollectionItem collectionItem){
-
+    public void removeCollectionItem(CollectionItem collectionItem){
     }
     public static void showLeaderBoard(){
         ArrayList<Account> accounts = Account.getAcccounts();
