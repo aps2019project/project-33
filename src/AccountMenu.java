@@ -23,6 +23,9 @@ public class AccountMenu extends Menu {
         else if(inputLine.equals("help")){
             AccountMenu.showHelp();
         }
+        else if(inputLine.equals("logout")){
+            this.logout();
+        }
     }
 
     public static void showHelp() {
@@ -32,6 +35,10 @@ public class AccountMenu extends Menu {
         System.out.println("4. save");
         System.out.println("5. logout");
         System.out.println("6. help");
+    }
+
+    private void logout(){
+        Main.application.setLoggedInAccount(null);
     }
 
     private void createAccount(String username) {
