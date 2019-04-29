@@ -6,4 +6,12 @@ public class HolyBuff extends Buff {
     public void doEffect(String cardName) {
 
     }
+
+    public int getShieldPower() {
+        return shieldPower;
+    }
+
+    public void setShieldPower(int shieldPower) {
+        this.shieldPower = shieldPower;
+    }
 }
