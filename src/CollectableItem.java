@@ -1,3 +1,5 @@
 public class CollectableItem extends Item{
-    public static void showInfo(){}
+    public static void showInfo(){
+
+    }
 }

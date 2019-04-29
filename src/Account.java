@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Account {
 
-    private static ArrayList<Account> acccounts = new ArrayList<Account>();
+    private static ArrayList<Account> accounts = new ArrayList<Account>();
     private ArrayList<Match> matches = new ArrayList<Match>();
     private Collection collection;
     private String username;
@@ -19,13 +19,13 @@ public class Account {
 
     //methods
 
-    public int getNumberOfWinns(){
-        int countOfWinns = 0;
+    public int getNumberOfWins(){
+        int countOfWins = 0;
         for(Match match : this.matches)
             if(match.getWinner() == this){
-                countOfWinns ++;
+                countOfWins ++;
             }
-        return countOfWinns;
+        return countOfWins;
     }
 
     public int getNumberOfLooses(){
@@ -38,7 +38,7 @@ public class Account {
     }
 
     public static Account getAccountByUsername(String username){
-        for(Account account : Account.getAcccounts()){
+        for(Account account : Account.getAccounts()){
             if(account.getUsername().equals(username))
                 return account;
         }
@@ -47,17 +47,19 @@ public class Account {
 
     public static void createAccount(String username, String password){
         Account account = new Account(username, password);
-        Account.getAcccounts().add(account);
+        Account.getAccounts().add(account);
     }
 
     public void removeCollectionItem(CollectionItem collectionItem){
+
     }
+
     public static void showLeaderBoard(){
-        ArrayList<Account> accounts = Account.getAcccounts();
+        ArrayList<Account> accounts = Account.getAccounts();
         sortArraysOfAccount(accounts);
         int index = 1;
         for(Account account : accounts){
-            System.out.println(index + ". " + account.getUsername() + " " + "W: " + account.getNumberOfWinns() + " "
+            System.out.println(index + ". " + account.getUsername() + " " + "W: " + account.getNumberOfWins() + " "
             + "L: " + account.getNumberOfLooses());
         }
     }
@@ -66,10 +68,10 @@ public class Account {
         int sizeOfArray = accounts.size();
         for(int i = 0; i < sizeOfArray; i ++)
             for(int j = i + 1; j < sizeOfArray; j ++) {
-                if (accounts.get(i).getNumberOfWinns() > accounts.get(j).getNumberOfWinns()) {
+                if (accounts.get(i).getNumberOfWins() > accounts.get(j).getNumberOfWins()) {
                     swap(accounts, i, j);
                 }
-                if(accounts.get(i).getNumberOfWinns() == accounts.get(j).getNumberOfWinns())
+                if(accounts.get(i).getNumberOfWins() == accounts.get(j).getNumberOfWins())
                     if(accounts.get(i).getNumberOfLooses() < accounts.get(j).getNumberOfLooses())
                         swap(accounts, i, j);
             }
@@ -85,12 +87,12 @@ public class Account {
 
     //Here is Setters && Getters
 
-    public static ArrayList<Account> getAcccounts() {
-        return acccounts;
+    public static ArrayList<Account> getAccounts() {
+        return accounts;
     }
 
-    public static void setAcccounts(ArrayList<Account> acccounts) {
-        Account.acccounts = acccounts;
+    public static void setAccounts(ArrayList<Account> accounts) {
+        Account.accounts = accounts;
     }
 
     public String getUsername() {
