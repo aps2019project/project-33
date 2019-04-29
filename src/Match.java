@@ -3,26 +3,9 @@
 
 public class Match {
 
-    private Player winner;
-    private Player loser;
+    private Account winner;
+    private Account loser;
     private Double time;
-
-    public Player getWinner() {
-        return winner;
-    }
-
-    public void setWinner(Player winner) {
-        this.winner = winner;
-    }
-
-    public Player getLoser() {
-        return loser;
-    }
-
-    public void setLoser(Player loser) {
-        this.loser = loser;
-    }
-
 
     public Double getTime() {
         return time;
@@ -32,4 +15,19 @@ public class Match {
         this.time = time;
     }
 
+    public Account getWinner() {
+        return winner;
+    }
+
+    public void setWinner(Account winner) {
+        this.winner = winner;
+    }
+
+    public Account getLoser() {
+        return loser;
+    }
+
+    public void setLoser(Account loser) {
+        this.loser = loser;
+    }
 }

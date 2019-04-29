@@ -10,18 +10,78 @@ public class Account {
     private int budget;
     private int numberOfItems;
 
+    //Constructor
+
+    public Account(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    //methods
+
+    public int getNumberOfWinns(){
+        int countOfWinns = 0;
+        for(Match match : this.matches)
+            if(match.getWinner() == this){
+                countOfWinns ++;
+            }
+        return countOfWinns;
+    }
+
+    public int getNumberOfLooses(){
+        int countOfLooses = 0;
+        for(Match match : this.matches){
+            if(match.getLoser() == this)
+                countOfLooses ++;
+        }
+        return countOfLooses;
+    }
+
+    public static Account getAccountByUsername(String username){
+        for(Account account : Account.getAcccounts()){
+            if(account.getUsername().equals(username))
+                return account;
+        }
+        return null;
+    }
+
     public static void createAccount(String username, String password){
-
+        Account account = new Account(username, password);
+        Account.getAcccounts().add(account);
     }
-    public static void login(String username, String password){
 
+    public void removeCollectionItem(CollectionItem collectionItem){
     }
-    public void removeCard(CollectionItem collectionItem){
+    public static void showLeaderBoard(){
+        ArrayList<Account> accounts = Account.getAcccounts();
+        sortArraysOfAccount(accounts);
+        int index = 1;
+        for(Account account : accounts){
+            System.out.println(index + ". " + account.getUsername() + " " + "W: " + account.getNumberOfWinns() + " "
+            + "L: " + account.getNumberOfLooses());
+        }
+    }
 
+    private static void sortArraysOfAccount(ArrayList<Account> accounts){
+        int sizeOfArray = accounts.size();
+        for(int i = 0; i < sizeOfArray; i ++)
+            for(int j = i + 1; j < sizeOfArray; j ++) {
+                if (accounts.get(i).getNumberOfWinns() > accounts.get(j).getNumberOfWinns()) {
+                    swap(accounts, i, j);
+                }
+                if(accounts.get(i).getNumberOfWinns() == accounts.get(j).getNumberOfWinns())
+                    if(accounts.get(i).getNumberOfLooses() < accounts.get(j).getNumberOfLooses())
+                        swap(accounts, i, j);
+            }
     }
-    public static void showLeaderBoard(){}
+
+    private static void swap(ArrayList<Account> account, int i, int j){
+        Account tmp = account.get(i);
+        account.set(i, account.get(j));
+        account.set(i, tmp);
+    }
+
     public void save(){}
-    public static void logout(){}
 
     //Here is Setters && Getters
 

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Map {
 
-    private ArrayList<Cell> cells = new ArrayList<Cell>();
+    private ArrayList<Cell> cells = new ArrayList<>();
     private int height;
     private int width;
 
