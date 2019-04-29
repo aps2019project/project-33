@@ -1,8 +1,4 @@
-package Model;
-
 import java.util.ArrayList;
-import Controller.*;
-
 
 public class Deck{
     private ArrayList<CollectionItem> cards = new ArrayList<CollectionItem>();
@@ -48,12 +44,12 @@ public class Deck{
         for(CollectionItem collectionItem : deck.getCards()){
             if(collectionItem instanceof Spell){
                 numberOfCards++;
-                System.out.print(numberOfCards + " : Type : Model.Spell - Name : " + collectionItem.getName() + " - MP : ");
+                System.out.print(numberOfCards + " : Type : Spell - Name : " + collectionItem.getName() + " - MP : ");
                 System.out.println(collectionItem.getMP() + " - Desc : " + collectionItem.getDesc());
             }
             if(collectionItem instanceof Minion){
                 numberOfCards++;
-                System.out.print(numberOfCards + " : Type : Model.Minion - Name : " + collectionItem.getName() + " - Class: ");
+                System.out.print(numberOfCards + " : Type : Minion - Name : " + collectionItem.getName() + " - Class: ");
                 System.out.print(collectionItem.getClass() + " - AP : " + collectionItem.getAP() + " - HP : ");
                 System.out.print(collectionItem.getHP() + " - MP : " + collectionItem.getMP() + " - Special power : ");
                 System.out.println(collectionItem.getSpecialPower());
