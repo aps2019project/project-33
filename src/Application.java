@@ -13,11 +13,6 @@ public class Application {
         mainMenu.inputCommandLine();
     }
 
-    public Account createAccount(){
-        Account newAccount = new Account();
-        this.addAccount(newAccount);
-        return newAccount;
-    }
     //hello
 
     public void addAccount(Account account){

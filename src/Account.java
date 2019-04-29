@@ -19,13 +19,13 @@ public class Account {
 
     //methods
 
-    public int getNumberOfWinns(){
-        int countOfWinns = 0;
+    public int getNumberOfWins(){
+        int countOfWins = 0;
         for(Match match : this.matches)
             if(match.getWinner() == this){
-                countOfWinns ++;
+                countOfWins ++;
             }
-        return countOfWinns;
+        return countOfWins;
     }
 
     public int getNumberOfLooses(){
@@ -51,13 +51,15 @@ public class Account {
     }
 
     public void removeCollectionItem(CollectionItem collectionItem){
+
     }
+
     public static void showLeaderBoard(){
         ArrayList<Account> accounts = Account.getAcccounts();
         sortArraysOfAccount(accounts);
         int index = 1;
         for(Account account : accounts){
-            System.out.println(index + ". " + account.getUsername() + " " + "W: " + account.getNumberOfWinns() + " "
+            System.out.println(index + ". " + account.getUsername() + " " + "W: " + account.getNumberOfWins() + " "
             + "L: " + account.getNumberOfLooses());
         }
     }
@@ -66,10 +68,10 @@ public class Account {
         int sizeOfArray = accounts.size();
         for(int i = 0; i < sizeOfArray; i ++)
             for(int j = i + 1; j < sizeOfArray; j ++) {
-                if (accounts.get(i).getNumberOfWinns() > accounts.get(j).getNumberOfWinns()) {
+                if (accounts.get(i).getNumberOfWins() > accounts.get(j).getNumberOfWins()) {
                     swap(accounts, i, j);
                 }
-                if(accounts.get(i).getNumberOfWinns() == accounts.get(j).getNumberOfWinns())
+                if(accounts.get(i).getNumberOfWins() == accounts.get(j).getNumberOfWins())
                     if(accounts.get(i).getNumberOfLooses() < accounts.get(j).getNumberOfLooses())
                         swap(accounts, i, j);
             }
