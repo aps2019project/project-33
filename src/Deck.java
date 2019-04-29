@@ -1,12 +1,15 @@
 import java.util.ArrayList;
 
-class Deck{
-    public ArrayList<CollectionItem> getCards() {
-        return cards;
-    }
-
+public class Deck{
     private ArrayList<CollectionItem> cards = new ArrayList<CollectionItem>();
     private static ArrayList<Deck> decks = new ArrayList<>();
+    private String name;
+
+    //constructor
+
+    public Deck(String name) {
+        this.name = name;
+    }
 
     public static Deck getDeckByName(String deckName){
         for(Deck deck : decks)
@@ -15,15 +18,6 @@ class Deck{
         return null;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    private String name;
 // ye string desc o special power bayad be carda ezafe she
     public static void showDeck(String deckName, boolean haveTab){
         Deck deck = Deck.getDeckByName(deckName);
@@ -129,4 +123,19 @@ class Deck{
         deck.setName(deckName);
         decks.add(deck);
     }
+
+    //Here is setters && getters
+
+    public ArrayList<CollectionItem> getCards() {
+        return cards;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }
