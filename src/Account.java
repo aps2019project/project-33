@@ -10,12 +10,25 @@ public class Account {
     private int budget;
     private int numberOfItems;
 
+    public Account(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+
+    public static Account getAccountByUsername(String username){
+        for(Account account : Account.getAcccounts()){
+            if(account.getUsername().equals(username))
+                return account;
+        }
+        return null;
+    }
+
     public static void createAccount(String username, String password){
-
+        Account account = new Account(username, password);
+        Account.getAcccounts().add(account);
     }
-    public static void login(String username, String password){
 
-    }
     public void removeCard(CollectionItem collectionItem){
 
     }
