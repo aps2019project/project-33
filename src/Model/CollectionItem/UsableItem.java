@@ -1,4 +1,4 @@
-package Model;
+package Model.CollectionItem;
 
 public class UsableItem {
     private int price;

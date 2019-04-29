@@ -1,4 +1,6 @@
-package Model;
+package Model.CollectionItem;
+
+import Model.Enviroment.Cell;
 
 import java.util.ArrayList;
 

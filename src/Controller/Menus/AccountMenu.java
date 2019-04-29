@@ -1,5 +1,6 @@
-package Controller;
+package Controller.Menus;
 
+import Controller.Main;
 import Model.*;
 
 public class AccountMenu extends Menu {

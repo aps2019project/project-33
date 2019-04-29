@@ -1,5 +1,6 @@
-package Controller;
+package Controller.Menus;
 
+import Controller.Main;
 import Model.*;
 
 public class CollectionMenu extends Menu {
@@ -22,7 +23,7 @@ public class CollectionMenu extends Menu {
             deleteDeck(input[2], collection);
         } else if (inputLine.matches("add *. to *.")) {
             String collectionItemId = input[1], deckName = input[3];
-            //  Model.CollectionItem = Model.CollectionItem.
+            //  Model.CollectionItem.CollectionItem = Model.CollectionItem.CollectionItem.
             //TODO
         } else if (inputLine.matches("remove *. from *.")) {
             String collecitonItemId = input[1], deckName = input[3];

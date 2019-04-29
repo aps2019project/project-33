@@ -2,6 +2,11 @@ package Model;
 
 import java.util.ArrayList;
 import Controller.*;
+import Model.CollectionItem.CollectableItem;
+import Model.CollectionItem.CollectionItem;
+import Model.CollectionItem.Hero;
+import Model.Enviroment.Cell;
+import Model.Enviroment.Map;
 
 public class Player {
 

@@ -1,4 +1,7 @@
-package Model;
+package Model.CollectionItem;
+
+import Model.Buffs.Buff;
+import Model.Enviroment.Cell;
 
 import java.util.ArrayList;
 

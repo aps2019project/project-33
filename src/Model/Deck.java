@@ -1,5 +1,7 @@
 package Model;
 
+import Model.CollectionItem.*;
+
 import java.util.ArrayList;
 
 public class Deck{

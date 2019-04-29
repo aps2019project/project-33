@@ -1,7 +1,8 @@
 package Model;
 
 import java.util.ArrayList;
-import Controller.*;
+
+import Model.CollectionItem.CollectionItem;
 
 public class Account {
 

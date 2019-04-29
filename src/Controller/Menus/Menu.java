@@ -1,4 +1,4 @@
-package Controller;
+package Controller.Menus;
 
 abstract public class Menu {
     private Menu previousMenu;

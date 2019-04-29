@@ -2,6 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 import Controller.*;
+import Model.CollectionItem.Card;
 
 public class GraveYard {
     private ArrayList<Card> cards;

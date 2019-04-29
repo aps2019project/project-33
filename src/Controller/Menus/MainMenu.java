@@ -1,4 +1,6 @@
-package Controller;
+package Controller.Menus;
+
+import Controller.Main;
 
 public class MainMenu extends Menu {
 

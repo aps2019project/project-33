@@ -1,6 +1,10 @@
 package Controller;
 
+import Controller.Menus.Menu;
 import Model.*;
+import Model.CollectionItem.Card;
+import Model.CollectionItem.CollectionItem;
+import Model.CollectionItem.UsableItem;
 
 public class Shop extends Menu {
     private Collection collection;

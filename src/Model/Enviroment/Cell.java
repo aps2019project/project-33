@@ -1,4 +1,8 @@
-package Model;
+package Model.Enviroment;
+
+import Model.Buffs.Buff;
+import Model.CollectionItem.CollectionItem;
+import Model.CollectionItem.LivingCard;
 
 import java.util.ArrayList;
 

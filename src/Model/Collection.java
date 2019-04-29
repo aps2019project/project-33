@@ -1,5 +1,10 @@
 package Model;
 
+import Model.CollectionItem.Card;
+import Model.CollectionItem.CollectionItem;
+import Model.CollectionItem.Hero;
+import Model.CollectionItem.Item;
+
 import java.util.ArrayList;
 
 public class Collection {

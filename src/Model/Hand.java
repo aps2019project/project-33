@@ -1,9 +1,13 @@
 package Model;
 
+import Model.CollectionItem.CollectionItem;
+import Model.CollectionItem.Minion;
+import Model.CollectionItem.Spell;
+
 import java.util.ArrayList;
 
 public class Hand {
-    ArrayList<CollectionItem> handCards = new ArrayList<CollectionItem>();
+     ArrayList<CollectionItem> handCards = new ArrayList<CollectionItem>();
     //havaset bashe to taghire in
     int numberOfUsedDeckCollectionItems = 0;
 
