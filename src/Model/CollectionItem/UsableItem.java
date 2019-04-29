@@ -1,6 +1,6 @@
 package Model.CollectionItem;
 
-public class UsableItem {
+public class UsableItem extends Item{
     private int price;
 
     //Here is Setters && Getters
@@ -12,4 +12,5 @@ public class UsableItem {
     public void setPrice(int price) {
         this.price = price;
     }
+
 }

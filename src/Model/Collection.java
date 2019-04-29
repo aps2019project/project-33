@@ -97,9 +97,7 @@ public class Collection {
         for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem instanceof Hero){
                 numberOfHeroes++;
-                System.out.print(numberOfHeroes + " : ");
-                Hero hero = (Hero)collectionItem;
-                hero.showHero();
+                System.out.print(numberOfHeroes + " : " + collectionItem.getID());
             }
         }
     }
@@ -110,9 +108,7 @@ public class Collection {
         for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem instanceof Item){
                 numberOfItems++;
-                System.out.print(numberOfItems + " : ");
-                Item item = (Item)collectionItem;
-                item.showItem();
+                System.out.print(numberOfItems + " : " + collectionItem.getInfo());
             }
         }
     }

@@ -10,3 +10,7 @@ public class Main {
         application.runApplication();
     }
 }
+
+
+//getClass e tooye show info cherto perte
+//get AP ham bayad dashte bashe

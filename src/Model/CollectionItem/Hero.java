@@ -34,4 +34,11 @@ public class Hero extends LivingCard {
     public void doImpact() {
 
     }
+
+    @Override
+    public String getInfo() {
+        String info = "Name : " + this.getName() + " - AP : " + this.getAP() + " - HP : "
+                + this.getHP() + " Class : " + this.getClass() + " Special power: " + this.getSpecialPower();
+        return info;
+    }
 }

@@ -13,8 +13,8 @@ public class MainMenu extends Menu {
             CollectionMenu collectionMenu = new CollectionMenu();
             collectionMenu.inputCommandLine();
         }
-        else if(inputLine.equals("Enter Controller.Shop")){
-            Main.application.getShop().inputCommandLine();
+        else if(inputLine.equals("Enter Controller.ShopMenu")){
+            Main.application.getShopMenu().inputCommandLine();
         }
         else if(inputLine.equals("Enter Controller.Battle")){
             BattleMenu battleMenu = new BattleMenu();
@@ -32,7 +32,7 @@ public class MainMenu extends Menu {
 
     public static void showHelp() {
         System.out.println("1. Model.Collection");
-        System.out.println("2. Controller.Shop");
+        System.out.println("2. Controller.ShopMenu");
         System.out.println("3. Controller.Battle");
         System.out.println("4. Exit");
         System.out.println("5. Help");

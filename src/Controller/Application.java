@@ -9,7 +9,7 @@ public class Application {
 
     private ArrayList<Account> accounts;
     private ArrayList<Battle> battles;
-    private Shop shop;
+    private ShopMenu shopMenu;
     private Account loggedInAccount;
 
 
@@ -36,12 +36,12 @@ public class Application {
 
     // Here is Setters && Getters
 
-    public Shop getShop() {
-        return shop;
+    public ShopMenu getShopMenu() {
+        return shopMenu;
     }
 
-    public void setShop(Shop shop) {
-        this.shop = shop;
+    public void setShopMenu(ShopMenu shopMenu) {
+        this.shopMenu = shopMenu;
     }
 
     public ArrayList<Account> getAccounts() {

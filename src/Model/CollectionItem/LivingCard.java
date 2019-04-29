@@ -10,7 +10,7 @@ abstract public class LivingCard extends Card {
     changeRangeOfAttack, numberOfDamaged;
     private String counterAttackType, type;
     private ArrayList<Buff> effects;
-    private boolean canCounterAttak, canMoveOrAttack;
+    private boolean canCounterAttack, canMoveOrAttack;
 
     public void addNewBuff(Buff buff){}
     public void deleteBuff(Buff buff){}
@@ -118,12 +118,12 @@ abstract public class LivingCard extends Card {
         this.effects = effects;
     }
 
-    public boolean isCanCounterAttak() {
-        return canCounterAttak;
+    public boolean isCanCounterAttack() {
+        return canCounterAttack;
     }
 
-    public void setCanCounterAttak(boolean canCounterAttak) {
-        this.canCounterAttak = canCounterAttak;
+    public void setCanCounterAttack(boolean canCounterAttack) {
+        this.canCounterAttack = canCounterAttack;
     }
 
     public boolean isCanMoveOrAttack() {

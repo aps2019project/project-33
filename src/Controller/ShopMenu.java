@@ -6,7 +6,7 @@ import Model.CollectionItem.Card;
 import Model.CollectionItem.CollectionItem;
 import Model.CollectionItem.UsableItem;
 
-public class Shop extends Menu {
+public class ShopMenu extends Menu {
     private Collection collection;
 
     public void inputCommandLine(){
@@ -18,7 +18,7 @@ public class Shop extends Menu {
 
         if(inputLine.equals("exit"))
             return;
-        else if(inputLine.equals("show Model.Collection"))
+        else if(inputLine.equals("show Collection"))
             collection.showCollection();
         else if(inputLine.matches("search .+")){
             String collectionItemName = separatedInput[1];

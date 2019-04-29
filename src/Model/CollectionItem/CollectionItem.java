@@ -8,22 +8,13 @@ public abstract class CollectionItem {
     public static ArrayList<LivingCard> allCards = new ArrayList<>();
     public static ArrayList<Item> allItems = new ArrayList<>();
 
-    public String getID(){
-        return this.ID;
-    }
-
     public static CollectionItem getCollectionItemByID(String ID){
         for(CollectionItem collectionItem : allCards){
-            if(collectionItem.ID.equals(ID))
+            if(collectionItem.getID().equals(ID))
                 return collectionItem;
         }
         return null;
     }
-
-    abstract public void doImpact();
-
-    //Here is Setters && Getters
-
     public static LivingCard getLivingCardByID(String livingCardID){
         for(LivingCard livingCard : CollectionItem.allCards)
             if(livingCard.getID().equals(livingCardID))
@@ -32,11 +23,25 @@ public abstract class CollectionItem {
         return null;
     }
 
+    public abstract void doImpact();
+    public abstract String getInfo();
+
+
+    //Here is Setters && Getters
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getID(){
+        return this.ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 }

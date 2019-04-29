@@ -34,4 +34,12 @@ public class Minion extends LivingCard {
     public void doImpact() {
 
     }
+
+    @Override
+    public String getInfo() {
+        String info = "Type : Minion - Name : " + this.getName() + " - Class: " + this.getClass() + " - AP : " +
+                this.getAP() + " - HP : " + this.getHP() + " - MP : " + this.getMP() + " - Special power : "
+                + this.getSpecialPower();
+        return info;
+    }
 }
