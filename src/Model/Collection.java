@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Collection {
     private ArrayList<CollectionItem> cards;
     private Deck mainDeck;
+    private ArrayList<Deck> decks = new ArrayList<Deck>();
 
     public void removeCollectionItemFromCollection(String collectionItemID){
     }
@@ -57,26 +58,44 @@ public class Collection {
         Deck deck = Deck.getDeckByName(deckName);
         CollectionItem collectionItem = deck.findCollectionItemInDeck(ID);
         if(this.validateInput(collectionItem, deck))
-            deck.removeCollectionItem(collectionItem);
+            deck.removeCollectionItemFromDeck(collectionItem);
     }
 
     public void addCollectionItemToDeck(String ID, String deckName){
-        Deck deck = Deck.getDeckByName(deckName);
-        if(this.search(ID).size() == 0){
-            System.out.println("This id is not exist");
+        Deck thisDeck = null;
+        for(Deck deck : this.getDecks()){
+            if(deck.getName().equals(deckName)){
+                thisDeck = deck;
+            }
+        }
+        if(thisDeck == null){
+            System.out.println("deck isnt in your collection");
             return;
         }
         CollectionItem collectionItem = CollectionItem.getCollectionItemByID(ID);
-        if(this.validateInput(collectionItem, deck))
-            deck.addCard(collectionItem);
+        if(this.validateInput(collectionItem, thisDeck))
+            thisDeck.addCard(collectionItem);
     }
 
     public void deleteDeck(String deckName){
-        Deck.deleteDeck(deckName);
+        for(Deck deck : this.getDecks()){
+            if(deck.getName().equals(deckName)){
+                Deck.removeDeck(deck);
+                decks.remove(deck);
+                return;
+            }
+        }
+        System.out.println("deck wasnt found");
+    }
+
+    public ArrayList<Deck> getDecks(){
+        return this.decks;
     }
 
     public void createDeck(String deckName){
-        Deck.createDeck(deckName);
+        Deck deck = Deck.createDeck(deckName);
+        if(deck != null)
+            decks.add(deck);
     }
 
     public ArrayList<CollectionItem> getCards(){
