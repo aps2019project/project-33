@@ -17,7 +17,9 @@ public class Minion extends LivingCard {
 
     @Override
     public void showCardInBattle() {
-
+        //decreaseHPByAttack hamun attack powere?
+        System.out.println(this.getID() + ": " + this.getName() + ", health : " + this.getHP() + ", location : (" +
+                this.getPositionRow() + ", " + this.getPositionColumn() + "), power : " + this.getDecreaseHPByAttack());
     }
 
     @Override
@@ -38,7 +40,7 @@ public class Minion extends LivingCard {
     @Override
     public String getInfo() {
         String info = "Type : Minion - Name : " + this.getName() + " - Class: " + this.getClass() + " - AP : " +
-                this.getAP() + " - HP : " + this.getHP() + " - MP : " + this.getMP() + " - Special power : "
+                this.getDecreaseHPByAttack() + " - HP : " + this.getHP() + " - MP : " + this.getMP() + " - Special power : "
                 + this.getSpecialPower();
         return info;
     }

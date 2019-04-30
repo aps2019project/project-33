@@ -5,11 +5,13 @@ import Controller.*;
 import Model.CollectionItem.CollectableItem;
 import Model.CollectionItem.CollectionItem;
 import Model.CollectionItem.Hero;
+import Model.CollectionItem.LivingCard;
 import Model.Enviroment.Cell;
 import Model.Enviroment.Map;
 
 public class Player {
-
+    private ArrayList<LivingCard> aliveCards = new ArrayList<>();
+  // vase chi mikhaim ino ?
     private ArrayList<CollectionItem> usedCards = new ArrayList<CollectionItem>();
     private ArrayList<CollectableItem> collectableItems = new ArrayList<CollectableItem>();
     private CollectionItem selectedCollectionItem;
@@ -21,6 +23,23 @@ public class Player {
     private int flagTurns;
     private GraveYard graveYard = new GraveYard();
     private Account account;
+
+    public ArrayList<LivingCard> getAliveCards(){
+        return this.aliveCards;
+    }
+
+    public void addAliveCard(LivingCard livingCard){
+        this.aliveCards.add(livingCard);
+    }
+
+    public void removeDeadCard(LivingCard deadCard){
+        for(LivingCard livingCard : this.getAliveCards()){
+            if(livingCard.getID().equals(deadCard.getID())){
+                this.aliveCards.remove(livingCard);
+                break;
+            }
+        }
+    }
 
     public Player(Account account){
         this.account = account;

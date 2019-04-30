@@ -38,8 +38,11 @@ public class Flag extends Item {
         return this.flagOwner;
     }
 
-    public void setPosition(int positionRow, int positionColumn){
+    public void setPositionColumn(int positionColumn){
         this.PositionColumn = positionColumn;
+    }
+
+    public void setPositionRow(int positionRow){
         this.positionRow = positionRow;
     }
 

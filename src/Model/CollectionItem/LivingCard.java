@@ -12,6 +12,10 @@ abstract public class LivingCard extends Card {
     private ArrayList<Buff> effects;
     private boolean canCounterAttack, canMoveOrAttack;
 
+    //location mikhad
+    private int positionColumn;
+    private int positionRow;
+
     public void addNewBuff(Buff buff){}
     public void deleteBuff(Buff buff){}
     public void attack(String opponentID){}
@@ -21,6 +25,22 @@ abstract public class LivingCard extends Card {
     public void counterAttack(){}
 
     // Here is Setters && Getters
+
+    public int getPositionColumn(){
+        return this.positionColumn;
+    }
+
+    public void setPositionColumn(int positionColumn){
+        this.positionColumn = positionColumn;
+    }
+
+    public int getPositionRow(){
+        return this.positionRow;
+    }
+
+    public void  setPositionRow(int positionRow){
+        this.positionRow = positionRow;
+    }
 
     public int getHP() {
         return HP;

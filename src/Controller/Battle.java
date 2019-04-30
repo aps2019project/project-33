@@ -2,6 +2,8 @@ package Controller;
 
 import Model.*;
 import Model.CollectionItem.Flag;
+import Model.CollectionItem.LivingCard;
+import Model.CollectionItem.Minion;
 import Model.Enviroment.Map;
 
 import java.util.ArrayList;
@@ -51,12 +53,25 @@ public class Battle {
     }
 
     public void showMyMinions(){
-        //test2
+        for(LivingCard livingCard : playerOn.getAliveCards()){
+            if(livingCard instanceof Minion){
+                livingCard.showCardInBattle();
+            }
+        }
     }
 
-    public void showOpponentMinions(){}
+    public void showOpponentMinions(){
+        for(LivingCard livingCard : playerOff.getAliveCards()){
+            if(livingCard instanceof Minion){
+                livingCard.showCardInBattle();
+            }
+        }
+    }
 
-    public void showCardInfo(String ID){}
+    //faghat vase livingCard e ?
+    public void showCardInfo(String ID){
+
+    }
 
     public void selectCard(String ID){}
 
