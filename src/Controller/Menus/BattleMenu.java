@@ -10,9 +10,9 @@ import Model.Player;
 public class BattleMenu extends Menu {
     private String inputLine;
     private String[] input;
-    private Battle battle = new Battle;
+    private Battle battle = new Battle();
 
-    private void readInputs(){
+    private void readInputs() {
         inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
         input = inputLine.split("[ ]+");
@@ -20,7 +20,7 @@ public class BattleMenu extends Menu {
 
     @Override
     public void inputCommandLine() {
-        if(!checkDeck(Main.application.getLoggedInAccount())){
+        if (!checkDeck(Main.application.getLoggedInAccount())) {
             System.out.println("selected deck is invalid");
             return;
         }
@@ -32,12 +32,11 @@ public class BattleMenu extends Menu {
 
         readInputs();
 
-        if(inputLine.equals("Single  player")){
+        if (inputLine.equals("Single  player")) {
             battle.setType("Single Player");
             inputCommandLineOfSinglePlayer();
             return;
-        }
-        else if(inputLine.equals("Multi player")){
+        } else if (inputLine.equals("Multi player")) {
             battle.setType("Multi Player");
             inputCommandLineOfMultiPlayer();
             return;
@@ -47,14 +46,14 @@ public class BattleMenu extends Menu {
         inputCommandLine();
     }
 
-    private boolean checkDeck(Account account){
+    private boolean checkDeck(Account account) {
         return account.getCollection().getMainDeck().checkValidateDeck();
     }
 
-    public void inputCommandLineOfSinglePlayer(){
+    public void inputCommandLineOfSinglePlayer() {
         battle.setPlayerOff(new AI());
 
-        while(true) {
+        while (true) {
             System.out.println("1. Story");
             System.out.println("2. Custom Game");
 
@@ -76,10 +75,10 @@ public class BattleMenu extends Menu {
         battle.runGame();
     }
 
-    public void inputCommandLineOfMultiPlayer(){
+    public void inputCommandLineOfMultiPlayer() {
         showAllAccount();
 
-        while(true) {
+        while (true) {
             System.out.println("Enter username of second player :");
             readInputs();
             if (inputLine.matches("Select user *.")) {
@@ -102,46 +101,58 @@ public class BattleMenu extends Menu {
         battle.runGame();
     }
 
-    private void showAllAccount(){
+    private void showAllAccount() {
         int index = 1;
-        for(Account account : Account.getAccounts())
+        for (Account account : Account.getAccounts())
             System.out.println(index++ + ". " + account.getUsername());
     }
 
 
-    public void story(){
+    public void story() {
 
         return;
     }
 
-    public void customGame(String type){
-        if(!battle.getPlayerOff().getAccount().getCollection().getMainDeck().checkValidateDeck()){
-            System.out.println("invalid deck for second player");
+    public void customGame(String type) {
+        if (!battle.getPlayerOff().getAccount().getCollection().getMainDeck().checkValidateDeck()) {
+            System.out.println("selected deck for second player is invalid");
             return;
         }
         System.out.println("Game modes : ");
-        System.out.println("1. Kill enemy's hero");
-        System.out.println("2. Hold flags");
-        System.out.println("3. Talk half of flags");
+        System.out.println("1. Kill_enemy's_hero");
+        System.out.println("2. Hold_flags");
+        System.out.println("3. Talk_half_of_flags");
 
-        readInputs();
+        while(true){
+            readInputs();
 
-        if(!inputLine.matches("start game ]")){
-            System.out.println();
+            if (inputLine.matches("start" + type + " game *.")) {
+                if (!(input[3].equals("Kill_enemy's_hero") || input[3].equals("Hold_flags") ||
+                        input[3].equals("Take_half_of_flags"))) {
+                    System.out.println("Please enter valid mode");
+                    continue;
+                }
+                else {
+                    battle.setMode(input[3]);
+                    return;
+                }
+            }
+            else
+                System.out.println("please enter valid command");
         }
     }
 
-    public void configurePlayer(Player player){
+    public void configurePlayer(Player player) {
         System.out.println("All Decks of players is");
         int index = 0;
-        for(Deck deck : player.getAccount().getCollection().getDecks()){
+        for (Deck deck : player.getAccount().getCollection().getDecks()) {
             System.out.println(index++ + deck.getName());
         }
 
-        while(true) {
+        while (true) {
             readInputs();
-            for(Deck deck : player.getAccount().getCollection().getDecks())
-                if(deck.getName().equals(inputLine)){
+            for (Deck deck : player.getAccount().getCollection().getDecks())
+                if (deck.getName().equals(inputLine)) {
                     player.getAccount().getCollection().setMainDeck(deck);
                     break;
                 }
