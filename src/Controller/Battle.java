@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+import Model.CollectionItem.*;
 import Model.CollectionItem.CollectionItem;
 import Model.CollectionItem.Flag;
 import Model.CollectionItem.LivingCard;
@@ -18,6 +19,7 @@ public class Battle {
     private String type, mode;
     private LivingCard selectedCard;
     private Flag mainFlag;
+    private CollectableItem selectedCollectableItem;
 
     private ArrayList<Flag> flags = new ArrayList<Flag>();
 
@@ -25,6 +27,7 @@ public class Battle {
 
     {
         this.selectedCard = null;
+        this.selectedCollectableItem = null;
     }
 
 
@@ -76,22 +79,45 @@ public class Battle {
     }
 
     //faghat vase livingCard e ?asan malum nis chejurie , card asan bayad tu bazi bashe ya chi koja donbalesh begardim
-    public void showCardInfo(String ID){
-
+    public void showCardInfo(String ID) {
+        String info = "card wasnt found";
+        CollectionItem thisCollectionItem = null;
+        for (CollectionItem collectionItem : playerOff.getAccount().getCollection().getMainDeck().getCards()){
+            if (collectionItem.getID().equals(ID)) {
+                thisCollectionItem = collectionItem;
+            }
+        }
+        for(CollectionItem collectionItem : playerOn.getAccount().getCollection().getMainDeck().getCards()){
+            if(collectionItem.getID().equals(ID)){
+                thisCollectionItem = collectionItem;
+            }
+        }
+        if(thisCollectionItem != null){
+            info = thisCollectionItem.getInfo();
+            if(thisCollectionItem instanceof LivingCard)
+                info += " HP : " + ((LivingCard) (thisCollectionItem)).getRemainingHP() + " AP : " +
+                        ((LivingCard)(thisCollectionItem)).getDecreaseHPByAttack();
+        }
+        System.out.println(info);
     }
 
     //in yeki shartesh chie bayad carde khdoemun bashe koja donbalesh begardim ...
     public void selectCard(String ID){
-        LivingCard livingCard = getCardInBattleByID(ID);
-        if(livingCard == null){
-            System.out.println("Invalid card id");
-            return;
+        for(LivingCard livingCard : playerOn.getAliveCards()){
+            if(livingCard.getID().equals(ID)){
+                this.selectedCard = livingCard;
+                return;
+            }
         }
-        this.selectedCard = livingCard;
+        System.out.println("Invalid card id");
     }
     //havaset bashe in seda zade she bade in ke karemun ba card tammum shod
     public void removeSelectedCard(){
         this.selectedCard = null;
+    }
+
+    public void removeSelectedCollectableItem(){
+        this.selectedCollectableItem = null;
     }
 //vase selected card e dige?
 //por o khali budanesh nabayad check she ?
@@ -167,21 +193,38 @@ public class Battle {
 
     public void useSpecialPower(int x, int y){}
 
-    public void showHand(){}
+    public void showHand(){
+        playerOn.getHand().show();
+    }
 
     public void insertCardInMap(String cardID, int x, int y){}
 
-    public void endTurn(){}
+    public void endTurn(){
+        Player player = playerOff;
+        playerOff = playerOn;
+        playerOn = player;
+    }
 
-    public void showCollectables(){}
+    public void showCollectables(){
+        for(CollectableItem collectableItem : playerOn.getCollectableItems()){
+            System.out.println(collectableItem.getInfo());
+        }
+    }
 
-    public void selectItem(String collectableItemID){}
-
-    public void showItemInfo(){}
+    public void selectItem(String collectableItemID){
+        for(CollectableItem collectableItem : playerOn.getCollectableItems())
+            if(collectableItem.getID().equals(collectableItemID)){
+                this.selectedCollectableItem = collectableItem;
+                return;
+            }
+        System.out.println("collectableItem wasnt found");
+    }
 
     public void useItem(int x, int y){}
 
-    public void nextCard(){}
+    public void nextCard(){
+
+    }
 
     public void endGame(){}
 
