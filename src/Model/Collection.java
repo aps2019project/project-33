@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Collection {
     private ArrayList<CollectionItem> cards;
     private Deck mainDeck;
+    private ArrayList<Deck> decks = new ArrayList<Deck>();
 
     public void removeCollectionItemFromCollection(String collectionItemID){
     }
@@ -76,7 +77,9 @@ public class Collection {
     }
 
     public void createDeck(String deckName){
-        Deck.createDeck(deckName);
+        Deck deck = Deck.createDeck(deckName);
+        if(deck != null)
+            decks.add(Deck.createDeck(deckName));
     }
 
     public ArrayList<CollectionItem> getCards(){

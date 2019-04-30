@@ -161,15 +161,16 @@ public class Deck{
         }
     }
     //too cell havaset bashe hamaro besazi avval
-    public static void createDeck(String deckName){
+    public static Deck createDeck(String deckName){
         Deck deck = getDeckByName(deckName);
         if(deck != null){
             System.out.println("a deck with this name already exists");
-            return;
+            return null;
         }
         deck = new Deck(deckName);
         deck.setName(deckName);
         decks.add(deck);
+        return deck;
     }
 
     //Here is setters && getters
