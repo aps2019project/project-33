@@ -9,12 +9,13 @@ public class MainMenu extends Menu {
         inputLine = inputLine.trim();
         String[] input = inputLine.split("[ ]+");
 
-        if(inputLine.equals("Enter Model.Collection")){
+        if(inputLine.equals("Enter Collection")){
             CollectionMenu collectionMenu = new CollectionMenu();
             collectionMenu.inputCommandLine();
         }
-        else if(inputLine.equals("Enter Controller.Menus.ShopMenu")){
-            Main.application.getShopMenu().inputCommandLine();
+        else if(inputLine.equals("Enter ShopMenu")){
+            ShopMenu shopMenu = new ShopMenu();
+            shopMenu.inputCommandLine();
         }
         else if(inputLine.equals("Enter Controller.Battle")){
             BattleMenu battleMenu = new BattleMenu();

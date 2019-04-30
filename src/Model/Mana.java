@@ -2,14 +2,14 @@ package Model;
 
 public class Mana {
 
-    private int curentMana;
+    private int currentMana;
     private int maximumMana;
 
     public Boolean decreaseMana (int spendMana) {
-        if (curentMana < spendMana) {
+        if (currentMana < spendMana) {
             return false;
         } else {
-            curentMana -= spendMana;
+            currentMana -= spendMana;
             return true;
         }
     }
@@ -18,19 +18,19 @@ public class Mana {
         if (maximumMana < 9) {
             maximumMana++;
         }
-        curentMana = maximumMana;
+        currentMana = maximumMana;
     }
 
-    public int getCurentMana(){
-        return curentMana;
+    public int getCurrentMana(){
+        return currentMana;
     }
 
     public int getMaximumMana() {
         return maximumMana;
     }
 
-    public void setCurentMana(int curentMana) {
-        this.curentMana = curentMana;
+    public void setCurrentMana(int currentMana) {
+        this.currentMana = currentMana;
     }
 
     public void setMaximumMana(int maximumMana) {

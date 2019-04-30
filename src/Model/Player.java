@@ -19,7 +19,7 @@ public class Player {
     private Hero hero;
     private int numberOfFlags;
     private int flagTurns;
-
+    private GraveYard graveYard;
 
     public CollectionItem getSelectedCollectionItem() {
         return selectedCollectionItem;
@@ -109,4 +109,11 @@ public class Player {
         Battle.comboAttackToOppenentCard(opponentID, myCardID);
     }
 
+    public GraveYard getGraveYard() {
+        return graveYard;
+    }
+
+    public void setGraveYard(GraveYard graveYard) {
+        this.graveYard = graveYard;
+    }
 }
