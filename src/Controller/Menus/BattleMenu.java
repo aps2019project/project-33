@@ -120,6 +120,7 @@ public class BattleMenu extends Menu {
         }
         System.out.println("Game modes : ");
         System.out.println("1. Kill_enemy's_hero");
+        // bayad x o y e flag ham set she
         System.out.println("2. Hold_flags");
         System.out.println("3. Talk_half_of_flags");
 

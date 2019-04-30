@@ -1,7 +1,10 @@
 package Controller;
 
 import Model.*;
+import Model.CollectionItem.Flag;
 import Model.Enviroment.Map;
+
+import java.util.ArrayList;
 
 public class Battle {
     private Player playerOn, playerOff;
@@ -10,26 +13,81 @@ public class Battle {
     private int numberOfRounds;
     private String type, mode;
 
-    public void showGameInfo(){}
+    private Flag mainFlag;
+
+    private ArrayList<Flag> flags = new ArrayList<Flag>();
+
+    private String[] modes = {"Kill_enemy's_hero", "Hold_flags", "Take_half_of_flags"};
+
+    public ArrayList<Flag> getFlags(){
+        return this.flags;
+    }
+
+    public void addFlag(Flag flag){
+        this.flags.add(flag);
+    }
+
+    public void showGameInfo(){
+        //remaining mana bayad bashe ya maximum
+        System.out.println("my mana : " + playerOn.getMana().getCurrentMana());
+        System.out.println("opponent mana : " + playerOff.getMana().getCurrentMana());
+        if(this.mode.equals(modes[0])){
+            System.out.println("my hero HP : " + playerOn.getHero().getHP());
+            System.out.println("opponent HP : " + playerOff.getHero().getHP());
+        }
+        if(this.mode.equals(modes[1])){
+            System.out.println("flag position is : " + this.mainFlag.getPositionColumn() + ", " + this.mainFlag.getPositionRow());
+          //usernamesh bayad chap she?
+            System.out.println("flag owner is : " + this.mainFlag.getFlagOwner().getAccount().getUsername());
+        }
+        if(this.mode.equals(modes[2])){
+            //hamin shekli bayad bashe ? id e sarbaz bayad bede ya chi ?
+            for(Flag flag : this.getFlags()){
+                if(flag.getFlagOwner() != null){
+                    System.out.println(flag.getFlagLivingCard().getID() + " " + flag.getFlagOwner().getAccount().getUsername());
+                }
+            }
+        }
+    }
+
     public void showMyMinions(){}
+
     public void showOpponentMinions(){}
+
     public void showCardInfo(String ID){}
+
     public void selectCard(String ID){}
+
     public void moveCardTo(int x, int y){}
+
     public void attackToOpponentCard(String opponentID){}
+
     public void comboAttackToOpponentCard(String[] input){}
+
     public void useSpecialPower(int x, int y){}
+
     public void showHand(){}
+
     public void insertCardInMap(String cardID, int x, int y){}
+
     public void endTurn(){}
+
     public void showCollectables(){}
+
     public void selectItem(String collectableItemID){}
+
     public void showItemInfo(){}
+
     public void useItem(int x, int y){}
+
     public void nextCard(){}
+
     public void endGame(){}
+
     public void checkTurn(){}
+
     public void exit(){}
+
     public void runGame(){
         inputCommandLine();
     }
