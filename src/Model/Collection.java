@@ -62,10 +62,19 @@ public class Collection {
     }
 
     public void addCollectionItemToDeck(String ID, String deckName){
-        Deck deck = Deck.getDeckByName(deckName);
+        Deck thisDeck = null;
+        for(Deck deck : this.getDecks()){
+            if(deck.getName().equals(deckName)){
+                thisDeck = deck;
+            }
+        }
+        if(thisDeck == null){
+            System.out.println("deck isnt in your collection");
+            return;
+        }
         CollectionItem collectionItem = CollectionItem.getCollectionItemByID(ID);
-        if(this.validateInput(collectionItem, deck))
-            deck.addCard(collectionItem);
+        if(this.validateInput(collectionItem, thisDeck))
+            thisDeck.addCard(collectionItem);
     }
 
     public void deleteDeck(String deckName){
@@ -86,7 +95,7 @@ public class Collection {
     public void createDeck(String deckName){
         Deck deck = Deck.createDeck(deckName);
         if(deck != null)
-            decks.add(Deck.createDeck(deckName));
+            decks.add(deck);
     }
 
     public ArrayList<CollectionItem> getCards(){
