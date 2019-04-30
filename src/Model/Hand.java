@@ -7,15 +7,14 @@ import Model.CollectionItem.Spell;
 import java.util.ArrayList;
 
 public class Hand {
-     ArrayList<CollectionItem> handCards = new ArrayList<CollectionItem>();
+    ArrayList<CollectionItem> handCards = new ArrayList<CollectionItem>();
     //havaset bashe to taghire in
     int numberOfUsedDeckCollectionItems = 0;
 
     void showSpells(){
         for(CollectionItem collectionItem : handCards){
             if(collectionItem instanceof Spell) {
-                Spell spell = (Spell)collectionItem;
-                spell.showSpell();
+                System.out.println(collectionItem.getInfo());
             }
         }
     }
@@ -25,8 +24,7 @@ public class Hand {
     void showMinions(){
         for(CollectionItem collectionItem : handCards)
             if(collectionItem instanceof Minion){
-                Minion minion = (Minion) collectionItem;
-                minion.showMinion();
+                System.out.println(collectionItem.getInfo());
             }
     }
     //nazadam
@@ -42,7 +40,7 @@ public class Hand {
     void show(Deck mainDeck){
         System.out.println("spells : \n");
         this.showSpells();
-        System.out.println("\nheroes : \n");
+        System.out.println("heroes : \n");
         this.showMinions();
         showNextCard(mainDeck);
     }
