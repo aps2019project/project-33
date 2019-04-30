@@ -144,13 +144,21 @@ public class Battle {
 
     public void useSpecialPower(int x, int y){}
 
-    public void showHand(){}
+    public void showHand(){
+        playerOn.getHand().show();
+    }
 
     public void insertCardInMap(String cardID, int x, int y){}
 
-    public void endTurn(){}
+    public void endTurn(){
+        Player player = playerOff;
+        playerOff = playerOn;
+        playerOn = player;
+    }
 
-    public void showCollectables(){}
+    public void showCollectables(){
+
+    }
 
     public void selectItem(String collectableItemID){}
 
