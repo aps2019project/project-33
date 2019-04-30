@@ -101,7 +101,7 @@ public class Collection {
                 return;
             }
         }
-        System.out.println("deck wasnt found");
+        System.out.println("deck wasn't found");
     }
 
     public ArrayList<Deck> getDecks(){

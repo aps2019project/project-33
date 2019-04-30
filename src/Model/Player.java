@@ -14,12 +14,17 @@ public class Player {
     private ArrayList<CollectableItem> collectableItems = new ArrayList<CollectableItem>();
     private CollectionItem selectedCollectionItem;
     private Cell heroPosition;
-    private Mana mana;
-    private Hand hand;
+    private Mana mana = new Mana();
+    private Hand hand = new Hand();
     private Hero hero;
     private int numberOfFlags;
     private int flagTurns;
-    private GraveYard graveYard;
+    private GraveYard graveYard = new GraveYard();
+    private Account account;
+
+    public Player(Account account){
+        this.account = account;
+    }
 
     public CollectionItem getSelectedCollectionItem() {
         return selectedCollectionItem;
@@ -115,5 +120,13 @@ public class Player {
 
     public void setGraveYard(GraveYard graveYard) {
         this.graveYard = graveYard;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }
