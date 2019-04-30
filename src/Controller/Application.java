@@ -1,6 +1,7 @@
 package Controller;
 
 import Controller.Menus.MainMenu;
+import Controller.Menus.ShopMenu;
 import Model.*;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ public class Application {
 
     private ArrayList<Account> accounts;
     private ArrayList<Battle> battles;
-    private ShopMenu shopMenu;
+    private Collection shop;
     private Account loggedInAccount;
 
 
@@ -36,14 +37,6 @@ public class Application {
 
     // Here is Setters && Getters
 
-    public ShopMenu getShopMenu() {
-        return shopMenu;
-    }
-
-    public void setShopMenu(ShopMenu shopMenu) {
-        this.shopMenu = shopMenu;
-    }
-
     public ArrayList<Account> getAccounts() {
         return accounts;
     }
@@ -66,5 +59,13 @@ public class Application {
 
     public void setLoggedInAccount(Account loggedInAccount) {
         this.loggedInAccount = loggedInAccount;
+    }
+
+    public Collection getShop() {
+        return shop;
+    }
+
+    public void setShop(Collection shop) {
+        this.shop = shop;
     }
 }

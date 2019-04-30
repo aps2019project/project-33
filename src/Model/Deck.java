@@ -11,7 +11,6 @@ public class Deck{
 
     //constructor
 
-
     public Deck(String name) {
         this.name = name;
     }
@@ -128,7 +127,22 @@ public class Deck{
     }
 
     public void addCard(CollectionItem collectionItem){
+        if(this.cards.size() == 20){
+            System.out.println("Deck is full !");
+            return;
+        }
+        if(this.haveHero()){
+            System.out.println("This deck has already a hero !");
+            return;
+        }
         this.cards.add(collectionItem);
+    }
+
+    private boolean haveHero(){
+        for(CollectionItem collectionItem : this.cards)
+            if(collectionItem instanceof Hero)
+                return true;
+        return false;
     }
 
     public static void addCardToDeck(String id, String deckName){

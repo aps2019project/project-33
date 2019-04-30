@@ -1,15 +1,14 @@
-package Controller;
+package Controller.Menus;
 
-import Controller.Menus.Menu;
+import Controller.Main;
 import Model.*;
-import Model.CollectionItem.Card;
 import Model.CollectionItem.CollectionItem;
 import Model.CollectionItem.UsableItem;
 
 import java.util.ArrayList;
 
 public class ShopMenu extends Menu {
-    private Collection collection;
+    private Collection shop = Main.application.getShop();
 
     public void inputCommandLine(){
         String inputLine = Main.scanner.nextLine();
@@ -23,7 +22,7 @@ public class ShopMenu extends Menu {
         else if(inputLine.equals("show Collection"))
             collection.showCollection("Sell Cost");
         else if(inputLine.matches("search .+")){
-            searchInCollection(separatedInput[1], this.collection);
+            searchInCollection(separatedInput[1], this.shop);
         }
         else if(inputLine.matches("search collection *+")){
             searchInCollection(separatedInput[2], collection);
@@ -37,7 +36,7 @@ public class ShopMenu extends Menu {
             this.sell(collectionItemName, collection);
         }
         else if(inputLine.equals("show"))
-            this.collection.showCollection("But Cost");
+            this.shop.showCollection("But Cost");
         else if(inputLine.equals("help"))
             ShopMenu.showHelp();
         else
@@ -67,13 +66,13 @@ public class ShopMenu extends Menu {
 
         costumer.getCollection().removeCollectionItemFromCollection(collectionItem.getID());
         costumer.increaseBudget(collectionItem.getPrice());
-        this.collection.addCollectionItemToCollection(collectionItem.getID());
+        this.shop.addCollectionItemToCollection(collectionItem.getID());
     }
 
     public void buy(String name){
-        ArrayList<String> Ids = this.collection.search(name);
+        ArrayList<String> Ids = this.shop.search(name);
         if(Ids.size() == 0){
-            System.out.println("There isn't this thing in collection");
+            System.out.println("There isn't this thing in shop");
             return;
         }
         CollectionItem collectionItem = CollectionItem.getCollectionItemByID(Ids.get(0));
@@ -95,7 +94,7 @@ public class ShopMenu extends Menu {
             System.out.println("Low Budget !!");
             return;
         }
-        this.collection.removeCollectionItemFromCollection(collectionItem.getName());
+        this.shop.removeCollectionItemFromCollection(collectionItem.getName());
         costumer.decreaseBudget(collectionItem.getPrice());
         costumer.getCollection().addCollectionItemToCollection(collectionItem.getName());
 
@@ -104,9 +103,9 @@ public class ShopMenu extends Menu {
 
     public static void showHelp(){
         System.out.println("1. exit");
-        System.out.println("2. show collection");
+        System.out.println("2. show shop");
         System.out.println("3. search  [item name | card name]");
-        System.out.println("4. search collection [item name | card name]");
+        System.out.println("4. search shop [item name | card name]");
         System.out.println("5. buy [card name | item name]");
         System.out.println("6. sell [card name | item name]");
         System.out.println("7. show");
@@ -115,11 +114,11 @@ public class ShopMenu extends Menu {
 
     //Here is Setters && Getters
 
-    public Collection getCollection() {
-        return collection;
+    public Collection getShop() {
+        return shop;
     }
 
-    public void setCollection(Collection collection) {
-        this.collection = collection;
+    public void setShop(Collection shop) {
+        this.shop = shop;
     }
 }

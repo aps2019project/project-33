@@ -22,7 +22,7 @@ public class Collection {
         Deck.showAllDecks();
     }
 
-    public void selectDeck(String deckName){
+    public void selectMainDeck(String deckName){
         Deck deck = Deck.getDeckByName(deckName);
         if(deck == null){
             System.out.println("deck not found");
@@ -60,8 +60,12 @@ public class Collection {
             deck.removeCollectionItem(collectionItem);
     }
 
-    public void addCardToDeck(String ID, String deckName){
+    public void addCollectionItemToDeck(String ID, String deckName){
         Deck deck = Deck.getDeckByName(deckName);
+        if(this.search(ID).size() == 0){
+            System.out.println("This id is not exist");
+            return;
+        }
         CollectionItem collectionItem = CollectionItem.getCollectionItemByID(ID);
         if(this.validateInput(collectionItem, deck))
             deck.addCard(collectionItem);
@@ -95,8 +99,8 @@ public class Collection {
         for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem instanceof Hero){
                 numberOfHeroes++;
-                System.out.print(numberOfHeroes + " : " + collectionItem.getID() + descriptionOfPrice +
-                        ((Hero) collectionItem).getPrice());
+                System.out.print(numberOfHeroes + " : " + collectionItem.getID() + " " + descriptionOfPrice + " : " +
+                        collectionItem.getPrice());
             }
         }
     }
@@ -107,7 +111,7 @@ public class Collection {
         for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem instanceof Item){
                 numberOfItems++;
-                System.out.print(numberOfItems + " : " + collectionItem.getInfo() + descriptionOfPrice
+                System.out.print(numberOfItems + " : " + collectionItem.getInfo() + " " + descriptionOfPrice + " : " +
                         + collectionItem.getPrice());
             }
         }
@@ -118,7 +122,7 @@ public class Collection {
         for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem instanceof Spell || collectionItem instanceof Minion){
                 numberOfCards++;
-                System.out.print(numberOfCards + " : " + collectionItem.getInfo() + descriptionOfPrice
+                System.out.print(numberOfCards + " : " + collectionItem.getInfo() + " " + descriptionOfPrice + " : " +
                         + collectionItem.getPrice());
             }
         }
@@ -134,4 +138,11 @@ public class Collection {
         //pull test
     }
 
+    public Deck getMainDeck() {
+        return mainDeck;
+    }
+
+    public void setMainDeck(Deck mainDeck) {
+        this.mainDeck = mainDeck;
+    }
 }

@@ -11,10 +11,11 @@ public class CollectionMenu extends Menu {
         String[] input = inputLine.split("[ ]+");
 
         Collection collection = Main.application.getLoggedInAccount().getCollection();
+
         if (inputLine.equals("exit"))
             return;
         else if (inputLine.equals("show")) {
-            collection.showCollection();
+            collection.showCollection("Sell Cost");
         } else if (inputLine.equals("save")) {
             collection.save();
         } else if (inputLine.matches("create deck *.")) {
@@ -23,11 +24,10 @@ public class CollectionMenu extends Menu {
             deleteDeck(input[2], collection);
         } else if (inputLine.matches("add *. to *.")) {
             String collectionItemId = input[1], deckName = input[3];
-            //  Model.CollectionItem.CollectionItem = Model.CollectionItem.CollectionItem.
-            //TODO
+            collection.addCollectionItemToDeck(collectionItemId, deckName);
         } else if (inputLine.matches("remove *. from *.")) {
-            String collecitonItemId = input[1], deckName = input[3];
-            //TODO
+            String collectionItemId = input[1], deckName = input[3];
+            collection.removeCollectionItemFromDeck(collectionItemId, deckName);
         } else if (inputLine.matches("validate deck *.")) {
             checkValidityOfDeck(input[2]);
         } else if (inputLine.matches("select deck *.")) {
