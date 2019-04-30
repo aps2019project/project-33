@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class Deck{
     private ArrayList<CollectionItem> cards = new ArrayList<CollectionItem>();
-    private static ArrayList<Deck> decks = new ArrayList<>();
     private String name;
 
     //constructor
@@ -15,21 +14,14 @@ public class Deck{
         this.name = name;
     }
 
-    public static Deck getDeckByName(String deckName){
-        for(Deck deck : decks)
-            if(deck.getName().equals(deckName))
-                return deck;
-        return null;
-    }
 
 // ye string desc o special power bayad be carda ezafe she
-    public static void showDeck(String deckName, boolean haveTab){
-        Deck deck = Deck.getDeckByName(deckName);
+    public void showDeck(boolean haveTab){
         if(haveTab)
             System.out.print("    ");
         System.out.println("Heroes :");
         int numberOfHeroes = 0;
-        for(CollectionItem collectionItem : deck.getCards()){
+        for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem instanceof Hero){
                 numberOfHeroes++;
                 //desc bayaad too collectionitem bashe ? + class baraye hero
@@ -49,7 +41,7 @@ public class Deck{
             System.out.print("    ");
         System.out.println("Items :");
         int numberOfItems = 0;
-        for(CollectionItem collectionItem : deck.getCards()){
+        for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem instanceof Item){
                 numberOfItems++;
                 if(haveTab)
@@ -66,7 +58,7 @@ public class Deck{
         if(haveTab)
             System.out.print("    ");
         System.out.println("Cards :");
-        for(CollectionItem collectionItem : deck.getCards()){
+        for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem instanceof Spell){
                 numberOfCards++;
                 if(haveTab)
@@ -104,15 +96,6 @@ public class Deck{
             }
         }
         return null;
-    }
-
-    public static void showAllDecks(){
-        int numberOfDecks = 0;
-        for(Deck deck : decks) {
-            numberOfDecks++;
-            System.out.println(numberOfDecks + " : " + deck.getName() + " :");
-            showDeck(deck.getName(), true);
-        }
     }
 
     //check kon ke 20 ta be hero e ya bedune hero
@@ -166,21 +149,7 @@ public class Deck{
         return false;
     }
     //havaset bashe reference kharab nashe moghe pak kardan
-
-    public static void removeDeck(Deck deck){
-        decks.remove(deck);
-    }
     //too cell havaset bashe hamaro besazi avval
-    public static Deck createDeck(String deckName){
-        Deck deck = getDeckByName(deckName);
-        if(deck != null){
-            System.out.println("a deck with this name already exists");
-            return null;
-        }
-        deck = new Deck(deckName);
-        decks.add(deck);
-        return deck;
-    }
 
     public ArrayList<CollectionItem> getCards() {
         return cards;

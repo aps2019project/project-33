@@ -9,6 +9,13 @@ public class Collection {
     private Deck mainDeck;
     private ArrayList<Deck> decks = new ArrayList<Deck>();
 
+    public Deck getDeckByName(String deckName){
+        for(Deck deck : decks)
+            if(deck.getName().equals(deckName))
+                return deck;
+        return null;
+    }
+
     public void removeCollectionItemFromCollection(String collectionItemID){
     }
 
@@ -16,15 +23,25 @@ public class Collection {
     }
 
     public void showDeck(String deckName){
-        Deck.showDeck(deckName, false);
+        Deck deck = this.getDeckByName(deckName);
+        if(deck == null){
+            System.out.println("deck dosnt exist");
+            return;
+        }
+        deck.showDeck(false);
     }
 
     public void showAllDecks(){
-        Deck.showAllDecks();
+        int numberOfDecks = 0;
+        for(Deck deck : this.getDecks()){
+            numberOfDecks++;
+            System.out.println(numberOfDecks + " : " + deck.getName() + " :");
+            deck.showDeck(true);
+        }
     }
 
     public void selectMainDeck(String deckName){
-        Deck deck = Deck.getDeckByName(deckName);
+        Deck deck = this.getDeckByName(deckName);
         if(deck == null){
             System.out.println("deck not found");
             return;
@@ -33,7 +50,7 @@ public class Collection {
     }
 
     public boolean checkValidateDeck(String deckName){
-        Deck deck = Deck.getDeckByName(deckName);
+        Deck deck = this.getDeckByName(deckName);
         if(deck == null) {
             System.out.println("deck not found");
             return false;
@@ -55,7 +72,7 @@ public class Collection {
     }
 
     public void removeCollectionItemFromDeck(String ID, String deckName){
-        Deck deck = Deck.getDeckByName(deckName);
+        Deck deck = this.getDeckByName(deckName);
         CollectionItem collectionItem = deck.findCollectionItemInDeck(ID);
         if(this.validateInput(collectionItem, deck))
             deck.removeCollectionItemFromDeck(collectionItem);
@@ -80,7 +97,6 @@ public class Collection {
     public void deleteDeck(String deckName){
         for(Deck deck : this.getDecks()){
             if(deck.getName().equals(deckName)){
-                Deck.removeDeck(deck);
                 decks.remove(deck);
                 return;
             }
@@ -93,9 +109,13 @@ public class Collection {
     }
 
     public void createDeck(String deckName){
-        Deck deck = Deck.createDeck(deckName);
-        if(deck != null)
-            decks.add(deck);
+        Deck deck = this.getDeckByName(deckName);
+        if(deck != null){
+            System.out.println("a deck with this name already exists");
+            return;
+        }
+        deck = new Deck(deckName);
+        this.decks.add(deck);
     }
 
     public ArrayList<CollectionItem> getCards(){
