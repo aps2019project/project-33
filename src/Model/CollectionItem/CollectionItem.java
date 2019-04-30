@@ -15,13 +15,6 @@ public abstract class CollectionItem {
         }
         return null;
     }
-    public static LivingCard getLivingCardByID(String livingCardID){
-        for(LivingCard livingCard : CollectionItem.allCards)
-            if(livingCard.getID().equals(livingCardID))
-                return livingCard;
-        System.out.println("Can't find living card !!");
-        return null;
-    }
 
     public abstract void doImpact();
     public abstract String getInfo();
