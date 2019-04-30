@@ -1,9 +1,11 @@
 package Controller;
 
 import Model.*;
+import Model.CollectionItem.CollectionItem;
 import Model.CollectionItem.Flag;
 import Model.CollectionItem.LivingCard;
 import Model.CollectionItem.Minion;
+import Model.Enviroment.Cell;
 import Model.Enviroment.Map;
 
 import java.util.ArrayList;
@@ -96,26 +98,67 @@ public class Battle {
     //che cardaei bishtar az 2 ta mitunan beran? moteghayer negah darim barashun?
     //too cell ham bayad ezafe she ?
 
-    //naghese
     public void moveCardTo(int x, int y){
         if(selectedCard == null){
             System.out.println("select a card");
             return;
         }
-        int distance = Math.abs(x - selectedCard.getPositionRow()) + Math.abs(y - selectedCard.getPositionColumn());
-        if(distance <= 2 || this.selectedCard.getCanMoveGreaterTwoCell()){
-            Cell lastCell = Map.getCellByCoordination(selectedCard.getPositionRow(), selectedCard.getPositionColumn());
+        if(isInMap(x, y)){
+            System.out.println("Invalid coordination");
+            return;
+        }
+        if(map.getCellByCoordination(x, y).getLivingCard() != null){
+            System.out.println("Destination is full !");
+            return;
+        }
+
+        int distance = getDistance(selectedCard.getPositionRow(), selectedCard.getPositionColumn(), x, y);
+        int maxDistanceCanCardGo = 2;
+        if(this.selectedCard.getCanMoveGreaterTwoCell()) maxDistanceCanCardGo = Integer.MAX_VALUE;
+
+        if(distance <= maxDistanceCanCardGo){
+            Cell lastCell = map.getCellByCoordination(selectedCard.getPositionRow(), selectedCard.getPositionColumn());
+            lastCell.removeCard();
+
             selectedCard.setPositionColumn(y);
             selectedCard.setPositionRow(x);
-            Cell cell = Map.getCellByCoordination(x, y);
-            if(cell.livingCard == null){
-                cell.insertCard(selectedCard.getID());
-                lastCell.removeCard(selectedCard.getID());
-            }
-            else{
-                System.out.println("this cell is full");
-            }
+
+            Cell cell = map.getCellByCoordination(x, y);
+            cell.insertCard(selectedCard.getID());
+        }else{
+            System.out.println("This move is impossible");
         }
+    }
+
+    private int getDistance(int x1, int y1, int x2, int y2){
+        int[][] dis = new int[map.getHeight()][map.getWidth()];
+        for(int i = 0; i < map.getHeight(); i ++)
+            for(int j = 0; j < map.getWidth(); j ++)
+                dis[i][j] = Integer.MAX_VALUE;
+        dis[x1][y1] = 0;
+        int[] dx = {-1, 0, 1, 0}, dy = {0, 1, 0, -1};
+        for(int i = 0; i < map.getHeight(); i ++)
+            for(int j = 0; j < map.getWidth(); j ++)
+                for(int t = 0; t < 4; t ++){
+                    int newX = i + dx[t], newY = j + dy[t];
+                    if(!isInMap(newX, newY))
+                        continue;
+                    LivingCard livingCard = map.getCellByCoordination(newX, newY).getLivingCard();
+                    if(livingCard != null){
+                        Deck deck = playerOn.getAccount().getCollection().getMainDeck();
+                        if(deck.findCollectionItemInDeck(livingCard.getID()) == null)
+                            continue;
+                    }
+                    dis[i][j] = Integer.min(dis[i][j], dis[newX][newY] + 1);
+                }
+        return dis[x2][y2];
+    }
+
+    private boolean isInMap(int x, int y){
+        if(x < 0 || y < 0) return false;
+        if(x >= map.getHeight() || y >= map.getWidth())
+            return false;
+        return true;
     }
 
     public void attackToOpponentCard(String opponentID){}

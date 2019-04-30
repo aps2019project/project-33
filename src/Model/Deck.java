@@ -81,7 +81,7 @@ public class Deck{
         }
     }
 
-    CollectionItem findCollectionItemInDeck(String ID){
+    public CollectionItem findCollectionItemInDeck(String ID){
         for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem.getID().equals(ID)){
                 return collectionItem;
