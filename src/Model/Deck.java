@@ -142,7 +142,7 @@ public class Deck{
         int numberOfNoneHeroCards = 0;
         for(CollectionItem collectionItem : this.getCards())
             if(collectionItem instanceof Spell || collectionItem instanceof Minion)
-                numberOfNoneHeroCards++:
+                numberOfNoneHeroCards++;
         return numberOfNoneHeroCards;
     }
 
