@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+import Model.CollectionItem.CollectionItem;
 import Model.CollectionItem.Flag;
 import Model.CollectionItem.LivingCard;
 import Model.CollectionItem.Minion;
@@ -74,18 +75,37 @@ public class Battle {
     }
 
     //faghat vase livingCard e ?asan malum nis chejurie , card asan bayad tu bazi bashe ya chi koja donbalesh begardim
-    public void showCardInfo(String ID){
-
+    public void showCardInfo(String ID) {
+        String info = "card wasnt found";
+        CollectionItem thisCollectionItem = null;
+        for (CollectionItem collectionItem : playerOff.getAccount().getCollection().getMainDeck().getCards()){
+            if (collectionItem.getID().equals(ID)) {
+                thisCollectionItem = collectionItem;
+            }
+        }
+        for(CollectionItem collectionItem : playerOn.getAccount().getCollection().getMainDeck().getCards()){
+            if(collectionItem.getID().equals(ID)){
+                thisCollectionItem = collectionItem;
+            }
+        }
+        if(thisCollectionItem != null){
+            info = thisCollectionItem.getInfo();
+            if(thisCollectionItem instanceof LivingCard)
+                info += " HP : " + ((LivingCard) (thisCollectionItem)).getRemainingHP() + " AP : " +
+                        ((LivingCard)(thisCollectionItem)).getDecreaseHPByAttack();
+        }
+        System.out.println(info);
     }
 
     //in yeki shartesh chie bayad carde khdoemun bashe koja donbalesh begardim ...
     public void selectCard(String ID){
-        LivingCard livingCard = getCardInBattleByID(ID);
-        if(livingCard == null){
-            System.out.println("Invalid card id");
-            return;
+        for(LivingCard livingCard : playerOn.getAliveCards()){
+            if(livingCard.getID().equals(ID)){
+                this.selectedCard = livingCard;
+                return;
+            }
         }
-        this.selectedCard = livingCard;
+        System.out.println("Invalid card id");
     }
     //havaset bashe in seda zade she bade in ke karemun ba card tammum shod
     public void removeSelectedCard(){
