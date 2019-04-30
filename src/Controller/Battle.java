@@ -70,7 +70,7 @@ public class Battle {
 
     //faghat vase livingCard e ?
     public void showCardInfo(String ID){
-
+        //test
     }
 
     public void selectCard(String ID){}
