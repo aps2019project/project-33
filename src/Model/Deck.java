@@ -72,7 +72,7 @@ public class Deck{
     //check kon ke 20 ta be hero e ya bedune hero
     public boolean checkValidateDeck(){
         ArrayList<CollectionItem> cards = this.getCards();
-        if(cards.size != 21)
+        if(cards.size() != 21)
             return false;
         int numberOfHeroes = 0;
         for(CollectionItem collectionItem : cards){
@@ -84,15 +84,14 @@ public class Deck{
         return true;
     }
 
-    public void removeCard(CollectionItem collectionItem){
+    public void removeCollectionItem(CollectionItem collectionItem){
         this.cards.remove(collectionItem);
     }
 
-    public static void removeCardFromDeck(String id, String deckName){
-        Deck deck = getDeckByName(deckName);
-        for(CollectionItem collectionItem: deck.getCards())
-            if(collectionItem.getID().equals(id)){
-                deck.removeCard(collectionItem);
+    public void removeCollectionItemFromDeck(CollectionItem collectionItem){
+        for(CollectionItem deckCollectionItem : this.getCards())
+            if(deckCollectionItem.getID().equals(collectionItem.getID())){
+                this.removeCollectionItem(collectionItem);
                 break;
             }
     }
@@ -103,7 +102,7 @@ public class Deck{
 
     public static void addCardToDeck(String id, String deckName){
         Deck deck = getDeckByName(deckName);
-        CollectionItem collectionItem = getCollectionItemByID(id);
+        CollectionItem collectionItem = CollectionItem.getCollectionItemByID(id);
         deck.addCard(collectionItem);
     }
 
@@ -123,7 +122,7 @@ public class Deck{
             System.out.println("a deck with this name already exists");
             return;
         }
-        deck = new Deck();
+        deck = new Deck(deckName);
         deck.setName(deckName);
         decks.add(deck);
     }

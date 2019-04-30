@@ -79,7 +79,7 @@ public class Collection {
     }
 
     public ArrayList<String> search(String cardName){
-        ArrayList<String> IDs = new ArrayList<String>()
+        ArrayList<String> IDs = new ArrayList<String>();
         for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem.getName().equals(cardName)){
                 IDs.add(collectionItem.getID());
