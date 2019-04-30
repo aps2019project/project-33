@@ -1,9 +1,6 @@
 package Model;
 
-import Model.CollectionItem.Card;
-import Model.CollectionItem.CollectionItem;
-import Model.CollectionItem.Hero;
-import Model.CollectionItem.Item;
+import Model.CollectionItem.*;
 
 import java.util.ArrayList;
 
@@ -91,44 +88,45 @@ public class Collection {
         return IDs;
     }
 
-    public void showHeroes(){
+    public void showHeroes(String descriptionOfPrice){
         System.out.println("Heroes :");
         int numberOfHeroes = 0;
         for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem instanceof Hero){
                 numberOfHeroes++;
-                System.out.print(numberOfHeroes + " : " + collectionItem.getID());
+                System.out.print(numberOfHeroes + " : " + collectionItem.getID() + descriptionOfPrice +
+                        ((Hero) collectionItem).getPrice());
             }
         }
     }
 
-    public void showItems(){
+    public void showItems(String descriptionOfPrice){
         System.out.println("Items :");
         int numberOfItems = 0;
         for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem instanceof Item){
                 numberOfItems++;
-                System.out.print(numberOfItems + " : " + collectionItem.getInfo());
+                System.out.print(numberOfItems + " : " + collectionItem.getInfo() + descriptionOfPrice
+                        + collectionItem.getPrice());
             }
         }
     }
 
-    public void showCards(){
+    public void showCards(String descriptionOfPrice){
         int numberOfCards = 0;
         for(CollectionItem collectionItem : this.getCards()){
-            if(collectionItem instanceof Card){
+            if(collectionItem instanceof Spell || collectionItem instanceof Minion){
                 numberOfCards++;
-                System.out.print(numberOfCards + " : ");
-                Card card = (Card)collectionItem;
-                card.showCard();
+                System.out.print(numberOfCards + " : " + collectionItem.getInfo() + descriptionOfPrice
+                        + collectionItem.getPrice());
             }
         }
     }
 
-    public void showCollection(){
-        this.showHeroes();
-        this.showItems();
-        this.showCards();
+    public void showCollection(String descriptionOfPrice){
+        this.showHeroes(descriptionOfPrice);
+        this.showItems(descriptionOfPrice);
+        this.showCards(descriptionOfPrice);
     }
 
     public void save(){}
