@@ -6,7 +6,7 @@ import Model.Enviroment.Cell;
 import java.util.ArrayList;
 
 abstract public class LivingCard extends Card {
-    private int HP, rangeOfAttack, decreaseHPByAttack, changeHP, changePower, numberOfSameTypeInComboAttack,
+    private int HP, remainingHP, rangeOfAttack, decreaseHPByAttack, changeHP, changePower, numberOfSameTypeInComboAttack,
     changeRangeOfAttack, numberOfDamaged;
     private String counterAttackType, type;
     private ArrayList<Buff> effects;
@@ -25,6 +25,14 @@ abstract public class LivingCard extends Card {
     public void counterAttack(){}
 
     // Here is Setters && Getters
+
+    public int getRemainingHP(){
+        return this.remainingHP;
+    }
+
+    public void setRemainingHP(int remainingHP){
+        this.remainingHP = remainingHP;
+    }
 
     public int getPositionColumn(){
         return this.positionColumn;
@@ -144,5 +152,10 @@ abstract public class LivingCard extends Card {
 
     public void setCanMoveOrAttack(boolean canMoveOrAttack) {
         this.canMoveOrAttack = canMoveOrAttack;
+    }
+
+    public void showInfoInBattle(){
+        System.out.println("remaining HP : " + this.getRemainingHP() + " attack power : " + this.getDecreaseHPByAttack()
+         + " required mana : " + this.getMP() + this.getDesc());
     }
 }
