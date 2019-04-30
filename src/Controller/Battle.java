@@ -50,7 +50,9 @@ public class Battle {
         }
     }
 
-    public void showMyMinions(){}
+    public void showMyMinions(){
+        //test
+    }
 
     public void showOpponentMinions(){}
 
