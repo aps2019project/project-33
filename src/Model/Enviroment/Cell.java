@@ -2,6 +2,7 @@ package Model.Enviroment;
 
 import Model.Buffs.Buff;
 import Model.CollectionItem.CollectionItem;
+import Model.CollectionItem.Item;
 import Model.CollectionItem.LivingCard;
 
 import java.util.ArrayList;
@@ -9,7 +10,8 @@ import java.util.ArrayList;
 public class Cell {
     private int x, y;
     private LivingCard livingCard;
-    private ArrayList<Buff> effects;
+    private ArrayList<Buff> effects = new ArrayList<>();
+    private ArrayList<Item> items = new ArrayList<>();
 
     //Here is Setters && Getters
     {
@@ -18,6 +20,9 @@ public class Cell {
     public void insertCard(String livingCardID){
         LivingCard livingCard = CollectionItem.getLivingCardByID(livingCardID);
         this.livingCard = livingCard;
+        for(Item item : this.items)
+            livingCard.getItems().add(item);
+        this.items.clear();
         return;
     }
 
@@ -61,5 +66,13 @@ public class Cell {
 
     public void setEffects(ArrayList<Buff> effects) {
         this.effects = effects;
+    }
+
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(ArrayList<Item> items) {
+        this.items = items;
     }
 }

@@ -3,6 +3,7 @@ package Model.CollectionItem;
 import Model.Buffs.Buff;
 import Model.Enviroment.Cell;
 
+import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 
 abstract public class LivingCard extends Card {
@@ -12,6 +13,8 @@ abstract public class LivingCard extends Card {
     private ArrayList<Buff> effects;
     private boolean canCounterAttack, canMoveOrAttack;
     private boolean canMoveGreaterTwoCell;
+    private ArrayList<Item> Ite
+        ms = new ArrayList<>();
 
     //location mikhad
     private int positionColumn;
@@ -167,5 +170,13 @@ abstract public class LivingCard extends Card {
     public void showInfoInBattle(){
         System.out.println("remaining HP : " + this.getRemainingHP() + " attack power : " + this.getDecreaseHPByAttack()
          + " required mana : " + this.getMP() + this.getDesc());
+    }
+
+    public ArrayList<Item> getItems() {
+        return Items;
+    }
+
+    public void setItems(ArrayList<Item> items) {
+        Items = items;
     }
 }
