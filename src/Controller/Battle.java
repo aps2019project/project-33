@@ -1,10 +1,7 @@
 package Controller;
 
 import Model.*;
-import Model.CollectionItem.CollectionItem;
-import Model.CollectionItem.Flag;
-import Model.CollectionItem.LivingCard;
-import Model.CollectionItem.Minion;
+import Model.CollectionItem.*;
 import Model.Enviroment.Map;
 
 import java.util.ArrayList;
@@ -17,6 +14,7 @@ public class Battle {
     private String type, mode;
     private LivingCard selectedCard;
     private Flag mainFlag;
+    private CollectableItem selectedCollectableItem;
 
     private ArrayList<Flag> flags = new ArrayList<Flag>();
 
@@ -24,6 +22,7 @@ public class Battle {
 
     {
         this.selectedCard = null;
+        this.selectedCollectableItem = null;
     }
 
 
@@ -111,6 +110,10 @@ public class Battle {
     public void removeSelectedCard(){
         this.selectedCard = null;
     }
+
+    public void removeSelectedCollectableItem(){
+        this.selectedCollectableItem = null;
+    }
 //vase selected card e dige?
 //por o khali budanesh nabayad check she ?
     //che cardaei bishtar az 2 ta mitunan beran? moteghayer negah darim barashun?
@@ -157,16 +160,25 @@ public class Battle {
     }
 
     public void showCollectables(){
-
+        for(CollectableItem collectableItem : playerOn.getCollectableItems()){
+            System.out.println(collectableItem.getInfo());
+        }
     }
 
-    public void selectItem(String collectableItemID){}
-
-    public void showItemInfo(){}
+    public void selectItem(String collectableItemID){
+        for(CollectableItem collectableItem : playerOn.getCollectableItems())
+            if(collectableItem.getID().equals(collectableItemID)){
+                this.selectedCollectableItem = collectableItem;
+                return;
+            }
+        System.out.println("collectableItem wasnt found");
+    }
 
     public void useItem(int x, int y){}
 
-    public void nextCard(){}
+    public void nextCard(){
+
+    }
 
     public void endGame(){}
 
