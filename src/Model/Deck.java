@@ -67,6 +67,7 @@ public class Deck{
                 System.out.println(collectionItem.getMP() + " - Desc : " + collectionItem.getDesc());
                 */
             }
+
             if(collectionItem instanceof Minion){
                 numberOfCards++;
                 System.out.print(numberOfCards + " : ");
