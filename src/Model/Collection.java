@@ -8,12 +8,10 @@ public class Collection {
     private ArrayList<CollectionItem> cards;
     private Deck mainDeck;
 
-    public void removeCollectionItemFromCollection(String collectionItemName){
-
+    public void removeCollectionItemFromCollection(String collectionItemID){
     }
 
-    public void addCollectionItemToCollection(String collectionItemName){
-
+    public void addCollectionItemToCollection(String collectionItemID){
     }
 
     public void showDeck(String deckName){

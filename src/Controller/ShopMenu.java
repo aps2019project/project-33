@@ -30,16 +30,16 @@ public class ShopMenu extends Menu {
         }
         else if(inputLine.matches("buy *+")){
             String collectionNameItem = separatedInput[1];
-            this.buy(collectionNameItem, this.collection);
+            this.buy(collectionNameItem);
         }
         else if(inputLine.matches("sell *+")){
             String collectionItemName = separatedInput[1];
-            this.sell(collectionItemName);
+            this.sell(collectionItemName, collection);
         }
         else if(inputLine.equals("show"))
-            this.collection.showCollection();
+            this.collection.showCollection("But Cost");
         else if(inputLine.equals("help"))
-            this.help();
+            ShopMenu.showHelp();
         else
             System.out.println("Please enter valid command line !");
     }
@@ -49,6 +49,25 @@ public class ShopMenu extends Menu {
         System.out.println("Result of search :");
         for(String ID : IDs)
             System.out.println(ID);
+    }
+
+    private void sell(String collectionItemName, Collection collection) {
+        ArrayList<String> Ids = collection.search(collectionItemName);
+        if(Ids.size() == 0){
+            System.out.println("You haven't this id !");
+            return;
+        }
+        CollectionItem collectionItem = CollectionItem.getCollectionItemByID(Ids.get(0));
+        if(collectionItem == null){
+            System.out.println("Again wtf !");
+            return;
+        }
+
+        Account costumer = Main.application.getLoggedInAccount();
+
+        costumer.getCollection().removeCollectionItemFromCollection(collectionItem.getID());
+        costumer.increaseBudget(collectionItem.getPrice());
+        this.collection.addCollectionItemToCollection(collectionItem.getID());
     }
 
     public void buy(String name){
@@ -78,7 +97,20 @@ public class ShopMenu extends Menu {
         }
         this.collection.removeCollectionItemFromCollection(collectionItem.getName());
         costumer.decreaseBudget(collectionItem.getPrice());
-        costumer.getCollection().
+        costumer.getCollection().addCollectionItemToCollection(collectionItem.getName());
+
+        System.out.println("You buy it :)");
+    }
+
+    public static void showHelp(){
+        System.out.println("1. exit");
+        System.out.println("2. show collection");
+        System.out.println("3. search  [item name | card name]");
+        System.out.println("4. search collection [item name | card name]");
+        System.out.println("5. buy [card name | item name]");
+        System.out.println("6. sell [card name | item name]");
+        System.out.println("7. show");
+        System.out.println("8. help");
     }
 
     //Here is Setters && Getters
