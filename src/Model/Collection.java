@@ -58,22 +58,29 @@ public class Collection {
         Deck deck = Deck.getDeckByName(deckName);
         CollectionItem collectionItem = deck.findCollectionItemInDeck(ID);
         if(this.validateInput(collectionItem, deck))
-            deck.removeCollectionItem(collectionItem);
+            deck.removeCollectionItemFromDeck(collectionItem);
     }
 
     public void addCollectionItemToDeck(String ID, String deckName){
         Deck deck = Deck.getDeckByName(deckName);
-        if(this.search(ID).size() == 0){
-            System.out.println("This id is not exist");
-            return;
-        }
         CollectionItem collectionItem = CollectionItem.getCollectionItemByID(ID);
         if(this.validateInput(collectionItem, deck))
             deck.addCard(collectionItem);
     }
 
     public void deleteDeck(String deckName){
-        Deck.deleteDeck(deckName);
+        for(Deck deck : this.getDecks()){
+            if(deck.getName().equals(deckName)){
+                Deck.removeDeck(deck);
+                decks.remove(deck);
+                return;
+            }
+        }
+        System.out.println("deck wasnt found");
+    }
+
+    public ArrayList<Deck> getDecks(){
+        return this.decks;
     }
 
     public void createDeck(String deckName){
