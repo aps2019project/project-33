@@ -58,6 +58,13 @@ public class Account {
 
     }
 
+    public void decreaseBudget(int cost){
+        this.budget -= cost;
+    }
+    public void increaseBudget(int income){
+        this.budget += income;
+    }
+
     public static void showLeaderBoard(){
         ArrayList<Account> accounts = Account.getAccounts();
         sortArraysOfAccount(accounts);

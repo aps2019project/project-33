@@ -8,7 +8,11 @@ public class Collection {
     private ArrayList<CollectionItem> cards;
     private Deck mainDeck;
 
-    public void removeCardFromCollection(String cardName){
+    public void removeCollectionItemFromCollection(String collectionItemName){
+
+    }
+
+    public void addCollectionItemToCollection(String collectionItemName){
 
     }
 
@@ -63,7 +67,6 @@ public class Collection {
         CollectionItem collectionItem = CollectionItem.getCollectionItemByID(ID);
         if(this.validateInput(collectionItem, deck))
             deck.addCard(collectionItem);
-
     }
 
     public void deleteDeck(String deckName){
