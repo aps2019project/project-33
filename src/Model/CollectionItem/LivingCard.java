@@ -11,6 +11,7 @@ abstract public class LivingCard extends Card {
     private String counterAttackType, type;
     private ArrayList<Buff> effects;
     private boolean canCounterAttack, canMoveOrAttack;
+    private boolean canMoveGreaterTwoCell;
 
     //location mikhad
     private int positionColumn;
@@ -23,8 +24,17 @@ abstract public class LivingCard extends Card {
     public void move(Cell cell){}
     abstract void doSpecialPower();
     public void counterAttack(){}
+    //?
 
     // Here is Setters && Getters
+
+    public boolean getCanMoveGreaterTwoCell(){
+        return this.canMoveGreaterTwoCell;
+    }
+
+    public void setCanMoveGreaterTwoCell(boolean canMoveGreaterTwoCell){
+        canMoveGreaterTwoCell = canMoveGreaterTwoCell;
+    }
 
     public int getRemainingHP(){
         return this.remainingHP;

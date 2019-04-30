@@ -14,12 +14,17 @@ public class Battle {
     private boolean gameIsRunning;
     private int numberOfRounds;
     private String type, mode;
-
+    private LivingCard selectedCard;
     private Flag mainFlag;
 
     private ArrayList<Flag> flags = new ArrayList<Flag>();
 
     private String[] modes = {"Kill_enemy's_hero", "Hold_flags", "Take_half_of_flags"};
+
+    {
+        this.selectedCard = null;
+    }
+
 
     public ArrayList<Flag> getFlags(){
         return this.flags;
@@ -68,14 +73,50 @@ public class Battle {
         }
     }
 
-    //faghat vase livingCard e ?
+    //faghat vase livingCard e ?asan malum nis chejurie , card asan bayad tu bazi bashe ya chi koja donbalesh begardim
     public void showCardInfo(String ID){
 
     }
 
-    public void selectCard(String ID){}
+    //in yeki shartesh chie bayad carde khdoemun bashe koja donbalesh begardim ...
+    public void selectCard(String ID){
+        LivingCard livingCard = getCardInBattleByID(ID);
+        if(livingCard == null){
+            System.out.println("Invalid card id");
+            return;
+        }
+        this.selectedCard = livingCard;
+    }
+    //havaset bashe in seda zade she bade in ke karemun ba card tammum shod
+    public void removeSelectedCard(){
+        this.selectedCard = null;
+    }
+//vase selected card e dige?
+//por o khali budanesh nabayad check she ?
+    //che cardaei bishtar az 2 ta mitunan beran? moteghayer negah darim barashun?
+    //too cell ham bayad ezafe she ?
 
-    public void moveCardTo(int x, int y){}
+    //naghese
+    public void moveCardTo(int x, int y){
+        if(selectedCard == null){
+            System.out.println("select a card");
+            return;
+        }
+        int distance = Math.abs(x - selectedCard.getPositionRow()) + Math.abs(y - selectedCard.getPositionColumn());
+        if(distance <= 2 || this.selectedCard.getCanMoveGreaterTwoCell()){
+            Cell lastCell = Map.getCellByCoordination(selectedCard.getPositionRow(), selectedCard.getPositionColumn());
+            selectedCard.setPositionColumn(y);
+            selectedCard.setPositionRow(x);
+            Cell cell = Map.getCellByCoordination(x, y);
+            if(cell.livingCard == null){
+                cell.insertCard(selectedCard.getID());
+                lastCell.removeCard(selectedCard.getID());
+            }
+            else{
+                System.out.println("this cell is full");
+            }
+        }
+    }
 
     public void attackToOpponentCard(String opponentID){}
 

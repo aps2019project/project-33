@@ -12,7 +12,9 @@ public class Cell {
     private ArrayList<Buff> effects;
 
     //Here is Setters && Getters
-
+    {
+        this.livingCard = null;
+    }
     public void insertCard(String livingCardID){
         LivingCard livingCard = CollectionItem.getLivingCardByID(livingCardID);
         this.livingCard = livingCard;
