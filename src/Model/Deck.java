@@ -84,15 +84,14 @@ public class Deck{
         return true;
     }
 
-    public void removeCard(CollectionItem collectionItem){
+    public void removeCollectionItem(CollectionItem collectionItem){
         this.cards.remove(collectionItem);
     }
 
-    public static void removeCardFromDeck(String id, String deckName){
-        Deck deck = getDeckByName(deckName);
-        for(CollectionItem collectionItem: deck.getCards())
-            if(collectionItem.getID().equals(id)){
-                deck.removeCard(collectionItem);
+    public void removeCollectionItemFromDeck(CollectionItem collectionItem){
+        for(CollectionItem deckCollectionItem : this.getCards())
+            if(deckCollectionItem.getID().equals(collectionItem.getID())){
+                this.removeCollectionItem(collectionItem);
                 break;
             }
     }
