@@ -51,7 +51,7 @@ public class Battle {
     }
 
     public void showMyMinions(){
-        //test
+        //test2
     }
 
     public void showOpponentMinions(){}
