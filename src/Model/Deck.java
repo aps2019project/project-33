@@ -11,6 +11,7 @@ public class Deck{
 
     //constructor
 
+
     public Deck(String name) {
         this.name = name;
     }
@@ -31,9 +32,14 @@ public class Deck{
             if(collectionItem instanceof Hero){
                 numberOfHeroes++;
                 //desc bayaad too collectionitem bashe ? + class baraye hero
+                System.out.print(numberOfHeroes + " : ");
+                Hero hero = (Hero)collectionItem;
+                hero.showCardInCollection();
+                /*
                 System.out.print(numberOfHeroes + " : Name : " + collectionItem.getName() + " - AP : " + collectionItem.getAP());
                 System.out.print(" - HP : " + collectionItem.getHP() + " Class : " + collectionItem.getClass());
                 System.out.println(" Special power: " + collectionItem.getSpecialPower());
+                */
             }
         }
         System.out.println("Items :");
@@ -41,24 +47,48 @@ public class Deck{
         for(CollectionItem collectionItem : deck.getCards()){
             if(collectionItem instanceof Item){
                 numberOfItems++;
+                System.out.print(numberOfItems + " : ");
+                Item item = (Item)collectionItem;
+                item.showItem();
+                /*
                 System.out.println(numberOfItems + " : Name : " + collectionItem.getName() + " - Desc " + collectionItem.getDesc());
+                */
             }
         }
         int numberOfCards = 0;
         for(CollectionItem collectionItem : deck.getCards()){
             if(collectionItem instanceof Spell){
                 numberOfCards++;
+                System.out.print(numberOfCards + " : ");
+                Spell spell = (Spell)collectionItem;
+                spell.showSpell();
+                /*
                 System.out.print(numberOfCards + " : Type : Spell - Name : " + collectionItem.getName() + " - MP : ");
                 System.out.println(collectionItem.getMP() + " - Desc : " + collectionItem.getDesc());
+                */
             }
             if(collectionItem instanceof Minion){
                 numberOfCards++;
+                System.out.print(numberOfCards + " : ");
+                Minion minion = (Minion)collectionItem;
+                minion.showMinion();
+                /*
                 System.out.print(numberOfCards + " : Type : Minion - Name : " + collectionItem.getName() + " - Class: ");
                 System.out.print(collectionItem.getClass() + " - AP : " + collectionItem.getAP() + " - HP : ");
                 System.out.print(collectionItem.getHP() + " - MP : " + collectionItem.getMP() + " - Special power : ");
                 System.out.println(collectionItem.getSpecialPower());
+                */
             }
         }
+    }
+
+    CollectionItem findCollectionItemInDeck(String ID){
+        for(CollectionItem collectionItem : this.getCards()){
+            if(collectionItem.getID().equals(ID)){
+                return collectionItem;
+            }
+        }
+        return null;
     }
 
     public static void showAllDecks(){
