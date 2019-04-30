@@ -8,6 +8,7 @@ public class Battle {
     private Map map;
     private boolean gameIsRunning;
     private int numberOfRounds;
+    private String type;
 
     public void showGameInfo(){}
     public void showMyMinions(){}
@@ -38,5 +39,37 @@ public class Battle {
 
     public void setPlayerOn(Player playerOn) {
         this.playerOn = playerOn;
+    }
+
+    public Player getPlayerOff() {
+        return playerOff;
+    }
+
+    public void setPlayerOff(Player playerOff) {
+        this.playerOff = playerOff;
+    }
+
+    public Map getMap() {
+        return map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
+    }
+
+    public boolean isGameIsRunning() {
+        return gameIsRunning;
+    }
+
+    public void setGameIsRunning(boolean gameIsRunning) {
+        this.gameIsRunning = gameIsRunning;
+    }
+
+    public int getNumberOfRounds() {
+        return numberOfRounds;
+    }
+
+    public void setNumberOfRounds(int numberOfRounds) {
+        this.numberOfRounds = numberOfRounds;
     }
 }
