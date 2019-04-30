@@ -16,6 +16,15 @@ public class Collection {
         return null;
     }
 
+    public CollectionItem getCollectionItemByID(String ID){
+        for(CollectionItem collectionItem : this.getCards()){
+            if(collectionItem.getID().equals(ID)){
+                return collectionItem;
+            }
+        }
+        return null;
+    }
+
     public void removeCollectionItemFromCollection(String collectionItemID){
     }
 
@@ -89,7 +98,7 @@ public class Collection {
             System.out.println("deck isnt in your collection");
             return;
         }
-        CollectionItem collectionItem = CollectionItem.getCollectionItemByID(ID);
+        CollectionItem collectionItem = this.getCollectionItemByID(ID);
         if(this.validateInput(collectionItem, thisDeck))
             thisDeck.addCard(collectionItem);
     }

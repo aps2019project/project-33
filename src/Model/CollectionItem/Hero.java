@@ -12,7 +12,7 @@ public class Hero extends LivingCard {
 
     @Override
     public void showCardInCollection() {
-
+        System.out.println(getInfo() + "\n");
     }
 
     @Override

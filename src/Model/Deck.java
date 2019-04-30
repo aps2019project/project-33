@@ -27,10 +27,8 @@ public class Deck{
                 //desc bayaad too collectionitem bashe ? + class baraye hero
                 if(haveTab)
                     System.out.print("    ");
-                System.out.print("    " + numberOfHeroes + " : ");
-                Hero hero = (Hero)collectionItem;
-                hero.showHero();
-                /*
+                System.out.print("    " + numberOfHeroes + " : " + collectionItem.getInfo() + "\n");
+            /*
                 System.out.print(numberOfHeroes + " : Name : " + collectionItem.getName() + " - AP : " + collectionItem.getAP());
                 System.out.print(" - HP : " + collectionItem.getHP() + " Class : " + collectionItem.getClass());
                 System.out.println(" Special power: " + collectionItem.getSpecialPower());
@@ -46,9 +44,7 @@ public class Deck{
                 numberOfItems++;
                 if(haveTab)
                     System.out.print("    ");
-                System.out.print("    " + numberOfItems + " : ");
-                Item item = (Item)collectionItem;
-                item.showItem();
+                System.out.print("    " + numberOfItems + " : " + collectionItem.getInfo() + "\n");
                 /*
                 System.out.println(numberOfItems + " : Name : " + collectionItem.getName() + " - Desc " + collectionItem.getDesc());
                 */
@@ -63,9 +59,7 @@ public class Deck{
                 numberOfCards++;
                 if(haveTab)
                     System.out.print("    ");
-                System.out.print("    " + numberOfCards + " : ");
-                Spell spell = (Spell)collectionItem;
-                spell.showSpell();
+                System.out.print("    " + numberOfCards + " : " + collectionItem.getInfo() + "\n");
                 /*
                 System.out.print(numberOfCards + " : Type : Spell - Name : " + collectionItem.getName() + " - MP : ");
                 System.out.println(collectionItem.getMP() + " - Desc : " + collectionItem.getDesc());
@@ -76,9 +70,7 @@ public class Deck{
                 numberOfCards++;
                 if(haveTab)
                     System.out.print("    ");
-                System.out.print("    " + numberOfCards + " : ");
-                Minion minion = (Minion)collectionItem;
-                minion.showMinion();
+                System.out.print("    " + numberOfCards + " : " + collectionItem.getInfo() + "\n");
                 /*
                 System.out.print(numberOfCards + " : Type : Minion - Name : " + collectionItem.getName() + " - Class: ");
                 System.out.print(collectionItem.getClass() + " - AP : " + collectionItem.getAP() + " - HP : ");
