@@ -5,18 +5,22 @@ import java.util.ArrayList;
 public abstract class CollectionItem {
     private String name;
     private String ID;
-    public static ArrayList<LivingCard> allCards = new ArrayList<>();
+    private int price;
+    public static ArrayList<LivingCard> allLivingCards = new ArrayList<>();
     public static ArrayList<Item> allItems = new ArrayList<>();
 
     public static CollectionItem getCollectionItemByID(String ID){
-        for(CollectionItem collectionItem : allCards){
+        for(CollectionItem collectionItem : allLivingCards){
             if(collectionItem.getID().equals(ID))
                 return collectionItem;
         }
+        for(CollectionItem collectionItem : allItems)
+            if(collectionItem.getID().equals(ID))
+                return collectionItem;
         return null;
     }
     public static LivingCard getLivingCardByID(String livingCardID){
-        for(LivingCard livingCard : CollectionItem.allCards)
+        for(LivingCard livingCard : CollectionItem.allLivingCards)
             if(livingCard.getID().equals(livingCardID))
                 return livingCard;
         System.out.println("Can't find living card !!");
@@ -43,5 +47,13 @@ public abstract class CollectionItem {
 
     public void setID(String ID) {
         this.ID = ID;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

@@ -6,7 +6,7 @@ import Model.Enviroment.Cell;
 import java.util.ArrayList;
 
 abstract public class LivingCard extends Card {
-    private int HP, price, rangeOfAttack, decreaseHPByAttack, changeHP, changePower, numberOfSameTypeInComboAttack,
+    private int HP, rangeOfAttack, decreaseHPByAttack, changeHP, changePower, numberOfSameTypeInComboAttack,
     changeRangeOfAttack, numberOfDamaged;
     private String counterAttackType, type;
     private ArrayList<Buff> effects;
@@ -28,14 +28,6 @@ abstract public class LivingCard extends Card {
 
     public void setHP(int HP) {
         this.HP = HP;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
     }
 
     public int getRangeOfAttack() {

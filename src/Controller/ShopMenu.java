@@ -6,6 +6,8 @@ import Model.CollectionItem.Card;
 import Model.CollectionItem.CollectionItem;
 import Model.CollectionItem.UsableItem;
 
+import java.util.ArrayList;
+
 public class ShopMenu extends Menu {
     private Collection collection;
 
@@ -19,18 +21,16 @@ public class ShopMenu extends Menu {
         if(inputLine.equals("exit"))
             return;
         else if(inputLine.equals("show Collection"))
-            collection.showCollection();
+            collection.showCollection("Sell Cost");
         else if(inputLine.matches("search .+")){
-            String collectionItemName = separatedInput[1];
-            this.collection.search(collectionItemName);
+            searchInCollection(separatedInput[1], this.collection);
         }
         else if(inputLine.matches("search collection *+")){
-            String collectionItemName = separatedInput[2];
-            Main.application.getLoggedInAccount().getCollection().search(collectionItemName);
+            searchInCollection(separatedInput[2], collection);
         }
-        else if(inputLine.matches("but *+")){
+        else if(inputLine.matches("buy *+")){
             String collectionNameItem = separatedInput[1];
-            this.buy(collectionNameItem);
+            this.buy(collectionNameItem, this.collection);
         }
         else if(inputLine.matches("sell *+")){
             String collectionItemName = separatedInput[1];
@@ -44,10 +44,18 @@ public class ShopMenu extends Menu {
             System.out.println("Please enter valid command line !");
     }
 
-    public void buy(String name){
-        CollectionItem collectionItem = this.collection.getCollectionItemByName(name);
-        if(collectionItem == null){
+    private void searchInCollection(String collectionItemName, Collection collection) {
+        ArrayList<String> IDs = collection.search(collectionItemName);
+        System.out.println("Result of search :");
+        for(String ID : IDs)
+            System.out.println(ID);
+    }
+
+    public void buy(String name, Collection collection){
+        ArrayList<String> Ids = collection.search(name);
+        if(Ids.size() == 0){
             System.out.println("There isn't this thing in collection");
+            return;
         }
         if(collectionItem instanceof UsableItem) this.buyItem((UsableItem)collectionItem);
         else this.buyCard((Card) collectionItem);
