@@ -7,11 +7,11 @@ import Model.CollectionItem.Spell;
 import java.util.ArrayList;
 
 public class Hand {
-    ArrayList<CollectionItem> handCards = new ArrayList<CollectionItem>();
+    private ArrayList<CollectionItem> handCards = new ArrayList<CollectionItem>();
     //havaset bashe to taghire in
-    int numberOfUsedDeckCollectionItems = 0;
+    private int  numberOfUsedDeckCollectionItems = 0;
 
-    void showSpells(){
+    public void showSpells(){
         for(CollectionItem collectionItem : handCards){
             if(collectionItem instanceof Spell) {
                 System.out.println(collectionItem.getInfo());
@@ -21,14 +21,14 @@ public class Hand {
 
     //showMinion o showSpell tuye classashun ezafe beshan
 
-    void showMinions(){
+    public void showMinions(){
         for(CollectionItem collectionItem : handCards)
             if(collectionItem instanceof Minion){
                 System.out.println(collectionItem.getInfo());
             }
     }
     //nazadam
-    void showNextCard(Deck mainDeck){
+    public void showNextCard(Deck mainDeck){
         if(numberOfUsedDeckCollectionItems >= mainDeck.getCards().size()){
             System.out.println("next card doesn't exist!");
             return;
@@ -37,7 +37,7 @@ public class Hand {
         System.out.println(collectionItem.getName());
     }
 
-    void show(Deck mainDeck){
+    public void show(Deck mainDeck){
         System.out.println("spells : \n");
         this.showSpells();
         System.out.println("heroes : \n");
@@ -45,7 +45,7 @@ public class Hand {
         showNextCard(mainDeck);
     }
 
-    void removeCard(String cardID){
+    public void removeCard(String cardID){
         for(CollectionItem collectionItem : handCards){
             if(collectionItem.getID().equals(cardID)){
                 handCards.remove(collectionItem);
@@ -54,7 +54,7 @@ public class Hand {
         }
     }
 
-    void addCard(CollectionItem collectionItem){
+    public void addCard(CollectionItem collectionItem){
         handCards.add(collectionItem);
     }
 
@@ -65,12 +65,11 @@ public class Hand {
         return null;
     }
     //havaset be tartibe ina bashe
-    CollectionItem getCollectionItemByIndex(int index){
+    public CollectionItem getCollectionItemByIndex(int index){
         return handCards.get(index);
     }
 
-    ArrayList<CollectionItem> getHand(){
+    public ArrayList<CollectionItem> getHand(){
         return handCards;
     }
-
 }

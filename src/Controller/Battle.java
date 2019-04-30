@@ -222,9 +222,11 @@ public class Battle {
 
     public void useItem(int x, int y){}
 
-    public void nextCard(){
+    public void showNextCard(){
 
     }
+
+    public void enterGraveYard(){}
 
     public void endGame(){}
 
@@ -232,9 +234,13 @@ public class Battle {
 
     public void exit(){}
 
+    public void showItemInfo(){}
+
     public void runGame(){
         inputCommandLine();
     }
+
+    public void help(){}
 
     private void inputCommandLine(){
         String inputLine = Main.scanner.nextLine();
@@ -277,7 +283,22 @@ public class Battle {
             showItemInfo();
         else if(inputLine.matches("Use [\\d],[\\d]"))
             useItem(Integer.parseInt(input[1]), Integer.parseInt(input[2]));
+        else if(inputLine.equals("Show Next Card"))
+            showNextCard();
+        else if(inputLine.equals("Enter GraveYard"))
+            enterGraveYard();
+        else if(inputLine.equals("Help"))
+            help();
+        else if(inputLine.equals("End Game"))
+            endGame();
+        else if(inputLine.equals("Exit"))
+            return;
+        else if(inputLine.equals("Show menu")){
 
+        }
+        else
+            System.out.println("Enter valid command");
+        this.inputCommandLine();
     }
 
     //Here is Setters && Getters
