@@ -9,15 +9,14 @@ public abstract class Card extends CollectionItem {
     //MP sabete hamishe vase ye card?
     private int MP;
 
-    public static Card getCardById(String ID){return null;}
-    public static Card getCardByName(String name){return null;}
-    abstract public void showCardInCollection();
     abstract public void showCardInBattle();
-    public ArrayList<Cell> getImpactCell(){ return null;}
-    abstract public ArrayList<Cell> findImpactCell();
-    abstract public ArrayList<Cell> findImpactArea();
+
+    public void showCardInCollection(){
+        System.out.println(getInfo() + "\n");
+    }
 
     //Here is Setters && Getters
+
     public void setMP(int MP){
         this.MP = MP;
     }
