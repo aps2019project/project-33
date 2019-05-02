@@ -1,44 +1,30 @@
 package Model.CollectionItem;
 
+import Controller.AttackArea;
+import Controller.Impact;
 import Model.Enviroment.Cell;
 
 import java.util.ArrayList;
 
 public class Hero extends LivingCard {
-    @Override
-    void doSpecialPower() {
 
+    public void impactSpell(String opponentID){
+        Impact.impactSpellOfHero(opponentID);
     }
 
     @Override
-    public void showCardInCollection() {
-        System.out.println(getInfo() + "\n");
+    public void showCardInBattle(){
+        System.out.println("remaining HP : " + this.getRemainingHP() + " attack power : " + this.getDecreaseHPByAttack()
+                + " required mana : " + this.getMP() + this.getDescription());
+        //TODO
     }
 
-    @Override
-    public void showCardInBattle() {
-
-    }
-
-    @Override
-    public ArrayList<Cell> findImpactCell() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Cell> findImpactArea() {
-        return null;
-    }
-
-    @Override
-    public void doImpact() {
-
-    }
-
+    //deghat konim ke description baraye hero hamoon tozihare special power e !!
     @Override
     public String getInfo() {
         String info = "Name : " + this.getName() + " - AP : " + this.getDecreaseHPByAttack() + " - HP : "
-                + this.getHP() + " Class : " + this.getClass() + " Special power: " + this.getSpecialPower();
+                + this.getHP() + " Class : " + this.getClass() + " Special power: " + this.getDescription();
         return info;
     }
+
 }

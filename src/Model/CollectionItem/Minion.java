@@ -1,14 +1,12 @@
 package Model.CollectionItem;
 
+import Controller.AttackArea;
+import Controller.Impact;
 import Model.Enviroment.Cell;
 
 import java.util.ArrayList;
 
 public class Minion extends LivingCard {
-    @Override
-    void doSpecialPower() {
-
-    }
 
     @Override
     public void showCardInCollection() {
@@ -22,26 +20,40 @@ public class Minion extends LivingCard {
                 this.getPositionRow() + ", " + this.getPositionColumn() + "), power : " + this.getDecreaseHPByAttack());
     }
 
-    @Override
-    public ArrayList<Cell> findImpactCell() {
-        return null;
+    public ArrayList<Cell> findImpactCellOfSpecialPower() {
+        return  AttackArea.getImapctCellsOfSpecialPower(this);
     }
 
-    @Override
-    public ArrayList<Cell> findImpactArea() {
-        return null;
+    public void doSpecialPower(String opponentID){
+        if(getCoolDown() > 0){
+            System.out.println("Special Power is not ready yet !!");
+            return;
+        }
+
+        LivingCard opponentCard = CollectionItem.getLivingCardByID(opponentID);
+
+        boolean canSpecialAttackToOpponent = false;
+        ArrayList<Cell> impactCells = this.findImpactCellOfSpecialPower();
+        for(Cell cell : impactCells)
+            if(cell.getX() == opponentCard.getPositionRow() && cell.getY() == opponentCard.getPositionColumn())
+                canSpecialAttackToOpponent = true;
+
+        if(!canSpecialAttackToOpponent){
+            System.out.println("Oppnent Card is not in special attack impact area");
+        }
+
+        Impact.specialPower(this, opponentCard);
+
+        setCoolDown(CollectionItem.readCoolDownTime(this));
+
     }
 
-    @Override
-    public void doImpact() {
-
-    }
-
+    //deghat konim description hamoon special power o in harfas
     @Override
     public String getInfo() {
         String info = "Type : Minion - Name : " + this.getName() + " - Class: " + this.getClass() + " - AP : " +
                 this.getDecreaseHPByAttack() + " - HP : " + this.getHP() + " - MP : " + this.getMP() + " - Special power : "
-                + this.getSpecialPower();
+                + this.getDescription();
         return info;
     }
 }

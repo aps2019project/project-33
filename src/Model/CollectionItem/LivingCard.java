@@ -1,5 +1,7 @@
 package Model.CollectionItem;
 
+import Controller.AttackArea;
+import Controller.Impact;
 import Model.Buffs.Buff;
 import Model.Enviroment.Cell;
 
@@ -12,22 +14,74 @@ abstract public class LivingCard extends Card {
     private String counterAttackType, type;
     private ArrayList<Buff> effects;
     private boolean canCounterAttack, canMoveOrAttack;
-    private boolean canMoveGreaterTwoCell;
-    private ArrayList<Item> Ite
-        ms = new ArrayList<>();
-
+    private boolean canMoveGreaterTwoCell, canMove, canAttack;
+    private ArrayList<Item> Items = new ArrayList<>();
     //location mikhad
     private int positionColumn;
     private int positionRow;
+    private int coolDown;
 
-    public void addNewBuff(Buff buff){}
-    public void deleteBuff(Buff buff){}
-    public void attack(String opponentID){}
-    public void defend(String opponentID){}
-    public void move(Cell cell){}
-    abstract void doSpecialPower();
-    public void counterAttack(){}
-    //?
+
+    public void addNewBuff(Buff buff){
+        this.effects.add(buff);
+    }
+    public void deleteBuff(Buff buff){
+        this.effects.remove(buff);
+    }
+
+    public ArrayList<Cell> findImpactCellsOfAttack(){
+        return AttackArea.getImpactCellsOfAttack(this);
+    }
+
+    public void attack(String opponentID){
+        if(!canAttack){
+            System.out.println("This living card can't attack this round !");
+            return;
+        }
+
+        LivingCard opponentCard = CollectionItem.getLivingCardByID(opponentID);
+
+        ArrayList<Cell> impactCells = this.findImpactCellsOfAttack();
+        boolean canAttackToOpponent = false;
+        for(Cell cell : impactCells){
+            if(cell.getX() == opponentCard.getPositionRow() && cell.getY() == opponentCard.getPositionColumn())
+                canAttackToOpponent = true;
+        }
+        if(!canAttackToOpponent){
+            System.out.println("This opponent isn't in impact area !1");
+            return;
+        }
+
+        Impact.attack(this, opponentCard);
+
+        this.canAttack = false;
+    }
+
+    public ArrayList<Cell> findImpactCellsOfCounterAttack() {
+        return AttackArea.getImpactCellsOfCounterAttack(this);
+    }
+
+    public void counterAttack(String opponentID){
+        if(!canCounterAttack){
+            System.out.println("This living card can't counter attack");
+            return;
+        }
+
+        LivingCard opponentCard = CollectionItem.getLivingCardByID(opponentID);
+
+        boolean canConuterAttackToOpponent = false;
+        ArrayList<Cell> impactCells = this.findImpactCellsOfCounterAttack();
+        for(Cell cell : impactCells){
+            if(cell.getX() == opponentCard.getPositionRow() && cell.getY() == opponentCard.getPositionColumn())
+                canConuterAttackToOpponent = true;
+        }
+
+        if(!canConuterAttackToOpponent){
+            System.out.println("The opponent card is not in counter attack impact area !!");
+            return;
+        }
+        Impact.counterAttack(this, opponentCard);
+    }
 
     // Here is Setters && Getters
 
@@ -167,16 +221,39 @@ abstract public class LivingCard extends Card {
         this.canMoveOrAttack = canMoveOrAttack;
     }
 
-    public void showInfoInBattle(){
-        System.out.println("remaining HP : " + this.getRemainingHP() + " attack power : " + this.getDecreaseHPByAttack()
-         + " required mana : " + this.getMP() + this.getDesc());
-    }
-
     public ArrayList<Item> getItems() {
         return Items;
     }
 
     public void setItems(ArrayList<Item> items) {
         Items = items;
+    }
+
+    public boolean isCanMove() {
+        return canMove;
+    }
+
+    public void setCanMove(boolean canMove) {
+        this.canMove = canMove;
+    }
+
+    public boolean isCanAttack() {
+        return canAttack;
+    }
+
+    public void setCanAttack(boolean canAttack) {
+        this.canAttack = canAttack;
+    }
+
+    public boolean isCanMoveGreaterTwoCell() {
+        return canMoveGreaterTwoCell;
+    }
+
+    public int getCoolDown() {
+        return coolDown;
+    }
+
+    public void setCoolDown(int coolDown) {
+        this.coolDown = coolDown;
     }
 }
