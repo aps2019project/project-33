@@ -1,5 +1,7 @@
 package Model.CollectionItem;
 
+import Controller.AttackArea;
+import Controller.Impact;
 import Model.Enviroment.Cell;
 
 import java.util.ArrayList;
@@ -7,34 +9,36 @@ import java.util.ArrayList;
 public class Spell extends Card {
     private int Mp, price;
 
-    public void impactEnemy(){}
+    public void impactSpell(Cell cell){
+        Impact.impactSpell(this, cell);
+    }
+    public ArrayList<Cell> findImapctCell(Cell coordination){
+        return AttackArea.getImpactSellOfSpell(this, coordination);
+    }
+
     public void multipleImpact(){}
     public void minionImpact(){}
     public void HeroImpact(){}
     public void cellImpact(){}
     public void kingsGurad(){}
     public void doAllKindOfAttacks(){}
-    public ArrayList<Cell> findImapctHeros(){return null;}
+
+
     @Override
-    public void showCardInCollection() {}
-    @Override
-    public void showCardInBattle() {}
-    @Override
-    public ArrayList<Cell> findImpactCell() {return null;}
-    @Override
-    public ArrayList<Cell> findImpactArea() {return null;}
-    @Override
-    public void doImpact() {}
+    public void showCardInBattle() {
+        //TODO
+    }
 
     @Override
     public String getInfo() {
         String info;
-        info = "Type : Spell - Name : " + this.getName() + " - MP : " + this.getMp() + " - Desc : " + this.getDesc();
+        info = "Type : Spell - Name : " + this.getName() + " - MP : " + this.getMp() + " - Desc : " + this.getDescription();
         return info;
     }
 
 
     //Here is Setters && Getters
+
     public int getMp() {
         return Mp;
     }
