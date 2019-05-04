@@ -10,6 +10,9 @@ public abstract class Card extends CollectionItem {
     private Battle battle;
     //MP sabete hamishe vase ye card?
     private int MP;
+    private int positionColumn;
+    private int positionRow;
+
 
     abstract public void showCardInBattle();
 
@@ -42,4 +45,20 @@ public abstract class Card extends CollectionItem {
     public void setBattle(Battle battle) {
         this.battle = battle;
     }
+    public int getPositionColumn(){
+        return this.positionColumn;
+    }
+
+    public void setPositionColumn(int positionColumn){
+        this.positionColumn = positionColumn;
+    }
+
+    public int getPositionRow(){
+        return this.positionRow;
+    }
+
+    public void  setPositionRow(int positionRow){
+        this.positionRow = positionRow;
+    }
+
 }

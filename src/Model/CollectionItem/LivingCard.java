@@ -17,8 +17,6 @@ abstract public class LivingCard extends Card {
     private boolean canMoveGreaterTwoCell, canMove, canAttack;
     private ArrayList<Item> Items = new ArrayList<>();
     //location mikhad
-    private int positionColumn;
-    private int positionRow;
     private int coolDown;
 
 
@@ -84,7 +82,7 @@ abstract public class LivingCard extends Card {
     }
 
     public Cell getCell(){
-        this.getBattle().getMap().getCellByCoordination(this.positionRow, this.positionColumn);
+        this.getBattle().getMap().getCellByCoordination(this.getPositionRow(), this.getPositionColumn());
     }
 
     // Here is Setters && Getters
@@ -103,22 +101,6 @@ abstract public class LivingCard extends Card {
 
     public void setRemainingHP(int remainingHP){
         this.remainingHP = remainingHP;
-    }
-
-    public int getPositionColumn(){
-        return this.positionColumn;
-    }
-
-    public void setPositionColumn(int positionColumn){
-        this.positionColumn = positionColumn;
-    }
-
-    public int getPositionRow(){
-        return this.positionRow;
-    }
-
-    public void  setPositionRow(int positionRow){
-        this.positionRow = positionRow;
     }
 
     public int getHP() {

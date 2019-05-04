@@ -48,6 +48,10 @@ public class Minion extends LivingCard {
 
     }
 
+    private ArrayList<Cell> findImpactCellOfSpecialPower() {
+        return null;
+    }
+
     //deghat konim description hamoon special power o in harfas
     @Override
     public String getInfo() {

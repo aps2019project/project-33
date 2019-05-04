@@ -13,7 +13,7 @@ public class Spell extends Card {
         Impact.impactSpell(this, cell);
     }
     public ArrayList<Cell> findImapctCell(Cell coordination){
-        return AttackArea.getImpactCellsOfSpell(this, coordination);
+        return AttackArea.getImpactCellsOfSpell(this, coordination, this.getBattle());
     }
 
     public void multipleImpact(){}

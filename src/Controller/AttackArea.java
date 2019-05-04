@@ -5,6 +5,7 @@ import Model.Enviroment.Cell;
 import Model.Player;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class AttackArea {
 
@@ -42,14 +43,16 @@ public class AttackArea {
         return null;
     }
 
-    public static ArrayList<Cell> getImpactCellsOfSpell(Spell spell, Cell coordination, Battle battle) {
+    public static ArrayList<Cell> getImpactCellsOfSpell(Spell spell, Cell cell, Battle battle) {
         ArrayList<Cell> impactCells = new ArrayList<>();
 
         Information information = spell.getInformation();
         information.readInformation();
 
         if(information.isCellImpact()){
-            if(information.)
+            if(information.isSquareOfCellsImpact()){
+                impactCells.addAll(getSquareOfCells(spell, cell, battle, information.getLengthOfSquareOfCellsImpact()));
+            }
         }
         else{
             if(information.isEnemyImpact())
@@ -58,6 +61,22 @@ public class AttackArea {
                 getCells(impactCells, information, battle.getPlayerOn());
         }
         return impactCells;
+    }
+
+    private static ArrayList<Cell> getSquareOfCells(Spell spell, Cell cell, Battle battle, int length) {
+        ArrayList<Cell> squareOfCells = new ArrayList<>();
+        int x = cell.getX(), y = cell.getY();
+        for(int i = 0; i < length; i ++){
+            for(int j = 0; j < length; j ++){
+                int newX = x + (length - 1) / 2 + i;
+                int newY = y + (length - 1) / 2 + j;
+                Cell cell1 = battle.getMap().getCellByCoordination(newX, newY);
+                if(cell1 != null){
+                    squareOfCells.add(cell1);
+                }
+            }
+        }
+        return squareOfCells;
     }
 
     private static void getCells(ArrayList<Cell> impactCells, Information information, Player player) {
@@ -79,5 +98,8 @@ public class AttackArea {
         return cellOfHero;
     }
 
+    public static ArrayList<Cell> getCellsOfSpecialPower(Minion minion) {
+        return null;
+    }
 }
 
