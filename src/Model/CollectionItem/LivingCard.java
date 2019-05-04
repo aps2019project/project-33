@@ -13,7 +13,7 @@ abstract public class LivingCard extends Card {
     changeRangeOfAttack, numberOfDamaged;
     private String counterAttackType, type;
     private ArrayList<Buff> effects;
-    private boolean canCounterAttack, canMoveOrAttack;
+    private boolean canCounterAttack, canMoveOrAttack, isAlive;
     private boolean canMoveGreaterTwoCell, canMove, canAttack;
     private ArrayList<Item> Items = new ArrayList<>();
     //location mikhad
@@ -81,6 +81,10 @@ abstract public class LivingCard extends Card {
             return;
         }
         Impact.counterAttack(this, opponentCard);
+    }
+
+    public Cell getCell(){
+        this.getBattle().getMap().getCellByCoordination(this.positionRow, this.positionColumn);
     }
 
     // Here is Setters && Getters
@@ -255,5 +259,13 @@ abstract public class LivingCard extends Card {
 
     public void setCoolDown(int coolDown) {
         this.coolDown = coolDown;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
     }
 }

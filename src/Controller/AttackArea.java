@@ -1,19 +1,12 @@
 package Controller;
 
-import Model.CollectionItem.Hero;
-import Model.CollectionItem.LivingCard;
-import Model.CollectionItem.Spell;
+import Model.CollectionItem.*;
 import Model.Enviroment.Cell;
+import Model.Player;
 
 import java.util.ArrayList;
 
 public class AttackArea {
-    private boolean isEnemyImpact;
-    private boolean isMultilpleImpact;
-    private boolean isMinionImpact;
-    private boolean isHeroImpact;
-    private boolean cellImpact;
-    private boolean isKingsGuard;
 
     public static ArrayList<Cell> findMeleeAttackArea(Battle battle, LivingCard attackingCard){
 
@@ -49,8 +42,42 @@ public class AttackArea {
         return null;
     }
 
-    public static ArrayList<Cell> getImpactCellsOfSpell(Spell spell, Cell coordination) {
+    public static ArrayList<Cell> getImpactCellsOfSpell(Spell spell, Cell coordination, Battle battle) {
+        ArrayList<Cell> impactCells = new ArrayList<>();
 
-        return null;
+        Information information = spell.getInformation();
+        information.readInformation();
+
+        if(information.isCellImpact()){
+            if(information.)
+        }
+        else{
+            if(information.isEnemyImpact())
+                getCells(impactCells, information, battle.getPlayerOff());
+            if(information.isUsImpact())
+                getCells(impactCells, information, battle.getPlayerOn());
+        }
+        return impactCells;
     }
+
+    private static void getCells(ArrayList<Cell> impactCells, Information information, Player player) {
+        if(information.isHeroImpact())
+            impactCells.addAll(addCellOfLivingCard(player, (LivingCard) new Hero()));
+        if(information.isHeroImpact())
+            impactCells.addAll(addCellOfLivingCard(player, (LivingCard) new Minion()));
+    }
+
+    private static ArrayList<Cell> addCellOfLivingCard(Player player, LivingCard livingCard){
+        ArrayList<Cell> cellOfHero = new ArrayList<>();
+        for(CollectionItem collectionItem : player.getUsedCards()){
+            if(collectionItem.getClass().equals(livingCard.getClass())){
+                LivingCard livingCard1 = (LivingCard) collectionItem;
+                if(livingCard1.isAlive())
+                    cellOfHero.add(livingCard1.getCell());
+            }
+        }
+        return cellOfHero;
+    }
+
 }
+

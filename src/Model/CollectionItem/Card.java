@@ -1,11 +1,13 @@
 package Model.CollectionItem;
 
+import Controller.Battle;
 import Model.Enviroment.Cell;
 
 import java.util.ArrayList;
 
 public abstract class Card extends CollectionItem {
     private String ID;
+    private Battle battle;
     //MP sabete hamishe vase ye card?
     private int MP;
 
@@ -31,5 +33,13 @@ public abstract class Card extends CollectionItem {
 
     public void setID(String ID) {
         this.ID = ID;
+    }
+
+    public Battle getBattle() {
+        return battle;
+    }
+
+    public void setBattle(Battle battle) {
+        this.battle = battle;
     }
 }

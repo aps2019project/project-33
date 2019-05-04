@@ -1,7 +1,7 @@
 package Model.CollectionItem;
 
 import Controller.AttackArea;
-import Controller.Impact;
+import Controller.;
 import Model.Enviroment.Cell;
 
 import java.util.ArrayList;
@@ -20,8 +20,8 @@ public class Minion extends LivingCard {
                 this.getPositionRow() + ", " + this.getPositionColumn() + "), power : " + this.getDecreaseHPByAttack());
     }
 
-    public ArrayList<Cell> findImpactCellOfSpecialPower() {
-        return  AttackArea.getImpactCellsOfSpecialPower(this);
+    public ArrayList<Cell> findCellOfSpecialPower() {
+        return  AttackArea.getCellsOfSpecialPower(this);
     }
 
     public void doSpecialPower(String opponentID){

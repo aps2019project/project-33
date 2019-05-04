@@ -3,6 +3,7 @@ package Model.CollectionItem;
 import java.util.ArrayList;
 
 public abstract class CollectionItem {
+    private Information information;
     private String name;
     private String ID;
     private int price;
@@ -90,5 +91,13 @@ public abstract class CollectionItem {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Information getInformation() {
+        return information;
+    }
+
+    public void setInformation(Information information) {
+        this.information = information;
     }
 }
