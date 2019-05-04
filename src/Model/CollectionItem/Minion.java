@@ -21,7 +21,7 @@ public class Minion extends LivingCard {
     }
 
     public ArrayList<Cell> findImpactCellOfSpecialPower() {
-        return  AttackArea.getImapctCellsOfSpecialPower(this);
+        return  AttackArea.getImpactCellsOfSpecialPower(this);
     }
 
     public void doSpecialPower(String opponentID){
