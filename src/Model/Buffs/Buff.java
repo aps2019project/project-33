@@ -9,6 +9,12 @@ public abstract class Buff {
     private int remainTime;
     private boolean isPassive;
 
+    public Buff(int remainTime, boolean isPermanent, boolean isPassive){
+        this.isPermanent = isPermanent;
+        this.remainTime = remainTime;
+        this.isPassive = isPassive;
+    }
+
     abstract public void doEffect(String cardName);
 
     public boolean isPermanent() {

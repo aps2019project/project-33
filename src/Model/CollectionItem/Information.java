@@ -14,7 +14,7 @@ public class Information {
     private boolean cellImpact;
     private boolean isSquareOfCellsImpact;
     private int lengthOfSquareOfCellsImpact;
-
+    private boolean isImpactAColumn;
     private boolean isKingsGuard;
 
     public boolean isEnemyImpact() {
@@ -87,6 +87,14 @@ public class Information {
 
     public void setLengthOfSquareOfCellsImpact(int lengthOfSquareOfCellsImpact) {
         this.lengthOfSquareOfCellsImpact = lengthOfSquareOfCellsImpact;
+    }
+
+    public boolean isImpactAColumn() {
+        return isImpactAColumn;
+    }
+
+    public void setImpactAColumn(boolean impactAColumn) {
+        isImpactAColumn = impactAColumn;
     }
 
     //Attack section

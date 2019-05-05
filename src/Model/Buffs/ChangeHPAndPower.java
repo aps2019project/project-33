@@ -7,6 +7,10 @@ public class ChangeHPAndPower extends Buff {
     private int changeHP;
     private int changePower;
 
+    public ChangeHPAndPower(int remainTime, boolean isPermanent, boolean isPassive) {
+        super(remainTime, isPermanent, isPassive);
+    }
+
     @Override
     public void doEffect(String cardName) {
 

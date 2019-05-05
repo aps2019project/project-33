@@ -2,23 +2,41 @@
 
 package Controller;
 
+import Model.Buffs.*;
 import Model.CollectionItem.*;
 import Model.Enviroment.Cell;
 import Model.Player;
+import javafx.geometry.Pos;
 
 import javax.swing.text.StyledEditorKit;
 
 public class Impact {
 
-    public static void addDisarmToCard(int time, Boolean isPermanent, Card card){}
+    public static void addDisarmToCard(int remainTime, boolean isPermanent, boolean isPassive, LivingCard livingCard){
+        DisarmBuff disarmBuff = new DisarmBuff(remainTime, isPermanent, isPassive);
+        livingCard.addNewBuff(disarmBuff);
+    }
 
-    public static void addHolyToCard(int time, Boolean iPermanent, Card card){}
+    public static void addHolyToCard(int remainTime, boolean isPermanent, boolean isPassive, int shieldPower, LivingCard livingCard){
+        HolyBuff holyBuff = new HolyBuff(remainTime, isPermanent, isPassive, shieldPower);
+        livingCard.addNewBuff(holyBuff);
+    }
 
-    public static void addStunToCard(int time, Boolean isPermanent, Card card){}
+    public static void addStunToCard(int remainTime, boolean isPermanent, boolean isPassive, LivingCard livingCard){
+        StunBuff stunBuff = new StunBuff(remainTime, isPermanent, isPassive);
+        livingCard.addNewBuff(stunBuff);
+    }
 
-    public static void addPosionToCard(int time, Boolean isPermanent, Card card){}
+    public static void addPosionToCard(int remainTime, boolean isPermanent, boolean isPassive, int decreaseHP,
+                                       LivingCard livingCard){
+        PosionBuff posionBuff = new PosionBuff(remainTime, isPermanent, isPassive, decreaseHP);
+        livingCard.addNewBuff(posionBuff);
+    }
 
-    public static void addPowerBuffToCard(int time, Boolean isPermanent, Card card){}
+    public static void addPowerBuffToCard(int remainTime, boolean isPermanent, boolean isPassive, LivingCard livingCard){
+        PowerBuff powerBuff = new PowerBuff(remainTime, isPermanent, isPassive);
+        livingCard.addNewBuff(powerBuff);
+    }
 
     public static void removeBadBuffsOfOurselves(Card card){}
 

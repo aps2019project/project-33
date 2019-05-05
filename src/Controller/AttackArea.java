@@ -53,6 +53,14 @@ public class AttackArea {
             if(information.isSquareOfCellsImpact()){
                 impactCells.addAll(getSquareOfCells(spell, cell, battle, information.getLengthOfSquareOfCellsImpact()));
             }
+            if(information.isImpactAColumn()){
+                ArrayList<Cell> cellsOfEnemyForces = new ArrayList<>();
+                getCells(cellsOfEnemyForces, information, battle.getPlayerOff());
+                for(Cell cellOfForce : cellsOfEnemyForces){
+                    if(cellOfForce.getY() == cell.getY())
+                        impactCells.add(cellOfForce);
+                }
+            }
         }
         else{
             if(information.isEnemyImpact())
