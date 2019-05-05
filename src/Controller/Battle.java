@@ -187,9 +187,43 @@ public class Battle {
         return true;
     }
 
-    public void attackToOpponentCard(String opponentID){}
+    public void attackToOpponentCard(String opponentID){
+        ArrayList<LivingCard> opponentAliveCards = playerOff.getAliveCards();
+        LivingCard opponentLivingCard = null;
+        for(LivingCard livingCard : opponentAliveCards)
+            if(livingCard.getID().equals(opponentID))
+                opponentLivingCard = livingCard;
+        if(opponentLivingCard == null){
+            System.out.println("Invalid card id");
+            return;
+        }
+        Impact.attack(this.selectedCard, opponentLivingCard);
+    }
 
-    public void comboAttackToOpponentCard(String[] input){}
+    public void comboAttackToOpponentCard(String[] input){
+        String opponentID = input[0];
+        LivingCard opponentLivingCard = null;
+        for(LivingCard livingCard : playerOff.getAliveCards())
+            if(livingCard.getID().equals(opponentID))
+                opponentLivingCard = livingCard;
+        if(opponentLivingCard == null){
+            System.out.println("Invalid card id");
+            return;
+        }
+        ArrayList<LivingCard> myLivingCards = new ArrayList<>();
+        for(int i = 1; i < input.length; i++){
+            LivingCard myLivingCard = null;
+            for(LivingCard livingCard : playerOn.getAliveCards())
+                if(livingCard.getID().equals(input[i]))
+                    myLivingCard = livingCard;
+            if(myLivingCard == null){
+                System.out.println("Invalid card id");
+                return;
+            }
+            myLivingCards.add(myLivingCard);
+        }
+        Impact.comboAttack(opponentLivingCard, myLivingCards);
+    }
 
     public void useSpecialPower(int x, int y){}
 
