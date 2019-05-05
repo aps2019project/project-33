@@ -32,6 +32,10 @@ public abstract class CollectionItem {
         return allItems;
     }
 
+    public static void addItemToAllItems(Item item){
+        allItems.add(item);
+    }
+
     public static CollectionItem getCollectionItemByID(String ID){
         for(CollectionItem collectionItem : allLivingCards){
             if(collectionItem.getID().equals(ID))

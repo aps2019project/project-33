@@ -2,6 +2,7 @@ package Model.CollectionItem;
 
 import Controller.AttackArea;
 import Controller.Impact;
+import Model.Collection;
 import Model.Enviroment.Cell;
 
 import java.util.ArrayList;
@@ -12,13 +13,22 @@ public class Minion extends LivingCard {
         //TODO
     }
 
-    public static Minion createMinion(String name){
-        Minion minion = new Minion();
-        minion.readInformation();
-        //TODO
-
+    public static Minion createMinion(String playerName, String minionName){
+        Minion minion = loadMinionFromJsonFile(minionName);
+        int numberOfThisMinionType = 0;
+        ArrayList<LivingCard> usedLivingCards = CollectionItem.getAllLivingCards();
+        for(LivingCard livingCard : usedLivingCards){
+            if(livingCard instanceof Minion){
+                if(livingCard.getName().equals(minionName))
+                    numberOfThisMinionType++;
+            }
+        }
+        String ID = playerName + "_" + minionName + "_" + numberOfThisMinionType;
+        minion.setID(ID);
+        CollectionItem.addLivingCardToAllLivingCards(minion);
         return minion;
     }
+
 
     @Override
     public void showCardInCollection() {
