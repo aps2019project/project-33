@@ -127,6 +127,8 @@ abstract public class LivingCard extends Card {
         return decreaseHPByAttack;
     }
 
+    //TODO
+    //be in sadegi ha ham nist
     public void setDecreaseHPByAttack(int decreaseHPByAttack) {
         this.decreaseHPByAttack = decreaseHPByAttack;
     }

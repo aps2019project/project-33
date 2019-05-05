@@ -10,6 +10,8 @@ import Model.Player;
 
 import javax.swing.text.StyledEditorKit;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class Impact {
 
@@ -86,23 +88,62 @@ public class Impact {
         minion.kill();
     }
 
-    public static void killOurMinionAndHealHero(Card card){}
+    public static void killOurMinionAndHealHero(Hero hero, Minion minion){
+        hero.setHP(hero.getHP() + minion.getHP());
+        minion.kill();
+    }
 
-    public static void rangeAttack(Card ourCard, Card enemyCard){}
+    public static void anyKindOfAttack(LivingCard ourLivingCard, LivingCard enemyLivingCard){
+        enemyLivingCard.handleAttack(ourLivingCard.getDecreaseHPByAttack());
+        Impact.counterAttack(enemyLivingCard, ourLivingCard);
+    }
 
-    public static void hybridAttack(Card ourCard, Card enemyCard){}
+    public static void specialAttackOfGhooleBozorg(Minion bigGiant, int bigGiantDamage){
+        int numberOfImpactedCells = 8;
+        int[] dx = {-1, -1, 0, 1, 1, 1, 0, -1}, dy = {0, 1, 1, 1, 0, -1, -1, -1};
+        for(int i = 0; i < numberOfImpactedCells; i ++){
+            int newX = bigGiant.getCell().getX() + dx[i], newY = bigGiant.getCell().getY() + dy[i];
+            Cell cell = bigGiant.getBattle().getMap().getCellByCoordination(newX, newY);
+            if(cell == null) continue;
+            LivingCard livingCard = cell.getLivingCard();
+            if(livingCard == null) continue;
+            if(!(livingCard instanceof Minion)) continue;
+            livingCard.handleAttack(bigGiantDamage);
+        }
+    }
 
-    public static void melleAttack(Card ourCard, Card enemyCard){}
+    //wa
+    public static void spellOfZahhak(Hero zahhak){
+        int numberOfImpactedCells = 8;
+        ArrayList<Cell> emptyCells = new ArrayList<>();
+        int[] dx = {-1, -1, 0, 1, 1, 1, 0, -1}, dy = {0, 1, 1, 1, 0, -1, -1, -1};
+        for(int i = 0; i < numberOfImpactedCells; i ++){
+            int newX = zahhak.getCell().getX() + dx[i], newY = zahhak.getCell().getY() + dy[i];
+            Cell cell = zahhak.getBattle().getMap().getCellByCoordination(newX, newY);
+            if(cell == null) continue;
+            if(cell.getLivingCard() != null) continue;
+            emptyCells.add(cell);
+        }
+        Collections.shuffle(emptyCells);
+        int numberOfNeededCells = Integer.min(2, emptyCells.size());
+        for(int i = 0; i < numberOfNeededCells; i ++){
+            zahhak.getBattle().addMareBozorg();
+        }
+    }
 
-    public static void specialAttackOfGhooleBozorg(Card card){}
+    //im not sure
+    public static void increaseRangeOfAttack(LivingCard livingCard, int amount){
+        livingCard.setRangeOfAttack(livingCard.getRangeOfAttack() + amount);
+    }
 
-    public static void spellOfZahhak(Card card){}
+    public static void doubleHP(Hero hero){
+        hero.setHP(hero.getHP() * 2);
+    }
 
-    public static void increaseRangeOfAttack(Card card){}
+    //daghighan chio ezafe mikone ?
+    public static void increaseMana(Player player){
 
-    public static void doubleHP(Card card){}
-
-    public static void increaseMana(Player player){}
+    }
 
     public static void attackForce(LivingCard ourCard, LivingCard enemyCard){}
 

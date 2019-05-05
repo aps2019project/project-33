@@ -139,8 +139,9 @@ public class Information {
     private static boolean canKillOurMinionAndHealHero;
     private static boolean canDoRangedAttack;
     private static boolean canDoHybridAttack;
-    private static boolean canDoMelleAttack;
+    private static boolean canDoMeleeAttack;
     private static boolean isGhooleBozorg;
+    private int ghooleBozorgDamage;
     private static boolean isShireDarrande;
     private static boolean isZahhak;
     private static boolean canIncreaseRangeOfAttack;
@@ -387,12 +388,12 @@ public class Information {
         return canDoHybridAttack;
     }
 
-    public static void setCanDoMelleAttack(boolean canDoMelleAttack) {
-        Information.canDoMelleAttack = canDoMelleAttack;
+    public static void setCanDoMeleeAttack(boolean canDoMeleeAttack) {
+        Information.canDoMeleeAttack = canDoMeleeAttack;
     }
 
-    public static boolean getCanDoMelleAttack() {
-        return canDoMelleAttack;
+    public static boolean getCanDoMeleeAttack() {
+        return canDoMeleeAttack;
     }
 
     public static void setIsGhooleBozorg(boolean isGhooleBozorg) {
@@ -449,6 +450,14 @@ public class Information {
 
     public static void setDecreaseHpOfPoisonBuffOfCell(int decreaseHpOfPoisonBuffOfCell) {
         Information.decreaseHpOfPoisonBuffOfCell = decreaseHpOfPoisonBuffOfCell;
+    }
+
+    public int getGhooleBozorgDamage() {
+        return ghooleBozorgDamage;
+    }
+
+    public void setGhooleBozorgDamage(int ghooleBozorgDamage) {
+        this.ghooleBozorgDamage = ghooleBozorgDamage;
     }
 
     //methods

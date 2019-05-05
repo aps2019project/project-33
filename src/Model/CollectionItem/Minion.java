@@ -1,12 +1,24 @@
 package Model.CollectionItem;
 
 import Controller.AttackArea;
-import Controller.;
+import Controller.Impact;
 import Model.Enviroment.Cell;
 
 import java.util.ArrayList;
 
 public class Minion extends LivingCard {
+
+    public void readInformation(){
+        //TODO
+    }
+
+    public static Minion createMinion(String name){
+        Minion minion = new Minion();
+        minion.readInformation();
+        //TODO
+
+        return minion;
+    }
 
     @Override
     public void showCardInCollection() {
@@ -21,6 +33,7 @@ public class Minion extends LivingCard {
     }
 
     public ArrayList<Cell> findCellOfSpecialPower() {
+
         return  AttackArea.getCellsOfSpecialPower(this);
     }
 

@@ -301,6 +301,8 @@ public class Battle {
         this.inputCommandLine();
     }
 
+    public void addMareBozorg(){}
+
     //Here is Setters && Getters
 
     public Player getPlayerOn() {
