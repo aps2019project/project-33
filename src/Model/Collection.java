@@ -5,9 +5,9 @@ import Model.CollectionItem.*;
 import java.util.ArrayList;
 
 public class Collection {
-    private ArrayList<CollectionItem> cards;
+    private ArrayList<CollectionItem> cards = new ArrayList<>();
     private Deck mainDeck;
-    private ArrayList<Deck> decks = new ArrayList<Deck>();
+    private ArrayList<Deck> decks = new ArrayList<>();
 
     public Deck getDeckByName(String deckName){
         for(Deck deck : decks)
@@ -34,7 +34,7 @@ public class Collection {
     public void showDeck(String deckName){
         Deck deck = this.getDeckByName(deckName);
         if(deck == null){
-            System.out.println("deck dosnt exist");
+            System.out.println("deck doesn't exist");
             return;
         }
         deck.showDeck(false);
@@ -88,16 +88,7 @@ public class Collection {
     }
 
     public void addCollectionItemToDeck(String ID, String deckName){
-        Deck thisDeck = null;
-        for(Deck deck : this.getDecks()){
-            if(deck.getName().equals(deckName)){
-                thisDeck = deck;
-            }
-        }
-        if(thisDeck == null){
-            System.out.println("deck isnt in your collection");
-            return;
-        }
+        Deck thisDeck = this.getDeckByName(deckName);
         CollectionItem collectionItem = this.getCollectionItemByID(ID);
         if(this.validateInput(collectionItem, thisDeck))
             thisDeck.addCard(collectionItem);
@@ -166,6 +157,7 @@ public class Collection {
     }
 
     public void showCards(String descriptionOfPrice){
+        System.out.println("Cards :");
         int numberOfCards = 0;
         for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem instanceof Spell || collectionItem instanceof Minion){

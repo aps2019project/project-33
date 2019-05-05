@@ -1,5 +1,6 @@
 package Controller;
 
+import Controller.Menus.AccountMenu;
 import Controller.Menus.MainMenu;
 import Controller.Menus.ShopMenu;
 import Model.*;
@@ -15,8 +16,8 @@ public class Application {
 
 
     public void runApplication(){
-        MainMenu mainMenu = new MainMenu();
-        mainMenu.inputCommandLine();
+        AccountMenu accountMenu = new AccountMenu();
+        accountMenu.inputCommandLine();
     }
 
     //hello

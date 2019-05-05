@@ -42,19 +42,19 @@ public class Hero extends LivingCard {
     }
 */
 
-    public Hero createHero(String playerName, String heroName){
-        Hero hero = loadAHeroFromJsonFile(heroName);
-        int numberOfThisHeroType = 0;
-        ArrayList<LivingCard> usedLivingCards = CollectionItem.getAllLivingCards();
-        for(LivingCard livingCard : usedLivingCards){
-            if(livingCard instanceof Hero){
-                if(livingCard.getName().equals(heroName))
-                    numberOfThisHeroType++;
-            }
-        }
-        String ID = playerName + "_" + heroName + numberOfThisHeroType;
-        hero.setID(ID);
-        CollectionItem.addLivingCardToAllLivingCards(hero);
-        return hero;
-    }
+//    public Hero createHero(String playerName, String heroName){
+//        Hero hero = loadAHeroFromJsonFile(heroName);
+//        int numberOfThisHeroType = 0;
+//        ArrayList<LivingCard> usedLivingCards = CollectionItem.getAllLivingCards();
+//        for(LivingCard livingCard : usedLivingCards){
+//            if(livingCard instanceof Hero){
+//                if(livingCard.getName().equals(heroName))
+//                    numberOfThisHeroType++;
+//            }
+//        }
+//        String ID = playerName + "_" + heroName + numberOfThisHeroType;
+//        hero.setID(ID);
+//        CollectionItem.addLivingCardToAllLivingCards(hero);
+//        return hero;
+//    }
 }

@@ -8,7 +8,7 @@ public class Account {
 
     private static ArrayList<Account> accounts = new ArrayList<>();
     private ArrayList<Match> matches = new ArrayList<>();
-    private Collection collection;
+    private Collection collection = new Collection();
     private String username;
     private String password;
     private int budget;
