@@ -42,7 +42,7 @@ public class Hero extends LivingCard {
     }
 */
 
-//    public Hero createHero(String playerName, String heroName){
+//    public static Hero createHero(String playerName, String heroName){
 //        Hero hero = loadAHeroFromJsonFile(heroName);
 //        int numberOfThisHeroType = 0;
 //        ArrayList<LivingCard> usedLivingCards = CollectionItem.getAllLivingCards();

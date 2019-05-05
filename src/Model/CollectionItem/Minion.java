@@ -13,7 +13,7 @@ public class Minion extends LivingCard {
         //TODO
     }
 
-    public Minion createMinion(String playerName, String minionName){
+    public static Minion createMinion(String playerName, String minionName){
         Minion minion = loadMinionFromJsonFile(minionName);
         int numberOfThisMinionType = 0;
         ArrayList<LivingCard> usedLivingCards = CollectionItem.getAllLivingCards();

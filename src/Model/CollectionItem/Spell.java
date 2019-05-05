@@ -23,6 +23,19 @@ public class Spell extends Card {
     public void kingsGurad(){}
     public void doAllKindOfAttacks(){}
 
+    public static Spell createSpell(String playerName, String spellName){
+        Spell spell = loadSpellFromJsonFile(spellName);
+        int numberOfThisSpellType = 0;
+        ArrayList<Spell> usedSpells = CollectionItem.getAllSpells();
+        for(Spell usedSpell : usedSpells){
+            if(usedSpell.getName().equals(spellName))
+                numberOfThisSpellType++;
+        }
+        String ID = playerName + "_" + spellName + numberOfThisSpellType;
+        spell.setID(ID);
+        CollectionItem.addSpellToAllSpells(spell);
+        return spell;
+    }
 
     @Override
     public void showCardInBattle() {
