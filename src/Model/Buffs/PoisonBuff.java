@@ -2,11 +2,11 @@ package Model.Buffs;
 
 import Model.Buffs.Buff;
 
-public class PosionBuff extends Buff {
+public class PoisonBuff extends Buff {
 
     private int decreaseHP;
 
-    public PosionBuff(int remainTime, boolean isPermanent, boolean isPassive, int decreaseHP){
+    public PoisonBuff(int remainTime, boolean isPermanent, boolean isPassive, int decreaseHP){
         super(remainTime, isPermanent, isPassive);
         this.decreaseHP = decreaseHP;
     }

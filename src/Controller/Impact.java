@@ -6,7 +6,7 @@ import Model.Buffs.*;
 import Model.CollectionItem.*;
 import Model.Enviroment.Cell;
 import Model.Player;
-import javafx.geometry.Pos;
+//import javafx.geometry.Pos;
 
 import javax.swing.text.StyledEditorKit;
 import java.util.ArrayList;
@@ -28,10 +28,10 @@ public class Impact {
         livingCard.addNewBuff(stunBuff);
     }
 
-    public static void addPosionToCard(int remainTime, boolean isPermanent, boolean isPassive, int decreaseHP,
+    public static void addPoisonToCard(int remainTime, boolean isPermanent, boolean isPassive, int decreaseHP,
                                        LivingCard livingCard){
-        PosionBuff posionBuff = new PosionBuff(remainTime, isPermanent, isPassive, decreaseHP);
-        livingCard.addNewBuff(posionBuff);
+        PoisonBuff PoisonBuff = new PoisonBuff(remainTime, isPermanent, isPassive, decreaseHP);
+        livingCard.addNewBuff(PoisonBuff);
     }
 
     public static void addPowerBuffToCard(int remainTime, boolean isPermanent, boolean isPassive, LivingCard livingCard){
@@ -41,26 +41,50 @@ public class Impact {
 
     public static void removeBadBuffsOfLivingCard(LivingCard livingCard){
         ArrayList<Buff> effects = livingCard.getEffects();
-        int numberOfBuffs = livingCard.getEffects().size();
+        int numberOfBuffs = effects.size();
 
         for(int i = numberOfBuffs - 1; i > -1; i --){
             Buff buff = effects.get(i);
             if(buff instanceof WeaknessBuff) effects.remove(i);
-            if(buff instanceof )
-
+            if(buff instanceof PoisonBuff) effects.remove(i);
+            if(buff instanceof StunBuff) effects.remove(i);
+            if(buff instanceof DisarmBuff) effects.remove(i);
         }
+
     }
 
     
-    public static void removeGoodBuffsOfLivingCard(LivingCard livingCard){}
+    public static void removeGoodBuffsOfLivingCard(LivingCard livingCard){
+        ArrayList<Buff> effects = livingCard.getEffects();
+        int numberOfBuffs = effects.size();
 
-    public static void damageToEnemy(Card ourCard, Card enemyCard){}
+        for(int i = numberOfBuffs; i > -1; i --){
+            Buff buff = effects.get(i);
+            if(buff instanceof HolyBuff) effects.remove(i);
+            if(buff instanceof PowerBuff) effects.remove(i);
+        }
+    }
 
-    public static void addFieryBuffToCell(Cell cell){}
+    public static void damageToEnemy(LivingCard opponentLivingCard, int damage){
+        opponentLivingCard.handleAttack(damage);
+        return;
+    }
 
-    public static void addPosionBuffToCell(Cell cell){}
+    public static void addFieryBuffToCell(Cell cell){
+        //TODO
+        //deghat konim aslan fiery buff nadarim
+    }
 
-    public static void killMinionOfEnemy(Card card){}
+    //deghat konim nabayad chize daemi be cell ha ezafe she
+    //passive boodan ham deghat  konim ke nadare
+    public static void addPoisonBuffToCell(int remainTime, int decreaseHP,  Cell cell){
+        PoisonBuff poisonBuff = new PoisonBuff(remainTime, false, false, decreaseHP);
+        cell.addEffect(poisonBuff);
+    }
+
+    public static void killMinionOfEnemy(Minion minion){
+        minion.kill();
+    }
 
     public static void killOurMinionAndHealHero(Card card){}
 

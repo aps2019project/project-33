@@ -82,8 +82,12 @@ abstract public class LivingCard extends Card {
     }
 
     public Cell getCell(){
-        this.getBattle().getMap().getCellByCoordination(this.getPositionRow(), this.getPositionColumn());
+        return this.getBattle().getMap().getCellByCoordination(this.getPositionRow(), this.getPositionColumn());
     }
+
+    public void handleAttack(int damage){}
+
+    public void kill(){}
 
     // Here is Setters && Getters
 
