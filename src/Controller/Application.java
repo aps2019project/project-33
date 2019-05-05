@@ -17,6 +17,7 @@ public class Application {
 
     public void runApplication(){
         AccountMenu accountMenu = new AccountMenu();
+        accountMenu.inputCommandLine();
     }
 
     //hello

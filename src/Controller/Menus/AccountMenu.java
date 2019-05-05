@@ -10,7 +10,6 @@ public class AccountMenu extends Menu {
 
     //tahesh in ja bayad har koodoom az bakhsh ha beshe ye tabe
 
-    private Account createdAccount;
 
     @Override
     public void inputCommandLine() {
@@ -43,10 +42,8 @@ public class AccountMenu extends Menu {
         System.out.println("1. create account [username]");
         System.out.println("2. login [username]");
         System.out.println("3. show leader board");
-        System.out.println("4. save");
-        System.out.println("5. logout");
-        System.out.println("6. help");
-        System.out.println("7. exit");
+        System.out.println("4. help");
+        System.out.println("5. exit");
     }
 
     private void createAccount(String username) {
@@ -64,7 +61,9 @@ public class AccountMenu extends Menu {
             return;
         }
 
-        this.createdAccount = new Account(username, password);
+        Account account = new Account(username, password);
+        Account.getAccounts().add(account);
+        Main.application.setLoggedInAccount(account);
 
         System.out.println("This account is created");
 
@@ -75,6 +74,7 @@ public class AccountMenu extends Menu {
         Account account = Account.getAccountByUsername(username);
         if (account == null) {
             System.out.println("Invalid Username !!");
+            this.inputCommandLine();
             return;
         }
 
@@ -83,23 +83,14 @@ public class AccountMenu extends Menu {
         String password = Main.scanner.nextLine();
         if (!account.getPassword().equals(password)) {
             System.out.println("Invalid password !!");
+            this.inputCommandLine();
             return;
         }
 
         System.out.println("login complete !");
         Main.application.setLoggedInAccount(account);
+        new MainMenu().inputCommandLine();
+
         return;
-    }
-
-    private void save(){
-        if(createdAccount == null){
-            System.out.println("Please create an account");
-            return;
-        }
-
-        Account.getAccounts().add(createdAccount);
-        Main.application.setLoggedInAccount(createdAccount);
-        //TODO
-        //in ja bayad tooye file rikhte she
     }
 }

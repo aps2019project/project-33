@@ -2,16 +2,14 @@ package Controller.Menus;
 
 import Controller.Main;
 import Model.*;
+import Model.CollectionItem.CollectionItem;
+
+import java.util.ArrayList;
 
 public class CollectionMenu extends Menu {
     @Override
     public void inputCommandLine() {
         System.out.println("Here is Collection Menu");
-
-        if(Main.application.getLoggedInAccount() == null){
-            System.out.println("Please login first !!");
-            return;
-        }
 
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
@@ -20,12 +18,10 @@ public class CollectionMenu extends Menu {
 
         Collection collection = Main.application.getLoggedInAccount().getCollection();
 
-        if (inputLine.equals("exit"))
-            return;
-        else if (inputLine.equals("show")) {
+        if (inputLine.equals("show")) {
             collection.showCollection("Sell Cost");
-        } else if (inputLine.equals("save")) {
-            collection.save();
+        } else if (inputLine.matches("search *.")) {
+            searchInCollection(collection, input[1]);
         } else if (inputLine.matches("create deck *.")) {
             createDeck(input[2], collection);
         } else if (inputLine.matches("delete deck *.")) {
@@ -44,10 +40,24 @@ public class CollectionMenu extends Menu {
             collection.showAllDecks();
         } else if (inputLine.matches("show deck *.")) {
             showDeck(input[2], collection);
+        } else if (inputLine.equals("save")) {
+            collection.save();
         } else if (inputLine.equals("help"))
             CollectionMenu.showHelp();
+        else if (inputLine.equals("exit"))
+            return;
         else
             System.out.println("Enter valid command line !");
+
+        this.inputCommandLine();
+    }
+
+    private void searchInCollection(Collection collection, String cardName) {
+        ArrayList<String> collectionItems = collection.search(cardName);
+        int index = 0;
+        System.out.println("CollectionItems with this name :");
+        for(String string : collectionItems)
+            System.out.println(++index + " " + string);
     }
 
     private void showDeck(String deckName, Collection collection) {
@@ -92,18 +102,18 @@ public class CollectionMenu extends Menu {
     }
 
     public static void showHelp() {
-        System.out.println("1. exit");
-        System.out.println("2. show");
-        System.out.println("3. search[card name | item name]");
-        System.out.println("4. save");
-        System.out.println("5. create deck[deck name]");
-        System.out.println("6. create deck[deck name]");
-        System.out.println("7. add [card id| item id | hero id] | to deck [deck name]");
-        System.out.println("8. remove [card id | item id | hero id ] from deck[deck name]");
-        System.out.println("9. validate deck [deck name]");
-        System.out.println("10. select deck[deck name]");
-        System.out.println("11. show all decks");
-        System.out.println("12. show deck [deck name]");
-        System.out.println("13. help");
+        System.out.println("1. show");
+        System.out.println("2. search[card name | item name]");
+        System.out.println("4. create deck[deck name]");
+        System.out.println("5. delete deck[deck name]");
+        System.out.println("6. add [card id| item id | hero id] | to deck [deck name]");
+        System.out.println("7. remove [card id | item id | hero id ] from deck[deck name]");
+        System.out.println("8. validate deck [deck name]");
+        System.out.println("9. select deck[deck name]");
+        System.out.println("10. show all decks");
+        System.out.println("11. show deck [deck name]");
+        System.out.println("3. save");
+        System.out.println("12. help");
+        System.out.println("13. exit");
     }
 }
