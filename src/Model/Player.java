@@ -122,15 +122,15 @@ public class Player {
     }
 
     public void showCollectableItems() {
-        CollectableItem.showInfo();
+    //    CollectableItem.showInfo();
     }
 
     public void attack(String opponentID, String maCardID) {
-        Battle.attackToOppenentCard(opponentID, maCardID);
+    //    Battle.attackToOppenentCard(opponentID);
     }
 
     public void comboAttack(String opponentID, String... myCardID) {
-        Battle.comboAttackToOppenentCard(opponentID, myCardID);
+    //    Battle.comboAttackToOppenentCard(opponentID, myCardID);
     }
 
     public GraveYard getGraveYard() {

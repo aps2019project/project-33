@@ -193,8 +193,10 @@ public class Battle {
 
     public void useSpecialPower(int x, int y){}
 
+
+    //TODO
     public void showHand(){
-        playerOn.getHand().show();
+//        playerOn.getHand().show();
     }
 
     public void insertCardInMap(String cardID, int x, int y){}
