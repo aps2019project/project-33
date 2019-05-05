@@ -12,6 +12,26 @@ public abstract class CollectionItem {
     public static ArrayList<Item> allItems = new ArrayList<>();
     public static ArrayList<Spell> allSpells = new ArrayList<>();
 
+    public static ArrayList<LivingCard> getAllLivingCards(){
+        return allLivingCards;
+    }
+
+    public static void addLivingCardToAllLivingCards(LivingCard livingCard){
+        allLivingCards.add(livingCard);
+    }
+
+    public static ArrayList<Spell> getAllSpells(){
+        return allSpells;
+    }
+
+    public static void addSpellToAllSpells(Spell spell){
+        allSpells.add(spell);
+    }
+
+    public static ArrayList<Item> getAllItems(){
+        return allItems;
+    }
+
     public static CollectionItem getCollectionItemByID(String ID){
         for(CollectionItem collectionItem : allLivingCards){
             if(collectionItem.getID().equals(ID))

@@ -27,4 +27,34 @@ public class Hero extends LivingCard {
         return info;
     }
 
+ /*   public static Hero loadAHeroFromJsonFile(String fileName){
+        Hero hero = null;
+        Gson gson = new Gson();
+        try {
+            //addresse in bayd chi bashe ?
+            JsonReader reader = new JsonReader(new FileReader(".\\.\\Model\\CollectionItem"+fileName+".json"));
+            hero = gson.fromJson(reader, Hero.class);
+        }
+        catch( Exception e ){
+
+        }
+        return hero;
+    }
+*/
+
+    public Hero createHero(String playerName, String heroName){
+        Hero hero = loadAHeroFromJsonFile(heroName);
+        int numberOfThisHeroType = 0;
+        ArrayList<LivingCard> usedLivingCards = CollectionItem.getAllLivingCards();
+        for(LivingCard livingCard : usedLivingCards){
+            if(livingCard instanceof Hero){
+                if(livingCard.getName().equals(heroName))
+                    numberOfThisHeroType++;
+            }
+        }
+        String ID = playerName + "_" + heroName + numberOfThisHeroType;
+        hero.setID(ID);
+        CollectionItem.addLivingCardToAllLivingCards(hero);
+        return hero;
+    }
 }
