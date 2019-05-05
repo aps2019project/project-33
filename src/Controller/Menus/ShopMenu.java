@@ -3,6 +3,8 @@ package Controller.Menus;
 import Controller.Main;
 import Model.*;
 import Model.CollectionItem.CollectionItem;
+import Model.CollectionItem.Hero;
+import Model.CollectionItem.LivingCard;
 import Model.CollectionItem.UsableItem;
 
 import java.util.ArrayList;
@@ -10,55 +12,51 @@ import java.util.ArrayList;
 public class ShopMenu extends Menu {
     private Collection shop = Main.application.getShop();
 
-    public void inputCommandLine(){
+    public void inputCommandLine() {
+        System.out.println("Here is shop !");
+
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
+        inputLine = inputLine.toLowerCase();
         String[] separatedInput = inputLine.split("[ ]+");
 
         Collection collection = Main.application.getLoggedInAccount().getCollection();
 
-        if(inputLine.equals("exit"))
-            return;
-        else if(inputLine.equals("show Collection"))
+        if (inputLine.equals("show collection"))
             collection.showCollection("Sell Cost");
-        else if(inputLine.matches("search .+")){
-            searchInCollection(separatedInput[1], this.shop);
-        }
-        else if(inputLine.matches("search collection *+")){
+        else if (inputLine.matches("search collection .+")) {
             searchInCollection(separatedInput[2], collection);
-        }
-        else if(inputLine.matches("buy *+")){
+        } else if (inputLine.matches("search .+")) {
+            searchInCollection(separatedInput[1], this.shop);
+        } else if (inputLine.matches("buy .+")) {
             String collectionNameItem = separatedInput[1];
             this.buy(collectionNameItem);
-        }
-        else if(inputLine.matches("sell *+")){
+        } else if (inputLine.matches("sell .*+")) {
             String collectionItemName = separatedInput[1];
             this.sell(collectionItemName, collection);
-        }
-        else if(inputLine.equals("show"))
-            this.shop.showCollection("But Cost");
-        else if(inputLine.equals("help"))
+        } else if (inputLine.equals("show"))
+            this.shop.showCollection("Buy Cost");
+        else if (inputLine.equals("help"))
             ShopMenu.showHelp();
+        else if (inputLine.equals("exit"))
+            return;
         else
             System.out.println("Please enter valid command line !");
+        this.inputCommandLine();
     }
 
     private void searchInCollection(String collectionItemName, Collection collection) {
         ArrayList<String> IDs = collection.search(collectionItemName);
         System.out.println("Result of search :");
-        for(String ID : IDs)
-            System.out.println(ID);
+        int index = 0;
+        for (String ID : IDs)
+            System.out.println(++index + ". " + ID);
     }
 
-    private void sell(String collectionItemName, Collection collection) {
-        ArrayList<String> Ids = collection.search(collectionItemName);
-        if(Ids.size() == 0){
-            System.out.println("You haven't this id !");
-            return;
-        }
-        CollectionItem collectionItem = CollectionItem.getCollectionItemByID(Ids.get(0));
-        if(collectionItem == null){
-            System.out.println("Again wtf !");
+    private void sell(String collectionItemID, Collection collection) {
+        CollectionItem collectionItem = collection.getCollectionItemByID(collectionItemID);
+        if (collectionItem == null) {
+            System.out.println("Can't find this CollectionItem");
             return;
         }
 
@@ -67,49 +65,64 @@ public class ShopMenu extends Menu {
         costumer.getCollection().removeCollectionItemFromCollection(collectionItem.getID());
         costumer.increaseBudget(collectionItem.getPrice());
         this.shop.addCollectionItemToCollection(collectionItem.getID());
+
+        System.out.println("You sold it :(");
     }
 
-    public void buy(String name){
+    public void buy(String name) {
         ArrayList<String> Ids = this.shop.search(name);
-        if(Ids.size() == 0){
+        if (Ids.size() == 0) {
             System.out.println("There isn't this thing in shop");
             return;
         }
+
         CollectionItem collectionItem = CollectionItem.getCollectionItemByID(Ids.get(0));
-        if(collectionItem == null){
+        if (collectionItem == null) {
             System.out.println("WTF !!");
             return;
         }
 
         Account costumer = Main.application.getLoggedInAccount();
 
-        if(collectionItem instanceof UsableItem) {
-            if(costumer.getNumberOfItems() == 3){
+        if (collectionItem instanceof UsableItem) {
+            if (costumer.getNumberOfItems() == 3) {
                 System.out.println("You have 3 Items! Please sell at least 1 item at first !");
                 return;
             }
         }
 
-        if(collectionItem.getPrice() > costumer.getBudget()){
+        if (collectionItem.getPrice() > costumer.getBudget()) {
             System.out.println("Low Budget !!");
             return;
         }
-        this.shop.removeCollectionItemFromCollection(collectionItem.getName());
-        costumer.decreaseBudget(collectionItem.getPrice());
-        costumer.getCollection().addCollectionItemToCollection(collectionItem.getName());
 
-        System.out.println("You buy it :)");
+        this.shop.removeCollectionItemFromCollection(collectionItem.getID());
+        costumer.decreaseBudget(collectionItem.getPrice());
+        costumer.getCollection().addCollectionItemToCollection(collectionItem.getID());
+
+        System.out.println("You bought it :)");
     }
 
-    public static void showHelp(){
-        System.out.println("1. exit");
-        System.out.println("2. show shop");
+    public static void showHelp() {
+        System.out.println("2. show collection");
         System.out.println("3. search  [item name | card name]");
         System.out.println("4. search shop [item name | card name]");
         System.out.println("5. buy [card name | item name]");
         System.out.println("6. sell [card name | item name]");
         System.out.println("7. show");
         System.out.println("8. help");
+        System.out.println("1. exit");
+    }
+
+    public void generate() {
+        for (int i = 0; i < 10; i++) {
+            Hero hero = new Hero();
+            hero.setName("mammad" + i);
+            hero.setPrice(i * 10);
+            hero.setID(Integer.toString(i));
+            CollectionItem.getAllLivingCards().add(hero);
+            this.shop.addCollectionItemToCollection(hero.getID());
+        }
     }
 
     //Here is Setters && Getters

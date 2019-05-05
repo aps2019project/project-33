@@ -11,7 +11,7 @@ public class Application {
 
     private ArrayList<Account> accounts;
     private ArrayList<Battle> battles;
-    private Collection shop;
+    private Collection shop = new Collection();
     private Account loggedInAccount;
 
 

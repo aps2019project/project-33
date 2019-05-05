@@ -26,9 +26,24 @@ public class Collection {
     }
 
     public void removeCollectionItemFromCollection(String collectionItemID){
+        CollectionItem collectionItem = this.getCollectionItemByID(collectionItemID);
+        if(collectionItem == null){
+            System.out.println("Can't find this CollectionItem");
+            return;
+        }
+
+        cards.remove(collectionItem);
+        for(Deck deck : this.decks)
+            deck.removeCollectionItemFromDeck(collectionItem);
     }
 
     public void addCollectionItemToCollection(String collectionItemID){
+        CollectionItem collectionItem = CollectionItem.getCollectionItemByID(collectionItemID);
+        if(collectionItem == null){
+            System.out.println("Can't find this CollectionItem");
+            return;
+        }
+        this.cards.add(collectionItem);
     }
 
     public void showDeck(String deckName){
@@ -123,7 +138,7 @@ public class Collection {
     }
 
     public ArrayList<String> search(String cardName){
-        ArrayList<String> IDs = new ArrayList<String>();
+        ArrayList<String> IDs = new ArrayList<>();
         for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem.getName().equals(cardName)){
                 IDs.add(collectionItem.getID());
@@ -138,7 +153,7 @@ public class Collection {
         for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem instanceof Hero){
                 numberOfHeroes++;
-                System.out.print(numberOfHeroes + " : " + collectionItem.getID() + " " + descriptionOfPrice + " : " +
+                System.out.println(numberOfHeroes + " : " + collectionItem.getID() + " " + descriptionOfPrice + " : " +
                         collectionItem.getPrice());
             }
         }
@@ -150,7 +165,7 @@ public class Collection {
         for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem instanceof Item){
                 numberOfItems++;
-                System.out.print(numberOfItems + " : " + collectionItem.getInfo() + " " + descriptionOfPrice + " : " +
+                System.out.println(numberOfItems + " : " + collectionItem.getInfo() + " " + descriptionOfPrice + " : " +
                         + collectionItem.getPrice());
             }
         }
@@ -162,7 +177,7 @@ public class Collection {
         for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem instanceof Spell || collectionItem instanceof Minion){
                 numberOfCards++;
-                System.out.print(numberOfCards + " : " + collectionItem.getInfo() + " " + descriptionOfPrice + " : " +
+                System.out.println(numberOfCards + " : " + collectionItem.getInfo() + " " + descriptionOfPrice + " : " +
                         + collectionItem.getPrice());
             }
         }
@@ -172,10 +187,6 @@ public class Collection {
         this.showHeroes(descriptionOfPrice);
         this.showItems(descriptionOfPrice);
         this.showCards(descriptionOfPrice);
-    }
-
-    public void save(){
-        //pull test
     }
 
     public Deck getMainDeck() {
