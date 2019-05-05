@@ -6,8 +6,16 @@ import Model.*;
 public class CollectionMenu extends Menu {
     @Override
     public void inputCommandLine() {
+        System.out.println("Here is Collection Menu");
+
+        if(Main.application.getLoggedInAccount() == null){
+            System.out.println("Please login first !!");
+            return;
+        }
+
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
+        inputLine = inputLine.toLowerCase();
         String[] input = inputLine.split("[ ]+");
 
         Collection collection = Main.application.getLoggedInAccount().getCollection();
@@ -29,20 +37,21 @@ public class CollectionMenu extends Menu {
             String collectionItemId = input[1], deckName = input[3];
             collection.removeCollectionItemFromDeck(collectionItemId, deckName);
         } else if (inputLine.matches("validate deck *.")) {
-            checkValidityOfDeck(input[2]);
+            checkValidityOfDeck(input[2], collection);
         } else if (inputLine.matches("select deck *.")) {
             selectMainDeck(input[2], collection);
         } else if (inputLine.equals("show all decks")) {
             collection.showAllDecks();
         } else if (inputLine.matches("show deck *.")) {
             showDeck(input[2], collection);
-        } else if (inputLine.equals("help")) {
+        } else if (inputLine.equals("help"))
             CollectionMenu.showHelp();
-        }
+        else
+            System.out.println("Enter valid command line !");
     }
 
     private void showDeck(String deckName, Collection collection) {
-        Deck deck = Deck.getDeckByName(deckName);
+        Deck deck = collection.getDeckByName(deckName);
         if (deck == null) {
             System.out.println("This deck doesn't exist");
             return;
@@ -51,7 +60,7 @@ public class CollectionMenu extends Menu {
     }
 
     private void selectMainDeck(String deckName, Collection collection) {
-        Deck deck = Deck.getDeckByName(deckName);
+        Deck deck = collection.getDeckByName(deckName);
         if (deck == null) {
             System.out.println("This deck doesn't exist");
             return;
@@ -59,8 +68,8 @@ public class CollectionMenu extends Menu {
         collection.setMainDeck(deck);
     }
 
-    private void checkValidityOfDeck(String deckName) {
-        Deck deck = Deck.getDeckByName(deckName);
+    private void checkValidityOfDeck(String deckName, Collection collection) {
+        Deck deck = collection.getDeckByName(deckName);
         if (deck == null) {
             System.out.println("This deck doesn't exist");
             return;
@@ -69,7 +78,7 @@ public class CollectionMenu extends Menu {
     }
 
     private void deleteDeck(String deckName, Collection collection) {
-        Deck deck = Deck.getDeckByName(deckName);
+        Deck deck = collection.getDeckByName(deckName);
         if (deck == null) {
             System.out.println("This deck doesn't exist");
             this.inputCommandLine();
@@ -79,13 +88,7 @@ public class CollectionMenu extends Menu {
     }
 
     private void createDeck(String deckName, Collection collection) {
-        Deck deck = Deck.getDeckByName(deckName);
-        if (deck != null) {
-            System.out.println("This deck exists");
-            return;
-        }
-        deck = new Deck(deckName);
-        collection.addDeck(deck);
+        collection.createDeck(deckName);
     }
 
     public static void showHelp() {

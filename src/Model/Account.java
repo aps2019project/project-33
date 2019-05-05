@@ -6,8 +6,8 @@ import Model.CollectionItem.CollectionItem;
 
 public class Account {
 
-    private static ArrayList<Account> accounts = new ArrayList<Account>();
-    private ArrayList<Match> matches = new ArrayList<Match>();
+    private static ArrayList<Account> accounts = new ArrayList<>();
+    private ArrayList<Match> matches = new ArrayList<>();
     private Collection collection;
     private String username;
     private String password;
@@ -49,10 +49,10 @@ public class Account {
         return null;
     }
 
-    public static void createAccount(String username, String password){
-        Account account = new Account(username, password);
-        Account.getAccounts().add(account);
-    }
+//    public static void createAccount(String username, String password){
+//        Account account = new Account(username, password);
+//        return;
+//    }
 
     public void removeCollectionItem(CollectionItem collectionItem){
 

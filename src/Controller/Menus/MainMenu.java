@@ -1,3 +1,5 @@
+//Done
+
 package Controller.Menus;
 
 import Controller.Main;
@@ -5,26 +7,33 @@ import Controller.Main;
 public class MainMenu extends Menu {
 
     public void inputCommandLine() {
+        System.out.println("Here is Main menu");
+
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
+        inputLine = inputLine.toLowerCase();
         String[] input = inputLine.split("[ ]+");
 
-        if(inputLine.equals("Enter Collection")){
+        if(inputLine.equals("enter collection")){
             CollectionMenu collectionMenu = new CollectionMenu();
             collectionMenu.inputCommandLine();
         }
-        else if(inputLine.equals("Enter ShopMenu")){
+        else if(inputLine.equals("enter shop menu")){
             ShopMenu shopMenu = new ShopMenu();
             shopMenu.inputCommandLine();
         }
-        else if(inputLine.equals("Enter Controller.Battle")){
+        else if(inputLine.equals("enter battle")){
             BattleMenu battleMenu = new BattleMenu();
             battleMenu.inputCommandLine();
         }
-        else if(inputLine.equals("Exit")){
+        else if(inputLine.equals("enter account menu")){
+            AccountMenu accountMenu = new AccountMenu();
+            accountMenu.inputCommandLine();
+        }
+        else if(inputLine.equals("exit")){
             return;
         }
-        else if(inputLine.equals("Help"))
+        else if(inputLine.equals("help"))
             MainMenu.showHelp();
         else
             System.out.println("Please enter valid command !!");
@@ -32,10 +41,11 @@ public class MainMenu extends Menu {
     }
 
     public static void showHelp() {
-        System.out.println("1. Model.Collection");
-        System.out.println("2. Controller.Menus.ShopMenu");
-        System.out.println("3. Controller.Battle");
-        System.out.println("4. Exit");
-        System.out.println("5. Help");
+        System.out.println("1. Collection");
+        System.out.println("2. Shop Menu");
+        System.out.println("3. Battle");
+        System.out.println("4. Account Menu");
+        System.out.println("5. Exit");
+        System.out.println("6. Help");
     }
 }
