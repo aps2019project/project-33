@@ -9,6 +9,7 @@ import Model.Player;
 import javafx.geometry.Pos;
 
 import javax.swing.text.StyledEditorKit;
+import java.util.ArrayList;
 
 public class Impact {
 
@@ -38,9 +39,20 @@ public class Impact {
         livingCard.addNewBuff(powerBuff);
     }
 
-    public static void removeBadBuffsOfOurselves(Card card){}
+    public static void removeBadBuffsOfLivingCard(LivingCard livingCard){
+        ArrayList<Buff> effects = livingCard.getEffects();
+        int numberOfBuffs = livingCard.getEffects().size();
 
-    public static void removeGoodBuffsOfEnemy(Card card){}
+        for(int i = numberOfBuffs - 1; i > -1; i --){
+            Buff buff = effects.get(i);
+            if(buff instanceof WeaknessBuff) effects.remove(i);
+            if(buff instanceof )
+
+        }
+    }
+
+    
+    public static void removeGoodBuffsOfLivingCard(LivingCard livingCard){}
 
     public static void damageToEnemy(Card ourCard, Card enemyCard){}
 
