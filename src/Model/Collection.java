@@ -34,7 +34,7 @@ public class Collection {
     public void showDeck(String deckName){
         Deck deck = this.getDeckByName(deckName);
         if(deck == null){
-            System.out.println("deck dosnt exist");
+            System.out.println("deck doesn't exist");
             return;
         }
         deck.showDeck(false);

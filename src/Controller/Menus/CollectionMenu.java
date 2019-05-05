@@ -1,3 +1,6 @@
+//Done
+//Json moonde
+
 package Controller.Menus;
 
 import Controller.Main;
@@ -20,28 +23,28 @@ public class CollectionMenu extends Menu {
 
         if (inputLine.equals("show")) {
             collection.showCollection("Sell Cost");
-        } else if (inputLine.matches("search *.")) {
+        } else if (inputLine.matches("search .*")) {
             searchInCollection(collection, input[1]);
-        } else if (inputLine.matches("create deck *.")) {
+        } else if (inputLine.matches("create deck .*")) {
             createDeck(input[2], collection);
-        } else if (inputLine.matches("delete deck *.")) {
+        } else if (inputLine.matches("delete deck .*")) {
             deleteDeck(input[2], collection);
-        } else if (inputLine.matches("add *. to *.")) {
+        } else if (inputLine.matches("add .* to .*")) {
             String collectionItemId = input[1], deckName = input[3];
             collection.addCollectionItemToDeck(collectionItemId, deckName);
-        } else if (inputLine.matches("remove *. from *.")) {
+        } else if (inputLine.matches("remove .* from .*")) {
             String collectionItemId = input[1], deckName = input[3];
             collection.removeCollectionItemFromDeck(collectionItemId, deckName);
-        } else if (inputLine.matches("validate deck *.")) {
+        } else if (inputLine.matches("validate deck .*")) {
             checkValidityOfDeck(input[2], collection);
-        } else if (inputLine.matches("select deck *.")) {
+        } else if (inputLine.matches("select deck .*")) {
             selectMainDeck(input[2], collection);
         } else if (inputLine.equals("show all decks")) {
             collection.showAllDecks();
-        } else if (inputLine.matches("show deck *.")) {
+        } else if (inputLine.matches("show deck .*")) {
             showDeck(input[2], collection);
         } else if (inputLine.equals("save")) {
-            collection.save();
+            this.save();
         } else if (inputLine.equals("help"))
             CollectionMenu.showHelp();
         else if (inputLine.equals("exit"))
@@ -104,16 +107,21 @@ public class CollectionMenu extends Menu {
     public static void showHelp() {
         System.out.println("1. show");
         System.out.println("2. search[card name | item name]");
-        System.out.println("4. create deck[deck name]");
-        System.out.println("5. delete deck[deck name]");
-        System.out.println("6. add [card id| item id | hero id] | to deck [deck name]");
-        System.out.println("7. remove [card id | item id | hero id ] from deck[deck name]");
-        System.out.println("8. validate deck [deck name]");
-        System.out.println("9. select deck[deck name]");
-        System.out.println("10. show all decks");
-        System.out.println("11. show deck [deck name]");
-        System.out.println("3. save");
+        System.out.println("3. create deck[deck name]");
+        System.out.println("4. delete deck[deck name]");
+        System.out.println("5. add [card id| item id | hero id] | to deck [deck name]");
+        System.out.println("6. remove [card id | item id | hero id ] from deck[deck name]");
+        System.out.println("7. validate deck [deck name]");
+        System.out.println("8. select deck [deck name]");
+        System.out.println("9. show all decks");
+        System.out.println("10. show deck [deck name]");
+        System.out.println("11. save");
         System.out.println("12. help");
         System.out.println("13. exit");
+    }
+
+    private void save(){
+        //TODO
+        //Json here, every where ?
     }
 }
