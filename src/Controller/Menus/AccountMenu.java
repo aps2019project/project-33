@@ -23,18 +23,16 @@ public class AccountMenu extends Menu {
 
         if (inputLine.matches("create account .*")) {
             createAccount(input[2]);
+            return;
         } else if (inputLine.matches("login .*")) {
             String username = input[1];
             login(username);
+            return;
         } else if (inputLine.equals("show leader board")) {
             Account.showLeaderBoard();
-        } else if (inputLine.equals("save")) {
-            this.save();
         } else if (inputLine.equals("help")) {
             AccountMenu.showHelp();
-        } else if (inputLine.equals("logout")) {
-            this.logout();
-        }else if(inputLine.equals("exit"))
+        } else if(inputLine.equals("exit"))
             return;
         else
             System.out.println("Enter valid command");
@@ -51,15 +49,10 @@ public class AccountMenu extends Menu {
         System.out.println("7. exit");
     }
 
-    private void logout() {
-        if(Main.application.getLoggedInAccount() == null)
-            System.out.println("You haven't been logged in !!");
-        Main.application.setLoggedInAccount(null);
-    }
-
     private void createAccount(String username) {
         if (Account.getAccountByUsername(username) != null) {
             System.out.println("this username is used");
+            this.inputCommandLine();
             return;
         }
 
@@ -67,21 +60,18 @@ public class AccountMenu extends Menu {
         String password = Main.scanner.nextLine();
         if(password.contains(" ")){
             System.out.println("password mustn't have space !!");
+            this.inputCommandLine();
             return;
         }
 
         this.createdAccount = new Account(username, password);
 
         System.out.println("This account is created");
-        System.out.println("if everything is ok, save account !");
+
+        new MainMenu().inputCommandLine();
     }
 
     private void login(String username) {
-        if(Main.application.getLoggedInAccount() != null){
-            System.out.println("Please first log out !");
-            return;
-        }
-
         Account account = Account.getAccountByUsername(username);
         if (account == null) {
             System.out.println("Invalid Username !!");
@@ -109,6 +99,7 @@ public class AccountMenu extends Menu {
 
         Account.getAccounts().add(createdAccount);
         Main.application.setLoggedInAccount(createdAccount);
+        //TODO
         //in ja bayad tooye file rikhte she
     }
 }

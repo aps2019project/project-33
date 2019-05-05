@@ -35,6 +35,10 @@ public class MainMenu extends Menu {
         }
         else if(inputLine.equals("help"))
             MainMenu.showHelp();
+        else if(inputLine.equals("save"))
+            this.save();
+        else if (inputLine.equals("logout"))
+            this.logout();
         else
             System.out.println("Please enter valid command !!");
         this.inputCommandLine();
@@ -47,5 +51,15 @@ public class MainMenu extends Menu {
         System.out.println("4. Account Menu");
         System.out.println("5. Exit");
         System.out.println("6. Help");
+    }
+
+    private void save(){
+
+    }
+
+    private void logout() {
+        Main.application.setLoggedInAccount(null);
+        new  AccountMenu().inputCommandLine();
+        return;
     }
 }
