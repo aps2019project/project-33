@@ -72,6 +72,7 @@ public class CollectionMenu extends Menu {
             collection.showDeck(deckName);
     }
 
+    //ino do ja zadim
     private void selectMainDeck(String deckName, Collection collection) {
         Deck deck = collection.getDeckByName(deckName);
         if (deck == null) {
