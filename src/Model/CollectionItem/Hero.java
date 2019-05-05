@@ -52,7 +52,7 @@ public class Hero extends LivingCard {
 //                    numberOfThisHeroType++;
 //            }
 //        }
-//        String ID = playerName + "_" + heroName + numberOfThisHeroType;
+//        String ID = playerName + "_" + heroName + "_" + numberOfThisHeroType;
 //        hero.setID(ID);
 //        CollectionItem.addLivingCardToAllLivingCards(hero);
 //        return hero;

@@ -23,7 +23,7 @@ public class Minion extends LivingCard {
                     numberOfThisMinionType++;
             }
         }
-        String ID = playerName + "_" + minionName + numberOfThisMinionType;
+        String ID = playerName + "_" + minionName + "_" + numberOfThisMinionType;
         minion.setID(ID);
         CollectionItem.addLivingCardToAllLivingCards(minion);
         return minion;

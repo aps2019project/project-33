@@ -31,7 +31,7 @@ public class Spell extends Card {
             if(usedSpell.getName().equals(spellName))
                 numberOfThisSpellType++;
         }
-        String ID = playerName + "_" + spellName + numberOfThisSpellType;
+        String ID = playerName + "_" + spellName + "_" + numberOfThisSpellType;
         spell.setID(ID);
         CollectionItem.addSpellToAllSpells(spell);
         return spell;
