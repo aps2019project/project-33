@@ -126,6 +126,9 @@ public class Information {
 
     private boolean canIncreaseAP;
     private int amountOfIncreaseAP;
+    private int remainTurn;
+
+    private boolean increasePermanent;
 
     private boolean isImpactAllArea;
 
@@ -201,6 +204,23 @@ public class Information {
     private boolean poisonousDagger;
     private boolean shockHammer;
 
+    public int getRemainTurn() {
+        return remainTurn;
+    }
+
+    public void setRemainTurn(int remainTurn) {
+        this.remainTurn = remainTurn;
+    }
+
+
+
+    public boolean isIncreasePermanent() {
+        return increasePermanent;
+    }
+
+    public void setIncreasePermanent(boolean increasePermanent) {
+        this.increasePermanent = increasePermanent;
+    }
 
     public int getNumberOfHolyBuff() {
         return numberOfHolyBuff;
