@@ -147,7 +147,51 @@ public class Impact {
 
     public static void attackForce(LivingCard ourCard, LivingCard enemyCard){}
 
-    public static void attack(LivingCard attacker, LivingCard defender){}
+    public static boolean isInRange(ArrayList<Cell> attackCells, LivingCard defender){
+        boolean isCardInRange = false;
+        for(Cell cell : attackCells){
+            if(cell.getX() == defender.getPositionRow() && cell.getY() == defender.getPositionColumn())
+                isCardInRange = true;
+        }
+        return isCardInRange;
+    }
+
+    public static boolean checkAlive(Battle battle, LivingCard checkedLivingCard){
+        if(checkedLivingCard.getHP() <= 0){
+            battle.removeAliveCard(checkedLivingCard);
+            return false;
+        }
+        return true;
+    }
+//counter attackam bayad haminja seda she
+    //mana nemikhad in ?
+    public static void attack(Battle battle, LivingCard attacker, LivingCard defender){
+        ArrayList<Cell> attackCells = new ArrayList<>();
+        if(attacker.getCounterAttackType().equals("melee")){
+            attackCells = AttackArea.findMeleeAttackArea(battle, attacker);
+        }
+        if(attacker.getCounterAttackType().equals("ranged")){
+            attackCells = AttackArea.findRangedAttackArea(battle, attacker);
+        }
+        if(attacker.getCounterAttackType().equals("hybrid")){
+            attackCells = AttackArea.findHybridAttackArea(battle, attacker);
+        }
+        boolean isInRange = Impact.isInRange(attackCells, defender);
+        if(!isInRange){
+            System.out.println("opponent minion is unavailable for attack");
+            return;
+        }
+        if(!attacker.isCanAttack()){
+            System.out.println("attacker cant attack");
+            return;
+        }
+        //changeHP e esme ap ?
+        //too getter ba taghirat jam miazanim
+        defender.setHP(defender.getHP() - attacker.getDecreaseHPByAttack());
+        if(checkAlive(battle, defender))
+            Impact.counterAttack(defender, attacker);
+
+    }
 // mahdude hamle o ina check she
     public static void comboAttack(LivingCard opponentLivingCard, ArrayList<LivingCard> attackers){
 

@@ -3,11 +3,15 @@ package Model;
 import java.util.ArrayList;
 import Controller.*;
 import Model.CollectionItem.Card;
+import Model.CollectionItem.LivingCard;
 
 public class GraveYard {
     private ArrayList<Card> cards;
 
-    public void addCard(Card card){}
+    public void addCard(LivingCard livingCard){
+        cards.add(livingCard);
+    }
+
     public Card SearchCard(String cardID){
         return null;
     }

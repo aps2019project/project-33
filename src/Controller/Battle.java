@@ -37,6 +37,11 @@ public class Battle {
 
     }
 
+    public void removeAliveCard(LivingCard removingLivingCard){
+        playerOn.removeDeadCard(removingLivingCard);
+        playerOff.removeDeadCard(removingLivingCard);
+    }
+
     public ArrayList<Flag> getFlags(){
         return this.flags;
     }
@@ -238,7 +243,7 @@ public class Battle {
             System.out.println("Invalid card id");
             return;
         }
-        Impact.attack(this.selectedCard, opponentLivingCard);
+        Impact.attack(this, this.selectedCard, opponentLivingCard);
     }
 
     public void comboAttackToOpponentCard(String[] input){

@@ -35,6 +35,7 @@ public class Player {
         for(LivingCard livingCard : this.getAliveCards()){
             if(livingCard.getID().equals(deadCard.getID())){
                 this.aliveCards.remove(livingCard);
+                this.graveYard.addCard(deadCard);
                 break;
             }
         }
