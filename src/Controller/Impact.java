@@ -157,7 +157,7 @@ public class Impact {
 
     }
 
-    public static void specialPower(Minion minion, LivingCard opponentCard) {
+    public static void specialPower(Hero hero, int x, int y) {
     }
 
     public static void impactItem(Item item, String livingCardID) {

@@ -260,14 +260,12 @@ public class Battle {
         Impact.comboAttack(opponentLivingCard, myLivingCards);
     }
 
-    public void useSpecialPower(int x, int y){}
-
 
     //TODO
+
     public void showHand(){
         playerOn.getHand().show();
     }
-
 
 
     public void endTurn(){
@@ -291,6 +289,10 @@ public class Battle {
         System.out.println("collectableItem wasnt found");
     }
 
+    public void useSpecialPower(int x, int y){
+        Impact.specialPower(playerOn.getHero(), x, y);
+    }
+
     public void useItem(int x, int y){}
 
     public void showNextCard(){
@@ -307,11 +309,11 @@ public class Battle {
 
     public void showItemInfo(){}
 
+    public void help(){}
+
     public void runGame(){
         inputCommandLine();
     }
-
-    public void help(){}
 
     private void inputCommandLine(){
         String inputLine = Main.scanner.nextLine();
