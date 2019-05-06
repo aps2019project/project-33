@@ -170,7 +170,11 @@ public class Information {
     private boolean canAddPoisonBuffToCell;
     private int timeOfAddPoisonBuffToCell;
     private int decreaseHpOfPoisonBuffOfCell;
-
+/*
+    private boolean canChangeAP;
+    private int timeOfChangeAP;
+    private int valueOfChangeAP;
+*/
     private boolean canKillMinionOfEnemy;
     private boolean canKillOurMinionAndHealHero;
     private boolean canDoRangedAttack;
@@ -183,7 +187,30 @@ public class Information {
     private boolean canIncreaseRangeOfAttack;
     private boolean canDoubleHp;
     private boolean canIncreaseMana;
+/*
+    public boolean isCanChangeAP() {
+        return canChangeAP;
+    }
 
+    public void setCanChangeAP(boolean canChangeAP) {
+        this.canChangeAP = canChangeAP;
+    }
+    public int getTimeOfChangeAP() {
+        return timeOfChangeAP;
+    }
+
+    public void setTimeOfChangeAP(int timeOfChangeAP) {
+        this.timeOfChangeAP = timeOfChangeAP;
+    }
+
+    public int getValueOfChangeAP() {
+        return valueOfChangeAP;
+    }
+
+    public void setValueOfChangeAP(int valueOfChangeAP) {
+        this.valueOfChangeAP = valueOfChangeAP;
+    }
+*/
     public void setCanHolyBuffAdd(boolean canHolyBuffAdd) {
         this.canHolyBuffAdd = canHolyBuffAdd;
     }
