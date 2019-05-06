@@ -208,7 +208,7 @@ public class Impact {
             attackCells = AttackArea.findRangedAttackArea(battle, livingCard);
         }
         if(livingCard.getCounterAttackType().equals("hybrid")){
-            attackCells = AttackArea.findHybridAttackArea(battle, livingCard)
+            attackCells = AttackArea.findHybridAttackArea(battle, livingCard);
         }
         return attackCells;
     }
