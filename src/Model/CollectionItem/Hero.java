@@ -7,7 +7,9 @@ import Model.Enviroment.Cell;
 import java.util.ArrayList;
 
 public class Hero extends LivingCard {
-/*
+
+    private int deadAfterRounds = 0;
+    /*
     public void impactSpell(String opponentID){
         Impact.impactSpellOfHero(opponentID);
     }
@@ -25,6 +27,14 @@ public class Hero extends LivingCard {
         String info = "Name : " + this.getName() + " - AP : " + this.getDecreaseHPByAttack() + " - HP : "
                 + this.getHP() + " Class : " + this.getClass() + " Special power: " + this.getDescription();
         return info;
+    }
+
+    public int getDeadAfterRounds() {
+        return deadAfterRounds;
+    }
+
+    public void setDeadAfterRounds(int deadAfterRounds) {
+        this.deadAfterRounds = deadAfterRounds;
     }
 
  /*   public static Hero loadAHeroFromJsonFile(String fileName){

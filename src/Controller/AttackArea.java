@@ -36,7 +36,7 @@ public class AttackArea {
         return cells;
     }
 
-    private static ArrayList<Cell> getNeighbors(Cell cell, Battle battle) {
+    public static ArrayList<Cell> getNeighbors(Cell cell, Battle battle) {
         ArrayList<Cell> neighbors = new ArrayList<>();
         Map1 map = battle.getMap();
         for (int i = 0; i < map.getHeight(); i++)
@@ -256,5 +256,13 @@ public class AttackArea {
                 result.add(cell);
         return result;
     }
+
+    public static ArrayList<Cell> getImpactCellsOfItem(Item item, Battle battle){
+        ArrayList<Cell> impactCells = new ArrayList<>();
+        Information information = item.getInformation();
+
+
+    }
+
 }
 
