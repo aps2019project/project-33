@@ -4,9 +4,11 @@ package Controller.Menus;
 
 import Controller.Main;
 
+import java.io.FileNotFoundException;
+
 public class MainMenu extends Menu {
 
-    public void inputCommandLine() {
+    public void inputCommandLine() throws FileNotFoundException {
         System.out.println("Here is Main menu");
 
         String inputLine = Main.scanner.nextLine();
@@ -55,7 +57,7 @@ public class MainMenu extends Menu {
         //Json
     }
 
-    private void logout() {
+    private void logout() throws FileNotFoundException {
         Main.application.setLoggedInAccount(null);
         new AccountMenu().inputCommandLine();
         return;

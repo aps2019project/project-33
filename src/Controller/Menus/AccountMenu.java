@@ -6,13 +6,15 @@ package Controller.Menus;
 import Controller.Main;
 import Model.*;
 
+import java.io.FileNotFoundException;
+
 public class AccountMenu extends Menu {
 
     //tahesh in ja bayad har koodoom az bakhsh ha beshe ye tabe
 
 
     @Override
-    public void inputCommandLine() {
+    public void inputCommandLine() throws FileNotFoundException {
         System.out.println("Here is Account Menu");
 
         String inputLine = Main.scanner.nextLine();
@@ -46,7 +48,7 @@ public class AccountMenu extends Menu {
         System.out.println("5. exit");
     }
 
-    private void createAccount(String username) {
+    private void createAccount(String username) throws FileNotFoundException {
         if (Account.getAccountByUsername(username) != null) {
             System.out.println("this username is used");
             this.inputCommandLine();
@@ -70,7 +72,7 @@ public class AccountMenu extends Menu {
         new MainMenu().inputCommandLine();
     }
 
-    private void login(String username) {
+    private void login(String username) throws FileNotFoundException {
         Account account = Account.getAccountByUsername(username);
         if (account == null) {
             System.out.println("Invalid Username !!");
