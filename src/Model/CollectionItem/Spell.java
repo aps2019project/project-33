@@ -1,16 +1,18 @@
 package Model.CollectionItem;
 
 import Controller.AttackArea;
+import Controller.Battle;
 import Controller.Impact;
 import Model.Enviroment.Cell;
 
 import java.util.ArrayList;
+import Controller.Battle;
 
 public class Spell extends Card {
     private int Mp, price;
 
-    public void impactSpell(Cell cell){
-        Impact.impactSpell(this, cell);
+    public void impactSpell(Cell cell, Battle battle){
+        Impact.impactSpell(this, cell, battle);
     }
     public ArrayList<Cell> findImapctCell(Cell coordination){
         return AttackArea.getImpactCellsOfSpell(this, coordination, this.getBattle());

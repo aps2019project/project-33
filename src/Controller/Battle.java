@@ -165,7 +165,8 @@ public class Battle {
             if(insertingCollectionItem instanceof Spell){
                 playerOn.getHand().removeCard(cardID);
                 Spell spell = (Spell)insertingCollectionItem;
-                spell.impactSpell(cell);
+                spell.impactSpell(cell, this);
+
             }
         }
     }

@@ -301,8 +301,63 @@ public class Impact {
         }
     }
 
-    public static void impactSpell(Spell spell, Cell cell) {
+    public static void impactSpell(Spell spell, Cell cell, Battle battle) {
         LivingCard livingCard = cell.getLivingCard();
+        ArrayList<Cell> impactCells = AttackArea.getImpactCellsOfSpell(spell, cell, battle);
+        if(!spell.getInformation().isMultipleImpact()){
+            if(livingCard == null){
+                System.out.println("there isnt living card");
+                return;
+            }
+            impactCells = new ArrayList<>();
+            impactCells.add(cell);
+
+        }
+        if(spell.getInformation().isCanDisarmBuffAdd()){
+            for(Cell impactCell : impactCells){
+                LivingCard cellLivingCard = impactCell.getLivingCard();
+                if(cellLivingCard == null)
+                    continue;
+                //isEnemyImpact : roo doshmane asaresh
+                if(spell.getInformation().isEnemyImpact()){
+                    for(LivingCard aliveCard : battle.getPlayerOff().getAliveCards()){
+                        if(aliveCard.getID().equals(cellLivingCard.getID())){
+                            int disarmTime = spell.getInformation().getTimeOfDisarmBuff();
+                            boolean isPermanent = spell.getInformation().isDisarmBuffPermanent();
+                            Impact.addDisarmToCard(disarmTime, isPermanent,false, cellLivingCard);
+                        }
+                    }
+                }
+                if(spell.getInformation().isUsImpact()){
+                    for(LivingCard aliveCard : battle.getPlayerOn().getAliveCards()){
+                        if(aliveCard.getID().equals(cellLivingCard.getID())){
+                            int disarmTime = spell.getInformation().getTimeOfDisarmBuff();
+                            boolean isPermanent = spell.getInformation().isDisarmBuffPermanent();
+                            Impact.addDisarmToCard(disarmTime, isPermanent, false, cellLivingCard);
+                        }
+                    }
+                }
+            }
+        }
+        if(spell.getInformation().isCanRemoveGoodBuffsOfEnemy()){
+            for(Cell impactCell : impactCells){
+                LivingCard cellLivingCard = impactCell.getLivingCard();
+                if(cellLivingCard == null)
+                    continue;
+                boolean isLivingCardOurs = false;
+                for(LivingCard aliveCard : battle.getPlayerOn().getAliveCards()){
+                    if(aliveCard.getID().equals(cellLivingCard.getID())){
+                        isLivingCardOurs = true;
+                    }
+                }
+                if(isLivingCardOurs){
+                    Impact.removeBadBuffsOfLivingCard(cellLivingCard);
+                }
+                else{
+                    Impact.removeGoodBuffsOfLivingCard(cellLivingCard);
+                }
+            }
+        }
 
     }
 
