@@ -4,6 +4,9 @@ import Controller.Battle;
 import Controller.Main;
 import Model.AI;
 import Model.Account;
+import Model.CollectionItem.CollectionItem;
+import Model.CollectionItem.Hero;
+import Model.CollectionItem.Minion;
 import Model.Deck;
 import Model.Player;
 
@@ -15,6 +18,7 @@ public class BattleMenu extends Menu {
     private void readInputs() {
         inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
+        inputLine = inputLine.toLowerCase();
         input = inputLine.split("[ ]+");
     }
 
@@ -32,21 +36,23 @@ public class BattleMenu extends Menu {
 
         readInputs();
 
-        if (inputLine.equals("Single  player")) {
-            battle.setType("Single Player");
+        if (inputLine.equals("single player")) {
+            battle.setType("single player");
             inputCommandLineOfSinglePlayer();
             return;
-        } else if (inputLine.equals("Multi player")) {
-            battle.setType("Multi Player");
+        } else if (inputLine.equals("multi player")) {
+            battle.setType("multi player");
             inputCommandLineOfMultiPlayer();
             return;
-        }
+        } else if (inputLine.equals("exit"))
+            return;
 
         System.out.println("Enter valid command !");
         inputCommandLine();
     }
 
     private boolean checkDeck(Account account) {
+        if (account.getCollection().getMainDeck() == null) return false;
         return account.getCollection().getMainDeck().checkValidateDeck();
     }
 
@@ -57,16 +63,16 @@ public class BattleMenu extends Menu {
             System.out.println("1. Story");
             System.out.println("2. Custom Game");
 
-            String inputLine = Main.scanner.nextLine();
-            inputLine = inputLine.trim();
+            readInputs();
 
-            if (inputLine.equals("Story")) {
+            if (inputLine.equals("story")) {
                 story();
                 break;
-            } else if (inputLine.equals("Custom game")) {
+            } else if (inputLine.equals("custom game")) {
                 customGame("");
                 break;
-            }
+            } else if (inputLine.equals("exit"))
+                return;
             System.out.println("Enter valid command !");
         }
 
@@ -81,7 +87,7 @@ public class BattleMenu extends Menu {
         while (true) {
             System.out.println("Enter username of second player :");
             readInputs();
-            if (inputLine.matches("Select user *.")) {
+            if (inputLine.matches("select user *.")) {
                 String username = input[2];
                 Account account = Account.getAccountByUsername(username);
                 if (account != null) {
@@ -89,7 +95,9 @@ public class BattleMenu extends Menu {
                     break;
                 } else
                     System.out.println("Invalid username");
-            } else
+            } else if (inputLine.equals("exit"))
+                return;
+            else
                 System.out.println("Enter valid command");
         }
 
@@ -114,17 +122,18 @@ public class BattleMenu extends Menu {
     }
 
     public void customGame(String type) {
+
         if (!battle.getPlayerOff().getAccount().getCollection().getMainDeck().checkValidateDeck()) {
             System.out.println("selected deck for second player is invalid");
             return;
         }
+
         System.out.println("Game modes : ");
         System.out.println("1. Kill_enemy's_hero");
-        // bayad x o y e flag ham set she
         System.out.println("2. Hold_flags");
         System.out.println("3. Talk_half_of_flags");
 
-        while(true){
+        while (true) {
             readInputs();
 
             if (inputLine.matches("start" + type + " game *.")) {
@@ -132,13 +141,11 @@ public class BattleMenu extends Menu {
                         input[3].equals("Take_half_of_flags"))) {
                     System.out.println("Please enter valid mode");
                     continue;
-                }
-                else {
+                } else {
                     battle.setMode(input[3]);
                     return;
                 }
-            }
-            else
+            } else
                 System.out.println("please enter valid command");
         }
     }
@@ -159,6 +166,27 @@ public class BattleMenu extends Menu {
                 }
             System.out.println("Enter valid deck name");
         }
+    }
+
+    public void handleDeck(Account account) {
+        account.getCollection().createDeck(account.getUsername());
+        account.getCollection().selectMainDeck(account.getUsername());
+        for (int i = 0; i < 20; i++) {
+            Minion minion = new Minion();
+            minion.setName(account.getUsername() + i);
+            minion.setPrice(i * 10);
+            minion.setID(Integer.toString(i));
+            CollectionItem.getAllLivingCards().add(minion);
+            account.getCollection().addCollectionItemToCollection(minion.getID());
+            account.getCollection().addCollectionItemToDeck(minion.getID(), account.getUsername());
+        }
+        Hero hero = new Hero();
+        hero.setName(account.getUsername());
+        hero.setPrice(100000);
+        hero.setID(account.getUsername());
+        CollectionItem.getAllLivingCards().add(hero);
+        account.getCollection().addCollectionItemToCollection(hero.getID());
+        account.getCollection().addCollectionItemToDeck(hero.getID(), account.getUsername());
     }
 
 }

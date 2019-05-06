@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class Battle {
     private Player playerOn, playerOff;
-    private Map map;
+    private Map map = new Map();
     private boolean gameIsRunning;
     private int numberOfRounds;
     private String type, mode;
