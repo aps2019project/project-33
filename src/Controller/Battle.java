@@ -316,8 +316,15 @@ public class Battle {
             System.out.println("cool down time");
             return;
         }
+        if(!sInMap(x, y)){
+            System.out.println("Invalid coordination");
+            return;
+        }
+        //anjam nashe ham cooldown mishe
+
         hero.setCoolDown(hero.getMaxCoolDown());
-        Impact.impactSpellOfHero(playerOn.getHero(), x, y);
+        Cell cell = this.map.getCellByCoordination(x, y);
+        Impact.impactSpellOfHero(this, playerOn.getHero(), cell);
     }
 
     public void useItem(int x, int y){

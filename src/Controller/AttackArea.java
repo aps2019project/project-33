@@ -64,7 +64,7 @@ public class AttackArea {
         return cellsOfColumn;
     }
 
-    private static ArrayList<Cell> getCellsOfRow(Cell cell, Battle battle) {
+    public static ArrayList<Cell> getCellsOfRow(Cell cell, Battle battle) {
         ArrayList<Cell> cellsOfRow = new ArrayList<>();
         Map1 map = battle.getMap();
         for (int i = 0; i < map.getHeight(); i++)
