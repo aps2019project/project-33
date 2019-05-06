@@ -312,7 +312,7 @@ public class Battle {
             System.out.println("Invalid coordination");
             return;
         }
-        Cell cell = getCellByCoordination(x, y);
+        Cell cell = map.getCellByCoordination(x, y);
         Impact.impactItem(selectedCollectableItem, cell);
     }
 

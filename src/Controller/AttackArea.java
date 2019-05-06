@@ -8,16 +8,20 @@ import Model.Player;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static java.awt.geom.Point2D.distance;
-
 public class AttackArea {
 
     public static ArrayList<Cell> findMeleeAttackArea(Battle battle, LivingCard attackingCard){
+        ArrayList<Cell> impactedCells = new ArrayList<>();
         int[] dx = {-1, -1, 0, 1, 1, 1, 0, -1}, dy = {0, 1, 1, 1, 0, -1, -1, -1};
         int numberOfImpactedCells = 8;
+        Map map = battle.getMap();
         for(int i = 0; i < numberOfImpactedCells; i ++){
-
+            int newX = attackingCard.getCell().getX() + dx[i], newY = attackingCard.getCell().getY() + dy[i];
+            Cell cell = map.getCellByCoordination(newX, newY);
+            if(cell == null) continue;
+            impactedCells.add(cell);
         }
+        return impactedCells;
     }
 
     public static ArrayList<Cell> findRangedAttackArea(Battle battle, LivingCard attackingCard){
