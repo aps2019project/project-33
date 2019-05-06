@@ -6,7 +6,7 @@ import Model.CollectionItem.Spell;
 
 import java.util.ArrayList;
 
-public class Hand {
+public class Hand1 {
 
     private ArrayList<CollectionItem> handCards = new ArrayList<>();
     //havaset bashe to taghire in
