@@ -374,7 +374,9 @@ public class Impact {
                 }
             }
         }
-
+        if(spell.getInformation().isCanIncreaseAP()){
+            Impact.addPowerBuffToCard();
+        }
     }
 
     public static void main(Battle battle, Card ourCard) {

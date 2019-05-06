@@ -126,6 +126,8 @@ public class Information {
 
     private boolean canIncreaseAP;
     private int amountOfIncreaseAP;
+    private int remainTime;
+    private boolean increaseAPPermanent;
 
     private boolean isImpactAllArea;
 
@@ -210,6 +212,24 @@ public class Information {
     private boolean forHybrid;
     private boolean pareSimorgh;
     private int minOfPareSimorgh;
+
+    public int getRemainTime() {
+        return remainTime;
+    }
+
+    public void setRemainTime(int remainTime) {
+        this.remainTime = remainTime;
+    }
+
+
+
+    public boolean isIncreaseAPPermanent() {
+        return increaseAPPermanent;
+    }
+
+    public void setIncreaseAPPermanent(boolean increaseAPPermanent) {
+        this.increaseAPPermanent = increaseAPPermanent;
+    }
 
     public int getNumberOfHolyBuff() {
         return numberOfHolyBuff;
