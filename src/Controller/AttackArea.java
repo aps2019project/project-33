@@ -258,10 +258,25 @@ public class AttackArea {
     }
 
     public static ArrayList<Cell> getImpactCellsOfItem(Item item, Battle battle){
-        ArrayList<Cell> impactCells = new ArrayList<>();
+        ArrayList<Cell> impactCells = new ArrayList<>(), result = new ArrayList<>();
         Information information = item.getInformation();
 
+        if(information.isEnemyImpact())
+            impactCells.addAll(getCells(information, battle.getPlayerOff()));
+        if(information.isUsImpact())
+            impactCells.addAll(getCells(information, battle.getPlayerOn()));
 
+        for(Cell cell : impactCells){
+            LivingCard livingCard = cell.getLivingCard();
+            if(information.isForHybrid() && livingCard.getInformation().isHybrid())
+                result.add(cell);
+            if(information.isForMelee() && livingCard.getInformation().isMelee())
+                result.add(cell);
+            if(information.isForRange() && livingCard.getInformation().isRange())
+                result.add(cell);
+        }
+
+        return result;
     }
 
 }
