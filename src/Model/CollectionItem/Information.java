@@ -126,6 +126,8 @@ public class Information {
 
     private boolean canIncreaseAP;
     private int amountOfIncreaseAP;
+    private int remainTime;
+    private boolean increaseAPPermanent;
 
     private boolean isImpactAllArea;
 
