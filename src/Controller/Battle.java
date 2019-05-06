@@ -165,7 +165,8 @@ public class Battle {
             if(insertingCollectionItem instanceof Spell){
                 playerOn.getHand().removeCard(cardID);
                 Spell spell = (Spell)insertingCollectionItem;
-                spell.impactSpell(cell);
+                spell.impactSpell(cell, this);
+
             }
         }
     }
@@ -278,7 +279,7 @@ public class Battle {
         playerOn.getHand().show(playerOn.getAccount().getCollection().getMainDeck());
     }
 
-
+//buff haye passive is activeshun true she
     public void endTurn(){
         Player player = playerOff;
         playerOff = playerOn;
@@ -289,6 +290,7 @@ public class Battle {
         }
         playerOn.getHero().setCoolDown(Math.max(0, playerOn.getHero().getCoolDown() - 1));
         playerOff.getHero().setCoolDown(Math.max(0, playerOff.getHero().getCoolDown() - 1));
+        Impact.activeBuffs(this);
     }
 
     public void showCollectables(){
