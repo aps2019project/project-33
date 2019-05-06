@@ -20,6 +20,7 @@ public class Battle {
     private LivingCard selectedCard;
     private Flag mainFlag;
     private CollectableItem selectedCollectableItem;
+    private int numberOfFlags;
 
     private ArrayList<Flag> flags = new ArrayList<Flag>();
 
@@ -464,5 +465,13 @@ public class Battle {
 
     public void setPrize(int prize) {
         this.prize = prize;
+    }
+
+    public int getNumberOfFlags() {
+        return numberOfFlags;
+    }
+
+    public void setNumberOfFlags(int numberOfFlags) {
+        this.numberOfFlags = numberOfFlags;
     }
 }
