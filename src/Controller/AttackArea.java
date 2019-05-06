@@ -192,6 +192,5 @@ public class AttackArea {
                 result.add(cell);
         return result;
     }
-
 }
 

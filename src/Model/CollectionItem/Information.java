@@ -115,358 +115,358 @@ public class Information {
 
     //Attack section
 
-    private static boolean canHolyBuffAdd;
-    private static int timeOfHolyBuff;
-    private static boolean isHolyBuffPermanent;
+    private  boolean canHolyBuffAdd;
+    private   int timeOfHolyBuff;
+    private   boolean isHolyBuffPermanent;
 
-    private static boolean canDisarmBuffAdd;
-    private static int timeOfDisarmBuff;
-    private static boolean isDisarmBuffPermanent;
+    private   boolean canDisarmBuffAdd;
+    private   int timeOfDisarmBuff;
+    private   boolean isDisarmBuffPermanent;
 
-    private static boolean canWeaknessBuffAdd;
-    private static int timeOfWeaknessBuff;
-    private static boolean isWeaknessBuffPermanent;
+    private   boolean canWeaknessBuffAdd;
+    private   int timeOfWeaknessBuff;
+    private   boolean isWeaknessBuffPermanent;
 
-    private static boolean canPoisonBuffAdd;
-    private static int timeOfPoisonBuff;
-    private static boolean isPoisonBuffPermanent;
+    private   boolean canPoisonBuffAdd;
+    private   int timeOfPoisonBuff;
+    private   boolean isPoisonBuffPermanent;
 
-    private static boolean canStunBuffAdd;
-    private static int timeOfStunBuff;
-    private static boolean isStunBuffPermanent;
+    private   boolean canStunBuffAdd;
+    private   int timeOfStunBuff;
+    private   boolean isStunBuffPermanent;
 
-    private static boolean canPowerBuffAdd;
-    private static int timeOfPowerBuff;
-    private static boolean isPowerBuffPermanent;
+    private   boolean canPowerBuffAdd;
+    private   int timeOfPowerBuff;
+    private   boolean isPowerBuffPermanent;
 
-    private static boolean canRemoveBadBuffsOfOurselves;
-    private static boolean canRemoveGoodBuffsOfEnemy;
+    private   boolean canRemoveBadBuffsOfOurselves;
+    private   boolean canRemoveGoodBuffsOfEnemy;
 
-    private static boolean canDamageToEnemy;
-    private static int damageToEnemy;
+    private   boolean canDamageToEnemy;
+    private   int damageToEnemy;
 
-    private static boolean canAddFieryBuffToCell;
-    private static int timeOfAddFieryBuffToCell;
+    private   boolean canAddFieryBuffToCell;
+    private   int timeOfAddFieryBuffToCell;
 
     
-    private static boolean canAddPoisonBuffToCell;
-    private static int timeOfAddPoisonBuffToCell;
-    private static int decreaseHpOfPoisonBuffOfCell;
+    private   boolean canAddPoisonBuffToCell;
+    private   int timeOfAddPoisonBuffToCell;
+    private   int decreaseHpOfPoisonBuffOfCell;
 
-    private static boolean canKillMinionOfEnemy;
-    private static boolean canKillOurMinionAndHealHero;
-    private static boolean canDoRangedAttack;
-    private static boolean canDoHybridAttack;
-    private static boolean canDoMeleeAttack;
-    private static boolean isGhooleBozorg;
+    private   boolean canKillMinionOfEnemy;
+    private   boolean canKillOurMinionAndHealHero;
+    private   boolean canDoRangedAttack;
+    private   boolean canDoHybridAttack;
+    private   boolean canDoMeleeAttack;
+    private   boolean isGhooleBozorg;
     private int ghooleBozorgDamage;
-    private static boolean isShireDarrande;
-    private static boolean isZahhak;
-    private static boolean canIncreaseRangeOfAttack;
-    private static boolean canDoubleHp;
-    private static boolean canIncreaseMana;
+    private   boolean isShireDarrande;
+    private   boolean isZahhak;
+    private   boolean canIncreaseRangeOfAttack;
+    private   boolean canDoubleHp;
+    private   boolean canIncreaseMana;
 
-    public static boolean getCanHolyBuffAdd() {
+    public   boolean getCanHolyBuffAdd() {
         return canHolyBuffAdd;
     }
 
-    public static void setCanHolyBuffAdd(boolean canHolyBuffAdd) {
+    public   void setCanHolyBuffAdd(boolean canHolyBuffAdd) {
         Information.canHolyBuffAdd = canHolyBuffAdd;
     }
 
-    public static void setTimeOfHolyBuff(int timeOfHolyBuff) {
+    public   void setTimeOfHolyBuff(int timeOfHolyBuff) {
         Information.timeOfHolyBuff = timeOfHolyBuff;
     }
 
-    public static int getTimeOfHolyBuff() {
+    public   int getTimeOfHolyBuff() {
         return timeOfHolyBuff;
     }
 
-    public static void setIsHolyBuffPermanent(boolean isHolyBuffPermanent) {
+    public   void setIsHolyBuffPermanent(boolean isHolyBuffPermanent) {
         Information.isHolyBuffPermanent = isHolyBuffPermanent;
     }
 
-    public static boolean getIsHolyBuffPermanent() {
+    public   boolean getIsHolyBuffPermanent() {
         return isHolyBuffPermanent;
     }
 
-    public static void setCanDisarmBuffAdd(boolean canDisarmBuffAdd) {
+    public   void setCanDisarmBuffAdd(boolean canDisarmBuffAdd) {
         Information.canDisarmBuffAdd = canDisarmBuffAdd;
     }
 
-    public static boolean getCanDisarmBuffAdd() {
+    public   boolean getCanDisarmBuffAdd() {
         return canDisarmBuffAdd;
     }
 
-    public static void setTimeOfDisarmBuff(int timeOfDisarmBuff) {
+    public   void setTimeOfDisarmBuff(int timeOfDisarmBuff) {
         Information.timeOfDisarmBuff = timeOfDisarmBuff;
     }
 
-    public static int getTimeOfDisarmBuff() {
+    public   int getTimeOfDisarmBuff() {
         return timeOfDisarmBuff;
     }
 
-    public static void setIsDisarmBuffPermanent(boolean isDisarmBuffPermanent) {
+    public   void setIsDisarmBuffPermanent(boolean isDisarmBuffPermanent) {
         Information.isDisarmBuffPermanent = isDisarmBuffPermanent;
     }
 
-    public static boolean getIsDisarmBuffPermanent() {
+    public   boolean getIsDisarmBuffPermanent() {
         return isDisarmBuffPermanent;
     }
 
-    public static void setCanWeaknessBuffAdd(boolean canWeaknessBuffAdd) {
+    public   void setCanWeaknessBuffAdd(boolean canWeaknessBuffAdd) {
         Information.canWeaknessBuffAdd = canWeaknessBuffAdd;
     }
 
-    public static boolean getCanWeaknessBuffAdd() {
+    public   boolean getCanWeaknessBuffAdd() {
         return canWeaknessBuffAdd;
     }
 
-    public static void setTimeOfWeaknessBuff(int timeOfWeaknessBuff) {
+    public   void setTimeOfWeaknessBuff(int timeOfWeaknessBuff) {
         Information.timeOfWeaknessBuff = timeOfWeaknessBuff;
     }
 
-    public static int getTimeOfWeaknessBuff() {
+    public   int getTimeOfWeaknessBuff() {
         return timeOfWeaknessBuff;
     }
 
-    public static void setIsWeaknessBuffPermanent(boolean isWeaknessBuffPermanent) {
+    public   void setIsWeaknessBuffPermanent(boolean isWeaknessBuffPermanent) {
         Information.isWeaknessBuffPermanent = isWeaknessBuffPermanent;
     }
 
-    public static boolean getIsWeaknessBuffPermanent() {
+    public   boolean getIsWeaknessBuffPermanent() {
         return isWeaknessBuffPermanent;
     }
 
-    public static void setCanPoisonBuffAdd(boolean canPoisonBuffAdd) {
+    public   void setCanPoisonBuffAdd(boolean canPoisonBuffAdd) {
         Information.canPoisonBuffAdd = canPoisonBuffAdd;
     }
 
-    public static boolean getCanPoisonBuffAdd() {
+    public   boolean getCanPoisonBuffAdd() {
         return canPoisonBuffAdd;
     }
 
-    public static void setTimeOfPoisonBuff(int timeOfPoisonBuff) {
+    public   void setTimeOfPoisonBuff(int timeOfPoisonBuff) {
         Information.timeOfPoisonBuff = timeOfPoisonBuff;
     }
 
-    public static int getTimeOfPoisonBuff() {
+    public   int getTimeOfPoisonBuff() {
         return timeOfPoisonBuff;
     }
 
-    public static void setIsPoisonBuffPermanent(boolean isPoisonBuffPermanent) {
+    public   void setIsPoisonBuffPermanent(boolean isPoisonBuffPermanent) {
         Information.isPoisonBuffPermanent = isPoisonBuffPermanent;
     }
 
-    public static boolean getIsPoisonBuffPermanent() {
+    public   boolean getIsPoisonBuffPermanent() {
         return isPoisonBuffPermanent;
     }
 
-    public static void setCanStunBuffAdd(boolean canStunBuffAdd) {
+    public   void setCanStunBuffAdd(boolean canStunBuffAdd) {
         Information.canStunBuffAdd = canStunBuffAdd;
     }
 
-    public static boolean getCanStunBuffAdd() {
+    public   boolean getCanStunBuffAdd() {
         return canStunBuffAdd;
     }
 
-    public static void setTimeOfStunBuff(int timeOfStunBuff) {
+    public   void setTimeOfStunBuff(int timeOfStunBuff) {
         Information.timeOfStunBuff = timeOfStunBuff;
     }
 
-    public static int getTimeOfStunBuff() {
+    public   int getTimeOfStunBuff() {
         return timeOfStunBuff;
     }
 
-    public static void setIsStunBuffPermanent(boolean isStunBuffPermanent) {
+    public   void setIsStunBuffPermanent(boolean isStunBuffPermanent) {
         Information.isStunBuffPermanent = isStunBuffPermanent;
     }
 
-    public static boolean getIsStunBuffPermanent() {
+    public   boolean getIsStunBuffPermanent() {
         return isStunBuffPermanent;
     }
 
-    public static void setCanPowerBuffAdd(boolean canPowerBuffAdd) {
+    public   void setCanPowerBuffAdd(boolean canPowerBuffAdd) {
         Information.canPowerBuffAdd = canPowerBuffAdd;
     }
 
-    public static boolean getCanPowerBuffAdd() {
+    public   boolean getCanPowerBuffAdd() {
         return canPowerBuffAdd;
     }
 
-    public static void setTimeOfPowerBuff(int timeOfPowerBuff) {
+    public   void setTimeOfPowerBuff(int timeOfPowerBuff) {
         Information.timeOfPowerBuff = timeOfPowerBuff;
     }
 
-    public static int getTimeOfPowerBuff() {
+    public   int getTimeOfPowerBuff() {
         return timeOfPowerBuff;
     }
 
-    public static void setIsPowerBuffPermanent(boolean isPowerBuffPermanent) {
+    public   void setIsPowerBuffPermanent(boolean isPowerBuffPermanent) {
         Information.isPowerBuffPermanent = isPowerBuffPermanent;
     }
 
-    public static boolean getIsPowerBuffPermanent() {
+    public   boolean getIsPowerBuffPermanent() {
         return isPowerBuffPermanent;
     }
 
-    public static void setCanRemoveBadBuffsOfOurselves(boolean canRemoveBadBuffsOfOurselves) {
+    public   void setCanRemoveBadBuffsOfOurselves(boolean canRemoveBadBuffsOfOurselves) {
         Information.canRemoveBadBuffsOfOurselves = canRemoveBadBuffsOfOurselves;
     }
 
-    public static boolean getCanRemoveBadBuffsOfOurselves() {
+    public   boolean getCanRemoveBadBuffsOfOurselves() {
         return canRemoveBadBuffsOfOurselves;
     }
 
-    public static void setCanRemoveGoodBuffsOfEnemy(boolean canRemoveGoodBuffsOfEnemy) {
+    public   void setCanRemoveGoodBuffsOfEnemy(boolean canRemoveGoodBuffsOfEnemy) {
         Information.canRemoveGoodBuffsOfEnemy = canRemoveGoodBuffsOfEnemy;
     }
 
-    public static boolean getCanRemoveGoodBuffsOfEnemy() {
+    public   boolean getCanRemoveGoodBuffsOfEnemy() {
         return canRemoveGoodBuffsOfEnemy;
     }
 
-    public static void setCanDamageToEnemy(boolean canDamageToEnemy) {
+    public   void setCanDamageToEnemy(boolean canDamageToEnemy) {
         Information.canDamageToEnemy = canDamageToEnemy;
     }
 
-    public static boolean getCanDamageToEnemy() {
+    public   boolean getCanDamageToEnemy() {
         return canDamageToEnemy;
     }
 
-    public static void setDamageToEnemy(int damageToEnemy) {
+    public   void setDamageToEnemy(int damageToEnemy) {
         Information.damageToEnemy = damageToEnemy;
     }
 
-    public static int getDamageToEnemy() {
+    public   int getDamageToEnemy() {
         return damageToEnemy;
     }
 
-    public static void setCanAddFieryBuffToCell(boolean canAddFieryBuffToCell) {
+    public   void setCanAddFieryBuffToCell(boolean canAddFieryBuffToCell) {
         Information.canAddFieryBuffToCell = canAddFieryBuffToCell;
     }
 
-    public static boolean getCanAddFieryBuffToCell() {
+    public   boolean getCanAddFieryBuffToCell() {
         return canAddFieryBuffToCell;
     }
 
-    public static void setTimeOfAddFieryBuffToCell(int timeOfAddFieryBuffToCell) {
+    public   void setTimeOfAddFieryBuffToCell(int timeOfAddFieryBuffToCell) {
         Information.timeOfAddFieryBuffToCell = timeOfAddFieryBuffToCell;
     }
 
-    public static int getTimeOfAddFieryBuffToCell() {
+    public   int getTimeOfAddFieryBuffToCell() {
         return timeOfAddFieryBuffToCell;
     }
 
-    public static void setCanAddPoisonBuffToCell(boolean canAddPoisonBuffToCell) {
+    public   void setCanAddPoisonBuffToCell(boolean canAddPoisonBuffToCell) {
         Information.canAddPoisonBuffToCell = canAddPoisonBuffToCell;
     }
 
-    public static boolean getCanAddPoisonBuffToCell() {
+    public   boolean getCanAddPoisonBuffToCell() {
         return canAddPoisonBuffToCell;
     }
 
-    public static void setTimeOfAddPoisonBuffToCell(int timeOfAddPoisonBuffToCell) {
+    public   void setTimeOfAddPoisonBuffToCell(int timeOfAddPoisonBuffToCell) {
         Information.timeOfAddPoisonBuffToCell = timeOfAddPoisonBuffToCell;
     }
 
-    public static int getTimeOfAddPoisonBuffToCell() {
+    public   int getTimeOfAddPoisonBuffToCell() {
         return timeOfAddPoisonBuffToCell;
     }
 
-    public static void setCanKillMinionOfEnemy(boolean canKillMinionOfEnemy) {
+    public   void setCanKillMinionOfEnemy(boolean canKillMinionOfEnemy) {
         Information.canKillMinionOfEnemy = canKillMinionOfEnemy;
     }
 
-    public static boolean getCanKillMinionOfEnemy() {
+    public   boolean getCanKillMinionOfEnemy() {
         return canKillMinionOfEnemy;
     }
 
-    public static void setCanKillOurMinionAndHealHero(boolean canKillOurMinionAndHealHero) {
+    public   void setCanKillOurMinionAndHealHero(boolean canKillOurMinionAndHealHero) {
         Information.canKillOurMinionAndHealHero = canKillOurMinionAndHealHero;
     }
 
-    public static boolean getCanKillOurMinionAndHealHero() {
+    public   boolean getCanKillOurMinionAndHealHero() {
         return canKillOurMinionAndHealHero;
     }
 
-    public static void setCanDoRangedAttack(boolean canDoRangedAttack) {
+    public   void setCanDoRangedAttack(boolean canDoRangedAttack) {
         Information.canDoRangedAttack = canDoRangedAttack;
     }
 
-    public static boolean getCanDoRangedAttack() {
+    public   boolean getCanDoRangedAttack() {
         return canDoRangedAttack;
     }
 
-    public static void setCanDoHybridAttack(boolean canDoHybridAttack) {
+    public   void setCanDoHybridAttack(boolean canDoHybridAttack) {
         Information.canDoHybridAttack = canDoHybridAttack;
     }
 
-    public static boolean getCanDoHybridAttack() {
+    public   boolean getCanDoHybridAttack() {
         return canDoHybridAttack;
     }
 
-    public static void setCanDoMeleeAttack(boolean canDoMeleeAttack) {
+    public   void setCanDoMeleeAttack(boolean canDoMeleeAttack) {
         Information.canDoMeleeAttack = canDoMeleeAttack;
     }
 
-    public static boolean getCanDoMeleeAttack() {
+    public   boolean getCanDoMeleeAttack() {
         return canDoMeleeAttack;
     }
 
-    public static void setIsGhooleBozorg(boolean isGhooleBozorg) {
+    public   void setIsGhooleBozorg(boolean isGhooleBozorg) {
         Information.isGhooleBozorg = isGhooleBozorg;
     }
 
-    public static boolean getIsGhooleBozorg() {
+    public   boolean getIsGhooleBozorg() {
         return isGhooleBozorg;
     }
 
-    public static void setIsShireDarrande(boolean isShireDarrande) {
+    public   void setIsShireDarrande(boolean isShireDarrande) {
         Information.isShireDarrande = isShireDarrande;
     }
 
-    public static boolean getIsShireDarrande() {
+    public   boolean getIsShireDarrande() {
         return isShireDarrande;
     }
 
-    public static void setIsZahhak(boolean isZahhak) {
+    public   void setIsZahhak(boolean isZahhak) {
         Information.isZahhak = isZahhak;
     }
 
-    public static boolean getIsZahhak() {
+    public   boolean getIsZahhak() {
         return isZahhak;
     }
 
-    public static void setCanIncreaseRangeOfAttack(boolean canIncreaseRangeOfAttack) {
+    public   void setCanIncreaseRangeOfAttack(boolean canIncreaseRangeOfAttack) {
         Information.canIncreaseRangeOfAttack = canIncreaseRangeOfAttack;
     }
 
-    public static boolean getCanIncreaseRangeOfAttack() {
+    public   boolean getCanIncreaseRangeOfAttack() {
         return canIncreaseRangeOfAttack;
     }
 
-    public static void setCanDoubleHp(boolean canDoubleHp) {
+    public   void setCanDoubleHp(boolean canDoubleHp) {
         Information.canDoubleHp = canDoubleHp;
     }
 
-    public static boolean getCanDoubleHp() {
+    public   boolean getCanDoubleHp() {
         return canDoubleHp;
     }
 
-    public static void setCanIncreaseMana(boolean canIncreaseMana) {
+    public   void setCanIncreaseMana(boolean canIncreaseMana) {
         Information.canIncreaseMana = canIncreaseMana;
     }
 
-    public static boolean getCanIncreaseMana() {
+    public   boolean getCanIncreaseMana() {
         return canIncreaseMana;
     }
 
-    public static int getDecreaseHpOfPoisonBuffOfCell() {
+    public   int getDecreaseHpOfPoisonBuffOfCell() {
         return decreaseHpOfPoisonBuffOfCell;
     }
 
-    public static void setDecreaseHpOfPoisonBuffOfCell(int decreaseHpOfPoisonBuffOfCell) {
+    public   void setDecreaseHpOfPoisonBuffOfCell(int decreaseHpOfPoisonBuffOfCell) {
         Information.decreaseHpOfPoisonBuffOfCell = decreaseHpOfPoisonBuffOfCell;
     }
 
