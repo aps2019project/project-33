@@ -293,7 +293,18 @@ public class Battle {
         Impact.specialPower(playerOn.getHero(), x, y);
     }
 
-    public void useItem(int x, int y){}
+    public void useItem(int x, int y){
+        if(selectedCollectableItem == null){
+            System.out.println("select a collectable item");
+            return;
+        }
+        if(!isInMap(x, y)){
+            System.out.println("Invalid coordination");
+            return;
+        }
+        Cell cell = getCellByCoordination(x, y);
+        Impact.impactItem(selectedCollectableItem, cell);
+    }
 
     public void showNextCard(){
 

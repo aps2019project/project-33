@@ -156,11 +156,11 @@ public class Impact {
     public static void counterAttack(LivingCard livingCard, LivingCard opponentCard) {
 
     }
-
+//manash berese - baraye hero e in minion chi ?
     public static void specialPower(Hero hero, int x, int y) {
     }
 
-    public static void impactItem(Item item, String livingCardID) {
+    public static void impactItem(Item item, Cell cell) {
     }
 
     public static void impactSpellOfHero(String opponentID) {
