@@ -243,7 +243,7 @@ public class Battle {
             System.out.println("Invalid card id");
             return;
         }
-        Impact.attack(this, this.selectedCard, opponentLivingCard);
+        Impact.attack(this.selectedCard, opponentLivingCard);
     }
 
     public void comboAttackToOpponentCard(String[] input){
