@@ -289,7 +289,7 @@ public class Battle {
         }
         playerOn.getHero().setCoolDown(Math.max(0, playerOn.getHero().getCoolDown() - 1));
         playerOff.getHero().setCoolDown(Math.max(0, playerOff.getHero().getCoolDown() - 1));
-        Impact.activeBuffs(battle);
+        Impact.activeBuffs(this);
     }
 
     public void showCollectables(){

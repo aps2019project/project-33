@@ -302,6 +302,8 @@ public class Impact {
     }
 
     public static void impactSpell(Spell spell, Cell cell) {
+        LivingCard livingCard = cell.getLivingCard();
+
     }
 
     public static void main(Battle battle, Card ourCard){}
