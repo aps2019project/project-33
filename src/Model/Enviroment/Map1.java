@@ -2,7 +2,7 @@ package Model.Enviroment;
 
 import java.util.ArrayList;
 
-public class Map {
+public class Map1 {
 
     private ArrayList<Cell> cells = new ArrayList<>();
     private int height;
