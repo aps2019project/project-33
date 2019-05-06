@@ -35,7 +35,7 @@ public class BattleMenu extends Menu {
         chooseType();
         chooseSecondPlayer();
         chooseMode();
-        battle.preprocess();
+        battle.preProcess();
         battle.runGame();
     }
 
@@ -121,7 +121,7 @@ public class BattleMenu extends Menu {
                 int numberOfFlags = 0;
                 if(mode.equals(modes[2])){
                     if(input.length == 5){
-                        numberOfFlags = Integer.parseInt(input[4])
+                        numberOfFlags = Integer.parseInt(input[4]);
                     }
                     else {
                         System.out.println("Enter valid command");
@@ -152,7 +152,7 @@ public class BattleMenu extends Menu {
             if(inputLine.matches("start multiplayer game [^s]+( [\\d]+)*")){
                 String mode = input[3];
                 int numberOfFlags = 0;
-                if(mode.equals(mode[2])){
+                if(mode.equals(modes[2])){
                     if(input.length == 5){
                         numberOfFlags = Integer.parseInt(input[4]);
                     }
