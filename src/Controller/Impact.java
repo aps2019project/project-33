@@ -163,19 +163,21 @@ public class Impact {
         }
         return true;
     }
+
+    public static void counterAttack(Battle battle, LivingCard livingCard, LivingCard opponentCard) {
+        ArrayList<Cell> attackCells = Impact.getAttackCells(battle, livingCard);
+        boolean isInRange = Impact.isInRange(attackCells, opponentCard);
+        if(!isInRange || !livingCard.isCanCounterAttack()){
+            return;
+        }
+        opponentCard.setHP(opponentCard.getHP() - livingCard.getDecreaseHPByAttack());
+        checkAlive(battle, opponentCard);
+    }
+
 //counter attackam bayad haminja seda she
     //mana nemikhad in ?
     public static void attack(Battle battle, LivingCard attacker, LivingCard defender){
-        ArrayList<Cell> attackCells = new ArrayList<>();
-        if(attacker.getCounterAttackType().equals("melee")){
-            attackCells = AttackArea.findMeleeAttackArea(battle, attacker);
-        }
-        if(attacker.getCounterAttackType().equals("ranged")){
-            attackCells = AttackArea.findRangedAttackArea(battle, attacker);
-        }
-        if(attacker.getCounterAttackType().equals("hybrid")){
-            attackCells = AttackArea.findHybridAttackArea(battle, attacker);
-        }
+        ArrayList<Cell> attackCells = Impact.getAttackCells(battle, attacker);
         boolean isInRange = Impact.isInRange(attackCells, defender);
         if(!isInRange){
             System.out.println("opponent minion is unavailable for attack");
@@ -189,7 +191,7 @@ public class Impact {
         //too getter ba taghirat jam miazanim
         defender.setHP(defender.getHP() - attacker.getDecreaseHPByAttack());
         if(checkAlive(battle, defender))
-            Impact.counterAttack(defender, attacker);
+            Impact.counterAttack(battle, defender, attacker);
 
     }
 // mahdude hamle o ina check she
@@ -197,9 +199,21 @@ public class Impact {
 
     }
 
-    public static void counterAttack(LivingCard livingCard, LivingCard opponentCard) {
-
+    public static ArrayList<Cell> getAttackCells(Battle battle, LivingCard livingCard){
+        ArrayList<Cell> attackCells = new ArrayList<>();
+        if(livingCard.getCounterAttackType().equals("melee")){
+            attackCells = AttackArea.findMeleeAttackArea(battle, livingCard);
+        }
+        if(livingCard.getCounterAttackType().equals("ranged")){
+            attackCells = AttackArea.findRangedAttackArea(battle, livingCard);
+        }
+        if(livingCard.getCounterAttackType().equals("hybrid")){
+            attackCells = AttackArea.findHybridAttackArea(battle, livingCard)
+        }
+        return attackCells;
     }
+
+
 //manash berese - baraye hero e in minion chi ?
     public static void specialPower(Hero hero, int x, int y) {
     }
