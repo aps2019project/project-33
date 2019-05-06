@@ -21,6 +21,8 @@ public class Battle {
     private Flag mainFlag;
     private CollectableItem selectedCollectableItem;
     private int numberOfFlags;
+    private Player winnerPlayer = null;
+    private Player loserPlayer = null;
 
     private ArrayList<Flag> flags = new ArrayList<Flag>();
 
@@ -276,6 +278,10 @@ public class Battle {
         Player player = playerOff;
         playerOff = playerOn;
         playerOn = player;
+        if(this.getMode().equals(modes[1])){
+            if(this.mainFlag.getFlagOwner() != null)
+                mainFlag.setNumberOfGotRounds(mainFlag.getNumberOfGotRounds() + 1);
+        }
     }
 
     public void showCollectables(){
@@ -309,21 +315,13 @@ public class Battle {
         Cell cell = getCellByCoordination(x, y);
         Impact.impactItem(selectedCollectableItem, cell);
     }
-//havaset bashe moteghayerasho update koni mese tedad cardaye estefade shode az main deck
+
+    //havaset bashe moteghayerasho update koni mese tedad cardaye estefade shode az main deck
     public void showNextCard(){
         playerOn.getHand().showNextCard(playerOn.getAccount().getCollection().getMainDeck());
     }
 
-    public void enterGraveYard(){}
-
-    public void endGame(){}
-
-    public void checkTurn(){
-
-    }
-
-    public void exit(){}
-//bazi jaha bayad khali shan selecteditem o card
+    //bazi jaha bayad khali shan selecteditem o card
     public void showItemInfo(){
         if(selectedCollectableItem == null){
             System.out.println("select an item");
@@ -331,6 +329,56 @@ public class Battle {
         }
         System.out.println(selectedCollectableItem.getInfo());
     }
+
+    public void checkTurn(){
+        if(this.getMode().equals(modes[0])){
+            if(playerOn.getHero().getHP() <= 0){
+                this.setLoserPlayer(playerOn);
+                this.setWinnerPlayer(playerOff);
+            }
+            if(playerOff.getHero().getHP() <= 0){
+                this.setLoserPlayer(playerOff);
+                this.setWinnerPlayer(playerOn);
+            }
+        }
+        if(this.getMode().equals(modes[1])){
+            if(mainFlag.getNumberOfGotRounds() >= 6){
+                Player winner = mainFlag.getFlagOwner();
+                this.setWinnerPlayer(winner);
+                if(playerOff.getAccount().getUsername().equals(winner.getAccount().getUsername())){
+                    this.setLoserPlayer(playerOn);
+                }
+                else{
+                    this.setLoserPlayer(playerOff);
+                }
+            }
+        }
+        if(this.getMode().equals(modes[2])){
+            int numberOfFlags = flags.size();
+            int numberOfPlayerOnFlags = 0, numberOfPlayerOffFlags = 0;
+            for(Flag flag : flags){
+                Player flagOwner = flag.getFlagOwner();
+                if(flagOwner != null){
+                    if(flagOwner.getAccount().getUsername().equals(playerOn.getAccount().getUsername()))
+                        numberOfPlayerOnFlags++;
+                    else
+                        numberOfPlayerOffFlags++;
+                }
+            }
+            if(numberOfPlayerOnFlags > numberOfFlags / 2){
+                this.setWinnerPlayer(playerOn);
+                this.setLoserPlayer(playerOff);
+            }
+            if(numberOfPlayerOffFlags > numberOfFlags / 2){
+                this.setWinnerPlayer(playerOff);
+                this.setLoserPlayer(playerOn);
+            }
+        }
+    }
+
+    public void exit(){}
+    public void enterGraveYard(){}
+    public void endGame(){}
 
     public void help(){
 
@@ -473,5 +521,21 @@ public class Battle {
 
     public void setNumberOfFlags(int numberOfFlags) {
         this.numberOfFlags = numberOfFlags;
+    }
+
+    public void setLoserPlayer(Player player){
+        this.loserPlayer = player;
+    }
+
+    public Player getLoserPlayer(){
+        return this.loserPlayer;
+    }
+
+    public void setWinnerPlayer(Player player){
+        this.winnerPlayer = player;
+    }
+
+    public Player getWinnerPlayer(){
+        return this.winnerPlayer;
     }
 }
