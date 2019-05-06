@@ -124,6 +124,41 @@ public class Battle {
     //che cardaei bishtar az 2 ta mitunan beran? moteghayer negah darim barashun?
     //too cell ham bayad ezafe she ?
 
+    public void insertCardInMap(String cardID, int x, int y){
+        CollectionItem insertingCollectionItem = null;
+        for(CollectionItem collectionItem : playerOn.getHand().getCards()){
+            if(collectionItem.getID().equals(cardID))
+                insertingCollectionItem = collectionItem;
+        }
+        if(insertingCollectionItem == null){
+            System.out.println("Invalid card name");
+            return;
+        }
+        if(!isInMap(x, y)){
+            System.out.println("Invalid coordination");
+            return;
+        }
+        Cell cell = map.getCellByCoordination(x, y);
+        if(insertingCollectionItem instanceof LivingCard){
+            if(map.getCellByCoordination(x, y).getLivingCard() != null){
+                System.out.println("Destination is full !");
+                return;
+            }
+            playerOn.getHand().removeCard(cardID);
+            insertingCollectionItem.setPositionColumn(y);
+            insertingCollectionItem.setPositionRow(x);
+            cell.insertCard(insertingCollectionItem.getID());
+            playerOn.addAliveCard((LivingCard)insertingCollectionItem);
+        }
+        else{
+            if(insertingCollectionItem instanceof Spell){
+                playerOn.getHand().removeCard(cardID);
+                Spell spell = (Spell)insertingCollectionItem;
+                spell.impactSpell(cell);
+            }
+        }
+    }
+
     public void moveCardTo(int x, int y){
         if(selectedCard == null){
             System.out.println("select a card");
@@ -233,7 +268,7 @@ public class Battle {
 //        playerOn.getHand().show();
     }
 
-    public void insertCardInMap(String cardID, int x, int y){}
+
 
     public void endTurn(){
         Player player = playerOff;
