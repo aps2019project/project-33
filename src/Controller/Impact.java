@@ -408,6 +408,8 @@ public class Impact {
                 addNefrineMarg((Minion) livingCard);
             if(information.isTerrorHood())
                 terrorHood(cell, battle);
+            if(information.isPareSimorgh())
+                pareSimorgh((Hero) livingCard, information);
         } else {
             if (information.isCanIncreaseManaAfter3Rounds())
                 increaseManaAfter3Round(battle.getPlayerOn());
@@ -422,6 +424,12 @@ public class Impact {
             if (information.isShockHammer())
                 shockHammer(battle);
         }
+    }
+
+
+    private static void pareSimorgh(Hero hero, Information information) {
+        hero.setHavePareSimorgh(information.isPareSimorgh());
+        hero.setMinOfPareSimorgh(information.getMinOfPareSimorgh());
     }
 
     private static void shockHammer(Battle battle) {

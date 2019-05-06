@@ -9,13 +9,16 @@ import java.util.ArrayList;
 public class Hero extends LivingCard {
 
     private int deadAfterRounds = 0;
+    private boolean havePareSimorgh;
+    private int minOfPareSimorgh;
+
     /*
     public void impactSpell(String opponentID){
         Impact.impactSpellOfHero(opponentID);
     }
 */
     @Override
-    public void showCardInBattle(){
+    public void showCardInBattle() {
         System.out.println("remaining HP : " + this.getRemainingHP() + " attack power : " + this.getDecreaseHPByAttack()
                 + " required mana : " + this.getMP() + this.getDescription());
         //TODO
@@ -29,12 +32,36 @@ public class Hero extends LivingCard {
         return info;
     }
 
+    public void checkPareSimorgh() {
+        if (!this.havePareSimorgh) return;
+        if (this.getHP() < minOfPareSimorgh) {
+            this.increaseHP(this.getHP());
+            this.havePareSimorgh = false;
+        }
+    }
+
     public int getDeadAfterRounds() {
         return deadAfterRounds;
     }
 
     public void setDeadAfterRounds(int deadAfterRounds) {
         this.deadAfterRounds = deadAfterRounds;
+    }
+
+    public boolean isHavePareSimorgh() {
+        return havePareSimorgh;
+    }
+
+    public void setHavePareSimorgh(boolean havePareSimorgh) {
+        this.havePareSimorgh = havePareSimorgh;
+    }
+
+    public int getMinOfPareSimorgh() {
+        return minOfPareSimorgh;
+    }
+
+    public void setMinOfPareSimorgh(int minOfPareSimorgh) {
+        this.minOfPareSimorgh = minOfPareSimorgh;
     }
 
  /*   public static Hero loadAHeroFromJsonFile(String fileName){
