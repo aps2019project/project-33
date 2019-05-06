@@ -149,6 +149,10 @@ public class Impact {
 
     public static void attack(LivingCard attacker, LivingCard defender){}
 
+    public static void comboAttack(LivingCard opponentLivingCard, ArrayList<LivingCard> attackers){
+
+    }
+
     public static void counterAttack(LivingCard livingCard, LivingCard opponentCard) {
 
     }
