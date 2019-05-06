@@ -152,8 +152,23 @@ public class AttackArea {
 
     public static ArrayList<Cell> getimpactCellsOfSpellOfHero(Hero hero, Battle battle){
         ArrayList<Cell> impactedCells = new ArrayList<>();
+        Information information = hero.getInformation();
 
-        return impactedCells;
+        if(information.isImpactItself())
+            impactedCells.add(hero.getCell());
+        if(information.isImpactAllArea())
+            impactedCells.addAll(getAllArea(battle));
+        if(information.isImpactRow())
+            impactedCells.addAll(getCellsOfRow(hero.getCell(), battle));
+
+        ArrayList<Cell> cellsOfLivingCards = new ArrayList<>();
+
+        if(information.isEnemyImpact())
+            cellsOfLivingCards.addAll(getCells(information, battle.getPlayerOff()));
+        if(information.isUsImpact())
+            cellsOfLivingCards.addAll(getCells(information, battle.getPlayerOn()));
+
+        return merge(impactedCells, cellsOfLivingCards);
     }
 
     public static ArrayList<Cell> getImpactCellsOfAttack(LivingCard livingCard, Battle battle) {
