@@ -6,80 +6,58 @@ import Model.Enviroment.Map;
 import Model.Player;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class AttackArea {
 
-    public static ArrayList<Cell> findMeleeAttackArea(Battle battle, LivingCard attackingCard){
-        ArrayList<Cell> impactedCells = new ArrayList<>();
-        int[] dx = {-1, -1, 0, 1, 1, 1, 0, -1}, dy = {0, 1, 1, 1, 0, -1, -1, -1};
-        int numberOfImpactedCells = 8;
-        Map map = battle.getMap();
-        for(int i = 0; i < numberOfImpactedCells; i ++){
-            int newX = attackingCard.getCell().getX() + dx[i], newY = attackingCard.getCell().getY() + dy[i];
-            Cell cell = map.getCellByCoordination(newX, newY);
-            if(cell == null) continue;
-            impactedCells.add(cell);
-        }
-        return impactedCells;
-    }
+    //Inja moshakhas mikone ke che khoone hayi ro az cell ha migire, mostaghel az in ke che type i ro lazem dare
 
-    public static ArrayList<Cell> findRangedAttackArea(Battle battle, LivingCard attackingCard){
-        ArrayList<Cell> impactedCells = new ArrayList<>();
+    private static ArrayList<Cell> getCellsInArea(Cell cell, int maxDistance, Battle battle){
+        ArrayList<Cell> cells = new ArrayList<>();
         Map map = battle.getMap();
         for(int i = 0; i < map.getHeight(); i ++)
             for(int j = 0; j < map.getWidth(); j ++){
-                int distance = AttackArea.distance(i, j, attackingCard.getCell().getX(), attackingCard.getCell().getY());
-                if(distance <= 1)
-                    continue;
-                if(distance > attackingCard.getRangeOfAttack())
-                    continue;
-                Cell cell = map.getCellByCoordination(i, j);
-                impactedCells.add(cell);
+                if(AttackArea.distance(cell.getX(), cell.getY(), i, j) > maxDistance) continue;
+                Cell cell1 = map.getCellByCoordination(i, j);
+                cells.add(cell1);
             }
-        return impactedCells;
     }
 
-    private static int distance(int i, int j, int x, int y) {
-        return Math.abs(i - x) + Math.abs(j - y);
-    }
-
-    public static ArrayList<Cell> findHybridAttackArea(Battle battle, LivingCard attackingCard){
-        ArrayList<Cell> impactedCells = new ArrayList<>();
+    private static ArrayList<Cell> getNeighbors(Cell cell, Battle battle){
+        ArrayList<Cell> neighbors = new ArrayList<>();
         Map map = battle.getMap();
         for(int i = 0; i < map.getHeight(); i ++)
             for(int j = 0; j < map.getWidth(); j ++){
-                if(i == attackingCard.getCell().getX() && j == attackingCard.getCell().getY())
+                if(!isNeighbor(cell.getX(), cell.getY(), i, j))
                     continue;
-                Cell cell = map.getCellByCoordination(i, j);
-                impactedCells.add(cell);
+                Cell cell1 = map.getCellByCoordination(i, j);
+                neighbors.add(cell1);
             }
-        return impactedCells;
+        return neighbors;
     }
 
-    public static ArrayList<Cell> getImpactCellsOfSpecialPower(LivingCard livingCard) {
-
-
-        return null;
+    // in ja baraye spell e o hamaro satisfy mikone
+    private static ArrayList<Cell> getCellsOfColumn(Cell cell, Battle battle) {
+        ArrayList<Cell> cellsOfColumn = new ArrayList<>();
+        Map map = battle.getMap();
+        for(int i = 0; i < map.getHeight(); i ++)
+            for(int j = 0; j < map.getWidth(); j ++){
+                Cell cell1 = map.getCellByCoordination(i, j);
+                if(j == cell.getY())
+                    cellsOfColumn.add(cell1);
+            }
+        return cellsOfColumn;
     }
 
-    public static ArrayList<Cell> getImpactCellsOfAttack(LivingCard livingCard) {
-
-        return null;
-    }
-
-    public static ArrayList<Cell> getImpactCellsOfCounterAttack(LivingCard livingCard) {
-
-        return null;
-    }
-
-    private static void getCellsOfAColumn(Cell cell, Battle battle, ArrayList<Cell> impactCells, Information information) {
-        ArrayList<Cell> cellsOfEnemyForces = new ArrayList<>();
-        getCells(cellsOfEnemyForces, information, battle.getPlayerOff());
-        for(Cell cellOfForce : cellsOfEnemyForces){
-            if(cellOfForce.getY() == cell.getY())
-                impactCells.add(cellOfForce);
-        }
+    private static ArrayList<Cell> getCellsOfRow(Cell cell, Battle battle){
+        ArrayList<Cell> cellsOfRow = new ArrayList<>();
+        Map map = battle.getMap();
+        for(int i = 0; i < map.getHeight(); i ++)
+            for(int j = 0; j < map.getWidth(); j ++){
+                Cell cell1 = map.getCellByCoordination(i, j);
+                if(i == cell.getX())
+                    cellsOfRow.add(cell1);
+            }
+        return cellsOfRow;
     }
 
     private static ArrayList<Cell> getSquareOfCells(Spell spell, Cell cell, Battle battle, int length) {
@@ -98,20 +76,79 @@ public class AttackArea {
         return squareOfCells;
     }
 
-    private static void getCells(ArrayList<Cell> impactCells, Information information, Player player) {
-        if(information.isHeroImpact())
-            impactCells.addAll(addCellOfLivingCard(player, (LivingCard) new Hero()));
-        if(information.isHeroImpact())
-            impactCells.addAll(addCellOfLivingCard(player, (LivingCard) new Minion()));
+    // in ja ham tamoom mishe
+
+    //
+
+
+    public static ArrayList<Cell> findMeleeAttackArea(Battle battle, LivingCard attackingCard){
+        return getNeighbors(attackingCard.getCell(), battle);
     }
 
-    private static ArrayList<Cell> addCellOfLivingCard(Player player, LivingCard livingCard){
+    public static ArrayList<Cell> findRangedAttackArea(Battle battle, LivingCard attackingCard){
+        ArrayList<Cell> impactedCells = new ArrayList<>();
+        Map map = battle.getMap();
+        for(int i = 0; i < map.getHeight(); i ++)
+            for(int j = 0; j < map.getWidth(); j ++){
+                int distance = AttackArea.distance(i, j, attackingCard.getCell().getX(), attackingCard.getCell().getY());
+                if(isNeighbor(i, j, attackingCard.getCell().getX(), attackingCard.getCell().getY()))
+                    continue;
+                if(distance > attackingCard.getRangeOfAttack())
+                    continue;
+                Cell cell = map.getCellByCoordination(i, j);
+                impactedCells.add(cell);
+            }
+        return impactedCells;
+    }
+
+    private static int distance(int i, int j, int x, int y) {
+        return Math.abs(i - x) + Math.abs(j - y);
+    }
+
+    private static boolean isNeighbor(int x1, int y1, int x2, int y2){
+        if(Math.abs(x1 - x2) > 1) return false;
+        if(Math.abs(y1 - y2) > 1) return false;
+        return true;
+    }
+
+    public static ArrayList<Cell> findHybridAttackArea(Battle battle, LivingCard attackingCard){
+        return getCellsInArea(attackingCard.getCell(), attackingCard.getRangeOfAttack(), battle);
+    }
+
+    public static ArrayList<Cell> getImpactCellsOfSpecialPower(LivingCard livingCard) {
+
+
+        return null;
+    }
+
+    public static ArrayList<Cell> getImpactCellsOfAttack(LivingCard livingCard) {
+
+        return null;
+    }
+
+    public static ArrayList<Cell> getImpactCellsOfCounterAttack(LivingCard livingCard) {
+
+        return null;
+    }
+
+    public static ArrayList<Cell> getCellsOfSpecialPower(Minion minion) {
+        return null;
+    }
+
+
+    private static void getCells(ArrayList<Cell> impactCells, Information information, Player player) {
+        if(information.isHeroImpact())
+            impactCells.addAll(getCellOfLivingCard(player, (LivingCard) new Hero()));
+        if(information.isHeroImpact())
+            impactCells.addAll(getCellOfLivingCard(player, (LivingCard) new Minion()));
+    }
+
+    private static ArrayList<Cell> getCellOfLivingCard(Player player, LivingCard livingCard){
         ArrayList<Cell> cellOfHero = new ArrayList<>();
         for(CollectionItem collectionItem : player.getAliveCards()){
             if(collectionItem.getClass().equals(livingCard.getClass())){
                 LivingCard livingCard1 = (LivingCard) collectionItem;
-                if(livingCard1.isAlive())
-                    cellOfHero.add(livingCard1.getCell());
+                cellOfHero.add(livingCard1.getCell());
             }
         }
         return cellOfHero;
@@ -127,7 +164,7 @@ public class AttackArea {
             if(information.isSquareOfCellsImpact())
                 impactCells.addAll(getSquareOfCells(spell, cell, battle, information.getLengthOfSquareOfCellsImpact()));
             if(information.isImpactAColumn())
-                getCellsOfAColumn(cell, battle, impactCells, information);
+                getCellsOfColumn(cell, battle, impactCells, information);
         }
         else{
             if(information.isEnemyImpact())
@@ -138,8 +175,5 @@ public class AttackArea {
         return impactCells;
     }
 
-    public static ArrayList<Cell> getCellsOfSpecialPower(Minion minion) {
-        return null;
-    }
 }
 
