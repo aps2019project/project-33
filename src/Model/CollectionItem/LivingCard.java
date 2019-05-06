@@ -50,7 +50,7 @@ abstract public class LivingCard extends Card {
             return;
         }
 
-        Impact.attack(this, opponentCard);
+        Impact.attack(this, this, opponentCard);
 
         this.canAttack = false;
     }
