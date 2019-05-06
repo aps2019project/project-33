@@ -141,8 +141,7 @@ public class AttackArea {
 
     public static ArrayList<Cell> findRangedAttackArea(Battle battle, LivingCard attackingCard) {
         ArrayList<Cell>  impactedCells = new ArrayList<>();
-        for(Cell cell : findHybridAttackArea(battle, attackingCard))
-            impactedCells.add(cell);
+        impactedCells.addAll(findHybridAttackArea(battle, attackingCard));
         for(Cell cell : findMeleeAttackArea(battle, attackingCard))
             impactedCells.remove(cell);
         return impactedCells;

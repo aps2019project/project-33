@@ -18,7 +18,7 @@ public class Application {
     private Account loggedInAccount;
 
 
-    public void runApplication(){
+    public void runApplication() throws FileNotFoundException {
         AccountMenu accountMenu = new AccountMenu();
         accountMenu.inputCommandLine();
     }
