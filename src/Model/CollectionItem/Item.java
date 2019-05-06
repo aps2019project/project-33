@@ -24,10 +24,11 @@ public  class Item extends CollectionItem {
     }
 */
 
-    @Override
+   /* @Override
     public void doImpact(String livingCardID) {
         Impact.impactItem(this, livingCardID);
     }
+    */
 
     @Override
     public String  getInfo(){
