@@ -2,6 +2,15 @@ package Model.CollectionItem;
 
 public class Information {
 
+
+    //methods
+
+    public void readInformation() {
+        //TODO
+        return;
+    }
+
+
     //AttackArea section
 
     private boolean isEnemyImpact;
@@ -115,6 +124,15 @@ public class Information {
 
     //Attack section
 
+    private boolean isImpactAllArea;
+
+    private boolean isImpactArea;
+    private int distanceOfImpactArea;
+
+    private boolean isImpactItself;
+
+    private boolean isSpecialMinion;
+
     private boolean canHolyBuffAdd;
     private int timeOfHolyBuff;
     private boolean isHolyBuffPermanent;
@@ -165,15 +183,6 @@ public class Information {
     private boolean canIncreaseRangeOfAttack;
     private boolean canDoubleHp;
     private boolean canIncreaseMana;
-
-
-
-    //methods
-
-    public void readInformation() {
-        //TODO
-        return;
-    }
 
     public void setCanHolyBuffAdd(boolean canHolyBuffAdd) {
         this.canHolyBuffAdd = canHolyBuffAdd;
@@ -485,5 +494,45 @@ public class Information {
 
     public boolean isCanIncreaseMana() {
         return canIncreaseMana;
+    }
+
+    public boolean isSpecialMinion() {
+        return isSpecialMinion;
+    }
+
+    public void setSpecialMinion(boolean specialMinion) {
+        isSpecialMinion = specialMinion;
+    }
+
+    public boolean isImpactArea() {
+        return isImpactArea;
+    }
+
+    public void setImpactArea(boolean impactArea) {
+        isImpactArea = impactArea;
+    }
+
+    public int getDistanceOfImpactArea() {
+        return distanceOfImpactArea;
+    }
+
+    public void setDistanceOfImpactArea(int distanceOfImpactArea) {
+        this.distanceOfImpactArea = distanceOfImpactArea;
+    }
+
+    public boolean isImpactItself() {
+        return isImpactItself;
+    }
+
+    public void setImpactItself(boolean impactItself) {
+        isImpactItself = impactItself;
+    }
+
+    public boolean isImpactAllArea() {
+        return isImpactAllArea;
+    }
+
+    public void setImpactAllArea(boolean impactAllArea) {
+        isImpactAllArea = impactAllArea;
     }
 }
