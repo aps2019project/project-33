@@ -217,12 +217,20 @@ public class Impact {
 
 //manash berese - baraye hero e in minion chi ?
     public static void specialPower(Hero hero, int x, int y) {
+
     }
 
     public static void impactItem(Item item, Cell cell) {
     }
+//simorgh chie
+    public static void impactSpellOfHero(Hero hero, int x, int y) {
+        if(hero.getName().equals("diveSefid")){
+            Impact.addPowerBuffToCard(100, true, false, hero);
+        }
+        if(hero.getName().equals("ezhdaha")){
+            Cell cell = Map.getCellByCoordination(x, y);
 
-    public static void impactSpellOfHero(String opponentID) {
+        }
     }
 
     public static void impactSpell(Spell spell, Cell cell) {
