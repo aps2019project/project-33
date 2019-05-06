@@ -153,4 +153,8 @@ public class Account {
     public void setMatches(ArrayList<Match> matches) {
         this.matches = matches;
     }
+
+    public void addMatch(Match match){
+        this.matches.add(match);
+    }
 }
