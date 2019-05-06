@@ -8,6 +8,15 @@ public abstract class Buff {
     private boolean isPermanent;
     private int remainTime;
     private boolean isPassive;
+    private boolean isActive = true;
+
+    public void setIsActive(boolean isActive){
+        this.isActive = isActive;
+    }
+
+    public boolean getIsActive(){
+        return this.isActive;
+    }
 
     public Buff(int remainTime, boolean isPermanent, boolean isPassive){
         this.isPermanent = isPermanent;

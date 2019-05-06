@@ -278,7 +278,7 @@ public class Battle {
         playerOn.getHand().show(playerOn.getAccount().getCollection().getMainDeck());
     }
 
-
+//buff haye passive is activeshun true she
     public void endTurn(){
         Player player = playerOff;
         playerOff = playerOn;
@@ -289,6 +289,7 @@ public class Battle {
         }
         playerOn.getHero().setCoolDown(Math.max(0, playerOn.getHero().getCoolDown() - 1));
         playerOff.getHero().setCoolDown(Math.max(0, playerOff.getHero().getCoolDown() - 1));
+        Impact.activeBuffs(battle);
     }
 
     public void showCollectables(){

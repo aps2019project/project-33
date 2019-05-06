@@ -49,6 +49,10 @@ public class Impact {
 
         for(int i = numberOfBuffs - 1; i > -1; i --){
             Buff buff = effects.get(i);
+            if(buff.isPassive()){
+                buff.setIsActive(false);
+                continue;
+            }
             if(buff instanceof WeaknessBuff) effects.remove(i);
             if(buff instanceof PoisonBuff) effects.remove(i);
             if(buff instanceof StunBuff) effects.remove(i);
@@ -57,7 +61,19 @@ public class Impact {
 
     }
 
-    
+    public static void activeBuffs(Battle battle){
+        for(LivingCard livingCard : battle.getPlayerOn().getAliveCards()){
+            for(Buff buff : livingCard.getEffects()){
+                buff.setIsActive(true);
+            }
+        }
+        for(LivingCard livingCard : battle.getPlayerOff().getAliveCards()){
+            for(Buff buff : livingCard.getEffects()){
+                buff.setIsActive(true);
+            }
+        }
+    }
+
     public static void removeGoodBuffsOfLivingCard(LivingCard livingCard){
         ArrayList<Buff> effects = livingCard.getEffects();
         int numberOfBuffs = effects.size();
@@ -268,7 +284,21 @@ public class Impact {
                 livingCard.handleAttack(4);
             }
         }
-
+        if(hero.getName().equals("afsaneh")){
+            LivingCard livingCard = cell.getLivingCard();
+            if(livingCard == null){
+                System.out.println("there isnt living card here");
+                return;
+            }
+            for(LivingCard playerOffLivingCard : battle.getPlayerOff().getAliveCards()){
+                if(playerOffLivingCard.getID().equals(livingCard.getID())){
+                    Impact.removeGoodBuffsOfLivingCard(livingCard);
+                }
+            }
+        }
+        if(hero.getName().equals("esfandiar")){
+            Impact.addHolyToCard(10, true, true, 1, hero);
+        }
     }
 
     public static void impactSpell(Spell spell, Cell cell) {
