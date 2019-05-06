@@ -6,6 +6,7 @@ import Model.Buffs.*;
 import Model.CollectionItem.*;
 import Model.Enviroment.Cell;
 
+import Model.Enviroment.Map1;
 import Model.Player;
 //import javafx.geometry.Pos;
 
@@ -94,10 +95,11 @@ public class Impact {
         minion.kill();
     }
 
-    public static void anyKindOfAttack(LivingCard ourLivingCard, LivingCard enemyLivingCard){
+ /*   public static void anyKindOfAttack(LivingCard ourLivingCard, LivingCard enemyLivingCard){
         enemyLivingCard.handleAttack(ourLivingCard.getDecreaseHPByAttack());
         Impact.counterAttack(enemyLivingCard, ourLivingCard);
     }
+    */
 
     public static void specialAttackOfGhooleBozorg(Minion bigGiant, int bigGiantDamage){
         int numberOfImpactedCells = 8;
@@ -223,14 +225,50 @@ public class Impact {
     public static void impactItem(Item item, Cell cell) {
     }
 //simorgh chie
-    public static void impactSpellOfHero(Hero hero, int x, int y) {
+    public static void impactSpellOfHero(Battle battle, Hero hero, Cell cell) {
         if(hero.getName().equals("diveSefid")){
             Impact.addPowerBuffToCard(100, true, false, hero);
         }
         if(hero.getName().equals("ezhdaha")){
-            Cell cell = Map.getCellByCoordination(x, y);
-
+            LivingCard livingCard = cell.getLivingCard();
+            if(livingCard == null){
+                System.out.println("there isnt living card here");
+                return;
+            }
+            //daemie ?
+            Impact.addDisarmToCard(10, true, false, livingCard);
         }
+        if(hero.getName().equals("rakhsh")){
+            LivingCard livingCard = cell.getLivingCard();
+            if(livingCard == null){
+                System.out.println("there isnt living card here");
+                return;
+            }
+            Impact.addStunToCard(1, false, false, livingCard);
+        }
+        if(hero.getName().equals("zahhak")){
+            Impact.spellOfZahhak(hero);
+        }
+        if(hero.getName().equals("kaveh")){
+            LivingCard livingCard = cell.getLivingCard();
+            if(livingCard == null){
+                System.out.println("there isnt living card here");
+                return;
+            }
+            Impact.addHolyToCard(3, false, false, 1, livingCard);
+        }
+        if(hero.getName().equals("arash")){
+            Cell heroCell = battle.getMap().getCellByCoordination(hero.getPositionRow(), hero.getPositionColumn());
+            ArrayList<Cell> attackCells = AttackArea.getCellsOfRow(heroCell, battle);
+            for(Cell attackCell : attackCells){
+                LivingCard livingCard = attackCell.getLivingCard();
+                if(livingCard == null)
+                    continue;
+                //handle attacko ok kon -> checkAlive o changeHP
+                livingCard.handleAttack(4);
+            }
+        }
+
     }
 
     public static void impactSpell(Spell spell, Cell cell) {
