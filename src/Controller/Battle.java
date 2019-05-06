@@ -330,6 +330,8 @@ public class Battle {
         System.out.println(selectedCollectableItem.getInfo());
     }
 
+
+    //jayze barande o time e bazi o namayesh e bazi munde
     public void checkTurn(){
         if(this.getMode().equals(modes[0])){
             if(playerOn.getHero().getHP() <= 0){
@@ -374,11 +376,24 @@ public class Battle {
                 this.setLoserPlayer(playerOn);
             }
         }
+        //inja bayad neshun bede barande o etela'ato
+        if(this.getWinnerPlayer() != null){
+            Match match = new Match();
+            match.setWinner(this.winnerPlayer.getAccount());
+            match.setLoser(this.loserPlayer.getAccount());
+          //  match.setTime(this.);
+            playerOn.getAccount().addMatch(match);
+            playerOff.getAccount().addMatch(match);
+
+        }
     }
 
+    public void endGame(){
+
+    }
     public void exit(){}
+
     public void enterGraveYard(){}
-    public void endGame(){}
 
     public void help(){
 
