@@ -29,7 +29,10 @@ public class Battle {
         this.selectedCard = null;
         this.selectedCollectableItem = null;
     }
+//jaye avalie flaga o hero ha o ...
+    public void preProcess(){
 
+    }
 
     public ArrayList<Flag> getFlags(){
         return this.flags;
@@ -305,22 +308,32 @@ public class Battle {
         Cell cell = getCellByCoordination(x, y);
         Impact.impactItem(selectedCollectableItem, cell);
     }
-
+//havaset bashe moteghayerasho update koni mese tedad cardaye estefade shode az main deck
     public void showNextCard(){
-
+        playerOn.getHand().showNextCard(playerOn.getAccount().getCollection().getMainDeck());
     }
 
     public void enterGraveYard(){}
 
     public void endGame(){}
 
-    public void checkTurn(){}
+    public void checkTurn(){
+
+    }
 
     public void exit(){}
+//bazi jaha bayad khali shan selecteditem o card
+    public void showItemInfo(){
+        if(selectedCollectableItem == null){
+            System.out.println("select an item");
+            return;
+        }
+        System.out.println(selectedCollectableItem.getInfo());
+    }
 
-    public void showItemInfo(){}
+    public void help(){
 
-    public void help(){}
+    }
 
     public void runGame(){
         inputCommandLine();
