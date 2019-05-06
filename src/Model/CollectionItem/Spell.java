@@ -23,6 +23,7 @@ public class Spell extends Card {
     public void kingsGurad(){}
     public void doAllKindOfAttacks(){}
 
+/*
     public static Spell createSpell(String playerName, String spellName){
         Spell spell = loadSpellFromJsonFile(spellName);
         int numberOfThisSpellType = 0;
@@ -36,6 +37,7 @@ public class Spell extends Card {
         CollectionItem.addSpellToAllSpells(spell);
         return spell;
     }
+*/
 
     @Override
     public void showCardInBattle() {
