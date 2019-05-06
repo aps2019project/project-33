@@ -166,176 +166,185 @@ public class Information {
     private boolean canDoubleHp;
     private boolean canIncreaseMana;
 
-    public boolean getCanHolyBuffAdd() {
-        return canHolyBuffAdd;
+
+
+    //methods
+
+    public void readInformation() {
+        //TODO
+        return;
     }
 
     public void setCanHolyBuffAdd(boolean canHolyBuffAdd) {
-        Information.canHolyBuffAdd = canHolyBuffAdd;
+        this.canHolyBuffAdd = canHolyBuffAdd;
+    }
+
+    public boolean isCanHolyBuffAdd() {
+        return canHolyBuffAdd;
     }
 
     public void setTimeOfHolyBuff(int timeOfHolyBuff) {
-        Information.timeOfHolyBuff = timeOfHolyBuff;
+        this.timeOfHolyBuff = timeOfHolyBuff;
     }
 
     public int getTimeOfHolyBuff() {
         return timeOfHolyBuff;
     }
 
-    public void setIsHolyBuffPermanent(boolean isHolyBuffPermanent) {
-        Information.isHolyBuffPermanent = isHolyBuffPermanent;
+    public void setHolyBuffPermanent(boolean holyBuffPermanent) {
+        isHolyBuffPermanent = holyBuffPermanent;
     }
 
-    public boolean getIsHolyBuffPermanent() {
+    public boolean isHolyBuffPermanent() {
         return isHolyBuffPermanent;
     }
 
     public void setCanDisarmBuffAdd(boolean canDisarmBuffAdd) {
-        Information.canDisarmBuffAdd = canDisarmBuffAdd;
+        this.canDisarmBuffAdd = canDisarmBuffAdd;
     }
 
-    public boolean getCanDisarmBuffAdd() {
+    public boolean isCanDisarmBuffAdd() {
         return canDisarmBuffAdd;
     }
 
     public void setTimeOfDisarmBuff(int timeOfDisarmBuff) {
-        Information.timeOfDisarmBuff = timeOfDisarmBuff;
+        this.timeOfDisarmBuff = timeOfDisarmBuff;
     }
 
     public int getTimeOfDisarmBuff() {
         return timeOfDisarmBuff;
     }
 
-    public void setIsDisarmBuffPermanent(boolean isDisarmBuffPermanent) {
-        Information.isDisarmBuffPermanent = isDisarmBuffPermanent;
+    public void setDisarmBuffPermanent(boolean disarmBuffPermanent) {
+        isDisarmBuffPermanent = disarmBuffPermanent;
     }
 
-    public boolean getIsDisarmBuffPermanent() {
+    public boolean isDisarmBuffPermanent() {
         return isDisarmBuffPermanent;
     }
 
     public void setCanWeaknessBuffAdd(boolean canWeaknessBuffAdd) {
-        Information.canWeaknessBuffAdd = canWeaknessBuffAdd;
+        this.canWeaknessBuffAdd = canWeaknessBuffAdd;
     }
 
-    public boolean getCanWeaknessBuffAdd() {
+    public boolean isCanWeaknessBuffAdd() {
         return canWeaknessBuffAdd;
     }
 
     public void setTimeOfWeaknessBuff(int timeOfWeaknessBuff) {
-        Information.timeOfWeaknessBuff = timeOfWeaknessBuff;
+        this.timeOfWeaknessBuff = timeOfWeaknessBuff;
     }
 
     public int getTimeOfWeaknessBuff() {
         return timeOfWeaknessBuff;
     }
 
-    public void setIsWeaknessBuffPermanent(boolean isWeaknessBuffPermanent) {
-        Information.isWeaknessBuffPermanent = isWeaknessBuffPermanent;
+    public void setWeaknessBuffPermanent(boolean weaknessBuffPermanent) {
+        isWeaknessBuffPermanent = weaknessBuffPermanent;
     }
 
-    public boolean getIsWeaknessBuffPermanent() {
+    public boolean isWeaknessBuffPermanent() {
         return isWeaknessBuffPermanent;
     }
 
     public void setCanPoisonBuffAdd(boolean canPoisonBuffAdd) {
-        Information.canPoisonBuffAdd = canPoisonBuffAdd;
+        this.canPoisonBuffAdd = canPoisonBuffAdd;
     }
 
-    public boolean getCanPoisonBuffAdd() {
+    public boolean isCanPoisonBuffAdd() {
         return canPoisonBuffAdd;
     }
 
     public void setTimeOfPoisonBuff(int timeOfPoisonBuff) {
-        Information.timeOfPoisonBuff = timeOfPoisonBuff;
+        this.timeOfPoisonBuff = timeOfPoisonBuff;
     }
 
     public int getTimeOfPoisonBuff() {
         return timeOfPoisonBuff;
     }
 
-    public void setIsPoisonBuffPermanent(boolean isPoisonBuffPermanent) {
-        Information.isPoisonBuffPermanent = isPoisonBuffPermanent;
+    public void setPoisonBuffPermanent(boolean poisonBuffPermanent) {
+        isPoisonBuffPermanent = poisonBuffPermanent;
     }
 
-    public boolean getIsPoisonBuffPermanent() {
+    public boolean isPoisonBuffPermanent() {
         return isPoisonBuffPermanent;
     }
 
     public void setCanStunBuffAdd(boolean canStunBuffAdd) {
-        Information.canStunBuffAdd = canStunBuffAdd;
+        this.canStunBuffAdd = canStunBuffAdd;
     }
 
-    public boolean getCanStunBuffAdd() {
+    public boolean isCanStunBuffAdd() {
         return canStunBuffAdd;
     }
 
     public void setTimeOfStunBuff(int timeOfStunBuff) {
-        Information.timeOfStunBuff = timeOfStunBuff;
+        this.timeOfStunBuff = timeOfStunBuff;
     }
 
     public int getTimeOfStunBuff() {
         return timeOfStunBuff;
     }
 
-    public void setIsStunBuffPermanent(boolean isStunBuffPermanent) {
-        Information.isStunBuffPermanent = isStunBuffPermanent;
+    public void setStunBuffPermanent(boolean stunBuffPermanent) {
+        isStunBuffPermanent = stunBuffPermanent;
     }
 
-    public boolean getIsStunBuffPermanent() {
+    public boolean isStunBuffPermanent() {
         return isStunBuffPermanent;
     }
 
     public void setCanPowerBuffAdd(boolean canPowerBuffAdd) {
-        Information.canPowerBuffAdd = canPowerBuffAdd;
+        this.canPowerBuffAdd = canPowerBuffAdd;
     }
 
-    public boolean getCanPowerBuffAdd() {
+    public boolean isCanPowerBuffAdd() {
         return canPowerBuffAdd;
     }
 
     public void setTimeOfPowerBuff(int timeOfPowerBuff) {
-        Information.timeOfPowerBuff = timeOfPowerBuff;
+        this.timeOfPowerBuff = timeOfPowerBuff;
     }
 
     public int getTimeOfPowerBuff() {
         return timeOfPowerBuff;
     }
 
-    public void setIsPowerBuffPermanent(boolean isPowerBuffPermanent) {
-        Information.isPowerBuffPermanent = isPowerBuffPermanent;
+    public void setPowerBuffPermanent(boolean powerBuffPermanent) {
+        isPowerBuffPermanent = powerBuffPermanent;
     }
 
-    public boolean getIsPowerBuffPermanent() {
+    public boolean isPowerBuffPermanent() {
         return isPowerBuffPermanent;
     }
 
     public void setCanRemoveBadBuffsOfOurselves(boolean canRemoveBadBuffsOfOurselves) {
-        Information.canRemoveBadBuffsOfOurselves = canRemoveBadBuffsOfOurselves;
+        this.canRemoveBadBuffsOfOurselves = canRemoveBadBuffsOfOurselves;
     }
 
-    public boolean getCanRemoveBadBuffsOfOurselves() {
+    public boolean isCanRemoveBadBuffsOfOurselves() {
         return canRemoveBadBuffsOfOurselves;
     }
 
     public void setCanRemoveGoodBuffsOfEnemy(boolean canRemoveGoodBuffsOfEnemy) {
-        Information.canRemoveGoodBuffsOfEnemy = canRemoveGoodBuffsOfEnemy;
+        this.canRemoveGoodBuffsOfEnemy = canRemoveGoodBuffsOfEnemy;
     }
 
-    public boolean getCanRemoveGoodBuffsOfEnemy() {
+    public boolean isCanRemoveGoodBuffsOfEnemy() {
         return canRemoveGoodBuffsOfEnemy;
     }
 
     public void setCanDamageToEnemy(boolean canDamageToEnemy) {
-        Information.canDamageToEnemy = canDamageToEnemy;
+        this.canDamageToEnemy = canDamageToEnemy;
     }
 
-    public boolean getCanDamageToEnemy() {
+    public boolean isCanDamageToEnemy() {
         return canDamageToEnemy;
     }
 
     public void setDamageToEnemy(int damageToEnemy) {
-        Information.damageToEnemy = damageToEnemy;
+        this.damageToEnemy = damageToEnemy;
     }
 
     public int getDamageToEnemy() {
@@ -343,15 +352,15 @@ public class Information {
     }
 
     public void setCanAddFieryBuffToCell(boolean canAddFieryBuffToCell) {
-        Information.canAddFieryBuffToCell = canAddFieryBuffToCell;
+        this.canAddFieryBuffToCell = canAddFieryBuffToCell;
     }
 
-    public boolean getCanAddFieryBuffToCell() {
+    public boolean isCanAddFieryBuffToCell() {
         return canAddFieryBuffToCell;
     }
 
     public void setTimeOfAddFieryBuffToCell(int timeOfAddFieryBuffToCell) {
-        Information.timeOfAddFieryBuffToCell = timeOfAddFieryBuffToCell;
+        this.timeOfAddFieryBuffToCell = timeOfAddFieryBuffToCell;
     }
 
     public int getTimeOfAddFieryBuffToCell() {
@@ -359,129 +368,122 @@ public class Information {
     }
 
     public void setCanAddPoisonBuffToCell(boolean canAddPoisonBuffToCell) {
-        Information.canAddPoisonBuffToCell = canAddPoisonBuffToCell;
+        this.canAddPoisonBuffToCell = canAddPoisonBuffToCell;
     }
 
-    public boolean getCanAddPoisonBuffToCell() {
+    public boolean isCanAddPoisonBuffToCell() {
         return canAddPoisonBuffToCell;
     }
 
     public void setTimeOfAddPoisonBuffToCell(int timeOfAddPoisonBuffToCell) {
-        Information.timeOfAddPoisonBuffToCell = timeOfAddPoisonBuffToCell;
+        this.timeOfAddPoisonBuffToCell = timeOfAddPoisonBuffToCell;
     }
 
     public int getTimeOfAddPoisonBuffToCell() {
         return timeOfAddPoisonBuffToCell;
     }
 
-    public void setCanKillMinionOfEnemy(boolean canKillMinionOfEnemy) {
-        Information.canKillMinionOfEnemy = canKillMinionOfEnemy;
-    }
-
-    public boolean getCanKillMinionOfEnemy() {
-        return canKillMinionOfEnemy;
-    }
-
-    public void setCanKillOurMinionAndHealHero(boolean canKillOurMinionAndHealHero) {
-        Information.canKillOurMinionAndHealHero = canKillOurMinionAndHealHero;
-    }
-
-    public boolean getCanKillOurMinionAndHealHero() {
-        return canKillOurMinionAndHealHero;
-    }
-
-    public void setCanDoRangedAttack(boolean canDoRangedAttack) {
-        Information.canDoRangedAttack = canDoRangedAttack;
-    }
-
-    public boolean getCanDoRangedAttack() {
-        return canDoRangedAttack;
-    }
-
-    public void setCanDoHybridAttack(boolean canDoHybridAttack) {
-        Information.canDoHybridAttack = canDoHybridAttack;
-    }
-
-    public boolean getCanDoHybridAttack() {
-        return canDoHybridAttack;
-    }
-
-    public void setCanDoMeleeAttack(boolean canDoMeleeAttack) {
-        Information.canDoMeleeAttack = canDoMeleeAttack;
-    }
-
-    public boolean getCanDoMeleeAttack() {
-        return canDoMeleeAttack;
-    }
-
-    public void setIsGhooleBozorg(boolean isGhooleBozorg) {
-        Information.isGhooleBozorg = isGhooleBozorg;
-    }
-
-    public boolean getIsGhooleBozorg() {
-        return isGhooleBozorg;
-    }
-
-    public void setIsShireDarrande(boolean isShireDarrande) {
-        Information.isShireDarrande = isShireDarrande;
-    }
-
-    public boolean getIsShireDarrande() {
-        return isShireDarrande;
-    }
-
-    public void setIsZahhak(boolean isZahhak) {
-        Information.isZahhak = isZahhak;
-    }
-
-    public boolean getIsZahhak() {
-        return isZahhak;
-    }
-
-    public void setCanIncreaseRangeOfAttack(boolean canIncreaseRangeOfAttack) {
-        Information.canIncreaseRangeOfAttack = canIncreaseRangeOfAttack;
-    }
-
-    public boolean getCanIncreaseRangeOfAttack() {
-        return canIncreaseRangeOfAttack;
-    }
-
-    public void setCanDoubleHp(boolean canDoubleHp) {
-        Information.canDoubleHp = canDoubleHp;
-    }
-
-    public boolean getCanDoubleHp() {
-        return canDoubleHp;
-    }
-
-    public void setCanIncreaseMana(boolean canIncreaseMana) {
-        Information.canIncreaseMana = canIncreaseMana;
-    }
-
-    public boolean getCanIncreaseMana() {
-        return canIncreaseMana;
+    public void setDecreaseHpOfPoisonBuffOfCell(int decreaseHpOfPoisonBuffOfCell) {
+        this.decreaseHpOfPoisonBuffOfCell = decreaseHpOfPoisonBuffOfCell;
     }
 
     public int getDecreaseHpOfPoisonBuffOfCell() {
         return decreaseHpOfPoisonBuffOfCell;
     }
 
-    public void setDecreaseHpOfPoisonBuffOfCell(int decreaseHpOfPoisonBuffOfCell) {
-        Information.decreaseHpOfPoisonBuffOfCell = decreaseHpOfPoisonBuffOfCell;
+    public void setCanKillMinionOfEnemy(boolean canKillMinionOfEnemy) {
+        this.canKillMinionOfEnemy = canKillMinionOfEnemy;
     }
 
-    public int getGhooleBozorgDamage() {
-        return ghooleBozorgDamage;
+    public boolean isCanKillMinionOfEnemy() {
+        return canKillMinionOfEnemy;
+    }
+
+    public void setCanKillOurMinionAndHealHero(boolean canKillOurMinionAndHealHero) {
+        this.canKillOurMinionAndHealHero = canKillOurMinionAndHealHero;
+    }
+
+    public boolean isCanKillOurMinionAndHealHero() {
+        return canKillOurMinionAndHealHero;
+    }
+
+    public void setCanDoRangedAttack(boolean canDoRangedAttack) {
+        this.canDoRangedAttack = canDoRangedAttack;
+    }
+
+    public boolean isCanDoRangedAttack() {
+        return canDoRangedAttack;
+    }
+
+    public void setCanDoHybridAttack(boolean canDoHybridAttack) {
+        this.canDoHybridAttack = canDoHybridAttack;
+    }
+
+    public boolean isCanDoHybridAttack() {
+        return canDoHybridAttack;
+    }
+
+    public void setCanDoMeleeAttack(boolean canDoMeleeAttack) {
+        this.canDoMeleeAttack = canDoMeleeAttack;
+    }
+
+    public boolean isCanDoMeleeAttack() {
+        return canDoMeleeAttack;
+    }
+
+    public void setGhooleBozorg(boolean ghooleBozorg) {
+        isGhooleBozorg = ghooleBozorg;
+    }
+
+    public boolean isGhooleBozorg() {
+        return isGhooleBozorg;
     }
 
     public void setGhooleBozorgDamage(int ghooleBozorgDamage) {
         this.ghooleBozorgDamage = ghooleBozorgDamage;
     }
 
-    //methods
+    public int getGhooleBozorgDamage() {
+        return ghooleBozorgDamage;
+    }
 
-    public void readInformation() {
-        //TODO
-        return;
+    public void setShireDarrande(boolean shireDarrande) {
+        isShireDarrande = shireDarrande;
+    }
+
+    public boolean isShireDarrande() {
+        return isShireDarrande;
+    }
+
+    public void setZahhak(boolean zahhak) {
+        isZahhak = zahhak;
+    }
+
+    public boolean isZahhak() {
+        return isZahhak;
+    }
+
+    public void setCanIncreaseRangeOfAttack(boolean canIncreaseRangeOfAttack) {
+        this.canIncreaseRangeOfAttack = canIncreaseRangeOfAttack;
+    }
+
+    public boolean isCanIncreaseRangeOfAttack() {
+        return canIncreaseRangeOfAttack;
+    }
+
+    public void setCanDoubleHp(boolean canDoubleHp) {
+        this.canDoubleHp = canDoubleHp;
+    }
+
+    public boolean isCanDoubleHp() {
+        return canDoubleHp;
+    }
+
+    public void setCanIncreaseMana(boolean canIncreaseMana) {
+        this.canIncreaseMana = canIncreaseMana;
+    }
+
+    public boolean isCanIncreaseMana() {
+        return canIncreaseMana;
     }
 }
