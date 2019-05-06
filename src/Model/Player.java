@@ -11,7 +11,6 @@ import Model.Enviroment.Map1;
 
 public class Player {
     private ArrayList<LivingCard> aliveCards = new ArrayList<>();
-  // vase chi mikhaim ino ?
     private ArrayList<CollectableItem> collectableItems = new ArrayList<>();
     private CollectionItem selectedCollectionItem;
     private Cell heroPosition;
@@ -22,6 +21,9 @@ public class Player {
     private int flagTurns;
     private GraveYard graveYard = new GraveYard();
     private Account account;
+    private boolean haveGhosleTamid;
+    private int timeOfGhosleTamid;
+    private boolean canAddPoisonWhileAttacking, canAddStunWhileAttacking;
 
     public ArrayList<LivingCard> getAliveCards(){
         return this.aliveCards;
@@ -139,5 +141,37 @@ public class Player {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public boolean isHaveGhosleTamid() {
+        return haveGhosleTamid;
+    }
+
+    public void setHaveGhosleTamid(boolean haveGhosleTamid) {
+        this.haveGhosleTamid = haveGhosleTamid;
+    }
+
+    public int getTimeOfGhosleTamid() {
+        return timeOfGhosleTamid;
+    }
+
+    public void setTimeOfGhosleTamid(int timeOfGhosleTamid) {
+        this.timeOfGhosleTamid = timeOfGhosleTamid;
+    }
+
+    public boolean isCanAddPoisonWhileAttacking() {
+        return canAddPoisonWhileAttacking;
+    }
+
+    public void setCanAddPoisonWhileAttacking(boolean canAddPoisonWhileAttacking) {
+        this.canAddPoisonWhileAttacking = canAddPoisonWhileAttacking;
+    }
+
+    public boolean isCanAddStunWhileAttacking() {
+        return canAddStunWhileAttacking;
+    }
+
+    public void setCanAddStunWhileAttacking(boolean canAddStunWhileAttacking) {
+        this.canAddStunWhileAttacking = canAddStunWhileAttacking;
     }
 }

@@ -1,9 +1,12 @@
 package Model;
 
+import Controller.Battle;
+
 public class Mana {
 
     private int currentMana;
     private int maximumMana;
+    private int changeManaByItem = 0;
 
     public Boolean decreaseMana (int spendMana) {
         if (currentMana < spendMana) {
@@ -14,9 +17,13 @@ public class Mana {
         }
     }
 
-    public void configueMana (){
+    public void configueMana (Battle battle){
         if (maximumMana < 9) {
             maximumMana++;
+        }
+        if(battle.getNumberOfRounds() >= 3){
+            maximumMana += changeManaByItem;
+            changeManaByItem = 0;
         }
         currentMana = maximumMana;
     }
@@ -35,5 +42,13 @@ public class Mana {
 
     public void setMaximumMana(int maximumMana) {
         this.maximumMana = maximumMana;
+    }
+
+    public void increaseChangeManaByItem(){
+        this.changeManaByItem ++;
+    }
+
+    public void increaseMaximumMana(int amountOfIncreaseMana) {
+        this.maximumMana += amountOfIncreaseMana;
     }
 }

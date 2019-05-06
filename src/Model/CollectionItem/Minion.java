@@ -1,13 +1,17 @@
 package Model.CollectionItem;
 
 import Controller.AttackArea;
+import Controller.Battle;
 import Controller.Impact;
 import Model.Collection;
 import Model.Enviroment.Cell;
+import Model.Enviroment.Map1;
 
 import java.util.ArrayList;
 
 public class Minion extends LivingCard {
+
+    private boolean nefrineMarg;
 
     public void readInformation(){
         //TODO
@@ -82,5 +86,17 @@ public class Minion extends LivingCard {
                 this.getDecreaseHPByAttack() + " - HP : " + this.getHP() + " - MP : " + this.getMP() + " - Special power : "
                 + this.getDescription();
         return info;
+    }
+
+    public boolean isNefrineMarg() {
+        return nefrineMarg;
+    }
+
+    public void setNefrineMarg(boolean nefrineMarg) {
+        this.nefrineMarg = nefrineMarg;
+    }
+
+    public void nefrineMarg(Map1 map){
+        //TODO
     }
 }

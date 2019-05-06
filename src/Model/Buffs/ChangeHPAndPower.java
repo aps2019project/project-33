@@ -7,8 +7,10 @@ public class ChangeHPAndPower extends Buff {
     private int changeHP;
     private int changePower;
 
-    public ChangeHPAndPower(int remainTime, boolean isPermanent, boolean isPassive) {
+    public ChangeHPAndPower(int remainTime, boolean isPermanent, boolean isPassive, int changeHP, int changePower) {
         super(remainTime, isPermanent, isPassive);
+        this.changeHP = changeHP;
+        this.changePower = changePower;
     }
 
     @Override

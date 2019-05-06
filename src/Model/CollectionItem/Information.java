@@ -124,6 +124,9 @@ public class Information {
 
     //Attack section
 
+    private boolean canIncreaseAP;
+    private int amountOfIncreaseAP;
+
     private boolean isImpactAllArea;
 
     private boolean isImpactArea;
@@ -136,6 +139,8 @@ public class Information {
     private boolean canHolyBuffAdd;
     private int timeOfHolyBuff;
     private boolean isHolyBuffPermanent;
+    private int numberOfHolyBuff;
+    private boolean isHolyBuffPassive;
 
     private boolean canDisarmBuffAdd;
     private int timeOfDisarmBuff;
@@ -183,6 +188,27 @@ public class Information {
     private boolean canIncreaseRangeOfAttack;
     private boolean canDoubleHp;
     private boolean canIncreaseMana;
+    private int amountOfIncreaseMana;
+    private boolean canIncreaseManaAfter3Rounds;
+    private boolean canAddNefrineMarg;
+
+    private boolean canKillHeroOfEnemyAfterRounds;
+    private int numberOfRoundsNeededForKillHeroOfEnemy;
+
+    private boolean addGhosleTamid;
+    private int timeOfGhosleTamid;
+    private boolean terrorHood;
+    private boolean poisonousDagger;
+    private boolean shockHammer;
+
+
+    public int getNumberOfHolyBuff() {
+        return numberOfHolyBuff;
+    }
+
+    public void setNumberOfHolyBuff(int numberOfHolyBuff) {
+        this.numberOfHolyBuff = numberOfHolyBuff;
+    }
 
     public void setCanHolyBuffAdd(boolean canHolyBuffAdd) {
         this.canHolyBuffAdd = canHolyBuffAdd;
@@ -534,5 +560,130 @@ public class Information {
 
     public void setImpactAllArea(boolean impactAllArea) {
         isImpactAllArea = impactAllArea;
+    }
+
+    //ina bishtar baraye item hast
+
+    private boolean canIncreaseHPOfLivingCard;
+    private int amountOfIncreaseHPOfLivingCard;
+
+    public boolean isCanIncreaseHPOfLivingCard() {
+        return canIncreaseHPOfLivingCard;
+    }
+
+    public void setCanIncreaseHPOfLivingCard(boolean canIncreaseHPOfLivingCard) {
+        this.canIncreaseHPOfLivingCard = canIncreaseHPOfLivingCard;
+    }
+
+    public int getAmountOfIncreaseHPOfLivingCard() {
+        return amountOfIncreaseHPOfLivingCard;
+    }
+
+    public void setAmountOfIncreaseHPOfLivingCard(int amountOfIncreaseHPOfLivingCard) {
+        this.amountOfIncreaseHPOfLivingCard = amountOfIncreaseHPOfLivingCard;
+    }
+
+    public boolean isHolyBuffPassive() {
+        return isHolyBuffPassive;
+    }
+
+    public void setHolyBuffPassive(boolean holyBuffPassive) {
+        isHolyBuffPassive = holyBuffPassive;
+    }
+
+    public boolean isCanIncreaseAP() {
+        return canIncreaseAP;
+    }
+
+    public void setCanIncreaseAP(boolean canIncreaseAP) {
+        this.canIncreaseAP = canIncreaseAP;
+    }
+
+    public int getAmountOfIncreaseAP() {
+        return amountOfIncreaseAP;
+    }
+
+    public void setAmountOfIncreaseAP(int amountOfIncreaseAP) {
+        this.amountOfIncreaseAP = amountOfIncreaseAP;
+    }
+
+    public boolean isCanIncreaseManaAfter3Rounds() {
+        return canIncreaseManaAfter3Rounds;
+    }
+
+    public void setCanIncreaseManaAfter3Rounds(boolean canIncreaseManaAfter3Rounds) {
+        this.canIncreaseManaAfter3Rounds = canIncreaseManaAfter3Rounds;
+    }
+
+    public int getAmountOfIncreaseMana() {
+        return amountOfIncreaseMana;
+    }
+
+    public void setAmountOfIncreaseMana(int amountOfIncreaseMana) {
+        this.amountOfIncreaseMana = amountOfIncreaseMana;
+    }
+
+    public boolean isCanAddNefrineMarg() {
+        return canAddNefrineMarg;
+    }
+
+    public void setCanAddNefrineMarg(boolean canAddNefrineMarg) {
+        this.canAddNefrineMarg = canAddNefrineMarg;
+    }
+
+    public boolean isCanKillHeroOfEnemyAfterRounds() {
+        return canKillHeroOfEnemyAfterRounds;
+    }
+
+    public void setCanKillHeroOfEnemyAfterRounds(boolean canKillHeroOfEnemyAfterRounds) {
+        this.canKillHeroOfEnemyAfterRounds = canKillHeroOfEnemyAfterRounds;
+    }
+
+    public int getNumberOfRoundsNeededForKillHeroOfEnemy() {
+        return numberOfRoundsNeededForKillHeroOfEnemy;
+    }
+
+    public void setNumberOfRoundsNeededForKillHeroOfEnemy(int numberOfRoundsNeededForKillHeroOfEnemy) {
+        this.numberOfRoundsNeededForKillHeroOfEnemy = numberOfRoundsNeededForKillHeroOfEnemy;
+    }
+
+    public boolean isAddGhosleTamid() {
+        return addGhosleTamid;
+    }
+
+    public void setAddGhosleTamid(boolean addGhosleTamid) {
+        this.addGhosleTamid = addGhosleTamid;
+    }
+
+    public int getTimeOfGhosleTamid() {
+        return timeOfGhosleTamid;
+    }
+
+    public void setTimeOfGhosleTamid(int timeOfGhosleTamid) {
+        this.timeOfGhosleTamid = timeOfGhosleTamid;
+    }
+
+    public boolean isTerrorHood() {
+        return terrorHood;
+    }
+
+    public void setTerrorHood(boolean terrorHood) {
+        this.terrorHood = terrorHood;
+    }
+
+    public boolean isPoisonousDagger() {
+        return poisonousDagger;
+    }
+
+    public void setPoisonousDagger(boolean poisonousDagger) {
+        this.poisonousDagger = poisonousDagger;
+    }
+
+    public boolean isShockHammer() {
+        return shockHammer;
+    }
+
+    public void setShockHammer(boolean shockHammer) {
+        this.shockHammer = shockHammer;
     }
 }

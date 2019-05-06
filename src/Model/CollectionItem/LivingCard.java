@@ -103,6 +103,10 @@ abstract public class LivingCard extends Card {
 
     public void kill(){}
 
+    public void increaseRangeOfAttack(int amount){
+        this.rangeOfAttack += amount;
+    }
+
     // Here is Setters && Getters
 
     public boolean getCanMoveGreaterTwoCell(){
@@ -269,5 +273,13 @@ abstract public class LivingCard extends Card {
 
     public void setAlive(boolean alive) {
         isAlive = alive;
+    }
+
+    public void increaseHP(int amount) {
+        this.HP += amount;
+    }
+
+    public void increaseAP(int amountOfIncreaseAP){
+        this.decreaseHPByAttack += amountOfIncreaseAP;
     }
 }
