@@ -1,7 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
-import Controller.*;
+
 import Model.CollectionItem.CollectableItem;
 import Model.CollectionItem.CollectionItem;
 import Model.CollectionItem.Hero;
@@ -16,7 +16,7 @@ public class Player {
     private CollectionItem selectedCollectionItem;
     private Cell heroPosition;
     private Mana mana = new Mana();
-    private Hand hand = new Hand();
+    private Hand1 hand = new Hand1();
     private Hero hero;
     private int numberOfFlags;
     private int flagTurns;
@@ -53,11 +53,11 @@ public class Player {
         this.selectedCollectionItem = selectedCollectionItem;
     }
 
-    public Hand getHand() {
+    public Hand1 getHand() {
         return hand;
     }
 
-    public void setHand(Hand hand) {
+    public void setHand(Hand1 hand) {
         this.hand = hand;
     }
 
