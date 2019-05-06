@@ -2,6 +2,7 @@ package Controller.Menus;
 
 import Controller.*;
 import Model.*;
+import Model.CollectionItem.*;
 import java.io.FileNotFoundException;
 
 public class BattleMenu extends Menu {
@@ -15,6 +16,7 @@ public class BattleMenu extends Menu {
             "3. fight with Arash"};
     private int[] prizeOfLevels = {500, 1000, 1500};
     private int numberOfDecksInCustomGame = 3;
+    private int prizeOfCustomGame = 1000;
 
     private void readInputs() {
         inputLine = Main.scanner.nextLine();
@@ -30,13 +32,9 @@ public class BattleMenu extends Menu {
             return;
         }
         battle.setPlayerOn(new Player(Main.application.getLoggedInAccount()));
-
         chooseType();
-
         chooseSecondPlayer();
-
         chooseMode();
-
         battle.preprocess();
         battle.runGame();
     }
@@ -44,12 +42,10 @@ public class BattleMenu extends Menu {
     private void chooseType() {
         for (int i = 0; i < types.length; i++)
             System.out.println(i + ". " + types[i]);
-
         readInputs();
-
         for (int i = 0; i < types.length; i++) {
             if (inputLine.equals(types[i].toLowerCase())) {
-                battle.setMode(types[0]);
+                battle.setMode(types[i]);
                 return;
             }
         }
@@ -62,9 +58,7 @@ public class BattleMenu extends Menu {
             battle.setPlayerOff(new AI());
             return;
         }
-
         showAllAccount();
-
         while (true) {
             System.out.println("Enter username of second player :");
             readInputs();
@@ -108,48 +102,85 @@ public class BattleMenu extends Menu {
     }
 
     private void customGame() throws FileNotFoundException {
+        battle.setPrize(prizeOfCustomGame);
         System.out.println("Modes :");
         for(int i = 0; i < modes.length; i ++)
             System.out.println(modes[i]);
+
         if(battle.getType().equals(types[0])){
+            System.out.println("Decks");
             for(int i = 0; i < numberOfDecksInCustomGame; i ++){
                 //TODO
                 Deck deck = (Deck) Application.readJSON(Deck.class, "");
                 System.out.print(i+1 + ". ");
-                deck.showDeck(true;
-            }
-            int numberOfFlags = 0;
-            if(mode.equals(modes[2])){
-                if(input.length == 5){
-                    numberOfFlags = Integer.parseInt(input[4])
-                }
-                else {
-                    System.out.println("Enter valid command");
-                    customGame();
-                    return;
-                }
+                deck.showDeck(true);
             }
             readInputs();
             if(inputLine.matches("start game [^s]+ [^s]+( [\\d]+)*")){
                 String deckName = input[2], mode = input[3];
+                int numberOfFlags = 0;
+                if(mode.equals(modes[2])){
+                    if(input.length == 5){
+                        numberOfFlags = Integer.parseInt(input[4])
+                    }
+                    else {
+                        System.out.println("Enter valid command");
+                        customGame();
+                        return;
+                    }
+                }
+                boolean isValidDeck = false;
                 for(int i = 0; i < numberOfDecksInCustomGame; i ++){
                     //TODO
                     Deck deck = (Deck) Application.readJSON(Deck.class, "");
                     if(deck.getName().equals(deckName)){
                         ((AI)battle.getPlayerOff()).selectMainDeck(deck);
+                        isValidDeck = true;
                     }
                 }
-                setMode();
+                if(!isValidDeck){
+                    System.out.println("Choose valid deck");
+                    customGame();
+                    return;
+                }
+                if(setMode(mode, numberOfFlags))
+                    return;
             }
         }
         else{
             readInputs();
             if(inputLine.matches("start multiplayer game [^s]+( [\\d]+)*")){
                 String mode = input[3];
+                int numberOfFlags = 0;
+                if(mode.equals(mode[2])){
+                    if(input.length == 5){
+                        numberOfFlags = Integer.parseInt(input[4]);
+                    }
+                    else{
+                        System.out.println("Enter Valid Command");
+                        return;
+                    }
+
+                }
+                if(setMode(mode, numberOfFlags))
+                    return;
             }
         }
+        System.out.println("please enter valid command ! something went wrong");
+        customGame();
     }
 
+    private boolean setMode(String mode, int numberOfFlags){
+        for(int i = 0; i < modes.length; i ++){
+            if(mode.equals(modes[i])){
+                battle.setMode(mode);
+                if(i == 2)
+                    battle.setNumberOfFlags(numberOfFlags);
+                return true;
+            }
+        }
+        return false;
+    }
 
     private boolean checkDeck(Account account) {
         if (account.getCollection().getMainDeck() == null) return false;
