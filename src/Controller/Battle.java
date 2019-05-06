@@ -287,6 +287,8 @@ public class Battle {
             if(this.mainFlag.getFlagOwner() != null)
                 mainFlag.setNumberOfGotRounds(mainFlag.getNumberOfGotRounds() + 1);
         }
+        playerOn.getHero().setCoolDown(Math.max(0, playerOn.getHero().getCoolDown() - 1));
+        playerOff.getHero().setCoolDown(Math.max(0, playerOff.getHero().getCoolDown() - 1));
     }
 
     public void showCollectables(){
@@ -305,7 +307,17 @@ public class Battle {
     }
 
     public void useSpecialPower(int x, int y){
-        Impact.specialPower(playerOn.getHero(), x, y);
+        Hero hero = playerOn.getHero();
+        if(playerOn.getMana().getCurrentMana() < hero.getMP()){
+            System.out.println("need more mana");
+            return;
+        }
+        if(hero.getCoolDown() > 0){
+            System.out.println("cool down time");
+            return;
+        }
+        hero.setCoolDown(hero.getMaxCoolDown());
+        Impact.impactSpellOfHero(playerOn.getHero(), x, y);
     }
 
     public void useItem(int x, int y){
