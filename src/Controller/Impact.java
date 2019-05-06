@@ -363,6 +363,18 @@ public class Impact {
                 }
             }
         }
+        if(spell.getInformation().isCanDamageToEnemy()){
+            for(Cell impactCell : impactCells){
+                LivingCard cellLivingCard = impactCell.getLivingCard();
+                for(LivingCard aliveCard : battle.getPlayerOff().getAliveCards()){
+                    if(aliveCard.getID().equals(cellLivingCard.getID())){
+                        aliveCard.handleAttack(spell.getInformation().getDamageToEnemy());
+                        break;
+                    }
+                }
+            }
+        }
+
     }
 
     public static void main(Battle battle, Card ourCard) {
