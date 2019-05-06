@@ -7,11 +7,11 @@ import Model.Enviroment.Cell;
 import java.util.ArrayList;
 
 public class Hero extends LivingCard {
-
+/*
     public void impactSpell(String opponentID){
         Impact.impactSpellOfHero(opponentID);
     }
-
+*/
     @Override
     public void showCardInBattle(){
         System.out.println("remaining HP : " + this.getRemainingHP() + " attack power : " + this.getDecreaseHPByAttack()

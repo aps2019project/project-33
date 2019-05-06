@@ -243,7 +243,7 @@ public class Battle {
             System.out.println("Invalid card id");
             return;
         }
-        Impact.attack(this.selectedCard, opponentLivingCard);
+        Impact.attack(this, this.selectedCard, opponentLivingCard);
     }
 
     public void comboAttackToOpponentCard(String[] input){
@@ -275,7 +275,7 @@ public class Battle {
     //TODO
 
     public void showHand(){
-        playerOn.getHand().show();
+        playerOn.getHand().show(playerOn.getAccount().getCollection().getMainDeck());
     }
 
 
@@ -316,7 +316,7 @@ public class Battle {
             System.out.println("cool down time");
             return;
         }
-        if(!sInMap(x, y)){
+        if(!isInMap(x, y)){
             System.out.println("Invalid coordination");
             return;
         }

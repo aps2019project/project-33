@@ -33,11 +33,13 @@ abstract public class LivingCard extends Card {
     public void deleteBuff(Buff buff){
         this.effects.remove(buff);
     }
-
+/*
     public ArrayList<Cell> findImpactCellsOfAttack(){
         return AttackArea.getImpactCellsOfAttack(this);
     }
+*/
 
+/*
     public void attack(String opponentID){
         if(!canAttack){
             System.out.println("This living card can't attack this round !");
@@ -61,11 +63,16 @@ abstract public class LivingCard extends Card {
 
         this.canAttack = false;
     }
+*/
 
+/*
     public ArrayList<Cell> findImpactCellsOfCounterAttack() {
         return AttackArea.getImpactCellsOfCounterAttack(this);
     }
+*/
 
+
+/*
     public void counterAttack(String opponentID){
         if(!canCounterAttack){
             System.out.println("This living card can't counter attack");
@@ -87,7 +94,7 @@ abstract public class LivingCard extends Card {
         }
         Impact.counterAttack(this, opponentCard);
     }
-
+*/
     public Cell getCell(){
         return this.getBattle().getMap().getCellByCoordination(this.getPositionRow(), this.getPositionColumn());
     }
