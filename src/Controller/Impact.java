@@ -148,7 +148,7 @@ public class Impact {
     public static void attackForce(LivingCard ourCard, LivingCard enemyCard){}
 
     public static void attack(LivingCard attacker, LivingCard defender){}
-
+// mahdude hamle o ina check she
     public static void comboAttack(LivingCard opponentLivingCard, ArrayList<LivingCard> attackers){
 
     }
