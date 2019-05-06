@@ -126,9 +126,6 @@ public class Information {
 
     private boolean canIncreaseAP;
     private int amountOfIncreaseAP;
-    private int remainTurn;
-
-    private boolean increasePermanent;
 
     private boolean isImpactAllArea;
 
@@ -204,23 +201,13 @@ public class Information {
     private boolean poisonousDagger;
     private boolean shockHammer;
 
-    public int getRemainTurn() {
-        return remainTurn;
-    }
+    private boolean isMelee;
+    private boolean isRange;
+    private boolean isHybrid;
 
-    public void setRemainTurn(int remainTurn) {
-        this.remainTurn = remainTurn;
-    }
-
-
-
-    public boolean isIncreasePermanent() {
-        return increasePermanent;
-    }
-
-    public void setIncreasePermanent(boolean increasePermanent) {
-        this.increasePermanent = increasePermanent;
-    }
+    private boolean forMelee;
+    private boolean forRange;
+    private boolean forHybrid;
 
     public int getNumberOfHolyBuff() {
         return numberOfHolyBuff;
@@ -705,5 +692,53 @@ public class Information {
 
     public void setShockHammer(boolean shockHammer) {
         this.shockHammer = shockHammer;
+    }
+
+    public boolean isForMelee() {
+        return forMelee;
+    }
+
+    public void setForMelee(boolean forMelee) {
+        this.forMelee = forMelee;
+    }
+
+    public boolean isForRange() {
+        return forRange;
+    }
+
+    public void setForRange(boolean forRange) {
+        this.forRange = forRange;
+    }
+
+    public boolean isForHybrid() {
+        return forHybrid;
+    }
+
+    public void setForHybrid(boolean forHybrid) {
+        this.forHybrid = forHybrid;
+    }
+
+    public boolean isMelee() {
+        return isMelee;
+    }
+
+    public void setMelee(boolean melee) {
+        isMelee = melee;
+    }
+
+    public boolean isRange() {
+        return isRange;
+    }
+
+    public void setRange(boolean range) {
+        isRange = range;
+    }
+
+    public boolean isHybrid() {
+        return isHybrid;
+    }
+
+    public void setHybrid(boolean hybrid) {
+        isHybrid = hybrid;
     }
 }
