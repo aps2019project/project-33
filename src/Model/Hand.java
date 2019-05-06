@@ -28,6 +28,7 @@ public class Hand {
                 System.out.println(collectionItem.getInfo());
             }
     }
+
     //nazadam
     public void showNextCard(Deck mainDeck){
         if(numberOfUsedDeckCollectionItems >= mainDeck.getCards().size()){
