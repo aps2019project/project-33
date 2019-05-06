@@ -12,8 +12,10 @@ public class Information {
     private boolean cellImpact;
     private boolean isSquareOfCellsImpact;
     private int lengthOfSquareOfCellsImpact;
-    private boolean isImpactAColumn;
+    private boolean isImpactColumn;
+    private boolean isImpactRow;
     private boolean isKingsGuard;
+    private boolean isImpactNeighbors;
 
     public boolean isEnemyImpact() {
         return isEnemyImpact;
@@ -87,12 +89,28 @@ public class Information {
         this.lengthOfSquareOfCellsImpact = lengthOfSquareOfCellsImpact;
     }
 
-    public boolean isImpactAColumn() {
-        return isImpactAColumn;
+    public boolean isImpactColumn() {
+        return isImpactColumn;
     }
 
-    public void setImpactAColumn(boolean impactAColumn) {
-        isImpactAColumn = impactAColumn;
+    public void setImpactColumn(boolean impactColumn) {
+        isImpactColumn = impactColumn;
+    }
+
+    public boolean isImpactRow() {
+        return isImpactRow;
+    }
+
+    public void setImpactRow(boolean impactRow) {
+        isImpactRow = impactRow;
+    }
+
+    public boolean isImpactNeighbors() {
+        return isImpactNeighbors;
+    }
+
+    public void setImpactNeighbors(boolean impactNeighbors) {
+        isImpactNeighbors = impactNeighbors;
     }
 
     //Attack section
@@ -463,7 +481,7 @@ public class Information {
     //methods
 
     public void readInformation(){
+        //TODO
         return;
     }
-
 }
