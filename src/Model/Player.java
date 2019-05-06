@@ -7,7 +7,7 @@ import Model.CollectionItem.CollectionItem;
 import Model.CollectionItem.Hero;
 import Model.CollectionItem.LivingCard;
 import Model.Enviroment.Cell;
-import Model.Enviroment.Map;
+import Model.Enviroment.Map1;
 
 public class Player {
     private ArrayList<LivingCard> aliveCards = new ArrayList<>();
@@ -109,7 +109,7 @@ public class Player {
         collectableItems.add(collectableItem);
     }
 
-    public void insertCard(Map map, String cardName, int x, int y) {
+    public void insertCard(Map1 map, String cardName, int x, int y) {
         map.insertCard(cardName, x, y);
     }
 

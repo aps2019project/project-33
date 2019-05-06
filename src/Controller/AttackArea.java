@@ -2,7 +2,7 @@ package Controller;
 
 import Model.CollectionItem.*;
 import Model.Enviroment.Cell;
-import Model.Enviroment.Map;
+import Model.Enviroment.Map1;
 import Model.Player;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class AttackArea {
 
     private static ArrayList<Cell> getCellsInArea(Cell cell, int maxDistance, Battle battle) {
         ArrayList<Cell> cells = new ArrayList<>();
-        Map map = battle.getMap();
+        Map1 map = battle.getMap();
         for (int i = 0; i < map.getHeight(); i++)
             for (int j = 0; j < map.getWidth(); j++) {
                 if (AttackArea.distance(cell.getX(), cell.getY(), i, j) > maxDistance) continue;
@@ -24,7 +24,7 @@ public class AttackArea {
 
     private static ArrayList<Cell> getNeighbors(Cell cell, Battle battle) {
         ArrayList<Cell> neighbors = new ArrayList<>();
-        Map map = battle.getMap();
+        Map1 map = battle.getMap();
         for (int i = 0; i < map.getHeight(); i++)
             for (int j = 0; j < map.getWidth(); j++) {
                 if (!isNeighbor(cell.getX(), cell.getY(), i, j))
@@ -38,7 +38,7 @@ public class AttackArea {
     // in ja baraye spell e o hamaro satisfy mikone
     private static ArrayList<Cell> getCellsOfColumn(Cell cell, Battle battle) {
         ArrayList<Cell> cellsOfColumn = new ArrayList<>();
-        Map map = battle.getMap();
+        Map1 map = battle.getMap();
         for (int i = 0; i < map.getHeight(); i++)
             for (int j = 0; j < map.getWidth(); j++) {
                 Cell cell1 = map.getCellByCoordination(i, j);
@@ -50,7 +50,7 @@ public class AttackArea {
 
     private static ArrayList<Cell> getCellsOfRow(Cell cell, Battle battle) {
         ArrayList<Cell> cellsOfRow = new ArrayList<>();
-        Map map = battle.getMap();
+        Map1 map = battle.getMap();
         for (int i = 0; i < map.getHeight(); i++)
             for (int j = 0; j < map.getWidth(); j++) {
                 Cell cell1 = map.getCellByCoordination(i, j);

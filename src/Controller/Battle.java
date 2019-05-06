@@ -7,13 +7,13 @@ import Model.CollectionItem.Flag;
 import Model.CollectionItem.LivingCard;
 import Model.CollectionItem.Minion;
 import Model.Enviroment.Cell;
-import Model.Enviroment.Map;
+import Model.Enviroment.Map1;
 
 import java.util.ArrayList;
 
 public class Battle {
     private Player playerOn, playerOff;
-    private Map map = new Map();
+    private Map1 map = new Map1();
     private boolean gameIsRunning;
     private int numberOfRounds, prize;
     private String type, mode;
@@ -487,11 +487,11 @@ public class Battle {
         this.playerOff = playerOff;
     }
 
-    public Map getMap() {
+    public Map1 getMap() {
         return map;
     }
 
-    public void setMap(Map map) {
+    public void setMap(Map1 map) {
         this.map = map;
     }
 
