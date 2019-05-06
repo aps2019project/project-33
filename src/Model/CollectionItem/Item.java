@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public  class Item extends CollectionItem {
 
 
+/*
     public static Item createItem(String playerName, String itemName){
         Item item = loadItemFromJsonFile(itemName);
         int numberOfThisItemType = 0;
@@ -21,6 +22,7 @@ public  class Item extends CollectionItem {
         CollectionItem.addItemToAllItems(item);
         return item;
     }
+*/
 
     @Override
     public void doImpact(String livingCardID) {
