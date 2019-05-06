@@ -12,8 +12,7 @@ import Model.Enviroment.Map;
 public class Player {
     private ArrayList<LivingCard> aliveCards = new ArrayList<>();
   // vase chi mikhaim ino ?
-    private ArrayList<CollectionItem> usedCards = new ArrayList<CollectionItem>();
-    private ArrayList<CollectableItem> collectableItems = new ArrayList<CollectableItem>();
+    private ArrayList<CollectableItem> collectableItems = new ArrayList<>();
     private CollectionItem selectedCollectionItem;
     private Cell heroPosition;
     private Mana mana = new Mana();
@@ -99,14 +98,6 @@ public class Player {
 
     public void setMana(Mana mana) {
         this.mana = mana;
-    }
-
-    public ArrayList<CollectionItem> getUsedCards() {
-        return usedCards;
-    }
-
-    public void addNewUsedCards(CollectionItem collectionItem) {
-        usedCards.add(collectionItem);
     }
 
     public ArrayList<CollectableItem> getCollectableItems() {

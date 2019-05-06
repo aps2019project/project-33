@@ -96,7 +96,7 @@ public class AttackArea {
 
     private static ArrayList<Cell> addCellOfLivingCard(Player player, LivingCard livingCard){
         ArrayList<Cell> cellOfHero = new ArrayList<>();
-        for(CollectionItem collectionItem : player.getUsedCards()){
+        for(CollectionItem collectionItem : player.getAliveCards()){
             if(collectionItem.getClass().equals(livingCard.getClass())){
                 LivingCard livingCard1 = (LivingCard) collectionItem;
                 if(livingCard1.isAlive())

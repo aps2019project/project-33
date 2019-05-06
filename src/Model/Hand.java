@@ -7,7 +7,8 @@ import Model.CollectionItem.Spell;
 import java.util.ArrayList;
 
 public class Hand {
-    private ArrayList<CollectionItem> handCards = new ArrayList<CollectionItem>();
+
+    private ArrayList<CollectionItem> handCards = new ArrayList<>();
     //havaset bashe to taghire in
     private int  numberOfUsedDeckCollectionItems = 0;
 
@@ -69,7 +70,8 @@ public class Hand {
         return handCards.get(index);
     }
 
-    public ArrayList<CollectionItem> getHand(){
+    public ArrayList<CollectionItem> getHandCards() {
         return handCards;
     }
+
 }

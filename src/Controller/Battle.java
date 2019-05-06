@@ -15,7 +15,7 @@ public class Battle {
     private Player playerOn, playerOff;
     private Map map = new Map();
     private boolean gameIsRunning;
-    private int numberOfRounds;
+    private int numberOfRounds, prize;
     private String type, mode;
     private LivingCard selectedCard;
     private Flag mainFlag;
@@ -126,12 +126,12 @@ public class Battle {
 
     public void insertCardInMap(String cardID, int x, int y){
         CollectionItem insertingCollectionItem = null;
-        for(CollectionItem collectionItem : playerOn.getHand().getCards()){
+        for(CollectionItem collectionItem : playerOn.getHand().getHandCards()){
             if(collectionItem.getID().equals(cardID))
                 insertingCollectionItem = collectionItem;
         }
         if(insertingCollectionItem == null){
-            System.out.println("Invalid card name");
+            System.out.println("Invalid card ID");
             return;
         }
         if(!isInMap(x, y)){
@@ -145,8 +145,8 @@ public class Battle {
                 return;
             }
             playerOn.getHand().removeCard(cardID);
-            insertingCollectionItem.setPositionColumn(y);
-            insertingCollectionItem.setPositionRow(x);
+            ((LivingCard) insertingCollectionItem).setPositionColumn(y);
+            ((LivingCard) insertingCollectionItem).setPositionRow(x);
             cell.insertCard(insertingCollectionItem.getID());
             playerOn.addAliveCard((LivingCard)insertingCollectionItem);
         }
@@ -265,7 +265,7 @@ public class Battle {
 
     //TODO
     public void showHand(){
-//        playerOn.getHand().show();
+        playerOn.getHand().show();
     }
 
 
@@ -430,5 +430,13 @@ public class Battle {
 
     public void setMode(String mode) {
         this.mode = mode;
+    }
+
+    public int getPrize() {
+        return prize;
+    }
+
+    public void setPrize(int prize) {
+        this.prize = prize;
     }
 }
