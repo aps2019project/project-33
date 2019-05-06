@@ -42,10 +42,10 @@ public class Minion extends LivingCard {
                 this.getPositionRow() + ", " + this.getPositionColumn() + "), power : " + this.getDecreaseHPByAttack());
     }
 
-    public ArrayList<Cell> findCellOfSpecialPower() {
+  //  public ArrayList<Cell> findCellOfSpecialPower() {
 
-        return  AttackArea.getCellsOfSpecialPower(this);
-    }
+//        return  AttackArea.getCellsOfSpecialPower(this);
+//    }
 
     public void doSpecialPower(String opponentID){
         if(getCoolDown() > 0){
