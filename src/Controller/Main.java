@@ -1,12 +1,14 @@
 package Controller;
 
 import Model.CollectionItem.Spell;
+import Model.CollectionItem.Hero;
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
 import jdk.jshell.spi.SPIResolutionException;
 
 import java.io.*;
 import java.util.Scanner;
+
 
 public class Main {
     public static Scanner scanner = new Scanner(System.in);
@@ -271,6 +273,61 @@ what is this shit
         spell.getInformation().setCanStunBuffAdd(true);
         spell.getInformation().setTimeOfStunBuff(2);
         application.writeJSON(spell, "Data/CollectionItem/Spell/Shock.json");
+    }
+
+    public static void DiveSefid() throws IOException{
+        Hero hero = new Hero("Dive sefid", 8000, 50, 4, "melee", 1, 2);
+        application.writeJSON(hero, "Data/CollectionItem/Hero/DiveSefid.json");
+    }
+
+    public static void Simorgh() throws IOException{
+        Hero hero = new Hero("simorgh", 9000, 50, 4, "melee", 3, 8);
+        application.writeJSON(hero, "Data/CollectionItem/Hero/Simorgh.json");
+    }
+
+    public static void Ezhdaha() throws IOException{
+        Hero hero = new Hero("Ezhdaha", 8000, 50, 4, "melee", 0, 1);
+        application.writeJSON(hero, "Data/CollectionItem/Hero/Ezhdaha.json");
+    }
+
+    public static void  Rakhsh() throws IOException{
+        Hero hero = new Hero("Rakhsh", 8000, 50, 4, "melee", 1, 2);
+        application.writeJSON(hero, "Data/CollectionItem/Hero/Rakhsh.json");
+    }
+
+    public static void Zahhak() throws IOException{
+        Hero hero = new Hero("Zahhak", 10000, 50, 4, "melee", 1, 3);
+        application.writeJSON(hero, "Data/CollectionItem/Hero/Zahhak.json");
+    }
+
+    public static void Kaveh() throws IOException{
+        Hero hero = new Hero("Kaveh", 8000, 50, 4, "melee", 1, 3);
+        application.writeJSON(hero, "Data/CollectionItem/Hero/Kaveh.json");
+    }
+
+    public static void Arash() throws IOException{
+        Hero hero = new Hero("Arash", 10000, 30, 2, "ranged", 2, 2);
+        hero.setRangeOfAttack(6);
+        application.writeJSON(hero, "Data/CollectionItem/Hero/Arash.json");
+    }
+
+    public static void Afsaneh() throws IOException{
+        Hero hero = new Hero("Afsaneh", 11000, 40, 3, "ranged", 1, 2);
+        hero.setRangeOfAttack(3);
+        application.writeJSON(hero, "Data/CollectionItem/Hero/Afsaneh.json");
+    }
+
+    public static void Esfandiar() throws IOException{
+        Hero hero = new Hero("Esfandiar", 12000, 35, 3, "hybrid", 0, 1);
+        hero.setRangeOfAttack(3);
+        application.writeJSON(hero, "Data/CollectionItem/Hero/Esfandiar.json");
+    }
+
+    public static void Rostam() throws IOException{
+        //chera mp o cooldown nadare?
+        Hero hero = new Hero("Rostam", 8000, 55, 7, "hybrid", 0, 0);
+        hero.setRangeOfAttack(4);
+        application.writeJSON(hero, "Data/CollectionItem/Hero/Rostam.json");
     }
 }
 
