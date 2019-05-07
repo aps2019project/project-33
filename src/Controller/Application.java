@@ -20,6 +20,7 @@ public class Application {
 
 
     public void runApplication() throws IOException {
+        loadData();
         AccountMenu accountMenu = new AccountMenu();
         accountMenu.inputCommandLine();
     }
@@ -29,6 +30,12 @@ public class Application {
         writeJSON(object, address);
         Object copyObject = readJSON(className, address);
         return copyObject;
+    }
+
+    public static void loadData(){
+        String address = "Data/Memory/Accounts";
+        int numberOfAddress = new File(address).listFiles().length;
+
     }
 
     public static Object readJSON(Class className, String address) throws FileNotFoundException {
