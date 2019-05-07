@@ -8,9 +8,43 @@ import java.util.ArrayList;
 
 public class Hero extends LivingCard {
 
+
     private int deadAfterRounds = 0;
     private boolean havePareSimorgh;
     private int minOfPareSimorgh;
+    private int coolDown, maxCoolDown;
+
+    public void setMaxCoolDown(int maxCoolDown){
+        this.maxCoolDown = maxCoolDown;
+    }
+
+    public int getMaxCoolDown(){
+        return this.maxCoolDown;
+    }
+
+    public int getCoolDown() {
+        return coolDown;
+    }
+
+    public void setCoolDown(int coolDown) {
+        this.coolDown = coolDown;
+    }
+
+    Hero(){
+
+    }
+
+    public Hero(String name, int price, int HP, int AP, String counterAttackType, int MP, int maxCoolDown){
+        this.setName(name);
+        this.setPrice(price);
+        this.setHP(HP);
+        this.setDecreaseHPByAttack(AP);
+        this.setCounterAttackType(counterAttackType);
+        this.setMP(MP);
+        this.setMaxCoolDown(maxCoolDown);
+        this.setCoolDown(maxCoolDown);
+        this.setRemainingHP(HP);
+    }
 
     /*
     public void impactSpell(String opponentID){

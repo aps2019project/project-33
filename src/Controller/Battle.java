@@ -123,7 +123,7 @@ public class Battle {
         }
         //chera sotoon o satr midi biroon ?
         if(this.mode.equals(modes[1])){
-            System.out.println("flag position is : " + this.mainFlag.getPositionColumn() + ", " + this.mainFlag.getPositionRow());
+            System.out.println("flag position is : " + this.mainFlag.getPositionRow() + ", " + this.mainFlag.getPositionColumn());
           //usernamesh bayad chap she?
             System.out.println("flag owner is : " + this.mainFlag.getFlagOwner().getAccount().getUsername());
         }
@@ -170,7 +170,7 @@ public class Battle {
         if(thisCollectionItem != null){
             info = thisCollectionItem.getInfo();
             if(thisCollectionItem instanceof LivingCard)
-                info += " HP : " + ((LivingCard) (thisCollectionItem)).getRemainingHP() + " AP : " +
+                info += " HP : " + ((LivingCard) (thisCollectionItem)).getHP() + " AP : " +
                         ((LivingCard)(thisCollectionItem)).getDecreaseHPByAttack();
         }
         System.out.println(info);
@@ -242,6 +242,7 @@ public class Battle {
                 return;
             }
             playerOn.getHand().removeCard(cardID);
+            playerOn.getHand().addNextCard(playerOn.getAccount().getCollection().getMainDeck());
             ((LivingCard) insertingCollectionItem).setPositionColumn(y);
             ((LivingCard) insertingCollectionItem).setPositionRow(x);
             cell.insertCard(insertingCollectionItem.getID());
@@ -250,6 +251,7 @@ public class Battle {
         else{
             if(insertingCollectionItem instanceof Spell){
                 playerOn.getHand().removeCard(cardID);
+                playerOn.getHand().addNextCard(playerOn.getAccount().getCollection().getMainDeck());
                 Spell spell = (Spell)insertingCollectionItem;
                 spell.impactSpell(cell, this);
             }
@@ -261,7 +263,7 @@ public class Battle {
             System.out.println("select a card");
             return;
         }
-        if(isInMap(x, y)){
+        if(!isInMap(x, y)){
             System.out.println("Invalid coordination");
             return;
         }
@@ -334,6 +336,7 @@ public class Battle {
             return;
         }
         Impact.attack(this, this.selectedCard, opponentLivingCard);
+        this.removeSelectedCard();
     }
 
     public void comboAttackToOpponentCard(String[] input){
@@ -472,7 +475,6 @@ public class Battle {
             }
         }
         if(this.getMode().equals(modes[2])){
-            int numberOfFlags = flags.size();
             int numberOfPlayerOnFlags = 0, numberOfPlayerOffFlags = 0;
             for(Flag flag : flags){
                 Player flagOwner = flag.getFlagOwner();
@@ -500,7 +502,6 @@ public class Battle {
           //  match.setTime(this.);
             playerOn.getAccount().addMatch(match);
             playerOff.getAccount().addMatch(match);
-
         }
     }
 

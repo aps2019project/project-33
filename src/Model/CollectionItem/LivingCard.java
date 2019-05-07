@@ -17,15 +17,7 @@ abstract public class LivingCard extends Card {
     private boolean canMoveGreaterTwoCell, canMove, canAttack;
     private ArrayList<Item> Items = new ArrayList<>();
     //location mikhad
-    private int coolDown, maxCoolDown;
 
-    public void setMaxCoolDown(int maxCoolDown){
-        this.maxCoolDown = maxCoolDown;
-    }
-
-    public int getMaxCoolDown(){
-        return this.maxCoolDown;
-    }
 
     public void addNewBuff(Buff buff){
         this.effects.add(buff);
@@ -261,13 +253,7 @@ abstract public class LivingCard extends Card {
         return canMoveGreaterTwoCell;
     }
 
-    public int getCoolDown() {
-        return coolDown;
-    }
 
-    public void setCoolDown(int coolDown) {
-        this.coolDown = coolDown;
-    }
 
     public boolean isAlive() {
         return isAlive;
