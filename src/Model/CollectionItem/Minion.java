@@ -51,29 +51,31 @@ public class Minion extends LivingCard {
 //        return  AttackArea.getCellsOfSpecialPower(this);
 //    }
 
-    public void doSpecialPower(String opponentID){
-        if(getCoolDown() > 0){
-            System.out.println("Special Power is not ready yet !!");
-            return;
-        }
-
-        LivingCard opponentCard = CollectionItem.getLivingCardByID(opponentID);
-
-        boolean canSpecialAttackToOpponent = false;
-        ArrayList<Cell> impactCells = this.findImpactCellOfSpecialPower();
-        for(Cell cell : impactCells)
-            if(cell.getX() == opponentCard.getPositionRow() && cell.getY() == opponentCard.getPositionColumn())
-                canSpecialAttackToOpponent = true;
-
-        if(!canSpecialAttackToOpponent){
-            System.out.println("Oppnent Card is not in special attack impact area");
-        }
-
-        Impact.specialPower(this, opponentCard);
-
-        setCoolDown(CollectionItem.readCoolDownTime(this));
-
-    }
+    //TODO
+    //ino bayad az aval bezanim
+//    public void doSpecialPower(String opponentID){
+//        if(getCoolDown() > 0){
+//            System.out.println("Special Power is not ready yet !!");
+//            return;
+//        }
+//
+//        LivingCard opponentCard = CollectionItem.getLivingCardByID(opponentID);
+//
+//        boolean canSpecialAttackToOpponent = false;
+//        ArrayList<Cell> impactCells = this.findImpactCellOfSpecialPower();
+//        for(Cell cell : impactCells)
+//            if(cell.getX() == opponentCard.getPositionRow() && cell.getY() == opponentCard.getPositionColumn())
+//                canSpecialAttackToOpponent = true;
+//
+//        if(!canSpecialAttackToOpponent){
+//            System.out.println("Oppnent Card is not in special attack impact area");
+//        }
+//
+//        Impact.specialPower(this, opponentCard);
+//
+//        setCoolDown(CollectionItem.readCoolDownTime(this));
+//
+//    }
 
     private ArrayList<Cell> findImpactCellOfSpecialPower() {
         return null;

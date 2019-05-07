@@ -45,8 +45,8 @@ public class CollectionMenu extends Menu {
             showDeck(input[2], collection);
         } else if (inputLine.equals("save")) {
             this.save();
-        } else if (inputLine.equals("help"))
-            CollectionMenu.showHelp();
+        } else if (inputLine.equals("show menu"))
+            CollectionMenu.showMenu();
         else if (inputLine.equals("exit"))
             return;
         else
@@ -105,7 +105,7 @@ public class CollectionMenu extends Menu {
         collection.createDeck(deckName);
     }
 
-    public static void showHelp() {
+    public static void showMenu() {
         System.out.println("1. show");
         System.out.println("2. search[card name | item name]");
         System.out.println("3. create deck[deck name]");
@@ -117,7 +117,7 @@ public class CollectionMenu extends Menu {
         System.out.println("9. show all decks");
         System.out.println("10. show deck [deck name]");
         System.out.println("11. save");
-        System.out.println("12. help");
+        System.out.println("12. show menu");
         System.out.println("13. exit");
     }
 
