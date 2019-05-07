@@ -33,8 +33,8 @@ public class MainMenu extends Menu {
         else if (inputLine.equals("logout")) {
             this.logout();
             return;
-        } else if (inputLine.equals("help"))
-            MainMenu.showHelp();
+        } else if (inputLine.equals("show menu"))
+            MainMenu.showMenu();
         else if (inputLine.equals("exit"))
             return;
         else
@@ -42,13 +42,13 @@ public class MainMenu extends Menu {
         this.inputCommandLine();
     }
 
-    public static void showHelp() {
+    public static void showMenu() {
         System.out.println("1. Collection");
         System.out.println("2. Shop Menu");
         System.out.println("3. Battle");
         System.out.println("4. save");
         System.out.println("5. logout");
-        System.out.println("6. Help");
+        System.out.println("6. show menu");
         System.out.println("7. Exit");
     }
 

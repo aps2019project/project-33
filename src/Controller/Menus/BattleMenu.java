@@ -44,7 +44,7 @@ public class BattleMenu extends Menu {
         readInputs();
         for (int i = 0; i < types.length; i++) {
             if (inputLine.equals(types[i].toLowerCase())) {
-                battle.setMode(types[i]);
+                battle.setType(types[i]);
                 return;
             }
         }
@@ -53,15 +53,17 @@ public class BattleMenu extends Menu {
     }
 
     private void chooseSecondPlayer() {
+        System.out.println(battle.getType());
         if (battle.getType().equals(types[0])) {
             battle.setPlayerOff(new AI());
             return;
         }
+
         showAllAccount();
         while (true) {
             System.out.println("Enter username of second player :");
             readInputs();
-            if (inputLine.matches("select user *.")) {
+            if (inputLine.matches("select user .*")) {
                 String username = input[2];
                 Account account = Account.getAccountByUsername(username);
                 if (account != null) {
@@ -148,10 +150,11 @@ public class BattleMenu extends Menu {
         }
         else{
             readInputs();
-            if(inputLine.matches("start multiplayer game [^s]+( [\\d]+)*")){
+            if(inputLine.matches("start multiplayer game [^\\s]+( [\\d]+)*")){
+
                 String mode = input[3];
                 int numberOfFlags = 0;
-                if(mode.equals(modes[2])){
+                if(mode.equals(modes[2].toLowerCase())){
                     if(input.length == 5){
                         numberOfFlags = Integer.parseInt(input[4]);
                     }
@@ -171,8 +174,8 @@ public class BattleMenu extends Menu {
 
     private boolean setMode(String mode, int numberOfFlags){
         for(int i = 0; i < modes.length; i ++){
-            if(mode.equals(modes[i])){
-                battle.setMode(mode);
+            if(mode.equals(modes[i].toLowerCase())){
+                battle.setMode(modes[i]);
                 if(i == 2)
                     battle.setNumberOfFlags(numberOfFlags);
                 return true;
@@ -188,8 +191,10 @@ public class BattleMenu extends Menu {
 
     private void showAllAccount() {
         int index = 1;
-        for (Account account : Account.getAccounts())
+        for (Account account : Account.getAccounts()) {
             System.out.println(index++ + ". " + account.getUsername());
+
+        }
     }
 
 

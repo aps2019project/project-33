@@ -464,6 +464,7 @@ public class Battle {
 
 
     public void runGame(){
+        System.out.println("hmmm");
         preProcess();
         inputCommandLine();
     }
@@ -515,13 +516,13 @@ public class Battle {
             showNextCard();
         else if(inputLine.equals("enter graveyard"))
             enterGraveYard();
-        else if(inputLine.equals("Help"))
+        else if(inputLine.equals("help"))
             help();
-        else if(inputLine.equals("End Game"))
+        else if(inputLine.equals("end game"))
             endGame();
-        else if(inputLine.equals("Exit"))
+        else if(inputLine.equals("exit"))
             return;
-        else if(inputLine.equals("Show menu")){
+        else if(inputLine.equals("show menu")){
             this.showMenu();
         }
         else
