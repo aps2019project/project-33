@@ -166,6 +166,7 @@ public class Information {
     private boolean canPowerBuffAdd;
     private int timeOfPowerBuff;
     private boolean isPowerBuffPermanent;
+    private boolean isGhazaPowerBuff;
 
     private boolean canRemoveBadBuffsOfOurselves;
     private boolean canRemoveGoodBuffsOfEnemy;
@@ -215,6 +216,15 @@ public class Information {
     private boolean forHybrid;
     private boolean pareSimorgh;
     private int minOfPareSimorgh;
+
+
+    public boolean isGhazaPowerBuff() {
+        return isGhazaPowerBuff;
+    }
+
+    public void setGhazaPowerBuff(boolean ghazaPowerBuff) {
+        isGhazaPowerBuff = ghazaPowerBuff;
+    }
 
     public int getChangePowerByWeakness() {
         return changePowerByWeakness;
