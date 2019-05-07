@@ -3,7 +3,7 @@ package Model.CollectionItem;
 import java.util.ArrayList;
 
 public abstract class CollectionItem {
-    private Information information;
+    private Information information = new Information();
     private String name;
     private String ID;
     private int price;

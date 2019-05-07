@@ -283,6 +283,7 @@ public class Battle {
 
             Cell cell = map.getCellByCoordination(x, y);
             cell.insertCard(selectedCard.getID());
+            //tuye mode e flag bayad flago begire dastesh
         }else
             System.out.println("Invalid target !");
     }
