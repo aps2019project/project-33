@@ -162,7 +162,6 @@ public class BattleMenu extends Menu {
                         System.out.println("Enter Valid Command");
                         return;
                     }
-
                 }
                 if(setMode(mode, numberOfFlags))
                     return;

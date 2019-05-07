@@ -12,3 +12,12 @@ In ja biaim chiz hayi ro benevisim ke bayad reayat she vali alan gharar nist cod
 10. alan yeki ke too grave yard gharare neshoonesh bedim bayad che juri  neshoon bedimesh ?
 11. main tooye graveyar be dardi nemikhore
 12. collectionitem ye chiz behesh bayad ezafe she, get card by id, zemne in ke kolle car ha ham bayad toosh negah darim
+
+ -----
+
+pre process
+class of cards
+hand bayad dorost she, mogheye remove o avvale kar
+kar hayi ke tooye end turn bayad anjam she
+masalan joone ye seri chiz kam she
+ya ye seri buff emal shan rooye ye seri card

@@ -42,7 +42,7 @@ public class Hand1 {
     public void show(Deck mainDeck){
         System.out.println("spells : \n");
         this.showSpells();
-        System.out.println("heroes : \n");
+        System.out.println("minions : \n");
         this.showMinions();
         showNextCard(mainDeck);
     }

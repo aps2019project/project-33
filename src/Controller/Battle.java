@@ -32,7 +32,7 @@ public class Battle {
 
 //jaye avalie flaga o hero ha o ...
     public void preProcess(){
-
+        //TODO
     }
 
 
@@ -316,6 +316,10 @@ public class Battle {
 
     public void useSpecialPower(int x, int y){
         Hero hero = playerOn.getHero();
+        if(hero == null){
+            System.out.println("select a card");
+            return;
+        }
         if(playerOn.getMana().getCurrentMana() < hero.getMP()){
             System.out.println("need more mana");
             return;
@@ -464,18 +468,19 @@ public class Battle {
 
 
     public void runGame(){
-        System.out.println("hmmm");
         preProcess();
         inputCommandLine();
     }
 
     private void inputCommandLine(){
+        System.out.println("Here is Battle");;
+
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
         inputLine = inputLine.toLowerCase();
         String[] input = inputLine.split("[ ]+");
 
-        if(inputLine.equals("gameinfo"))
+        if(inputLine.equals("game info"))
             showGameInfo();
         else if(inputLine.equals("show my minions"))
             showMyMinions();
@@ -488,7 +493,7 @@ public class Battle {
             if(!isFound) System.out.println("Can't find this card");
             else System.out.println("card found !!");
         }
-        else if(inputLine.matches("move\\([\\d]+, [\\d]+\\)")){
+        else if(inputLine.matches("move to \\([\\d]+, [\\d]+\\)")){
             input = inputLine.split("[ \\(\\),]+");
             moveCardTo(Integer.parseInt(input[2]), Integer.parseInt(input[3]));
         }
@@ -502,8 +507,10 @@ public class Battle {
         }
         else if(inputLine.equals("show hand"))
             showHand();
-        else if(inputLine.matches("insert [^s]+ in \\([\\d]+, [\\d]+\\)"))
+        else if(inputLine.matches("insert [^\\s]+ in \\([\\d]+, [\\d]+\\)")) {
+            input = inputLine.split("[ \\(\\),]+");
             insertCardInMap(input[1], Integer.parseInt(input[3]), Integer.parseInt(input[4]));
+        }
         else if(inputLine.equals("end turn"))
             endTurn();
         else if(inputLine.equals("show collectables"))
