@@ -2,13 +2,20 @@
 
 package Controller.Menus;
 
+import Controller.Application;
 import Controller.Main;
+import Model.Account;
+import Model.CollectionItem.CollectionItem;
+import Model.CollectionItem.LivingCard;
+import Model.CollectionItem.Spell;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainMenu extends Menu {
 
-    public void inputCommandLine() throws FileNotFoundException {
+    public void inputCommandLine() throws IOException {
         System.out.println("Here is Main menu");
 
         String inputLine = Main.scanner.nextLine();
@@ -52,9 +59,29 @@ public class MainMenu extends Menu {
         System.out.println("7. Exit");
     }
 
-    private void save() {
-        //TODO
-        //Json
+    private void save() throws IOException {
+        //Save Accounts
+        writeInFile("Account", Account.getAccounts());
+        //Save Shop
+        {
+            String address = "../../../Data/Memory/Shop/shop.json";
+            Application.writeJSON(Main.application.getShop(), address);
+        }
+        //Save All Spells
+        writeInFile("Spell", CollectionItem.getAllSpells());
+        //Save All Items
+        writeInFile("Item", CollectionItem.getAllItems());
+        //Save All LivingCards
+        writeInFile("LivingCard", CollectionItem.getAllLivingCards());
+
+    }
+
+    private void writeInFile(String name, ArrayList arrayList) throws IOException {
+        for(int i = 0; i < arrayList.size(); i ++){
+            Object object = arrayList.get(i);
+            String address = "../../../Data/Memory/" + name + "s/" + name;
+            Application.writeJSON(object, address + i + ".json");
+        }
     }
 
     private void logout() throws FileNotFoundException {
