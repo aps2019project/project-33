@@ -213,6 +213,8 @@ public class Information {
     private boolean forMelee;
     private boolean forRange;
     private boolean forHybrid;
+    private boolean pareSimorgh;
+    private int minOfPareSimorgh;
 
     public int getChangePowerByWeakness() {
         return changePowerByWeakness;
@@ -787,5 +789,21 @@ public class Information {
 
     public void setHybrid(boolean hybrid) {
         isHybrid = hybrid;
+    }
+
+    public boolean isPareSimorgh() {
+        return pareSimorgh;
+    }
+
+    public void setPareSimorgh(boolean pareSimorgh) {
+        this.pareSimorgh = pareSimorgh;
+    }
+
+    public int getMinOfPareSimorgh() {
+        return minOfPareSimorgh;
+    }
+
+    public void setMinOfPareSimorgh(int minOfPareSimorgh) {
+        this.minOfPareSimorgh = minOfPareSimorgh;
     }
 }
