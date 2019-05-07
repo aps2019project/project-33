@@ -12,11 +12,12 @@ public class Main {
     public static Application application = new Application();
 
     public static void main(String[] args) throws IOException {
+        createTotalDisarm();
         application.runApplication();
     }
 
 
-    public void createTotalDisarm() throws IOException {
+    public static void createTotalDisarm() throws IOException {
         Spell spell = new Spell();
         spell.setPrice(1000);
         spell.setMp(0);
