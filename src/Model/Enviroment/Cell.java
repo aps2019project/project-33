@@ -12,11 +12,23 @@ public class Cell {
     private LivingCard livingCard;
     private ArrayList<Buff> effects = new ArrayList<>();
     private ArrayList<Item> items = new ArrayList<>();
+    private boolean haveFlag = false;
+
+
+    public boolean isHaveFlag() {
+        return haveFlag;
+    }
+
+    public void setHaveFlag(boolean haveFlag) {
+        this.haveFlag = haveFlag;
+    }
 
     //Here is Setters && Getters
     {
         this.livingCard = null;
     }
+
+
     public void insertCard(String livingCardID){
         LivingCard livingCard = CollectionItem.getLivingCardByID(livingCardID);
         this.livingCard = livingCard;

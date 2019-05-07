@@ -10,6 +10,7 @@ import Model.Enviroment.Cell;
 import Model.Enviroment.Map1;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Battle {
     private Player playerOn, playerOff;
@@ -37,10 +38,77 @@ public class Battle {
             player.getHand().addNextCard(mainDeck);
     }
 
+    public void setHeroPosition(Player player){
+        Random random = new Random();
+        int row = random.nextInt(this.getMap().getHeight());
+        int column = random.nextInt(this.getMap().getWidth());
+        player.getHero().setPositionRow(row);
+        player.getHero().setPositionColumn(column);
+    }
+
+    public boolean haveSamePosition(Hero hero1, Hero hero2){
+        if(hero1.getPositionColumn() != hero2.getPositionColumn())
+            return false;
+        if(hero1.getPositionRow() != hero2.getPositionRow())
+            return false;
+        return true;
+    }
+
+    public void putHero(Player player){
+        Hero hero = player.getHero();
+        Cell cell = this.getMap().getCellByCoordination(hero.getPositionRow(), hero.getPositionColumn());
+        cell.insertCard(hero.getID());
+        player.addAliveCard(hero);
+    }
+
+    public void putHeroes(){
+        this.setHeroPosition(this.playerOn);
+        this.setHeroPosition(this.playerOff);
+        while(haveSamePosition(playerOff.getHero(), playerOn.getHero()))
+            this.setHeroPosition(this.playerOff);
+        this.putHero(playerOn);
+        this.putHero(playerOff);
+    }
+
+    public void setFlagPosition(Flag flag){
+        Random random = new Random();
+        int row = random.nextInt(this.getMap().getHeight());
+        int column = random.nextInt(this.getMap().getWidth());
+        flag.setPositionRow(row);
+        flag.setPositionColumn(column);
+    }
+
+    public void createFlags(){
+        for(int i = 0; i < this.numberOfFlags; i++){
+            Flag flag = new Flag();
+            flags.add(flag);
+        }
+    }
+
+    public void createFlagMode(){
+        //numberOfFlags chaande tuye mode e 3
+        if(this.mode.equals(modes[1]))
+            numberOfFlags = 1;
+        this.createFlags();
+        for(Flag flag : this.getFlags()){
+            this.setFlagPosition(flag);
+            Cell cell = this.getMap().getCellByCoordination(flag.getPositionRow(), flag.getPositionColumn());
+            while(cell.isHaveFlag()){
+                this.setFlagPosition(flag);
+                cell = this.getMap().getCellByCoordination(flag.getPositionRow(), flag.getPositionColumn());
+            }
+            cell.setHaveFlag(true);
+        }
+    }
+
 //jaye avalie flaga o hero ha o ...
     public void preProcess(){
         this.createHand(playerOn);
         this.createHand(playerOff);
+        this.putHeroes();
+        if(!this.getMode().equals(modes[0])){
+            this.createFlagMode();
+        }
         //TODO
     }
 
