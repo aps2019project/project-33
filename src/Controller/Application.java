@@ -29,11 +29,13 @@ public class Application {
         return copyObject;
     }
 
-    public static void loadData(){
-        String address = "Data/Memory/Accounts";
-        int numberOfAddress = new File(address).listFiles().length;
-
-    }
+//    public static void loadData(){
+//        String address = "Data/Memory/Accounts";
+//        int numberOfAddress = new File(address).listFiles().length;
+//            for(int i = 0; i < numberOfAddress; i ++){
+//
+//        }
+//    }
 
     public static Object readJSON(Class className, String address) throws FileNotFoundException {
         YaGsonBuilder builder = new YaGsonBuilder();
