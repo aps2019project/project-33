@@ -256,6 +256,7 @@ public class Battle {
                 spell.impactSpell(cell, this);
             }
         }
+        handleFlags();
     }
 
     public void moveCardTo(int x, int y){
@@ -288,6 +289,7 @@ public class Battle {
             //tuye mode e flag bayad flago begire dastesh
         }else
             System.out.println("Invalid target !");
+        handleFlags();
     }
 
     private int getDistance(int x1, int y1, int x2, int y2){
@@ -520,6 +522,40 @@ public class Battle {
 
     }
 
+    public boolean isLivingCardInList(LivingCard livingCard, ArrayList<LivingCard> livingCards){
+        for(LivingCard aliveCard : livingCards){
+            if(aliveCard.getID().equals(livingCard.getID()))
+                return true;
+        }
+        return false;
+    }
+
+    public Player getOwnerOfLivingCard(LivingCard livingCard){
+        if(isLivingCardInList(livingCard, playerOn.getAliveCards()))
+            return playerOn;
+        return playerOff;
+    }
+
+    public void handleFlags(){
+        for(Flag flag : flags){
+            LivingCard livingCard = flag.getFlagLivingCard();
+            if(livingCard != null){
+                flag.setPositionColumn(livingCard.getPositionColumn());
+                flag.setPositionRow(livingCard.getPositionRow());
+            }
+        }
+        for(Flag flag : flags){
+            Cell cell = this.getMap().getCellByCoordination(flag.getPositionRow(), flag.getPositionColumn());
+            LivingCard livingCard = cell.getLivingCard();
+            if(livingCard == null)
+                continue;
+            if(flag.getFlagLivingCard() == null){
+                flag.setFlagLivingCard(livingCard);
+                flag.setFlagOwner(getOwnerOfLivingCard(livingCard));
+            }
+        }
+    }
+
     public void showMenu(){
         System.out.println("1. Game Info");
         System.out.println("2. Show my minions");
@@ -677,6 +713,7 @@ public class Battle {
     public void setMode(String mode) {
         this.mode = mode;
     }
+
 
     public int getPrize() {
         return prize;

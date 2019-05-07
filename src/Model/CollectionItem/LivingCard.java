@@ -2,6 +2,7 @@ package Model.CollectionItem;
 
 import Controller.AttackArea;
 import Controller.Impact;
+import Controller.Battle;
 import Model.Buffs.Buff;
 import Model.Enviroment.Cell;
 
@@ -91,7 +92,10 @@ abstract public class LivingCard extends Card {
         return this.getBattle().getMap().getCellByCoordination(this.getPositionRow(), this.getPositionColumn());
     }
 
-    public void handleAttack(int damage){}
+    public void handleAttack(Battle battle, int damage){
+        this.setHP(this.getHP() - damage);
+        Impact.checkAlive(battle, this);
+    }
 
     public void kill(){
         this.setRemainingHP(0);
