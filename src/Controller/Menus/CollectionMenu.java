@@ -3,15 +3,17 @@
 
 package Controller.Menus;
 
+import Controller.Application;
 import Controller.Main;
 import Model.*;
 import Model.CollectionItem.CollectionItem;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CollectionMenu extends Menu {
     @Override
-    public void inputCommandLine() {
+    public void inputCommandLine() throws IOException {
         System.out.println("Here is Collection Menu");
 
         String inputLine = Main.scanner.nextLine();
@@ -19,7 +21,8 @@ public class CollectionMenu extends Menu {
         inputLine = inputLine.toLowerCase();
         String[] input = inputLine.split("[ ]+");
 
-        Collection collection = Main.application.getLoggedInAccount().getCollection();
+        Collection collection = (Collection) Application.copy(Main.application.getLoggedInAccount().getCollection(),
+                Collection.class);
 
         if (inputLine.equals("show")) {
             collection.showCollection("Sell Cost");
@@ -44,7 +47,7 @@ public class CollectionMenu extends Menu {
         } else if (inputLine.matches("show deck .*")) {
             showDeck(input[2], collection);
         } else if (inputLine.equals("save")) {
-            this.save();
+            this.save(collection);
         } else if (inputLine.equals("show menu"))
             CollectionMenu.showMenu();
         else if (inputLine.equals("exit"))
@@ -91,7 +94,7 @@ public class CollectionMenu extends Menu {
         System.out.println("validity state of " + deckName + " is : " + deck.checkValidateDeck());
     }
 
-    private void deleteDeck(String deckName, Collection collection) {
+    private void deleteDeck(String deckName, Collection collection) throws IOException {
         Deck deck = collection.getDeckByName(deckName);
         if (deck == null) {
             System.out.println("This deck doesn't exist");
@@ -121,8 +124,7 @@ public class CollectionMenu extends Menu {
         System.out.println("13. exit");
     }
 
-    private void save(){
-        //TODO
-        //Json here, every where ?
+    private void save(Collection collection){
+        Main.application.getLoggedInAccount().setCollection(collection);
     }
 }

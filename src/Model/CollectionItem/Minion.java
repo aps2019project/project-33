@@ -1,5 +1,6 @@
 package Model.CollectionItem;
 
+import Controller.Application;
 import Controller.AttackArea;
 import Controller.Battle;
 import Controller.Impact;
@@ -7,6 +8,7 @@ import Model.Collection;
 import Model.Enviroment.Cell;
 import Model.Enviroment.Map1;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Minion extends LivingCard {
@@ -17,8 +19,10 @@ public class Minion extends LivingCard {
         //TODO
     }
 
-    /*public static Minion createMinion(String playerName, String minionName){
-        Minion minion = loadMinionFromJsonFile(minionName);
+    public static Minion createMinion(String minionName, String playerName) throws FileNotFoundException {
+        String address = "Data/Collection/Minion" + minionName + ".json";
+        Minion minion = (Minion) Application.readJSON(Minion.class, address);
+
         int numberOfThisMinionType = 0;
         ArrayList<LivingCard> usedLivingCards = CollectionItem.getAllLivingCards();
         for(LivingCard livingCard : usedLivingCards){
@@ -29,10 +33,10 @@ public class Minion extends LivingCard {
         }
         String ID = playerName + "_" + minionName + "_" + numberOfThisMinionType;
         minion.setID(ID);
+
         CollectionItem.addLivingCardToAllLivingCards(minion);
         return minion;
     }
-*/
 
     @Override
     public void showCardInCollection() {

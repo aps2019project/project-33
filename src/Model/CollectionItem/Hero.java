@@ -1,9 +1,11 @@
 package Model.CollectionItem;
 
+import Controller.Application;
 import Controller.AttackArea;
 import Controller.Impact;
 import Model.Enviroment.Cell;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Hero extends LivingCard {
@@ -98,34 +100,23 @@ public class Hero extends LivingCard {
         this.minOfPareSimorgh = minOfPareSimorgh;
     }
 
- /*   public static Hero loadAHeroFromJsonFile(String fileName){
-        Hero hero = null;
-        Gson gson = new Gson();
-        try {
-            //addresse in bayd chi bashe ?
-            JsonReader reader = new JsonReader(new FileReader(".\\.\\Model\\CollectionItem"+fileName+".json"));
-            hero = gson.fromJson(reader, Hero.class);
-        }
-        catch( Exception e ){
 
+    public static Hero createHero(String heroName, String playerName) throws FileNotFoundException {
+        String address = "Data/CollectionItem/Hero" + heroName + ".json";
+        Hero hero = (Hero) Application.readJSON(Hero.class, address);
+
+        int numberOfThisHeroType = 0;
+        ArrayList<LivingCard> usedLivingCards = CollectionItem.getAllLivingCards();
+        for(LivingCard livingCard : usedLivingCards){
+            if(livingCard instanceof Hero){
+                if(livingCard.getName().equals(heroName))
+                    numberOfThisHeroType++;
+            }
         }
+
+        String ID = playerName + "_" + heroName + "_" + numberOfThisHeroType;
+        hero.setID(ID);
+        CollectionItem.addLivingCardToAllLivingCards(hero);
         return hero;
     }
-*/
-
-//    public static Hero createHero(String playerName, String heroName){
-//        Hero hero = loadAHeroFromJsonFile(heroName);
-//        int numberOfThisHeroType = 0;
-//        ArrayList<LivingCard> usedLivingCards = CollectionItem.getAllLivingCards();
-//        for(LivingCard livingCard : usedLivingCards){
-//            if(livingCard instanceof Hero){
-//                if(livingCard.getName().equals(heroName))
-//                    numberOfThisHeroType++;
-//            }
-//        }
-//        String ID = playerName + "_" + heroName + "_" + numberOfThisHeroType;
-//        hero.setID(ID);
-//        CollectionItem.addLivingCardToAllLivingCards(hero);
-//        return hero;
-//    }
 }
