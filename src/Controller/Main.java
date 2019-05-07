@@ -16,12 +16,11 @@ public class Main {
     }
 
 
-    public void createTotalDisarm(){
+    public void createTotalDisarm() throws IOException {
         Spell spell = new Spell();
         spell.setPrice(1000);
         spell.setMp(0);
         spell.getInformation().setEnemyImpact(true);
-        spell.getInformation().setMultipleImpact(false);
         spell.getInformation().setCanDisarmBuffAdd(true);
         spell.getInformation().setDisarmBuffPermanent(true);
         spell.setName("Total Disarm");
