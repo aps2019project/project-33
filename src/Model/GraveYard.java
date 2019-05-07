@@ -6,15 +6,7 @@ import Model.CollectionItem.Card;
 import Model.CollectionItem.LivingCard;
 
 public class GraveYard {
-    private ArrayList<Card> cards;
-
-    public void addCard(LivingCard livingCard){
-        cards.add(livingCard);
-    }
-
-    public Card SearchCard(String cardID){
-        return null;
-    }
+    private ArrayList<Card> cards = new ArrayList<>();
 
     public void showInfo(String cardID){
         for(Card card : this.cards){
@@ -28,30 +20,51 @@ public class GraveYard {
     }
 
     public void showCards(){
-        System.out.println("All cards in graveyard");
+        System.out.println("All cards in graveyard :");
         for(Card card : this.cards){
             card.showCardInCollection();
-            System.out.println(" ---- ");
         }
         return;
     }
+
+    public void showMenu(){
+        System.out.println("1. show info [card id]");
+        System.out.println("2. show cards");
+        System.out.println("3. show menu");
+        System.out.println("4. exit");
+    }
+
     public void inputCommandLine(){
+        System.out.println("Here is GraveYard");
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
+        inputLine = inputLine.toLowerCase();
         String[] input = inputLine.split("[ ]+");
 
         if(inputLine.equals("exit")){
             return;
         }
-        else if(inputLine.matches("Show info *.")){
+        else if(inputLine.matches("show info .*")){
             String cardID = input[2];
             showInfo(cardID);
         }
-        else if(inputLine.equals("Show cards")){
+        else if(inputLine.equals("show cards")){
             showCards();
+        } else if(inputLine.equals("show menu")){
+            showMenu();
         }
         else
             System.out.println("Invalid Command !!!");
+        inputCommandLine();;
+    }
+
+
+    public void addCard(LivingCard livingCard){
+        cards.add(livingCard);
+    }
+
+    public Card SearchCard(String cardID){
+        return null;
     }
 
     //Here is Setters && Getters

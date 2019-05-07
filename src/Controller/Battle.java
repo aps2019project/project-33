@@ -517,8 +517,10 @@ public class Battle {
             showCollectables();
         else if(inputLine.equals("show info"))
             showItemInfo();
-        else if(inputLine.matches("use [\\d],[\\d]"))
+        else if(inputLine.matches("use [\\d], [\\d]")) {
+            input = inputLine.split("[ \\(\\),]+");
             useItem(Integer.parseInt(input[1]), Integer.parseInt(input[2]));
+        }
         else if(inputLine.equals("show next card"))
             showNextCard();
         else if(inputLine.equals("enter graveyard"))
