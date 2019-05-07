@@ -4,6 +4,8 @@ import Controller.Menus.AccountMenu;
 import Controller.Menus.MainMenu;
 import Controller.Menus.ShopMenu;
 import Model.*;
+import com.gilecode.yagson.YaGson;
+import com.gilecode.yagson.YaGsonBuilder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -17,7 +19,7 @@ public class Application {
     private Account loggedInAccount;
 
 
-    public void runApplication() throws FileNotFoundException {
+    public void runApplication() throws IOException {
         AccountMenu accountMenu = new AccountMenu();
         accountMenu.inputCommandLine();
     }
@@ -30,20 +32,20 @@ public class Application {
     }
 
     public static Object readJSON(Class className, String address) throws FileNotFoundException {
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
+        YaGsonBuilder builder = new YaGsonBuilder();
+        YaGson yaGson = builder.create();
         BufferedReader bufferedReader = new BufferedReader(
                 new FileReader(address));
 
-        Object object = gson.fromJson(bufferedReader, className);
+        Object object = yaGson.fromJson(bufferedReader, className);
         return object;
     }
 
     public static void writeJSON(Object object, String address) throws IOException {
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
+        YaGsonBuilder builder = new YaGsonBuilder();
+        YaGson yaGson = builder.create();
         FileWriter writer = new FileWriter(address);
-        writer.write(gson.toJson(object));
+        writer.write(yaGson.toJson(object));
         writer.close();
     }
 
