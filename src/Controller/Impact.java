@@ -420,6 +420,7 @@ public class Impact {
             }
         }
         //check kardane in ke doshmane ya na ro mikhad?
+        //havaset bashe ja nandakhte basham chizio 2 ta azina bood yekisho pak kardam
         if(information.isCanWeaknessBuffAdd()){
             for(Cell impactCell : impactCells){
                 LivingCard cellLivingCard = impactCell.getLivingCard();
