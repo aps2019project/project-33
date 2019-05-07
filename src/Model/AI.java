@@ -1,9 +1,8 @@
 package Model;
 
-import Model.CollectionItem.CollectionItem;
-import Model.CollectionItem.Hero;
-import Model.CollectionItem.Minion;
-import Model.CollectionItem.Spell;
+import Model.CollectionItem.*;
+
+import java.io.FileNotFoundException;
 
 public class AI extends Player {
 
@@ -11,14 +10,19 @@ public class AI extends Player {
         super(new Account("admin", "1234"));
     }
 
-    public void selectMainDeck(Deck deck){
+    public void selectMainDeck(Deck deck) throws FileNotFoundException {
         this.getAccount().setUsername("AI");
+        this.getAccount().getCollection().createDeck("AI");
         for(CollectionItem collectionItem : deck.getCards()) {
-            CollectionItem newCollectionItem;
-            if(collectionItem instanceof Spell) newCollectionItem =
-            if(collectionItem instanceof Hero) newCollectionItem =
-            if(collectionItem instanceof Minion) newCollectionItem =
+            CollectionItem newCollectionItem = null;
+            if(collectionItem instanceof Spell) newCollectionItem = Spell.createSpell(collectionItem.getName(), "AI");
+            if(collectionItem instanceof Hero) newCollectionItem = Hero.createHero(collectionItem.getName(), "AI");
+            if(collectionItem instanceof Minion) newCollectionItem = Minion.createMinion(collectionItem.getName(), "AI");
+            if(collectionItem instanceof Item) newCollectionItem = Item.createItem(collectionItem.getName(), "AI");
+            this.getAccount().getCollection().addCollectionItemToCollection(newCollectionItem.getID());
+            this.getAccount().getCollection().addCollectionItemToDeck(newCollectionItem.getID(), "AI");
         }
+        this.getAccount().getCollection().selectMainDeck("AI");
     }
 
     public String outputSomeRandomOrder(){

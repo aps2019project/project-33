@@ -26,13 +26,6 @@ public  class Item extends CollectionItem {
         return item;
     }
 
-
-   /* @Override
-    public void doImpact(String livingCardID) {
-        Impact.impactItem(this, livingCardID);
-    }
-    */
-
     @Override
     public String  getInfo(){
         String info = "Name : " + this.getName() + " - Desc " + this.getDescription();
