@@ -12,12 +12,11 @@ public class Main {
     public static Application application = new Application();
 
     public static void main(String[] args) throws IOException {
-        createTotalDisarm();
         application.runApplication();
     }
 
 
-    public static void createTotalDisarm() throws IOException {
+    public void createTotalDisarm(){
         Spell spell = new Spell();
         spell.setPrice(1000);
         spell.setMp(0);
@@ -26,9 +25,8 @@ public class Main {
         spell.getInformation().setCanDisarmBuffAdd(true);
         spell.getInformation().setDisarmBuffPermanent(true);
         spell.setName("Total Disarm");
-        Application.writeJSON(spell, "Data/CollectionItem/Spell/TotalDisarm.json");
+        application.writeJSON(spell, "Data/CollectionItem/Spell/TotalDisarm.json");
     }
-
 
 }
 
