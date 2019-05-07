@@ -437,6 +437,13 @@ public class Impact {
                         }
                     }
                 }
+                if(information.isUsImpact()){
+                    for(LivingCard aliveCard : battle.getPlayerOn().getAliveCards()){
+                        if(aliveCard.getID().equals(cellLivingCard.getID())){
+                            Impact.addWeaknessToCard(remainTime, isPermanent, false, changeHP, changePower, cellLivingCard);
+                        }
+                    }
+                }
             }
         }
         if(information.isCanHolyBuffAdd()){
@@ -474,22 +481,6 @@ public class Impact {
                     }
                 }
                 //bara doshmano nazadam nadarim hanuz
-            }
-        }
-        if(information.isCanWeaknessBuffAdd()){
-            for(Cell impactCell : impactCells){
-                LivingCard cellLivingCard = cell.getLivingCard();
-                if(information.isEnemyImpact()){
-                    for(LivingCard aliveCard : battle.getPlayerOff().getAliveCards()){
-                        if(aliveCard.getID().equals(cellLivingCard.getID())){
-                            int remainTime = information.getTimeOfWeaknessBuff();
-                            boolean isPernament = information.isWeaknessBuffPermanent();
-                            //too information bayad + esho bezanim pas
-                            int changeAP = -information.getAmountOfIncreaseAP();
-                            Impact.addWeaknessToCard(remainTime, isPernament, false, 0, changeAP, cellLivingCard);
-                        }
-                    }
-                }
             }
         }
         if (information.isCanKillMinionOfEnemy()) {
