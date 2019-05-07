@@ -1,13 +1,17 @@
 package Controller;
 
 import Controller.Menus.AccountMenu;
-import Controller.Menus.MainMenu;
-import Controller.Menus.ShopMenu;
 import Model.*;
+import Model.CollectionItem.CollectionItem;
+import Model.CollectionItem.Item;
+import Model.CollectionItem.LivingCard;
+import Model.CollectionItem.Spell;
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Application {
 
@@ -29,12 +33,44 @@ public class Application {
         return copyObject;
     }
 
-    public static void loadData(){
-        String address = "Data/Memory/Accounts";
-        int numberOfAddress = new File(address).listFiles().length;
-            for(int i = 0; i < numberOfAddress; i ++){
+    public static void loadData() throws FileNotFoundException {
+        ArrayList<Object> objects;
+        //Read Account
+        objects = readFromFile("Data/Memory/Accounts", "Account");
+        for (Object object : objects)
+            Account.getAccounts().add((Account) object);
 
+        //Read Items
+        objects = readFromFile("Data/Memory/Items", "Item");
+        for (Object object : objects)
+            CollectionItem.getAllItems().add((Item) object);
+
+
+        //Read Spells
+        objects = readFromFile("Data/Memory/Spells", "Spell");
+        for (Object object : objects)
+            CollectionItem.getAllSpells().add((Spell) object);
+
+        //Read LivingCards
+        objects = readFromFile("Data/Memory/LivingCards", "LivingCard");
+        for (Object object : objects)
+            CollectionItem.getAllLivingCards().add((LivingCard) object);
+
+        //Read Shop
+        File file = new File("Data/Memory/Shop");
+        if(Objects.requireNonNull(file.listFiles()).length > 0)
+            Main.application.shop = (Collection) readJSON(Collection.class, "Data/Memory/Shop/shop.json");
+    }
+
+    public static ArrayList<Object> readFromFile(String address, String type) throws FileNotFoundException {
+        ArrayList<Object> arrayList = new ArrayList<>();
+        File file = new File(address);
+        int sizeOfFolder = Objects.requireNonNull(file.listFiles()).length;
+        for (int i = 0; i < sizeOfFolder; i++) {
+            Object object = readJSON(Object.class, address + "/" + type + i + ".json");
+            arrayList.add(object);
         }
+        return arrayList;
     }
 
     public static Object readJSON(Class className, String address) throws FileNotFoundException {
@@ -55,7 +91,7 @@ public class Application {
         writer.close();
     }
 
-    public void addAccount(Account account){
+    public void addAccount(Account account) {
         this.accounts.add(account);
     }
 
@@ -68,7 +104,6 @@ public class Application {
     public void setAccounts(ArrayList<Account> accounts) {
         this.accounts = accounts;
     }
-
 
 
     public Account getLoggedInAccount() {

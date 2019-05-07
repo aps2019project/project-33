@@ -70,7 +70,7 @@ public class Account {
         sortArraysOfAccount(accounts);
         int index = 1;
         for(Account account : accounts){
-            System.out.println(index + ". " + account.getUsername() + " " + "W: " + account.getNumberOfWins() + " "
+            System.out.println(index ++ + ". " + account.getUsername() + " " + "W: " + account.getNumberOfWins() + " "
             + "L: " + account.getNumberOfLooses());
         }
     }

@@ -126,6 +126,7 @@ public class Information {
 
     private boolean canIncreaseAP;
     private int amountOfIncreaseAP;
+
     private int increaseRemainTime;
     private boolean increaseAPPermanent;
 
@@ -140,6 +141,7 @@ public class Information {
 
     private boolean canHolyBuffAdd;
     private int timeOfHolyBuff;
+
     private boolean isHolyBuffPermanent;
     private int numberOfHolyBuff;
     private boolean isHolyBuffPassive;
@@ -151,6 +153,7 @@ public class Information {
     private boolean canWeaknessBuffAdd;
     private int timeOfWeaknessBuff;
     private boolean isWeaknessBuffPermanent;
+
     private int changeHPByWeakness;
     private int changePowerByWeakness;
 
@@ -192,6 +195,7 @@ public class Information {
     private boolean isShireDarrande;
     private boolean isZahhak;
     private boolean canIncreaseRangeOfAttack;
+    private int amountOfIncreaseRangeOfAttack;
     private boolean canDoubleHp;
     private boolean canIncreaseMana;
     private int amountOfIncreaseMana;
@@ -815,5 +819,13 @@ public class Information {
 
     public void setMinOfPareSimorgh(int minOfPareSimorgh) {
         this.minOfPareSimorgh = minOfPareSimorgh;
+    }
+
+    public int getAmountOfIncreaseRangeOfAttack() {
+        return amountOfIncreaseRangeOfAttack;
+    }
+
+    public void setAmountOfIncreaseRangeOfAttack(int amountOfIncreaseRangeOfAttack) {
+        this.amountOfIncreaseRangeOfAttack = amountOfIncreaseRangeOfAttack;
     }
 }

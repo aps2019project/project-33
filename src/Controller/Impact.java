@@ -532,7 +532,9 @@ public class Impact {
 
     //payane in bakhsh
 
-    //In tike bishtar marboot be item hast
+    //In tike    bishtar marboot be item hast
+
+    //esme information haro dorost konam
 
     public static void impactItem(Item item, Cell cell, Battle battle) {
         Information information = item.getInformation();
@@ -548,7 +550,7 @@ public class Impact {
             LivingCard livingCard = cell.getLivingCard();
 
             if (information.isCanIncreaseRangeOfAttack())
-                increaseRangeOfAttack(livingCard, 2);
+                increaseRangeOfAttack(livingCard, information.getAmountOfIncreaseRangeOfAttack());
             if (information.isCanHolyBuffAdd()) {
                 for (int i = 0; i < information.getNumberOfHolyBuff(); i++)
                     addHolyToCard(information.getTimeOfHolyBuff(), information.isHolyBuffPermanent(), information.isHolyBuffPassive(),
