@@ -101,7 +101,9 @@ abstract public class LivingCard extends Card {
 
     public void handleAttack(int damage){}
 
-    public void kill(){}
+    public void kill(){
+        this.setRemainingHP(0);
+    }
 
     public void increaseRangeOfAttack(int amount){
         this.rangeOfAttack += amount;

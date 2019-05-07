@@ -183,7 +183,7 @@ public class Impact {
     }
 
     public static boolean checkAlive(Battle battle, LivingCard checkedLivingCard){
-        if(checkedLivingCard.getHP() <= 0){
+        if(checkedLivingCard.getRemainingHP() <= 0){
             battle.removeAliveCard(checkedLivingCard);
             return false;
         }
@@ -320,6 +320,14 @@ public class Impact {
                 System.out.println("there isnt living card");
                 return;
             }
+            boolean inRange = false;
+            for(Cell impactCell : impactCells)
+                if(impactCell.getY() == cell.getY() && impactCell.getX() == cell.getX())
+                    inRange = true;
+            if(!inRange){
+                System.out.println("cell isnt in range");
+                return;
+            }
             impactCells = new ArrayList<>();
             impactCells.add(cell);
 
@@ -412,6 +420,7 @@ public class Impact {
             }
         }
         //check kardane in ke doshmane ya na ro mikhad?
+        //havaset bashe ja nandakhte basham chizio 2 ta azina bood yekisho pak kardam
         if(information.isCanWeaknessBuffAdd()){
             for(Cell impactCell : impactCells){
                 LivingCard cellLivingCard = impactCell.getLivingCard();
@@ -425,6 +434,93 @@ public class Impact {
                     for(LivingCard aliveCard : battle.getPlayerOff().getAliveCards()){
                         if(aliveCard.getID().equals(cellLivingCard.getID())){
                             Impact.addWeaknessToCard(remainTime, isPermanent, false, changeHP, changePower, cellLivingCard);
+                            break;
+                        }
+                    }
+                }
+                if(information.isUsImpact()){
+                    for(LivingCard aliveCard : battle.getPlayerOn().getAliveCards()){
+                        if(aliveCard.getID().equals(cellLivingCard.getID())){
+                            Impact.addWeaknessToCard(remainTime, isPermanent, false, changeHP, changePower, cellLivingCard);
+                        }
+                    }
+                }
+            }
+        }
+        if(information.isCanHolyBuffAdd()){
+            for(Cell impactCell : impactCells){
+                LivingCard cellLivingCard = impactCell.getLivingCard();
+                if(information.isUsImpact()){
+                    for(LivingCard aliveCard : battle.getPlayerOn().getAliveCards()){
+                        if(aliveCard.getID().equals(cellLivingCard.getID())){
+                            int remainTime = information.getTimeOfHolyBuff();
+                            boolean isPermanent = information.isHolyBuffPermanent();
+                            //2 ta dare ???
+                            Impact.addHolyToCard(remainTime, isPermanent, false,1, cellLivingCard);
+                            Impact.addHolyToCard(remainTime, isPermanent, false, 1, cellLivingCard);
+                            break;
+                        }
+                    }
+                }
+                //enemy sho nazadam hanuz chon nadarim felan tooo carda
+            }
+        }
+        if(information.isCanPowerBuffAdd()){
+            for(Cell impactCell : impactCells){
+                LivingCard cellLivingCard = impactCell.getLivingCard();
+                if(information.isUsImpact()){
+                    for(LivingCard aliveCard : battle.getPlayerOn().getAliveCards()){
+                        if(aliveCard.getID().equals(cellLivingCard.getID())){
+                            int remainTime = information.getTimeOfPowerBuff();
+                            boolean isPermanent = information.isPowerBuffPermanent();
+                            int changePower = information.getAmountOfIncreaseAP();
+                            if(information.isGhazaPowerBuff())
+                                changePower = aliveCard.getRemainingHP();
+                            //faghat changePower dare na HP
+                            Impact.addPowerBuffToCard(remainTime, isPermanent, false, 0, changePower, aliveCard);
+                        }
+                    }
+                }
+                //bara doshmano nazadam nadarim hanuz
+            }
+        }
+        if (information.isCanKillMinionOfEnemy()) {
+            for(Cell impactCell : impactCells){
+                LivingCard cellLivingCard = cell.getLivingCard();
+                for(LivingCard aliveCard : battle.getPlayerOff().getAliveCards()){
+                    if(aliveCard.getID().equals(cellLivingCard.getID())){
+                        if(aliveCard instanceof Minion){
+                            //kill hanuz khalie
+                            aliveCard.kill();
+                            checkAlive(battle, aliveCard);
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        if(information.isCanKillOurMinionAndHealHero()){
+            for(LivingCard aliveCard : battle.getPlayerOn().getAliveCards()){
+                if(aliveCard.getID().equals(livingCard.getID())){
+                    if(aliveCard instanceof Minion){
+                        Hero hero = battle.getPlayerOn().getHero();
+                        hero.setRemainingHP(hero.getRemainingHP() + aliveCard.getRemainingHP());
+                        aliveCard.kill();
+                        checkAlive(battle, aliveCard);
+                    }
+                    break;
+                }
+            }
+        }
+        if(information.isCanStunBuffAdd()){
+            for(Cell impactCell : impactCells){
+                LivingCard cellLivingCard = impactCell.getLivingCard();
+                if(information.isEnemyImpact()){
+                    for(LivingCard aliveCard : battle.getPlayerOff().getAliveCards()){
+                        if(aliveCard.getID().equals(cellLivingCard.getID())){
+                            int remainTime = information.getTimeOfStunBuff();
+                            boolean isPermanent = information.isStunBuffPermanent();
+                            Impact.addStunToCard(remainTime, isPermanent, false, cellLivingCard);
                             break;
                         }
                     }
