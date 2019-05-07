@@ -51,6 +51,8 @@ public class Minion extends LivingCard {
 //        return  AttackArea.getCellsOfSpecialPower(this);
 //    }
 
+    //TODO
+    //ino bayad az aval bezanim
     public void doSpecialPower(String opponentID){
         if(getCoolDown() > 0){
             System.out.println("Special Power is not ready yet !!");

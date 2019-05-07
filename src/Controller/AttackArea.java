@@ -81,8 +81,8 @@ public class AttackArea {
         int x = cell.getX(), y = cell.getY();
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < length; j++) {
-                int newX = x + (length - 1) / 2 + i;
-                int newY = y + (length - 1) / 2 + j;
+                int newX = x + i;
+                int newY = y + j;
                 Cell cell1 = battle.getMap().getCellByCoordination(newX, newY);
                 if (cell1 != null) {
                     squareOfCells.add(cell1);

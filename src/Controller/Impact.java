@@ -242,7 +242,7 @@ public class Impact {
     //in tike baraye special power minion e
 
     //manash berese - baraye hero e in minion chi ?
-    public static void specialPower(Hero hero, int x, int y) {
+    public static void specialPower(Minion minion, int x, int y) {
 
     }
 

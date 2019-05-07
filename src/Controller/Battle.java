@@ -35,18 +35,6 @@ public class Battle {
 
     }
 
-    public void removeAliveCard(LivingCard removingLivingCard){
-        playerOn.removeDeadCard(removingLivingCard);
-        playerOff.removeDeadCard(removingLivingCard);
-    }
-
-    public ArrayList<Flag> getFlags(){
-        return this.flags;
-    }
-
-    public void addFlag(Flag flag){
-        this.flags.add(flag);
-    }
 
     public void showGameInfo(){
         //remaining mana bayad bashe ya maximum
@@ -90,7 +78,7 @@ public class Battle {
 
     //faghat vase livingCard e ?asan malum nis chejurie , card asan bayad tu bazi bashe ya chi koja donbalesh begardim
     public void showCardInfo(String ID) {
-        String info = "card wasnt found";
+        String info = "card was not found";
         CollectionItem thisCollectionItem = null;
         for (CollectionItem collectionItem : playerOff.getAccount().getCollection().getMainDeck().getCards()){
             if (collectionItem.getID().equals(ID)) {
@@ -112,15 +100,27 @@ public class Battle {
     }
 
     //in yeki shartesh chie bayad carde khdoemun bashe koja donbalesh begardim ...
-    public void selectCard(String ID){
+    public boolean selectCard(String ID){
         for(LivingCard livingCard : playerOn.getAliveCards()){
             if(livingCard.getID().equals(ID)){
                 this.selectedCard = livingCard;
-                return;
+                return true;
             }
         }
-        System.out.println("Invalid card id");
+        return false;
     }
+
+    public boolean selectItem(String collectableItemID){
+        for(CollectableItem collectableItem : playerOn.getCollectableItems())
+            if(collectableItem.getID().equals(collectableItemID)){
+                this.selectedCollectableItem = collectableItem;
+                return true;
+            }
+        return false;
+    }
+
+
+
     //havaset bashe in seda zade she bade in ke karemun ba card tammum shod
     public void removeSelectedCard(){
         this.selectedCard = null;
@@ -134,6 +134,8 @@ public class Battle {
     //che cardaei bishtar az 2 ta mitunan beran? moteghayer negah darim barashun?
     //too cell ham bayad ezafe she ?
 
+
+
     public void insertCardInMap(String cardID, int x, int y){
         CollectionItem insertingCollectionItem = null;
         for(CollectionItem collectionItem : playerOn.getHand().getHandCards()){
@@ -145,9 +147,17 @@ public class Battle {
             return;
         }
         if(!isInMap(x, y)){
-            System.out.println("Invalid coordination");
+            System.out.println("Invalid target");
             return;
         }
+
+        if(insertingCollectionItem instanceof Card){
+            if(playerOn.getMana().getCurrentMana() < ((Card) insertingCollectionItem).getMP()){
+                System.out.println("Low mana !! ");
+                return;
+            }
+        }
+
         Cell cell = map.getCellByCoordination(x, y);
         if(insertingCollectionItem instanceof LivingCard){
             if(map.getCellByCoordination(x, y).getLivingCard() != null){
@@ -165,7 +175,6 @@ public class Battle {
                 playerOn.getHand().removeCard(cardID);
                 Spell spell = (Spell)insertingCollectionItem;
                 spell.impactSpell(cell, this);
-
             }
         }
     }
@@ -180,7 +189,7 @@ public class Battle {
             return;
         }
         if(map.getCellByCoordination(x, y).getLivingCard() != null){
-            System.out.println("Destination is full !");
+            System.out.println("Invalid target !");
             return;
         }
 
@@ -188,7 +197,7 @@ public class Battle {
         int maxDistanceCanCardGo = 2;
         if(this.selectedCard.getCanMoveGreaterTwoCell()) maxDistanceCanCardGo = Integer.MAX_VALUE;
 
-        if(distance <= maxDistanceCanCardGo){
+        if(distance <= maxDistanceCanCardGo && distance < Integer.MAX_VALUE){
             Cell lastCell = map.getCellByCoordination(selectedCard.getPositionRow(), selectedCard.getPositionColumn());
             lastCell.removeCard();
 
@@ -197,9 +206,8 @@ public class Battle {
 
             Cell cell = map.getCellByCoordination(x, y);
             cell.insertCard(selectedCard.getID());
-        }else{
-            System.out.println("This move is impossible");
-        }
+        }else
+            System.out.println("Invalid target !");
     }
 
     private int getDistance(int x1, int y1, int x2, int y2){
@@ -234,6 +242,10 @@ public class Battle {
     }
 
     public void attackToOpponentCard(String opponentID){
+        if(selectedCard == null){
+            System.out.println("Select a card");
+            return;
+        }
         ArrayList<LivingCard> opponentAliveCards = playerOff.getAliveCards();
         LivingCard opponentLivingCard = null;
         for(LivingCard livingCard : opponentAliveCards)
@@ -247,17 +259,17 @@ public class Battle {
     }
 
     public void comboAttackToOpponentCard(String[] input){
-        String opponentID = input[0];
+        String opponentID = input[2];
         LivingCard opponentLivingCard = null;
         for(LivingCard livingCard : playerOff.getAliveCards())
             if(livingCard.getID().equals(opponentID))
                 opponentLivingCard = livingCard;
         if(opponentLivingCard == null){
-            System.out.println("Invalid card id");
+            System.out.println("Invalid opponent card id");
             return;
         }
         ArrayList<LivingCard> myLivingCards = new ArrayList<>();
-        for(int i = 1; i < input.length; i++){
+        for(int i = 3; i < input.length; i++){
             LivingCard myLivingCard = null;
             for(LivingCard livingCard : playerOn.getAliveCards())
                 if(livingCard.getID().equals(input[i]))
@@ -278,7 +290,10 @@ public class Battle {
         playerOn.getHand().show(playerOn.getAccount().getCollection().getMainDeck());
     }
 
-//buff haye passive is activeshun true she
+    //TODO
+    //in ja bayad kheili kar ha bokonim
+    //tahesh migim daghighan chia
+    //buff haye passive is activeshun true she
     public void endTurn(){
         Player player = playerOff;
         playerOff = playerOn;
@@ -298,14 +313,6 @@ public class Battle {
         }
     }
 
-    public void selectItem(String collectableItemID){
-        for(CollectableItem collectableItem : playerOn.getCollectableItems())
-            if(collectableItem.getID().equals(collectableItemID)){
-                this.selectedCollectableItem = collectableItem;
-                return;
-            }
-        System.out.println("collectableItem wasnt found");
-    }
 
     public void useSpecialPower(int x, int y){
         Hero hero = playerOn.getHero();
@@ -323,11 +330,13 @@ public class Battle {
         }
         //anjam nashe ham cooldown mishe
 
-        hero.setCoolDown(hero.getMaxCoolDown());
         Cell cell = this.map.getCellByCoordination(x, y);
         Impact.impactSpellOfHero(this, playerOn.getHero(), cell);
+        hero.setCoolDown(hero.getMaxCoolDown());
     }
 
+    //TODO
+    //in bayad az hand pak she
     public void useItem(int x, int y){
         if(selectedCollectableItem == null){
             System.out.println("select a collectable item");
@@ -338,7 +347,7 @@ public class Battle {
             return;
         }
         Cell cell = map.getCellByCoordination(x, y);
-        Impact.impactItem(selectedCollectableItem, cell);
+        Impact.impactItem((Item) selectedCollectableItem, cell, this);
     }
 
     //havaset bashe moteghayerasho update koni mese tedad cardaye estefade shode az main deck
@@ -418,11 +427,41 @@ public class Battle {
     }
     public void exit(){}
 
-    public void enterGraveYard(){}
+    //TODO
+    //masalan in ke yeki bemire bere tooye grave yard add she
+    public void enterGraveYard(){
+        playerOn.getGraveYard().inputCommandLine();
+    }
 
     public void help(){
 
     }
+
+    public void showMenu(){
+        System.out.println("1. Game Info");
+        System.out.println("2. Show my minions");
+        System.out.println("3. Show opponent minions");
+        System.out.println("4. Show card info [card id]");
+        System.out.println("5. Select [card id]");
+        System.out.println("6. Move to ([x], [y])");
+        System.out.println("7. Attack [opponent card id]");
+        System.out.println("8. Attack combo [opponent id] [my card id] [my card id] [...]");
+        System.out.println("9. Use special power (x, y)");
+        System.out.println("10. Show hand");
+        System.out.println("11. Insert [card id] in (x, y)");
+        System.out.println("12. End turn");
+        System.out.println("13. Show collectables");
+        System.out.println("14. Select [collectable id]");
+        System.out.println("15. Show info");
+        System.out.println("16. Use [location x, y]");
+        System.out.println("17. Show Next Card");
+        System.out.println("18. Enter gravayard");
+        System.out.println("19. Help");
+        System.out.println("20. End Game");
+        System.out.println("21. Exit");
+        System.out.println("22. Show menu");
+    }
+
 
     public void runGame(){
         preProcess();
@@ -443,37 +482,38 @@ public class Battle {
             showOpponentMinions();
         else if(inputLine.matches("show card info .*"))
             showCardInfo(input[3]);
-        else if(inputLine.matches("Select .*")) {
-            selectCard(input[1]);
-            selectItem(input[1]);
+        else if(inputLine.matches("select .*")) {
+            boolean isFound = selectCard(input[1]) || selectItem(input[1]);
+            if(!isFound) System.out.println("Can't find this card");
+            else System.out.println("card found !!");
         }
-        else if(inputLine.matches("Move\\([\\d]+, [\\d]+\\)")){
+        else if(inputLine.matches("move\\([\\d]+, [\\d]+\\)")){
             input = inputLine.split("[ \\(\\),]+");
             moveCardTo(Integer.parseInt(input[2]), Integer.parseInt(input[3]));
         }
-        else if(inputLine.matches("Attack .*"))
+        else if(inputLine.matches("attack .*"))
             attackToOpponentCard(input[1]);
-        else if(inputLine.matches("Attack combo .* .*"))
+        else if(inputLine.matches("attack combo [^s]+( [^s]+)+"))
             comboAttackToOpponentCard(input);
-        else if(inputLine.matches("Use special power \\([\\d]+, [\\d]+\\)")){
+        else if(inputLine.matches("use special power \\([\\d]+, [\\d]+\\)")){
             input = inputLine.split("[ \\(\\),]+");
             useSpecialPower(Integer.parseInt(input[3]), Integer.parseInt(input[4]));
         }
-        else if(inputLine.equals("Show hand"))
+        else if(inputLine.equals("show hand"))
             showHand();
-        else if(inputLine.matches("Insert .* in \\([\\d]+, [\\d]+\\)"))
+        else if(inputLine.matches("insert [^s]+ in \\([\\d]+, [\\d]+\\)"))
             insertCardInMap(input[1], Integer.parseInt(input[3]), Integer.parseInt(input[4]));
-        else if(inputLine.equals("End turn"))
+        else if(inputLine.equals("end turn"))
             endTurn();
-        else if(inputLine.equals("Show collectables"))
+        else if(inputLine.equals("show collectables"))
             showCollectables();
-        else if(inputLine.equals("Show info"))
+        else if(inputLine.equals("show info"))
             showItemInfo();
-        else if(inputLine.matches("Use [\\d],[\\d]"))
+        else if(inputLine.matches("use [\\d],[\\d]"))
             useItem(Integer.parseInt(input[1]), Integer.parseInt(input[2]));
-        else if(inputLine.equals("Show Next Card"))
+        else if(inputLine.equals("show next card"))
             showNextCard();
-        else if(inputLine.equals("Enter GraveYard"))
+        else if(inputLine.equals("enter graveyard"))
             enterGraveYard();
         else if(inputLine.equals("Help"))
             help();
@@ -482,7 +522,7 @@ public class Battle {
         else if(inputLine.equals("Exit"))
             return;
         else if(inputLine.equals("Show menu")){
-
+            this.showMenu();
         }
         else
             System.out.println("Enter valid command");
@@ -580,4 +620,18 @@ public class Battle {
     public Player getWinnerPlayer(){
         return this.winnerPlayer;
     }
+
+    public void removeAliveCard(LivingCard removingLivingCard){
+        playerOn.removeDeadCard(removingLivingCard);
+        playerOff.removeDeadCard(removingLivingCard);
+    }
+
+    public ArrayList<Flag> getFlags(){
+        return this.flags;
+    }
+
+    public void addFlag(Flag flag){
+        this.flags.add(flag);
+    }
+
 }
