@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public class Application {
 
     private ArrayList<Account> accounts;
-    private ArrayList<Battle> battles;
     private Collection shop = new Collection();
     private Account loggedInAccount;
 
@@ -52,16 +51,6 @@ public class Application {
         this.accounts.add(account);
     }
 
-    public Battle createBattle(){
-        Battle newBattle = new Battle();
-        this.addBattle(newBattle);
-        return newBattle;
-    }
-
-    public void addBattle(Battle battle){
-        this.battles.add(battle);
-    }
-
     // Here is Setters && Getters
 
     public ArrayList<Account> getAccounts() {
@@ -72,13 +61,7 @@ public class Application {
         this.accounts = accounts;
     }
 
-    public ArrayList<Battle> getBattles() {
-        return battles;
-    }
 
-    public void setBattles(ArrayList<Battle> battles) {
-        this.battles = battles;
-    }
 
     public Account getLoggedInAccount() {
         return loggedInAccount;

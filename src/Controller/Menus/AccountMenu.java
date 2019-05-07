@@ -7,6 +7,7 @@ import Controller.Main;
 import Model.*;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class AccountMenu extends Menu {
 
@@ -48,7 +49,7 @@ public class AccountMenu extends Menu {
         System.out.println("5. exit");
     }
 
-    private void createAccount(String username) throws FileNotFoundException {
+    private void createAccount(String username) throws IOException {
         if (Account.getAccountByUsername(username) != null) {
             System.out.println("this username is used");
             this.inputCommandLine();
