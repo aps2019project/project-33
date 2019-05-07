@@ -16,7 +16,7 @@ public class Main {
     }
 
 
-    public void createTotalDisarm() throws IOException {
+    public static void createTotalDisarm() throws IOException {
         Spell spell = new Spell();
         spell.setPrice(1000);
         spell.setMp(0);
