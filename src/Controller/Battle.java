@@ -553,7 +553,7 @@ public class Battle {
     private void inputCommandLine(){
         System.out.println("Here is Battle");;
 
-        String inputLine = Main.scanner.nextLine();
+        String inputLine = readInput();
         inputLine = inputLine.trim();
         inputLine = inputLine.toLowerCase();
         String[] input = inputLine.split("[ ]+");
@@ -615,6 +615,14 @@ public class Battle {
         else
             System.out.println("Enter valid command");
         this.inputCommandLine();
+    }
+
+    private String readInput() {
+        if(playerOn instanceof AI){
+            return ((AI)playerOn).outputSomeRandomOrder();
+        }
+        else
+            return Main.scanner.nextLine();
     }
 
     public void addMareBozorg(){}

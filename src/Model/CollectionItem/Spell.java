@@ -1,10 +1,9 @@
 package Model.CollectionItem;
 
-import Controller.AttackArea;
-import Controller.Battle;
-import Controller.Impact;
+import Controller.*;
 import Model.Enviroment.Cell;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import Controller.Battle;
 
@@ -18,19 +17,15 @@ public class Spell extends Card {
         return AttackArea.getImpactCellsOfSpell(this, coordination, this.getBattle());
     }
 
-    public void multipleImpact(){}
-    public void minionImpact(){}
-    public void HeroImpact(){}
     public void cellImpact(){}
-    public void kingsGurad(){}
-    public void doAllKindOfAttacks(){}
 
-/*
-    public static Spell createSpell(String playerName, String spellName){
-        Spell spell = loadSpellFromJsonFile(spellName);
+    public static Spell createSpell(String spellName, String playerName) throws FileNotFoundException {
+        String address = "Data/CollectionItem/Spell/" + spellName + ".json";
+        Spell spell = (Spell) Application.readJSON(Spell.class, address);
+
         int numberOfThisSpellType = 0;
-        ArrayList<Spell> usedSpells = CollectionItem.getAllSpells();
-        for(Spell usedSpell : usedSpells){
+        ArrayList<Spell> allSpells = CollectionItem.getAllSpells();
+        for(Spell usedSpell : allSpells){
             if(usedSpell.getName().equals(spellName))
                 numberOfThisSpellType++;
         }
@@ -39,7 +34,6 @@ public class Spell extends Card {
         CollectionItem.addSpellToAllSpells(spell);
         return spell;
     }
-*/
 
     @Override
     public void showCardInBattle() {
@@ -52,7 +46,6 @@ public class Spell extends Card {
         info = "Type : Spell - Name : " + this.getName() + " - MP : " + this.getMp() + " - Desc : " + this.getDescription();
         return info;
     }
-
 
     //Here is Setters && Getters
 
