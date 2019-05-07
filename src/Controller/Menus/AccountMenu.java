@@ -11,11 +11,8 @@ import java.io.IOException;
 
 public class AccountMenu extends Menu {
 
-    //tahesh in ja bayad har koodoom az bakhsh ha beshe ye tabe
-
-
     @Override
-    public void inputCommandLine() throws FileNotFoundException {
+    public void inputCommandLine() throws IOException {
         System.out.println("Here is Account Menu");
 
         String inputLine = Main.scanner.nextLine();
@@ -73,7 +70,7 @@ public class AccountMenu extends Menu {
         new MainMenu().inputCommandLine();
     }
 
-    private void login(String username) throws FileNotFoundException {
+    private void login(String username) throws IOException {
         Account account = Account.getAccountByUsername(username);
         if (account == null) {
             System.out.println("Invalid Username !!");

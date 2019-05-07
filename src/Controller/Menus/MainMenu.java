@@ -64,7 +64,7 @@ public class MainMenu extends Menu {
         writeInFile("Account", Account.getAccounts());
         //Save Shop
         {
-            String address = "../../../Data/Memory/Shop/shop.json";
+            String address = "Data/Memory/Shop/shop.json";
             Application.writeJSON(Main.application.getShop(), address);
         }
         //Save All Spells
@@ -79,12 +79,12 @@ public class MainMenu extends Menu {
     private void writeInFile(String name, ArrayList arrayList) throws IOException {
         for(int i = 0; i < arrayList.size(); i ++){
             Object object = arrayList.get(i);
-            String address = "../../../Data/Memory/" + name + "s/" + name;
+            String address = "Data/Memory/" + name + "s/" + name;
             Application.writeJSON(object, address + i + ".json");
         }
     }
 
-    private void logout() throws FileNotFoundException {
+    private void logout() throws IOException {
         Main.application.setLoggedInAccount(null);
         new AccountMenu().inputCommandLine();
         return;
