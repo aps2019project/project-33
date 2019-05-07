@@ -3,6 +3,7 @@ package Controller;
 import Model.CollectionItem.Spell;
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
+import jdk.jshell.spi.SPIResolutionException;
 
 import java.io.*;
 import java.util.Scanner;
@@ -20,13 +21,257 @@ public class Main {
         Spell spell = new Spell();
         spell.setPrice(1000);
         spell.setMp(0);
+        spell.setName("Total Disarm");
         spell.getInformation().setEnemyImpact(true);
         spell.getInformation().setCanDisarmBuffAdd(true);
         spell.getInformation().setDisarmBuffPermanent(true);
-        spell.setName("Total Disarm");
+        spell.getInformation().setImpactAllArea(true);
         application.writeJSON(spell, "Data/CollectionItem/Spell/TotalDisarm.json");
     }
 
+    public static void createAreaDispel() throws IOException {
+        Spell spell = new Spell();
+        spell.setPrice(1500);
+        spell.setMp(2);
+        spell.setName("Area Dispel");
+        spell.getInformation().setCanRemoveGoodBuffsOfEnemy(true);
+        spell.getInformation().setSquareOfCellsImpact(true);
+        spell.getInformation().setLengthOfSquareOfCellsImpact(2);
+        spell.getInformation().setCanRemoveBadBuffsOfOurselves(true);
+        spell.getInformation().setMultipleImpact(true);
+        spell.getInformation().setImpactAllArea(true);
+        application.writeJSON(spell, "Data/CollectionItem/Spell/AreaDispel.json");
+    }
+
+    public static void Empower() throws IOException{
+        Spell spell = new Spell();
+        spell.setPrice(250);
+        spell.setMp(1);
+        spell.setName("Empower");
+        spell.getInformation().setUsImpact(true);
+        spell.getInformation().setCanIncreaseAP(true);
+        spell.getInformation().setAmountOfIncreaseAP(2);
+        spell.getInformation().setIncreaseAPPermanent(true);
+        spell.getInformation().setImpactAllArea(true);
+        application.writeJSON(spell, "Data/CollectionItem/Spell/Empower.json");
+    }
+
+    public static void Fireball() throws IOException{
+        Spell spell = new Spell();
+        spell.setPrice(400);
+        spell.setMp(1);
+        spell.setName("Fireball");
+        spell.getInformation().setEnemyImpact(true);
+        spell.getInformation().setCanDamageToEnemy(true);
+        spell.getInformation().setDamageToEnemy(4);
+        spell.getInformation().setImpactAllArea(true);
+        application.writeJSON(spell, "Data/CollectionItem/Spell/Fireball.json");
+    }
+
+    public static void GodStrength() throws IOException{
+        Spell spell = new Spell();
+        spell.setPrice(450);
+        spell.setMp(2);
+        spell.setName("God Strength");
+        spell.getInformation().setUsImpact(true);
+        spell.getInformation().setHeroImpact(true);
+        spell.getInformation().setCanIncreaseAP(true);
+        spell.getInformation().setIncreaseAPPermanent(true);
+        spell.getInformation().setAmountOfIncreaseAP(4);
+        spell.getInformation().setImpactAllArea(true);
+        application.writeJSON(spell, "Data/CollectionItem/Spell/GodStrength.json");
+    }
+/*
+what is this shit
+    public static void HellFire() throws IOException{
+
+    }
+*/
+    public static void LightingBolt() throws IOException{
+        Spell spell = new Spell();
+        spell.setPrice(1250);
+        spell.setMp(2);
+        spell.setName("Lighting Bolt");
+        spell.getInformation().setEnemyImpact(true);
+        spell.getInformation().setHeroImpact(true);
+        spell.getInformation().setImpactAllArea(true);
+        spell.getInformation().setCanDamageToEnemy(true);
+        spell.getInformation().setDamageToEnemy(8);
+        application.writeJSON(spell, "Data/CollectionItem/Spell/LightingBolt.json");
+    }
+
+    public static void PoisonLake() throws IOException{
+        Spell spell = new Spell();
+        spell.setPrice(900);
+        spell.setMp(5);
+        spell.setName("Poison Lake");
+        spell.getInformation().setLengthOfSquareOfCellsImpact(3);
+        spell.getInformation().setSquareOfCellsImpact(true);
+        spell.getInformation().setCanAddPoisonBuffToCell(true);
+        spell.getInformation().setMultipleImpact(true);
+        spell.getInformation().setTimeOfAddPoisonBuffToCell(1);
+        application.writeJSON(spell, "Data/CollectionItem/Spell/PoisonLake.json");
+    }
+
+    public static void Madness() throws IOException{
+        Spell spell = new Spell();
+        spell.setPrice(650);
+        spell.setMp(0);
+        spell.setName("Madness");
+        spell.getInformation().setUsImpact(true);
+        spell.getInformation().setImpactAllArea(true);
+        spell.getInformation().setCanDisarmBuffAdd(true);
+        spell.getInformation().setTimeOfDisarmBuff(3);
+        spell.getInformation().setCanIncreaseAP(true);
+        spell.getInformation().setAmountOfIncreaseAP(4);
+        spell.getInformation().setIncreaseRemainTime(3);
+        application.writeJSON(spell, "Data/CollectionItem/Spell/Madness.json");
+    }
+
+    public static void AllDisarm() throws IOException{
+        Spell spell = new Spell();
+        spell.setPrice(2000);
+        spell.setMp(9);
+        spell.setName("All Disarm");
+        spell.getInformation().setEnemyImpact(true);
+        spell.getInformation().setMultipleImpact(true);
+        spell.getInformation().setImpactAllArea(true);
+        spell.getInformation().setTimeOfDisarmBuff(1);
+        spell.getInformation().setCanDisarmBuffAdd(true);
+        application.writeJSON(spell, "Data/CollectionItem/Spell/AllDisarm.json");
+    }
+
+    public static void AllPoison() throws IOException{
+        Spell spell = new Spell();
+        spell.setPrice(1500);
+        spell.setMp(8);
+        spell.setName("All Poison");
+        spell.getInformation().setEnemyImpact(true);
+        spell.getInformation().setMultipleImpact(true);
+        spell.getInformation().setImpactAllArea(true);
+        spell.getInformation().setCanPoisonBuffAdd(true);
+        spell.getInformation().setTimeOfPoisonBuff(4);
+        application.writeJSON(spell, "Data/CollectionItem/Spell/AllPoison.json");
+    }
+
+    public static void Dispel() throws IOException{
+        Spell spell = new Spell();
+        spell.setPrice(2100);
+        spell.setMp(0);
+        spell.setName("Dispel");
+        spell.getInformation().setUsImpact(true);
+        spell.getInformation().setEnemyImpact(true);
+        spell.getInformation().setImpactAllArea(true);
+        spell.getInformation().setCanRemoveGoodBuffsOfEnemy(true);
+        spell.getInformation().setCanRemoveBadBuffsOfOurselves(true);
+        application.writeJSON(spell, "Data/CollectionItem/Spell/Dispel.json");
+    }
+
+    public static void HealthWithProfit() throws  IOException{
+        Spell spell = new Spell();
+        spell.setPrice(2250);
+        spell.setMp(0);
+        spell.setName("HealthWithProfit");
+        spell.getInformation().setUsImpact(true);
+        spell.getInformation().setImpactAllArea(true);
+        spell.getInformation().setCanWeaknessBuffAdd(true);
+        spell.getInformation().setChangeHPByWeakness(6);
+        spell.getInformation().setWeaknessBuffPermanent(true);
+        spell.getInformation().setNumberOfHolyBuff(2);
+        spell.getInformation().setCanHolyBuffAdd(true);
+        spell.getInformation().setTimeOfHolyBuff(3);
+        application.writeJSON(spell, "Data/CollectionItem/Spell/HealthWithProfit.json");
+    }
+
+    public static void GhazaBokhorJoonBegiri() throws IOException{
+        Spell spell = new Spell();
+        spell.setPrice(2500);
+        spell.setMp(2);
+        spell.setName("Ghaza Bokhor Joon Begiri");
+        spell.getInformation().setUsImpact(true);
+        spell.getInformation().setImpactAllArea(true);
+        spell.getInformation().setPowerBuffPermanent(true);
+        spell.getInformation().setGhazaPowerBuff(true);
+        spell.getInformation().setCanPowerBuffAdd(true);
+        application.writeJSON(spell, "Data/CollectionItem/Spell/GhazaBokhorJoonBegiri.json");
+    }
+
+    public static void  AllPower() throws IOException{
+        Spell spell = new Spell();
+        spell.setPrice(2000);
+        spell.setMp(4);
+        spell.setName("All Power");
+        spell.getInformation().setUsImpact(true);
+        spell.getInformation().setMultipleImpact(true);
+        spell.getInformation().setImpactAllArea(true);
+        spell.getInformation().setCanPowerBuffAdd(true);
+        spell.getInformation().setPowerBuffPermanent(true);
+        spell.getInformation().setAmountOfIncreaseAP(2);
+        application.writeJSON(spell, "Data/CollectionItem/Spell/AllPower.json");
+    }
+
+    public static void AllAttack() throws IOException{
+        Spell spell = new Spell();
+        spell.setPrice(1500);
+        spell.setMp(4);
+        spell.setName("All Attack");
+        spell.getInformation().setEnemyImpact(true);
+        spell.getInformation().setMultipleImpact(true);
+        spell.getInformation().setImpactColumn(true);
+        spell.getInformation().setDamageToEnemy(6);
+        spell.getInformation().setCanDamageToEnemy(true);
+        application.writeJSON(spell, "Data/CollectionItem/Spell/AllAttack.json");
+    }
+
+    public static void Weakening() throws IOException{
+        Spell spell = new Spell();
+        spell.setPrice(1000);
+        spell.setMp(1);
+        spell.setName("Weakening");
+        spell.getInformation().setImpactAllArea(true);
+        spell.getInformation().setEnemyImpact(true);
+        spell.getInformation().setMinionImpact(true);
+        spell.getInformation().setCanWeaknessBuffAdd(true);
+        spell.getInformation().setWeaknessBuffPermanent(true);
+        spell.getInformation().setChangePowerByWeakness(4);
+        application.writeJSON(spell, "Data/CollectionItem/Spell/Weakening.json");
+    }
+
+    public static void Sacrifice() throws IOException{
+        Spell spell = new Spell();
+        spell.setPrice(1600);
+        spell.setMp(3);
+        spell.setName("Sacrifice");
+        spell.getInformation().setImpactAllArea(true);
+        spell.getInformation().setUsImpact(true);
+        spell.getInformation().setMinionImpact(true);
+        spell.getInformation().setCanKillOurMinionAndHealHero(true);
+        application.writeJSON(spell, "Data/CollectionItem/Spell/Sacrifice.json");
+    }
+
+    public static void KingsGuard() throws IOException{
+        Spell spell = new Spell();
+        spell.setPrice(1750);
+        spell.setMp(3);
+        spell.setName("Kings Guard");
+        spell.getInformation().setEnemyImpact(true);
+        spell.getInformation().setMinionImpact(true);
+        spell.getInformation().setImpactNeighbors(true);
+        spell.getInformation().setCanKillMinionOfEnemy(true);
+        application.writeJSON(spell, "Data/CollectionItem/Spell/KingsGuard.json");
+    }
+
+    public static void Shock() throws IOException{
+        Spell spell = new Spell();
+        spell.setPrice(1200);
+        spell.setMp(1);
+        spell.setName("Shock");
+        spell.getInformation().setEnemyImpact(true);
+        spell.getInformation().setImpactAllArea(true);
+        spell.getInformation().setCanStunBuffAdd(true);
+        spell.getInformation().setTimeOfStunBuff(2);
+        application.writeJSON(spell, "Data/CollectionItem/Spell/Shock.json");
+    }
 }
 
 

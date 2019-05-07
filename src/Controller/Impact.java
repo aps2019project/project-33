@@ -433,6 +433,7 @@ public class Impact {
                 if(information.isEnemyImpact()){
                     for(LivingCard aliveCard : battle.getPlayerOff().getAliveCards()){
                         if(aliveCard.getID().equals(cellLivingCard.getID())){
+                            //havaset bashee change power + e vali bayad az ap kam she
                             Impact.addWeaknessToCard(remainTime, isPermanent, false, changeHP, changePower, cellLivingCard);
                             break;
                         }
