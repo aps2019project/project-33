@@ -126,7 +126,7 @@ public class Information {
 
     private boolean canIncreaseAP;
     private int amountOfIncreaseAP;
-    private int remainTime;
+    private int increaseRemainTime;
     private boolean increaseAPPermanent;
 
     private boolean isImpactAllArea;
@@ -151,10 +151,13 @@ public class Information {
     private boolean canWeaknessBuffAdd;
     private int timeOfWeaknessBuff;
     private boolean isWeaknessBuffPermanent;
+    private int changeHPByWeakness;
+    private int changePowerByWeakness;
 
     private boolean canPoisonBuffAdd;
     private int timeOfPoisonBuff;
     private boolean isPoisonBuffPermanent;
+    private int decreaseHPOfPoisonBuff;
 
     private boolean canStunBuffAdd;
     private int timeOfStunBuff;
@@ -213,12 +216,36 @@ public class Information {
     private boolean pareSimorgh;
     private int minOfPareSimorgh;
 
-    public int getRemainTime() {
-        return remainTime;
+    public int getChangePowerByWeakness() {
+        return changePowerByWeakness;
     }
 
-    public void setRemainTime(int remainTime) {
-        this.remainTime = remainTime;
+    public void setChangePowerByWeakness(int changePowerByWeakness) {
+        this.changePowerByWeakness = changePowerByWeakness;
+    }
+
+    public int getChangeHPByWeakness() {
+        return changeHPByWeakness;
+    }
+
+    public void setChangeHPByWeakness(int changeHPByWeakness) {
+        this.changeHPByWeakness = changeHPByWeakness;
+    }
+
+    public int getDecreaseHPOfPoisonBuff() {
+        return decreaseHPOfPoisonBuff;
+    }
+
+    public void setDecreaseHPOfPoisonBuff(int decreaseHPOfPoisonBuff) {
+        this.decreaseHPOfPoisonBuff = decreaseHPOfPoisonBuff;
+    }
+
+    public int getIncreaseRemainTime() {
+        return increaseRemainTime;
+    }
+
+    public void setIncreaseRemainTime(int remainTime) {
+        this.increaseRemainTime = remainTime;
     }
 
 

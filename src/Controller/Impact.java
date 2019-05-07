@@ -40,8 +40,8 @@ public class Impact {
         livingCard.addNewBuff(PoisonBuff);
     }
 
-    public static void addPowerBuffToCard(int remainTime, boolean isPermanent, boolean isPassive, LivingCard livingCard) {
-        PowerBuff powerBuff = new PowerBuff(remainTime, isPermanent, isPassive, 1, 1);
+    public static void addPowerBuffToCard(int remainTime, boolean isPermanent, boolean isPassive, int changeHP, int changePower, LivingCard livingCard) {
+        PowerBuff powerBuff = new PowerBuff(remainTime, isPermanent, isPassive, changeHP, changePower);
         livingCard.addNewBuff(powerBuff);
     }
 
@@ -251,7 +251,7 @@ public class Impact {
     //simorgh chie
     public static void impactSpellOfHero(Battle battle, Hero hero, Cell cell) {
         if (hero.getName().equals("diveSefid")) {
-            Impact.addPowerBuffToCard(100, true, false, hero);
+            Impact.addPowerBuffToCard(100, true, false, 0, 4, hero);
         }
         if (hero.getName().equals("ezhdaha")) {
             LivingCard livingCard = cell.getLivingCard();
@@ -314,6 +314,7 @@ public class Impact {
     public static void impactSpell(Spell spell, Cell cell, Battle battle) {
         LivingCard livingCard = cell.getLivingCard();
         ArrayList<Cell> impactCells = AttackArea.getImpactCellsOfSpell(spell, cell, battle);
+        Information information = spell.getInformation();
         if (!spell.getInformation().isMultipleImpact()) {
             if (livingCard == null) {
                 System.out.println("there isnt living card");
@@ -379,7 +380,56 @@ public class Impact {
             }
         }
         if(spell.getInformation().isCanIncreaseAP()){
-            Impact.addPowerBuffToCard();
+            for(Cell impactCell : impactCells){
+                LivingCard cellLivingCard = impactCell.getLivingCard();
+                if(cellLivingCard == null)
+                    continue;
+                int remainTime = information.getIncreaseRemainTime();
+                int changePower = information.getAmountOfIncreaseAP();
+                boolean isPermanent = information.isIncreaseAPPermanent();
+                Impact.addPowerBuffToCard(remainTime,isPermanent, false, 0, changePower, cellLivingCard);
+            }
+        }
+        if(information.isCanAddPoisonBuffToCell()){
+            for(Cell impactCell : impactCells){
+                int remainTime = information.getTimeOfAddPoisonBuffToCell();
+                int decreaseHP = information.getDecreaseHpOfPoisonBuffOfCell();
+                Impact.addPoisonBuffToCell(remainTime, decreaseHP, impactCell);
+            }
+        }
+        if(information.isCanPoisonBuffAdd()){
+            for(Cell impactCell : impactCells){
+                LivingCard cellLivingCard = impactCell.getLivingCard();
+                for(LivingCard aliveCard : battle.getPlayerOff().getAliveCards()){
+                    if(aliveCard.getID().equals(cellLivingCard.getID())){
+                        int remainTime = information.getTimeOfPoisonBuff();
+                        boolean isPermanent = information.isPoisonBuffPermanent();
+                        int decreaseHP = information.getDecreaseHPOfPoisonBuff();
+                        Impact.addPoisonToCard(remainTime, isPermanent, false, decreaseHP, cellLivingCard);
+                        break;
+                    }
+                }
+            }
+        }
+        //check kardane in ke doshmane ya na ro mikhad?
+        if(information.isCanWeaknessBuffAdd()){
+            for(Cell impactCell : impactCells){
+                LivingCard cellLivingCard = impactCell.getLivingCard();
+                if(cellLivingCard == null)
+                    continue;
+                int remainTime = information.getTimeOfWeaknessBuff();
+                boolean isPermanent = information.isWeaknessBuffPermanent();
+                int changeHP = information.getChangeHPByWeakness();
+                int changePower = information.getChangePowerByWeakness();
+                if(information.isEnemyImpact()){
+                    for(LivingCard aliveCard : battle.getPlayerOff().getAliveCards()){
+                        if(aliveCard.getID().equals(cellLivingCard.getID())){
+                            Impact.addWeaknessToCard(remainTime, isPermanent, false, changeHP, changePower, cellLivingCard);
+                            break;
+                        }
+                    }
+                }
+            }
         }
     }
 
