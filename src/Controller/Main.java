@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.CollectionItem.Item;
 import Model.CollectionItem.Spell;
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
@@ -12,20 +13,7 @@ public class Main {
     public static Application application = new Application();
 
     public static void main(String[] args) throws IOException {
-        createTotalDisarm();
         application.runApplication();
-    }
-
-
-    public static void createTotalDisarm() throws IOException {
-        Spell spell = new Spell();
-        spell.setPrice(1000);
-        spell.setMp(0);
-        spell.getInformation().setEnemyImpact(true);
-        spell.getInformation().setCanDisarmBuffAdd(true);
-        spell.getInformation().setDisarmBuffPermanent(true);
-        spell.setName("Total Disarm");
-        application.writeJSON(spell, "Data/CollectionItem/Spell/TotalDisarm.json");
     }
 
 }

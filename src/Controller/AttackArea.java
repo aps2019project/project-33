@@ -275,7 +275,6 @@ public class AttackArea {
             if(information.isForRange() && livingCard.getInformation().isRange())
                 result.add(cell);
         }
-
         return result;
     }
 
