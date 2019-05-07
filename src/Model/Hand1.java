@@ -56,6 +56,15 @@ public class Hand1 {
         }
     }
 
+    public void addNextCard(Deck mainDeck){
+        if(mainDeck.getCards().size() <= numberOfUsedDeckCollectionItems){
+            System.out.println("main deck is empty");
+            return;
+        }
+        handCards.add(mainDeck.getCards().get(numberOfUsedDeckCollectionItems));
+        numberOfUsedDeckCollectionItems++;
+    }
+
     public void addCard(CollectionItem collectionItem){
         handCards.add(collectionItem);
     }
