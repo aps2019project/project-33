@@ -7,7 +7,6 @@ import Model.CollectionItem.*;
 import Model.Enviroment.Cell;
 
 import Model.Player;
-//import javafx.geometry.Pos;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -240,11 +239,14 @@ public class Impact {
         return attackCells;
     }
 
+    //in tike baraye special power minion e
 
-//manash berese - baraye hero e in minion chi ?
+    //manash berese - baraye hero e in minion chi ?
     public static void specialPower(Hero hero, int x, int y) {
 
     }
+
+    //payane in bakhsh
 
     //simorgh chie
     public static void impactSpellOfHero(Battle battle, Hero hero, Cell cell) {
@@ -306,6 +308,8 @@ public class Impact {
             Impact.addHolyToCard(10, true, true, 1, hero);
         }
     }
+
+    //in tike baraye spell hast
 
     public static void impactSpell(Spell spell, Cell cell, Battle battle) {
         LivingCard livingCard = cell.getLivingCard();
@@ -379,8 +383,9 @@ public class Impact {
         }
     }
 
-    public static void main(Battle battle, Card ourCard) {
-    }
+    //payane in bakhsh
+
+    //In tike bishtar marboot be item hast
 
     public static void impactItem(Item item, Cell cell, Battle battle) {
         Information information = item.getInformation();
@@ -474,6 +479,8 @@ public class Impact {
     private static void increaseHPOfLivingHero(LivingCard livingCard, int amount) {
         livingCard.increaseHP(amount);
     }
+
+    //payane in bakhsh
 }
 
 

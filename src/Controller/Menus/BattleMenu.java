@@ -35,7 +35,6 @@ public class BattleMenu extends Menu {
         chooseType();
         chooseSecondPlayer();
         chooseMode();
-        battle.preProcess();
         battle.runGame();
     }
 

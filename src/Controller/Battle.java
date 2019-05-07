@@ -15,16 +15,13 @@ public class Battle {
     private Player playerOn, playerOff;
     private Map1 map = new Map1();
     private boolean gameIsRunning;
-    private int numberOfRounds, prize;
+    private int numberOfRounds, prize, numberOfFlags;
     private String type, mode;
     private LivingCard selectedCard;
     private Flag mainFlag;
     private CollectableItem selectedCollectableItem;
-    private int numberOfFlags;
-    private Player winnerPlayer = null;
-    private Player loserPlayer = null;
-
-    private ArrayList<Flag> flags = new ArrayList<Flag>();
+    private Player winnerPlayer = null, loserPlayer = null;
+    private ArrayList<Flag> flags = new ArrayList<>();
 
     private String[] modes = {"Kill_enemy's_hero", "Hold_flags", "Take_half_of_flags"};
 
@@ -32,6 +29,7 @@ public class Battle {
         this.selectedCard = null;
         this.selectedCollectableItem = null;
     }
+
 //jaye avalie flaga o hero ha o ...
     public void preProcess(){
 
@@ -58,6 +56,7 @@ public class Battle {
             System.out.println("my hero HP : " + playerOn.getHero().getHP());
             System.out.println("opponent HP : " + playerOff.getHero().getHP());
         }
+        //chera sotoon o satr midi biroon ?
         if(this.mode.equals(modes[1])){
             System.out.println("flag position is : " + this.mainFlag.getPositionColumn() + ", " + this.mainFlag.getPositionRow());
           //usernamesh bayad chap she?
@@ -426,23 +425,25 @@ public class Battle {
     }
 
     public void runGame(){
+        preProcess();
         inputCommandLine();
     }
 
     private void inputCommandLine(){
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
+        inputLine = inputLine.toLowerCase();
         String[] input = inputLine.split("[ ]+");
 
-        if(inputLine.equals("GameInfo"))
+        if(inputLine.equals("gameinfo"))
             showGameInfo();
-        else if(inputLine.equals("Show my minions"))
+        else if(inputLine.equals("show my minions"))
             showMyMinions();
-        else if(inputLine.equals("Show opponent minions"))
+        else if(inputLine.equals("show opponent minions"))
             showOpponentMinions();
-        else if(inputLine.matches("Show card info *."))
+        else if(inputLine.matches("show card info .*"))
             showCardInfo(input[3]);
-        else if(inputLine.matches("Select *.")) {
+        else if(inputLine.matches("Select .*")) {
             selectCard(input[1]);
             selectItem(input[1]);
         }
@@ -450,9 +451,9 @@ public class Battle {
             input = inputLine.split("[ \\(\\),]+");
             moveCardTo(Integer.parseInt(input[2]), Integer.parseInt(input[3]));
         }
-        else if(inputLine.matches("Attack *."))
+        else if(inputLine.matches("Attack .*"))
             attackToOpponentCard(input[1]);
-        else if(inputLine.matches("Attack combo *. *."))
+        else if(inputLine.matches("Attack combo .* .*"))
             comboAttackToOpponentCard(input);
         else if(inputLine.matches("Use special power \\([\\d]+, [\\d]+\\)")){
             input = inputLine.split("[ \\(\\),]+");
@@ -460,7 +461,7 @@ public class Battle {
         }
         else if(inputLine.equals("Show hand"))
             showHand();
-        else if(inputLine.matches("Insert *. in \\([\\d]+, [\\d]+\\)"))
+        else if(inputLine.matches("Insert .* in \\([\\d]+, [\\d]+\\)"))
             insertCardInMap(input[1], Integer.parseInt(input[3]), Integer.parseInt(input[4]));
         else if(inputLine.equals("End turn"))
             endTurn();
