@@ -36,8 +36,8 @@ public class ShopMenu extends Menu {
             this.sell(collectionItemName, collection);
         } else if (inputLine.equals("show"))
             this.shop.showCollection("Buy Cost");
-        else if (inputLine.equals("help"))
-            ShopMenu.showHelp();
+        else if (inputLine.equals("show menu"))
+            ShopMenu.showMenu();
         else if (inputLine.equals("exit"))
             return;
         else
@@ -103,15 +103,15 @@ public class ShopMenu extends Menu {
         System.out.println("You bought it :)");
     }
 
-    public static void showHelp() {
-        System.out.println("2. show collection");
-        System.out.println("3. search  [item name | card name]");
-        System.out.println("4. search shop [item name | card name]");
-        System.out.println("5. buy [card name | item name]");
-        System.out.println("6. sell [card name | item name]");
-        System.out.println("7. show");
-        System.out.println("8. help");
-        System.out.println("1. exit");
+    public static void showMenu() {
+        System.out.println("1. show collection");
+        System.out.println("2. search  [item name | card name]");
+        System.out.println("3. search shop [item name | card name]");
+        System.out.println("4. buy [card name | item name]");
+        System.out.println("5. sell [card name | item name]");
+        System.out.println("6. show");
+        System.out.println("7. show menu");
+        System.out.println("8. exit");
     }
 
     public void generate() {

@@ -31,8 +31,8 @@ public class AccountMenu extends Menu {
             return;
         } else if (inputLine.equals("show leader board")) {
             Account.showLeaderBoard();
-        } else if (inputLine.equals("help")) {
-            AccountMenu.showHelp();
+        } else if (inputLine.equals("show menu")) {
+            AccountMenu.showMenu();
         } else if(inputLine.equals("exit"))
             return;
         else
@@ -40,11 +40,11 @@ public class AccountMenu extends Menu {
         this.inputCommandLine();
     }
 
-    public static void showHelp() {
+    public static void showMenu() {
         System.out.println("1. create account [username]");
         System.out.println("2. login [username]");
         System.out.println("3. show leader board");
-        System.out.println("4. help");
+        System.out.println("4. show menu");
         System.out.println("5. exit");
     }
 
