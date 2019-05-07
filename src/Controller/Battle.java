@@ -30,8 +30,17 @@ public class Battle {
         this.selectedCollectableItem = null;
     }
 
+    public void createHand(Player player){
+        Deck mainDeck = player.getAccount().getCollection().getMainDeck();
+        mainDeck.shuffle();
+        for(int i = 0; i < 5; i++)
+            player.getHand().addNextCard(mainDeck);
+    }
+
 //jaye avalie flaga o hero ha o ...
     public void preProcess(){
+        this.createHand(playerOn);
+        this.createHand(playerOff);
         //TODO
     }
 

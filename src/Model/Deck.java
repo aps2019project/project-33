@@ -3,6 +3,7 @@ package Model;
 import Model.CollectionItem.*;
 
 import java.util.ArrayList;
+import java.util.*;
 
 public class Deck{
     private ArrayList<CollectionItem> cards = new ArrayList<CollectionItem>();
@@ -134,6 +135,10 @@ public class Deck{
         this.cards.add(collectionItem);
     }
 
+    public void shuffle(){
+        Collections.shuffle(this.cards);
+    }
+
     private boolean haveHero(){
         for(CollectionItem collectionItem : this.cards)
             if(collectionItem instanceof Hero)
@@ -150,5 +155,6 @@ public class Deck{
     public String getName() {
         return name;
     }
+
 
 }
