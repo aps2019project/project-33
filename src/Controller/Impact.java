@@ -89,10 +89,18 @@ public class Impact {
     }
 
     public static void damageToEnemy(Battle battle, Player player, LivingCard myLivingCard, LivingCard opponentLivingCard, int damage) {
+        if (opponentLivingCard.getInformation().isAntiShock()) return;
+
+        if (opponentLivingCard.getInformation().isAntiAttackAgainstWeek()) {
+            if (myLivingCard.getDecreaseHPByAttack() < myLivingCard.getDecreaseHPByAttack())
+                return;
+        }
+
         if (myLivingCard instanceof Hero && opponentLivingCard instanceof Hero) {
             if (((Hero) myLivingCard).isHaveAssassinationDagger())
                 damage += 8;
         }
+
         if (player.isCanAddPoisonWhileAttacking())
             addPoisonToCard(1, false, false, 1, opponentLivingCard);
         if (player.isCanAddStunWhileAttacking())
@@ -101,6 +109,29 @@ public class Impact {
             myLivingCard.increaseHP(2);
         if (myLivingCard.isHaveShamshireChini())
             damage += 5;
+
+        if (myLivingCard instanceof Minion) {
+
+            Minion minion = (Minion) myLivingCard;
+            Information information = minion.getInformation();
+
+            if (information.isCanStunBuffAdd())
+                addStunToCard(information.getTimeOfStunBuff(), false, false, opponentLivingCard);
+
+            if (information.isAntiHollyBuff())
+                damage += opponentLivingCard.getShield();
+
+            if (opponentLivingCard instanceof Minion) {
+                if (information.isCanDecreaseHpNextRound()) {
+                    opponentLivingCard.setDecreaseHPByAttack(opponentLivingCard.getDecreasHPNextRound() +
+                            information.getAmountOfDecreaseHPNextRound());
+                }
+                if (information.isCanDecreaseHP2NextRound()) {
+                    opponentLivingCard.setDecreaseHP2NextRound(opponentLivingCard.getDecreaseHP2NextRound() +
+                            information.getGetAmountOfDecreaseHP2NextRound());
+                }
+            }
+        }
         opponentLivingCard.handleAttack(battle, damage);
         return;
     }
@@ -652,24 +683,51 @@ public class Impact {
         if (!buff.getIsActive()) return;
         if (buff instanceof HolyBuff)
             livingCard.setShield(livingCard.getShield() + ((HolyBuff) buff).getShieldPower());
-        if (buff instanceof DisarmBuff) {
+        if (buff instanceof PowerBuff) {
+            livingCard.increaseHP(((PowerBuff) buff).getChangeHP());
+            livingCard.increaseAP(((PowerBuff) buff).getChangePower());
+        }
+
+        if (livingCard.getInformation().isAntiShock()) return;
+
+        if (buff instanceof DisarmBuff && !livingCard.getInformation().isAntiDisarm()) {
             livingCard.setCanCounterAttack(false);
         }
         if (buff instanceof StunBuff) {
             livingCard.setCanAttack(false);
             livingCard.setCanMove(false);
         }
-        if (buff instanceof PoisonBuff) {
+        if (buff instanceof PoisonBuff && !livingCard.getInformation().isAntiPoison()) {
             livingCard.increaseAP(-((PoisonBuff) buff).getDecreaseHP());
-        }
-        if (buff instanceof PowerBuff) {
-            livingCard.increaseHP(((PowerBuff) buff).getChangeHP());
-            livingCard.increaseAP(((PowerBuff) buff).getChangePower());
         }
         if (buff instanceof WeaknessBuff) {
             livingCard.increaseAP(-((WeaknessBuff) buff).getChangeHP());
             livingCard.increaseAP(-((WeaknessBuff) buff).getChangePower());
         }
+    }
+
+    // special of minion
+
+    public static void impactGhooleBozorg(Minion minion) {
+        if (!minion.getInformation().isGhooleBozorg()) return;
+        ArrayList<Cell> impactCells = AttackArea.getNeighbors(minion.getCell(), minion.getBattle());
+        for (Cell cell : impactCells) {
+            LivingCard livingCard = cell.getLivingCard();
+            if (livingCard == null) continue;
+            if (livingCard instanceof Hero) continue;
+            livingCard.handleAttack(minion.getBattle(), 2);
+        }
+    }
+
+    public static void impactNefrineMarg(Minion minion) {
+        if (!minion.getInformation().isCanAddNefrineMarg()) return;
+
+    }
+
+    public static void damageToHeroWhenDead(Minion minion) {
+        Player opponent = minion.getBattle().getPlayerOn();
+        if (!opponent.getAliveCards().contains(minion)) opponent = minion.getBattle().getPlayerOff();
+        opponent.getHero().handleAttack(minion.getBattle(), minion.getInformation().getDamageToHeroWhenDead());
     }
 }
 

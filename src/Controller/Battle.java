@@ -500,6 +500,12 @@ public class Battle {
     }
 
     public void endTurn(){
+        checkThings(playerOff);
+        checkThings(playerOn);
+
+        handleBuffs(playerOff);
+        handleBuffs(playerOn);
+
 
         handleEndTurnMinions(playerOn);
         handleEndTurnMinions(playerOff);
@@ -776,12 +782,6 @@ public class Battle {
 
     private void inputCommandLine(){
         System.out.println("Here is Battle");;
-
-        checkThings(playerOff);
-        checkThings(playerOn);
-
-        handleBuffs(playerOff);
-        handleBuffs(playerOn);
 
         String inputLine = readInput();
         inputLine = inputLine.trim();
