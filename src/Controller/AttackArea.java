@@ -220,7 +220,7 @@ public class AttackArea {
         ArrayList<Cell> impactedCellsOfLivingCards = new ArrayList<>();
 
         Information information = spell.getInformation();
-        information.readInformation();
+        //information.readInformation();
 
         if(information.isKingsGuard()){
             return getNeighbors(battle.getPlayerOn().getHeroPosition(), battle);

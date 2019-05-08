@@ -1,16 +1,6 @@
 package Model.CollectionItem;
 
 public class Information {
-
-
-    //methods
-
-    public void readInformation() {
-        //TODO
-        return;
-    }
-
-
     //AttackArea section
 
     private boolean isEnemyImpact;

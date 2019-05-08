@@ -92,11 +92,15 @@ abstract public class LivingCard extends Card {
         return this.getBattle().getMap().getCellByCoordination(this.getPositionRow(), this.getPositionColumn());
     }
 
+    //TODO
+    //ghataan in bayad avaz she
     public void handleAttack(Battle battle, int damage){
         this.setHP(this.getHP() - damage);
         Impact.checkAlive(battle, this);
     }
 
+    //TODO
+    //Azad kardane flag, ezafe shodan be grave yard
     public void kill(){
         this.setHP(0);
     }

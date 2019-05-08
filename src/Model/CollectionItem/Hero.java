@@ -9,8 +9,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Hero extends LivingCard {
-
-
     private int deadAfterRounds = 0;
     private boolean havePareSimorgh;
     private int minOfPareSimorgh;
@@ -32,7 +30,7 @@ public class Hero extends LivingCard {
         this.coolDown = coolDown;
     }
 
-    Hero(){
+    public Hero(){
 
     }
 
