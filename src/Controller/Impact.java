@@ -319,8 +319,38 @@ public class Impact {
     }
 
     // mahdude hamle o ina check she
-    public static void comboAttack(LivingCard opponentLivingCard, ArrayList<LivingCard> attackers) {
-
+    public static void comboAttack(Battle battle, LivingCard opponentLivingCard, ArrayList<LivingCard> attackers) {
+        int[] numberOfComboers = new int[4];
+        String[] comboerNames = {"SepahSalareFars", "ShahzadeTorani", "ShahGhool", "ArzhangeDiv"};
+        for(LivingCard livingCard : attackers){
+            boolean find = false;
+            for(int i = 0; i < 4; i++){
+                if(comboerNames[i].equals(livingCard.getName())){
+                    numberOfComboers[i]++;
+                    find = true;
+                }
+                if(!find){
+                    System.out.println("these cards cant combo attack!");
+                    return;
+                }
+            }
+        }
+        for(LivingCard livingCard : attackers){
+            boolean canChangeDamage = false;
+            int index = 0;
+            if(livingCard.getName().equals(comboerNames[0]))
+                canChangeDamage = true;
+            if(livingCard.getName().equals(comboerNames[1])){
+                canChangeDamage = true;
+                index = 1;
+            }
+            if(canChangeDamage){
+                int damage = livingCard.getDecreaseHPByAttack() + 4 * (numberOfComboers[index] - 1);
+                damageToEnemy(battle, battle.getPlayerOn(), livingCard, opponentLivingCard, damage);
+            }
+        }
+        Impact.addDisarmToCard(numberOfComboers[2], false, false, opponentLivingCard);
+        Impact.addWeaknessToCard(10, true, false, 0, 3 * (numberOfComboers[3] - 1), opponentLivingCard);
     }
 
     //in tike baraye special power minion e

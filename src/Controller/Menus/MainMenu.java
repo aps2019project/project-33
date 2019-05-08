@@ -40,7 +40,7 @@ public class MainMenu extends Menu {
         else if (inputLine.equals("logout")) {
             this.logout();
             return;
-        } else if (inputLine.equals("show menu"))
+        } else if (inputLine.equals("help") || inputLine.equals("show menu"))
             MainMenu.showMenu();
         else if (inputLine.equals("exit"))
             return;

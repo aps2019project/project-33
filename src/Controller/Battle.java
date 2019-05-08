@@ -471,7 +471,7 @@ public class Battle {
             }
             myLivingCards.add(myLivingCard);
         }
-        Impact.comboAttack(opponentLivingCard, myLivingCards);
+        Impact.comboAttack(this, opponentLivingCard, myLivingCards);
         checkTurn();
     }
 
