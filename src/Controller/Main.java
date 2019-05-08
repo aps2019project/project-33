@@ -17,7 +17,7 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException {
-        application.runApplication();
+//        application.runApplication();
         Main.TotalDisarm();
         Main.AreaDispel();
         Main.Empower();
@@ -64,7 +64,7 @@ public class Main {
         spell.getInformation().setCanDisarmBuffAdd(true);
         spell.getInformation().setDisarmBuffPermanent(true);
         spell.getInformation().setImpactAllArea(true);
-        application.writeJSON(spell, "Data/CollectionItem/Spell/TotalDisarm.json");
+        Application.writeJSON(spell, "Data/CollectionItem/Spell/TotalDisarm.json");
     }
 
     public static void AreaDispel() throws IOException {
@@ -79,7 +79,7 @@ public class Main {
         spell.getInformation().setCanRemoveBadBuffsOfOurselves(true);
         spell.getInformation().setMultipleImpact(true);
         spell.getInformation().setImpactAllArea(true);
-        application.writeJSON(spell, "Data/CollectionItem/Spell/AreaDispel.json");
+        Application.writeJSON(spell, "Data/CollectionItem/Spell/AreaDispel.json");
     }
 
     public static void Empower() throws IOException{
@@ -92,7 +92,7 @@ public class Main {
         spell.getInformation().setAmountOfIncreaseAP(2);
         spell.getInformation().setIncreaseAPPermanent(true);
         spell.getInformation().setImpactAllArea(true);
-        application.writeJSON(spell, "Data/CollectionItem/Spell/Empower.json");
+        Application.writeJSON(spell, "Data/CollectionItem/Spell/Empower.json");
     }
 
     public static void Fireball() throws IOException{
@@ -104,7 +104,7 @@ public class Main {
         spell.getInformation().setCanDamageToEnemy(true);
         spell.getInformation().setDamageToEnemy(4);
         spell.getInformation().setImpactAllArea(true);
-        application.writeJSON(spell, "Data/CollectionItem/Spell/Fireball.json");
+        Application.writeJSON(spell, "Data/CollectionItem/Spell/Fireball.json");
     }
 
     public static void GodStrength() throws IOException{
@@ -118,7 +118,7 @@ public class Main {
         spell.getInformation().setIncreaseAPPermanent(true);
         spell.getInformation().setAmountOfIncreaseAP(4);
         spell.getInformation().setImpactAllArea(true);
-        application.writeJSON(spell, "Data/CollectionItem/Spell/GodStrength.json");
+        Application.writeJSON(spell, "Data/CollectionItem/Spell/GodStrength.json");
     }
 
     //nemidunam chie
@@ -127,6 +127,7 @@ public class Main {
         spell.setPrice(600);
         spell.setMp(3);
         spell.setName("HellFire");
+        Application.writeJSON(spell, "Data/CollectionItem/Spell/HellFire.json");
     }
 
     public static void LightingBolt() throws IOException{
@@ -139,7 +140,7 @@ public class Main {
         spell.getInformation().setImpactAllArea(true);
         spell.getInformation().setCanDamageToEnemy(true);
         spell.getInformation().setDamageToEnemy(8);
-        application.writeJSON(spell, "Data/CollectionItem/Spell/LightingBolt.json");
+        Application.writeJSON(spell, "Data/CollectionItem/Spell/LightingBolt.json");
     }
 
     public static void PoisonLake() throws IOException{
@@ -153,7 +154,7 @@ public class Main {
         spell.getInformation().setCanAddPoisonBuffToCell(true);
         spell.getInformation().setMultipleImpact(true);
         spell.getInformation().setTimeOfAddPoisonBuffToCell(1);
-        application.writeJSON(spell, "Data/CollectionItem/Spell/PoisonLake.json");
+        Application.writeJSON(spell, "Data/CollectionItem/Spell/PoisonLake.json");
     }
 
     public static void Madness() throws IOException{
@@ -168,7 +169,7 @@ public class Main {
         spell.getInformation().setCanIncreaseAP(true);
         spell.getInformation().setAmountOfIncreaseAP(4);
         spell.getInformation().setIncreaseRemainTime(3);
-        application.writeJSON(spell, "Data/CollectionItem/Spell/Madness.json");
+        Application.writeJSON(spell, "Data/CollectionItem/Spell/Madness.json");
     }
 
     public static void AllDisarm() throws IOException{
@@ -181,7 +182,7 @@ public class Main {
         spell.getInformation().setImpactAllArea(true);
         spell.getInformation().setTimeOfDisarmBuff(1);
         spell.getInformation().setCanDisarmBuffAdd(true);
-        application.writeJSON(spell, "Data/CollectionItem/Spell/AllDisarm.json");
+        Application.writeJSON(spell, "Data/CollectionItem/Spell/AllDisarm.json");
     }
 
     public static void AllPoison() throws IOException{
@@ -194,7 +195,7 @@ public class Main {
         spell.getInformation().setImpactAllArea(true);
         spell.getInformation().setCanPoisonBuffAdd(true);
         spell.getInformation().setTimeOfPoisonBuff(4);
-        application.writeJSON(spell, "Data/CollectionItem/Spell/AllPoison.json");
+        Application.writeJSON(spell, "Data/CollectionItem/Spell/AllPoison.json");
     }
 
     public static void Dispel() throws IOException{
@@ -207,7 +208,7 @@ public class Main {
         spell.getInformation().setImpactAllArea(true);
         spell.getInformation().setCanRemoveGoodBuffsOfEnemy(true);
         spell.getInformation().setCanRemoveBadBuffsOfOurselves(true);
-        application.writeJSON(spell, "Data/CollectionItem/Spell/Dispel.json");
+        Application.writeJSON(spell, "Data/CollectionItem/Spell/Dispel.json");
     }
 
     public static void HealthWithProfit() throws  IOException{
@@ -223,7 +224,7 @@ public class Main {
         spell.getInformation().setNumberOfHolyBuff(2);
         spell.getInformation().setCanHolyBuffAdd(true);
         spell.getInformation().setTimeOfHolyBuff(3);
-        application.writeJSON(spell, "Data/CollectionItem/Spell/HealthWithProfit.json");
+        Application.writeJSON(spell, "Data/CollectionItem/Spell/HealthWithProfit.json");
     }
 
     public static void GhazaBokhorJoonBegiri() throws IOException{
@@ -236,7 +237,7 @@ public class Main {
         spell.getInformation().setPowerBuffPermanent(true);
         spell.getInformation().setGhazaPowerBuff(true);
         spell.getInformation().setCanPowerBuffAdd(true);
-        application.writeJSON(spell, "Data/CollectionItem/Spell/GhazaBokhorJoonBegiri.json");
+        Application.writeJSON(spell, "Data/CollectionItem/Spell/GhazaBokhorJoonBegiri.json");
     }
 
     public static void  AllPower() throws IOException{
@@ -250,7 +251,7 @@ public class Main {
         spell.getInformation().setCanPowerBuffAdd(true);
         spell.getInformation().setPowerBuffPermanent(true);
         spell.getInformation().setAmountOfIncreaseAP(2);
-        application.writeJSON(spell, "Data/CollectionItem/Spell/AllPower.json");
+        Application.writeJSON(spell, "Data/CollectionItem/Spell/AllPower.json");
     }
 
     public static void AllAttack() throws IOException{
@@ -263,7 +264,7 @@ public class Main {
         spell.getInformation().setImpactColumn(true);
         spell.getInformation().setDamageToEnemy(6);
         spell.getInformation().setCanDamageToEnemy(true);
-        application.writeJSON(spell, "Data/CollectionItem/Spell/AllAttack.json");
+        Application.writeJSON(spell, "Data/CollectionItem/Spell/AllAttack.json");
     }
 
     public static void Weakening() throws IOException{
@@ -277,7 +278,7 @@ public class Main {
         spell.getInformation().setCanWeaknessBuffAdd(true);
         spell.getInformation().setWeaknessBuffPermanent(true);
         spell.getInformation().setChangePowerByWeakness(4);
-        application.writeJSON(spell, "Data/CollectionItem/Spell/Weakening.json");
+        Application.writeJSON(spell, "Data/CollectionItem/Spell/Weakening.json");
     }
 
     public static void Sacrifice() throws IOException{
@@ -289,7 +290,7 @@ public class Main {
         spell.getInformation().setUsImpact(true);
         spell.getInformation().setMinionImpact(true);
         spell.getInformation().setCanKillOurMinionAndHealHero(true);
-        application.writeJSON(spell, "Data/CollectionItem/Spell/Sacrifice.json");
+        Application.writeJSON(spell, "Data/CollectionItem/Spell/Sacrifice.json");
     }
 
     public static void KingsGuard() throws IOException{
@@ -301,7 +302,7 @@ public class Main {
         spell.getInformation().setMinionImpact(true);
         spell.getInformation().setImpactNeighbors(true);
         spell.getInformation().setCanKillMinionOfEnemy(true);
-        application.writeJSON(spell, "Data/CollectionItem/Spell/KingsGuard.json");
+        Application.writeJSON(spell, "Data/CollectionItem/Spell/KingsGuard.json");
     }
 
     public static void Shock() throws IOException{
@@ -313,62 +314,62 @@ public class Main {
         spell.getInformation().setImpactAllArea(true);
         spell.getInformation().setCanStunBuffAdd(true);
         spell.getInformation().setTimeOfStunBuff(2);
-        application.writeJSON(spell, "Data/CollectionItem/Spell/Shock.json");
+        Application.writeJSON(spell, "Data/CollectionItem/Spell/Shock.json");
     }
 
     public static void DiveSefid() throws IOException{
         Hero hero = new Hero("Dive Sefid", 8000, 50, 4, "melee", 1, 2);
-        application.writeJSON(hero, "Data/CollectionItem/Hero/DiveSefid.json");
+        Application.writeJSON(hero, "Data/CollectionItem/Hero/DiveSefid.json");
     }
 
     public static void Simorgh() throws IOException{
         Hero hero = new Hero("Simorgh", 9000, 50, 4, "melee", 3, 8);
-        application.writeJSON(hero, "Data/CollectionItem/Hero/Simorgh.json");
+        Application.writeJSON(hero, "Data/CollectionItem/Hero/Simorgh.json");
     }
 
     public static void Ezhdaha() throws IOException{
         Hero hero = new Hero("Ezhdaha", 8000, 50, 4, "melee", 0, 1);
-        application.writeJSON(hero, "Data/CollectionItem/Hero/Ezhdaha.json");
+        Application.writeJSON(hero, "Data/CollectionItem/Hero/Ezhdaha.json");
     }
 
     public static void  Rakhsh() throws IOException{
         Hero hero = new Hero("Rakhsh", 8000, 50, 4, "melee", 1, 2);
-        application.writeJSON(hero, "Data/CollectionItem/Hero/Rakhsh.json");
+        Application.writeJSON(hero, "Data/CollectionItem/Hero/Rakhsh.json");
     }
 
     public static void Zahhak() throws IOException{
         Hero hero = new Hero("Zahhak", 10000, 50, 4, "melee", 1, 3);
-        application.writeJSON(hero, "Data/CollectionItem/Hero/Zahhak.json");
+        Application.writeJSON(hero, "Data/CollectionItem/Hero/Zahhak.json");
     }
 
     public static void Kaveh() throws IOException{
         Hero hero = new Hero("Kaveh", 8000, 50, 4, "melee", 1, 3);
-        application.writeJSON(hero, "Data/CollectionItem/Hero/Kaveh.json");
+        Application.writeJSON(hero, "Data/CollectionItem/Hero/Kaveh.json");
     }
 
     public static void Arash() throws IOException{
         Hero hero = new Hero("Arash", 10000, 30, 2, "ranged", 2, 2);
         hero.setRangeOfAttack(6);
-        application.writeJSON(hero, "Data/CollectionItem/Hero/Arash.json");
+        Application.writeJSON(hero, "Data/CollectionItem/Hero/Arash.json");
     }
 
     public static void Afsaneh() throws IOException{
         Hero hero = new Hero("Afsaneh", 11000, 40, 3, "ranged", 1, 2);
         hero.setRangeOfAttack(3);
-        application.writeJSON(hero, "Data/CollectionItem/Hero/Afsaneh.json");
+        Application.writeJSON(hero, "Data/CollectionItem/Hero/Afsaneh.json");
     }
 
     public static void Esfandiar() throws IOException{
         Hero hero = new Hero("Esfandiar", 12000, 35, 3, "hybrid", 0, 1);
         hero.setRangeOfAttack(3);
-        application.writeJSON(hero, "Data/CollectionItem/Hero/Esfandiar.json");
+        Application.writeJSON(hero, "Data/CollectionItem/Hero/Esfandiar.json");
     }
 
     public static void Rostam() throws IOException{
         //chera mp o cooldown nadare?
         Hero hero = new Hero("Rostam", 8000, 55, 7, "hybrid", 0, 0);
         hero.setRangeOfAttack(4);
-        application.writeJSON(hero, "Data/CollectionItem/Hero/Rostam.json");
+        Application.writeJSON(hero, "Data/CollectionItem/Hero/Rostam.json");
     }
 }
 
