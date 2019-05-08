@@ -290,6 +290,7 @@ public class Battle {
 
             Cell cell = map.getCellByCoordination(x, y);
             cell.insertCard(selectedCard.getID());
+            this.selectedCard.setCanMove(false);
             //tuye mode e flag bayad flago begire dastesh
         }else
             System.out.println("Invalid target !");
@@ -343,7 +344,7 @@ public class Battle {
             return;
         }
         Impact.attack(this, this.selectedCard, opponentLivingCard);
-        this.removeSelectedCard();
+        this.selectedCard.setCanAttack(false);
         checkTurn();
     }
 
@@ -396,6 +397,15 @@ public class Battle {
         playerOff.getHero().setCoolDown(Math.max(0, playerOff.getHero().getCoolDown() - 1));
         Impact.activeBuffs(this);
         numberOfRounds++;
+        for(LivingCard livingCard : playerOn.getAliveCards()) {
+            livingCard.setCanMove(true);
+            livingCard.setCanAttack(true);
+        }
+        for(LivingCard livingCard : playerOff.getAliveCards()){
+            livingCard.setCanMove(true);
+            livingCard.setCanAttack(true);
+        }
+
     }
 
     public void showCollectables(){
