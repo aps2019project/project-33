@@ -23,7 +23,7 @@ public class Main {
     String[] spellNames = {"Total Disarm", "Area Dispel", "Empower", "Fireball", "God Strength", "HellFire", "Lighting Bolt",
             "Poison Lake", "Madness", "All Disarm", "All Poison", "Dispel", "Health with profit", "Ghaza bokhor joon begiri",
             "All Power", "All Attack", "Weakening", "Sacrifice", "Kings Guard", "Shock"};
-    public static void createTotalDisarm() throws IOException {
+    public static void TotalDisarm() throws IOException {
         Spell spell = new Spell();
         spell.setPrice(1000);
         spell.setMp(0);
@@ -35,7 +35,7 @@ public class Main {
         application.writeJSON(spell, "Data/CollectionItem/Spell/TotalDisarm.json");
     }
 
-    public static void createAreaDispel() throws IOException {
+    public static void AreaDispel() throws IOException {
         Spell spell = new Spell();
         spell.setPrice(1500);
         spell.setMp(2);
