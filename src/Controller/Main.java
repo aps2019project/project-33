@@ -22,7 +22,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         application.runApplication();
-        Generator.createCards(application);
+     //   Generator.createCards(application);
     }
 
 }
