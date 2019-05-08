@@ -35,11 +35,10 @@ time e match ro doros konim -> done
 bazi tamum she bayad neshun bedim barande inaro -> done
 be barande bayad prize bedim -> done
 handle attacke carda! -> done
+help -> done
+handle attack -> done
 -------------
-farda :
 show card in battle
 combo attack bayad tuye speciale minion zade she
-help -> done
 addMare bozorg ?
 desc e carda :(
-handle attacke carda! -> done ?

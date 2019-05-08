@@ -595,6 +595,7 @@ public class Impact {
     private static void increaseHPOfLivingHero(LivingCard livingCard, int amount) {
         livingCard.increaseHP(amount);
     }
+    //payane in bakhsh
 
     public static void impactTerrorHood(Cell cell, Battle battle){
         ArrayList<Cell> neighbors = AttackArea.getNeighbors(cell, battle);
@@ -639,6 +640,3 @@ public class Impact {
         }
     }
 
-    //payan
-
-}

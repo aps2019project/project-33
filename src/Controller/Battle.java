@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+import Model.Buffs.*;
 import Model.Buffs.Buff;
 import Model.CollectionItem.*;
 import Model.CollectionItem.CollectionItem;
