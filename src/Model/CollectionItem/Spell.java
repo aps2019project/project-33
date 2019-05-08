@@ -37,7 +37,11 @@ public class Spell extends Card {
 
     @Override
     public void showCardInBattle() {
-        //TODO
+        System.out.println("Spell:");
+        System.out.println("Name: " + this.getName());
+        System.out.println("MP: " + this.getMP());
+        System.out.println("Cost: " + this.getPrice());
+        System.out.println("Desc: " + this.getDescription());
     }
 
     @Override
