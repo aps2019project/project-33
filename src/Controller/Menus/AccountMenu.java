@@ -53,7 +53,7 @@ public class AccountMenu extends Menu {
             return;
         }
 
-        System.out.println("this username is ok, please enter passwordK !");
+        System.out.println("this username is ok, please enter password !");
         String password = Main.scanner.nextLine();
         if(password.contains(" ")){
             System.out.println("password mustn't have space !!");

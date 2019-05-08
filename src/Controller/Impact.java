@@ -135,7 +135,7 @@ public class Impact {
                 }
                 if (information.isCanDecreaseHP2NextRound()) {
                     opponentLivingCard.setDecreaseHP2NextRound(opponentLivingCard.getDecreaseHP2NextRound() +
-                            information.getGetAmountOfDecreaseHP2NextRound());
+                            information.getAmountOfDecreaseHP2NextRound());
                 }
             }
         }
