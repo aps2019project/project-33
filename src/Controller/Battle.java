@@ -23,6 +23,7 @@ public class Battle {
     private CollectableItem selectedCollectableItem;
     private Player winnerPlayer = null, loserPlayer = null;
     private ArrayList<Flag> flags = new ArrayList<>();
+    private String estate = "none";
 
     private String[] modes = {"Kill_enemy's_hero", "Hold_flags", "Take_half_of_flags"};
 
@@ -291,6 +292,7 @@ public class Battle {
         }else
             System.out.println("Invalid target !");
         handleFlags();
+        checkTurn();
     }
 
     private int getDistance(int x1, int y1, int x2, int y2){
@@ -340,6 +342,7 @@ public class Battle {
         }
         Impact.attack(this, this.selectedCard, opponentLivingCard);
         this.removeSelectedCard();
+        checkTurn();
     }
 
     public void comboAttackToOpponentCard(String[] input){
@@ -365,6 +368,7 @@ public class Battle {
             myLivingCards.add(myLivingCard);
         }
         Impact.comboAttack(opponentLivingCard, myLivingCards);
+        checkTurn();
     }
 
 
@@ -422,6 +426,7 @@ public class Battle {
         Cell cell = this.map.getCellByCoordination(x, y);
         Impact.impactSpellOfHero(this, playerOn.getHero(), cell);
         hero.setCoolDown(hero.getMaxCoolDown());
+        checkTurn();
     }
 
     //TODO
@@ -437,6 +442,7 @@ public class Battle {
         }
         Cell cell = map.getCellByCoordination(x, y);
         Impact.impactItem((Item) selectedCollectableItem, cell, this);
+        checkTurn();
     }
 
     //havaset bashe moteghayerasho update koni mese tedad cardaye estefade shode az main deck
@@ -499,18 +505,23 @@ public class Battle {
             }
         }
         //inja bayad neshun bede barande o etela'ato
-        if(this.getWinnerPlayer() != null){
+        if(this.getWinnerPlayer() != null && this.estate.equals("none")){
+            estate = "finished";
             Match match = new Match();
             match.setWinner(this.winnerPlayer.getAccount());
             match.setLoser(this.loserPlayer.getAccount());
             match.setTime(this.numberOfRounds);
             playerOn.getAccount().addMatch(match);
             playerOff.getAccount().addMatch(match);
+            System.out.println("Game finished! the winner is : " + winnerPlayer.getAccount().getUsername());
+            System.out.println("the number of rounds is :" + numberOfRounds);
+            Account winnerAccount = winnerPlayer.getAccount();
+            winnerAccount.setBudget(winnerAccount.getBudget() + this.prize);
         }
     }
 
     public void endGame(){
-
+        return;
     }
     public void exit(){}
 
