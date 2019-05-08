@@ -189,12 +189,18 @@ public class Impact {
         return isCardInRange;
     }
 
-    //TODO
-    //in inja chi kara mikone ?!
-    //add to grave yard
+    //TODO -> done
+    //in inja chi kara mikone ?! karaei ke bayad vase carte morde anjam she kollan
+    //add to grave yard -> done
     public static boolean checkAlive(Battle battle, LivingCard checkedLivingCard){
 
         if(checkedLivingCard.getHP() <= 0){
+            if(battle.getPlayerOn().getAliveCards().contains(checkedLivingCard)){
+                battle.getPlayerOn().getGraveYard().addCard(checkedLivingCard);
+            }
+            else{
+                battle.getPlayerOff().getGraveYard().addCard(checkedLivingCard);
+            }
             battle.removeAliveCard(checkedLivingCard);
             battle.handleFlags();
             if(battle.getSelectedCard().getID().equals(checkedLivingCard.getID()))
@@ -204,23 +210,24 @@ public class Impact {
         return true;
     }
 
-    //TODO
-    //bayad az damage enemy estefade she, chon momkene option dashte bashe taraf
+    //TODO -> done
+    //bayad az damage enemy estefade she, chon momkene option dashte bashe taraf -> done
     //az in item ha va ...
     public static void counterAttack(Battle battle, LivingCard livingCard, LivingCard opponentCard) {
-        ArrayList<Cell> attackCells = Impact.getAttackCells(battle, livingCard);
+        //tabe sho dorost zaadam ? baraye melee o ranged o hybrid
+        ArrayList<Cell> attackCells = AttackArea.getImpactCellsOfAttack(livingCard, battle);
         boolean isInRange = Impact.isInRange(attackCells, opponentCard);
         if(!isInRange || !livingCard.isCanCounterAttack()){
             return;
         }
-        opponentCard.setHP(opponentCard.getHP() - livingCard.getDecreaseHPByAttack());
+        damageToEnemy(battle, battle.getPlayerOff(), livingCard, opponentCard, livingCard.getDecreaseHPByAttack());
         checkAlive(battle, opponentCard);
     }
 
     //counter attackam bayad haminja seda she
     //mana nemikhad in ?
     public static void attack(Battle battle, LivingCard attacker, LivingCard defender){
-        ArrayList<Cell> attackCells = Impact.getAttackCells(battle, attacker);
+        ArrayList<Cell> attackCells = AttackArea.getImpactCellsOfAttack(attacker, battle);
         boolean isInRange = Impact.isInRange(attackCells, defender);
         if(!isInRange){
             System.out.println("opponent force is unavailable for attack");
@@ -233,9 +240,9 @@ public class Impact {
 
         //changeHP e esme ap ?
         //too getter ba taghirat jam miazanim
-        //TODO
+        //TODO -> done
         //inja baz az damage enemy estefade konim
-        defender.setHP(defender.getHP() - attacker.getDecreaseHPByAttack());
+        damageToEnemy(battle, battle.getPlayerOn(), attacker, defender, attacker.getDecreaseHPByAttack());
         if(checkAlive(battle, defender))
             Impact.counterAttack(battle, defender, attacker);
 
@@ -246,25 +253,8 @@ public class Impact {
 
     }
 
-    //TODO
-    //chera ? darim midim too attack area ino, faghat kafie too file e card ha gofte bashim type hamlasho
-    //age nagofte bashim ham item ha ghalat mishan
-    public static ArrayList<Cell> getAttackCells(Battle battle, LivingCard livingCard){
-        ArrayList<Cell> attackCells = new ArrayList<>();
-        if(livingCard.getCounterAttackType().equals("melee")){
-            attackCells = AttackArea.findMeleeAttackArea(battle, livingCard);
-        }
-        if(livingCard.getCounterAttackType().equals("ranged")){
-            attackCells = AttackArea.findRangedAttackArea(battle, livingCard);
-        }
-        if(livingCard.getCounterAttackType().equals("hybrid")){
-            attackCells = AttackArea.findHybridAttackArea(battle, livingCard);
-        }
-        return attackCells;
-    }
-
     //in tike baraye special power minion e
-    //manash berese - baraye hero e in minion chi ?
+    //manash berese
     public static void specialPower(Minion minion, int x, int y) {
 
     }
@@ -272,13 +262,13 @@ public class Impact {
     //payane in bakhsh
 
     //simorgh chie
-    //TODO
+    //TODO -> done
     //Esm ha cammle case nistan
     public static void impactSpellOfHero(Battle battle, Hero hero, Cell cell) {
-        if (hero.getName().equals("diveSefid")) {
+        if (hero.getName().equals("DiveSefid")) {
             Impact.addPowerBuffToCard(100, true, false, 0, 4, hero);
         }
-        if (hero.getName().equals("ezhdaha")) {
+        if (hero.getName().equals("Ezhdaha")) {
             LivingCard livingCard = cell.getLivingCard();
             if (livingCard == null) {
                 System.out.println("there isnt living card here");
@@ -287,7 +277,7 @@ public class Impact {
             //daemie ?
             Impact.addDisarmToCard(10, true, false, livingCard);
         }
-        if (hero.getName().equals("rakhsh")) {
+        if (hero.getName().equals("Rakhsh")) {
             LivingCard livingCard = cell.getLivingCard();
             if (livingCard == null) {
                 System.out.println("there isnt living card here");
@@ -295,10 +285,10 @@ public class Impact {
             }
             Impact.addStunToCard(1, false, false, livingCard);
         }
-        if (hero.getName().equals("zahhak")) {
+        if (hero.getName().equals("Zahhak")) {
             Impact.spellOfZahhak(hero);
         }
-        if (hero.getName().equals("kaveh")) {
+        if (hero.getName().equals("Kaveh")) {
             LivingCard livingCard = cell.getLivingCard();
             if (livingCard == null) {
                 System.out.println("there isnt living card here");
@@ -306,7 +296,7 @@ public class Impact {
             }
             Impact.addHolyToCard(3, false, false, 1, livingCard);
         }
-        if (hero.getName().equals("arash")) {
+        if (hero.getName().equals("Arash")) {
             Cell heroCell = battle.getMap().getCellByCoordination(hero.getPositionRow(), hero.getPositionColumn());
             ArrayList<Cell> attackCells = AttackArea.getCellsOfRow(heroCell, battle);
             for (Cell attackCell : attackCells) {
@@ -317,7 +307,7 @@ public class Impact {
                 livingCard.handleAttack(battle, 4);
             }
         }
-        if(hero.getName().equals("afsaneh")){
+        if(hero.getName().equals("Afsaneh")){
             LivingCard livingCard = cell.getLivingCard();
             if(livingCard == null){
                 System.out.println("there isnt living card here");
@@ -329,7 +319,7 @@ public class Impact {
                 }
             }
         }
-        if(hero.getName().equals("esfandiar")){
+        if(hero.getName().equals("Esfandiar")){
             Impact.addHolyToCard(10, true, true, 1, hero);
         }
     }
@@ -408,9 +398,11 @@ public class Impact {
         }
         if(spell.getInformation().isCanDamageToEnemy()){
             for(Cell impactCell : impactCells){
-                //TODO
+                //TODO -> done
                 //chera lazem nis check konim paeinie null nabshe ?! mamoolan khode intellij gir midad
                 LivingCard cellLivingCard = impactCell.getLivingCard();
+                if(cellLivingCard == null)
+                    continue;
                 for(LivingCard aliveCard : battle.getPlayerOff().getAliveCards()){
                     if(aliveCard.getID().equals(cellLivingCard.getID())){
                         aliveCard.handleAttack(battle, spell.getInformation().getDamageToEnemy());
@@ -441,9 +433,11 @@ public class Impact {
         }
         if(information.isCanPoisonBuffAdd()){
             for(Cell impactCell : impactCells){
-                //TODO
+                //TODO -> done
                 //inam nabayad check she ke null nabshe ?
                 LivingCard cellLivingCard = impactCell.getLivingCard();
+                if(cellLivingCard == null)
+                    continue;
                 for(LivingCard aliveCard : battle.getPlayerOff().getAliveCards()){
                     if(aliveCard.getID().equals(cellLivingCard.getID())){
                         int remainTime = information.getTimeOfPoisonBuff();
@@ -474,7 +468,7 @@ public class Impact {
                             //havaset bashee change power + e vali bayad az ap kam she
                             Impact.addWeaknessToCard(remainTime, isPermanent, false, changeHP, changePower, cellLivingCard);
                             //TODO
-                            //break chera ??
+                            //break chera ?? chon in card emal shode mirim badi inja darim donbalesh migardim
                             break;
                         }
                     }
@@ -490,15 +484,17 @@ public class Impact {
         }
         if(information.isCanHolyBuffAdd()){
             for(Cell impactCell : impactCells){
-                //TODO
+                //TODO -> done
                 //null nabudane paeini
                 LivingCard cellLivingCard = impactCell.getLivingCard();
+                if(cellLivingCard == null)
+                    continue;
                 if(information.isUsImpact()){
                     for(LivingCard aliveCard : battle.getPlayerOn().getAliveCards()){
                         if(aliveCard.getID().equals(cellLivingCard.getID())){
                             int remainTime = information.getTimeOfHolyBuff();
                             boolean isPermanent = information.isHolyBuffPermanent();
-                            //2 ta dare ???
+                            //2 ta dare ??? are
                             //TODO
                             //fekr konam hastesh tooye information ke chand ta betoone ezafe kone
                             Impact.addHolyToCard(remainTime, isPermanent, false,1, cellLivingCard);
@@ -512,9 +508,11 @@ public class Impact {
         }
         if(information.isCanPowerBuffAdd()){
             for(Cell impactCell : impactCells){
-                //TODO
+                //TODO -> done
                 //null naboodane paeini
                 LivingCard cellLivingCard = impactCell.getLivingCard();
+                if(cellLivingCard == null)
+                    continue;
                 if(information.isUsImpact()){
                     for(LivingCard aliveCard : battle.getPlayerOn().getAliveCards()){
                         if(aliveCard.getID().equals(cellLivingCard.getID())){
@@ -522,10 +520,10 @@ public class Impact {
                             boolean isPermanent = information.isPowerBuffPermanent();
                             int changePower = information.getAmountOfIncreaseAP();
                             //TODO
-                            //in alive.card.hetAp nabayad bashe ?
+                            //in alive.card.hetAp nabayad bashe ? -> na hamine
                             if(information.isGhazaPowerBuff())
                                 changePower = aliveCard.getHP();
-                            //faghat changePower dare na HP
+                            //faghat changePower dare na HP -> khob unam 0 e beharhal
                             Impact.addPowerBuffToCard(remainTime, isPermanent, false, 0, changePower, aliveCard);
                         }
                     }
@@ -535,20 +533,21 @@ public class Impact {
         }
         if (information.isCanKillMinionOfEnemy()) {
             //TODO
-            //chera impactCell toosi shode?
+            //chera impactCell toosi shode? -> ok shod eshtebah zade budam
             for(Cell impactCell : impactCells){
-                LivingCard cellLivingCard = cell.getLivingCard();
+                LivingCard cellLivingCard = impactCell.getLivingCard();
+                if(cellLivingCard == null)
+                    continue;
                 for(LivingCard aliveCard : battle.getPlayerOff().getAliveCards()){
                     if(aliveCard.getID().equals(cellLivingCard.getID())){
                         //TODO
                         //dobare, age informatino zade bashi in baraye minion e, lazem nis check koni
                         //khode attack area ino mide
                         if(aliveCard instanceof Minion){
-                            //kill hanuz khalie
+                            //kill hanuz khalie -> ok shod
                             aliveCard.kill();
                             checkAlive(battle, aliveCard);
                         }
-
                         break;
                     }
                 }
@@ -566,7 +565,7 @@ public class Impact {
                         checkAlive(battle, aliveCard);
                     }
                     //TODO
-                    //niazi be berak hast?
+                    //niazi be berak hast? -> na vali ok e
                     break;
                 }
             }
@@ -576,6 +575,8 @@ public class Impact {
                 //TODO
                 //null naboodane in paeini
                 LivingCard cellLivingCard = impactCell.getLivingCard();
+                if(cellLivingCard == null)
+                    continue;
                 if(information.isEnemyImpact()){
                     for(LivingCard aliveCard : battle.getPlayerOff().getAliveCards()){
                         if(aliveCard.getID().equals(cellLivingCard.getID())){
@@ -583,7 +584,7 @@ public class Impact {
                             boolean isPermanent = information.isStunBuffPermanent();
                             Impact.addStunToCard(remainTime, isPermanent, false, cellLivingCard);
                             //TODO
-                            //break ? :D
+                            //break ? :D -> ok e :D
                             break;
                         }
                     }
