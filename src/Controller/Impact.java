@@ -321,6 +321,8 @@ public class Impact {
     // mahdude hamle o ina check she
     public static void comboAttack(Battle battle, LivingCard opponentLivingCard, ArrayList<LivingCard> attackers) {
         int[] numberOfComboers = new int[4];
+        for(int i = 0; i < 4; i++)
+            numberOfComboers[i] = 0;
         String[] comboerNames = {"SepahSalareFars", "ShahzadeTorani", "ShahGhool", "ArzhangeDiv"};
         for(LivingCard livingCard : attackers){
             boolean find = false;
