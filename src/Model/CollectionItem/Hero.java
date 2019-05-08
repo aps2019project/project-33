@@ -43,7 +43,7 @@ public class Hero extends LivingCard {
         this.setMP(MP);
         this.setMaxCoolDown(maxCoolDown);
         this.setCoolDown(maxCoolDown);
-        this.setRemainingHP(HP);
+        this.setHP(HP);
     }
 
     /*
@@ -53,7 +53,7 @@ public class Hero extends LivingCard {
 */
     @Override
     public void showCardInBattle() {
-        System.out.println("remaining HP : " + this.getRemainingHP() + " attack power : " + this.getDecreaseHPByAttack()
+        System.out.println("remaining HP : " + this.getHP() + " attack power : " + this.getDecreaseHPByAttack()
                 + " required mana : " + this.getMP() + this.getDescription());
         //TODO
     }
