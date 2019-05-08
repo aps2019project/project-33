@@ -620,7 +620,7 @@ public class Battle {
 
     private String readInput() {
         if(playerOn instanceof AI){
-            return ((AI)playerOn).outputSomeRandomOrder();
+            return ((AI)playerOn).outputSomeRandomOrder(this);
         }
         else
             return Main.scanner.nextLine();
