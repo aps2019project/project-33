@@ -27,7 +27,7 @@ public class AccountMenu extends Menu {
             String username = input[1];
             login(username);
             return;
-        } else if (inputLine.equals("show leader board")) {
+        } else if (inputLine.equals("show leaderboard")) {
             Account.showLeaderBoard();
         } else if (inputLine.equals("show menu")) {
             AccountMenu.showMenu();
