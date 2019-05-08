@@ -16,10 +16,7 @@ public class Main {
     public static Scanner scanner = new Scanner(System.in);
     public static Application application = new Application();
 
-
-    public static void main(String[] args) throws IOException {
-    //    application.runApplication();
-
+    public static void createCards() throws IOException {
         Main.createKamandareFars();
         Main.createShamshirzaneFars();
         Main.createNeyzedareFars();
@@ -92,6 +89,12 @@ public class Main {
         Main.Afsaneh();
         Main.Esfandiar();
         Main.Rostam();
+    }
+
+
+    public static void main(String[] args) throws IOException {
+        application.runApplication();
+    //    Main.createCards();
     }
 
     String[] heroNames = {"Dive Sefid", "Simorgh", "Ezhdaha", "Rakhsh", "Zahhak", "Kaveh", "Arash", "Afsaneh", "Esfandiar",
