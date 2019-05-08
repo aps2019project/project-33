@@ -186,6 +186,8 @@ public class Impact {
         if(checkedLivingCard.getHP() <= 0){
             battle.removeAliveCard(checkedLivingCard);
             battle.handleFlags();
+            if(battle.getSelectedCard().getID().equals(checkedLivingCard.getID()))
+                battle.removeSelectedCard();
             return false;
         }
         return true;
