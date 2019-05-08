@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 abstract public class LivingCard extends Card {
     private int HP, rangeOfAttack, decreaseHPByAttack, changeHP, changePower, numberOfSameTypeInComboAttack,
-    changeRangeOfAttack, numberOfDamaged;
+    changeRangeOfAttack, numberOfDamaged, shield;
     private String counterAttackType, type;
     private ArrayList<Buff> effects;
     private boolean canCounterAttack, canMoveOrAttack, isAlive;
@@ -157,7 +157,6 @@ abstract public class LivingCard extends Card {
     public void setChangeHP(int changeHP) {
         this.changeHP = changeHP;
     }
-
     public int getChangePower() {
         return changePower;
     }
@@ -290,5 +289,13 @@ abstract public class LivingCard extends Card {
 
     public void setHaveSoulEater(boolean haveSoulEater) {
         this.haveSoulEater = haveSoulEater;
+    }
+
+    public int getShield() {
+        return shield;
+    }
+
+    public void setShield(int shield) {
+        this.shield = shield;
     }
 }
