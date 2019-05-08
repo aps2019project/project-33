@@ -1,13 +1,6 @@
 package Controller;
 
-import Generator.Generator;
-import Model.CollectionItem.Item;
-import Model.CollectionItem.Minion;
-import Model.CollectionItem.Spell;
-import Model.CollectionItem.Hero;
-import com.gilecode.yagson.YaGson;
-import com.gilecode.yagson.YaGsonBuilder;
-import jdk.jshell.spi.SPIResolutionException;
+import Generator.*;
 
 import java.io.*;
 import java.util.Scanner;
@@ -21,8 +14,10 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException {
-        application.runApplication();
-     //   Generator.createCards(application);
+        ShopGenerator shopGenerator = new ShopGenerator();
+        shopGenerator.generate();
+        //application.runApplication();
+        //Generator.createCards(application);
     }
 
 }

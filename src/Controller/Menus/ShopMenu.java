@@ -114,17 +114,6 @@ public class ShopMenu extends Menu {
         System.out.println("8. exit");
     }
 
-    public void generate() {
-        for (int i = 0; i < 10; i++) {
-            Hero hero = new Hero();
-            hero.setName("mammad" + i);
-            hero.setPrice(i * 10);
-            hero.setID(Integer.toString(i));
-            CollectionItem.getAllLivingCards().add(hero);
-            this.shop.addCollectionItemToCollection(hero.getID());
-        }
-    }
-
     //Here is Setters && Getters
 
     public Collection getShop() {
