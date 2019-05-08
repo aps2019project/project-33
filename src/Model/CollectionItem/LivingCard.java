@@ -96,6 +96,7 @@ abstract public class LivingCard extends Card {
     //TODO
     //ghataan in bayad avaz she
     public void handleAttack(Battle battle, int damage){
+        damage = Integer.max(damage - this.getShield(), 0);
         this.setHP(this.getHP() - damage);
 
         Impact.checkAlive(battle, this);
