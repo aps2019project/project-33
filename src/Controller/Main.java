@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.CollectionItem.Item;
 import Model.CollectionItem.Minion;
 import Model.CollectionItem.Spell;
 import Model.CollectionItem.Hero;
