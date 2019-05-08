@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.CollectionItem.Minion;
 import Model.CollectionItem.Spell;
 import Model.CollectionItem.Hero;
 import com.gilecode.yagson.YaGson;
@@ -17,6 +18,26 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         application.runApplication();
+        Main.TotalDisarm();
+        Main.AreaDispel();
+        Main.Empower();
+        Main.Fireball();
+        Main.GodStrength();
+        Main.HellFire();
+        Main.LightingBolt();
+        Main.PoisonLake();
+        Main.Madness();
+        Main.AllDisarm();
+        Main.AllPoison();
+        Main.Dispel();
+        Main.HealthWithProfit();
+        Main.GhazaBokhorJoonBegiri();
+        Main.AllPower();
+        Main.AllAttack();
+        Main.Weakening();
+        Main.Sacrifice();
+        Main.KingsGuard();
+        Main.Shock();
     }
 
     String[] heroNames = {"Dive Sefid", "Simorgh", "Ezhdaha", "Rakhsh", "Zahhak", "Kaveh", "Arash", "Afsaneh", "Esfandiar",
