@@ -6,13 +6,13 @@ public class Match {
 
     private Account winner;
     private Account loser;
-    private Double time;
+    private int time;
 
-    public Double getTime() {
+    public int getTime() {
         return time;
     }
 
-    public void setTime(Double time) {
+    public void setTime(int time) {
         this.time = time;
     }
 

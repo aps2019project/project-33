@@ -389,6 +389,7 @@ public class Battle {
         playerOn.getHero().setCoolDown(Math.max(0, playerOn.getHero().getCoolDown() - 1));
         playerOff.getHero().setCoolDown(Math.max(0, playerOff.getHero().getCoolDown() - 1));
         Impact.activeBuffs(this);
+        numberOfRounds++;
     }
 
     public void showCollectables(){
@@ -502,7 +503,7 @@ public class Battle {
             Match match = new Match();
             match.setWinner(this.winnerPlayer.getAccount());
             match.setLoser(this.loserPlayer.getAccount());
-          //  match.setTime(this.);
+            match.setTime(this.numberOfRounds);
             playerOn.getAccount().addMatch(match);
             playerOff.getAccount().addMatch(match);
         }
@@ -776,4 +777,7 @@ public class Battle {
         this.flags.add(flag);
     }
 
+    public LivingCard getSelectedCard(){
+        return this.selectedCard;
+    }
 }

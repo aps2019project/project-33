@@ -26,17 +26,18 @@ show collectables tooye battle irad dare, choon jayi nayoomadim inaro tooye play
 -------------------
 
 showCardInBattle ?
-too moveCard bayad check she flag unja hast ya na va badesh flago bedim be yaru -> player o living cardesho ok konim
-moghe insert kardane living card ham hamintor mese bala
-bad az move o attack o ... selectedCard bayad khali she ?
-hame cardaei ke sakhte mishan bayad be collectionitems ezafe she
-yeki mimire flag az dastesh miofte
-too move ha for mizanim roo flaga makaneshuno mikonim makane sahebeshun
-time e match ro doros konim
-combo attack bayad tuye speciale minion zade she
+too moveCard bayad check she flag unja hast ya na va badesh flago bedim be yaru -> player o living cardesho ok konim -> done
+moghe insert kardane living card ham hamintor mese bala -> done
+bad az move o attack o ... selectedCard bayad khali she ? -> felan na faghat moghe mordan khali mikonim -> done
+hame cardaei ke sakhte mishan bayad be collectionitems ezafe she -> done be nazar
+yeki mimire flag az dastesh miofte -> done
+too move ha for mizanim roo flaga makaneshuno mikonim makane sahebeshun -> done
+time e match ro doros konim -> todo
+combo attack bayad tuye speciale mini on zade she -> farda
 bazi tamum she bayad neshun bedim barande inaro
 be barande bayad prize bedim
 help
 addMare bozorg ?
 desc e carda :(
-handle attacke carda!
+
+handle attacke carda! -> done
