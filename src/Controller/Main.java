@@ -38,6 +38,16 @@ public class Main {
         Main.Sacrifice();
         Main.KingsGuard();
         Main.Shock();
+        Main.DiveSefid();
+        Main.Simorgh();
+        Main.Ezhdaha();
+        Main.Rakhsh();
+        Main.Zahhak();
+        Main.Kaveh();
+        Main.Arash();
+        Main.Afsaneh();
+        Main.Esfandiar();
+        Main.Rostam();
     }
 
     String[] heroNames = {"Dive Sefid", "Simorgh", "Ezhdaha", "Rakhsh", "Zahhak", "Kaveh", "Arash", "Afsaneh", "Esfandiar",
