@@ -13,7 +13,7 @@ public class AttackArea {
     //Inja moshakhas mikone ke che khoone hayi ro az cell ha migire, mostaghel az in ke che type i ro lazem dare
 
 
-    private static ArrayList<Cell> getAllArea(Battle battle) {
+    public static ArrayList<Cell> getAllArea(Battle battle) {
         ArrayList<Cell> allCells = new ArrayList<>();
         Map1 map = battle.getMap();
         for (int i = 0; i < map.getHeight(); i++)
@@ -24,7 +24,7 @@ public class AttackArea {
         return allCells;
     }
 
-    private static ArrayList<Cell> getCellsInArea(Cell cell, int maxDistance, Battle battle) {
+    public static ArrayList<Cell> getCellsInArea(Cell cell, int maxDistance, Battle battle) {
         ArrayList<Cell> cells = new ArrayList<>();
         Map1 map = battle.getMap();
         for (int i = 0; i < map.getHeight(); i++)
@@ -52,7 +52,7 @@ public class AttackArea {
     }
 
     // in ja baraye spell e o hamaro satisfy mikone
-    private static ArrayList<Cell> getCellsOfColumn(Cell cell, Battle battle) {
+    public static ArrayList<Cell> getCellsOfColumn(Cell cell, Battle battle) {
         ArrayList<Cell> cellsOfColumn = new ArrayList<>();
         Map1 map = battle.getMap();
         for (int i = 0; i < map.getHeight(); i++)
@@ -76,7 +76,7 @@ public class AttackArea {
         return cellsOfRow;
     }
 
-    private static ArrayList<Cell> getSquareOfCells(Cell cell, Battle battle, int length) {
+    public static ArrayList<Cell> getSquareOfCells(Cell cell, Battle battle, int length) {
         ArrayList<Cell> squareOfCells = new ArrayList<>();
         int x = cell.getX(), y = cell.getY();
         for (int i = 0; i < length; i++) {

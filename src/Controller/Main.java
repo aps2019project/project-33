@@ -2,7 +2,6 @@ package Controller;
 
 import Model.CollectionItem.Spell;
 import Model.CollectionItem.Hero;
-import Model.Deck;
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
 import jdk.jshell.spi.SPIResolutionException;
@@ -20,6 +19,11 @@ public class Main {
         application.runApplication();
     }
 
+    String[] heroNames = {"Dive Sefid", "Simorgh", "Ezhdaha", "Rakhsh", "Zahhak", "Kaveh", "Arash", "Afsaneh", "Esfandiar",
+            "Rostam"};
+    String[] spellNames = {"Total Disarm", "Area Dispel", "Empower", "Fireball", "God Strength", "HellFire", "Lighting Bolt",
+            "Poison Lake", "Madness", "All Disarm", "All Poison", "Dispel", "Health with profit", "Ghaza bokhor joon begiri",
+            "All Power", "All Attack", "Weakening", "Sacrifice", "Kings Guard", "Shock"};
     public static void createTotalDisarm() throws IOException {
         Spell spell = new Spell();
         spell.setPrice(1000);
@@ -85,12 +89,15 @@ public class Main {
         spell.getInformation().setImpactAllArea(true);
         application.writeJSON(spell, "Data/CollectionItem/Spell/GodStrength.json");
     }
-/*
-what is this shit
-    public static void HellFire() throws IOException{
 
+    //nemidunam chie
+    public static void HellFire() throws IOException{
+        Spell spell = new Spell();
+        spell.setPrice(600);
+        spell.setMp(3);
+        spell.setName("HellFire");
     }
-*/
+
     public static void LightingBolt() throws IOException{
         Spell spell = new Spell();
         spell.setPrice(1250);
@@ -176,7 +183,7 @@ what is this shit
         Spell spell = new Spell();
         spell.setPrice(2250);
         spell.setMp(0);
-        spell.setName("HealthWithProfit");
+        spell.setName("Health with profit");
         spell.getInformation().setUsImpact(true);
         spell.getInformation().setImpactAllArea(true);
         spell.getInformation().setCanWeaknessBuffAdd(true);
@@ -192,7 +199,7 @@ what is this shit
         Spell spell = new Spell();
         spell.setPrice(2500);
         spell.setMp(2);
-        spell.setName("Ghaza Bokhor Joon Begiri");
+        spell.setName("Ghaza bokhor joon begiri");
         spell.getInformation().setUsImpact(true);
         spell.getInformation().setImpactAllArea(true);
         spell.getInformation().setPowerBuffPermanent(true);
@@ -279,12 +286,12 @@ what is this shit
     }
 
     public static void DiveSefid() throws IOException{
-        Hero hero = new Hero("Dive sefid", 8000, 50, 4, "melee", 1, 2);
+        Hero hero = new Hero("Dive Sefid", 8000, 50, 4, "melee", 1, 2);
         application.writeJSON(hero, "Data/CollectionItem/Hero/DiveSefid.json");
     }
 
     public static void Simorgh() throws IOException{
-        Hero hero = new Hero("simorgh", 9000, 50, 4, "melee", 3, 8);
+        Hero hero = new Hero("Simorgh", 9000, 50, 4, "melee", 3, 8);
         application.writeJSON(hero, "Data/CollectionItem/Hero/Simorgh.json");
     }
 
