@@ -222,10 +222,6 @@ public class AttackArea {
         Information information = spell.getInformation();
         //information.readInformation();
 
-        if(information.isKingsGuard()){
-            return getNeighbors(battle.getPlayerOn().getHeroPosition(), battle);
-        }
-
         if (information.isEnemyImpact())
             impactedCellsOfLivingCards.addAll(getCells(information, battle.getPlayerOff()));
         if (information.isUsImpact())
@@ -241,6 +237,9 @@ public class AttackArea {
                 impactedCells.addAll(getCellsOfRow(cell, battle));
             if(information.isImpactNeighbors())
                 impactedCells.addAll(getNeighbors(cell, battle));
+            if(information.isKingsGuard()){
+                impactedCells = getNeighbors(battle.getPlayerOn().getHeroPosition(), battle);
+            }
             impactedCellsOfLivingCards = merge(impactedCells, impactedCellsOfLivingCards);
         }
 
