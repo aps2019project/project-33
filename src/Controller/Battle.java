@@ -10,7 +10,9 @@ import Model.CollectionItem.LivingCard;
 import Model.CollectionItem.Minion;
 import Model.Enviroment.Cell;
 import Model.Enviroment.Map1;
+import Controller.AttackArea;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -215,7 +217,101 @@ public class Battle {
     //che cardaei bishtar az 2 ta mitunan beran? moteghayer negah darim barashun?
     //too cell ham bayad ezafe she ?
 
+    public ArrayList<Minion> getOurMinionsOFCells(ArrayList<Cell> impactCells){
+        ArrayList<Minion> minions = new ArrayList<>();
+        for(Cell cell : impactCells){
+            LivingCard livingCard = cell.getLivingCard();
+            if(livingCard instanceof Minion){
+                boolean isOurs = playerOn.getAliveCards().contains(livingCard);
+                if(isOurs){
+                    minions.add((Minion)livingCard);
+                }
+            }
+        }
+        return minions;
+    }
 
+    public Minion getRandomEnemyMinion(){
+        ArrayList<Minion> enemyMinions = new ArrayList<>();
+        for(LivingCard livingCard : playerOff.getAliveCards()){
+            if(livingCard instanceof Minion)
+                enemyMinions.add((Minion)livingCard);
+        }
+        Random random = new Random();
+        int randomIndex = random.nextInt(enemyMinions.size());
+        Minion randomMinion = enemyMinions.get(randomIndex);
+        return randomMinion;
+    }
+
+    public void minionOnSpawn(Minion minion) {
+        if(minion.getName().equals("Oghab")){
+            LivingCard livingCard = (LivingCard)minion;
+            Impact.addPowerBuffToCard(10, true, true, 10, 0, livingCard);
+        }
+        //in moshkel dare too removegoodBuffs pak mishe
+        if(minion.getName().equals("MareGhoolPeikar")){
+            for(Cell cell : this.getMap().getCells()){
+                LivingCard livingCard = cell.getLivingCard();
+                if(getDistance(cell.getX(), cell.getY(), minion.getPositionRow(), minion.getPositionColumn()) > 2)
+                    continue;
+                if(livingCard instanceof Minion){
+                    Impact.addHolyToCard(10, true, false, -1, livingCard);
+                }
+            }
+        }
+
+        if(minion.getName().equals("NaneSarma")){
+            Cell cell = this.getMap().getCellByCoordination(minion.getPositionRow(), minion.getPositionColumn());
+            ArrayList<Cell> neighbours = AttackArea.getNeighbors(cell, this);
+            ArrayList<Minion> ourMinions = getOurMinionsOFCells(neighbours);
+            for(Minion ourMinion : ourMinions){
+                LivingCard livingCard = (LivingCard)ourMinion;
+                Impact.addStunToCard(1, false, false, livingCard);
+            }
+        }
+
+        if(minion.getName().equals("Bahman")){
+            Minion randomMinion = getRandomEnemyMinion();
+            randomMinion.setHP(randomMinion.getHP() - 16);
+            Impact.checkAlive(this, (LivingCard)randomMinion);
+        }
+        if(minion.getName().equals("FoladZere")){
+            Minion randomeMinion = getRandomEnemyMinion();
+         //   Minion copyMinion = (Minion)Application.copy(randomeMinion, Minion.class);
+            //TODO
+        }
+    }
+
+    public void endTurnMinion(Minion minion){
+        if(minion.getName().equals("Jadogar")){
+            Cell cell = this.getMap().getCellByCoordination(minion.getPositionRow(), minion.getPositionColumn());
+            ArrayList<Cell> neighbours = AttackArea.getNeighbors(cell, this);
+            ArrayList<Minion> ourMinions = getOurMinionsOFCells(neighbours);
+            ourMinions.add(minion);
+            for(Minion ourMinion : ourMinions){
+                LivingCard livingCard = (LivingCard)ourMinion;
+                Impact.addPowerBuffToCard(10, true, true, 0, 2, livingCard);
+                Impact.addWeaknessToCard(10, true, true, 1, 0, livingCard);
+            }
+        }
+        if(minion.getName().equals("JadogarAzam")){
+            Cell cell = this.getMap().getCellByCoordination(minion.getPositionRow(), minion.getPositionColumn());
+            ArrayList<Cell> neighbours = AttackArea.getNeighbors(cell, this);
+            ArrayList<Minion> ourMinions = getOurMinionsOFCells(neighbours);
+            for(Minion ourMinion : ourMinions){
+                LivingCard livingCard = (LivingCard)ourMinion;
+                Impact.addPowerBuffToCard(10, true, true, 0, 2, livingCard);
+                Impact.addHolyToCard(10, true, true, 1, livingCard);
+            }
+        }
+        if(minion.getName().equals("Jen")){
+            ArrayList<Minion> ourMinions = getOurMinionsOFCells(this.getMap().getCells());
+            for(Minion ourMinion : ourMinions){
+                LivingCard livingCard = (LivingCard)ourMinion;
+                Impact.addPowerBuffToCard(10, true, true, 0, 1, livingCard);
+            }
+        }
+    }
 
     public void insertCardInMap(String cardID, int x, int y){
         CollectionItem insertingCollectionItem = null;
@@ -244,6 +340,9 @@ public class Battle {
             if(map.getCellByCoordination(x, y).getLivingCard() != null){
                 System.out.println("Destination is full !");
                 return;
+            }
+            if(insertingCollectionItem instanceof Minion){
+                minionOnSpawn((Minion)insertingCollectionItem);
             }
             playerOn.getHand().removeCard(cardID);
             playerOn.getHand().addNextCard(playerOn.getAccount().getCollection().getMainDeck());
@@ -388,7 +487,26 @@ public class Battle {
     //in ja bayad kheili kar ha bokonim
     //tahesh migim daghighan chia
     //buff haye passive is activeshun true she
+    public void handleEndTurnMinions(Player player){
+        for(LivingCard livingCard : player.getAliveCards()){
+            if(livingCard instanceof Minion)
+                endTurnMinion((Minion)livingCard);
+        }
+    }
+
+    public void checkAliveCards(Player player){
+        for(LivingCard livingCard : player.getAliveCards())
+            Impact.checkAlive(this, livingCard);
+    }
+
     public void endTurn(){
+
+        handleEndTurnMinions(playerOn);
+        handleEndTurnMinions(playerOff);
+
+        checkAliveCards(playerOn);
+        checkAliveCards(playerOff);
+
         Player player = playerOff;
         playerOff = playerOn;
         playerOn = player;

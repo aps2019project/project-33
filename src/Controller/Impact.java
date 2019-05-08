@@ -225,6 +225,35 @@ public class Impact {
 
     //counter attackam bayad haminja seda she
     //mana nemikhad in ?
+    public static int pahlevaneFarsChangeDamage(Minion minion, String defenderID){
+        int changeDamage = 0;
+        for(LivingCard livingCard : minion.getAttackedLivingCards()){
+            if(livingCard.getID().equals(defenderID)){
+                changeDamage += 5;
+            }
+        }
+        return changeDamage;
+    }
+
+    public static void specialAttackOfMinion(Battle battle, Minion minion, LivingCard defender){
+        if(minion.getName().equals("PahlevaneFars")){
+            int changeDamageForMinion = pahlevaneFarsChangeDamage(minion, defender.getID());
+            int damage = minion.getDecreaseHPByAttack() + changeDamageForMinion;
+            damageToEnemy(battle, battle.getPlayerOn(), (LivingCard)minion, defender, damage);
+            minion.addAttackedLivingCard(defender);
+        }
+        if(minion.getName().equals("JasoseTorani")){
+            Impact.addDisarmToCard(1, false, false, defender);
+            Impact.addPoisonToCard(4, false, false, 1, defender);
+        }
+        if(minion.getName().equals("MareSami")){
+            Impact.addPoisonToCard(3, false, false, 1, defender);
+        }
+        if(minion.getName().equals("GhooleDoSar")){
+            Impact.removeGoodBuffsOfLivingCard(defender);
+        }
+    }
+
     public static void attack(Battle battle, LivingCard attacker, LivingCard defender) {
         ArrayList<Cell> attackCells = AttackArea.getImpactCellsOfAttack(attacker, battle);
         boolean isInRange = Impact.isInRange(attackCells, defender);
@@ -239,8 +268,12 @@ public class Impact {
 
         //changeHP e esme ap ?
         //too getter ba taghirat jam miazanim
-        //TODO -> done
-        //inja baz az damage enemy estefade konim
+
+        if(attacker instanceof Minion){
+            specialAttackOfMinion(battle, (Minion)attacker, defender);
+            return;
+        }
+
         damageToEnemy(battle, battle.getPlayerOn(), attacker, defender, attacker.getDecreaseHPByAttack());
         if (checkAlive(battle, defender))
             Impact.counterAttack(battle, defender, attacker);
@@ -264,7 +297,7 @@ public class Impact {
     //TODO -> done
     //Esm ha cammle case nistan
     public static void impactSpellOfHero(Battle battle, Hero hero, Cell cell) {
-        if (hero.getName().equals("DiveSefid")) {
+        if (hero.getName().equals("Dive Sefid")) {
             Impact.addPowerBuffToCard(100, true, false, 0, 4, hero);
         }
         if (hero.getName().equals("Ezhdaha")) {

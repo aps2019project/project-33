@@ -9,8 +9,16 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Minion extends LivingCard {
-
+    private ArrayList<LivingCard> attackedLivingCards = new ArrayList<>();
     private boolean haveNefrineMarg;
+
+    public void addAttackedLivingCard (LivingCard livingCard){
+        this.attackedLivingCards.add(livingCard);
+    }
+
+    public ArrayList<LivingCard> getAttackedLivingCards(){
+        return this.attackedLivingCards;
+    }
 
     public static Minion createMinion(String minionName, String playerName) throws FileNotFoundException {
         String address = "Data/Collection/Minion" + minionName + ".json";
