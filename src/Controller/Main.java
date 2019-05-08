@@ -36,6 +36,7 @@ public class Main {
         spell.setPrice(1500);
         spell.setMp(2);
         spell.setName("Area Dispel");
+        spell.getInformation().setCellImpact(true);
         spell.getInformation().setCanRemoveGoodBuffsOfEnemy(true);
         spell.getInformation().setSquareOfCellsImpact(true);
         spell.getInformation().setLengthOfSquareOfCellsImpact(2);
@@ -107,6 +108,7 @@ what is this shit
         spell.setPrice(900);
         spell.setMp(5);
         spell.setName("Poison Lake");
+        spell.getInformation().setCellImpact(true);
         spell.getInformation().setLengthOfSquareOfCellsImpact(3);
         spell.getInformation().setSquareOfCellsImpact(true);
         spell.getInformation().setCanAddPoisonBuffToCell(true);
