@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.*;
 
 public class Deck{
-    private ArrayList<CollectionItem> cards = new ArrayList<CollectionItem>();
+    private ArrayList<CollectionItem> cards = new ArrayList<>();
     private String name;
 
     //constructor
