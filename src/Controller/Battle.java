@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.*;
-import Model.Buffs.*;
 import Model.Buffs.Buff;
 import Model.CollectionItem.*;
 import Model.CollectionItem.CollectionItem;
@@ -897,30 +896,3 @@ public class Battle {
         return this.selectedCard;
     }
 }
-
-    public static void impactBuffInLivingCard(Buff buff, LivingCard livingCard) {
-        if (!buff.getIsActive()) return;
-        if (buff instanceof HolyBuff)
-            livingCard.setShield(livingCard.getShield() + ((HolyBuff) buff).getShieldPower());
-        if (buff instanceof DisarmBuff) {
-            livingCard.setCanCounterAttack(false);
-        }
-        if (buff instanceof StunBuff) {
-            livingCard.setCanAttack(false);
-            livingCard.setCanMove(false);
-        }
-        if (buff instanceof PoisonBuff) {
-            livingCard.increaseAP(-((PoisonBuff) buff).getDecreaseHP());
-        }
-        if (buff instanceof PowerBuff) {
-            livingCard.increaseHP(((PowerBuff) buff).getChangeHP());
-            livingCard.increaseAP(((PowerBuff) buff).getChangePower());
-        }
-        if (buff instanceof WeaknessBuff) {
-            livingCard.increaseAP(-((WeaknessBuff) buff).getChangeHP());
-            livingCard.increaseAP(-((WeaknessBuff) buff).getChangePower());
-        }
-    }
-
-}
-//payan

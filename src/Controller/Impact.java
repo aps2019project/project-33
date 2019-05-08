@@ -595,7 +595,6 @@ public class Impact {
     private static void increaseHPOfLivingHero(LivingCard livingCard, int amount) {
         livingCard.increaseHP(amount);
     }
-    //payane in bakhsh
 
     public static void impactTerrorHood(Cell cell, Battle battle){
         ArrayList<Cell> neighbors = AttackArea.getNeighbors(cell, battle);
@@ -604,6 +603,42 @@ public class Impact {
                 addWeaknessToCard(1, false, false, 2, 0, cell1.getLivingCard());
         }
     }
+
+    //payane in bakhsh
+
+    //impact e buff
+
+    public static void impactBuffInCell(Buff buff, Cell cell) {
+        LivingCard livingCard = cell.getLivingCard();
+        if (livingCard == null)
+            return;
+        impactBuffInLivingCard(buff, livingCard);
+    }
+
+    public static void impactBuffInLivingCard(Buff buff, LivingCard livingCard) {
+        if (!buff.getIsActive()) return;
+        if (buff instanceof HolyBuff)
+            livingCard.setShield(livingCard.getShield() + ((HolyBuff) buff).getShieldPower());
+        if (buff instanceof DisarmBuff) {
+            livingCard.setCanCounterAttack(false);
+        }
+        if (buff instanceof StunBuff) {
+            livingCard.setCanAttack(false);
+            livingCard.setCanMove(false);
+        }
+        if (buff instanceof PoisonBuff){
+            livingCard.increaseAP(-((PoisonBuff)buff).getDecreaseHP());
+        }
+        if (buff instanceof PowerBuff) {
+            livingCard.increaseHP(((PowerBuff) buff).getChangeHP());
+            livingCard.increaseAP(((PowerBuff)buff).getChangePower());
+        }
+        if (buff instanceof WeaknessBuff){
+            livingCard.increaseAP(-((WeaknessBuff)buff).getChangeHP());
+            livingCard.increaseAP(-((WeaknessBuff)buff).getChangePower());
+        }
+    }
+
+    //payan
+
 }
-
-
