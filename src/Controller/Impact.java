@@ -59,6 +59,10 @@ public class Impact {
             if (buff instanceof PoisonBuff) effects.remove(i);
             if (buff instanceof StunBuff) effects.remove(i);
             if (buff instanceof DisarmBuff) effects.remove(i);
+            if (buff instanceof HolyBuff){
+                if(((HolyBuff)buff).getShieldPower() < 0)
+                    effects.remove(i);
+            }
         }
     }
 
@@ -83,7 +87,10 @@ public class Impact {
 
         for (int i = numberOfBuffs - 1; i > -1; i--) {
             Buff buff = effects.get(i);
-            if (buff instanceof HolyBuff) effects.remove(i);
+            if (buff instanceof HolyBuff) {
+                if(((HolyBuff)buff).getShieldPower() > 0)
+                    effects.remove(i);
+            }
             if (buff instanceof PowerBuff) effects.remove(i);
         }
     }

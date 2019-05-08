@@ -644,18 +644,22 @@ public class Battle {
         }
         //inja bayad neshun bede barande o etela'ato
         if(this.getWinnerPlayer() != null && this.estate.equals("none")){
-            estate = "finished";
-            Match match = new Match();
-            match.setWinner(this.winnerPlayer.getAccount());
-            match.setLoser(this.loserPlayer.getAccount());
-            match.setTime(this.numberOfRounds);
-            playerOn.getAccount().addMatch(match);
-            playerOff.getAccount().addMatch(match);
-            System.out.println("Game finished! the winner is : " + winnerPlayer.getAccount().getUsername());
-            System.out.println("the number of rounds is :" + numberOfRounds);
-            Account winnerAccount = winnerPlayer.getAccount();
-            winnerAccount.setBudget(winnerAccount.getBudget() + this.prize);
+            finishMatch();
         }
+    }
+
+    public void finishMatch(){
+        estate = "finished";
+        Match match = new Match();
+        match.setWinner(this.winnerPlayer.getAccount());
+        match.setLoser(this.loserPlayer.getAccount());
+        match.setTime(this.numberOfRounds);
+        playerOn.getAccount().addMatch(match);
+        playerOff.getAccount().addMatch(match);
+        System.out.println("Game finished! the winner is : " + winnerPlayer.getAccount().getUsername());
+        System.out.println("the number of rounds is :" + numberOfRounds);
+        Account winnerAccount = winnerPlayer.getAccount();
+        winnerAccount.setBudget(winnerAccount.getBudget() + this.prize);
     }
 
     public void endGame(){
@@ -771,12 +775,19 @@ public class Battle {
         System.out.println("20. End Game");
         System.out.println("21. Exit");
         System.out.println("22. Show menu");
+        System.out.println("23. Forfeit match");
     }
 
 
     public void runGame(){
         preProcess();
         inputCommandLine();
+    }
+
+    public void forfeitMatch(){
+        this.setWinnerPlayer(playerOff);
+        this.setLoserPlayer(playerOn);
+        finishMatch();
     }
 
     private void inputCommandLine(){
@@ -786,7 +797,9 @@ public class Battle {
         inputLine = inputLine.trim();
         inputLine = inputLine.toLowerCase();
         String[] input = inputLine.split("[ ]+");
-
+        if(inputLine.equals("Forfeit match")){
+            forfeitMatch();
+        }
         if(inputLine.equals("game info"))
             showGameInfo();
         else if(inputLine.equals("show my minions"))
