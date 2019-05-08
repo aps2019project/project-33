@@ -23,7 +23,7 @@ public class Minion extends LivingCard {
     }
 
     public static Minion createMinion(String minionName, String playerName) throws FileNotFoundException {
-        String address = "Data/Collection/Minion" + minionName + ".json";
+        String address = "Data/CollectionItem/Minion/" + minionName + ".json";
         Minion minion = (Minion) Application.readJSON(Minion.class, address);
 
         int numberOfThisMinionType = 0;

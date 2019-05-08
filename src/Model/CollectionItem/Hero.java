@@ -100,9 +100,8 @@ public class Hero extends LivingCard {
 
 
     public static Hero createHero(String heroName, String playerName) throws FileNotFoundException {
-        String address = "Data/CollectionItem/Hero" + heroName + ".json";
+        String address = "Data/CollectionItem/Hero/" + heroName + ".json";
         Hero hero = (Hero) Application.readJSON(Hero.class, address);
-
         int numberOfThisHeroType = 0;
         ArrayList<LivingCard> usedLivingCards = CollectionItem.getAllLivingCards();
         for(LivingCard livingCard : usedLivingCards){

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public  class Item extends CollectionItem {
 
     public static Item createItem(String itemName, String playerName) throws FileNotFoundException {
-        String address = "Data/CollectionItem/Spell" + itemName + ".json";
+        String address = "Data/CollectionItem/Item/" + itemName + ".json";
         Item item = (Item) Application.readJSON(Item.class, address);
 
         int numberOfThisItemType = 0;
