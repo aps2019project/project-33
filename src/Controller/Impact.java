@@ -87,8 +87,8 @@ public class Impact {
         }
     }
 
-    public static void damageToEnemy(LivingCard opponentLivingCard, int damage){
-        opponentLivingCard.handleAttack(damage);
+    public static void damageToEnemy(Battle battle, LivingCard opponentLivingCard, int damage){
+        opponentLivingCard.handleAttack(battle, damage);
         return;
     }
 
@@ -124,7 +124,7 @@ public class Impact {
     }
     */
 
-    public static void specialAttackOfGhooleBozorg(Minion bigGiant, int bigGiantDamage){
+    public static void specialAttackOfGhooleBozorg(Battle battle, Minion bigGiant, int bigGiantDamage){
         int numberOfImpactedCells = 8;
         int[] dx = {-1, -1, 0, 1, 1, 1, 0, -1}, dy = {0, 1, 1, 1, 0, -1, -1, -1};
         for(int i = 0; i < numberOfImpactedCells; i ++){
@@ -134,7 +134,7 @@ public class Impact {
             LivingCard livingCard = cell.getLivingCard();
             if(livingCard == null) continue;
             if(!(livingCard instanceof Minion)) continue;
-            livingCard.handleAttack(bigGiantDamage);
+            livingCard.handleAttack(battle, bigGiantDamage);
         }
     }
 
@@ -183,8 +183,9 @@ public class Impact {
     }
 
     public static boolean checkAlive(Battle battle, LivingCard checkedLivingCard){
-        if(checkedLivingCard.getRemainingHP() <= 0){
+        if(checkedLivingCard.getHP() <= 0){
             battle.removeAliveCard(checkedLivingCard);
+            battle.handleFlags();
             return false;
         }
         return true;
@@ -289,7 +290,7 @@ public class Impact {
                 if (livingCard == null)
                     continue;
                 //handle attacko ok kon -> checkAlive o changeHP
-                livingCard.handleAttack(4);
+                livingCard.handleAttack(battle, 4);
             }
         }
         if(hero.getName().equals("afsaneh")){
@@ -381,7 +382,7 @@ public class Impact {
                 LivingCard cellLivingCard = impactCell.getLivingCard();
                 for(LivingCard aliveCard : battle.getPlayerOff().getAliveCards()){
                     if(aliveCard.getID().equals(cellLivingCard.getID())){
-                        aliveCard.handleAttack(spell.getInformation().getDamageToEnemy());
+                        aliveCard.handleAttack(battle, spell.getInformation().getDamageToEnemy());
                         break;
                     }
                 }
@@ -476,7 +477,7 @@ public class Impact {
                             boolean isPermanent = information.isPowerBuffPermanent();
                             int changePower = information.getAmountOfIncreaseAP();
                             if(information.isGhazaPowerBuff())
-                                changePower = aliveCard.getRemainingHP();
+                                changePower = aliveCard.getHP();
                             //faghat changePower dare na HP
                             Impact.addPowerBuffToCard(remainTime, isPermanent, false, 0, changePower, aliveCard);
                         }
@@ -505,7 +506,7 @@ public class Impact {
                 if(aliveCard.getID().equals(livingCard.getID())){
                     if(aliveCard instanceof Minion){
                         Hero hero = battle.getPlayerOn().getHero();
-                        hero.setRemainingHP(hero.getRemainingHP() + aliveCard.getRemainingHP());
+                        hero.setHP(hero.getHP() + aliveCard.getHP());
                         aliveCard.kill();
                         checkAlive(battle, aliveCard);
                     }

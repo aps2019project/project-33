@@ -2,6 +2,7 @@ package Model.CollectionItem;
 
 import Controller.AttackArea;
 import Controller.Impact;
+import Controller.Battle;
 import Model.Buffs.Buff;
 import Model.Enviroment.Cell;
 
@@ -9,7 +10,7 @@ import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 
 abstract public class LivingCard extends Card {
-    private int HP, remainingHP, rangeOfAttack, decreaseHPByAttack, changeHP, changePower, numberOfSameTypeInComboAttack,
+    private int HP, rangeOfAttack, decreaseHPByAttack, changeHP, changePower, numberOfSameTypeInComboAttack,
     changeRangeOfAttack, numberOfDamaged;
     private String counterAttackType, type;
     private ArrayList<Buff> effects;
@@ -91,10 +92,13 @@ abstract public class LivingCard extends Card {
         return this.getBattle().getMap().getCellByCoordination(this.getPositionRow(), this.getPositionColumn());
     }
 
-    public void handleAttack(int damage){}
+    public void handleAttack(Battle battle, int damage){
+        this.setHP(this.getHP() - damage);
+        Impact.checkAlive(battle, this);
+    }
 
     public void kill(){
-        this.setRemainingHP(0);
+        this.setHP(0);
     }
 
     public void increaseRangeOfAttack(int amount){
@@ -109,14 +113,6 @@ abstract public class LivingCard extends Card {
 
     public void setCanMoveGreaterTwoCell(boolean canMoveGreaterTwoCell){
         canMoveGreaterTwoCell = canMoveGreaterTwoCell;
-    }
-
-    public int getRemainingHP(){
-        return this.remainingHP;
-    }
-
-    public void setRemainingHP(int remainingHP){
-        this.remainingHP = remainingHP;
     }
 
     public int getHP() {
