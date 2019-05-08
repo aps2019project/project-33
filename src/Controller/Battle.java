@@ -533,8 +533,42 @@ public class Battle {
         playerOn.getGraveYard().inputCommandLine();
     }
 
-    public void help(){
+    public String coordinationString(LivingCard livingCard){
+        String coordination = " coordination : (" + livingCard.getPositionRow() + ", " + livingCard.getPositionColumn() + ") ";
+        return coordination;
+    }
 
+    public void help(){
+        System.out.println("you can insert these cards :");
+        for(CollectionItem collectionItem : playerOn.getHand().getHandCards()){
+            if(collectionItem instanceof Card){
+                if(((Card)collectionItem).getMP() <= playerOn.getMana().getCurrentMana()){
+                    System.out.println("name: " + collectionItem.getName() + " id: " + collectionItem.getID() + " mana: " +
+                            ((Card) collectionItem).getMP());
+                }
+            }
+        }
+        System.out.println("you can move these cards:");
+        for(LivingCard livingCard : playerOn.getAliveCards()){
+            if(livingCard.isCanMove()){
+                System.out.println("name: " + livingCard.getName() + " id: " + livingCard.getID() +
+                        this.coordinationString(livingCard) );
+            }
+        }
+        System.out.println("you can attack with these cards:");
+        for(LivingCard livingCard : playerOn.getAliveCards()){
+            if(livingCard.isCanAttack()){
+                System.out.println("name: " + livingCard.getName() + " id: " + livingCard.getID() +
+                        this.coordinationString(livingCard));
+            }
+        }
+        if(playerOn.getMana().getCurrentMana() >= playerOn.getHero().getMP()){
+            if(playerOn.getHero().getCoolDown() <= 0) {
+                System.out.println("also you can use special power of your hero:");
+                System.out.println("name: " + playerOn.getHero().getName() + " id: " + playerOn.getHero().getID() +
+                        this.coordinationString(playerOn.getHero()));
+            }
+        }
     }
 
     public boolean isLivingCardInList(LivingCard livingCard, ArrayList<LivingCard> livingCards){
