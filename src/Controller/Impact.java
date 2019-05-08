@@ -183,8 +183,9 @@ public class Impact {
     }
 
     public static boolean checkAlive(Battle battle, LivingCard checkedLivingCard){
-        if(checkedLivingCard.getRemainingHP() <= 0){
+        if(checkedLivingCard.getHP() <= 0){
             battle.removeAliveCard(checkedLivingCard);
+            battle.handleFlags();
             return false;
         }
         return true;
@@ -476,7 +477,7 @@ public class Impact {
                             boolean isPermanent = information.isPowerBuffPermanent();
                             int changePower = information.getAmountOfIncreaseAP();
                             if(information.isGhazaPowerBuff())
-                                changePower = aliveCard.getRemainingHP();
+                                changePower = aliveCard.getHP();
                             //faghat changePower dare na HP
                             Impact.addPowerBuffToCard(remainTime, isPermanent, false, 0, changePower, aliveCard);
                         }
@@ -505,7 +506,7 @@ public class Impact {
                 if(aliveCard.getID().equals(livingCard.getID())){
                     if(aliveCard instanceof Minion){
                         Hero hero = battle.getPlayerOn().getHero();
-                        hero.setRemainingHP(hero.getRemainingHP() + aliveCard.getRemainingHP());
+                        hero.setHP(hero.getHP() + aliveCard.getHP());
                         aliveCard.kill();
                         checkAlive(battle, aliveCard);
                     }

@@ -31,6 +31,7 @@ public class Battle {
         this.selectedCollectableItem = null;
     }
 
+
     public void createHand(Player player){
         Deck mainDeck = player.getAccount().getCollection().getMainDeck();
         mainDeck.shuffle();
@@ -537,6 +538,13 @@ public class Battle {
     }
 
     public void handleFlags(){
+        for(Flag flag : flags){
+            if(flag.getFlagLivingCard().getHP() <= 0){
+                flag.setFlagOwner(null);
+                flag.setFlagLivingCard(null);
+                flag.setNumberOfGotRounds(0);
+            }
+        }
         for(Flag flag : flags){
             LivingCard livingCard = flag.getFlagLivingCard();
             if(livingCard != null){
