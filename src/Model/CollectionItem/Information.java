@@ -182,7 +182,7 @@ public class Information {
     private boolean canDoMeleeAttack;
     private boolean isGhooleBozorg;
     private int ghooleBozorgDamage;
-    private boolean isShireDarrande;
+    private boolean isAntiHollyBuff;
     private boolean isZahhak;
     private boolean canIncreaseRangeOfAttack;
     private int amountOfIncreaseRangeOfAttack;
@@ -213,6 +213,18 @@ public class Information {
     private boolean isShamshireChini;
     private boolean isSoulEater;
     private boolean isAssassinationDagger;
+
+    private boolean canDecreaseHpNextRound;
+    private int amountOfDecreaseHPNextRound;
+
+    private boolean canDecreaseHP2NextRound;
+    private int getAmountOfDecreaseHP2NextRound;
+
+    private boolean antiDisarm;
+    private boolean antiShock;
+    private boolean antiAttackAgainstWeek;
+    private boolean canAttackToHeroWhenDead;
+    private int damageToHeroWhenDead;
 
     public boolean isGhazaPowerBuff() {
         return isGhazaPowerBuff;
@@ -544,14 +556,6 @@ public class Information {
         return ghooleBozorgDamage;
     }
 
-    public void setShireDarrande(boolean shireDarrande) {
-        isShireDarrande = shireDarrande;
-    }
-
-    public boolean isShireDarrande() {
-        return isShireDarrande;
-    }
-
     public void setZahhak(boolean zahhak) {
         isZahhak = zahhak;
     }
@@ -843,5 +847,85 @@ public class Information {
 
     public void setAssassinationDagger(boolean assassinationDagger) {
         isAssassinationDagger = assassinationDagger;
+    }
+
+    public boolean isAntiHollyBuff() {
+        return isAntiHollyBuff;
+    }
+
+    public void setAntiHollyBuff(boolean antiHollyBuff) {
+        isAntiHollyBuff = antiHollyBuff;
+    }
+
+    public boolean isCanDecreaseHpNextRound() {
+        return canDecreaseHpNextRound;
+    }
+
+    public void setCanDecreaseHpNextRound(boolean canDecreaseHpNextRound) {
+        this.canDecreaseHpNextRound = canDecreaseHpNextRound;
+    }
+
+    public int getAmountOfDecreaseHPNextRound() {
+        return amountOfDecreaseHPNextRound;
+    }
+
+    public void setAmountOfDecreaseHPNextRound(int amountOfDecreaseHPNextRound) {
+        this.amountOfDecreaseHPNextRound = amountOfDecreaseHPNextRound;
+    }
+
+    public boolean isCanDecreaseHP2NextRound() {
+        return canDecreaseHP2NextRound;
+    }
+
+    public void setCanDecreaseHP2NextRound(boolean canDecreaseHP2NextRound) {
+        this.canDecreaseHP2NextRound = canDecreaseHP2NextRound;
+    }
+
+    public int getGetAmountOfDecreaseHP2NextRound() {
+        return getAmountOfDecreaseHP2NextRound;
+    }
+
+    public void setGetAmountOfDecreaseHP2NextRound(int getAmountOfDecreaseHP2NextRound) {
+        this.getAmountOfDecreaseHP2NextRound = getAmountOfDecreaseHP2NextRound;
+    }
+
+    public boolean isAntiDisarm() {
+        return antiDisarm;
+    }
+
+    public void setAntiDisarm(boolean antiDisarm) {
+        this.antiDisarm = antiDisarm;
+    }
+
+    public boolean isAntiShock() {
+        return antiShock;
+    }
+
+    public void setAntiShock(boolean antiShock) {
+        this.antiShock = antiShock;
+    }
+
+    public boolean isAntiAttackAgainstWeek() {
+        return antiAttackAgainstWeek;
+    }
+
+    public void setAntiAttackAgainstWeek(boolean antiAttackAgainstWeek) {
+        this.antiAttackAgainstWeek = antiAttackAgainstWeek;
+    }
+
+    public boolean isCanAttackToHeroWhenDead() {
+        return canAttackToHeroWhenDead;
+    }
+
+    public void setCanAttackToHeroWhenDead(boolean canAttackToHeroWhenDead) {
+        this.canAttackToHeroWhenDead = canAttackToHeroWhenDead;
+    }
+
+    public int getDamageToHeroWhenDead() {
+        return damageToHeroWhenDead;
+    }
+
+    public void setDamageToHeroWhenDead(int damageToHeroWhenDead) {
+        this.damageToHeroWhenDead = damageToHeroWhenDead;
     }
 }

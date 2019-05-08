@@ -389,6 +389,12 @@ public class Battle {
     //tahesh migim daghighan chia
     //buff haye passive is activeshun true she
     public void endTurn(){
+        checkThings(playerOff);
+        checkThings(playerOn);
+
+        handleBuffs(playerOff);
+        handleBuffs(playerOn);
+
         Player player = playerOff;
         playerOff = playerOn;
         playerOn = player;
@@ -658,12 +664,6 @@ public class Battle {
 
     private void inputCommandLine(){
         System.out.println("Here is Battle");;
-
-        checkThings(playerOff);
-        checkThings(playerOn);
-
-        handleBuffs(playerOff);
-        handleBuffs(playerOn);
 
         String inputLine = readInput();
         inputLine = inputLine.trim();

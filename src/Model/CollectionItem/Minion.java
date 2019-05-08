@@ -1,7 +1,9 @@
 package Model.CollectionItem;
 
 import Controller.Application;
+import Controller.AttackArea;
 import Controller.Battle;
+import Controller.Impact;
 import Model.Enviroment.Cell;
 import Model.Enviroment.Map1;
 
@@ -31,10 +33,6 @@ public class Minion extends LivingCard {
         return minion;
     }
 
-    @Override
-    public void showCardInCollection() {
-
-    }
 
     @Override
     public void showCardInBattle() {
@@ -43,36 +41,6 @@ public class Minion extends LivingCard {
                 this.getPositionRow() + ", " + this.getPositionColumn() + "), power : " + this.getDecreaseHPByAttack());
     }
 
-  //  public ArrayList<Cell> findCellOfSpecialPower() {
-
-//        return  AttackArea.getCellsOfSpecialPower(this);
-//    }
-
-    //TODO
-    //ino bayad az aval bezanim
-//    public void doSpecialPower(String opponentID){
-//        if(getCoolDown() > 0){
-//            System.out.println("Special Power is not ready yet !!");
-//            return;
-//        }
-//
-//        LivingCard opponentCard = CollectionItem.getLivingCardByID(opponentID);
-//
-//        boolean canSpecialAttackToOpponent = false;
-//        ArrayList<Cell> impactCells = this.findImpactCellOfSpecialPower();
-//        for(Cell cell : impactCells)
-//            if(cell.getX() == opponentCard.getPositionRow() && cell.getY() == opponentCard.getPositionColumn())
-//                canSpecialAttackToOpponent = true;
-//
-//        if(!canSpecialAttackToOpponent){
-//            System.out.println("Oppnent Card is not in special attack impact area");
-//        }
-//
-//        Impact.specialPower(this, opponentCard);
-//
-//        setCoolDown(CollectionItem.readCoolDownTime(this));
-//
-//    }
 
     private ArrayList<Cell> findImpactCellOfSpecialPower() {
         return null;
@@ -95,8 +63,5 @@ public class Minion extends LivingCard {
         this.haveNefrineMarg = haveNefrineMarg;
     }
 
-    public void checkNefrineMarg() {
-        if(!this.isHaveNefrineMarg()) return;
 
-    }
 }

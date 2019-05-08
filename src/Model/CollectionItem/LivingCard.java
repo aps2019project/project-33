@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 abstract public class LivingCard extends Card {
     private int HP, rangeOfAttack, decreaseHPByAttack, changeHP, changePower, numberOfSameTypeInComboAttack,
-    changeRangeOfAttack, numberOfDamaged, shield;
+    changeRangeOfAttack, numberOfDamaged, shield, decreasHPNextRound, decreaseHP2NextRound;
     private String counterAttackType, type;
     private ArrayList<Buff> effects;
     private boolean canCounterAttack, canMoveOrAttack, isAlive;
@@ -105,10 +105,15 @@ abstract public class LivingCard extends Card {
     //TODO
     //Azad kardane flag, ezafe shodan be grave yard
     public void kill(){
-        if(this instanceof Minion) {
-            ((Minion) this).checkNefrineMarg();
-        }
+        if(this instanceof Minion)
+            onDeathOfMinion((Minion)this);
         this.setHP(0);
+    }
+
+    private void onDeathOfMinion(Minion minion){
+        Impact.impactNefrineMarg(minion);
+        Impact.impactGhooleBozorg(minion);
+            Impact.damageToHeroWhenDead(minion);
     }
 
     public void increaseRangeOfAttack(int amount){
@@ -258,8 +263,6 @@ abstract public class LivingCard extends Card {
         return canMoveGreaterTwoCell;
     }
 
-
-
     public boolean isAlive() {
         return isAlive;
     }
@@ -298,5 +301,21 @@ abstract public class LivingCard extends Card {
 
     public void setShield(int shield) {
         this.shield = shield;
+    }
+
+    public int getDecreasHPNextRound() {
+        return decreasHPNextRound;
+    }
+
+    public void setDecreasHPNextRound(int decreasHPNextRound) {
+        this.decreasHPNextRound = decreasHPNextRound;
+    }
+
+    public int getDecreaseHP2NextRound() {
+        return decreaseHP2NextRound;
+    }
+
+    public void setDecreaseHP2NextRound(int decreaseHP2NextRound) {
+        this.decreaseHP2NextRound = decreaseHP2NextRound;
     }
 }
