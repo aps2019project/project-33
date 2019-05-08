@@ -7,6 +7,7 @@ import Model.Buffs.Buff;
 import Model.Enviroment.Cell;
 
 import java.awt.event.ItemEvent;
+import java.lang.management.MemoryNotificationInfo;
 import java.util.ArrayList;
 
 abstract public class LivingCard extends Card {
@@ -15,7 +16,7 @@ abstract public class LivingCard extends Card {
     private String counterAttackType, type;
     private ArrayList<Buff> effects;
     private boolean canCounterAttack, canMoveOrAttack, isAlive;
-    private boolean canMoveGreaterTwoCell, canMove, canAttack;
+    private boolean canMoveGreaterTwoCell, canMove, canAttack, haveShamshireChini, haveSoulEater;
     private ArrayList<Item> Items = new ArrayList<>();
     //location mikhad
 
@@ -96,12 +97,16 @@ abstract public class LivingCard extends Card {
     //ghataan in bayad avaz she
     public void handleAttack(Battle battle, int damage){
         this.setHP(this.getHP() - damage);
+
         Impact.checkAlive(battle, this);
     }
 
     //TODO
     //Azad kardane flag, ezafe shodan be grave yard
     public void kill(){
+        if(this instanceof Minion) {
+            (((Minion) this).checkNefrineMarg();
+        }
         this.setHP(0);
     }
 
@@ -269,5 +274,21 @@ abstract public class LivingCard extends Card {
 
     public void increaseAP(int amountOfIncreaseAP){
         this.decreaseHPByAttack += amountOfIncreaseAP;
+    }
+
+    public boolean isHaveShamshireChini() {
+        return haveShamshireChini;
+    }
+
+    public void setHaveShamshireChini(boolean haveShamshireChini) {
+        this.haveShamshireChini = haveShamshireChini;
+    }
+
+    public boolean isHaveSoulEater() {
+        return haveSoulEater;
+    }
+
+    public void setHaveSoulEater(boolean haveSoulEater) {
+        this.haveSoulEater = haveSoulEater;
     }
 }

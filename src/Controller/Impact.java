@@ -119,12 +119,6 @@ public class Impact {
         minion.kill();
     }
 
- /*   public static void anyKindOfAttack(LivingCard ourLivingCard, LivingCard enemyLivingCard){
-        enemyLivingCard.handleAttack(ourLivingCard.getDecreaseHPByAttack());
-        Impact.counterAttack(enemyLivingCard, ourLivingCard);
-    }
-    */
-
     public static void specialAttackOfGhooleBozorg(Battle battle, Minion bigGiant, int bigGiantDamage){
         int numberOfImpactedCells = 8;
         int[] dx = {-1, -1, 0, 1, 1, 1, 0, -1}, dy = {0, 1, 1, 1, 0, -1, -1, -1};
@@ -622,6 +616,12 @@ public class Impact {
                 terrorHood(cell, battle);
             if(information.isPareSimorgh())
                 pareSimorgh((Hero) livingCard, information);
+            if(information.isShamshireChini())
+                shamshireChini(livingCard);
+            if(information.isSoulEater())
+                soulEater(livingCard);
+            if(information.isAssassinationDagger())
+                assassinationDaggaer((Hero)livingCard);
         } else {
             if (information.isCanIncreaseManaAfter3Rounds())
                 increaseManaAfter3Round(battle.getPlayerOn());
@@ -638,6 +638,17 @@ public class Impact {
         }
     }
 
+    private static void assassinationDaggaer(Hero livingCard) {
+        livingCard.setHaveAssassinationDagger(true);
+    }
+
+    private static void soulEater(LivingCard livingCard) {
+        livingCard.setHaveSoulEater(true);
+    }
+
+    private static void shamshireChini(LivingCard livingCard) {
+        livingCard.setHaveShamshireChini(true);
+    }
 
     private static void pareSimorgh(Hero hero, Information information) {
         hero.setHavePareSimorgh(information.isPareSimorgh());
@@ -670,7 +681,7 @@ public class Impact {
     }
 
     private static void addNefrineMarg(Minion minion) {
-        minion.setNefrineMarg(true);
+        minion.setHaveNefrineMarg(true);
     }
 
     private static void increaseMana(Player playerOn, int amountOfIncreaseMana) {

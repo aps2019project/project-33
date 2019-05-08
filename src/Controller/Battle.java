@@ -610,6 +610,9 @@ public class Battle {
     private void inputCommandLine(){
         System.out.println("Here is Battle");;
 
+        checkThigns(playerOff);
+        checkThigns(playerOn);
+
         String inputLine = readInput();
         inputLine = inputLine.trim();
         inputLine = inputLine.toLowerCase();
@@ -672,6 +675,11 @@ public class Battle {
         else
             System.out.println("Enter valid command");
         this.inputCommandLine();
+    }
+
+    private void checkThigns(Player player) {
+        player.getHero().checkPareSimorgh();
+
     }
 
     private String readInput() {

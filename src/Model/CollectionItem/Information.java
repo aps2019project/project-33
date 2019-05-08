@@ -210,7 +210,9 @@ public class Information {
     private boolean forHybrid;
     private boolean pareSimorgh;
     private int minOfPareSimorgh;
-
+    private boolean isShamshireChini;
+    private boolean isSoulEater;
+    private boolean isAssassinationDagger;
 
     public boolean isGhazaPowerBuff() {
         return isGhazaPowerBuff;
@@ -817,5 +819,29 @@ public class Information {
 
     public void setAmountOfIncreaseRangeOfAttack(int amountOfIncreaseRangeOfAttack) {
         this.amountOfIncreaseRangeOfAttack = amountOfIncreaseRangeOfAttack;
+    }
+
+    public boolean isShamshireChini() {
+        return isShamshireChini;
+    }
+
+    public void setShamshireChini(boolean shamshireChini) {
+        isShamshireChini = shamshireChini;
+    }
+
+    public boolean isSoulEater() {
+        return isSoulEater;
+    }
+
+    public void setSoulEater(boolean soulEater) {
+        isSoulEater = soulEater;
+    }
+
+    public boolean isAssassinationDagger() {
+        return isAssassinationDagger;
+    }
+
+    public void setAssassinationDagger(boolean assassinationDagger) {
+        isAssassinationDagger = assassinationDagger;
     }
 }

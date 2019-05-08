@@ -1,10 +1,7 @@
 package Model.CollectionItem;
 
 import Controller.Application;
-import Controller.AttackArea;
 import Controller.Battle;
-import Controller.Impact;
-import Model.Collection;
 import Model.Enviroment.Cell;
 import Model.Enviroment.Map1;
 
@@ -13,11 +10,7 @@ import java.util.ArrayList;
 
 public class Minion extends LivingCard {
 
-    private boolean nefrineMarg;
-
-    public void readInformation(){
-        //TODO
-    }
+    private boolean haveNefrineMarg;
 
     public static Minion createMinion(String minionName, String playerName) throws FileNotFoundException {
         String address = "Data/Collection/Minion" + minionName + ".json";
@@ -94,15 +87,16 @@ public class Minion extends LivingCard {
         return info;
     }
 
-    public boolean isNefrineMarg() {
-        return nefrineMarg;
+    public boolean isHaveNefrineMarg() {
+        return haveNefrineMarg;
     }
 
-    public void setNefrineMarg(boolean nefrineMarg) {
-        this.nefrineMarg = nefrineMarg;
+    public void setHaveNefrineMarg(boolean haveNefrineMarg) {
+        this.haveNefrineMarg = haveNefrineMarg;
     }
 
-    public void nefrineMarg(Map1 map){
-        //TODO
+    public void checkNefrineMarg(Battle) {
+        if(!this.isHaveNefrineMarg()) return;
+
     }
 }

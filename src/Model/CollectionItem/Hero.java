@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Hero extends LivingCard {
     private int deadAfterRounds = 0;
-    private boolean havePareSimorgh;
+    private boolean havePareSimorgh, haveAssassinationDagger;
     private int minOfPareSimorgh;
     private int coolDown, maxCoolDown;
 
@@ -116,5 +116,13 @@ public class Hero extends LivingCard {
         hero.setID(ID);
         CollectionItem.addLivingCardToAllLivingCards(hero);
         return hero;
+    }
+
+    public boolean isHaveAssassinationDagger() {
+        return haveAssassinationDagger;
+    }
+
+    public void setHaveAssassinationDagger(boolean haveAssassinationDagger) {
+        this.haveAssassinationDagger = haveAssassinationDagger;
     }
 }
