@@ -107,7 +107,7 @@ public class AttackArea {
     // in ja miad mige che noe LivingCard hayi tahte tasire in lanati hastan
     // albate Cell hashoono mige behemoon khodeshoono kar nadare
 
-    private static ArrayList<Cell> getCells(Information information, Player player) {
+    public static ArrayList<Cell> getCells(Information information, Player player) {
         ArrayList<Cell> impactCells = new ArrayList<>();
         if (information.isHeroImpact())
             impactCells.addAll(getCellOfLivingCard(player, (LivingCard) new Hero()));
@@ -116,7 +116,7 @@ public class AttackArea {
         return impactCells;
     }
 
-    private static ArrayList<Cell> getCellOfLivingCard(Player player, LivingCard livingCard) {
+    public static ArrayList<Cell> getCellOfLivingCard(Player player, LivingCard livingCard) {
         ArrayList<Cell> cellOfHero = new ArrayList<>();
         for (CollectionItem collectionItem : player.getAliveCards()) {
             if (collectionItem.getClass().equals(livingCard.getClass())) {
@@ -248,7 +248,7 @@ public class AttackArea {
 
     // tabe haye komaki
 
-    private static ArrayList<Cell> merge(ArrayList<Cell> impactedCells, ArrayList<Cell> impactedCellsOfLivingCards) {
+    public static ArrayList<Cell> merge(ArrayList<Cell> impactedCells, ArrayList<Cell> impactedCellsOfLivingCards) {
        ArrayList<Cell> result = new ArrayList<>();
         for(Cell cell : impactedCells)
             if(impactedCellsOfLivingCards.contains(cell))

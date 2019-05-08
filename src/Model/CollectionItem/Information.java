@@ -222,6 +222,7 @@ public class Information {
 
     private boolean antiDisarm;
     private boolean antiShock;
+    private boolean antiPoison;
     private boolean antiAttackAgainstWeek;
     private boolean canAttackToHeroWhenDead;
     private int damageToHeroWhenDead;
@@ -927,5 +928,13 @@ public class Information {
 
     public void setDamageToHeroWhenDead(int damageToHeroWhenDead) {
         this.damageToHeroWhenDead = damageToHeroWhenDead;
+    }
+
+    public boolean isAntiPoison() {
+        return antiPoison;
+    }
+
+    public void setAntiPoison(boolean antiPoison) {
+        this.antiPoison = antiPoison;
     }
 }
