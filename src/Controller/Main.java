@@ -2,6 +2,7 @@ package Controller;
 
 import Model.CollectionItem.Spell;
 import Model.CollectionItem.Hero;
+import Model.Deck;
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
 import jdk.jshell.spi.SPIResolutionException;
@@ -14,10 +15,10 @@ public class Main {
     public static Scanner scanner = new Scanner(System.in);
     public static Application application = new Application();
 
+
     public static void main(String[] args) throws IOException {
         application.runApplication();
     }
-
 
     public static void createTotalDisarm() throws IOException {
         Spell spell = new Spell();
