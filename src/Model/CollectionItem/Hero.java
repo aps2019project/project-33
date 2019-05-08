@@ -53,9 +53,10 @@ public class Hero extends LivingCard {
 */
     @Override
     public void showCardInBattle() {
-        System.out.println("remaining HP : " + this.getHP() + " attack power : " + this.getDecreaseHPByAttack()
-                + " required mana : " + this.getMP() + this.getDescription());
-        //TODO
+        System.out.println("Hero:");
+        System.out.println("Name: " + this.getName());
+        System.out.println("Cost: " + this.getPrice());
+        System.out.println("Desc: " + this.getDescription());
     }
 
     //deghat konim ke description baraye hero hamoon tozihare special power e !!

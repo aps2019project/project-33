@@ -13,6 +13,11 @@ import java.util.ArrayList;
 public class Minion extends LivingCard {
     private ArrayList<LivingCard> attackedLivingCards = new ArrayList<>();
     private boolean haveNefrineMarg;
+    private String comboAbility;
+
+    public String getComboAbility(){
+        return this.comboAbility;
+    }
 
     public void addAttackedLivingCard (LivingCard livingCard){
         this.attackedLivingCards.add(livingCard);
@@ -44,9 +49,13 @@ public class Minion extends LivingCard {
 
     @Override
     public void showCardInBattle() {
-        //decreaseHPByAttack hamun attack powere?
-        System.out.println(this.getID() + ": " + this.getName() + ", health : " + this.getHP() + ", location : (" +
-                this.getPositionRow() + ", " + this.getPositionColumn() + "), power : " + this.getDecreaseHPByAttack());
+        System.out.println("Minion:");
+        System.out.println("Name: " + this.getName());
+        System.out.println("HP: " + this.getHP() + " AP: " + this.getDecreaseHPByAttack() + " MP: " + this.getMP());
+        System.out.println("Range: " + this.getRangeOfAttack());
+        System.out.println("Combo-ability:" + this.getComboAbility());
+        System.out.println("Cost: " + this.getPrice());
+        System.out.println("Desc: " + this.getDescription());
     }
 
 
