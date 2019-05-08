@@ -63,6 +63,7 @@ public class AccountMenu extends Menu {
 
         Account account = new Account(username, password);
         Account.getAccounts().add(account);
+        account.setBudget(100000);
         Main.application.setLoggedInAccount(account);
 
         System.out.println("This account is created");
