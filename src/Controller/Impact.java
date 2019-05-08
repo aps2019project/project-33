@@ -88,7 +88,19 @@ public class Impact {
         }
     }
 
-    public static void damageToEnemy(Battle battle, LivingCard opponentLivingCard, int damage){
+    public static void damageToEnemy(Battle battle, Player player, LivingCard myLivingCard, LivingCard opponentLivingCard, int damage){
+        if(myLivingCard instanceof Hero && opponentLivingCard instanceof Hero){
+            if(((Hero)myLivingCard).isHaveAssassinationDagger())
+                damage += 8;
+        }
+        if(player.isCanAddPoisonWhileAttacking())
+            addPoisonToCard(1, false, false, 1, opponentLivingCard);
+        if(player.isCanAddStunWhileAttacking())
+            addStunToCard(1, false, false, opponentLivingCard);
+        if(myLivingCard.isHaveSoulEater())
+            myLivingCard.increaseHP(2);
+        if(myLivingCard.isHaveShamshireChini())
+            damage += 5;
         opponentLivingCard.handleAttack(battle, damage);
         return;
     }
@@ -613,7 +625,7 @@ public class Impact {
             if(information.isCanAddNefrineMarg())
                 addNefrineMarg((Minion) livingCard);
             if(information.isTerrorHood())
-                terrorHood(cell, battle);
+                terrorHood(battle.getPlayerOn());
             if(information.isPareSimorgh())
                 pareSimorgh((Hero) livingCard, information);
             if(information.isShamshireChini())
@@ -663,12 +675,8 @@ public class Impact {
         battle.getPlayerOn().setCanAddPoisonWhileAttacking(true);
     }
 
-    private static void terrorHood(Cell cell, Battle battle) {
-        ArrayList<Cell> neighbors = AttackArea.getNeighbors(cell, battle);
-        for(Cell cell1 : neighbors) {
-            if(battle.getPlayerOff().getAliveCards().contains(cell1.getLivingCard()))
-                addWeaknessToCard(1, false, false, 2, 0, cell1.getLivingCard());
-        }
+    private static void terrorHood(Player player) {
+        player.setHaveTerrorHood(true);
     }
 
     private static void addGhosleTamid(Battle battle, int timeOfGhosleTamid) {
@@ -678,6 +686,7 @@ public class Impact {
 
     private static void killHeroOfEnemyAfterRounds(int numberOfRoundsNeededForKillHeroOfEnemy, Battle battle) {
         battle.getPlayerOff().getHero().setDeadAfterRounds(numberOfRoundsNeededForKillHeroOfEnemy);
+        battle.getPlayerOff().getHero().setHaveKingKiller(true);
     }
 
     private static void addNefrineMarg(Minion minion) {
@@ -696,6 +705,14 @@ public class Impact {
         livingCard.increaseHP(amount);
     }
     //payane in bakhsh
+
+    public static void impactTerrorHood(Cell cell, Battle battle){
+        ArrayList<Cell> neighbors = AttackArea.getNeighbors(cell, battle);
+        for(Cell cell1 : neighbors) {
+            if(battle.getPlayerOff().getAliveCards().contains(cell1.getLivingCard()))
+                addWeaknessToCard(1, false, false, 2, 0, cell1.getLivingCard());
+        }
+    }
 }
 
 

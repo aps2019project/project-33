@@ -105,7 +105,7 @@ abstract public class LivingCard extends Card {
     //Azad kardane flag, ezafe shodan be grave yard
     public void kill(){
         if(this instanceof Minion) {
-            (((Minion) this).checkNefrineMarg();
+            ((Minion) this).checkNefrineMarg();
         }
         this.setHP(0);
     }

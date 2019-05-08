@@ -21,7 +21,7 @@ public class Player {
     private int flagTurns;
     private GraveYard graveYard = new GraveYard();
     private Account account;
-    private boolean haveGhosleTamid;
+    private boolean haveGhosleTamid, haveTerrorHood;
     private int timeOfGhosleTamid;
     private boolean canAddPoisonWhileAttacking, canAddStunWhileAttacking;
 
@@ -173,5 +173,13 @@ public class Player {
 
     public void setCanAddStunWhileAttacking(boolean canAddStunWhileAttacking) {
         this.canAddStunWhileAttacking = canAddStunWhileAttacking;
+    }
+
+    public boolean isHaveTerrorHood() {
+        return haveTerrorHood;
+    }
+
+    public void setHaveTerrorHood(boolean haveTerrorHood) {
+        this.haveTerrorHood = haveTerrorHood;
     }
 }

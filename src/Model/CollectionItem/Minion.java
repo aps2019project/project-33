@@ -95,7 +95,7 @@ public class Minion extends LivingCard {
         this.haveNefrineMarg = haveNefrineMarg;
     }
 
-    public void checkNefrineMarg(Battle) {
+    public void checkNefrineMarg() {
         if(!this.isHaveNefrineMarg()) return;
 
     }

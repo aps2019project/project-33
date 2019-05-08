@@ -249,6 +249,8 @@ public class Battle {
             ((LivingCard) insertingCollectionItem).setPositionRow(x);
             cell.insertCard(insertingCollectionItem.getID());
             playerOn.addAliveCard((LivingCard)insertingCollectionItem);
+            Impact.addHolyToCard(2, false, false, 1,
+                    ((LivingCard) insertingCollectionItem));
         }
         else{
             if(insertingCollectionItem instanceof Spell){
@@ -610,8 +612,8 @@ public class Battle {
     private void inputCommandLine(){
         System.out.println("Here is Battle");;
 
-        checkThigns(playerOff);
-        checkThigns(playerOn);
+        checkThings(playerOff);
+        checkThings(playerOn);
 
         String inputLine = readInput();
         inputLine = inputLine.trim();
@@ -677,9 +679,13 @@ public class Battle {
         this.inputCommandLine();
     }
 
-    private void checkThigns(Player player) {
+    private void checkThings(Player player) {
         player.getHero().checkPareSimorgh();
-
+        if(player.isHaveTerrorHood()) Impact.impactTerrorHood(player.getHeroPosition(), this);
+        if(player.getHero().isHaveKingKiller()){
+            if(player.getHero().getDeadAfterRounds() == 0) player.getHero().kill();
+            else player.getHero().setDeadAfterRounds(player.getHero().getDeadAfterRounds() - 1);
+        }
     }
 
     private String readInput() {
