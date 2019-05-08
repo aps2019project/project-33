@@ -23,6 +23,48 @@ public class Generator {
 
     public static void createCards(Application settedApplication) throws IOException {
         setApplication(settedApplication);
+        createMinions();
+        createSpells();
+        createHeroes();
+    }
+
+    public static void createSpells() throws IOException {
+        Generator.TotalDisarm();
+        Generator.AreaDispel();
+        Generator.Empower();
+        Generator.Fireball();
+        Generator.GodStrength();
+        Generator.HellFire();
+        Generator.LightingBolt();
+        Generator.PoisonLake();
+        Generator.Madness();
+        Generator.AllDisarm();
+        Generator.AllPoison();
+        Generator.Dispel();
+        Generator.HealthWithProfit();
+        Generator.GhazaBokhorJoonBegiri();
+        Generator.AllPower();
+        Generator.AllAttack();
+        Generator.Weakening();
+        Generator.Sacrifice();
+        Generator.KingsGuard();
+        Generator.Shock();
+    }
+
+    public static void createHeroes() throws IOException {
+        Generator.DiveSefid();
+        Generator.Simorgh();
+        Generator.Ezhdaha();
+        Generator.Rakhsh();
+        Generator.Zahhak();
+        Generator.Kaveh();
+        Generator.Arash();
+        Generator.Afsaneh();
+        Generator.Esfandiar();
+        Generator.Rostam();
+    }
+
+    public static void createMinions() throws IOException {
         Generator.createKamandareFars();
         Generator.createShamshirzaneFars();
         Generator.createNeyzedareFars();
@@ -63,40 +105,7 @@ public class Generator {
         Generator.createSiavash();
         Generator.createShahGhool();
         Generator.createArzhangeDiv();
-
-
-        Generator.TotalDisarm();
-        Generator.AreaDispel();
-        Generator.Empower();
-        Generator.Fireball();
-        Generator.GodStrength();
-        Generator.HellFire();
-        Generator.LightingBolt();
-        Generator.PoisonLake();
-        Generator.Madness();
-        Generator.AllDisarm();
-        Generator.AllPoison();
-        Generator.Dispel();
-        Generator.HealthWithProfit();
-        Generator.GhazaBokhorJoonBegiri();
-        Generator.AllPower();
-        Generator.AllAttack();
-        Generator.Weakening();
-        Generator.Sacrifice();
-        Generator.KingsGuard();
-        Generator.Shock();
-        Generator.DiveSefid();
-        Generator.Simorgh();
-        Generator.Ezhdaha();
-        Generator.Rakhsh();
-        Generator.Zahhak();
-        Generator.Kaveh();
-        Generator.Arash();
-        Generator.Afsaneh();
-        Generator.Esfandiar();
-        Generator.Rostam();
     }
-
 
     public static void TotalDisarm() throws IOException {
         Spell spell = new Spell();
