@@ -367,7 +367,7 @@ public class Main {
     }
 
     public static void Rostam() throws IOException{
-        //chera mp o cooldown nadare?
+        //chera mp o cooldown nadare?s
         Hero hero = new Hero("Rostam", 8000, 55, 7, "hybrid", 0, 0);
         hero.setRangeOfAttack(4);
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Rostam.json");
