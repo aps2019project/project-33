@@ -218,7 +218,7 @@ public class Information {
     private int amountOfDecreaseHPNextRound;
 
     private boolean canDecreaseHP2NextRound;
-    private int getAmountOfDecreaseHP2NextRound;
+    private int amountOfDecreaseHP2NextRound;
 
     private boolean antiDisarm;
     private boolean antiShock;
@@ -882,12 +882,12 @@ public class Information {
         this.canDecreaseHP2NextRound = canDecreaseHP2NextRound;
     }
 
-    public int getGetAmountOfDecreaseHP2NextRound() {
-        return getAmountOfDecreaseHP2NextRound;
+    public int getAmountOfDecreaseHP2NextRound() {
+        return amountOfDecreaseHP2NextRound;
     }
 
-    public void setGetAmountOfDecreaseHP2NextRound(int getAmountOfDecreaseHP2NextRound) {
-        this.getAmountOfDecreaseHP2NextRound = getAmountOfDecreaseHP2NextRound;
+    public void setAmountOfDecreaseHP2NextRound(int amountOfDecreaseHP2NextRound) {
+        this.amountOfDecreaseHP2NextRound = amountOfDecreaseHP2NextRound;
     }
 
     public boolean isAntiDisarm() {
