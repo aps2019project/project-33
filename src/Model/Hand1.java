@@ -1,6 +1,7 @@
 package Model;
 
 import Model.CollectionItem.CollectionItem;
+import Model.CollectionItem.Item;
 import Model.CollectionItem.Minion;
 import Model.CollectionItem.Spell;
 
@@ -29,6 +30,13 @@ public class Hand1 {
             }
     }
 
+    public void showItems(){
+        for(CollectionItem collectionItem : handCards){
+            if(collectionItem instanceof Item){
+                System.out.println(collectionItem.getInfo());
+            }
+        }
+    }
     //nazadam
     public void showNextCard(Deck mainDeck){
         if(numberOfUsedDeckCollectionItems >= mainDeck.getCards().size() - 1){
@@ -36,14 +44,17 @@ public class Hand1 {
             return;
         }
         CollectionItem collectionItem = mainDeck.getCards().get(numberOfUsedDeckCollectionItems);
+        System.out.println("Next card :");
         System.out.println(collectionItem.getName());
     }
 
     public void show(Deck mainDeck){
-        System.out.println("spells : \n");
+        System.out.println("spells :");
         this.showSpells();
-        System.out.println("minions : \n");
+        System.out.println("minions :");
         this.showMinions();
+        System.out.println("items :");
+        this.showItems();
         showNextCard(mainDeck);
     }
 
