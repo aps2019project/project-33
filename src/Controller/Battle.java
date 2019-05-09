@@ -231,7 +231,10 @@ public class Battle {
     public void showMinions(Player player){
         for(LivingCard livingCard : player.getAliveCards()){
             if(livingCard instanceof Minion){
-                livingCard.showCardInBattle();
+                String info = livingCard.getID() + " : " + livingCard.getName() + ", health : " + livingCard.getHP();
+                info += ", location : (" + livingCard.getPositionRow() + ", " + livingCard.getPositionColumn() + "), power : ";
+                info += livingCard.getDecreaseHPByAttack();
+                System.out.println(info);
             }
         }
     }
@@ -260,13 +263,9 @@ public class Battle {
         CollectionItem collectionItem = getCollectionItemInList(onCollectionItems, ID);
         if(collectionItem == null)
             collectionItem = getCollectionItemInList(offCollectionItems, ID);
-        if(collectionItem != null){
-            info = collectionItem.getInfo();
-            if(collectionItem instanceof LivingCard)
-                info += " HP : " + ((LivingCard) (collectionItem)).getHP() + " AP : " +
-                        ((LivingCard)(collectionItem)).getDecreaseHPByAttack();
+        if(collectionItem != null) {
+            ((Card)collectionItem).showCardInBattle();
         }
-        System.out.println(info);
     }
 
     public boolean selectCard(String ID){
