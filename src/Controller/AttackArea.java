@@ -174,11 +174,11 @@ public class AttackArea {
         ArrayList<Cell> impactedCells = new ArrayList<>();
         Information information = livingCard.getInformation();
 
-        if(information.isCanDoHybridAttack())
+        if(livingCard.getCounterAttackType().equals("hybrid"))
             impactedCells.addAll(findHybridAttackArea(battle, livingCard));
-        if(information.isCanDoMeleeAttack())
+        if(livingCard.getCounterAttackType().equals("melee"))
             impactedCells.addAll(findMeleeAttackArea(battle, livingCard));
-        if(information.isCanDoRangedAttack())
+        if(livingCard.getCounterAttackType().equals("ranged"))
             impactedCells.addAll(findRangedAttackArea(battle, livingCard));
 
         return impactedCells;
