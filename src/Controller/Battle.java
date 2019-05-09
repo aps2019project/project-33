@@ -917,16 +917,6 @@ public class Battle {
         inputLine = inputLine.toLowerCase();
         String[] input = inputLineOriginal.split("[ ]+");
 
-/*
-        for (int i = 0; i < map.getHeight(); i++) {
-            for (int j = 0; j < map.getWidth(); j++) {
-                if (map.getCellByCoordination(i, j).getLivingCard() == null) System.out.print(".");
-                else System.out.print("L");
-            }
-            System.out.print("\n");
-        }
-*/
-
         if (inputLine.equals("Forfeit match")) {
             forfeitMatch();
         }
