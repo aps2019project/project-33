@@ -401,7 +401,7 @@ public class Battle {
 
         Cell cell = map.getCellByCoordination(x, y);
         if(insertingCollectionItem instanceof LivingCard){
-            if(map.getCellByCoordination(x, y).getLivingCard() != null){
+            if(cell.getLivingCard() != null){
                 System.out.println("Destination is full !");
                 return;
             }
