@@ -22,7 +22,6 @@ public class BattleMenu extends Menu {
     private void readInputs() {
         inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
-        inputLine = inputLine.toLowerCase();
         input = inputLine.split("[ ]+");
     }
 

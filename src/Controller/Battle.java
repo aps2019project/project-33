@@ -44,15 +44,18 @@ public class Battle {
         Deck mainDeck = player.getAccount().getCollection().getMainDeck();
         ArrayList<CollectionItem> livingCards = mainDeck.getCards();
 
-        for(CollectionItem collectionItem : livingCards){
+        for(int i = livingCards.size() - 1; i > -1; i --){
+            CollectionItem collectionItem = livingCards.get(i);
 
             System.out.println(collectionItem.getName());
 
             collection.removeCollectionItemFromCollection(collectionItem.getID());
+            String address = "Data/CollectionItem/";
 
             if(collectionItem instanceof Hero){
                 CollectionItem.getAllLivingCards().remove(collectionItem);
-                Hero hero = (Hero) Application.readJSON(Hero.class, collectionItem.getName());
+                address += "Hero/" + collectionItem.getName() + ".json";
+                Hero hero = (Hero) Application.readJSON(Hero.class, address);
                 hero.setID(collectionItem.getID());
                 CollectionItem.getAllLivingCards().add(hero);
                 collection.addCollectionItemToCollection(hero.getID());
@@ -61,7 +64,8 @@ public class Battle {
 
             if(collectionItem instanceof Minion){
                 CollectionItem.getAllLivingCards().remove(collectionItem);
-                Minion minion = (Minion) Application.readJSON(Minion.class, collectionItem.getName());
+                address += "Minion/" + collectionItem.getName() + ".json";
+                Minion minion = (Minion) Application.readJSON(Minion.class, address);
                 minion.setID(collectionItem.getID());
                 CollectionItem.getAllLivingCards().add(minion);
                 collection.addCollectionItemToCollection(minion.getID());
@@ -69,7 +73,8 @@ public class Battle {
             }
             if(collectionItem instanceof Spell){
                 CollectionItem.getAllSpells().remove(collectionItem);
-                Spell spell = (Spell) Application.readJSON(Spell.class, collectionItem.getName());
+                address += "Spell/" + collectionItem.getName() + ".json";
+                Spell spell = (Spell) Application.readJSON(Spell.class, address);
                 spell.setID(collectionItem.getID());
                 CollectionItem.getAllSpells().add(spell);
                 collection.addCollectionItemToCollection(spell.getID());
@@ -77,11 +82,12 @@ public class Battle {
             }
             if(collectionItem instanceof Item){
                 CollectionItem.getAllItems().remove(collectionItem);
-                Item item = (Item) Application.readJSON(Item.class, collectionItem.getName());
+                address += "Item/" + collectionItem.getName() + ".json";
+                Item item = (Item) Application.readJSON(Item.class, address);
                 item.setID(collectionItem.getID());
                 CollectionItem.getAllItems().add(item);
                 collection.addCollectionItemToCollection(item.getID());
-                collection.addCollectionItemToDeck(item.getID(), mainDeck.getName());
+                collection.addCollectionItemToDeck(item.getID(),  mainDeck.getName());
             }
         }
     }
