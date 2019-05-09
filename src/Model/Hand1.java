@@ -31,7 +31,7 @@ public class Hand1 {
 
     //nazadam
     public void showNextCard(Deck mainDeck){
-        if(numberOfUsedDeckCollectionItems >= mainDeck.getCards().size()){
+        if(numberOfUsedDeckCollectionItems >= mainDeck.getCards().size() - 1){
             System.out.println("next card doesn't exist!");
             return;
         }
@@ -57,7 +57,7 @@ public class Hand1 {
     }
 
     public void addNextCard(Deck mainDeck){
-        if(mainDeck.getCards().size() <= numberOfUsedDeckCollectionItems){
+        if(mainDeck.getCards().size() - 1 <= numberOfUsedDeckCollectionItems){
             System.out.println("main deck is empty");
             return;
         }
