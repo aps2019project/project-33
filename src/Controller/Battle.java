@@ -190,13 +190,14 @@ public class Battle {
         this.createHand(playerOff);
         this.putHeroes();
 
+        playerOn.getMana().setMaximumMana(2);
+        playerOff.getMana().setMaximumMana(3);
         playerOn.getMana().setCurrentMana(playerOn.getMana().getMaximumMana());
         playerOff.getMana().setCurrentMana(playerOff.getMana().getMaximumMana());
 
         if(!this.getMode().equals(modes[0])){
             this.createFlagMode();
         }
-// gitignore test
         canLivingCards(playerOn);
         canLivingCards(playerOff);
 
@@ -587,6 +588,8 @@ public class Battle {
     }
 
     public void endTurn(){
+        playerOn.getMana().configueMana(this);
+
         canLivingCards(playerOn);
         canLivingCards(playerOff);
 
