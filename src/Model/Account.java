@@ -3,6 +3,7 @@ package Model;
 import java.util.ArrayList;
 
 import Model.CollectionItem.CollectionItem;
+import Model.CollectionItem.Item;
 
 public class Account {
 
@@ -12,7 +13,6 @@ public class Account {
     private String username;
     private String password;
     private int budget;
-    private int numberOfItems;
 
     //Constructor
 
@@ -139,12 +139,13 @@ public class Account {
     }
 
     public int getNumberOfItems() {
+        int numberOfItems = 0;
+        for(CollectionItem collectionItem : this.getCollection().getCards())
+            if(collectionItem instanceof Item)
+                numberOfItems ++;
         return numberOfItems;
     }
 
-    public void setNumberOfItems(int numberOfItems) {
-        this.numberOfItems = numberOfItems;
-    }
 
     public ArrayList<Match> getMatches() {
         return matches;

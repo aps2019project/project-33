@@ -14,6 +14,8 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException {
+        DeckGenerator.deckGenerator();
+        ShopGenerator.generate();
         application.runApplication();
     //    Generator.createCards(application);
     }

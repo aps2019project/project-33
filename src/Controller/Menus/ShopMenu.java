@@ -2,10 +2,7 @@ package Controller.Menus;
 
 import Controller.Main;
 import Model.*;
-import Model.CollectionItem.CollectionItem;
-import Model.CollectionItem.Hero;
-import Model.CollectionItem.LivingCard;
-import Model.CollectionItem.UsableItem;
+import Model.CollectionItem.*;
 
 import java.util.ArrayList;
 
@@ -17,7 +14,7 @@ public class ShopMenu extends Menu {
 
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
-        inputLine = inputLine.toLowerCase();
+        //inputLine = inputLine.toLowerCase();
         String[] separatedInput = inputLine.split("[ ]+");
 
         Collection collection = Main.application.getLoggedInAccount().getCollection();
@@ -84,7 +81,7 @@ public class ShopMenu extends Menu {
 
         Account costumer = Main.application.getLoggedInAccount();
 
-        if (collectionItem instanceof UsableItem) {
+        if (collectionItem instanceof Item) {
             if (costumer.getNumberOfItems() == 3) {
                 System.out.println("You have 3 Items! Please sell at least 1 item at first !");
                 return;
