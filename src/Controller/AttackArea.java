@@ -264,14 +264,13 @@ public class AttackArea {
             impactCells.addAll(getCells(information, battle.getPlayerOff()));
         if(information.isUsImpact())
             impactCells.addAll(getCells(information, battle.getPlayerOn()));
-
         for(Cell cell : impactCells){
             LivingCard livingCard = cell.getLivingCard();
-            if(information.isForHybrid() && livingCard.getInformation().isHybrid())
+            if(information.isForHybrid() && livingCard.getInformation().isCanDoHybridAttack())
                 result.add(cell);
-            if(information.isForMelee() && livingCard.getInformation().isMelee())
+            if(information.isForMelee() && livingCard.getInformation().isCanDoMeleeAttack())
                 result.add(cell);
-            if(information.isForRange() && livingCard.getInformation().isRange())
+            if(information.isForRange() && livingCard.getInformation().isCanDoRangedAttack())
                 result.add(cell);
         }
         return result;
