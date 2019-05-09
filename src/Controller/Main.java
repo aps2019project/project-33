@@ -14,7 +14,8 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException {
-    //    ShopGenerator.generate();
+        //Generator.createHeroes();
+        //    ShopGenerator.generate();
         application.runApplication();
     //    Generator.createCards(application);
     }

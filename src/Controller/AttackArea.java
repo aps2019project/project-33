@@ -264,7 +264,6 @@ public class AttackArea {
             impactCells.addAll(getCells(information, battle.getPlayerOff()));
         if(information.isUsImpact())
             impactCells.addAll(getCells(information, battle.getPlayerOn()));
-
         for(Cell cell : impactCells){
             LivingCard livingCard = cell.getLivingCard();
             if(information.isForHybrid() && livingCard.getInformation().isCanDoHybridAttack())
