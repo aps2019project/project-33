@@ -59,7 +59,7 @@ public class Application {
         //Read Shop
         File file = new File("Data/Memory/Shop");
         if(Objects.requireNonNull(file.listFiles()).length > 0)
-            Main.application.shop = (Collection) readJSON(Collection.class, "Data/Memory/Shop/shop.json");
+            Main.application.shop = (Collection) readJSON(Collection.class, "Data/Memory/Shop/Shop.json");
     }
 
     public static ArrayList<Object> readFromFile(String address, String type) throws FileNotFoundException {

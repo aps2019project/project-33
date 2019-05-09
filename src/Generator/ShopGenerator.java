@@ -11,7 +11,7 @@ import java.lang.management.MemoryNotificationInfo;
 
 public class ShopGenerator {
 
-    public void generate() throws IOException {
+    public static void generate() throws IOException {
         Collection shop = new Collection();
         int numberOfEachCard = 10;
         DeckGenerator deckGenerator = new DeckGenerator();
