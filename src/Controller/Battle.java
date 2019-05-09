@@ -293,7 +293,6 @@ public class Battle {
         if (collectionItem != null) {
             ((Card) collectionItem).showCardInBattle();
         }
-        System.out.println(info);
     }
 
     public boolean selectCard(String ID) {
