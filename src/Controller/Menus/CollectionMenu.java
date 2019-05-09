@@ -12,17 +12,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class CollectionMenu extends Menu {
+    private boolean isFirstOne = true;
+    private Collection collection = null;
+
+    public void setFirstOne(boolean flag){
+        isFirstOne = flag;
+    }
+
     @Override
+
     public void inputCommandLine() throws IOException {
         System.out.println("Here is Collection Menu");
 
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
-        inputLine = inputLine.toLowerCase();
         String[] input = inputLine.split("[ ]+");
-
-        Collection collection = (Collection) Application.copy(Main.application.getLoggedInAccount().getCollection(),
-                Collection.class);
+        if(isFirstOne){
+            collection = (Collection) Application.copy(Main.application.getLoggedInAccount().getCollection(),
+                    Collection.class);
+            isFirstOne = false;
+        }
 
         if (inputLine.equals("show")) {
             collection.showCollection("Sell Cost");
@@ -32,11 +41,11 @@ public class CollectionMenu extends Menu {
             createDeck(input[2], collection);
         } else if (inputLine.matches("delete deck .*")) {
             deleteDeck(input[2], collection);
-        } else if (inputLine.matches("add .* to .*")) {
-            String collectionItemId = input[1], deckName = input[3];
+        } else if (inputLine.matches("add .* to deck .*")) {
+            String collectionItemId = input[1], deckName = input[4];
             collection.addCollectionItemToDeck(collectionItemId, deckName);
         } else if (inputLine.matches("remove .* from .*")) {
-            String collectionItemId = input[1], deckName = input[3];
+            String collectionItemId = input[1], deckName = input[4];
             collection.removeCollectionItemFromDeck(collectionItemId, deckName);
         } else if (inputLine.matches("validate deck .*")) {
             checkValidityOfDeck(input[2], collection);
@@ -45,13 +54,15 @@ public class CollectionMenu extends Menu {
         } else if (inputLine.equals("show all decks")) {
             collection.showAllDecks();
         } else if (inputLine.matches("show deck .*")) {
-            showDeck(input[2], collection);
+            collection.showDeck(input[2]);
         } else if (inputLine.equals("save")) {
             this.save(collection);
         } else if (inputLine.equals("show menu"))
             CollectionMenu.showMenu();
-        else if (inputLine.equals("exit"))
+        else if (inputLine.equals("exit")){
+            isFirstOne = true;
             return;
+        }
         else
             System.out.println("Enter valid command line !");
 
@@ -67,12 +78,7 @@ public class CollectionMenu extends Menu {
     }
 
     private void showDeck(String deckName, Collection collection) {
-        Deck deck = collection.getDeckByName(deckName);
-        if (deck == null) {
-            System.out.println("This deck doesn't exist");
-            return;
-        } else
-            collection.showDeck(deckName);
+        collection.showDeck(deckName);
     }
 
     //ino do ja zadim

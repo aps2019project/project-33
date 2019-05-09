@@ -17,7 +17,7 @@ public class ShopMenu extends Menu {
 
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
-        inputLine = inputLine.toLowerCase();
+   //     inputLine = inputLine.toLowerCase();
         String[] separatedInput = inputLine.split("[ ]+");
 
         Collection collection = Main.application.getLoggedInAccount().getCollection();
@@ -47,6 +47,7 @@ public class ShopMenu extends Menu {
 
     private void searchInCollection(String collectionItemName, Collection collection) {
         ArrayList<String> IDs = collection.search(collectionItemName);
+        System.out.println(collectionItemName + " " + IDs.size());
         System.out.println("Result of search :");
         int index = 0;
         for (String ID : IDs)

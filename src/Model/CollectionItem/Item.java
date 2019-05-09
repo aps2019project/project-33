@@ -28,7 +28,7 @@ public  class Item extends CollectionItem {
 
     @Override
     public String  getInfo(){
-        String info = "Name : " + this.getName() + " - Desc " + this.getDescription();
+        String info = "Name : " + this.getName() + " - ID : " + this.getID() + " - Desc " + this.getDescription();
         return info;
     }
 

@@ -47,7 +47,7 @@ public class Spell extends Card {
     @Override
     public String getInfo() {
         String info;
-        info = "Type : Spell - Name : " + this.getName() + " - MP : " + this.getMp() + " - Desc : " + this.getDescription();
+        info = "Type : Spell - Name : " + this.getName() + " - ID : " + this.getID() + " - MP : " + this.getMp() + " - Desc : " + this.getDescription();
         return info;
     }
 

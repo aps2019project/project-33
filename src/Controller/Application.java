@@ -56,10 +56,24 @@ public class Application {
         for (Object object : objects)
             CollectionItem.getAllLivingCards().add((LivingCard) object);
 
+        //Read Spells
+        objects = readFromFile("Data/Memory/Spells", "Spell");
+        for (Object object : objects)
+            CollectionItem.getAllSpells().add((Spell) object);
+
+        //Read Items
+        objects = readFromFile("Data/Memory/Items", "Item");
+        for (Object object : objects)
+            CollectionItem.getAllItems().add((Item) object);
+
+
         //Read Shop
         File file = new File("Data/Memory/Shop");
         if(Objects.requireNonNull(file.listFiles()).length > 0)
             Main.application.shop = (Collection) readJSON(Collection.class, "Data/Memory/Shop/Shop.json");
+
+        //Read CollectionItem
+
     }
 
     public static ArrayList<Object> readFromFile(String address, String type) throws FileNotFoundException {

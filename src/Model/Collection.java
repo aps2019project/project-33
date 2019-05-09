@@ -10,9 +10,10 @@ public class Collection {
     private ArrayList<Deck> decks = new ArrayList<>();
 
     public Deck getDeckByName(String deckName){
-        for(Deck deck : decks)
-            if(deck.getName().equals(deckName))
+        for(Deck deck : decks) {
+            if (deck.getName().equals(deckName))
                 return deck;
+        }
         return null;
     }
 
@@ -98,6 +99,10 @@ public class Collection {
     public void removeCollectionItemFromDeck(String ID, String deckName){
         Deck deck = this.getDeckByName(deckName);
         CollectionItem collectionItem = deck.findCollectionItemInDeck(ID);
+        if(collectionItem == null){
+            System.out.println("collection item not found");
+            return;
+        }
         if(this.validateInput(collectionItem, deck))
             deck.removeCollectionItemFromDeck(collectionItem);
     }

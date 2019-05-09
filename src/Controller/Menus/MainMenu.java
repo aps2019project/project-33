@@ -20,7 +20,6 @@ public class MainMenu extends Menu {
 
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
-        inputLine = inputLine.toLowerCase();
         String[] input = inputLine.split("[ ]+");
 
         if (inputLine.equals("enter collection")) {

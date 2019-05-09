@@ -79,7 +79,7 @@ public abstract class CollectionItem {
         return 0;
     }
 
-    public void doImpact(String livingCardID){}
+    public                                                                                                                                                           void doImpact(String livingCardID){}
     public abstract String getInfo();
 
 

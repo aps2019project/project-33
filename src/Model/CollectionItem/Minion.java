@@ -66,7 +66,7 @@ public class Minion extends LivingCard {
     //deghat konim description hamoon special power o in harfas
     @Override
     public String getInfo() {
-        String info = "Type : Minion - Name : " + this.getName() + " - Class: " + this.getClass() + " - AP : " +
+        String info = "Type : Minion - Name : " + this.getName() + " - ID: " + this.getID() + " - Class: " + this.getClass() + " - AP : " +
                 this.getDecreaseHPByAttack() + " - HP : " + this.getHP() + " - MP : " + this.getMP() + " - Special power : "
                 + this.getDescription();
         return info;
