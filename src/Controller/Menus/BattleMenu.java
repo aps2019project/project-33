@@ -210,25 +210,25 @@ public class BattleMenu extends Menu {
         return;
     }
 
-    public void handleDeck(Account account) {
-        account.getCollection().createDeck(account.getUsername());
-        account.getCollection().selectMainDeck(account.getUsername());
-        for (int i = 0; i < 20; i++) {
-            Minion minion = new Minion();
-            minion.setName(account.getUsername() + i);
-            minion.setPrice(i * 10);
-            minion.setID(Integer.toString(i));
-            CollectionItem.getAllLivingCards().add(minion);
-            account.getCollection().addCollectionItemToCollection(minion.getID());
-            account.getCollection().addCollectionItemToDeck(minion.getID(), account.getUsername());
-        }
-        Hero hero = new Hero();
-        hero.setName(account.getUsername());
-        hero.setPrice(100000);
-        hero.setID(account.getUsername());
-        CollectionItem.getAllLivingCards().add(hero);
-        account.getCollection().addCollectionItemToCollection(hero.getID());
-        account.getCollection().addCollectionItemToDeck(hero.getID(), account.getUsername());
-    }
+//    public void handleDeck(Account account) {
+//        account.getCollection().createDeck(account.getUsername());
+//        account.getCollection().selectMainDeck(account.getUsername());
+//        for (int i = 0; i < 20; i++) {
+//            Minion minion = new Minion();
+//            minion.setName(account.getUsername() + i);
+//            minion.setPrice(i * 10);
+//            minion.setID(Integer.toString(i));
+//            CollectionItem.getAllLivingCards().add(minion);
+//            account.getCollection().addCollectionItemToCollection(minion.getID());
+//            account.getCollection().addCollectionItemToDeck(minion.getID(), account.getUsername());
+//        }
+//        Hero hero = new Hero();
+//        hero.setName(account.getUsername());
+//        hero.setPrice(100000);
+//        hero.setID(account.getUsername());
+//        CollectionItem.getAllLivingCards().add(hero);
+//        account.getCollection().addCollectionItemToCollection(hero.getID());
+//        account.getCollection().addCollectionItemToDeck(hero.getID(), account.getUsername());
+//    }
 }
 

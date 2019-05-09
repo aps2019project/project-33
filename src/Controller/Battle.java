@@ -11,9 +11,12 @@ import Model.Enviroment.Cell;
 import Model.Enviroment.Map1;
 import Controller.AttackArea;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+
+import static javax.swing.text.html.parser.DTDConstants.ID;
 
 public class Battle {
     private Player playerOn, playerOff;
@@ -35,6 +38,49 @@ public class Battle {
         this.selectedCollectableItem = null;
     }
 
+    // in be ehtemale khoobi momkene bug bokhore
+    public void relaxCards(Player player) throws FileNotFoundException {
+        Collection collection = player.getAccount().getCollection();
+        Deck mainDeck = player.getAccount().getCollection().getMainDeck();
+        for(CollectionItem collectionItem : mainDeck.getCards()){
+
+            collection.removeCollectionItemFromCollection(collectionItem.getID());
+
+            if(collectionItem instanceof Hero){
+                CollectionItem.getAllLivingCards().remove(collectionItem);
+                Hero hero = (Hero) Application.readJSON(Hero.class, collectionItem.getName());
+                hero.setID(collectionItem.getID());
+                CollectionItem.getAllLivingCards().add(hero);
+                collection.addCollectionItemToCollection(hero.getID());
+                collection.addCollectionItemToDeck(hero.getID(), mainDeck.getName());
+            }
+
+            if(collectionItem instanceof Minion){
+                CollectionItem.getAllLivingCards().remove(collectionItem);
+                Minion minion = (Minion) Application.readJSON(Minion.class, collectionItem.getName());
+                minion.setID(collectionItem.getID());
+                CollectionItem.getAllLivingCards().add(minion);
+                collection.addCollectionItemToCollection(minion.getID());
+                collection.addCollectionItemToDeck(minion.getID(), mainDeck.getName());
+            }
+            if(collectionItem instanceof Spell){
+                CollectionItem.getAllSpells().remove(collectionItem);
+                Spell spell = (Spell) Application.readJSON(Spell.class, collectionItem.getName());
+                spell.setID(collectionItem.getID());
+                CollectionItem.getAllSpells().add(spell);
+                collection.addCollectionItemToCollection(spell.getID());
+                collection.addCollectionItemToDeck(spell.getID(), mainDeck.getName());
+            }
+            if(collectionItem instanceof Item){
+                CollectionItem.getAllItems().remove(collectionItem);
+                Item item = (Item) Application.readJSON(Item.class, collectionItem.getName());
+                item.setID(collectionItem.getID());
+                CollectionItem.getAllItems().add(item);
+                collection.addCollectionItemToCollection(item.getID());
+                collection.addCollectionItemToDeck(item.getID(), mainDeck.getName());
+            }
+        }
+    }
 
     public void createHand(Player player){
         Deck mainDeck = player.getAccount().getCollection().getMainDeck();
@@ -107,7 +153,9 @@ public class Battle {
     }
 
 //jaye avalie flaga o hero ha o ...
-    public void preProcess(){
+    public void preProcess() throws FileNotFoundException {
+        this.relaxCards(this.playerOn);
+        this.relaxCards(this.playerOff);
         this.createHand(playerOn);
         this.createHand(playerOff);
         this.putHeroes();
@@ -779,7 +827,7 @@ public class Battle {
     }
 
 
-    public void runGame(){
+    public void runGame() throws FileNotFoundException {
         preProcess();
         inputCommandLine();
     }
