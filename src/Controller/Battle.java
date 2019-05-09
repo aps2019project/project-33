@@ -36,12 +36,13 @@ public class Battle {
     }
 
     // in be ehtemale khoobi momkene bug bokhore
-    public void relaxCards(Player player) throws FileNotFoundException {
+    public void
+    relaxCards(Player player) throws FileNotFoundException {
         Collection collection = player.getAccount().getCollection();
         Deck mainDeck = player.getAccount().getCollection().getMainDeck();
         ArrayList<CollectionItem> livingCards = mainDeck.getCards();
 
-        for(int i = livingCards.size() - 1; i > -1; i --){
+        for (int i = livingCards.size() - 1; i > -1; i--) {
             CollectionItem collectionItem = livingCards.get(i);
 
             collection.removeCollectionItemFromCollection(collectionItem.getID());
@@ -161,7 +162,7 @@ public class Battle {
     }
 
     public void canLivingCards(Player player) {
-        for (LivingCard livingCard : player.getAliveCards()){
+        for (LivingCard livingCard : player.getAliveCards()) {
             livingCard.setCanMove(true);
             livingCard.setCanAttack(true);
             livingCard.setCanCounterAttack(true);
@@ -212,7 +213,19 @@ public class Battle {
         canLivingCards(playerOn);
         canLivingCards(playerOff);
 
+        this.setCards(this.playerOn);
+        this.setCards(this.playerOff);
+
+
         //TODO
+    }
+
+    private void setCards(Player playerOff) {
+        for(CollectionItem collectionItem : playerOff.getAccount().getCollection().getMainDeck().getCards()){
+            if(collectionItem instanceof Item) continue;
+            if(collectionItem instanceof LivingCard) ((LivingCard) collectionItem).setBattle(this);
+            if(collectionItem instanceof Spell) ((Spell) collectionItem).setBattle(this);
+        }
     }
 
 
@@ -242,9 +255,9 @@ public class Battle {
         }
     }
 
-    public void showMinions(Player player){
-        for(LivingCard livingCard : player.getAliveCards()){
-            if(livingCard instanceof Minion){
+    public void showMinions(Player player) {
+        for (LivingCard livingCard : player.getAliveCards()) {
+            if (livingCard instanceof Minion) {
                 String info = livingCard.getID() + " : " + livingCard.getName() + ", health : " + livingCard.getHP();
                 info += ", location : (" + livingCard.getPositionRow() + ", " + livingCard.getPositionColumn() + "), power : ";
                 info += livingCard.getDecreaseHPByAttack();
@@ -261,9 +274,9 @@ public class Battle {
         showMinions(playerOff);
     }
 
-    public CollectionItem getCollectionItemInList(ArrayList<CollectionItem> collectionItems, String ID){
-        for(CollectionItem collectionItem : collectionItems){
-            if(collectionItem.getID().equals(ID))
+    public CollectionItem getCollectionItemInList(ArrayList<CollectionItem> collectionItems, String ID) {
+        for (CollectionItem collectionItem : collectionItems) {
+            if (collectionItem.getID().equals(ID))
                 return collectionItem;
         }
         return null;
@@ -272,13 +285,13 @@ public class Battle {
     //faghat vase livingCard e ?asan malum nis chejurie , card asan bayad tu bazi bashe ya chi koja donbalesh begardim
     public void showCardInfo(String ID) {
         String info = "card was not found";
-        ArrayList <CollectionItem> onCollectionItems = playerOn.getAccount().getCollection().getMainDeck().getCards();
-        ArrayList <CollectionItem> offCollectionItems = playerOff.getAccount().getCollection().getMainDeck().getCards();
+        ArrayList<CollectionItem> onCollectionItems = playerOn.getAccount().getCollection().getMainDeck().getCards();
+        ArrayList<CollectionItem> offCollectionItems = playerOff.getAccount().getCollection().getMainDeck().getCards();
         CollectionItem collectionItem = getCollectionItemInList(onCollectionItems, ID);
         if (collectionItem == null)
             collectionItem = getCollectionItemInList(offCollectionItems, ID);
-        if(collectionItem != null) {
-            ((Card)collectionItem).showCardInBattle();
+        if (collectionItem != null) {
+            ((Card) collectionItem).showCardInBattle();
         }
         System.out.println(info);
     }
@@ -451,9 +464,8 @@ public class Battle {
                 Impact.addHolyToCard(2, false, false, 1,
                         ((LivingCard) insertingCollectionItem));
             }
-        }
-        else{
-            if(insertingCollectionItem instanceof Spell){
+        } else {
+            if (insertingCollectionItem instanceof Spell) {
                 playerOn.getHand().removeCard(cardID);
                 playerOn.getHand().addNextCard(playerOn.getAccount().getCollection().getMainDeck());
                 Spell spell = (Spell) insertingCollectionItem;
@@ -476,7 +488,7 @@ public class Battle {
             System.out.println("Invalid target !");
             return;
         }
-        if(!selectedCard.isCanMove()){
+        if (!selectedCard.isCanMove()) {
             System.out.println("This card can't move");
             return;
         }
@@ -881,7 +893,6 @@ public class Battle {
 
     public void runGame() throws FileNotFoundException {
         preProcess();
-        System.out.println("input command line");
         inputCommandLine();
     }
 
@@ -891,7 +902,7 @@ public class Battle {
         finishMatch();
     }
 
-    private void inputCommandLine(){
+    private void inputCommandLine() {
         System.out.println("Here is Battle");
         System.out.println("For help, enter : show menu");
 
@@ -900,6 +911,14 @@ public class Battle {
         String inputLineOriginal = inputLine;
         inputLine = inputLine.toLowerCase();
         String[] input = inputLineOriginal.split("[ ]+");
+
+        for(int i = 0; i < map.getHeight(); i ++){
+            for(int j = 0; j < map.getWidth(); j ++){
+                if(map.getCellByCoordination(i, j).getLivingCard() == null) System.out.print(".");
+                else System.out.print("L");
+            }
+            System.out.print("\n");
+        }
 
         if (inputLine.equals("Forfeit match")) {
             forfeitMatch();

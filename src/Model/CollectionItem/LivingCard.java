@@ -14,7 +14,7 @@ abstract public class LivingCard extends Card {
     private int HP, rangeOfAttack, decreaseHPByAttack, changeHP, changePower, numberOfSameTypeInComboAttack,
     changeRangeOfAttack, numberOfDamaged, shield, decreasHPNextRound, decreaseHP2NextRound;
     private String counterAttackType, type;
-    private ArrayList<Buff> effects;
+    private ArrayList<Buff> effects = new ArrayList<>();
     private boolean canCounterAttack, canMoveOrAttack, isAlive;
     private boolean canMoveGreaterTwoCell, canMove, canAttack, haveShamshireChini, haveSoulEater;
     private ArrayList<Item> Items = new ArrayList<>();
