@@ -154,15 +154,17 @@ public class Battle {
 
 //jaye avalie flaga o hero ha o ...
     public void preProcess() throws FileNotFoundException {
-        this.relaxCards(this.playerOn);
-        this.relaxCards(this.playerOff);
-        this.createHand(playerOn);
-        this.createHand(playerOff);
-        this.putHeroes();
-        if(!this.getMode().equals(modes[0])){
-            this.createFlagMode();
-        }
-        //TODO
+        playerOff.getAccount().getCollection().getMainDeck().showDeck(true);
+        return;
+//        this.relaxCards(this.playerOn);
+//        this.relaxCards(this.playerOff);
+//        this.createHand(playerOn);
+//        this.createHand(playerOff);
+//        this.putHeroes();
+//        if(!this.getMode().equals(modes[0])){
+//            this.createFlagMode();
+//        }
+//        //TODO
     }
 
 

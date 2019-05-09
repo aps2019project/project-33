@@ -13,7 +13,7 @@ public class BattleMenu extends Menu {
     private String[] modes = {"Kill_enemy's_hero", "Hold_flags", "Take_half_of_flags"};
     private String[] types = {"Single Player", "Multi Player"};
     private String[] singlePlayerKinds = {"Story", "Custom Game"};
-    private String[] levels = {"1. fight with DiveSeipd", "2. fight with Zahhak",
+    private String[] levels = {"1. fight with DiveSepid", "2. fight with Zahhak",
             "3. fight with Arash"};
     private int[] prizeOfLevels = {500, 1000, 1500};
     private int numberOfDecksInCustomGame = 3;
@@ -206,29 +206,31 @@ public class BattleMenu extends Menu {
                 ((AI) battle.getPlayerOff()).selectMainDeck(deck);
                 battle.setMode(modes[i]);
                 battle.setPrize(prizeOfLevels[i]);
+                return;
             }
-        return;
-    }
+        System.out.println("Enter valid level");
+        story();
+   }
 
-//    public void handleDeck(Account account) {
-//        account.getCollection().createDeck(account.getUsername());
-//        account.getCollection().selectMainDeck(account.getUsername());
-//        for (int i = 0; i < 20; i++) {
-//            Minion minion = new Minion();
-//            minion.setName(account.getUsername() + i);
-//            minion.setPrice(i * 10);
-//            minion.setID(Integer.toString(i));
-//            CollectionItem.getAllLivingCards().add(minion);
-//            account.getCollection().addCollectionItemToCollection(minion.getID());
-//            account.getCollection().addCollectionItemToDeck(minion.getID(), account.getUsername());
-//        }
-//        Hero hero = new Hero();
-//        hero.setName(account.getUsername());
-//        hero.setPrice(100000);
-//        hero.setID(account.getUsername());
-//        CollectionItem.getAllLivingCards().add(hero);
-//        account.getCollection().addCollectionItemToCollection(hero.getID());
-//        account.getCollection().addCollectionItemToDeck(hero.getID(), account.getUsername());
-//    }
+    public void handleDeck(Account account) {
+        account.getCollection().createDeck(account.getUsername());
+        account.getCollection().selectMainDeck(account.getUsername());
+        for (int i = 0; i < 20; i++) {
+            Minion minion = new Minion();
+            minion.setName(account.getUsername() + i);
+            minion.setPrice(i * 10);
+            minion.setID(Integer.toString(i));
+            CollectionItem.getAllLivingCards().add(minion);
+            account.getCollection().addCollectionItemToCollection(minion.getID());
+            account.getCollection().addCollectionItemToDeck(minion.getID(), account.getUsername());
+        }
+        Hero hero = new Hero();
+        hero.setName(account.getUsername());
+        hero.setPrice(100000);
+        hero.setID(account.getUsername());
+        CollectionItem.getAllLivingCards().add(hero);
+        account.getCollection().addCollectionItemToCollection(hero.getID());
+        account.getCollection().addCollectionItemToDeck(hero.getID(), account.getUsername());
+    }
 }
 

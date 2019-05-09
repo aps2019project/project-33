@@ -33,8 +33,8 @@ public class MainMenu extends Menu {
             shopMenu.inputCommandLine();
         } else if (inputLine.equals("enter battle")) {
             BattleMenu battleMenu = new BattleMenu();
+            battleMenu.handleDeck(Main.application.getLoggedInAccount());
             battleMenu.inputCommandLine();
-            //battleMenu.handleDeck(Main.application.getLoggedInAccount());
         } else if (inputLine.equals("save"))
             this.save();
         else if (inputLine.equals("logout")) {
