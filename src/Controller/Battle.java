@@ -41,7 +41,7 @@ public class Battle {
         Deck mainDeck = player.getAccount().getCollection().getMainDeck();
         ArrayList<CollectionItem> livingCards = mainDeck.getCards();
 
-        for (int i = livingCards.size() - 1; i > -1; i--) {
+        for(int i = livingCards.size() - 1; i > -1; i --){
             CollectionItem collectionItem = livingCards.get(i);
 
             collection.removeCollectionItemFromCollection(collectionItem.getID());
@@ -161,19 +161,31 @@ public class Battle {
     }
 
     public void canLivingCards(Player player) {
-        for (LivingCard livingCard : player.getAliveCards()) {
+        for (LivingCard livingCard : player.getAliveCards()){
             livingCard.setCanMove(true);
             livingCard.setCanAttack(true);
+            livingCard.setCanCounterAttack(true);
         }
     }
 
+
+    private void swapHeroToEnd(ArrayList<CollectionItem> cards, int index) {
+        int size = cards.size();
+        CollectionItem collectionItem = cards.get(index);
+        cards.set(index, cards.get(size - 1));
+        cards.set(size - 1, collectionItem);
+    }
+
+
     public void findHero(Player player) {
+        int index = 0;
         for (CollectionItem collectionItem : player.getAccount().getCollection().getCards()) {
-            if (collectionItem instanceof Hero)
+            if (collectionItem instanceof Hero) {
                 player.setHero((Hero) collectionItem);
-            swapHeroToEnd(player.getAccount().getCollection().getCards(), index);
+                swapHeroToEnd(player.getAccount().getCollection().getCards(), index);
+            }
+            index++;
         }
-        index++;
     }
 
     //jaye avalie flaga o hero ha o ...
@@ -230,9 +242,9 @@ public class Battle {
         }
     }
 
-    public void showMinions(Player player) {
-        for (LivingCard livingCard : player.getAliveCards()) {
-            if (livingCard instanceof Minion) {
+    public void showMinions(Player player){
+        for(LivingCard livingCard : player.getAliveCards()){
+            if(livingCard instanceof Minion){
                 String info = livingCard.getID() + " : " + livingCard.getName() + ", health : " + livingCard.getHP();
                 info += ", location : (" + livingCard.getPositionRow() + ", " + livingCard.getPositionColumn() + "), power : ";
                 info += livingCard.getDecreaseHPByAttack();
@@ -249,9 +261,9 @@ public class Battle {
         showMinions(playerOff);
     }
 
-    public CollectionItem getCollectionItemInList(ArrayList<CollectionItem> collectionItems, String ID) {
-        for (CollectionItem collectionItem : collectionItems) {
-            if (collectionItem.getID().equals(ID))
+    public CollectionItem getCollectionItemInList(ArrayList<CollectionItem> collectionItems, String ID){
+        for(CollectionItem collectionItem : collectionItems){
+            if(collectionItem.getID().equals(ID))
                 return collectionItem;
         }
         return null;
@@ -260,13 +272,13 @@ public class Battle {
     //faghat vase livingCard e ?asan malum nis chejurie , card asan bayad tu bazi bashe ya chi koja donbalesh begardim
     public void showCardInfo(String ID) {
         String info = "card was not found";
-        ArrayList<CollectionItem> onCollectionItems = playerOn.getAccount().getCollection().getMainDeck().getCards();
-        ArrayList<CollectionItem> offCollectionItems = playerOff.getAccount().getCollection().getMainDeck().getCards();
+        ArrayList <CollectionItem> onCollectionItems = playerOn.getAccount().getCollection().getMainDeck().getCards();
+        ArrayList <CollectionItem> offCollectionItems = playerOff.getAccount().getCollection().getMainDeck().getCards();
         CollectionItem collectionItem = getCollectionItemInList(onCollectionItems, ID);
         if (collectionItem == null)
             collectionItem = getCollectionItemInList(offCollectionItems, ID);
-        if (collectionItem != null) {
-            ((Card) collectionItem).showCardInBattle();
+        if(collectionItem != null) {
+            ((Card)collectionItem).showCardInBattle();
         }
         System.out.println(info);
     }
@@ -439,8 +451,9 @@ public class Battle {
                 Impact.addHolyToCard(2, false, false, 1,
                         ((LivingCard) insertingCollectionItem));
             }
-        } else {
-            if (insertingCollectionItem instanceof Spell) {
+        }
+        else{
+            if(insertingCollectionItem instanceof Spell){
                 playerOn.getHand().removeCard(cardID);
                 playerOn.getHand().addNextCard(playerOn.getAccount().getCollection().getMainDeck());
                 Spell spell = (Spell) insertingCollectionItem;
@@ -463,6 +476,10 @@ public class Battle {
             System.out.println("Invalid target !");
             return;
         }
+        if(!selectedCard.isCanMove()){
+            System.out.println("This card can't move");
+            return;
+        }
 
         int distance = getDistance(selectedCard.getPositionRow(), selectedCard.getPositionColumn(), x, y);
         int maxDistanceCanCardGo = 2;
@@ -481,6 +498,7 @@ public class Battle {
             //tuye mode e flag bayad flago begire dastesh
         } else
             System.out.println("Invalid target !");
+        selectedCard.setCanMove(false);
         handleFlags();
         checkTurn();
     }
@@ -873,7 +891,7 @@ public class Battle {
         finishMatch();
     }
 
-    private void inputCommandLine() {
+    private void inputCommandLine(){
         System.out.println("Here is Battle");
         System.out.println("For help, enter : show menu");
 
@@ -881,7 +899,8 @@ public class Battle {
         inputLine = inputLine.trim();
         String inputLineOriginal = inputLine;
         inputLine = inputLine.toLowerCase();
-        String[] input = inputLine.split("[ ]+");
+        String[] input = inputLineOriginal.split("[ ]+");
+
         if (inputLine.equals("Forfeit match")) {
             forfeitMatch();
         }
@@ -910,7 +929,7 @@ public class Battle {
         } else if (inputLine.equals("show hand"))
             showHand();
         else if (inputLine.matches("insert [^\\s]+ in \\([\\d]+, [\\d]+\\)")) {
-            input = inputLine.split("[ \\(\\),]+");
+            input = inputLineOriginal.split("[ \\(\\),]+");
             insertCardInMap(input[1], Integer.parseInt(input[3]), Integer.parseInt(input[4]));
         } else if (inputLine.equals("end turn"))
             endTurn();
