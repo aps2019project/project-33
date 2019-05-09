@@ -367,7 +367,7 @@ public class Impact {
     //TODO -> done
     //Esm ha cammle case nistan
     public static void impactSpellOfHero(Battle battle, Hero hero, Cell cell) {
-        if (hero.getName().equals("Dive Sefid")) {
+        if (hero.getName().equals("DiveSefid")) {
             Impact.addPowerBuffToCard(100, true, false, 0, 4, hero);
         }
         if (hero.getName().equals("Ezhdaha")) {

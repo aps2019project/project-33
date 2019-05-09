@@ -11,11 +11,11 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class Generator {
     private static Application application;
 
-    private static String[] heroNames = {"Dive Sefid", "Simorgh", "Ezhdaha", "Rakhsh", "Zahhak", "Kaveh", "Arash", "Afsaneh", "Esfandiar",
+    private static String[] heroNames = {"DiveSefid", "Simorgh", "Ezhdaha", "Rakhsh", "Zahhak", "Kaveh", "Arash", "Afsaneh", "Esfandiar",
             "Rostam"};
-    private static String[] spellNames = {"Total Disarm", "Area Dispel", "Empower", "Fireball", "God Strength", "HellFire", "Lighting Bolt",
-            "Poison Lake", "Madness", "All Disarm", "All Poison", "Dispel", "Health with profit", "Ghaza bokhor joon begiri",
-            "All Power", "All Attack", "Weakening", "Sacrifice", "Kings Guard", "Shock"};
+    private static String[] spellNames = {"TotalDisarm", "AreaDispel", "Empower", "Fireball", "GodStrength", "HellFire", "LightingBolt",
+            "PoisonLake", "Madness", "AllDisarm", "AllPoison", "Dispel", "HealthWithProfit", "GhazaBokhorJoonBegiri",
+            "AllPower", "AllAttack", "Weakening", "Sacrifice", "KingsGuard", "Shock"};
 
     public static void setApplication(Application setApplication){
         application = setApplication;
@@ -111,7 +111,7 @@ public class Generator {
         Spell spell = new Spell();
         spell.setPrice(1000);
         spell.setMp(0);
-        spell.setName("Total Disarm");
+        spell.setName("TotalDisarm");
         spell.getInformation().setEnemyImpact(true);
         spell.getInformation().setCanDisarmBuffAdd(true);
         spell.getInformation().setDisarmBuffPermanent(true);
@@ -123,7 +123,7 @@ public class Generator {
         Spell spell = new Spell();
         spell.setPrice(1500);
         spell.setMp(2);
-        spell.setName("Area Dispel");
+        spell.setName("AreaDispel");
         spell.getInformation().setCellImpact(true);
         spell.getInformation().setCanRemoveGoodBuffsOfEnemy(true);
         spell.getInformation().setSquareOfCellsImpact(true);
@@ -163,7 +163,7 @@ public class Generator {
         Spell spell = new Spell();
         spell.setPrice(450);
         spell.setMp(2);
-        spell.setName("God Strength");
+        spell.setName("GodStrength");
         spell.getInformation().setUsImpact(true);
         spell.getInformation().setHeroImpact(true);
         spell.getInformation().setCanIncreaseAP(true);
@@ -186,7 +186,7 @@ public class Generator {
         Spell spell = new Spell();
         spell.setPrice(1250);
         spell.setMp(2);
-        spell.setName("Lighting Bolt");
+        spell.setName("LightingBolt");
         spell.getInformation().setEnemyImpact(true);
         spell.getInformation().setHeroImpact(true);
         spell.getInformation().setImpactAllArea(true);
@@ -199,7 +199,7 @@ public class Generator {
         Spell spell = new Spell();
         spell.setPrice(900);
         spell.setMp(5);
-        spell.setName("Poison Lake");
+        spell.setName("PoisonLake");
         spell.getInformation().setCellImpact(true);
         spell.getInformation().setLengthOfSquareOfCellsImpact(3);
         spell.getInformation().setSquareOfCellsImpact(true);
@@ -228,7 +228,7 @@ public class Generator {
         Spell spell = new Spell();
         spell.setPrice(2000);
         spell.setMp(9);
-        spell.setName("All Disarm");
+        spell.setName("AllDisarm");
         spell.getInformation().setEnemyImpact(true);
         spell.getInformation().setMultipleImpact(true);
         spell.getInformation().setImpactAllArea(true);
@@ -241,7 +241,7 @@ public class Generator {
         Spell spell = new Spell();
         spell.setPrice(1500);
         spell.setMp(8);
-        spell.setName("All Poison");
+        spell.setName("AllPoison");
         spell.getInformation().setEnemyImpact(true);
         spell.getInformation().setMultipleImpact(true);
         spell.getInformation().setImpactAllArea(true);
@@ -267,7 +267,7 @@ public class Generator {
         Spell spell = new Spell();
         spell.setPrice(2250);
         spell.setMp(0);
-        spell.setName("Health with profit");
+        spell.setName("HealthWithProfit");
         spell.getInformation().setUsImpact(true);
         spell.getInformation().setImpactAllArea(true);
         spell.getInformation().setCanWeaknessBuffAdd(true);
@@ -283,7 +283,7 @@ public class Generator {
         Spell spell = new Spell();
         spell.setPrice(2500);
         spell.setMp(2);
-        spell.setName("Ghaza bokhor joon begiri");
+        spell.setName("GhazaBokhorJoonBegiri");
         spell.getInformation().setUsImpact(true);
         spell.getInformation().setImpactAllArea(true);
         spell.getInformation().setPowerBuffPermanent(true);
@@ -296,7 +296,7 @@ public class Generator {
         Spell spell = new Spell();
         spell.setPrice(2000);
         spell.setMp(4);
-        spell.setName("All Power");
+        spell.setName("AllPower");
         spell.getInformation().setUsImpact(true);
         spell.getInformation().setMultipleImpact(true);
         spell.getInformation().setImpactAllArea(true);
@@ -310,7 +310,7 @@ public class Generator {
         Spell spell = new Spell();
         spell.setPrice(1500);
         spell.setMp(4);
-        spell.setName("All Attack");
+        spell.setName("AllAttack");
         spell.getInformation().setEnemyImpact(true);
         spell.getInformation().setMultipleImpact(true);
         spell.getInformation().setImpactColumn(true);
@@ -349,7 +349,7 @@ public class Generator {
         Spell spell = new Spell();
         spell.setPrice(1750);
         spell.setMp(3);
-        spell.setName("Kings Guard");
+        spell.setName("KingsGuard");
         spell.getInformation().setEnemyImpact(true);
         spell.getInformation().setMinionImpact(true);
         spell.getInformation().setImpactNeighbors(true);
@@ -370,7 +370,7 @@ public class Generator {
     }
 
     public static void DiveSefid() throws IOException{
-        Hero hero = new Hero("Dive Sefid", 8000, 50, 4, "melee", 1, 2);
+        Hero hero = new Hero("DiveSefid", 8000, 50, 4, "melee", 1, 2);
         Application.writeJSON(hero, "Data/CollectionItem/Hero/DiveSefid.json");
     }
 
