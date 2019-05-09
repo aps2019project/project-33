@@ -371,48 +371,57 @@ public class Generator {
 
     public static void DiveSefid() throws IOException{
         Hero hero = new Hero("DiveSefid", 8000, 50, 4, "melee", 1, 2);
+        hero.getInformation().setCanDoMeleeAttack(true);
         Application.writeJSON(hero, "Data/CollectionItem/Hero/DiveSefid.json");
     }
 
     public static void Simorgh() throws IOException{
         Hero hero = new Hero("Simorgh", 9000, 50, 4, "melee", 3, 8);
+        hero.getInformation().setCanDoMeleeAttack(true);
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Simorgh.json");
     }
 
     public static void Ezhdaha() throws IOException{
         Hero hero = new Hero("Ezhdaha", 8000, 50, 4, "melee", 0, 1);
+        hero.getInformation().setCanDoMeleeAttack(true);
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Ezhdaha.json");
     }
 
     public static void  Rakhsh() throws IOException{
         Hero hero = new Hero("Rakhsh", 8000, 50, 4, "melee", 1, 2);
+        hero.getInformation().setCanDoMeleeAttack(true);
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Rakhsh.json");
     }
 
     public static void Zahhak() throws IOException{
         Hero hero = new Hero("Zahhak", 10000, 50, 4, "melee", 1, 3);
+        hero.getInformation().setCanDoMeleeAttack(true);
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Zahhak.json");
     }
 
     public static void Kaveh() throws IOException{
         Hero hero = new Hero("Kaveh", 8000, 50, 4, "melee", 1, 3);
+        hero.getInformation().setCanDoMeleeAttack(true);
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Kaveh.json");
     }
 
     public static void Arash() throws IOException{
         Hero hero = new Hero("Arash", 10000, 30, 2, "ranged", 2, 2);
+        hero.getInformation().setCanDoRangedAttack(true);
         hero.setRangeOfAttack(6);
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Arash.json");
     }
 
     public static void Afsaneh() throws IOException{
         Hero hero = new Hero("Afsaneh", 11000, 40, 3, "ranged", 1, 2);
+        hero.getInformation().setCanDoRangedAttack(true);
         hero.setRangeOfAttack(3);
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Afsaneh.json");
     }
 
     public static void Esfandiar() throws IOException{
         Hero hero = new Hero("Esfandiar", 12000, 35, 3, "hybrid", 0, 1);
+        hero.getInformation().setCanDoHybridAttack(true);
         hero.setRangeOfAttack(3);
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Esfandiar.json");
     }
@@ -420,6 +429,7 @@ public class Generator {
     public static void Rostam() throws IOException{
         //chera mp o cooldown nadare?s
         Hero hero = new Hero("Rostam", 8000, 55, 7, "hybrid", 0, 0);
+        hero.getInformation().setCanDoHybridAttack(true);
         hero.setRangeOfAttack(4);
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Rostam.json");
     }
