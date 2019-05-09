@@ -196,7 +196,7 @@ public class Battle {
         if(!this.getMode().equals(modes[0])){
             this.createFlagMode();
         }
-
+// gitignore test
         canLivingCards(playerOn);
         canLivingCards(playerOff);
 
