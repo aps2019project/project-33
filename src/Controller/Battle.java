@@ -663,8 +663,8 @@ public class Battle {
         System.out.println(selectedCollectableItem.getInfo());
     }
 
-
-    //jayze barande o time e bazi o namayesh e bazi munde
+//-----------------------------------------------
+    //ta injaro khundam
     public void checkTurn(){
         if(this.getMode().equals(modes[0])){
             if(playerOn.getHero().getHP() <= 0){
@@ -731,7 +731,9 @@ public class Battle {
     public void endGame(){
         return;
     }
-    public void exit(){}
+    public void exit(){
+        return;
+    }
 
     //TODO
     //masalan in ke yeki bemire bere tooye grave yard add she
@@ -740,7 +742,7 @@ public class Battle {
     }
 
     public String coordinationString(LivingCard livingCard){
-        String coordination = " coordination : (" + livingCard.getPositionRow() + ", " + livingCard.getPositionColumn() + ") ";
+        String coordination = " Coordination : (" + livingCard.getPositionRow() + ", " + livingCard.getPositionColumn() + ") ";
         return coordination;
     }
 
@@ -772,21 +774,13 @@ public class Battle {
             if(playerOn.getHero().getCoolDown() <= 0) {
                 System.out.println("also you can use special power of your hero:");
                 System.out.println("name: " + playerOn.getHero().getName() + " id: " + playerOn.getHero().getID() +
-                        this.coordinationString(playerOn.getHero()));
+                        " mana: " + playerOn.getHero().getMP() + this.coordinationString(playerOn.getHero()));
             }
         }
     }
 
-    public boolean isLivingCardInList(LivingCard livingCard, ArrayList<LivingCard> livingCards){
-        for(LivingCard aliveCard : livingCards){
-            if(aliveCard.getID().equals(livingCard.getID()))
-                return true;
-        }
-        return false;
-    }
-
     public Player getOwnerOfLivingCard(LivingCard livingCard){
-        if(isLivingCardInList(livingCard, playerOn.getAliveCards()))
+        if(playerOn.getAliveCards().contains(livingCard))
             return playerOn;
         return playerOff;
     }
