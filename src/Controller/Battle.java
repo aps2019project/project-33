@@ -419,8 +419,10 @@ public class Battle {
             ((LivingCard) insertingCollectionItem).setPositionRow(x);
             cell.insertCard(insertingCollectionItem.getID());
             playerOn.addAliveCard((LivingCard)insertingCollectionItem);
-            Impact.addHolyToCard(2, false, false, 1,
-                    ((LivingCard) insertingCollectionItem));
+            if(playerOn.isHaveGhosleTamid()){
+                Impact.addHolyToCard(2, false, false, 1,
+                        ((LivingCard) insertingCollectionItem));
+            }
         }
         else{
             if(insertingCollectionItem instanceof Spell){
@@ -464,7 +466,6 @@ public class Battle {
             //tuye mode e flag bayad flago begire dastesh
         }else
             System.out.println("Invalid target !");
-        handleBuffsOfCard(selectedCard);
         handleFlags();
         checkTurn();
     }
@@ -515,7 +516,6 @@ public class Battle {
             return;
         }
         Impact.attack(this, this.selectedCard, opponentLivingCard);
-        this.removeSelectedCard();
         checkTurn();
     }
 
@@ -561,11 +561,13 @@ public class Battle {
             if(livingCard instanceof Minion)
                 endTurnMinion((Minion)livingCard);
         }
+        checkTurn();
     }
 
     public void checkAliveCards(Player player){
         for(LivingCard livingCard : player.getAliveCards())
             Impact.checkAlive(this, livingCard);
+        checkTurn();
     }
 
     public void endTurn(){
@@ -594,20 +596,13 @@ public class Battle {
         if(this.getMode().equals(modes[1])){
             if(this.mainFlag.getFlagOwner() != null)
                 mainFlag.setNumberOfGotRounds(mainFlag.getNumberOfGotRounds() + 1);
+            else
+                mainFlag.setNumberOfGotRounds(0);
         }
         playerOn.getHero().setCoolDown(Math.max(0, playerOn.getHero().getCoolDown() - 1));
         playerOff.getHero().setCoolDown(Math.max(0, playerOff.getHero().getCoolDown() - 1));
         Impact.activeBuffs(this);
         numberOfRounds++;
-        for (LivingCard livingCard : playerOn.getAliveCards()) {
-            livingCard.setCanMove(true);
-            livingCard.setCanAttack(true);
-        }
-        for (LivingCard livingCard : playerOff.getAliveCards()) {
-            livingCard.setCanMove(true);
-            livingCard.setCanAttack(true);
-        }
-
     }
 
     public void showCollectables(){
@@ -673,8 +668,8 @@ public class Battle {
         System.out.println(selectedCollectableItem.getInfo());
     }
 
-
-    //jayze barande o time e bazi o namayesh e bazi munde
+//-----------------------------------------------
+    //ta injaro khundam
     public void checkTurn(){
         if(this.getMode().equals(modes[0])){
             if(playerOn.getHero().getHP() <= 0){
@@ -741,7 +736,9 @@ public class Battle {
     public void endGame(){
         return;
     }
-    public void exit(){}
+    public void exit(){
+        return;
+    }
 
     //TODO
     //masalan in ke yeki bemire bere tooye grave yard add she
@@ -750,7 +747,7 @@ public class Battle {
     }
 
     public String coordinationString(LivingCard livingCard){
-        String coordination = " coordination : (" + livingCard.getPositionRow() + ", " + livingCard.getPositionColumn() + ") ";
+        String coordination = " Coordination : (" + livingCard.getPositionRow() + ", " + livingCard.getPositionColumn() + ") ";
         return coordination;
     }
 
@@ -782,21 +779,13 @@ public class Battle {
             if(playerOn.getHero().getCoolDown() <= 0) {
                 System.out.println("also you can use special power of your hero:");
                 System.out.println("name: " + playerOn.getHero().getName() + " id: " + playerOn.getHero().getID() +
-                        this.coordinationString(playerOn.getHero()));
+                        " mana: " + playerOn.getHero().getMP() + this.coordinationString(playerOn.getHero()));
             }
         }
     }
 
-    public boolean isLivingCardInList(LivingCard livingCard, ArrayList<LivingCard> livingCards){
-        for(LivingCard aliveCard : livingCards){
-            if(aliveCard.getID().equals(livingCard.getID()))
-                return true;
-        }
-        return false;
-    }
-
     public Player getOwnerOfLivingCard(LivingCard livingCard){
-        if(isLivingCardInList(livingCard, playerOn.getAliveCards()))
+        if(playerOn.getAliveCards().contains(livingCard))
             return playerOn;
         return playerOff;
     }

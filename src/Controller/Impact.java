@@ -313,6 +313,7 @@ public class Impact {
         }
 
         damageToEnemy(battle, battle.getPlayerOn(), attacker, defender, attacker.getDecreaseHPByAttack());
+        attacker.setCanAttack(false);
         if (checkAlive(battle, defender))
             Impact.counterAttack(battle, defender, attacker);
 
