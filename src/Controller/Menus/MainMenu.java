@@ -21,6 +21,7 @@ public class MainMenu extends Menu {
 
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
+        inputLine = inputLine.toLowerCase();
         String[] input = inputLine.split("[ ]+");
 
         if (inputLine.equals("enter collection")) {
@@ -33,7 +34,7 @@ public class MainMenu extends Menu {
             shopMenu.inputCommandLine();
         } else if (inputLine.equals("enter battle")) {
             BattleMenu battleMenu = new BattleMenu();
-        //    battleMenu.handleDeck(Main.application.getLoggedInAccount());
+            battleMenu.handleDeck(Main.application.getLoggedInAccount());
             battleMenu.inputCommandLine();
         } else if (inputLine.equals("save"))
             this.save();
