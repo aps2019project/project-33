@@ -12,7 +12,7 @@ public class BattleMenu extends Menu {
     private String inputLine;
     private String[] input;
     private Battle battle = new Battle();
-    private String[] modes = {"Kill_enemy's_hero", "Hold_flags", "Take_half_of_flags"};
+    private String[] modes = {"Kill_enemy's_hero", "Hold_flag", "Take_half_of_flags"};
     private String[] types = {"Single Player", "Multi Player"};
     private String[] singlePlayerKinds = {"Story", "Custom Game"};
     private String[] levels = {"1. fight with DiveSepid", "2. fight with Zahhak",
@@ -41,9 +41,10 @@ public class BattleMenu extends Menu {
     }
 
     private void chooseType() {
-        System.out.println("Type :");
+        System.out.println("Game Types :");
         for (int i = 0; i < types.length; i++)
-            System.out.println("- " + types[i]);
+            System.out.println(" - " + types[i]);
+        System.out.println("For choosing, enter : [Type]");
         readInputs();
         for (int i = 0; i < types.length; i++) {
             if (inputLine.equals(types[i])) {
@@ -65,6 +66,7 @@ public class BattleMenu extends Menu {
         showAllAccount();
         while (true) {
             System.out.println("Enter username of second player :");
+            System.out.println("For choosing, enter : select user [username]");
             readInputs();
             if (inputLine.matches("select user .*")) {
                 String username = input[2];
@@ -86,9 +88,11 @@ public class BattleMenu extends Menu {
     }
 
     private void chooseMode() throws FileNotFoundException {
+        System.out.println("Game Kinds :");
         if (battle.getType().equals(types[0])) {
             for (int i = 0; i < singlePlayerKinds.length; i++)
-                System.out.println(singlePlayerKinds[i]);
+                System.out.println(" - " + singlePlayerKinds[i]);
+            System.out.println("For choosing, enter : [Kind]");
             readInputs();
             for (int i = 0; i < singlePlayerKinds.length; i++) {
                 if (inputLine.equals(singlePlayerKinds[i])) {
@@ -107,9 +111,9 @@ public class BattleMenu extends Menu {
 
     private void customGame() throws FileNotFoundException {
         battle.setPrize(prizeOfCustomGame);
-        System.out.println("Modes :");
+        System.out.println("Game Modes :");
         for (int i = 0; i < modes.length; i++)
-            System.out.println(modes[i]);
+            System.out.println(" - " + modes[i]);
 
         if (battle.getType().equals(types[0])) {
 
@@ -120,6 +124,7 @@ public class BattleMenu extends Menu {
                 System.out.println(i + 1 + ". " + deck.getName());
                 deck.showDeck(true);
             }
+            System.out.println("For choosing, enter : start game [deckName] [Mode] [Number of flags : Just for third Mode]");
             readInputs();
             if (inputLine.matches("start game [^\\s]+ [^\\s]+( [\\d]+)*")) {
                 String deckName = input[2], mode = input[3];
@@ -150,6 +155,7 @@ public class BattleMenu extends Menu {
                     return;
             }
         } else {
+            System.out.println("For choosing, enter : start multiplayer game [Mode] [Number of flags : Just for third mode");
             readInputs();
             if (inputLine.matches("start multiplayer game [^\\s]+( [\\d]+)*")) {
                 String mode = input[3];
@@ -201,6 +207,7 @@ public class BattleMenu extends Menu {
         for (int i = 0; i < levels.length; i++)
             System.out.println(levels[i] + ", Prize : " + prizeOfLevels[i]);
         System.out.println("Enter number of level: ");
+        System.out.println("For choosing, enter : [Number of level]");
         readInputs();
         if (inputLine.matches("[\\d]+")) {
             for (int i = 0; i < levels.length; i++)
@@ -210,15 +217,19 @@ public class BattleMenu extends Menu {
                     ((AI) battle.getPlayerOff()).selectMainDeck(deck);
                     battle.setMode(modes[i]);
                     battle.setPrize(prizeOfLevels[i]);
+                    if(i == 2)
+                        battle.setNumberOfFlags(5);
                     return;
                 }
         }
+        if(inputLine.equals("exit"))
+            return;
         System.out.println("Enter valid level");
         story();
     }
 
     public void handleDeck(Account account) throws FileNotFoundException {
-        //account.getCollection().createDeck(account.getUsername());
+        account.getCollection().createDeck(account.getUsername());
         account.getCollection().selectMainDeck(account.getUsername());
         for (int i = 0; i < 2; i++) {
             Spell spell = Spell.createSpell(DeckGenerator.spellNames[0], account.getUsername());

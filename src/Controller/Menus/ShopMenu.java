@@ -14,6 +14,7 @@ public class ShopMenu extends Menu {
 
     public void inputCommandLine() {
         System.out.println("Here is shop !");
+        System.out.println("For help, enter : show menu");
 
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();

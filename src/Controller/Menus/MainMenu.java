@@ -17,6 +17,7 @@ public class MainMenu extends Menu {
 
     public void inputCommandLine() throws IOException {
         System.out.println("Here is Main menu");
+        System.out.println("For help, enter : show menu");
 
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
@@ -32,7 +33,7 @@ public class MainMenu extends Menu {
             shopMenu.inputCommandLine();
         } else if (inputLine.equals("enter battle")) {
             BattleMenu battleMenu = new BattleMenu();
-        //    battleMenu.handleDeck(Main.application.getLoggedInAccount());
+            battleMenu.handleDeck(Main.application.getLoggedInAccount());
             battleMenu.inputCommandLine();
         } else if (inputLine.equals("save"))
             this.save();
@@ -49,9 +50,9 @@ public class MainMenu extends Menu {
     }
 
     public static void showMenu() {
-        System.out.println("1. Collection");
-        System.out.println("2. Shop Menu");
-        System.out.println("3. Battle");
+        System.out.println("1. Enter Collection");
+        System.out.println("2. Enter Shop Menu");
+        System.out.println("3. Enter Battle");
         System.out.println("4. save");
         System.out.println("5. logout");
         System.out.println("6. show menu");
@@ -61,18 +62,22 @@ public class MainMenu extends Menu {
     private void save() throws IOException {
         //Save Accounts
         writeInFile("Account", Account.getAccounts());
+        System.out.println("Account saving done :)");
         //Save Shop
         {
             String address = "Data/Memory/Shop/shop.json";
             Application.writeJSON(Main.application.getShop(), address);
         }
+        System.out.println("Shop saving done :)");
         //Save All Spells
         writeInFile("Spell", CollectionItem.getAllSpells());
+        System.out.println("Spell saving done :)");
         //Save All Items
         writeInFile("Item", CollectionItem.getAllItems());
+        System.out.println("Item saving done:)");
         //Save All LivingCards
         writeInFile("LivingCard", CollectionItem.getAllLivingCards());
-
+        System.out.println("LivingCard saving done :)");
     }
 
     private void writeInFile(String name, ArrayList arrayList) throws IOException {

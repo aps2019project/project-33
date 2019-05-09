@@ -9,14 +9,11 @@ import Model.CollectionItem.LivingCard;
 import Model.CollectionItem.Minion;
 import Model.Enviroment.Cell;
 import Model.Enviroment.Map1;
-import Controller.AttackArea;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static javax.swing.text.html.parser.DTDConstants.ID;
 
 public class Battle {
     private Player playerOn, playerOff;
@@ -31,7 +28,7 @@ public class Battle {
     private ArrayList<Flag> flags = new ArrayList<>();
     private String estate = "none";
 
-    private String[] modes = {"Kill_enemy's_hero", "Hold_flags", "Take_half_of_flags"};
+    private String[] modes = {"Kill_enemy's_hero", "Hold_flag", "Take_half_of_flags"};
 
     {
         this.selectedCard = null;
@@ -46,8 +43,6 @@ public class Battle {
 
         for(int i = livingCards.size() - 1; i > -1; i --){
             CollectionItem collectionItem = livingCards.get(i);
-
-            System.out.println(collectionItem.getName());
 
             collection.removeCollectionItemFromCollection(collectionItem.getID());
             String address = "Data/CollectionItem/";
@@ -150,6 +145,7 @@ public class Battle {
         //numberOfFlags chaande tuye mode e 3
         if(this.mode.equals(modes[1]))
             numberOfFlags = 1;
+        System.out.println(this.numberOfFlags);
         this.createFlags();
         for(Flag flag : this.getFlags()){
             this.setFlagPosition(flag);
@@ -180,7 +176,6 @@ public class Battle {
 
 //jaye avalie flaga o hero ha o ...
     public void preProcess() throws FileNotFoundException {
-        System.out.println("Start pre process");
         findHero(playerOff);
         findHero(playerOn);
 
@@ -193,10 +188,11 @@ public class Battle {
         playerOn.getMana().setCurrentMana(playerOn.getMana().getMaximumMana());
         playerOff.getMana().setCurrentMana(playerOff.getMana().getMaximumMana());
 
+
         if(!this.getMode().equals(modes[0])){
             this.createFlagMode();
         }
-// gitignore test
+        // gitignore test
         canLivingCards(playerOn);
         canLivingCards(playerOff);
 
@@ -873,7 +869,8 @@ public class Battle {
     }
 
     private void inputCommandLine(){
-        System.out.println("Here is Battle");;
+        System.out.println("Here is Battle");
+        System.out.println("For help, enter : show menu");
 
         String inputLine = readInput();
         inputLine = inputLine.trim();

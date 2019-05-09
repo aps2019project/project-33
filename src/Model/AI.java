@@ -18,19 +18,16 @@ public class AI extends Player {
 
     public void selectMainDeck(Deck deck) throws FileNotFoundException {
         this.getAccount().getCollection().createDeck("AI");
-        for(CollectionItem collectionItem : deck.getCards()) {
+        for (CollectionItem collectionItem : deck.getCards()) {
             CollectionItem newCollectionItem = null;
-//            System.out.println(collectionItem.getName());
             String name = collectionItem.getName();
-            if(collectionItem instanceof Spell) {
-                System.out.println(name);
+            if (collectionItem instanceof Spell)
                 newCollectionItem = Spell.createSpell(collectionItem.getName(), name);
-            }
-            if(collectionItem instanceof Hero)
+            if (collectionItem instanceof Hero)
                 newCollectionItem = Hero.createHero(collectionItem.getName(), name);
-            if(collectionItem instanceof Minion)
+            if (collectionItem instanceof Minion)
                 newCollectionItem = Minion.createMinion(collectionItem.getName(), name);
-            if(collectionItem instanceof Item)
+            if (collectionItem instanceof Item)
                 newCollectionItem = Item.createItem(collectionItem.getName(), name);
             this.getAccount().getCollection().addCollectionItemToCollection(newCollectionItem.getID());
             this.getAccount().getCollection().addCollectionItemToDeck(newCollectionItem.getID(), "AI");
@@ -38,36 +35,36 @@ public class AI extends Player {
         this.getAccount().getCollection().selectMainDeck("AI");
     }
 
-    public void preProcess(Battle battle){
+    public void preProcess(Battle battle) {
         ArrayList<LivingCard> opponentCards = battle.getPlayerOff().getAliveCards();
         ArrayList<Cell> cells = new ArrayList<Cell>();
-        for(int i = 0; i < battle.getMap().getHeight(); i ++)
-            for(int j = 0; j < battle.getMap().getWidth(); j ++)
+        for (int i = 0; i < battle.getMap().getHeight(); i++)
+            for (int j = 0; j < battle.getMap().getWidth(); j++)
                 cells.add(battle.getMap().getCellByCoordination(i, j));
 
         Collections.shuffle(this.getAliveCards());
         Collections.shuffle(opponentCards);
         Collections.shuffle(cells);
 
-        for(LivingCard livingCard : this.getAliveCards()) {
+        for (LivingCard livingCard : this.getAliveCards()) {
             orders.add("select " + livingCard.getID());
-            for(Cell cell : cells)
-                orders.add("move to (" + cell.getX() + ", " + cell.getY()+ ")");
-            for(LivingCard livingCard1 : opponentCards)
+            for (Cell cell : cells)
+                orders.add("move to (" + cell.getX() + ", " + cell.getY() + ")");
+            for (LivingCard livingCard1 : opponentCards)
                 orders.add("attack " + livingCard1.getID());
         }
 
-        for(CollectionItem collectionItem : this.getHand().getHandCards()){
-            for(Cell cell : cells)
-                orders.add("insert " + collectionItem.getID() + " in (" + cell.getX() + ", " + cell.getY() +")");
+        for (CollectionItem collectionItem : this.getHand().getHandCards()) {
+            for (Cell cell : cells)
+                orders.add("insert " + collectionItem.getID() + " in (" + cell.getX() + ", " + cell.getY() + ")");
         }
     }
 
-    public String outputSomeRandomOrder(Battle battle){
-        if(orders.size() == 0) preProcess(battle);
-        if(orders.size() == 1){
-          orders.clear();
-          return "End turn";
+    public String outputSomeRandomOrder(Battle battle) {
+        if (orders.size() == 0) preProcess(battle);
+        if (orders.size() == 1) {
+            orders.clear();
+            return "End turn";
         }
         String result = orders.get(0);
         orders.remove(0);

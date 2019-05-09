@@ -23,6 +23,7 @@ public class CollectionMenu extends Menu {
 
     public void inputCommandLine() throws IOException {
         System.out.println("Here is Collection Menu");
+        System.out.println("For help, enter : show menu");;
 
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
@@ -116,11 +117,11 @@ public class CollectionMenu extends Menu {
 
     public static void showMenu() {
         System.out.println("1. show");
-        System.out.println("2. search[card name | item name]");
-        System.out.println("3. create deck[deck name]");
-        System.out.println("4. delete deck[deck name]");
-        System.out.println("5. add [card id| item id | hero id] | to deck [deck name]");
-        System.out.println("6. remove [card id | item id | hero id ] from deck[deck name]");
+        System.out.println("2. search [card name | item name]");
+        System.out.println("3. create deck [deck name]");
+        System.out.println("4. delete deck [deck name]");
+        System.out.println("5. add [card id| item id | hero id] to deck [deck name]");
+        System.out.println("6. remove [card id | item id | hero id] from deck [deck name]");
         System.out.println("7. validate deck [deck name]");
         System.out.println("8. select deck [deck name]");
         System.out.println("9. show all decks");

@@ -14,6 +14,7 @@ public class AccountMenu extends Menu {
     @Override
     public void inputCommandLine() throws IOException {
         System.out.println("Here is Account Menu");
+        System.out.println("For help, enter : show menu");
 
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
@@ -41,7 +42,7 @@ public class AccountMenu extends Menu {
     public static void showMenu() {
         System.out.println("1. create account [username]");
         System.out.println("2. login [username]");
-        System.out.println("3. show leader board");
+        System.out.println("3. show leaderboard");
         System.out.println("4. show menu");
         System.out.println("5. exit");
     }
