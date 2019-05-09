@@ -113,7 +113,7 @@ public class BattleMenu extends Menu {
 
         if (battle.getType().equals(types[0])) {
 
-            String address = "Data/Battle/Custom/Custom";
+            String address = "Data/Battle/Story/Story";
             System.out.println("Decks are: ");
             for (int i = 0; i < numberOfDecksInCustomGame; i++) {
                 Deck deck = (Deck) Application.readJSON(Deck.class, address + i + ".json");

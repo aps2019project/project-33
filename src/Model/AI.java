@@ -21,10 +21,17 @@ public class AI extends Player {
         for(CollectionItem collectionItem : deck.getCards()) {
             CollectionItem newCollectionItem = null;
 //            System.out.println(collectionItem.getName());
-            if(collectionItem instanceof Spell) newCollectionItem = Spell.createSpell(collectionItem.getName(), "AI");
-            if(collectionItem instanceof Hero) newCollectionItem = Hero.createHero(collectionItem.getName(), "AI");
-            if(collectionItem instanceof Minion) newCollectionItem = Minion.createMinion(collectionItem.getName(), "AI");
-            if(collectionItem instanceof Item) newCollectionItem = Item.createItem(collectionItem.getName(), "AI");
+            String name = collectionItem.getName();
+            if(collectionItem instanceof Spell) {
+                System.out.println(name);
+                newCollectionItem = Spell.createSpell(collectionItem.getName(), name);
+            }
+            if(collectionItem instanceof Hero)
+                newCollectionItem = Hero.createHero(collectionItem.getName(), name);
+            if(collectionItem instanceof Minion)
+                newCollectionItem = Minion.createMinion(collectionItem.getName(), name);
+            if(collectionItem instanceof Item)
+                newCollectionItem = Item.createItem(collectionItem.getName(), name);
             this.getAccount().getCollection().addCollectionItemToCollection(newCollectionItem.getID());
             this.getAccount().getCollection().addCollectionItemToDeck(newCollectionItem.getID(), "AI");
         }

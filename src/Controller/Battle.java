@@ -101,7 +101,6 @@ public class Battle {
 
     public void setHeroPosition(Player player){
         Random random = new Random();
-        System.out.println(this.getMap().getHeight());
         int row = random.nextInt(this.getMap().getHeight());
         int column = random.nextInt(this.getMap().getWidth());
         player.getHero().setPositionRow(row);
@@ -181,6 +180,7 @@ public class Battle {
 
 //jaye avalie flaga o hero ha o ...
     public void preProcess() throws FileNotFoundException {
+        System.out.println("Start pre process");
         findHero(playerOff);
         findHero(playerOn);
 
@@ -862,7 +862,8 @@ public class Battle {
 
     public void runGame() throws FileNotFoundException {
         preProcess();
-//        inputCommandLine();
+        System.out.println("input command line");
+        inputCommandLine();
     }
 
     public void forfeitMatch(){
