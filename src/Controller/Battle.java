@@ -104,6 +104,15 @@ public class Battle {
             }
             cell.setHaveFlag(true);
         }
+        this.mainFlag = this.flags.get(0);
+        this.mainFlag.setFlagOwner(null);
+    }
+
+    public void canLivingCards(Player player) {
+        for (LivingCard livingCard : player.getAliveCards()){
+            livingCard.setCanMove(true);
+            livingCard.setCanAttack(true);
+        }
     }
 
 //jaye avalie flaga o hero ha o ...
@@ -111,9 +120,17 @@ public class Battle {
         this.createHand(playerOn);
         this.createHand(playerOff);
         this.putHeroes();
+
+        playerOn.getMana().setCurrentMana(playerOn.getMana().getMaximumMana());
+        playerOff.getMana().setCurrentMana(playerOff.getMana().getMaximumMana());
+
         if(!this.getMode().equals(modes[0])){
             this.createFlagMode();
         }
+
+        canLivingCards(playerOn);
+        canLivingCards(playerOff);
+
         //TODO
     }
 
@@ -130,58 +147,61 @@ public class Battle {
         if(this.mode.equals(modes[1])){
             System.out.println("flag position is : " + this.mainFlag.getPositionRow() + ", " + this.mainFlag.getPositionColumn());
           //usernamesh bayad chap she?
-            System.out.println("flag owner is : " + this.mainFlag.getFlagOwner().getAccount().getUsername());
+            if(this.mainFlag.getFlagOwner() != null)
+                System.out.println("flag owner is : " + this.mainFlag.getFlagOwner().getAccount().getUsername());
         }
         if(this.mode.equals(modes[2])){
             //hamin shekli bayad bashe ? id e sarbaz bayad bede ya chi ?
             for(Flag flag : this.getFlags()){
                 if(flag.getFlagOwner() != null){
-                    System.out.println(flag.getFlagLivingCard().getID() + " " + flag.getFlagOwner().getAccount().getUsername());
+                    System.out.println("card id : " + flag.getFlagLivingCard().getID() + " owner player : " +
+                            flag.getFlagOwner().getAccount().getUsername());
                 }
             }
         }
     }
 
-    public void showMyMinions(){
-        for(LivingCard livingCard : playerOn.getAliveCards()){
+    public void showMinions(Player player){
+        for(LivingCard livingCard : player.getAliveCards()){
             if(livingCard instanceof Minion){
                 livingCard.showCardInBattle();
             }
         }
     }
 
+    public void showMyMinions(){
+        showMinions(playerOn);
+    }
+
     public void showOpponentMinions(){
-        for(LivingCard livingCard : playerOff.getAliveCards()){
-            if(livingCard instanceof Minion){
-                livingCard.showCardInBattle();
-            }
+        showMinions(playerOff);
+    }
+
+    public CollectionItem getCollectionItemInList(ArrayList<CollectionItem> collectionItems, String ID){
+        for(CollectionItem collectionItem : collectionItems){
+            if(collectionItem.getID().equals(ID))
+                return collectionItem;
         }
+        return null;
     }
 
     //faghat vase livingCard e ?asan malum nis chejurie , card asan bayad tu bazi bashe ya chi koja donbalesh begardim
     public void showCardInfo(String ID) {
         String info = "card was not found";
-        CollectionItem thisCollectionItem = null;
-        for (CollectionItem collectionItem : playerOff.getAccount().getCollection().getMainDeck().getCards()){
-            if (collectionItem.getID().equals(ID)) {
-                thisCollectionItem = collectionItem;
-            }
-        }
-        for(CollectionItem collectionItem : playerOn.getAccount().getCollection().getMainDeck().getCards()){
-            if(collectionItem.getID().equals(ID)){
-                thisCollectionItem = collectionItem;
-            }
-        }
-        if(thisCollectionItem != null){
-            info = thisCollectionItem.getInfo();
-            if(thisCollectionItem instanceof LivingCard)
-                info += " HP : " + ((LivingCard) (thisCollectionItem)).getHP() + " AP : " +
-                        ((LivingCard)(thisCollectionItem)).getDecreaseHPByAttack();
+        ArrayList <CollectionItem> onCollectionItems = playerOn.getAccount().getCollection().getMainDeck().getCards();
+        ArrayList <CollectionItem> offCollectionItems = playerOff.getAccount().getCollection().getMainDeck().getCards();
+        CollectionItem collectionItem = getCollectionItemInList(onCollectionItems, ID);
+        if(collectionItem == null)
+            collectionItem = getCollectionItemInList(offCollectionItems, ID);
+        if(collectionItem != null){
+            info = collectionItem.getInfo();
+            if(collectionItem instanceof LivingCard)
+                info += " HP : " + ((LivingCard) (collectionItem)).getHP() + " AP : " +
+                        ((LivingCard)(collectionItem)).getDecreaseHPByAttack();
         }
         System.out.println(info);
     }
 
-    //in yeki shartesh chie bayad carde khdoemun bashe koja donbalesh begardim ...
     public boolean selectCard(String ID){
         for(LivingCard livingCard : playerOn.getAliveCards()){
             if(livingCard.getID().equals(ID)){
@@ -201,9 +221,6 @@ public class Battle {
         return false;
     }
 
-
-
-    //havaset bashe in seda zade she bade in ke karemun ba card tammum shod
     public void removeSelectedCard(){
         this.selectedCard = null;
     }
@@ -211,15 +228,13 @@ public class Battle {
     public void removeSelectedCollectableItem(){
         this.selectedCollectableItem = null;
     }
-//vase selected card e dige?
-//por o khali budanesh nabayad check she ?
-    //che cardaei bishtar az 2 ta mitunan beran? moteghayer negah darim barashun?
-    //too cell ham bayad ezafe she ?
 
     public ArrayList<Minion> getOurMinionsOFCells(ArrayList<Cell> impactCells){
         ArrayList<Minion> minions = new ArrayList<>();
         for(Cell cell : impactCells){
             LivingCard livingCard = cell.getLivingCard();
+            if(livingCard == null)
+                continue;
             if(livingCard instanceof Minion){
                 boolean isOurs = playerOn.getAliveCards().contains(livingCard);
                 if(isOurs){
@@ -251,6 +266,8 @@ public class Battle {
         if(minion.getName().equals("MareGhoolPeikar")){
             for(Cell cell : this.getMap().getCells()){
                 LivingCard livingCard = cell.getLivingCard();
+                if(livingCard == null)
+                    continue;
                 if(getDistance(cell.getX(), cell.getY(), minion.getPositionRow(), minion.getPositionColumn()) > 2)
                     continue;
                 if(livingCard instanceof Minion){
@@ -499,6 +516,12 @@ public class Battle {
     }
 
     public void endTurn(){
+        canLivingCards(playerOn);
+        canLivingCards(playerOff);
+
+        playerOn.getMana().setCurrentMana(playerOn.getMana().getMaximumMana());
+        playerOff.getMana().setCurrentMana(playerOff.getMana().getMaximumMana());
+
         checkThings(playerOff);
         checkThings(playerOn);
 
