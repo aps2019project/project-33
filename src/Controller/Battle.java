@@ -42,7 +42,11 @@ public class Battle {
     public void relaxCards(Player player) throws FileNotFoundException {
         Collection collection = player.getAccount().getCollection();
         Deck mainDeck = player.getAccount().getCollection().getMainDeck();
-        for(CollectionItem collectionItem : mainDeck.getCards()){
+        ArrayList<CollectionItem> livingCards = mainDeck.getCards();
+
+        for(CollectionItem collectionItem : livingCards){
+
+            System.out.println(collectionItem.getName());
 
             collection.removeCollectionItemFromCollection(collectionItem.getID());
 
@@ -163,6 +167,7 @@ public class Battle {
 
 //jaye avalie flaga o hero ha o ...
     public void preProcess() throws FileNotFoundException {
+
         this.relaxCards(this.playerOn);
         this.relaxCards(this.playerOff);
         this.createHand(playerOn);
@@ -841,7 +846,7 @@ public class Battle {
 
     public void runGame() throws FileNotFoundException {
         preProcess();
-        inputCommandLine();
+//        inputCommandLine();
     }
 
     public void forfeitMatch(){

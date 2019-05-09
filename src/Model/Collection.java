@@ -158,7 +158,7 @@ public class Collection {
         for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem instanceof Hero){
                 numberOfHeroes++;
-                System.out.println(numberOfHeroes + " : " + collectionItem.getID() + " " + descriptionOfPrice + " : " +
+                System.out.println(numberOfHeroes + " : " + collectionItem.getID() + " - " + descriptionOfPrice + " : " +
                         collectionItem.getPrice());
             }
         }
@@ -170,7 +170,7 @@ public class Collection {
         for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem instanceof Item){
                 numberOfItems++;
-                System.out.println(numberOfItems + " : " + collectionItem.getInfo() + " " + descriptionOfPrice + " : " +
+                System.out.println(numberOfItems + " : " + collectionItem.getInfo() + " - " + descriptionOfPrice + " : " +
                         + collectionItem.getPrice());
             }
         }
@@ -182,7 +182,7 @@ public class Collection {
         for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem instanceof Spell || collectionItem instanceof Minion){
                 numberOfCards++;
-                System.out.println(numberOfCards + " : " + collectionItem.getInfo() + " " + descriptionOfPrice + " : " +
+                System.out.println(numberOfCards + " : " + collectionItem.getInfo() + " - " + descriptionOfPrice + " : " +
                         + collectionItem.getPrice());
             }
         }
