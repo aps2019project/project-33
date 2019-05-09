@@ -191,6 +191,9 @@ public class Battle {
 
     //jaye avalie flaga o hero ha o ...
     public void preProcess() throws FileNotFoundException {
+        this.setCards(playerOff);
+        this.setCards(playerOn);
+
         this.relaxCards(this.playerOn);
         this.relaxCards(this.playerOff);
 
@@ -625,8 +628,6 @@ public class Battle {
         checkThings(playerOff);
         checkThings(playerOn);
 
-        this.setCards(playerOff);
-        this.setCards(playerOn);
 
         handleBuffs(playerOff);
         handleBuffs(playerOn);
