@@ -1,6 +1,8 @@
 package Controller.Menus;
 
 import Controller.*;
+import Generator.DeckGenerator;
+import Generator.ShopGenerator;
 import Model.*;
 import Model.CollectionItem.*;
 
@@ -44,7 +46,7 @@ public class BattleMenu extends Menu {
             System.out.println("- " + types[i]);
         readInputs();
         for (int i = 0; i < types.length; i++) {
-            if (inputLine.equals(types[i].toLowerCase())) {
+            if (inputLine.equals(types[i])) {
                 battle.setType(types[i]);
                 return;
             }
@@ -89,7 +91,7 @@ public class BattleMenu extends Menu {
                 System.out.println(singlePlayerKinds[i]);
             readInputs();
             for (int i = 0; i < singlePlayerKinds.length; i++) {
-                if (inputLine.equals(singlePlayerKinds[i].toLowerCase())) {
+                if (inputLine.equals(singlePlayerKinds[i])) {
                     if (i == 0) story();
                     else customGame();
                     return;
@@ -115,7 +117,7 @@ public class BattleMenu extends Menu {
             System.out.println("Decks are: ");
             for (int i = 0; i < numberOfDecksInCustomGame; i++) {
                 Deck deck = (Deck) Application.readJSON(Deck.class, address + i + ".json");
-                System.out.print(i + 1 + ". ");
+                System.out.println(i + 1 + ". " + deck.getName());
                 deck.showDeck(true);
             }
             readInputs();
@@ -152,7 +154,7 @@ public class BattleMenu extends Menu {
             if (inputLine.matches("start multiplayer game [^\\s]+( [\\d]+)*")) {
                 String mode = input[3];
                 int numberOfFlags = 0;
-                if (mode.equals(modes[2].toLowerCase())) {
+                if (mode.equals(modes[2])) {
                     if (input.length == 5) {
                         numberOfFlags = Integer.parseInt(input[4]);
                     } else {
@@ -170,7 +172,7 @@ public class BattleMenu extends Menu {
 
     private boolean setMode(String mode, int numberOfFlags) {
         for (int i = 0; i < modes.length; i++) {
-            if (mode.equals(modes[i].toLowerCase())) {
+            if (mode.equals(modes[i])) {
                 battle.setMode(modes[i]);
                 if (i == 2)
                     battle.setNumberOfFlags(numberOfFlags);
@@ -200,7 +202,7 @@ public class BattleMenu extends Menu {
             System.out.println(levels[i] + ", Prize : " + prizeOfLevels[i]);
         System.out.println("Enter number of level: ");
         readInputs();
-        if(inputLine.matches("[\\d]+")) {
+        if (inputLine.matches("[\\d]+")) {
             for (int i = 0; i < levels.length; i++)
                 if (Integer.parseInt(inputLine) == i + 1) {
                     String address = "Data/Battle/Story/Story";
@@ -213,25 +215,27 @@ public class BattleMenu extends Menu {
         }
         System.out.println("Enter valid level");
         story();
-   }
+    }
 
-    public void handleDeck(Account account) {
-        account.getCollection().createDeck(account.getUsername());
+    public void handleDeck(Account account) throws FileNotFoundException {
+        //account.getCollection().createDeck(account.getUsername());
         account.getCollection().selectMainDeck(account.getUsername());
-        for (int i = 0; i < 20; i++) {
-            Minion minion = new Minion();
-            minion.setName(account.getUsername() + i);
-            minion.setPrice(i * 10);
-            minion.setID(Integer.toString(i));
-            CollectionItem.getAllLivingCards().add(minion);
+        for (int i = 0; i < 2; i++) {
+            Spell spell = Spell.createSpell(DeckGenerator.spellNames[0], account.getUsername());
+            account.getCollection().addCollectionItemToCollection(spell.getID());
+            account.getCollection().addCollectionItemToDeck(spell.getID(), account.getUsername());
+        }
+        for(int i = 0; i < 3; i ++){
+            Item item = Item.createItem(DeckGenerator.itemNames[0], account.getUsername());
+            account.getCollection().addCollectionItemToCollection(item.getID());
+            account.getCollection().addCollectionItemToDeck(item.getID(), account.getUsername());
+        }
+        for (int i = 0; i < 15; i++) {
+            Minion minion = Minion.createMinion(DeckGenerator.minionNames[0], account.getUsername());
             account.getCollection().addCollectionItemToCollection(minion.getID());
             account.getCollection().addCollectionItemToDeck(minion.getID(), account.getUsername());
         }
-        Hero hero = new Hero();
-        hero.setName(account.getUsername());
-        hero.setPrice(100000);
-        hero.setID(account.getUsername());
-        CollectionItem.getAllLivingCards().add(hero);
+        Hero hero = Hero.createHero(DeckGenerator.heroNames[0], account.getUsername());
         account.getCollection().addCollectionItemToCollection(hero.getID());
         account.getCollection().addCollectionItemToDeck(hero.getID(), account.getUsername());
     }

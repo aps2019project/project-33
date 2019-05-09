@@ -20,7 +20,7 @@ import static javax.swing.text.html.parser.DTDConstants.ID;
 
 public class Battle {
     private Player playerOn, playerOff;
-    private Map1 map = new Map1();
+    private Map1 map = new Map1(5, 9);
     private boolean gameIsRunning;
     private int numberOfRounds, prize, numberOfFlags;
     private String type, mode;
@@ -101,6 +101,7 @@ public class Battle {
 
     public void setHeroPosition(Player player){
         Random random = new Random();
+        System.out.println(this.getMap().getHeight());
         int row = random.nextInt(this.getMap().getHeight());
         int column = random.nextInt(this.getMap().getWidth());
         player.getHero().setPositionRow(row);
@@ -171,8 +172,17 @@ public class Battle {
         }
     }
 
+    public void findHero(Player player){
+        for(CollectionItem collectionItem : player.getAccount().getCollection().getCards()){
+            if(collectionItem instanceof Hero)
+                player.setHero((Hero) collectionItem);
+        }
+    }
+
 //jaye avalie flaga o hero ha o ...
     public void preProcess() throws FileNotFoundException {
+        findHero(playerOff);
+        findHero(playerOn);
 
         this.relaxCards(this.playerOn);
         this.relaxCards(this.playerOff);

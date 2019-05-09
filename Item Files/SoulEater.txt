@@ -1,0 +1,56 @@
+    public static void method16() throws IOException {
+        String name = "SoulEater";
+        Item item = new Item();
+        item.setPrice(20000);
+        item.setName(name);
+
+        item.getInformation().setCellImpact(true);
+
+        item.getInformation().setEnemyImpact(false);
+        item.getInformation().setUsImpact(true);
+
+        item.getInformation().setHeroImpact(true);
+        item.getInformation().setMinionImpact(true) ;
+
+        item.getInformation().setForRange(false);
+        item.getInformation().setForHybrid(false);
+        item.getInformation().setForMelee(true);
+
+        item.getInformation().setCanIncreaseAP(false);
+        item.getInformation().setAmountOfIncreaseAP(0);
+
+        item.getInformation().setCanIncreaseHPOfLivingCard(false);
+        item.getInformation().setAmountOfIncreaseHPOfLivingCard(0);
+
+        item.getInformation().setCanIncreaseManaAfter3Rounds(false);
+
+        item.getInformation().setPareSimorgh(false);
+        item.getInformation().setMinOfPareSimorgh(0);
+
+        item.getInformation().setCanIncreaseMana(false);
+        item.getInformation().setAmountOfIncreaseMana(0);
+
+        item.getInformation().setCanHolyBuffAdd(false);
+        item.getInformation().setNumberOfHolyBuff(0);
+        item.getInformation().setTimeOfHolyBuff(0);
+
+        item.getInformation().setCanAddNefrineMarg(false);
+
+        item.getInformation().setTerrorHood(false);
+
+        item.getInformation().setCanKillHeroOfEnemyAfterRounds(false);
+        item.getInformation().setNumberOfRoundsNeededForKillHeroOfEnemy(0);
+
+        item.getInformation().setCanIncreaseMana(false);
+        item.getInformation().setAmountOfIncreaseMana(0);
+
+        item.getInformation().setPoisonousDagger(false);
+
+        item.getInformation().setShockHammer(false);
+
+        item.getInformation().setAddGhosleTamid(false);
+        item.getInformation().setTimeOfGhosleTamid(0);
+
+	item.getInformation().setShamshireChini(false);
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+    }

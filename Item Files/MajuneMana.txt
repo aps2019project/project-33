@@ -1,0 +1,35 @@
+
+    public static void method8() throws IOException {
+        String name = "MajuneMana";
+        Item item = new Item();
+        item.setPrice(0);
+        item.setName(name);
+
+        item.getInformation().setCellImpact(false);
+
+        item.getInformation().setEnemyImpact(false);
+        item.getInformation().setUsImpact(false);
+
+        item.getInformation().setHeroImpact(false);
+        item.getInformation().setMinionImpact(false) ;
+
+        item.getInformation().setForRange(false);
+        item.getInformation().setForHybrid(false);
+        item.getInformation().setForMelee(false);
+
+        item.getInformation().setCanIncreaseAP(false);
+        item.getInformation().setAmountOfIncreaseAP(0);
+
+        item.getInformation().setCanIncreaseHPOfLivingCard(false);
+        item.getInformation().setAmountOfIncreaseHPOfLivingCard(0);
+
+        item.getInformation().setCanIncreaseManaAfter3Rounds(false);
+
+        item.getInformation().setPareSimorgh(false);
+        item.getInformation().setMinOfPareSimorgh(0);
+
+        item.getInformation().setCanIncreaseMana(true);
+        item.getInformation().setAmountOfIncreaseMana(3);
+
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+    }

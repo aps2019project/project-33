@@ -1,0 +1,32 @@
+
+    public static void method19() throws IOException {
+        String name = "TireSeShakh";
+        Item item = new Item();
+        item.setPrice(0);
+        item.setName(name);
+
+        item.getInformation().setCellImpact(true);
+
+        item.getInformation().setEnemyImpact(false);
+        item.getInformation().setUsImpact(true);
+
+        item.getInformation().setHeroImpact(true);
+        item.getInformation().setMinionImpact(true) ;
+
+        item.getInformation().setForRange(true);
+        item.getInformation().setForHybrid(true);
+        item.getInformation().setForMelee(false);
+
+        item.getInformation().setCanIncreaseAP(true);
+        item.getInformation().setAmountOfIncreaseAP(2);
+
+        item.getInformation().setCanIncreaseHPOfLivingCard(false);
+        item.getInformation().setAmountOfIncreaseHPOfLivingCard(0);
+
+        item.getInformation().setCanIncreaseManaAfter3Rounds(false);
+
+        item.getInformation().setPareSimorgh(false);
+        item.getInformation().setMinOfPareSimorgh(0);
+
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+    }
