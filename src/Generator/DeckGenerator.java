@@ -9,18 +9,18 @@ import java.io.IOException;
 
 public class DeckGenerator {
 
-    static String[] heroNames = {"DiveSefid", "Simorgh", "Ezhdaha", "Rakhsh", "Zahhak", "Kaveh", "Arash", "Afsaneh", "Esfandiar",
+    public static String[] heroNames = {"DiveSefid", "Simorgh", "Ezhdaha", "Rakhsh", "Zahhak", "Kaveh", "Arash", "Afsaneh", "Esfandiar",
             "Rostam"};
-    static String[] spellNames = {"TotalDisarm", "AreaDispel", "Empower", "Fireball", "GodStrength", "HellFire", "LightingBolt",
+    public static String[] spellNames = {"TotalDisarm", "AreaDispel", "Empower", "Fireball", "GodStrength", "HellFire", "LightingBolt",
             "PoisonLake", "Madness", "AllDisarm", "AllPoison", "Dispel", "HealthWithProfit", "GhazaBokhorJoonBegiri",
             "AllPower", "AllAttack", "Weakening", "Sacrifice", "KingsGuard", "Shock"};
-    static String[] minionNames = {"KamandareFars", "ShamshirzaneFars", "NeyzedareFars", "AsbSavareFars", "PahlevaneFars", "SepahSalareFars"
+    public static String[] minionNames = {"KamandareFars", "ShamshirzaneFars", "NeyzedareFars", "AsbSavareFars", "PahlevaneFars", "SepahSalareFars"
             , "KamandareTorani", "GholabsangdareTorani", "NeyzedareTorani", "JasoseTorani", "GorzdareTorani", "ShahzadeTorani", "DiveSiah"
             , "GhooleSangAndaz", "Oghab", "DiveGorazSavar", "GhooleBozorg", "MareSami", "EzhdehayeAtashAndaz", "ShireDarande"
             , "MareGhoolPeykar", "GorgeSefid", "Palang", "Gorg", "Jadogar", "JadogarAzam", "Jen", "GorazeVahshi"
             , "Piran", "Giv", "Bahman", "Ashkbos", "Iraj", "GhooleBozorg2", "GhooleDoSar", "NaneSarma", "FoladZere", "Siavash"
             , "ShahGhool", "ArzhangeDiv"};
-    static String[] itemNames = {"TajeDanaei", "NamuseSepar", "KamaneDamul", "JunBaw", "TireSeShakh", "PareSimorgh", "Exir"
+    public static String[] itemNames = {"TajeDanaei", "NamuseSepar", "KamaneDamul", "JunBaw", "TireSeShakh", "PareSimorgh", "Exir"
             , "MajuneMana", "MajuneRueinTani", "NefrineMarg", "RandomDamage", "TerrorHood", "BladesOfAgility", "KingKiller"
             , "AssassinationDagger", "PoisonousDagger", "ShockHammer", "SoulEater", "GhosleTamid", "ShamshireChini"};
 

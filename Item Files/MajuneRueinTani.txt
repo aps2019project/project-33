@@ -1,0 +1,39 @@
+
+    public static void method9() throws IOException {
+        String name = "MajuneRueinTani";
+        Item item = new Item();
+        item.setPrice(0);
+        item.setName(name);
+
+        item.getInformation().setCellImpact(true);
+
+        item.getInformation().setEnemyImpact(false);
+        item.getInformation().setUsImpact(true);
+
+        item.getInformation().setHeroImpact(true);
+        item.getInformation().setMinionImpact(true) ;
+
+        item.getInformation().setForRange(true);
+        item.getInformation().setForHybrid(true);
+        item.getInformation().setForMelee(true);
+
+        item.getInformation().setCanIncreaseAP(false);
+        item.getInformation().setAmountOfIncreaseAP(0);
+
+        item.getInformation().setCanIncreaseHPOfLivingCard(false);
+        item.getInformation().setAmountOfIncreaseHPOfLivingCard(0);
+
+        item.getInformation().setCanIncreaseManaAfter3Rounds(false);
+
+        item.getInformation().setPareSimorgh(false);
+        item.getInformation().setMinOfPareSimorgh(0);
+
+        item.getInformation().setCanIncreaseMana(false);
+        item.getInformation().setAmountOfIncreaseMana(0);
+
+        item.getInformation().setCanHolyBuffAdd(true);
+        item.getInformation().setNumberOfHolyBuff(10);
+        item.getInformation().setTimeOfHolyBuff(10);
+
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+    }

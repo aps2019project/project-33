@@ -14,6 +14,10 @@ public class Cell {
     private ArrayList<Item> items = new ArrayList<>();
     private boolean haveFlag = false;
 
+    public Cell(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
 
     public boolean isHaveFlag() {
         return haveFlag;

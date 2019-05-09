@@ -1,0 +1,42 @@
+    public static void method18() throws IOException {
+        String name = "TerrorHood";
+        Item item = new Item();
+        item.setPrice(20000);
+        item.setName(name);
+
+        item.getInformation().setCellImpact(true);
+
+        item.getInformation().setEnemyImpact(true);
+        item.getInformation().setUsImpact(false);
+
+        item.getInformation().setHeroImpact(true);
+        item.getInformation().setMinionImpact(true) ;
+
+        item.getInformation().setForRange(true);
+        item.getInformation().setForHybrid(true);
+        item.getInformation().setForMelee(true);
+
+        item.getInformation().setCanIncreaseAP(false);
+        item.getInformation().setAmountOfIncreaseAP(0);
+
+        item.getInformation().setCanIncreaseHPOfLivingCard(false);
+        item.getInformation().setAmountOfIncreaseHPOfLivingCard(0);
+
+        item.getInformation().setCanIncreaseManaAfter3Rounds(false);
+
+        item.getInformation().setPareSimorgh(false);
+        item.getInformation().setMinOfPareSimorgh(0);
+
+        item.getInformation().setCanIncreaseMana(false);
+        item.getInformation().setAmountOfIncreaseMana(0);
+
+        item.getInformation().setCanHolyBuffAdd(false);
+        item.getInformation().setNumberOfHolyBuff(0);
+        item.getInformation().setTimeOfHolyBuff(0);
+
+        item.getInformation().setCanAddNefrineMarg(false);
+
+        item.getInformation().setTerrorHood(true);
+        
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+    }

@@ -1,0 +1,32 @@
+
+    public static void method12() throws IOException {
+        String name = "PareSimorgh";
+        Item item = new Item();
+        item.setPrice(3500);
+        item.setName(name);
+
+        item.getInformation().setCellImpact(true);
+
+        item.getInformation().setEnemyImpact(false);
+        item.getInformation().setUsImpact(true);
+
+        item.getInformation().setHeroImpact(true);
+        item.getInformation().setMinionImpact(false) ;
+
+        item.getInformation().setForRange(true);
+        item.getInformation().setForHybrid(true);
+        item.getInformation().setForMelee(true);
+
+        item.getInformation().setCanIncreaseAP(false);
+        item.getInformation().setAmountOfIncreaseAP(0);
+
+        item.getInformation().setCanIncreaseHPOfLivingCard(false);
+        item.getInformation().setAmountOfIncreaseHPOfLivingCard(0);
+
+        item.getInformation().setCanIncreaseManaAfter3Rounds(false);
+
+        item.getInformation().setPareSimorgh(true);
+        item.getInformation().setMinOfPareSimorgh(15);
+
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+    }

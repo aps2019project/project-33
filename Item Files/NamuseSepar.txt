@@ -1,0 +1,57 @@
+
+    public static void method10() throws IOException {
+        String name = "NamuseSepar";
+        Item item = new Item();
+        item.setPrice(4000);
+        item.setName(name);
+
+        item.getInformation().setCellImpact(true);
+
+        item.getInformation().setEnemyImpact(false);
+        item.getInformation().setUsImpact(true);
+
+        item.getInformation().setHeroImpact(true);
+        item.getInformation().setMinionImpact(false) ;
+
+        item.getInformation().setForRange(true);
+        item.getInformation().setForHybrid(true);
+        item.getInformation().setForMelee(true);
+
+        item.getInformation().setCanIncreaseAP(false);
+        item.getInformation().setAmountOfIncreaseAP(0);
+
+        item.getInformation().setCanIncreaseHPOfLivingCard(false);
+        item.getInformation().setAmountOfIncreaseHPOfLivingCard(0);
+
+        item.getInformation().setCanIncreaseManaAfter3Rounds(false);
+
+        item.getInformation().setPareSimorgh(false);
+        item.getInformation().setMinOfPareSimorgh(0);
+
+        item.getInformation().setCanIncreaseMana(false);
+        item.getInformation().setAmountOfIncreaseMana(0);
+
+        item.getInformation().setCanHolyBuffAdd(true);
+        item.getInformation().setNumberOfHolyBuff(2);
+        item.getInformation().setHolyBuffPermanent(true);
+        item.getInformation().setHolyBuffPassive(true);
+
+        item.getInformation().setCanAddNefrineMarg(false);
+
+        item.getInformation().setTerrorHood(false);
+
+        item.getInformation().setCanKillHeroOfEnemyAfterRounds(false);
+        item.getInformation().setNumberOfRoundsNeededForKillHeroOfEnemy(0);
+
+        item.getInformation().setCanIncreaseMana(false);
+        item.getInformation().setAmountOfIncreaseMana(0);
+
+        item.getInformation().setPoisonousDagger(false);
+
+        item.getInformation().setShockHammer(false);
+
+        item.getInformation().setAddGhosleTamid(false);
+        item.getInformation().setTimeOfGhosleTamid(0);
+
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+    }

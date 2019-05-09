@@ -1,0 +1,31 @@
+    public static void method3() throws IOException {
+        String name = "Exir";
+        Item item = new Item();
+        item.setPrice(0);
+        item.setName(name);
+
+        item.getInformation().setCellImpact(true);
+
+        item.getInformation().setEnemyImpact(false);
+        item.getInformation().setUsImpact(true);
+
+        item.getInformation().setHeroImpact(true);
+        item.getInformation().setMinionImpact(false) ;
+
+        item.getInformation().setForRange(true);
+        item.getInformation().setForHybrid(true);
+        item.getInformation().setForMelee(true);
+
+        item.getInformation().setCanIncreaseAP(true);
+        item.getInformation().setAmountOfIncreaseAP(3);
+
+        item.getInformation().setCanIncreaseHPOfLivingCard(true);
+        item.getInformation().setAmountOfIncreaseHPOfLivingCard(3);
+
+        item.getInformation().setCanIncreaseManaAfter3Rounds(false);
+
+        item.getInformation().setPareSimorgh(false);
+        item.getInformation().setMinOfPareSimorgh(0);
+
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+    }

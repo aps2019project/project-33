@@ -8,6 +8,16 @@ public class Map1 {
     private int height;
     private int width;
 
+    public Map1(int height, int width){
+        this.width = width;
+        this.height = height;
+        for(int i = 0; i < this.height; i ++)
+            for(int j = 0; j < this.width; j ++){
+                Cell cell = new Cell(i, j);
+                this.cells.add(cell);
+            }
+    }
+
     public void addNewCell (Cell cell) {
         cells.add(cell);
     }
