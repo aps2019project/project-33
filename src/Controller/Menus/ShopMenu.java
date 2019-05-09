@@ -66,7 +66,7 @@ public class ShopMenu extends Menu {
         costumer.getCollection().removeCollectionItemFromCollection(collectionItem.getID());
         costumer.increaseBudget(collectionItem.getPrice());
         this.shop.addCollectionItemToCollection(collectionItem.getID());
-
+        collection.removeCollectionItemFromCollection(collectionItem.getID());
         System.out.println("You sold it :(");
     }
 
