@@ -191,11 +191,12 @@ public class Battle {
 
     //jaye avalie flaga o hero ha o ...
     public void preProcess() throws FileNotFoundException {
+        this.relaxCards(this.playerOn);
+        this.relaxCards(this.playerOff);
+
         findHero(playerOff);
         findHero(playerOn);
 
-        this.relaxCards(this.playerOn);
-        this.relaxCards(this.playerOff);
         this.createHand(playerOn);
         this.createHand(playerOff);
         this.putHeroes();
@@ -213,18 +214,16 @@ public class Battle {
         canLivingCards(playerOn);
         canLivingCards(playerOff);
 
-        this.setCards(this.playerOn);
-        this.setCards(this.playerOff);
-
-
         //TODO
     }
 
-    private void setCards(Player playerOff) {
-        for(CollectionItem collectionItem : playerOff.getAccount().getCollection().getMainDeck().getCards()){
-            if(collectionItem instanceof Item) continue;
-            if(collectionItem instanceof LivingCard) ((LivingCard) collectionItem).setBattle(this);
-            if(collectionItem instanceof Spell) ((Spell) collectionItem).setBattle(this);
+    private void setCards(Player player) {
+        Hero hero;
+        for (CollectionItem collectionItem : player.getAccount().getCollection().getMainDeck().getCards()) {
+            if (collectionItem instanceof Item) continue;
+            if (collectionItem instanceof Hero) ((Hero) collectionItem).setBattle(this);
+            if (collectionItem instanceof Spell) ((Spell) collectionItem).setBattle(this);
+            if (collectionItem instanceof Minion) ((Minion) collectionItem).setBattle(this);
         }
     }
 
@@ -626,6 +625,9 @@ public class Battle {
         checkThings(playerOff);
         checkThings(playerOn);
 
+        this.setCards(playerOff);
+        this.setCards(playerOn);
+
         handleBuffs(playerOff);
         handleBuffs(playerOn);
 
@@ -911,13 +913,15 @@ public class Battle {
         inputLine = inputLine.toLowerCase();
         String[] input = inputLineOriginal.split("[ ]+");
 
-        for(int i = 0; i < map.getHeight(); i ++){
-            for(int j = 0; j < map.getWidth(); j ++){
-                if(map.getCellByCoordination(i, j).getLivingCard() == null) System.out.print(".");
+/*
+        for (int i = 0; i < map.getHeight(); i++) {
+            for (int j = 0; j < map.getWidth(); j++) {
+                if (map.getCellByCoordination(i, j).getLivingCard() == null) System.out.print(".");
                 else System.out.print("L");
             }
             System.out.print("\n");
         }
+*/
 
         if (inputLine.equals("Forfeit match")) {
             forfeitMatch();
@@ -978,6 +982,7 @@ public class Battle {
     private void handleBuffs(Player player) {
         for (LivingCard livingCard : player.getAliveCards())
             handleBuffsOfCard(livingCard);
+
         //decrease remain time
         for (LivingCard livingCard : player.getAliveCards()) {
             decreaseTimeOfBuff(livingCard.getEffects());
