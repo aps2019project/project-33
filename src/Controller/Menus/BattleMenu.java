@@ -40,8 +40,9 @@ public class BattleMenu extends Menu {
     }
 
     private void chooseType() {
+        System.out.println("Type :");
         for (int i = 0; i < types.length; i++)
-            System.out.println(i + ". " + types[i]);
+            System.out.println("- " + types[i]);
         readInputs();
         for (int i = 0; i < types.length; i++) {
             if (inputLine.equals(types[i].toLowerCase())) {
@@ -198,16 +199,19 @@ public class BattleMenu extends Menu {
         System.out.println("Levels :");
         for (int i = 0; i < levels.length; i++)
             System.out.println(levels[i] + ", Prize : " + prizeOfLevels[i]);
+        System.out.println("Enter number of level: ");
         readInputs();
-        for (int i = 0; i < levels.length; i++)
-            if (inputLine.equals(levels[i].toLowerCase())) {
-                String address = "Data/Battle/Story/Story";
-                Deck deck = (Deck) Application.readJSON(Deck.class, address + i + ".json");
-                ((AI) battle.getPlayerOff()).selectMainDeck(deck);
-                battle.setMode(modes[i]);
-                battle.setPrize(prizeOfLevels[i]);
-                return;
-            }
+        if(inputLine.matches("[\\d]+")) {
+            for (int i = 0; i < levels.length; i++)
+                if (Integer.parseInt(inputLine) == i + 1) {
+                    String address = "Data/Battle/Story/Story";
+                    Deck deck = (Deck) Application.readJSON(Deck.class, address + i + ".json");
+                    ((AI) battle.getPlayerOff()).selectMainDeck(deck);
+                    battle.setMode(modes[i]);
+                    battle.setPrize(prizeOfLevels[i]);
+                    return;
+                }
+        }
         System.out.println("Enter valid level");
         story();
    }
