@@ -164,6 +164,7 @@ public class Battle {
         for (LivingCard livingCard : player.getAliveCards()) {
             livingCard.setCanMove(true);
             livingCard.setCanAttack(true);
+            livingCard.setCanCounterAttack(true);
         }
     }
 
@@ -283,7 +284,6 @@ public class Battle {
     }
 
     public boolean selectCard(String ID) {
-        System.out.println(ID);
         for (LivingCard livingCard : playerOn.getAliveCards()) {
             if (livingCard.getID().equals(ID)) {
                 this.selectedCard = livingCard;
@@ -475,6 +475,10 @@ public class Battle {
             System.out.println("Invalid target !");
             return;
         }
+        if(!selectedCard.isCanMove()){
+            System.out.println("This card can't move");
+            return;
+        }
 
         int distance = getDistance(selectedCard.getPositionRow(), selectedCard.getPositionColumn(), x, y);
         int maxDistanceCanCardGo = 2;
@@ -493,6 +497,7 @@ public class Battle {
             //tuye mode e flag bayad flago begire dastesh
         } else
             System.out.println("Invalid target !");
+        selectedCard.setCanMove(false);
         handleFlags();
         checkTurn();
     }
@@ -886,6 +891,9 @@ public class Battle {
     }
 
     private void inputCommandLine() {
+        if(selectedCard != null)
+            System.out.println(selectedCard.isCanAttack() + " " + selectedCard.isCanMove());
+
         System.out.println("Here is Battle");
         System.out.println("For help, enter : show menu");
 
