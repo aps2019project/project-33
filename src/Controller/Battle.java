@@ -823,6 +823,10 @@ public class Battle {
                         this.coordinationString(livingCard));
             }
         }
+        System.out.println("you can attack to these cards:");
+        for(LivingCard livingCard : playerOff.getAliveCards())
+            System.out.println("name: " + livingCard.getName() + " id: " + livingCard.getID() +
+                    this.coordinationString(livingCard));
         if (playerOn.getMana().getCurrentMana() >= playerOn.getHero().getMP()) {
             if (playerOn.getHero().getCoolDown() <= 0) {
                 System.out.println("also you can use special power of your hero:");
