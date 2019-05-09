@@ -171,6 +171,9 @@ public class Battle {
         for(CollectionItem collectionItem : player.getAccount().getCollection().getCards()){
             if(collectionItem instanceof Hero)
                 player.setHero((Hero) collectionItem);
+                swapHeroToEnd(player.getAccount().getCollection().getCards(), index);
+            }
+            index++;
         }
     }
 
@@ -266,6 +269,7 @@ public class Battle {
         if(collectionItem != null) {
             ((Card)collectionItem).showCardInBattle();
         }
+        System.out.println(info);
     }
 
     public boolean selectCard(String ID){
@@ -877,6 +881,7 @@ public class Battle {
 
         String inputLine = readInput();
         inputLine = inputLine.trim();
+        String inputLineOriginal = inputLine;
         inputLine = inputLine.toLowerCase();
         String[] input = inputLine.split("[ ]+");
         if(inputLine.equals("Forfeit match")){
