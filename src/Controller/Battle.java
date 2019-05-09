@@ -41,7 +41,7 @@ public class Battle {
         Deck mainDeck = player.getAccount().getCollection().getMainDeck();
         ArrayList<CollectionItem> livingCards = mainDeck.getCards();
 
-        for (int i = livingCards.size() - 1; i > -1; i--) {
+        for(int i = livingCards.size() - 1; i > -1; i --){
             CollectionItem collectionItem = livingCards.get(i);
 
             collection.removeCollectionItemFromCollection(collectionItem.getID());
@@ -161,7 +161,7 @@ public class Battle {
     }
 
     public void canLivingCards(Player player) {
-        for (LivingCard livingCard : player.getAliveCards()) {
+        for (LivingCard livingCard : player.getAliveCards()){
             livingCard.setCanMove(true);
             livingCard.setCanAttack(true);
             livingCard.setCanCounterAttack(true);
@@ -242,10 +242,13 @@ public class Battle {
         }
     }
 
-    public void showMinions(Player player) {
-        for (LivingCard livingCard : player.getAliveCards()) {
-            if (livingCard instanceof Minion) {
-                livingCard.showCardInBattle();
+    public void showMinions(Player player){
+        for(LivingCard livingCard : player.getAliveCards()){
+            if(livingCard instanceof Minion){
+                String info = livingCard.getID() + " : " + livingCard.getName() + ", health : " + livingCard.getHP();
+                info += ", location : (" + livingCard.getPositionRow() + ", " + livingCard.getPositionColumn() + "), power : ";
+                info += livingCard.getDecreaseHPByAttack();
+                System.out.println(info);
             }
         }
     }
@@ -258,9 +261,9 @@ public class Battle {
         showMinions(playerOff);
     }
 
-    public CollectionItem getCollectionItemInList(ArrayList<CollectionItem> collectionItems, String ID) {
-        for (CollectionItem collectionItem : collectionItems) {
-            if (collectionItem.getID().equals(ID))
+    public CollectionItem getCollectionItemInList(ArrayList<CollectionItem> collectionItems, String ID){
+        for(CollectionItem collectionItem : collectionItems){
+            if(collectionItem.getID().equals(ID))
                 return collectionItem;
         }
         return null;
@@ -269,16 +272,13 @@ public class Battle {
     //faghat vase livingCard e ?asan malum nis chejurie , card asan bayad tu bazi bashe ya chi koja donbalesh begardim
     public void showCardInfo(String ID) {
         String info = "card was not found";
-        ArrayList<CollectionItem> onCollectionItems = playerOn.getAccount().getCollection().getMainDeck().getCards();
-        ArrayList<CollectionItem> offCollectionItems = playerOff.getAccount().getCollection().getMainDeck().getCards();
+        ArrayList <CollectionItem> onCollectionItems = playerOn.getAccount().getCollection().getMainDeck().getCards();
+        ArrayList <CollectionItem> offCollectionItems = playerOff.getAccount().getCollection().getMainDeck().getCards();
         CollectionItem collectionItem = getCollectionItemInList(onCollectionItems, ID);
         if (collectionItem == null)
             collectionItem = getCollectionItemInList(offCollectionItems, ID);
-        if (collectionItem != null) {
-            info = collectionItem.getInfo();
-            if (collectionItem instanceof LivingCard)
-                info += " HP : " + ((LivingCard) (collectionItem)).getHP() + " AP : " +
-                        ((LivingCard) (collectionItem)).getDecreaseHPByAttack();
+        if(collectionItem != null) {
+            ((Card)collectionItem).showCardInBattle();
         }
         System.out.println(info);
     }
@@ -451,8 +451,9 @@ public class Battle {
                 Impact.addHolyToCard(2, false, false, 1,
                         ((LivingCard) insertingCollectionItem));
             }
-        } else {
-            if (insertingCollectionItem instanceof Spell) {
+        }
+        else{
+            if(insertingCollectionItem instanceof Spell){
                 playerOn.getHand().removeCard(cardID);
                 playerOn.getHand().addNextCard(playerOn.getAccount().getCollection().getMainDeck());
                 Spell spell = (Spell) insertingCollectionItem;
@@ -890,10 +891,7 @@ public class Battle {
         finishMatch();
     }
 
-    private void inputCommandLine() {
-        if(selectedCard != null)
-            System.out.println(selectedCard.isCanAttack() + " " + selectedCard.isCanMove());
-
+    private void inputCommandLine(){
         System.out.println("Here is Battle");
         System.out.println("For help, enter : show menu");
 
