@@ -18,8 +18,8 @@ public class AccountMenu extends Menu {
 
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
-        inputLine = inputLine.toLowerCase();
         String[] input = inputLine.split("[ ]+");
+        inputLine = inputLine.toLowerCase();
 
         if (inputLine.matches("create account .*")) {
             createAccount(input[2]);
@@ -62,12 +62,11 @@ public class AccountMenu extends Menu {
             return;
         }
 
-        Account account = new Account(username, password);
+        Account account = new Account(username, password, 100000);
         Account.getAccounts().add(account);
-        account.setBudget(100000);
         Main.application.setLoggedInAccount(account);
 
-        System.out.println("This account is created");
+        System.out.println("The account is created");
 
         new MainMenu().inputCommandLine();
     }

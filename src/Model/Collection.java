@@ -9,6 +9,15 @@ public class Collection {
     private Deck mainDeck;
     private ArrayList<Deck> decks = new ArrayList<>();
 
+    public void selectMainDeck(String deckName) {
+        Deck deck = this.getDeckByName(deckName);
+        if (deck == null) {
+            System.out.println("This deck doesn't exist");
+            return;
+        }
+        this.setMainDeck(deck);
+    }
+
     public Deck getDeckByName(String deckName){
         for(Deck deck : decks) {
             if (deck.getName().equals(deckName))
@@ -65,15 +74,6 @@ public class Collection {
         }
     }
 
-    public void selectMainDeck(String deckName){
-        Deck deck = this.getDeckByName(deckName);
-        if(deck == null){
-            System.out.println("deck not found");
-            return;
-        }
-        this.mainDeck = deck;
-    }
-
     public boolean checkValidateDeck(String deckName){
         Deck deck = this.getDeckByName(deckName);
         if(deck == null) {
@@ -115,13 +115,12 @@ public class Collection {
     }
 
     public void deleteDeck(String deckName){
-        for(Deck deck : this.getDecks()){
-            if(deck.getName().equals(deckName)){
-                decks.remove(deck);
-                return;
-            }
+        Deck deck = this.getDeckByName(deckName);
+        if(deck == null){
+            System.out.println("deck wasn't found");
+            return;
         }
-        System.out.println("deck wasn't found");
+        this.decks.remove(deck);
     }
 
     public ArrayList<Deck> getDecks(){

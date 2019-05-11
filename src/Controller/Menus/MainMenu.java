@@ -29,8 +29,6 @@ public class MainMenu extends Menu {
             collectionMenu.inputCommandLine();
         } else if (inputLine.equals("enter shop menu")) {
             ShopMenu shopMenu = new ShopMenu();
-//            shopMenu.generate();
-//            Main.application.getLoggedInAccount().setBudget(40);
             shopMenu.inputCommandLine();
         } else if (inputLine.equals("enter battle")) {
             BattleMenu battleMenu = new BattleMenu();

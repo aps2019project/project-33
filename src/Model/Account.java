@@ -16,9 +16,10 @@ public class Account {
 
     //Constructor
 
-    public Account(String username, String password) {
+    public Account(String username, String password, int budget) {
         this.username = username;
         this.password = password;
+        this.budget = 100000;
     }
 
     //methods

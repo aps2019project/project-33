@@ -6,32 +6,34 @@ package Controller.Menus;
 import Controller.Application;
 import Controller.Main;
 import Model.*;
-import Model.CollectionItem.CollectionItem;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class CollectionMenu extends Menu {
-    private boolean isFirstOne = true;
+    private boolean isFirstTime = true;
     private Collection collection = null;
 
-    public void setFirstOne(boolean flag){
-        isFirstOne = flag;
+    public void setFirstTime(boolean flag) {
+        isFirstTime = flag;
     }
 
     @Override
 
     public void inputCommandLine() throws IOException {
+
         System.out.println("Here is Collection Menu");
-        System.out.println("For help, enter : show menu");;
+        System.out.println("For help, enter : show menu");
+        ;
 
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
         String[] input = inputLine.split("[ ]+");
-        if(isFirstOne){
+        inputLine = inputLine.toLowerCase();
+        if (isFirstTime) {
             collection = (Collection) Application.copy(Main.application.getLoggedInAccount().getCollection(),
                     Collection.class);
-            isFirstOne = false;
+            isFirstTime = false;
         }
 
         if (inputLine.equals("show")) {
@@ -39,9 +41,11 @@ public class CollectionMenu extends Menu {
         } else if (inputLine.matches("search .*")) {
             searchInCollection(collection, input[1]);
         } else if (inputLine.matches("create deck .*")) {
-            createDeck(input[2], collection);
+            String deckName = input[2];
+            collection.createDeck(deckName);
         } else if (inputLine.matches("delete deck .*")) {
-            deleteDeck(input[2], collection);
+            String deckName = input[2];
+            collection.deleteDeck(deckName);
         } else if (inputLine.matches("add .* to deck .*")) {
             String collectionItemId = input[1], deckName = input[4];
             collection.addCollectionItemToDeck(collectionItemId, deckName);
@@ -51,7 +55,8 @@ public class CollectionMenu extends Menu {
         } else if (inputLine.matches("validate deck .*")) {
             checkValidityOfDeck(input[2], collection);
         } else if (inputLine.matches("select deck .*")) {
-            selectMainDeck(input[2], collection);
+            String deckName = input[2];
+            collection.selectMainDeck(deckName);
         } else if (inputLine.equals("show all decks")) {
             collection.showAllDecks();
         } else if (inputLine.matches("show deck .*")) {
@@ -60,11 +65,10 @@ public class CollectionMenu extends Menu {
             this.save(collection);
         } else if (inputLine.equals("show menu"))
             CollectionMenu.showMenu();
-        else if (inputLine.equals("exit")){
-            isFirstOne = true;
+        else if (inputLine.equals("exit")) {
+            isFirstTime = true;
             return;
-        }
-        else
+        } else
             System.out.println("Enter valid command line !");
 
         this.inputCommandLine();
@@ -74,22 +78,8 @@ public class CollectionMenu extends Menu {
         ArrayList<String> collectionItems = collection.search(cardName);
         int index = 0;
         System.out.println("CollectionItems with this name :");
-        for(String string : collectionItems)
+        for (String string : collectionItems)
             System.out.println(++index + " " + string);
-    }
-
-    private void showDeck(String deckName, Collection collection) {
-        collection.showDeck(deckName);
-    }
-
-    //ino do ja zadim
-    private void selectMainDeck(String deckName, Collection collection) {
-        Deck deck = collection.getDeckByName(deckName);
-        if (deck == null) {
-            System.out.println("This deck doesn't exist");
-            return;
-        }
-        collection.setMainDeck(deck);
     }
 
     private void checkValidityOfDeck(String deckName, Collection collection) {
@@ -99,20 +89,6 @@ public class CollectionMenu extends Menu {
             return;
         }
         System.out.println("validity state of " + deckName + " is : " + deck.checkValidateDeck());
-    }
-
-    private void deleteDeck(String deckName, Collection collection) throws IOException {
-        Deck deck = collection.getDeckByName(deckName);
-        if (deck == null) {
-            System.out.println("This deck doesn't exist");
-            this.inputCommandLine();
-            return;
-        }
-        collection.deleteDeck(deckName);
-    }
-
-    private void createDeck(String deckName, Collection collection) {
-        collection.createDeck(deckName);
     }
 
     public static void showMenu() {
@@ -131,7 +107,7 @@ public class CollectionMenu extends Menu {
         System.out.println("13. exit");
     }
 
-    private void save(Collection collection){
+    private void save(Collection collection) {
         Main.application.getLoggedInAccount().setCollection(collection);
     }
 }

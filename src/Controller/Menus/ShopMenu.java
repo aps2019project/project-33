@@ -18,8 +18,8 @@ public class ShopMenu extends Menu {
 
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
-   //     inputLine = inputLine.toLowerCase();
         String[] separatedInput = inputLine.split("[ ]+");
+        inputLine = inputLine.toLowerCase();
 
         Collection collection = Main.application.getLoggedInAccount().getCollection();
 
@@ -32,7 +32,7 @@ public class ShopMenu extends Menu {
         } else if (inputLine.matches("buy .+")) {
             String collectionNameItem = separatedInput[1];
             this.buy(collectionNameItem);
-        } else if (inputLine.matches("sell .*+")) {
+        } else if (inputLine.matches("sell .+")) {
             String collectionItemName = separatedInput[1];
             this.sell(collectionItemName, collection);
         } else if (inputLine.equals("show"))
@@ -48,7 +48,6 @@ public class ShopMenu extends Menu {
 
     private void searchInCollection(String collectionItemName, Collection collection) {
         ArrayList<String> IDs = collection.search(collectionItemName);
-        System.out.println(collectionItemName + " " + IDs.size());
         System.out.println("Result of search :");
         int index = 0;
         for (String ID : IDs)
@@ -62,13 +61,12 @@ public class ShopMenu extends Menu {
             return;
         }
 
-        Account costumer = Main.application.getLoggedInAccount();
-
-        costumer.getCollection().removeCollectionItemFromCollection(collectionItem.getID());
-        costumer.increaseBudget(collectionItem.getPrice());
+        Account customer = Main.application.getLoggedInAccount();
+        customer.increaseBudget(collectionItem.getPrice());
         this.shop.addCollectionItemToCollection(collectionItem.getID());
         collection.removeCollectionItemFromCollection(collectionItem.getID());
         System.out.println("You sold it :(");
+        System.out.println("remaining budget is : " + customer.getBudget());
     }
 
     public void buy(String name) {
@@ -84,25 +82,25 @@ public class ShopMenu extends Menu {
             return;
         }
 
-        Account costumer = Main.application.getLoggedInAccount();
+        Account customer = Main.application.getLoggedInAccount();
 
         if (collectionItem instanceof UsableItem) {
-            if (costumer.getNumberOfItems() == 3) {
+            if (customer.getNumberOfItems() == 3) {
                 System.out.println("You have 3 Items! Please sell at least 1 item at first !");
                 return;
             }
         }
 
-        if (collectionItem.getPrice() > costumer.getBudget()) {
+        if (collectionItem.getPrice() > customer.getBudget()) {
             System.out.println("Low Budget !!");
             return;
         }
 
         this.shop.removeCollectionItemFromCollection(collectionItem.getID());
-        costumer.decreaseBudget(collectionItem.getPrice());
-        costumer.getCollection().addCollectionItemToCollection(collectionItem.getID());
-
+        customer.decreaseBudget(collectionItem.getPrice());
+        customer.getCollection().addCollectionItemToCollection(collectionItem.getID());
         System.out.println("You bought it :)");
+        System.out.println("remaining budget is : " + customer.getBudget());
     }
 
     public static void showMenu() {
