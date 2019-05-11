@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Collection;
 import Model.CollectionItem.*;
 import Model.Enviroment.Cell;
 import Model.Enviroment.Map1;
@@ -139,30 +140,6 @@ public class AttackArea {
         return unique(impactedCells);
     }
 
-    //
-
-    public static ArrayList<Cell> getimpactCellsOfSpellOfHero(Hero hero, Battle battle) {
-        ArrayList<Cell> impactedCells = new ArrayList<>();
-        Information information = hero.getInformation();
-
-        if (information.isImpactItself())
-            impactedCells.add(hero.getCell());
-        if (information.isImpactAllArea())
-            impactedCells.addAll(getAllArea(battle));
-        if (information.isImpactRow())
-            impactedCells.addAll(getCellsOfRow(hero.getCell(), battle));
-        if(information.isImpactColumn())
-            impactedCells.addAll(getCellsOfColumn(hero.getCell(), battle));
-        ArrayList<Cell> cellsOfLivingCards = new ArrayList<>();
-
-        if (information.isEnemyImpact())
-            cellsOfLivingCards.addAll(getCells(information, battle.getPlayerOff()));
-        if (information.isUsImpact())
-            cellsOfLivingCards.addAll(getCells(information, battle.getPlayerOn()));
-
-        return unique(merge(impactedCells, cellsOfLivingCards));
-    }
-
     public static ArrayList<Cell> getImpactCellsOfAttack(LivingCard livingCard, Battle battle) {
         ArrayList<Cell> impactedCells = new ArrayList<>();
         if (livingCard.getInformation().isCanDoHybridAttack())
@@ -179,44 +156,15 @@ public class AttackArea {
         return unique(AttackArea.getImpactCellsOfAttack(livingCard, battle));
     }
 
-
-    public static ArrayList<Cell> getImpactCellsOfSpecialPower(Minion minion, Battle battle) {
-        Information information = minion.getInformation();
-        if (!information.isSpecialMinion()) {
-            return getImpactCellsOfAttack((LivingCard) minion, battle);
-        }
-
-        ArrayList<Cell> impactedCells = new ArrayList<>();
-
-        if (information.isImpactNeighbors())
-            impactedCells.addAll(getNeighbors(minion.getCell(), battle));
-        if (information.isImpactArea())
-            impactedCells.addAll(getCellsInArea(minion.getCell(), information.getDistanceOfImpactArea(), battle));
-        if (information.isImpactItself())
-            impactedCells.add(minion.getCell());
-        if (information.isImpactAllArea())
-            impactedCells.addAll(getAllArea(battle));
-
-        ArrayList<Cell> cellsOfLivingCards = new ArrayList<>();
-
-        if (information.isEnemyImpact())
-            cellsOfLivingCards.addAll(getCells(information, battle.getPlayerOff()));
-        if (information.isEnemyImpact())
-            cellsOfLivingCards.addAll(getCells(information, battle.getPlayerOn()));
-
-        return unique(merge(impactedCells, cellsOfLivingCards));
-    }
-
-    public static ArrayList<Cell> getImpactCellsOfSpell(Spell spell, Cell cell, Battle battle) {
+    public static ArrayList<Cell> getImpactCells(CollectionItem collectionItem, Cell cell, Battle battle) {
         ArrayList<Cell> impactedCellsOfLivingCards = new ArrayList<>();
 
-        Information information = spell.getInformation();
+        Information information = collectionItem.getInformation();
 
         if (information.isEnemyImpact())
             impactedCellsOfLivingCards.addAll(getCells(information, battle.getPlayerOff()));
         if (information.isUsImpact())
             impactedCellsOfLivingCards.addAll(getCells(information, battle.getPlayerOn()));
-
         if (information.isCellImpact()) {
             ArrayList<Cell> impactedCells = new ArrayList<>();
             if (information.isSquareOfCellsImpact())
@@ -232,6 +180,8 @@ public class AttackArea {
             }
             impactedCellsOfLivingCards = merge(impactedCells, impactedCellsOfLivingCards);
         }
+        if(information.isImpactItself())
+            impactedCellsOfLivingCards.add(cell);
         return unique(impactedCellsOfLivingCards);
     }
 
