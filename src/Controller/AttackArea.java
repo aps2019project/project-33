@@ -151,7 +151,8 @@ public class AttackArea {
             impactedCells.addAll(getAllArea(battle));
         if (information.isImpactRow())
             impactedCells.addAll(getCellsOfRow(hero.getCell(), battle));
-
+        if(information.isImpactColumn())
+            impactedCells.addAll(getCellsOfColumn(hero.getCell(), battle));
         ArrayList<Cell> cellsOfLivingCards = new ArrayList<>();
 
         if (information.isEnemyImpact())
@@ -164,11 +165,11 @@ public class AttackArea {
 
     public static ArrayList<Cell> getImpactCellsOfAttack(LivingCard livingCard, Battle battle) {
         ArrayList<Cell> impactedCells = new ArrayList<>();
-        if (livingCard.getCounterAttackType().equals("hybrid"))
+        if (livingCard.getInformation().isCanDoHybridAttack())
             impactedCells.addAll(findHybridAttackArea(battle, livingCard));
-        if (livingCard.getCounterAttackType().equals("melee"))
+        if (livingCard.getInformation().isCanDoMeleeAttack())
             impactedCells.addAll(findMeleeAttackArea(battle, livingCard));
-        if (livingCard.getCounterAttackType().equals("ranged"))
+        if (livingCard.getInformation().isCanDoRangedAttack())
             impactedCells.addAll(findRangedAttackArea(battle, livingCard));
 
         return unique(impactedCells);
@@ -273,6 +274,4 @@ public class AttackArea {
         }
         return result;
     }
-
 }
-
