@@ -13,7 +13,7 @@ public class AI extends Player {
     ArrayList<String> orders = new ArrayList<>();
 
     public AI() {
-        super(new Account("admin", "1234"));
+        super(new Account("admin", "1234", 0));
     }
 
     public void selectMainDeck(Deck deck) throws FileNotFoundException {

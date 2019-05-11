@@ -2,29 +2,37 @@ package Controller.Menus;
 
 import Controller.*;
 import Generator.DeckGenerator;
-import Generator.ShopGenerator;
 import Model.*;
 import Model.CollectionItem.*;
 
 import java.io.FileNotFoundException;
 
 public class BattleMenu extends Menu {
+    private boolean isRunning = true;
     private String inputLine;
+
+    private String originalInputLine;
     private String[] input;
     private Battle battle = new Battle();
     private String[] modes = {"Kill_enemy's_hero", "Hold_flag", "Take_half_of_flags"};
     private String[] types = {"Single Player", "Multi Player"};
     private String[] singlePlayerKinds = {"Story", "Custom Game"};
-    private String[] levels = {"1. fight with DiveSepid", "2. fight with Zahhak",
+    private String[] levels = {"1. fight with DiveSefid", "2. fight with Zahhak",
             "3. fight with Arash"};
     private int[] prizeOfLevels = {500, 1000, 1500};
     private int numberOfDecksInCustomGame = 3;
     private int prizeOfCustomGame = 1000;
 
+    public BattleMenu() {
+    }
+
     private void readInputs() {
         inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
+        originalInputLine = inputLine;
         input = inputLine.split("[ ]+");
+        inputLine = inputLine.toLowerCase();
+        if (inputLine.equals("exit")) isRunning = false;
     }
 
     @Override
@@ -34,20 +42,21 @@ public class BattleMenu extends Menu {
             return;
         }
         battle.setPlayerOn(new Player(Main.application.getLoggedInAccount()));
-        chooseType();
-        chooseSecondPlayer();
-        chooseMode();
-        battle.runGame();
+        if (isRunning) chooseType();
+        if (isRunning) chooseSecondPlayer();
+        if (isRunning) chooseMode();
+        if (isRunning) battle.runGame();
     }
 
     private void chooseType() {
+        if (!isRunning) return;
         System.out.println("Game Types :");
         for (int i = 0; i < types.length; i++)
             System.out.println(" - " + types[i]);
-        System.out.println("For choosing, enter : [Type]");
+        System.out.println("For choosing, enter : [Type Name]");
         readInputs();
         for (int i = 0; i < types.length; i++) {
-            if (inputLine.equals(types[i])) {
+            if (originalInputLine.equals(types[i])) {
                 battle.setType(types[i]);
                 return;
             }
@@ -57,6 +66,7 @@ public class BattleMenu extends Menu {
     }
 
     private void chooseSecondPlayer() {
+        if (!isRunning) return;
         System.out.println(battle.getType());
         if (battle.getType().equals(types[0])) {
             battle.setPlayerOff(new AI());
@@ -64,44 +74,48 @@ public class BattleMenu extends Menu {
         }
 
         showAllAccount();
-        while (true) {
-            System.out.println("Enter username of second player :");
-            System.out.println("For choosing, enter : select user [username]");
-            readInputs();
-            if (inputLine.matches("select user .*")) {
-                String username = input[2];
-                Account account = Account.getAccountByUsername(username);
-                if (account != null) {
-                    if (!checkDeck(account)) {
-                        System.out.println("Selected deck for second player is invalid");
-                        continue;
-                    }
-                    battle.setPlayerOff(new Player(account));
-                    break;
-                } else
-                    System.out.println("Invalid username");
-            } else if (inputLine.equals("exit"))
+        chooseSecondPlayerInMultiPlayerType();
+    }
+
+    private void chooseSecondPlayerInMultiPlayerType() {
+        if (!isRunning) return;
+        System.out.println("Enter username of second player :");
+        System.out.println("For choosing, enter : select user [username]");
+        readInputs();
+        if (inputLine.matches("select user .*")) {
+            String username = input[2];
+            Account account = Account.getAccountByUsername(username);
+            if (account != null) {
+                if (!checkDeck(account)) {
+                    System.out.println("Selected deck for second player is invalid");
+                    chooseSecondPlayerInMultiPlayerType();
+                    return;
+                }
+                battle.setPlayerOff(new Player(account));
                 return;
-            else
-                System.out.println("Enter valid command");
-        }
+            } else
+                System.out.println("Invalid username");
+        } else
+            System.out.println("Enter valid command");
+        chooseSecondPlayerInMultiPlayerType();
     }
 
     private void chooseMode() throws FileNotFoundException {
+        if (!isRunning) return;
         System.out.println("Game Kinds :");
         if (battle.getType().equals(types[0])) {
             for (int i = 0; i < singlePlayerKinds.length; i++)
                 System.out.println(" - " + singlePlayerKinds[i]);
-            System.out.println("For choosing, enter : [Kind]");
+            System.out.println("For choosing, enter : [Kind Name]");
             readInputs();
             for (int i = 0; i < singlePlayerKinds.length; i++) {
-                if (inputLine.equals(singlePlayerKinds[i])) {
+                if (originalInputLine.equals(singlePlayerKinds[i])) {
                     if (i == 0) story();
                     else customGame();
                     return;
                 }
             }
-            System.out.println("enter valid Kind !!");
+            System.out.println("Enter valid Kind !!");
         } else {
             customGame();
             return;
@@ -110,6 +124,7 @@ public class BattleMenu extends Menu {
     }
 
     private void customGame() throws FileNotFoundException {
+        if(!isRunning)return;
         battle.setPrize(prizeOfCustomGame);
         System.out.println("Game Modes :");
         for (int i = 0; i < modes.length; i++)
@@ -165,6 +180,7 @@ public class BattleMenu extends Menu {
                         numberOfFlags = Integer.parseInt(input[4]);
                     } else {
                         System.out.println("Enter Valid Command");
+                        customGame();
                         return;
                     }
                 }
@@ -203,6 +219,7 @@ public class BattleMenu extends Menu {
 
 
     public void story() throws FileNotFoundException {
+        if(!isRunning)return;
         System.out.println("Levels :");
         for (int i = 0; i < levels.length; i++)
             System.out.println(levels[i] + ", Prize : " + prizeOfLevels[i]);
@@ -212,20 +229,22 @@ public class BattleMenu extends Menu {
         if (inputLine.matches("[\\d]+")) {
             for (int i = 0; i < levels.length; i++)
                 if (Integer.parseInt(inputLine) == i + 1) {
-                    String address = "Data/Battle/Story/Story";
-                    Deck deck = (Deck) Application.readJSON(Deck.class, address + i + ".json");
-                    ((AI) battle.getPlayerOff()).selectMainDeck(deck);
+                    selectAIMainDeck(i);
                     battle.setMode(modes[i]);
                     battle.setPrize(prizeOfLevels[i]);
-                    if(i == 2)
+                    if (i == 2)
                         battle.setNumberOfFlags(5);
                     return;
                 }
         }
-        if(inputLine.equals("exit"))
-            return;
         System.out.println("Enter valid level");
         story();
+    }
+
+    private void selectAIMainDeck(int index) throws FileNotFoundException {
+        String address = "Data/Battle/Story/Story";
+        Deck deck = (Deck) Application.readJSON(Deck.class, address + index + ".json");
+        ((AI) battle.getPlayerOff()).selectMainDeck(deck);
     }
 
     public void handleDeck(Account account) throws FileNotFoundException {
@@ -236,7 +255,7 @@ public class BattleMenu extends Menu {
             account.getCollection().addCollectionItemToCollection(spell.getID());
             account.getCollection().addCollectionItemToDeck(spell.getID(), account.getUsername());
         }
-        for(int i = 0; i < 3; i ++){
+        for (int i = 0; i < 3; i++) {
             Item item = Item.createItem(DeckGenerator.itemNames[0], account.getUsername());
             account.getCollection().addCollectionItemToCollection(item.getID());
             account.getCollection().addCollectionItemToDeck(item.getID(), account.getUsername());
