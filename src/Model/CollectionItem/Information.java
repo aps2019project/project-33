@@ -16,102 +16,6 @@ public class Information {
     private boolean isKingsGuard;
     private boolean isImpactNeighbors;
 
-    public boolean isEnemyImpact() {
-        return isEnemyImpact;
-    }
-
-    public void setEnemyImpact(boolean enemyImpact) {
-        isEnemyImpact = enemyImpact;
-    }
-
-    public boolean isMultipleImpact() {
-        return isMultipleImpact;
-    }
-
-    public void setMultipleImpact(boolean multilpleImpact) {
-        isMultipleImpact = multilpleImpact;
-    }
-
-    public boolean isMinionImpact() {
-        return isMinionImpact;
-    }
-
-    public void setMinionImpact(boolean minionImpact) {
-        isMinionImpact = minionImpact;
-    }
-
-    public boolean isHeroImpact() {
-        return isHeroImpact;
-    }
-
-    public void setHeroImpact(boolean heroImpact) {
-        isHeroImpact = heroImpact;
-    }
-
-    public boolean isCellImpact() {
-        return cellImpact;
-    }
-
-    public void setCellImpact(boolean cellImpact) {
-        this.cellImpact = cellImpact;
-    }
-
-    public boolean isKingsGuard() {
-        return isKingsGuard;
-    }
-
-    public void setKingsGuard(boolean kingsGuard) {
-        isKingsGuard = kingsGuard;
-    }
-
-    public boolean isUsImpact() {
-        return isUsImpact;
-    }
-
-    public void setUsImpact(boolean usImpact) {
-        isUsImpact = usImpact;
-    }
-
-    public boolean isSquareOfCellsImpact() {
-        return isSquareOfCellsImpact;
-    }
-
-    public void setSquareOfCellsImpact(boolean squareOfCellsImpact) {
-        isSquareOfCellsImpact = squareOfCellsImpact;
-    }
-
-    public int getLengthOfSquareOfCellsImpact() {
-        return lengthOfSquareOfCellsImpact;
-    }
-
-    public void setLengthOfSquareOfCellsImpact(int lengthOfSquareOfCellsImpact) {
-        this.lengthOfSquareOfCellsImpact = lengthOfSquareOfCellsImpact;
-    }
-
-    public boolean isImpactColumn() {
-        return isImpactColumn;
-    }
-
-    public void setImpactColumn(boolean impactColumn) {
-        isImpactColumn = impactColumn;
-    }
-
-    public boolean isImpactRow() {
-        return isImpactRow;
-    }
-
-    public void setImpactRow(boolean impactRow) {
-        isImpactRow = impactRow;
-    }
-
-    public boolean isImpactNeighbors() {
-        return isImpactNeighbors;
-    }
-
-    public void setImpactNeighbors(boolean impactNeighbors) {
-        isImpactNeighbors = impactNeighbors;
-    }
-
     //Attack section
 
     private boolean canIncreaseAP;
@@ -936,5 +840,101 @@ public class Information {
 
     public void setAntiPoison(boolean antiPoison) {
         this.antiPoison = antiPoison;
+    }
+
+    public boolean isEnemyImpact() {
+        return isEnemyImpact;
+    }
+
+    public void setEnemyImpact(boolean enemyImpact) {
+        isEnemyImpact = enemyImpact;
+    }
+
+    public boolean isMultipleImpact() {
+        return isMultipleImpact;
+    }
+
+    public void setMultipleImpact(boolean multilpleImpact) {
+        isMultipleImpact = multilpleImpact;
+    }
+
+    public boolean isMinionImpact() {
+        return isMinionImpact;
+    }
+
+    public void setMinionImpact(boolean minionImpact) {
+        isMinionImpact = minionImpact;
+    }
+
+    public boolean isHeroImpact() {
+        return isHeroImpact;
+    }
+
+    public void setHeroImpact(boolean heroImpact) {
+        isHeroImpact = heroImpact;
+    }
+
+    public boolean isCellImpact() {
+        return cellImpact;
+    }
+
+    public void setCellImpact(boolean cellImpact) {
+        this.cellImpact = cellImpact;
+    }
+
+    public boolean isKingsGuard() {
+        return isKingsGuard;
+    }
+
+    public void setKingsGuard(boolean kingsGuard) {
+        isKingsGuard = kingsGuard;
+    }
+
+    public boolean isUsImpact() {
+        return isUsImpact;
+    }
+
+    public void setUsImpact(boolean usImpact) {
+        isUsImpact = usImpact;
+    }
+
+    public boolean isSquareOfCellsImpact() {
+        return isSquareOfCellsImpact;
+    }
+
+    public void setSquareOfCellsImpact(boolean squareOfCellsImpact) {
+        isSquareOfCellsImpact = squareOfCellsImpact;
+    }
+
+    public int getLengthOfSquareOfCellsImpact() {
+        return lengthOfSquareOfCellsImpact;
+    }
+
+    public void setLengthOfSquareOfCellsImpact(int lengthOfSquareOfCellsImpact) {
+        this.lengthOfSquareOfCellsImpact = lengthOfSquareOfCellsImpact;
+    }
+
+    public boolean isImpactColumn() {
+        return isImpactColumn;
+    }
+
+    public void setImpactColumn(boolean impactColumn) {
+        isImpactColumn = impactColumn;
+    }
+
+    public boolean isImpactRow() {
+        return isImpactRow;
+    }
+
+    public void setImpactRow(boolean impactRow) {
+        isImpactRow = impactRow;
+    }
+
+    public boolean isImpactNeighbors() {
+        return isImpactNeighbors;
+    }
+
+    public void setImpactNeighbors(boolean impactNeighbors) {
+        isImpactNeighbors = impactNeighbors;
     }
 }

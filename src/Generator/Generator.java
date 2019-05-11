@@ -2,6 +2,7 @@ package Generator;
 
 import Controller.Application;
 import Model.CollectionItem.Hero;
+import Model.CollectionItem.Information;
 import Model.CollectionItem.Minion;
 import Model.CollectionItem.Spell;
 
@@ -107,15 +108,35 @@ public class Generator {
         Generator.createArzhangeDiv();
     }
 
+    public static void setAttackArea(Spell spell, boolean isUs, boolean isEnemy, boolean isHero, boolean isMinion,
+                                     boolean isCell, boolean isSquare, int length, boolean isNeighbor, boolean isRow, boolean isColumn,
+                                     boolean isKingsGuard){
+        Information information = spell.getInformation();
+        information.setUsImpact(isUs);
+        information.setEnemyImpact(isEnemy);
+        information.setHeroImpact(isHero);
+        information.setMinionImpact(isMinion);
+        information.setCellImpact(isCell);
+        information.setSquareOfCellsImpact(isSquare);
+        information.setLengthOfSquareOfCellsImpact(length);
+        information.setImpactNeighbors(isNeighbor);
+        information.setImpactRow(isRow);
+        information.setImpactColumn(isColumn);
+        information.setKingsGuard(isKingsGuard);
+    }
+
     public static void TotalDisarm() throws IOException {
         Spell spell = new Spell();
         spell.setPrice(1000);
         spell.setMp(0);
         spell.setName("TotalDisarm");
-        spell.getInformation().setEnemyImpact(true);
+
+        setAttackArea(spell, false, true, true, true, false, false, 0, false,
+                false, false, false);
+
         spell.getInformation().setCanDisarmBuffAdd(true);
         spell.getInformation().setDisarmBuffPermanent(true);
-        spell.getInformation().setImpactAllArea(true);
+
         Application.writeJSON(spell, "Data/CollectionItem/Spell/TotalDisarm.json");
     }
 
@@ -124,13 +145,14 @@ public class Generator {
         spell.setPrice(1500);
         spell.setMp(2);
         spell.setName("AreaDispel");
-        spell.getInformation().setCellImpact(true);
-        spell.getInformation().setCanRemoveGoodBuffsOfEnemy(true);
-        spell.getInformation().setSquareOfCellsImpact(true);
-        spell.getInformation().setLengthOfSquareOfCellsImpact(2);
-        spell.getInformation().setCanRemoveBadBuffsOfOurselves(true);
+
+        setAttackArea(spell, true, true, true, true, true, true, 2, false,
+                false, false, false);
+
         spell.getInformation().setMultipleImpact(true);
-        spell.getInformation().setImpactAllArea(true);
+
+        spell.getInformation().setCanRemoveGoodBuffsOfEnemy(true);
+        spell.getInformation().setCanRemoveBadBuffsOfOurselves(true);
         Application.writeJSON(spell, "Data/CollectionItem/Spell/AreaDispel.json");
     }
 
@@ -139,11 +161,13 @@ public class Generator {
         spell.setPrice(250);
         spell.setMp(1);
         spell.setName("Empower");
-        spell.getInformation().setUsImpact(true);
+
+        setAttackArea(spell, true, false, true, true, false, false, 0, false,
+                false, false, false);
+
         spell.getInformation().setCanIncreaseAP(true);
         spell.getInformation().setAmountOfIncreaseAP(2);
         spell.getInformation().setIncreaseAPPermanent(true);
-        spell.getInformation().setImpactAllArea(true);
         Application.writeJSON(spell, "Data/CollectionItem/Spell/Empower.json");
     }
 
@@ -152,10 +176,12 @@ public class Generator {
         spell.setPrice(400);
         spell.setMp(1);
         spell.setName("Fireball");
-        spell.getInformation().setEnemyImpact(true);
+
+        setAttackArea(spell, false, true, true, true, false, false, 0, false,
+                false, false, false);
+
         spell.getInformation().setCanDamageToEnemy(true);
         spell.getInformation().setDamageToEnemy(4);
-        spell.getInformation().setImpactAllArea(true);
         Application.writeJSON(spell, "Data/CollectionItem/Spell/Fireball.json");
     }
 
@@ -164,12 +190,13 @@ public class Generator {
         spell.setPrice(450);
         spell.setMp(2);
         spell.setName("GodStrength");
-        spell.getInformation().setUsImpact(true);
-        spell.getInformation().setHeroImpact(true);
+
+        setAttackArea(spell, true, false, true, false, false, false, 0, false,
+                false, false, false);
+
         spell.getInformation().setCanIncreaseAP(true);
         spell.getInformation().setIncreaseAPPermanent(true);
         spell.getInformation().setAmountOfIncreaseAP(4);
-        spell.getInformation().setImpactAllArea(true);
         Application.writeJSON(spell, "Data/CollectionItem/Spell/GodStrength.json");
     }
 
@@ -187,9 +214,10 @@ public class Generator {
         spell.setPrice(1250);
         spell.setMp(2);
         spell.setName("LightingBolt");
-        spell.getInformation().setEnemyImpact(true);
-        spell.getInformation().setHeroImpact(true);
-        spell.getInformation().setImpactAllArea(true);
+
+        setAttackArea(spell, false, true, true, false, false, false, 0, false,
+                false, false, false);
+
         spell.getInformation().setCanDamageToEnemy(true);
         spell.getInformation().setDamageToEnemy(8);
         Application.writeJSON(spell, "Data/CollectionItem/Spell/LightingBolt.json");
@@ -200,9 +228,10 @@ public class Generator {
         spell.setPrice(900);
         spell.setMp(5);
         spell.setName("PoisonLake");
-        spell.getInformation().setCellImpact(true);
-        spell.getInformation().setLengthOfSquareOfCellsImpact(3);
-        spell.getInformation().setSquareOfCellsImpact(true);
+
+        setAttackArea(spell, true, true, true, true, true, true, 3, false,
+                false, false, false);
+
         spell.getInformation().setCanAddPoisonBuffToCell(true);
         spell.getInformation().setMultipleImpact(true);
         spell.getInformation().setTimeOfAddPoisonBuffToCell(1);
@@ -214,8 +243,10 @@ public class Generator {
         spell.setPrice(650);
         spell.setMp(0);
         spell.setName("Madness");
-        spell.getInformation().setUsImpact(true);
-        spell.getInformation().setImpactAllArea(true);
+
+        setAttackArea(spell, true, false, true, true, false, false, 0, false,
+                false, false, false);
+
         spell.getInformation().setCanDisarmBuffAdd(true);
         spell.getInformation().setTimeOfDisarmBuff(3);
         spell.getInformation().setCanIncreaseAP(true);
@@ -229,9 +260,11 @@ public class Generator {
         spell.setPrice(2000);
         spell.setMp(9);
         spell.setName("AllDisarm");
-        spell.getInformation().setEnemyImpact(true);
+
+        setAttackArea(spell, false, true, true, true, false, false, 0, false,
+                false, false, false);
+
         spell.getInformation().setMultipleImpact(true);
-        spell.getInformation().setImpactAllArea(true);
         spell.getInformation().setTimeOfDisarmBuff(1);
         spell.getInformation().setCanDisarmBuffAdd(true);
         Application.writeJSON(spell, "Data/CollectionItem/Spell/AllDisarm.json");
@@ -242,9 +275,11 @@ public class Generator {
         spell.setPrice(1500);
         spell.setMp(8);
         spell.setName("AllPoison");
-        spell.getInformation().setEnemyImpact(true);
+
+        setAttackArea(spell, false, true, true, true, false, false, 0, false,
+                false, false, false);
+
         spell.getInformation().setMultipleImpact(true);
-        spell.getInformation().setImpactAllArea(true);
         spell.getInformation().setCanPoisonBuffAdd(true);
         spell.getInformation().setTimeOfPoisonBuff(4);
         Application.writeJSON(spell, "Data/CollectionItem/Spell/AllPoison.json");
@@ -255,9 +290,10 @@ public class Generator {
         spell.setPrice(2100);
         spell.setMp(0);
         spell.setName("Dispel");
-        spell.getInformation().setUsImpact(true);
-        spell.getInformation().setEnemyImpact(true);
-        spell.getInformation().setImpactAllArea(true);
+
+        setAttackArea(spell, true, true, true, true, false, false, 0, false,
+                false, false, false);
+
         spell.getInformation().setCanRemoveGoodBuffsOfEnemy(true);
         spell.getInformation().setCanRemoveBadBuffsOfOurselves(true);
         Application.writeJSON(spell, "Data/CollectionItem/Spell/Dispel.json");
@@ -268,8 +304,10 @@ public class Generator {
         spell.setPrice(2250);
         spell.setMp(0);
         spell.setName("HealthWithProfit");
-        spell.getInformation().setUsImpact(true);
-        spell.getInformation().setImpactAllArea(true);
+
+        setAttackArea(spell, true, false, true, true, false, false, 0, false,
+                false, false, false);
+
         spell.getInformation().setCanWeaknessBuffAdd(true);
         spell.getInformation().setChangeHPByWeakness(6);
         spell.getInformation().setWeaknessBuffPermanent(true);
@@ -284,8 +322,10 @@ public class Generator {
         spell.setPrice(2500);
         spell.setMp(2);
         spell.setName("GhazaBokhorJoonBegiri");
-        spell.getInformation().setUsImpact(true);
-        spell.getInformation().setImpactAllArea(true);
+
+        setAttackArea(spell, true, false, true, true, false, false, 0, false,
+                false, false, false);
+
         spell.getInformation().setPowerBuffPermanent(true);
         spell.getInformation().setGhazaPowerBuff(true);
         spell.getInformation().setCanPowerBuffAdd(true);
@@ -297,9 +337,11 @@ public class Generator {
         spell.setPrice(2000);
         spell.setMp(4);
         spell.setName("AllPower");
-        spell.getInformation().setUsImpact(true);
+
+        setAttackArea(spell, true, false, true, true, false, false, 0, false,
+                false, false, false);
+
         spell.getInformation().setMultipleImpact(true);
-        spell.getInformation().setImpactAllArea(true);
         spell.getInformation().setCanPowerBuffAdd(true);
         spell.getInformation().setPowerBuffPermanent(true);
         spell.getInformation().setAmountOfIncreaseAP(2);
@@ -311,9 +353,11 @@ public class Generator {
         spell.setPrice(1500);
         spell.setMp(4);
         spell.setName("AllAttack");
-        spell.getInformation().setEnemyImpact(true);
+
+        setAttackArea(spell, false, true, true, true, true, false, 0, false,
+                false, true, false);
+
         spell.getInformation().setMultipleImpact(true);
-        spell.getInformation().setImpactColumn(true);
         spell.getInformation().setDamageToEnemy(6);
         spell.getInformation().setCanDamageToEnemy(true);
         Application.writeJSON(spell, "Data/CollectionItem/Spell/AllAttack.json");
@@ -324,9 +368,10 @@ public class Generator {
         spell.setPrice(1000);
         spell.setMp(1);
         spell.setName("Weakening");
-        spell.getInformation().setImpactAllArea(true);
-        spell.getInformation().setEnemyImpact(true);
-        spell.getInformation().setMinionImpact(true);
+
+        setAttackArea(spell, false, true, false, true, false, false, 0, false,
+                false, false, false);
+
         spell.getInformation().setCanWeaknessBuffAdd(true);
         spell.getInformation().setWeaknessBuffPermanent(true);
         spell.getInformation().setChangePowerByWeakness(4);
@@ -338,9 +383,10 @@ public class Generator {
         spell.setPrice(1600);
         spell.setMp(3);
         spell.setName("Sacrifice");
-        spell.getInformation().setImpactAllArea(true);
-        spell.getInformation().setUsImpact(true);
-        spell.getInformation().setMinionImpact(true);
+
+        setAttackArea(spell, true, false, false, true, false, false, 0, false,
+                false, false, false);
+
         spell.getInformation().setCanKillOurMinionAndHealHero(true);
         Application.writeJSON(spell, "Data/CollectionItem/Spell/Sacrifice.json");
     }
@@ -350,9 +396,10 @@ public class Generator {
         spell.setPrice(1750);
         spell.setMp(3);
         spell.setName("KingsGuard");
-        spell.getInformation().setEnemyImpact(true);
-        spell.getInformation().setMinionImpact(true);
-        spell.getInformation().setImpactNeighbors(true);
+
+        setAttackArea(spell, false, true, false, true, false, false, 0, false,
+                false, false, true);
+
         spell.getInformation().setCanKillMinionOfEnemy(true);
         Application.writeJSON(spell, "Data/CollectionItem/Spell/KingsGuard.json");
     }
@@ -362,8 +409,10 @@ public class Generator {
         spell.setPrice(1200);
         spell.setMp(1);
         spell.setName("Shock");
-        spell.getInformation().setEnemyImpact(true);
-        spell.getInformation().setImpactAllArea(true);
+
+        setAttackArea(spell, false, true, true, true, false, false, 0, false,
+                false, false, false);
+
         spell.getInformation().setCanStunBuffAdd(true);
         spell.getInformation().setTimeOfStunBuff(2);
         Application.writeJSON(spell, "Data/CollectionItem/Spell/Shock.json");

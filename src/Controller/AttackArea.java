@@ -6,97 +6,87 @@ import Model.Enviroment.Map1;
 import Model.Player;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class AttackArea {
-
     //Inja moshakhas mikone ke che khoone hayi ro az cell ha migire, mostaghel az in ke che type i ro lazem dare
 
-
     public static ArrayList<Cell> getAllArea(Battle battle) {
-        ArrayList<Cell> allCells = new ArrayList<>();
         Map1 map = battle.getMap();
-        for (int i = 0; i < map.getHeight(); i++)
-            for (int j = 0; j < map.getWidth(); j++) {
-                Cell cell = map.getCellByCoordination(i, j);
-                allCells.add(cell);
-            }
-        return allCells;
+        return map.getCells();
     }
 
-    public static ArrayList<Cell> getCellsInArea(Cell cell, int maxDistance, Battle battle) {
+    public static ArrayList<Cell> getCellsInArea(Cell sourceCell, int maxDistance, Battle battle) {
         ArrayList<Cell> cells = new ArrayList<>();
         Map1 map = battle.getMap();
-        for (int i = 0; i < map.getHeight(); i++)
-            for (int j = 0; j < map.getWidth(); j++) {
-                if (AttackArea.distance(cell.getX(), cell.getY(), i, j) > maxDistance) continue;
-                Cell cell1 = map.getCellByCoordination(i, j);
-                cells.add(cell1);
-            }
-        return cells;
+        for (Cell cell : map.getCells()) {
+            if (AttackArea.distance(cell, sourceCell) > maxDistance)
+                continue;
+            cells.add(cell);
+        }
+        return unique(cells);
     }
 
-    public static ArrayList<Cell> getNeighbors(Cell cell, Battle battle) {
+    public static ArrayList<Cell> getNeighbors(Cell sourceCell, Battle battle) {
         ArrayList<Cell> neighbors = new ArrayList<>();
         Map1 map = battle.getMap();
-        for (int i = 0; i < map.getHeight(); i++)
-            for (int j = 0; j < map.getWidth(); j++) {
-                if (!isNeighbor(cell.getX(), cell.getY(), i, j))
-                    continue;
-                if(i == cell.getX() && j == cell.getY())
-                    continue;
-                Cell cell1 = map.getCellByCoordination(i, j);
-                neighbors.add(cell1);
-            }
-        return neighbors;
+        for (Cell cell : map.getCells()) {
+            if (!isNeighbor(cell, sourceCell))
+                continue;
+            neighbors.add(cell);
+        }
+        return unique(neighbors);
     }
 
     // in ja baraye spell e o hamaro satisfy mikone
-    public static ArrayList<Cell> getCellsOfColumn(Cell cell, Battle battle) {
+    public static ArrayList<Cell> getCellsOfColumn(Cell sourceCell, Battle battle) {
         ArrayList<Cell> cellsOfColumn = new ArrayList<>();
         Map1 map = battle.getMap();
-        for (int i = 0; i < map.getHeight(); i++)
-            for (int j = 0; j < map.getWidth(); j++) {
-                Cell cell1 = map.getCellByCoordination(i, j);
-                if (j == cell.getY())
-                    cellsOfColumn.add(cell1);
-            }
-        return cellsOfColumn;
+        for (Cell cell : map.getCells()) {
+            if (cell.getY() != sourceCell.getY())
+                continue;
+            cellsOfColumn.add(cell);
+        }
+        return unique(cellsOfColumn);
     }
 
-    public static ArrayList<Cell> getCellsOfRow(Cell cell, Battle battle) {
+    public static ArrayList<Cell> getCellsOfRow(Cell sourceCell, Battle battle) {
         ArrayList<Cell> cellsOfRow = new ArrayList<>();
         Map1 map = battle.getMap();
-        for (int i = 0; i < map.getHeight(); i++)
-            for (int j = 0; j < map.getWidth(); j++) {
-                Cell cell1 = map.getCellByCoordination(i, j);
-                if (i == cell.getX())
-                    cellsOfRow.add(cell1);
-            }
-        return cellsOfRow;
+        for (Cell cell : map.getCells()) {
+            if (cell.getX() != sourceCell.getX())
+                continue;
+            cellsOfRow.add(cell);
+        }
+        return unique(cellsOfRow);
     }
 
-    public static ArrayList<Cell> getSquareOfCells(Cell cell, Battle battle, int length) {
+    public static ArrayList<Cell> getSquareOfCells(Cell sourceCell, Battle battle, int length) {
         ArrayList<Cell> squareOfCells = new ArrayList<>();
-        int x = cell.getX(), y = cell.getY();
+        int x = sourceCell.getX(), y = sourceCell.getY();
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < length; j++) {
                 int newX = x + i;
                 int newY = y + j;
-                Cell cell1 = battle.getMap().getCellByCoordination(newX, newY);
-                if (cell1 != null) {
-                    squareOfCells.add(cell1);
-                }
+                Cell cell = battle.getMap().getCellByCoordination(newX, newY);
+                if (cell == null)
+                    continue;
+                squareOfCells.add(cell);
             }
         }
-        return squareOfCells;
+        return unique(squareOfCells);
     }
 
-    private static int distance(int i, int j, int x, int y) {
-        return Math.abs(i - x) + Math.abs(j - y);
+    private static int distance(Cell cell1, Cell cell2) {
+        int x1 = cell1.getX(), y1 = cell1.getY();
+        int x2 = cell2.getX(), y2 = cell2.getY();
+        return Math.abs(x1 - x2) + Math.abs(y1 - y2);
     }
 
-    private static boolean isNeighbor(int x1, int y1, int x2, int y2) {
+    private static boolean isNeighbor(Cell cell1, Cell cell2) {
+        int x1 = cell1.getX(), y1 = cell1.getY();
+        int x2 = cell2.getX(), y2 = cell2.getY();
+        if (distance(cell1, cell2) == 0)
+            return false;
         if (Math.abs(x1 - x2) > 1) return false;
         if (Math.abs(y1 - y2) > 1) return false;
         return true;
@@ -117,14 +107,14 @@ public class AttackArea {
     }
 
     public static ArrayList<Cell> getCellOfLivingCard(Player player, LivingCard livingCard) {
-        ArrayList<Cell> cellOfHero = new ArrayList<>();
+        ArrayList<Cell> cellsOfHero = new ArrayList<>();
         for (CollectionItem collectionItem : player.getAliveCards()) {
             if (collectionItem.getClass().equals(livingCard.getClass())) {
                 LivingCard livingCard1 = (LivingCard) collectionItem;
-                cellOfHero.add(livingCard1.getCell());
+                cellsOfHero.add(livingCard1.getCell());
             }
         }
-        return cellOfHero;
+        return unique(cellsOfHero);
     }
 
     // tamoom shod :D
@@ -132,95 +122,94 @@ public class AttackArea {
     //in ja 3 ta type e hamleye mohem ro joda gane zadim, har chand ahamiate ziadi nadaran
 
     public static ArrayList<Cell> findMeleeAttackArea(Battle battle, LivingCard attackingCard) {
-        return getNeighbors(attackingCard.getCell(), battle);
+        return unique(getNeighbors(attackingCard.getCell(), battle));
     }
 
     public static ArrayList<Cell> findHybridAttackArea(Battle battle, LivingCard attackingCard) {
-        return getCellsInArea(attackingCard.getCell(), attackingCard.getRangeOfAttack(), battle);
+        ArrayList<Cell> hybridCells = getCellsInArea(attackingCard.getCell(), attackingCard.getRangeOfAttack(), battle);
+        hybridCells.remove(attackingCard.getCell());
+        return unique(hybridCells);
     }
 
     public static ArrayList<Cell> findRangedAttackArea(Battle battle, LivingCard attackingCard) {
-        ArrayList<Cell>  impactedCells = new ArrayList<>();
+        ArrayList<Cell> impactedCells = new ArrayList<>();
         impactedCells.addAll(findHybridAttackArea(battle, attackingCard));
-        for(Cell cell : findMeleeAttackArea(battle, attackingCard))
+        for (Cell cell : findMeleeAttackArea(battle, attackingCard))
             impactedCells.remove(cell);
-        return impactedCells;
+        return unique(impactedCells);
     }
 
     //
 
-    public static ArrayList<Cell> getimpactCellsOfSpellOfHero(Hero hero, Battle battle){
+    public static ArrayList<Cell> getimpactCellsOfSpellOfHero(Hero hero, Battle battle) {
         ArrayList<Cell> impactedCells = new ArrayList<>();
         Information information = hero.getInformation();
 
-        if(information.isImpactItself())
+        if (information.isImpactItself())
             impactedCells.add(hero.getCell());
-        if(information.isImpactAllArea())
+        if (information.isImpactAllArea())
             impactedCells.addAll(getAllArea(battle));
-        if(information.isImpactRow())
+        if (information.isImpactRow())
             impactedCells.addAll(getCellsOfRow(hero.getCell(), battle));
 
         ArrayList<Cell> cellsOfLivingCards = new ArrayList<>();
 
-        if(information.isEnemyImpact())
+        if (information.isEnemyImpact())
             cellsOfLivingCards.addAll(getCells(information, battle.getPlayerOff()));
-        if(information.isUsImpact())
+        if (information.isUsImpact())
             cellsOfLivingCards.addAll(getCells(information, battle.getPlayerOn()));
 
-        return merge(impactedCells, cellsOfLivingCards);
+        return unique(merge(impactedCells, cellsOfLivingCards));
     }
 
     public static ArrayList<Cell> getImpactCellsOfAttack(LivingCard livingCard, Battle battle) {
         ArrayList<Cell> impactedCells = new ArrayList<>();
-        Information information = livingCard.getInformation();
-
-        if(livingCard.getCounterAttackType().equals("hybrid"))
+        if (livingCard.getCounterAttackType().equals("hybrid"))
             impactedCells.addAll(findHybridAttackArea(battle, livingCard));
-        if(livingCard.getCounterAttackType().equals("melee"))
+        if (livingCard.getCounterAttackType().equals("melee"))
             impactedCells.addAll(findMeleeAttackArea(battle, livingCard));
-        if(livingCard.getCounterAttackType().equals("ranged"))
+        if (livingCard.getCounterAttackType().equals("ranged"))
             impactedCells.addAll(findRangedAttackArea(battle, livingCard));
 
-        return impactedCells;
+        return unique(impactedCells);
     }
 
     public static ArrayList<Cell> getImpactCellsOfCounterAttack(LivingCard livingCard, Battle battle) {
-        return AttackArea.getImpactCellsOfAttack(livingCard, battle);
+        return unique(AttackArea.getImpactCellsOfAttack(livingCard, battle));
     }
 
 
     public static ArrayList<Cell> getImpactCellsOfSpecialPower(Minion minion, Battle battle) {
         Information information = minion.getInformation();
-        if(!information.isSpecialMinion()){
+        if (!information.isSpecialMinion()) {
             return getImpactCellsOfAttack((LivingCard) minion, battle);
         }
 
         ArrayList<Cell> impactedCells = new ArrayList<>();
 
-        if(information.isImpactNeighbors())
+        if (information.isImpactNeighbors())
             impactedCells.addAll(getNeighbors(minion.getCell(), battle));
-        if(information.isImpactArea())
+        if (information.isImpactArea())
             impactedCells.addAll(getCellsInArea(minion.getCell(), information.getDistanceOfImpactArea(), battle));
-        if(information.isImpactItself())
+        if (information.isImpactItself())
             impactedCells.add(minion.getCell());
-        if(information.isImpactAllArea())
+        if (information.isImpactAllArea())
             impactedCells.addAll(getAllArea(battle));
 
         ArrayList<Cell> cellsOfLivingCards = new ArrayList<>();
 
-        if(information.isEnemyImpact())
+        if (information.isEnemyImpact())
             cellsOfLivingCards.addAll(getCells(information, battle.getPlayerOff()));
-        if(information.isEnemyImpact())
+        if (information.isEnemyImpact())
             cellsOfLivingCards.addAll(getCells(information, battle.getPlayerOn()));
 
-        return merge(impactedCells, cellsOfLivingCards);
+        return unique(merge(impactedCells, cellsOfLivingCards));
     }
 
     public static ArrayList<Cell> getImpactCellsOfSpell(Spell spell, Cell cell, Battle battle) {
         ArrayList<Cell> impactedCellsOfLivingCards = new ArrayList<>();
 
         Information information = spell.getInformation();
-        //information.readInformation();
 
         if (information.isEnemyImpact())
             impactedCellsOfLivingCards.addAll(getCells(information, battle.getPlayerOff()));
@@ -233,44 +222,53 @@ public class AttackArea {
                 impactedCells.addAll(getSquareOfCells(cell, battle, information.getLengthOfSquareOfCellsImpact()));
             if (information.isImpactColumn())
                 impactedCells.addAll(getCellsOfColumn(cell, battle));
-            if(information.isImpactRow())
+            if (information.isImpactRow())
                 impactedCells.addAll(getCellsOfRow(cell, battle));
-            if(information.isImpactNeighbors())
+            if (information.isImpactNeighbors())
                 impactedCells.addAll(getNeighbors(cell, battle));
-            if(information.isKingsGuard()){
+            if (information.isKingsGuard()) {
                 impactedCells = getNeighbors(battle.getPlayerOn().getHeroPosition(), battle);
             }
             impactedCellsOfLivingCards = merge(impactedCells, impactedCellsOfLivingCards);
         }
+        return unique(impactedCellsOfLivingCards);
+    }
 
-        return impactedCellsOfLivingCards;
+    private static ArrayList<Cell> unique(ArrayList<Cell> listOfCells) {
+        ArrayList<Cell> uniquedList = new ArrayList<>();
+        for(Cell cell : listOfCells) {
+            if (uniquedList.contains(cell))
+                continue;
+            uniquedList.add(cell);
+        }
+        return uniquedList;
     }
 
     // tabe haye komaki
 
     public static ArrayList<Cell> merge(ArrayList<Cell> impactedCells, ArrayList<Cell> impactedCellsOfLivingCards) {
-       ArrayList<Cell> result = new ArrayList<>();
-        for(Cell cell : impactedCells)
-            if(impactedCellsOfLivingCards.contains(cell))
+        ArrayList<Cell> result = new ArrayList<>();
+        for (Cell cell : impactedCells)
+            if (impactedCellsOfLivingCards.contains(cell))
                 result.add(cell);
         return result;
     }
 
-    public static ArrayList<Cell> getImpactCellsOfItem(Item item, Battle battle){
+    public static ArrayList<Cell> getImpactCellsOfItem(Item item, Battle battle) {
         ArrayList<Cell> impactCells = new ArrayList<>(), result = new ArrayList<>();
         Information information = item.getInformation();
 
-        if(information.isEnemyImpact())
+        if (information.isEnemyImpact())
             impactCells.addAll(getCells(information, battle.getPlayerOff()));
-        if(information.isUsImpact())
+        if (information.isUsImpact())
             impactCells.addAll(getCells(information, battle.getPlayerOn()));
-        for(Cell cell : impactCells){
+        for (Cell cell : impactCells) {
             LivingCard livingCard = cell.getLivingCard();
-            if(information.isForHybrid() && livingCard.getInformation().isCanDoHybridAttack())
+            if (information.isForHybrid() && livingCard.getInformation().isCanDoHybridAttack())
                 result.add(cell);
-            if(information.isForMelee() && livingCard.getInformation().isCanDoMeleeAttack())
+            if (information.isForMelee() && livingCard.getInformation().isCanDoMeleeAttack())
                 result.add(cell);
-            if(information.isForRange() && livingCard.getInformation().isCanDoRangedAttack())
+            if (information.isForRange() && livingCard.getInformation().isCanDoRangedAttack())
                 result.add(cell);
         }
         return result;

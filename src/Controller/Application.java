@@ -14,11 +14,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Application {
-
     private ArrayList<Account> accounts;
     private Collection shop = new Collection();
     private Account loggedInAccount;
-
 
     public void runApplication() throws IOException {
         loadData();
@@ -40,12 +38,6 @@ public class Application {
         for (Object object : objects)
             Account.getAccounts().add((Account) object);
 
-        //Read Items
-        objects = readFromFile("Data/Memory/Items", "Item");
-        for (Object object : objects)
-            CollectionItem.getAllItems().add((Item) object);
-
-
         //Read Spells
         objects = readFromFile("Data/Memory/Spells", "Spell");
         for (Object object : objects)
@@ -56,23 +48,15 @@ public class Application {
         for (Object object : objects)
             CollectionItem.getAllLivingCards().add((LivingCard) object);
 
-        //Read Spells
-        objects = readFromFile("Data/Memory/Spells", "Spell");
-        for (Object object : objects)
-            CollectionItem.getAllSpells().add((Spell) object);
-
         //Read Items
         objects = readFromFile("Data/Memory/Items", "Item");
         for (Object object : objects)
             CollectionItem.getAllItems().add((Item) object);
 
-
         //Read Shop
         File file = new File("Data/Memory/Shop");
         if(Objects.requireNonNull(file.listFiles()).length > 0)
             Main.application.shop = (Collection) readJSON(Collection.class, "Data/Memory/Shop/Shop.json");
-
-        //Read CollectionItem
 
     }
 
@@ -105,20 +89,7 @@ public class Application {
         writer.close();
     }
 
-    public void addAccount(Account account) {
-        this.accounts.add(account);
-    }
-
     // Here is Setters && Getters
-
-    public ArrayList<Account> getAccounts() {
-        return accounts;
-    }
-
-    public void setAccounts(ArrayList<Account> accounts) {
-        this.accounts = accounts;
-    }
-
 
     public Account getLoggedInAccount() {
         return loggedInAccount;
@@ -132,7 +103,4 @@ public class Application {
         return shop;
     }
 
-    public void setShop(Collection shop) {
-        this.shop = shop;
-    }
 }
