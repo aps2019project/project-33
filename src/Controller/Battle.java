@@ -180,12 +180,13 @@ public class Battle {
 
     public void findHero(Player player) {
         int index = 0;
-        for (CollectionItem collectionItem : player.getAccount().getCollection().getCards()) {
+        for (CollectionItem collectionItem : player.getAccount().getCollection().getMainDeck().getCards()) {
             if (collectionItem instanceof Hero) {
                 player.setHero((Hero) collectionItem);
-                swapHeroToEnd(player.getAccount().getCollection().getCards(), index);
+                swapHeroToEnd(player.getAccount().getCollection().getMainDeck().getCards(), index);
+                break;
             }
-            index++;
+            index ++;
         }
     }
 
@@ -194,14 +195,16 @@ public class Battle {
         this.relaxCards(this.playerOn);
         this.relaxCards(this.playerOff);
 
-        findHero(playerOff);
-        findHero(playerOn);
 
         this.setCards(playerOff);
         this.setCards(playerOn);
 
         this.createHand(playerOn);
         this.createHand(playerOff);
+
+        findHero(playerOff);
+        findHero(playerOn);
+
         this.putHeroes();
 
         playerOn.getMana().setMaximumMana(2);
@@ -217,7 +220,6 @@ public class Battle {
         canLivingCards(playerOn);
         canLivingCards(playerOff);
 
-        //TODO
     }
 
     private void setCards(Player player) {
@@ -249,6 +251,7 @@ public class Battle {
         if (this.mode.equals(modes[2])) {
             //hamin shekli bayad bashe ? id e sarbaz bayad bede ya chi ?
             for (Flag flag : this.getFlags()) {
+                System.out.println(flag.getPositionColumn() + " " + flag.getPositionRow());
                 if (flag.getFlagOwner() != null) {
                     System.out.println("card id : " + flag.getFlagLivingCard().getID() + " owner player : " +
                             flag.getFlagOwner().getAccount().getUsername());
@@ -347,6 +350,7 @@ public class Battle {
                 enemyMinions.add((Minion) livingCard);
         }
         Random random = new Random();
+        if (enemyMinions.size() == 0) return null;
         int randomIndex = random.nextInt(enemyMinions.size());
         Minion randomMinion = enemyMinions.get(randomIndex);
         return randomMinion;
@@ -383,8 +387,10 @@ public class Battle {
 
         if (minion.getName().equals("Bahman")) {
             Minion randomMinion = getRandomEnemyMinion();
-            randomMinion.setHP(randomMinion.getHP() - 16);
-            Impact.checkAlive(this, (LivingCard) randomMinion);
+            if (randomMinion != null) {
+                randomMinion.setHP(randomMinion.getHP() - 16);
+                Impact.checkAlive(this, (LivingCard) randomMinion);
+            }
         }
         if (minion.getName().equals("FoladZere")) {
             Minion randomeMinion = getRandomEnemyMinion();
@@ -466,15 +472,21 @@ public class Battle {
                         ((LivingCard) insertingCollectionItem));
             }
         } else {
+            playerOn.getHand().removeCard(cardID);
+            playerOn.getHand().addNextCard(playerOn.getAccount().getCollection().getMainDeck());
             if (insertingCollectionItem instanceof Spell) {
-                playerOn.getHand().removeCard(cardID);
-                playerOn.getHand().addNextCard(playerOn.getAccount().getCollection().getMainDeck());
                 Spell spell = (Spell) insertingCollectionItem;
                 spell.impactSpell(cell, this);
             }
+            if (insertingCollectionItem instanceof Item){
+                Impact.impactItem((Item)insertingCollectionItem, cell, this);
+                return;
+            }
         }
         handleFlags();
+        playerOn.getMana().decreaseMana(((Card) insertingCollectionItem).getMP());
     }
+
 
     public void moveCardTo(int x, int y) {
         if (selectedCard == null) {
@@ -687,6 +699,7 @@ public class Battle {
         Impact.impactSpellOfHero(this, playerOn.getHero(), cell);
         hero.setCoolDown(hero.getMaxCoolDown());
         checkTurn();
+        playerOn.getMana().decreaseMana(hero.getMP());
     }
 
     //TODO
@@ -827,7 +840,7 @@ public class Battle {
             }
         }
         System.out.println("you can attack to these cards:");
-        for(LivingCard livingCard : playerOff.getAliveCards())
+        for (LivingCard livingCard : playerOff.getAliveCards())
             System.out.println("name: " + livingCard.getName() + " id: " + livingCard.getID() +
                     this.coordinationString(livingCard));
         if (playerOn.getMana().getCurrentMana() >= playerOn.getHero().getMP()) {
@@ -847,6 +860,7 @@ public class Battle {
 
     public void handleFlags() {
         for (Flag flag : flags) {
+            if (flag.getFlagLivingCard() == null) continue;
             if (flag.getFlagLivingCard().getHP() <= 0) {
                 flag.setFlagOwner(null);
                 flag.setFlagLivingCard(null);
@@ -904,6 +918,7 @@ public class Battle {
         inputCommandLine();
     }
 
+
     public void forfeitMatch() {
         this.setWinnerPlayer(playerOff);
         this.setLoserPlayer(playerOn);
@@ -911,8 +926,12 @@ public class Battle {
     }
 
     private void inputCommandLine() {
+
         System.out.println("Here is Battle");
         System.out.println("For help, enter : show menu");
+
+        System.out.println(playerOff.getAccount().getUsername() + " " + playerOff.getHero().getHP());
+        System.out.println(playerOn.getAccount().getUsername() + " " + playerOn.getHero().getHP());
 
         String inputLine = readInput();
         inputLine = inputLine.trim();
@@ -920,8 +939,20 @@ public class Battle {
         inputLine = inputLine.toLowerCase();
         String[] input = inputLineOriginal.split("[ ]+");
 
-        if (inputLine.equals("Forfeit match")) {
+        for (int i = 0; i < map.getHeight(); i++) {
+            for (int j = 0; j < map.getWidth(); j++) {
+                Cell cell = map.getCellByCoordination(i, j);
+                if (cell.getLivingCard() == null)
+                    System.out.print(".");
+                if (cell.getLivingCard() instanceof Minion) System.out.print("M");
+                if (cell.getLivingCard() instanceof Hero) System.out.print("L");
+            }
+            System.out.print("\n");
+        }
+
+        if (inputLine.equals("forfeit match")) {
             forfeitMatch();
+            return;
         }
         if (inputLine.equals("game info"))
             showGameInfo();
@@ -940,7 +971,7 @@ public class Battle {
             moveCardTo(Integer.parseInt(input[2]), Integer.parseInt(input[3]));
         } else if (inputLine.matches("attack .*"))
             attackToOpponentCard(input[1]);
-        else if (inputLine.matches("attack combo [^s]+( [^s]+)+"))
+        else if (inputLine.matches("attack combo [^\\s]+( [^\\s]+)+"))
             comboAttackToOpponentCard(input);
         else if (inputLine.matches("use special power \\([\\d]+, [\\d]+\\)")) {
             input = inputLine.split("[ \\(\\),]+");

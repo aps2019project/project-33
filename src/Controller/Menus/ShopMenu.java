@@ -18,8 +18,8 @@ public class ShopMenu extends Menu {
 
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
-   //     inputLine = inputLine.toLowerCase();
         String[] separatedInput = inputLine.split("[ ]+");
+        inputLine = inputLine.toLowerCase();
 
         Collection collection = Main.application.getLoggedInAccount().getCollection();
 

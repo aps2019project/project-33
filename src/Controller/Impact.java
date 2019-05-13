@@ -11,7 +11,7 @@ import Model.Player;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Impact {
+public class    Impact {
 
     public static void addWeaknessToCard(int remainTime, boolean isPermanent, boolean isPassive, int changeHP, int changePower,
                                          LivingCard livingCard) {
@@ -240,6 +240,7 @@ public class Impact {
             }
             battle.removeAliveCard(checkedLivingCard);
             battle.handleFlags();
+            if(battle.getSelectedCard() == null) return false;
             if (battle.getSelectedCard().getID().equals(checkedLivingCard.getID()))
                 battle.removeSelectedCard();
             return false;
@@ -304,19 +305,20 @@ public class Impact {
             return;
         }
 
+        System.out.println(attacker.getID());
+
         //changeHP e esme ap ?
         //too getter ba taghirat jam miazanim
 
         if(attacker instanceof Minion){
             specialAttackOfMinion(battle, (Minion)attacker, defender);
-            return;
         }
 
         damageToEnemy(battle, battle.getPlayerOn(), attacker, defender, attacker.getDecreaseHPByAttack());
         attacker.setCanAttack(false);
         if (checkAlive(battle, defender))
             Impact.counterAttack(battle, defender, attacker);
-
+        System.out.println("YESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSs");
     }
 
     // mahdude hamle o ina check she

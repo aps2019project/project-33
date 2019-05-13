@@ -41,6 +41,9 @@ public class AttackArea {
         Map1 map = battle.getMap();
         for (int i = 0; i < map.getHeight(); i++)
             for (int j = 0; j < map.getWidth(); j++) {
+                if(cell == null){
+                    System.out.println("PASHMAM");
+                }
                 if (!isNeighbor(cell.getX(), cell.getY(), i, j))
                     continue;
                 if(i == cell.getX() && j == cell.getY())
@@ -174,11 +177,11 @@ public class AttackArea {
         ArrayList<Cell> impactedCells = new ArrayList<>();
         Information information = livingCard.getInformation();
 
-        if(livingCard.getCounterAttackType().equals("hybrid"))
+        if(information.isCanDoHybridAttack() || (livingCard.getCounterAttackType() != null &&livingCard.getCounterAttackType().equals("hybrid")))
             impactedCells.addAll(findHybridAttackArea(battle, livingCard));
-        if(livingCard.getCounterAttackType().equals("melee"))
+        if(information.isCanDoMeleeAttack() || (livingCard.getCounterAttackType() != null && livingCard.getCounterAttackType().equals("melee")))
             impactedCells.addAll(findMeleeAttackArea(battle, livingCard));
-        if(livingCard.getCounterAttackType().equals("ranged"))
+        if(information.isCanDoRangedAttack() || (livingCard.getCounterAttackType() != null && livingCard.getCounterAttackType().equals("ranged")))
             impactedCells.addAll(findRangedAttackArea(battle, livingCard));
 
         return impactedCells;

@@ -37,7 +37,7 @@ public class AI extends Player {
 
     public void preProcess(Battle battle) {
         ArrayList<LivingCard> opponentCards = battle.getPlayerOff().getAliveCards();
-        ArrayList<Cell> cells = new ArrayList<Cell>();
+        ArrayList<Cell> cells = new ArrayList<>();
         for (int i = 0; i < battle.getMap().getHeight(); i++)
             for (int j = 0; j < battle.getMap().getWidth(); j++)
                 cells.add(battle.getMap().getCellByCoordination(i, j));
@@ -66,6 +66,7 @@ public class AI extends Player {
             orders.clear();
             return "End turn";
         }
+        while(orders.size() > 100) orders.remove(0);
         String result = orders.get(0);
         orders.remove(0);
         return result;

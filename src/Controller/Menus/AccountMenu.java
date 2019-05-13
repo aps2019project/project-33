@@ -18,8 +18,8 @@ public class AccountMenu extends Menu {
 
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
-        inputLine = inputLine.toLowerCase();
         String[] input = inputLine.split("[ ]+");
+        inputLine = inputLine.toLowerCase();
 
         if (inputLine.matches("create account .*")) {
             createAccount(input[2]);

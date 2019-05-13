@@ -25,6 +25,7 @@ public class BattleMenu extends Menu {
         inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
         input = inputLine.split("[ ]+");
+        inputLine =inputLine.toLowerCase();
     }
 
     @Override
@@ -47,7 +48,7 @@ public class BattleMenu extends Menu {
         System.out.println("For choosing, enter : [Type]");
         readInputs();
         for (int i = 0; i < types.length; i++) {
-            if (inputLine.equals(types[i])) {
+            if (inputLine.equals(types[i].toLowerCase())) {
                 battle.setType(types[i]);
                 return;
             }
@@ -95,7 +96,7 @@ public class BattleMenu extends Menu {
             System.out.println("For choosing, enter : [Kind]");
             readInputs();
             for (int i = 0; i < singlePlayerKinds.length; i++) {
-                if (inputLine.equals(singlePlayerKinds[i])) {
+                if (inputLine.equals(singlePlayerKinds[i].toLowerCase())) {
                     if (i == 0) story();
                     else customGame();
                     return;
@@ -138,21 +139,22 @@ public class BattleMenu extends Menu {
                         return;
                     }
                 }
-                boolean isValidDeck = false;
-                for (int i = 0; i < numberOfDecksInCustomGame; i++) {
-                    Deck deck = (Deck) Application.readJSON(Deck.class, address + i + ".json");
-                    if (deck.getName().equals(deckName)) {
-                        ((AI) battle.getPlayerOff()).selectMainDeck(deck);
-                        isValidDeck = true;
+                if (setMode(mode, numberOfFlags)) {
+                    boolean isValidDeck = false;
+                    for (int i = 0; i < numberOfDecksInCustomGame; i++) {
+                        Deck deck = (Deck) Application.readJSON(Deck.class, address + i + ".json");
+                        if (deck.getName().equals(deckName)) {
+                            ((AI) battle.getPlayerOff()).selectMainDeck(deck);
+                            isValidDeck = true;
+                        }
                     }
-                }
-                if (!isValidDeck) {
-                    System.out.println("Choose valid deck");
-                    customGame();
+                    if (!isValidDeck) {
+                        System.out.println("Choose valid deck");
+                        customGame();
+                        return;
+                    }
                     return;
                 }
-                if (setMode(mode, numberOfFlags))
-                    return;
             }
         } else {
             System.out.println("For choosing, enter : start multiplayer game [Mode] [Number of flags : Just for third mode");
@@ -231,8 +233,8 @@ public class BattleMenu extends Menu {
     public void handleDeck(Account account) throws FileNotFoundException {
         account.getCollection().createDeck(account.getUsername());
         account.getCollection().selectMainDeck(account.getUsername());
-        for (int i = 0; i < 2; i++) {
-            Spell spell = Spell.createSpell(DeckGenerator.spellNames[0], account.getUsername());
+        for (int i = 0; i < 9; i++) {
+            Spell spell = Spell.createSpell(DeckGenerator.spellNames[13], account.getUsername());
             account.getCollection().addCollectionItemToCollection(spell.getID());
             account.getCollection().addCollectionItemToDeck(spell.getID(), account.getUsername());
         }
@@ -241,8 +243,8 @@ public class BattleMenu extends Menu {
             account.getCollection().addCollectionItemToCollection(item.getID());
             account.getCollection().addCollectionItemToDeck(item.getID(), account.getUsername());
         }
-        for (int i = 0; i < 15; i++) {
-            Minion minion = Minion.createMinion(DeckGenerator.minionNames[0], account.getUsername());
+        for (int i = 0; i < 8; i ++){
+            Minion minion = Minion.createMinion(DeckGenerator.minionNames[22], account.getUsername());
             account.getCollection().addCollectionItemToCollection(minion.getID());
             account.getCollection().addCollectionItemToDeck(minion.getID(), account.getUsername());
         }

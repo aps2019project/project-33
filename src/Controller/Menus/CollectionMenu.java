@@ -28,6 +28,7 @@ public class CollectionMenu extends Menu {
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
         String[] input = inputLine.split("[ ]+");
+        inputLine = inputLine.toLowerCase();
         if(isFirstOne){
             collection = (Collection) Application.copy(Main.application.getLoggedInAccount().getCollection(),
                     Collection.class);
