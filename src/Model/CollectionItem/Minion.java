@@ -1,11 +1,7 @@
 package Model.CollectionItem;
 
 import Controller.Application;
-import Controller.AttackArea;
-import Controller.Battle;
-import Controller.Impact;
 import Model.Enviroment.Cell;
-import Model.Enviroment.Map1;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -51,7 +47,7 @@ public class Minion extends LivingCard {
     public void showCardInBattle() {
         System.out.println("Minion:");
         System.out.println("Name: " + this.getName());
-        System.out.println("HP: " + this.getHP() + " AP: " + this.getDecreaseHPByAttack() + " MP: " + this.getMP());
+        System.out.println("HP: " + this.getHP() + " AP: " + this.getAP() + " MP: " + this.getMP());
         System.out.println("Range: " + this.getRangeOfAttack());
         System.out.println("Combo-ability:" + this.getComboAbility());
         System.out.println("Cost: " + this.getPrice());
@@ -67,7 +63,7 @@ public class Minion extends LivingCard {
     @Override
     public String getInfo() {
         String info = "Type : Minion - Name : " + this.getName() + " - ID: " + this.getID() + " - Class: " + this.getClass() + " - AP : " +
-                this.getDecreaseHPByAttack() + " - HP : " + this.getHP() + " - MP : " + this.getMP() + " - Special power : "
+                this.getAP() + " - HP : " + this.getHP() + " - MP : " + this.getMP() + " - Special power : "
                 + this.getDescription();
         return info;
     }

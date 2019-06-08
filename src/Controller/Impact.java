@@ -99,7 +99,7 @@ public class Impact {
         if (opponentLivingCard.getInformation().isAntiShock()) return;
 
         if (opponentLivingCard.getInformation().isAntiAttackAgainstWeek()) {
-            if (myLivingCard.getDecreaseHPByAttack() < myLivingCard.getDecreaseHPByAttack())
+            if (myLivingCard.getAP() < myLivingCard.getAP())
                 return;
         }
 
@@ -130,7 +130,7 @@ public class Impact {
 
             if (opponentLivingCard instanceof Minion) {
                 if (information.isCanDecreaseHpNextRound()) {
-                    opponentLivingCard.setDecreaseHPByAttack(opponentLivingCard.getDecreasHPNextRound() +
+                    opponentLivingCard.setAP(opponentLivingCard.getDecreasHPNextRound() +
                             information.getAmountOfDecreaseHPNextRound());
                 }
                 if (information.isCanDecreaseHP2NextRound()) {
@@ -257,7 +257,7 @@ public class Impact {
         if (!isInRange || !livingCard.isCanCounterAttack()) {
             return;
         }
-        damageToEnemy(battle, battle.getPlayerOff(), livingCard, opponentCard, livingCard.getDecreaseHPByAttack());
+        damageToEnemy(battle, battle.getPlayerOff(), livingCard, opponentCard, livingCard.getAP());
         checkAlive(battle, opponentCard);
     }
 
@@ -276,7 +276,7 @@ public class Impact {
     public static void specialAttackOfMinion(Battle battle, Minion minion, LivingCard defender){
         if(minion.getName().equals("PahlevaneFars")){
             int changeDamageForMinion = pahlevaneFarsChangeDamage(minion, defender.getID());
-            int damage = minion.getDecreaseHPByAttack() + changeDamageForMinion;
+            int damage = minion.getAP() + changeDamageForMinion;
             damageToEnemy(battle, battle.getPlayerOn(), (LivingCard)minion, defender, damage);
             minion.addAttackedLivingCard(defender);
         }
@@ -309,11 +309,13 @@ public class Impact {
 
         if(attacker instanceof Minion){
             specialAttackOfMinion(battle, (Minion)attacker, defender);
-            return;
         }
 
-        damageToEnemy(battle, battle.getPlayerOn(), attacker, defender, attacker.getDecreaseHPByAttack());
+        damageToEnemy(battle, battle.getPlayerOn(), attacker, defender, attacker.getAP());
+
         attacker.setCanAttack(false);
+        attacker.setCanMove(false);
+
         if (checkAlive(battle, defender))
             Impact.counterAttack(battle, defender, attacker);
 
@@ -348,7 +350,7 @@ public class Impact {
                 index = 1;
             }
             if(canChangeDamage){
-                int damage = livingCard.getDecreaseHPByAttack() + 4 * (numberOfComboers[index] - 1);
+                int damage = livingCard.getAP() + 4 * (numberOfComboers[index] - 1);
                 damageToEnemy(battle, battle.getPlayerOn(), livingCard, opponentLivingCard, damage);
             }
         }
@@ -437,7 +439,7 @@ public class Impact {
     //alan tabe shode 200 khat va ehtemal bugesh ziade :(
     public static void impactSpell(Spell spell, Cell cell, Battle battle) {
         LivingCard livingCard = cell.getLivingCard();
-        ArrayList<Cell> impactCells = AttackArea.getImpactCellsOfSpell(spell, cell, battle);
+        ArrayList<Cell> impactCells = AttackArea.getImpactCells(spell, cell, battle);
         Information information = spell.getInformation();
         if (!spell.getInformation().isMultipleImpact()) {
             if (livingCard == null) {

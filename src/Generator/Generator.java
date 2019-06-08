@@ -7,7 +7,6 @@ import Model.CollectionItem.Minion;
 import Model.CollectionItem.Spell;
 
 import java.io.IOException;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class Generator {
     private static Application application;
@@ -108,9 +107,9 @@ public class Generator {
         Generator.createArzhangeDiv();
     }
 
-    public static void setAttackArea(Spell spell, boolean isUs, boolean isEnemy, boolean isHero, boolean isMinion,
-                                     boolean isCell, boolean isSquare, int length, boolean isNeighbor, boolean isRow, boolean isColumn,
-                                     boolean isKingsGuard){
+    public static void setSpellAttackArea(Spell spell, boolean isUs, boolean isEnemy, boolean isHero, boolean isMinion,
+                                          boolean isCell, boolean isSquare, int length, boolean isNeighbor, boolean isRow, boolean isColumn,
+                                          boolean isKingsGuard){
         Information information = spell.getInformation();
         information.setUsImpact(isUs);
         information.setEnemyImpact(isEnemy);
@@ -125,13 +124,36 @@ public class Generator {
         information.setKingsGuard(isKingsGuard);
     }
 
+    public static void setMinionAttackArea(Minion minion, boolean isPassive, boolean isOnAttack, boolean isOnDefence, boolean isOnDeath,
+                                           boolean isOnSpawn, boolean isCombo, boolean isEnemy, boolean isUs, boolean isHero,
+                                           boolean isMinion, boolean isCell, boolean isNeighbor, boolean isMelee,
+                                           boolean isHybrid, boolean isRanged, int range){
+        Information information = minion.getInformation();
+        information.setPassive(isPassive);
+        information.setOnAttack(isOnAttack);
+        information.setOnDefence(isOnDefence);
+        information.setOnDeath(isOnDeath);
+        information.setOnSpawn(isOnSpawn);
+        information.setCombo(isCombo);
+        information.setEnemyImpact(isEnemy);
+        information.setUsImpact(isUs);
+        information.setHeroImpact(isHero);
+        information.setMinionImpact(isMinion);
+        information.setCellImpact(isCell);
+        information.setImpactNeighbors(isNeighbor);
+        information.setCanDoMeleeAttack(isMelee);
+        information.setCanDoHybridAttack(isHybrid);
+        information.setCanDoRangedAttack(isRanged);
+        minion.setRangeOfAttack(range);
+    }
+
     public static void TotalDisarm() throws IOException {
         Spell spell = new Spell();
         spell.setPrice(1000);
         spell.setMp(0);
         spell.setName("TotalDisarm");
 
-        setAttackArea(spell, false, true, true, true, false, false, 0, false,
+        setSpellAttackArea(spell, false, true, true, true, false, false, 0, false,
                 false, false, false);
 
         spell.getInformation().setCanDisarmBuffAdd(true);
@@ -146,7 +168,7 @@ public class Generator {
         spell.setMp(2);
         spell.setName("AreaDispel");
 
-        setAttackArea(spell, true, true, true, true, true, true, 2, false,
+        setSpellAttackArea(spell, true, true, true, true, true, true, 2, false,
                 false, false, false);
 
         spell.getInformation().setMultipleImpact(true);
@@ -162,7 +184,7 @@ public class Generator {
         spell.setMp(1);
         spell.setName("Empower");
 
-        setAttackArea(spell, true, false, true, true, false, false, 0, false,
+        setSpellAttackArea(spell, true, false, true, true, false, false, 0, false,
                 false, false, false);
 
         spell.getInformation().setCanIncreaseAP(true);
@@ -177,7 +199,7 @@ public class Generator {
         spell.setMp(1);
         spell.setName("Fireball");
 
-        setAttackArea(spell, false, true, true, true, false, false, 0, false,
+        setSpellAttackArea(spell, false, true, true, true, false, false, 0, false,
                 false, false, false);
 
         spell.getInformation().setCanDamageToEnemy(true);
@@ -191,7 +213,7 @@ public class Generator {
         spell.setMp(2);
         spell.setName("GodStrength");
 
-        setAttackArea(spell, true, false, true, false, false, false, 0, false,
+        setSpellAttackArea(spell, true, false, true, false, false, false, 0, false,
                 false, false, false);
 
         spell.getInformation().setCanIncreaseAP(true);
@@ -215,7 +237,7 @@ public class Generator {
         spell.setMp(2);
         spell.setName("LightingBolt");
 
-        setAttackArea(spell, false, true, true, false, false, false, 0, false,
+        setSpellAttackArea(spell, false, true, true, false, false, false, 0, false,
                 false, false, false);
 
         spell.getInformation().setCanDamageToEnemy(true);
@@ -229,7 +251,7 @@ public class Generator {
         spell.setMp(5);
         spell.setName("PoisonLake");
 
-        setAttackArea(spell, true, true, true, true, true, true, 3, false,
+        setSpellAttackArea(spell, true, true, true, true, true, true, 3, false,
                 false, false, false);
 
         spell.getInformation().setCanAddPoisonBuffToCell(true);
@@ -244,7 +266,7 @@ public class Generator {
         spell.setMp(0);
         spell.setName("Madness");
 
-        setAttackArea(spell, true, false, true, true, false, false, 0, false,
+        setSpellAttackArea(spell, true, false, true, true, false, false, 0, false,
                 false, false, false);
 
         spell.getInformation().setCanDisarmBuffAdd(true);
@@ -261,7 +283,7 @@ public class Generator {
         spell.setMp(9);
         spell.setName("AllDisarm");
 
-        setAttackArea(spell, false, true, true, true, false, false, 0, false,
+        setSpellAttackArea(spell, false, true, true, true, false, false, 0, false,
                 false, false, false);
 
         spell.getInformation().setMultipleImpact(true);
@@ -276,7 +298,7 @@ public class Generator {
         spell.setMp(8);
         spell.setName("AllPoison");
 
-        setAttackArea(spell, false, true, true, true, false, false, 0, false,
+        setSpellAttackArea(spell, false, true, true, true, false, false, 0, false,
                 false, false, false);
 
         spell.getInformation().setMultipleImpact(true);
@@ -291,7 +313,7 @@ public class Generator {
         spell.setMp(0);
         spell.setName("Dispel");
 
-        setAttackArea(spell, true, true, true, true, false, false, 0, false,
+        setSpellAttackArea(spell, true, true, true, true, false, false, 0, false,
                 false, false, false);
 
         spell.getInformation().setCanRemoveGoodBuffsOfEnemy(true);
@@ -305,7 +327,7 @@ public class Generator {
         spell.setMp(0);
         spell.setName("HealthWithProfit");
 
-        setAttackArea(spell, true, false, true, true, false, false, 0, false,
+        setSpellAttackArea(spell, true, false, true, true, false, false, 0, false,
                 false, false, false);
 
         spell.getInformation().setCanWeaknessBuffAdd(true);
@@ -323,7 +345,7 @@ public class Generator {
         spell.setMp(2);
         spell.setName("GhazaBokhorJoonBegiri");
 
-        setAttackArea(spell, true, false, true, true, false, false, 0, false,
+        setSpellAttackArea(spell, true, false, true, true, false, false, 0, false,
                 false, false, false);
 
         spell.getInformation().setPowerBuffPermanent(true);
@@ -338,7 +360,7 @@ public class Generator {
         spell.setMp(4);
         spell.setName("AllPower");
 
-        setAttackArea(spell, true, false, true, true, false, false, 0, false,
+        setSpellAttackArea(spell, true, false, true, true, false, false, 0, false,
                 false, false, false);
 
         spell.getInformation().setMultipleImpact(true);
@@ -354,7 +376,7 @@ public class Generator {
         spell.setMp(4);
         spell.setName("AllAttack");
 
-        setAttackArea(spell, false, true, true, true, true, false, 0, false,
+        setSpellAttackArea(spell, false, true, true, true, true, false, 0, false,
                 false, true, false);
 
         spell.getInformation().setMultipleImpact(true);
@@ -369,7 +391,7 @@ public class Generator {
         spell.setMp(1);
         spell.setName("Weakening");
 
-        setAttackArea(spell, false, true, false, true, false, false, 0, false,
+        setSpellAttackArea(spell, false, true, false, true, false, false, 0, false,
                 false, false, false);
 
         spell.getInformation().setCanWeaknessBuffAdd(true);
@@ -384,7 +406,7 @@ public class Generator {
         spell.setMp(3);
         spell.setName("Sacrifice");
 
-        setAttackArea(spell, true, false, false, true, false, false, 0, false,
+        setSpellAttackArea(spell, true, false, false, true, false, false, 0, false,
                 false, false, false);
 
         spell.getInformation().setCanKillOurMinionAndHealHero(true);
@@ -397,7 +419,7 @@ public class Generator {
         spell.setMp(3);
         spell.setName("KingsGuard");
 
-        setAttackArea(spell, false, true, false, true, false, false, 0, false,
+        setSpellAttackArea(spell, false, true, false, true, false, false, 0, false,
                 false, false, true);
 
         spell.getInformation().setCanKillMinionOfEnemy(true);
@@ -410,7 +432,7 @@ public class Generator {
         spell.setMp(1);
         spell.setName("Shock");
 
-        setAttackArea(spell, false, true, true, true, false, false, 0, false,
+        setSpellAttackArea(spell, false, true, true, true, false, false, 0, false,
                 false, false, false);
 
         spell.getInformation().setCanStunBuffAdd(true);
@@ -483,446 +505,463 @@ public class Generator {
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Rostam.json");
     }
 
+/////////////////////////////////////////////////
 
     public static void createArzhangeDiv() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(600);
         minion.setMP(3);
         minion.setHP(6);
-        minion.setDecreaseHPByAttack(6);
-        minion.getInformation().setCanDoMeleeAttack(true);
-        minion.setRangeOfAttack(0);
+        minion.setAP(6);
         minion.setName("ArzhangeDiv");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/ArzhangeDiv.json");
+
+        setMinionAttackArea(minion, false, false, false, false, false, true, true, false, true, true, false, false, true, false, false, 0);
+
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/ArzhangeDiv.json");
     }
     public static void createAsbSavareFars() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(200);
         minion.setMP(4);
         minion.setHP(10);
-        minion.setDecreaseHPByAttack(6);
-        minion.getInformation().setCanDoMeleeAttack(true);
-        minion.setRangeOfAttack(0);
+        minion.setAP(6);
         minion.setName("AsbSavareFars");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/AsbSavareFars.json");
+
+        setMinionAttackArea(minion, false, false, false, false, false, false, false, false, false, false, false, false,  true, false, false, 6);
+
+
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/AsbSavareFars.json");
     }
     public static void createAshkbos() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(400);
         minion.setMP(7);
         minion.setHP(14);
-        minion.setDecreaseHPByAttack(8);
-        minion.getInformation().setCanDoMeleeAttack(true);
-        minion.setRangeOfAttack(0);
+        minion.setAP(8);
         minion.setName("Ashkbos");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Ashkbos.json");
+
+        setMinionAttackArea(minion, false, false, true, false, false, false, false, false, false, false, false, false,  true, false, false, 0);
+
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Ashkbos.json");
     }
     public static void createBahman() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(450);
         minion.setMP(8);
         minion.setHP(16);
-        minion.setDecreaseHPByAttack(9);
-        minion.getInformation().setCanDoMeleeAttack(true);
-        minion.setRangeOfAttack(0);
+        minion.setAP(9);
         minion.setName("Bahman");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Bahman.json");
+
+        setMinionAttackArea(minion, false, false, false, false, true, false, true, false, false, true, false, false,  true, false, false, 0);
+
+
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Bahman.json");
     }
     public static void createDiveGorazSavar() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(300);
         minion.setMP(6);
         minion.setHP(16);
-        minion.setDecreaseHPByAttack(8);
-        minion.getInformation().setCanDoMeleeAttack(true);
-        minion.setRangeOfAttack(0);
+        minion.setAP(8);
         minion.setName("DiveGorazSavar");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/DiveGorazSavar.json");
+
+        setMinionAttackArea(minion, false, false, false, false, false, false, false, false, false, false, false, false,  true, false, false, 0);
+
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/DiveGorazSavar.json");
     }
     public static void createDiveSiah() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(300);
         minion.setMP(9);
         minion.setHP(14);
-        minion.setDecreaseHPByAttack(10);
-        minion.getInformation().setCanDoHybridAttack(true);
-        minion.setRangeOfAttack(7);
+        minion.setAP(10);
         minion.setName("DiveSiah");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/DiveSiah.json");
+
+        setMinionAttackArea(minion, false, false, false, false, false, false, false, false, false, false, false, false,  false, true, false, 7);
+
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/DiveSiah.json");
     }
     public static void createEzhdehayeAtashAndaz() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(250);
         minion.setMP(5);
         minion.setHP(9);
-        minion.setDecreaseHPByAttack(5);
-        minion.getInformation().setCanDoRangedAttack(true);
-        minion.setRangeOfAttack(4);
+        minion.setAP(5);
         minion.setName("EzhdehayeAtashAndaz");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/EzhdehayeAtashAndaz.json");
+
+        setMinionAttackArea(minion, false, false, false, false, false, false, false, false, false, false, false, false,  false, false, true, 4);
+
+
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/EzhdehayeAtashAndaz.json");
     }
     public static void createFoladZere() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(650);
         minion.setMP(3);
         minion.setHP(1);
-        minion.setDecreaseHPByAttack(1);
-        minion.getInformation().setCanDoMeleeAttack(true);
-        minion.setRangeOfAttack(0);
+        minion.setAP(1);
         minion.setName("FoladZere");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/FoladZere.json");
+
+        setMinionAttackArea(minion, false, false, false, false, false, false, false, false, false, false, false, false,  false, false, false, 0);
+
+
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/FoladZere.json");
     }
     public static void createGholabsangdareTorani() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(600);
         minion.setMP(1);
         minion.setHP(4);
-        minion.setDecreaseHPByAttack(2);
+        minion.setAP(2);
         minion.getInformation().setCanDoRangedAttack(true);
         minion.setRangeOfAttack(7);
         minion.setName("GholabsangdareTorani");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/GholabsangdareTorani.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/GholabsangdareTorani.json");
     }
     public static void createGhooleBozorg() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(500);
         minion.setMP(7);
         minion.setHP(12);
-        minion.setDecreaseHPByAttack(11);
+        minion.setAP(11);
         minion.getInformation().setCanDoHybridAttack(true);
         minion.setRangeOfAttack(3);
         minion.setName("GhooleBozorg");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/GhooleBozorg.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/GhooleBozorg.json");
     }
     public static void createGhooleBozorg2() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(600);
         minion.setMP(9);
         minion.setHP(30);
-        minion.setDecreaseHPByAttack(8);
+        minion.setAP(8);
         minion.getInformation().setCanDoHybridAttack(true);
         minion.setRangeOfAttack(2);
         minion.setName("GhooleBozorg2");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/GhooleBozorg2.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/GhooleBozorg2.json");
     }
     public static void createGhooleDoSar() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(550);
         minion.setMP(4);
         minion.setHP(10);
-        minion.setDecreaseHPByAttack(4);
+        minion.setAP(4);
         minion.getInformation().setCanDoMeleeAttack(true);
         minion.setRangeOfAttack(0);
         minion.setName("GhooleDoSar");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/GhooleDoSar.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/GhooleDoSar.json");
     }
     public static void createGhooleSangAndaz() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(300);
         minion.setMP(9);
         minion.setHP(12);
-        minion.setDecreaseHPByAttack(12);
+        minion.setAP(12);
         minion.getInformation().setCanDoRangedAttack(true);
         minion.setRangeOfAttack(7);
         minion.setName("GhooleSangAndaz");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/GhooleSangAndaz.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/GhooleSangAndaz.json");
     }
     public static void createGiv() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(450);
         minion.setMP(4);
         minion.setHP(5);
-        minion.setDecreaseHPByAttack(7);
+        minion.setAP(7);
         minion.getInformation().setCanDoRangedAttack(true);
         minion.setRangeOfAttack(5);
         minion.setName("Giv");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Giv.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Giv.json");
     }
     public static void createGorazeVahshi() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(500);
         minion.setMP(6);
         minion.setHP(10);
-        minion.setDecreaseHPByAttack(14);
+        minion.setAP(14);
         minion.getInformation().setCanDoMeleeAttack(true);
         minion.setRangeOfAttack(0);
         minion.setName("GorazeVahshi");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/GorazeVahshi.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/GorazeVahshi.json");
     }
     public static void createGorg() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(400);
         minion.setMP(3);
         minion.setHP(6);
-        minion.setDecreaseHPByAttack(1);
+        minion.setAP(1);
         minion.getInformation().setCanDoMeleeAttack(true);
         minion.setRangeOfAttack(0);
         minion.setName("Gorg");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Gorg.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Gorg.json");
     }
     public static void createGorgeSefid() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(400);
         minion.setMP(5);
         minion.setHP(8);
-        minion.setDecreaseHPByAttack(2);
+        minion.setAP(2);
         minion.getInformation().setCanDoMeleeAttack(true);
         minion.setRangeOfAttack(0);
         minion.setName("GorgeSefid");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/GorgeSefid.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/GorgeSefid.json");
     }
     public static void createGorzdareTorani() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(450);
         minion.setMP(2);
         minion.setHP(3);
-        minion.setDecreaseHPByAttack(10);
+        minion.setAP(10);
         minion.getInformation().setCanDoMeleeAttack(true);
         minion.setRangeOfAttack(0);
         minion.setName("GorzdareTorani");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/GorzdareTorani.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/GorzdareTorani.json");
     }
     public static void createIraj() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(500);
         minion.setMP(4);
         minion.setHP(6);
-        minion.setDecreaseHPByAttack(20);
+        minion.setAP(20);
         minion.getInformation().setCanDoRangedAttack(true);
         minion.setRangeOfAttack(3);
         minion.setName("Iraj");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Iraj.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Iraj.json");
     }
     public static void createJadogar() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(550);
         minion.setMP(4);
         minion.setHP(5);
-        minion.setDecreaseHPByAttack(4);
+        minion.setAP(4);
         minion.getInformation().setCanDoRangedAttack(true);
         minion.setRangeOfAttack(3);
         minion.setName("Jadogar");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Jadogar.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Jadogar.json");
     }
     public static void createJadogarAzam() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(550);
         minion.setMP(6);
         minion.setHP(6);
-        minion.setDecreaseHPByAttack(6);
+        minion.setAP(6);
         minion.getInformation().setCanDoRangedAttack(true);
         minion.setRangeOfAttack(5);
         minion.setName("JadogarAzam");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/JadogarAzam.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/JadogarAzam.json");
     }
     public static void createJasoseTorani() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(700);
         minion.setMP(4);
         minion.setHP(6);
-        minion.setDecreaseHPByAttack(6);
+        minion.setAP(6);
         minion.getInformation().setCanDoMeleeAttack(true);
         minion.setRangeOfAttack(0);
         minion.setName("JasoseTorani");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/JasoseTorani.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/JasoseTorani.json");
     }
     public static void createJen() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(500);
         minion.setMP(5);
         minion.setHP(10);
-        minion.setDecreaseHPByAttack(4);
+        minion.setAP(4);
         minion.getInformation().setCanDoRangedAttack(true);
         minion.setRangeOfAttack(4);
         minion.setName("Jen");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Jen.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Jen.json");
     }
     public static void createKamandareFars() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(300);
         minion.setMP(2);
         minion.setHP(6);
-        minion.setDecreaseHPByAttack(4);
+        minion.setAP(4);
         minion.getInformation().setCanDoRangedAttack(true);
         minion.setRangeOfAttack(7);
         minion.setName("KamandareFars");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/KamandareFars.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/KamandareFars.json");
     }
     public static void createKamandareTorani() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(500);
         minion.setMP(1);
         minion.setHP(3);
-        minion.setDecreaseHPByAttack(4);
+        minion.setAP(4);
         minion.getInformation().setCanDoRangedAttack(true);
         minion.setRangeOfAttack(5);
         minion.setName("KamandareTorani");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/KamandareTorani.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/KamandareTorani.json");
     }
     public static void createMareGhoolPeykar() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(500);
         minion.setMP(8);
         minion.setHP(14);
-        minion.setDecreaseHPByAttack(7);
+        minion.setAP(7);
         minion.getInformation().setCanDoRangedAttack(true);
         minion.setRangeOfAttack(5);
         minion.setName("MareGhoolPeykar");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/MareGhoolPeykar.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/MareGhoolPeykar.json");
     }
     public static void createMareSami() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(300);
         minion.setMP(4);
         minion.setHP(5);
-        minion.setDecreaseHPByAttack(6);
+        minion.setAP(6);
         minion.getInformation().setCanDoRangedAttack(true);
         minion.setRangeOfAttack(4);
         minion.setName("MareSami");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/MareSami.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/MareSami.json");
     }
     public static void createNaneSarma() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(500);
         minion.setMP(3);
         minion.setHP(3);
-        minion.setDecreaseHPByAttack(4);
+        minion.setAP(4);
         minion.getInformation().setCanDoRangedAttack(true);
         minion.setRangeOfAttack(5);
         minion.setName("NaneSarma");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/NaneSarma.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/NaneSarma.json");
     }
     public static void createNeyzedareFars() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(500);
         minion.setMP(1);
         minion.setHP(5);
-        minion.setDecreaseHPByAttack(3);
+        minion.setAP(3);
         minion.getInformation().setCanDoHybridAttack(true);
         minion.setRangeOfAttack(3);
         minion.setName("NeyzedareFars");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/NeyzedareFars.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/NeyzedareFars.json");
     }
     public static void createNeyzedareTorani() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(600);
         minion.setMP(1);
         minion.setHP(4);
-        minion.setDecreaseHPByAttack(4);
+        minion.setAP(4);
         minion.getInformation().setCanDoHybridAttack(true);
         minion.setRangeOfAttack(3);
         minion.setName("NeyzedareTorani");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/NeyzedareTorani.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/NeyzedareTorani.json");
     }
     public static void createOghab() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(200);
         minion.setMP(2);
         minion.setHP(0);
-        minion.setDecreaseHPByAttack(2);
+        minion.setAP(2);
         minion.getInformation().setCanDoRangedAttack(true);
         minion.setRangeOfAttack(3);
         minion.setName("Oghab");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Oghab.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Oghab.json");
     }
     public static void createPahlevaneFars() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(600);
         minion.setMP(9);
         minion.setHP(24);
-        minion.setDecreaseHPByAttack(6);
+        minion.setAP(6);
         minion.getInformation().setCanDoMeleeAttack(true);
         minion.setRangeOfAttack(0);
         minion.setName("PahlevaneFars");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/PahlevaneFars.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/PahlevaneFars.json");
     }
     public static void createPalang() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(400);
         minion.setMP(4);
         minion.setHP(6);
-        minion.setDecreaseHPByAttack(2);
+        minion.setAP(2);
         minion.getInformation().setCanDoMeleeAttack(true);
         minion.setRangeOfAttack(0);
         minion.setName("Palang");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Palang.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Palang.json");
     }
     public static void createPiran() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(400);
         minion.setMP(8);
         minion.setHP(20);
-        minion.setDecreaseHPByAttack(12);
+        minion.setAP(12);
         minion.getInformation().setCanDoMeleeAttack(true);
         minion.setRangeOfAttack(0);
         minion.setName("Piran");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Piran.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Piran.json");
     }
     public static void createSepahSalareFars() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(800);
         minion.setMP(7);
         minion.setHP(12);
-        minion.setDecreaseHPByAttack(4);
+        minion.setAP(4);
         minion.getInformation().setCanDoMeleeAttack(true);
         minion.setRangeOfAttack(0);
         minion.setName("SepahSalareFars");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/SepahSalareFars.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/SepahSalareFars.json");
     }
     public static void createShahGhool() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(600);
         minion.setMP(5);
         minion.setHP(10);
-        minion.setDecreaseHPByAttack(4);
+        minion.setAP(4);
         minion.getInformation().setCanDoMeleeAttack(true);
         minion.setRangeOfAttack(0);
         minion.setName("ShahGhool");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/ShahGhool.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/ShahGhool.json");
     }
     public static void createShahzadeTorani() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(800);
         minion.setMP(6);
         minion.setHP(6);
-        minion.setDecreaseHPByAttack(10);
+        minion.setAP(10);
         minion.getInformation().setCanDoMeleeAttack(true);
         minion.setRangeOfAttack(0);
         minion.setName("ShahzadeTorani");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/ShahzadeTorani.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/ShahzadeTorani.json");
     }
     public static void createShamshirzaneFars() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(400);
         minion.setMP(2);
         minion.setHP(6);
-        minion.setDecreaseHPByAttack(4);
-        minion.getInformation().setCanDoMeleeAttack(true);
-        minion.setRangeOfAttack(0);
+        minion.setAP(4);
         minion.setName("ShamshirzaneFars");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/ShamshirzaneFars.json");
+
+        minion.getInformation().setCanStunBuffAdd(true);
+        minion.getInformation().setTimeOfStunBuff(1);
+
+        setMinionAttackArea(minion, false, true, true, false, false, false, true, false, true, true, false, false,  true, false, false, 0);
+
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/ShamshirzaneFars.json");
     }
     public static void createShireDarande() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(600);
         minion.setMP(2);
         minion.setHP(1);
-        minion.setDecreaseHPByAttack(8);
+        minion.setAP(8);
         minion.getInformation().setCanDoMeleeAttack(true);
         minion.setRangeOfAttack(0);
         minion.setName("ShireDarande");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/ShireDarande.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/ShireDarande.json");
     }
     public static void createSiavash() throws IOException {
         Minion minion = new Minion();
         minion.setPrice(350);
         minion.setMP(4);
         minion.setHP(8);
-        minion.setDecreaseHPByAttack(5);
+        minion.setAP(5);
         minion.getInformation().setCanDoMeleeAttack(true);
         minion.setRangeOfAttack(0);
         minion.setName("Siavash");
-        application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Siavash.json");
+        Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Siavash.json");
     }
 
 }

@@ -3,6 +3,14 @@ package Model.CollectionItem;
 public class Information {
     //AttackArea section
 
+
+    private boolean isOnAttack;
+    private boolean isOnDefence;
+    private boolean isOnSpawn;
+    private boolean isPassive;
+    private boolean isOnDeath;
+    private boolean isCombo;
+
     private boolean isEnemyImpact;
     private boolean isUsImpact;
     private boolean isMultipleImpact;
@@ -936,5 +944,53 @@ public class Information {
 
     public void setImpactNeighbors(boolean impactNeighbors) {
         isImpactNeighbors = impactNeighbors;
+    }
+
+    public boolean isOnAttack() {
+        return isOnAttack;
+    }
+
+    public void setOnAttack(boolean onAttack) {
+        isOnAttack = onAttack;
+    }
+
+    public boolean isOnDefence() {
+        return isOnDefence;
+    }
+
+    public void setOnDefence(boolean onDefence) {
+        isOnDefence = onDefence;
+    }
+
+    public boolean isOnSpawn() {
+        return isOnSpawn;
+    }
+
+    public void setOnSpawn(boolean onSpawn) {
+        isOnSpawn = onSpawn;
+    }
+
+    public boolean isPassive() {
+        return isPassive;
+    }
+
+    public void setPassive(boolean passive) {
+        isPassive = passive;
+    }
+
+    public boolean isOnDeath() {
+        return isOnDeath;
+    }
+
+    public void setOnDeath(boolean onDeath) {
+        isOnDeath = onDeath;
+    }
+
+    public boolean isCombo() {
+        return isCombo;
+    }
+
+    public void setCombo(boolean combo) {
+        isCombo = combo;
     }
 }

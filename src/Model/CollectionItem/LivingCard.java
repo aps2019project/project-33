@@ -1,17 +1,14 @@
 package Model.CollectionItem;
 
-import Controller.AttackArea;
 import Controller.Impact;
 import Controller.Battle;
 import Model.Buffs.Buff;
 import Model.Enviroment.Cell;
 
-import java.awt.event.ItemEvent;
-import java.lang.management.MemoryNotificationInfo;
 import java.util.ArrayList;
 
 abstract public class LivingCard extends Card {
-    private int HP, rangeOfAttack, decreaseHPByAttack, changeHP, changePower, numberOfSameTypeInComboAttack,
+    private int HP, rangeOfAttack, AP, changeHP, changePower, numberOfSameTypeInComboAttack,
     changeRangeOfAttack, numberOfDamaged, shield, decreasHPNextRound, decreaseHP2NextRound;
     private String counterAttackType, type;
     private ArrayList<Buff> effects = new ArrayList<>();
@@ -146,14 +143,14 @@ abstract public class LivingCard extends Card {
         this.rangeOfAttack = rangeOfAttack;
     }
 
-    public int getDecreaseHPByAttack() {
-        return decreaseHPByAttack;
+    public int getAP() {
+        return AP;
     }
 
     //TODO
     //be in sadegi ha ham nist
-    public void setDecreaseHPByAttack(int decreaseHPByAttack) {
-        this.decreaseHPByAttack = decreaseHPByAttack;
+    public void setAP(int AP) {
+        this.AP = AP;
     }
 
     public int getChangeHP() {
@@ -276,7 +273,7 @@ abstract public class LivingCard extends Card {
     }
 
     public void increaseAP(int amountOfIncreaseAP){
-        this.decreaseHPByAttack += amountOfIncreaseAP;
+        this.AP += amountOfIncreaseAP;
     }
 
     public boolean isHaveShamshireChini() {

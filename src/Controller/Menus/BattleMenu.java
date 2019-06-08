@@ -124,7 +124,7 @@ public class BattleMenu extends Menu {
     }
 
     private void customGame() throws FileNotFoundException {
-        if(!isRunning)return;
+        if (!isRunning) return;
         battle.setPrize(prizeOfCustomGame);
         System.out.println("Game Modes :");
         for (int i = 0; i < modes.length; i++)
@@ -153,21 +153,21 @@ public class BattleMenu extends Menu {
                         return;
                     }
                 }
-                boolean isValidDeck = false;
-                for (int i = 0; i < numberOfDecksInCustomGame; i++) {
-                    Deck deck = (Deck) Application.readJSON(Deck.class, address + i + ".json");
-                    if (deck.getName().equals(deckName)) {
-                        ((AI) battle.getPlayerOff()).selectMainDeck(deck);
-                        isValidDeck = true;
+                if (setMode(mode, numberOfFlags)) {
+                    boolean isValidDeck = false;
+                    for (int i = 0; i < numberOfDecksInCustomGame; i++) {
+                        Deck deck = (Deck) Application.readJSON(Deck.class, address + i + ".json");
+                        if (deck.getName().equals(deckName)) {
+                            ((AI) battle.getPlayerOff()).selectMainDeck(deck);
+                            isValidDeck = true;
+                        }
                     }
-                }
-                if (!isValidDeck) {
-                    System.out.println("Choose valid deck");
-                    customGame();
+                    if (!isValidDeck) {
+                        System.out.println("Choose valid deck");
+                        customGame();
+                    }
                     return;
                 }
-                if (setMode(mode, numberOfFlags))
-                    return;
             }
         } else {
             System.out.println("For choosing, enter : start multiplayer game [Mode] [Number of flags : Just for third mode");
@@ -219,7 +219,7 @@ public class BattleMenu extends Menu {
 
 
     public void story() throws FileNotFoundException {
-        if(!isRunning)return;
+        if (!isRunning) return;
         System.out.println("Levels :");
         for (int i = 0; i < levels.length; i++)
             System.out.println(levels[i] + ", Prize : " + prizeOfLevels[i]);

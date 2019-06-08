@@ -1,9 +1,6 @@
 package Model.CollectionItem;
 
 import Controller.Application;
-import Controller.AttackArea;
-import Controller.Impact;
-import Model.Enviroment.Cell;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -38,7 +35,7 @@ public class Hero extends LivingCard {
         this.setName(name);
         this.setPrice(price);
         this.setHP(HP);
-        this.setDecreaseHPByAttack(AP);
+        this.setAP(AP);
         this.setCounterAttackType(counterAttackType);
         this.setMP(MP);
         this.setMaxCoolDown(maxCoolDown);
@@ -62,7 +59,7 @@ public class Hero extends LivingCard {
     //deghat konim ke description baraye hero hamoon tozihare special power e !!
     @Override
     public String getInfo() {
-        String info = "Name : " + this.getName() + " - AP : " + this.getDecreaseHPByAttack() + " - HP : "
+        String info = "Name : " + this.getName() + " - AP : " + this.getAP() + " - HP : "
                 + this.getHP() + " Class : " + this.getClass() + " Special power: " + this.getDescription();
         return info;
     }
