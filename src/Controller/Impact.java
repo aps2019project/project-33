@@ -529,7 +529,7 @@ public class Impact {
                 int remainTime = information.getTimeOfWeaknessBuff();
                 boolean isPermanent = information.isWeaknessBuffPermanent();
                 int changeHP = information.getChangeHPByWeakness();
-                int changePower = information.getChangePowerByWeakness();
+                int changePower = information.getChangeAPByWeakness();
                 //havaset bashee change power + e vali bayad az ap kam she
                 Impact.addWeaknessToCard(remainTime, isPermanent, false, changeHP, changePower, cellLivingCard);
             }
@@ -597,7 +597,7 @@ public class Impact {
     public static void impactItem(Item item, Cell cell, Battle battle) {
         Information information = item.getInformation();
 
-        if (information.isCellImpact()) {
+        if (information.isLocationLimit()) {
 
             ArrayList<Cell> impactArea = AttackArea.getImpactCellsOfItem(item, battle);
             if (!impactArea.contains(cell)) {

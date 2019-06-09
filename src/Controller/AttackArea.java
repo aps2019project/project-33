@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.Collection;
 import Model.CollectionItem.*;
 import Model.Enviroment.Cell;
 import Model.Enviroment.Map1;
@@ -165,7 +164,7 @@ public class AttackArea {
             impactedCellsOfLivingCards.addAll(getCells(information, battle.getPlayerOff()));
         if (information.isUsImpact())
             impactedCellsOfLivingCards.addAll(getCells(information, battle.getPlayerOn()));
-        if (information.isCellImpact()) {
+        if (information.isLocationLimit()) {
             ArrayList<Cell> impactedCells = new ArrayList<>();
             if (information.isSquareOfCellsImpact())
                 impactedCells.addAll(getSquareOfCells(cell, battle, information.getLengthOfSquareOfCellsImpact()));

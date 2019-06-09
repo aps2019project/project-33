@@ -11,16 +11,17 @@ public class Information {
     private boolean isOnDeath;
     private boolean isCombo;
     private boolean isOnTurn;
+    private boolean isOnAttack;
 
     //AttackArea section
 
-    private boolean isOnAttack;
     private boolean isEnemyImpact;
     private boolean isUsImpact;
     private boolean isMultipleImpact;
     private boolean isMinionImpact;
     private boolean isHeroImpact;
-    private boolean cellImpact;
+    private boolean isCellImpact;
+    private boolean locationLimit;
     private boolean isSquareOfCellsImpact;
     private int lengthOfSquareOfCellsImpact;
     private boolean isImpactColumn;
@@ -31,7 +32,6 @@ public class Information {
     //TODO fasele manhatanie
     private boolean isImpactArea;
     private int distanceOfImpactArea;
-
 
     //Attack section
 
@@ -53,9 +53,8 @@ public class Information {
     private boolean canWeaknessBuffAdd;
     private int timeOfWeaknessBuff;
     private boolean isWeaknessBuffPermanent;
-
     private int changeHPByWeakness;
-    private int changePowerByWeakness;
+    private int changeAPByWeakness;
 
     private boolean canPoisonBuffAdd;
     private int timeOfPoisonBuff;
@@ -69,6 +68,8 @@ public class Information {
     private boolean canPowerBuffAdd;
     private int timeOfPowerBuff;
     private boolean isPowerBuffPermanent;
+    private int changeHPByPowerBuff;
+    private int changeAPByPowerBuff;
 
     private boolean canRemoveBadBuffsOfOurselves;
     private boolean canRemoveGoodBuffsOfEnemy;
@@ -131,12 +132,12 @@ public class Information {
     private boolean canAttackToHeroWhenDead;
     private int damageToHeroWhenDead;
 
-    public int getChangePowerByWeakness() {
-        return changePowerByWeakness;
+    public int getChangeAPByWeakness() {
+        return changeAPByWeakness;
     }
 
-    public void setChangePowerByWeakness(int changePowerByWeakness) {
-        this.changePowerByWeakness = changePowerByWeakness;
+    public void setChangeAPByWeakness(int changeAPByWeakness) {
+        this.changeAPByWeakness = changeAPByWeakness;
     }
 
     public int getChangeHPByWeakness() {
@@ -794,12 +795,12 @@ public class Information {
         isHeroImpact = heroImpact;
     }
 
-    public boolean isCellImpact() {
-        return cellImpact;
+    public boolean isLocationLimit() {
+        return locationLimit;
     }
 
-    public void setCellImpact(boolean cellImpact) {
-        this.cellImpact = cellImpact;
+    public void setLocationLimit(boolean locationLimit) {
+        this.locationLimit = locationLimit;
     }
 
     public boolean isKingsGuard() {
@@ -928,5 +929,29 @@ public class Information {
 
     public void setIsIncreaseManaPermanent(int isIncreaseManaPermanent) {
         this.isIncreaseManaPermanent = isIncreaseManaPermanent;
+    }
+
+    public boolean isCellImpact() {
+        return isCellImpact;
+    }
+
+    public void setCellImpact(boolean cellImpact) {
+        isCellImpact = cellImpact;
+    }
+
+    public int getChangeHPByPowerBuff() {
+        return changeHPByPowerBuff;
+    }
+
+    public void setChangeHPByPowerBuff(int changeHPByPowerBuff) {
+        this.changeHPByPowerBuff = changeHPByPowerBuff;
+    }
+
+    public int getChangeAPByPowerBuff() {
+        return changeAPByPowerBuff;
+    }
+
+    public void setChangeAPByPowerBuff(int changeAPByPowerBuff) {
+        this.changeAPByPowerBuff = changeAPByPowerBuff;
     }
 }

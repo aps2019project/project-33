@@ -42,7 +42,7 @@ public class Generator {
         Generator.AllPoison();
         Generator.Dispel();
         Generator.HealthWithProfit();
-        Generator.GhazaBokhorJoonBegiri();
+        Generator.PowerUp();
         Generator.AllPower();
         Generator.AllAttack();
         Generator.Weakening();
@@ -115,7 +115,7 @@ public class Generator {
         information.setEnemyImpact(isEnemy);
         information.setHeroImpact(isHero);
         information.setMinionImpact(isMinion);
-        information.setCellImpact(isCell);
+        information.setLocationLimit(isCell);
         information.setSquareOfCellsImpact(isSquare);
         information.setLengthOfSquareOfCellsImpact(length);
         information.setImpactNeighbors(isNeighbor);
@@ -139,7 +139,7 @@ public class Generator {
         information.setUsImpact(isUs);
         information.setHeroImpact(isHero);
         information.setMinionImpact(isMinion);
-        information.setCellImpact(isCell);
+        information.setLocationLimit(isCell);
         information.setImpactNeighbors(isNeighbor);
         information.setCanDoMeleeAttack(isMelee);
         information.setCanDoHybridAttack(isHybrid);
@@ -235,7 +235,7 @@ public class Generator {
         //TODO attack area baraye kasaei ke kollan roo cell ha anjam mishan baayad doros she
         setSpellAttackArea(spell, false, false, false, false, true, true, 2, false,
                 false, false, false);
-
+        spell.getInformation().setCellImpact(true);
         //TODO impact
 
 
@@ -261,13 +261,15 @@ public class Generator {
         spell.setPrice(900);
         spell.setMp(5);
         spell.setName("PoisonLake");
-
-        setSpellAttackArea(spell, true, true, true, true, true, true, 3, false,
+//TODO faghat baraye celle
+        setSpellAttackArea(spell, false, false, false, false, true, true, 3, false,
                 false, false, false);
+        spell.getInformation().setCellImpact(true);
 
         spell.getInformation().setCanAddPoisonBuffToCell(true);
-        spell.getInformation().setMultipleImpact(true);
+        //TODO in tedad turna ro havasemun bashe
         spell.getInformation().setTimeOfAddPoisonBuffToCell(1);
+
         Application.writeJSON(spell, "Data/CollectionItem/Spell/PoisonLake.json");
     }
 
@@ -298,8 +300,8 @@ public class Generator {
                 false, false, false);
 
         spell.getInformation().setMultipleImpact(true);
-        spell.getInformation().setTimeOfDisarmBuff(1);
         spell.getInformation().setCanDisarmBuffAdd(true);
+        spell.getInformation().setTimeOfDisarmBuff(1);
         Application.writeJSON(spell, "Data/CollectionItem/Spell/AllDisarm.json");
     }
 
@@ -350,19 +352,19 @@ public class Generator {
         Application.writeJSON(spell, "Data/CollectionItem/Spell/HealthWithProfit.json");
     }
 
-    public static void GhazaBokhorJoonBegiri() throws IOException{
+    public static void PowerUp() throws IOException{
         Spell spell = new Spell();
         spell.setPrice(2500);
         spell.setMp(2);
-        spell.setName("GhazaBokhorJoonBegiri");
+        spell.setName("PowerUp");
 
         setSpellAttackArea(spell, true, false, true, true, false, false, 0, false,
                 false, false, false);
 
-        spell.getInformation().setPowerBuffPermanent(true);
-        spell.getInformation().setGhazaPowerBuff(true);
         spell.getInformation().setCanPowerBuffAdd(true);
-        Application.writeJSON(spell, "Data/CollectionItem/Spell/GhazaBokhorJoonBegiri.json");
+        spell.getInformation().setPowerBuffPermanent(true);
+        spell.getInformation().setChangeAPByPowerBuff(2);
+        Application.writeJSON(spell, "Data/CollectionItem/Spell/PowerUp.json");
     }
 
     public static void  AllPower() throws IOException{
@@ -377,7 +379,7 @@ public class Generator {
         spell.getInformation().setMultipleImpact(true);
         spell.getInformation().setCanPowerBuffAdd(true);
         spell.getInformation().setPowerBuffPermanent(true);
-        spell.getInformation().setAmountOfIncreaseAP(2);
+        spell.getInformation().setChangeAPByPowerBuff(2);
         Application.writeJSON(spell, "Data/CollectionItem/Spell/AllPower.json");
     }
 
@@ -391,8 +393,8 @@ public class Generator {
                 false, true, false);
 
         spell.getInformation().setMultipleImpact(true);
-        spell.getInformation().setDamageToEnemy(6);
         spell.getInformation().setCanDamageToEnemy(true);
+        spell.getInformation().setDamageToEnemy(6);
         Application.writeJSON(spell, "Data/CollectionItem/Spell/AllAttack.json");
     }
 
@@ -407,30 +409,35 @@ public class Generator {
 
         spell.getInformation().setCanWeaknessBuffAdd(true);
         spell.getInformation().setWeaknessBuffPermanent(true);
-        spell.getInformation().setChangePowerByWeakness(4);
+        spell.getInformation().setChangeAPByWeakness(4);
         Application.writeJSON(spell, "Data/CollectionItem/Spell/Weakening.json");
     }
 
     public static void Sacrifice() throws IOException{
         Spell spell = new Spell();
         spell.setPrice(1600);
-        spell.setMp(3);
+        spell.setMp(2);
         spell.setName("Sacrifice");
 
         setSpellAttackArea(spell, true, false, false, true, false, false, 0, false,
                 false, false, false);
 
-        spell.getInformation().setCanKillOurMinionAndHealHero(true);
+        spell.getInformation().setCanWeaknessBuffAdd(true);
+        spell.getInformation().setChangeHPByWeakness(6);
+        spell.getInformation().setWeaknessBuffPermanent(true);
+        spell.getInformation().setCanPowerBuffAdd(true);
+        spell.getInformation().setChangeAPByPowerBuff(8);
+        spell.getInformation().setPowerBuffPermanent(true);
         Application.writeJSON(spell, "Data/CollectionItem/Spell/Sacrifice.json");
     }
 
     public static void KingsGuard() throws IOException{
         Spell spell = new Spell();
         spell.setPrice(1750);
-        spell.setMp(3);
+        spell.setMp(9);
         spell.setName("KingsGuard");
-
-        setSpellAttackArea(spell, false, true, false, true, false, false, 0, false,
+//TODO akhare kar ezafe konim
+        setSpellAttackArea(spell, false, true, false, true, true, false, 0, true,
                 false, false, true);
 
         spell.getInformation().setCanKillMinionOfEnemy(true);
@@ -450,6 +457,8 @@ public class Generator {
         spell.getInformation().setTimeOfStunBuff(2);
         Application.writeJSON(spell, "Data/CollectionItem/Spell/Shock.json");
     }
+
+///////////////////////////////////////////////
 
     public static void DiveSefid() throws IOException{
         Hero hero = new Hero("DiveSefid", 8000, 50, 4, "melee", 1, 2);
