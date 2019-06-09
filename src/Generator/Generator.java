@@ -172,9 +172,9 @@ public class Generator {
                 false, false, false);
 
         spell.getInformation().setMultipleImpact(true);
-
         spell.getInformation().setCanRemoveGoodBuffsOfEnemy(true);
         spell.getInformation().setCanRemoveBadBuffsOfOurselves(true);
+
         Application.writeJSON(spell, "Data/CollectionItem/Spell/AreaDispel.json");
     }
 
@@ -190,6 +190,7 @@ public class Generator {
         spell.getInformation().setCanIncreaseAP(true);
         spell.getInformation().setAmountOfIncreaseAP(2);
         spell.getInformation().setIncreaseAPPermanent(true);
+
         Application.writeJSON(spell, "Data/CollectionItem/Spell/Empower.json");
     }
 
@@ -204,6 +205,7 @@ public class Generator {
 
         spell.getInformation().setCanDamageToEnemy(true);
         spell.getInformation().setDamageToEnemy(4);
+
         Application.writeJSON(spell, "Data/CollectionItem/Spell/Fireball.json");
     }
 
@@ -219,6 +221,7 @@ public class Generator {
         spell.getInformation().setCanIncreaseAP(true);
         spell.getInformation().setIncreaseAPPermanent(true);
         spell.getInformation().setAmountOfIncreaseAP(4);
+
         Application.writeJSON(spell, "Data/CollectionItem/Spell/GodStrength.json");
     }
 
@@ -228,6 +231,14 @@ public class Generator {
         spell.setPrice(600);
         spell.setMp(3);
         spell.setName("HellFire");
+
+        //TODO attack area baraye kasaei ke kollan roo cell ha anjam mishan baayad doros she
+        setSpellAttackArea(spell, false, false, false, false, true, true, 2, false,
+                false, false, false);
+
+        //TODO impact
+
+
         Application.writeJSON(spell, "Data/CollectionItem/Spell/HellFire.json");
     }
 

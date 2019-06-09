@@ -21,7 +21,3 @@ public class Main {
     }
 
 }
-
-
-//getClass e tooye show info cherto perte
-//get AP ham bayad dashte bashe

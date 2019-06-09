@@ -24,7 +24,6 @@ public class CollectionMenu extends Menu {
 
         System.out.println("Here is Collection Menu");
         System.out.println("For help, enter : show menu");
-        ;
 
         String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();

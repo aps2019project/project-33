@@ -1,16 +1,20 @@
 package Model.CollectionItem;
 
 public class Information {
-    //AttackArea section
 
+    //TODO ghoole bozorg ro divert kardim raft
+    private boolean isKingsGuard;
 
-    private boolean isOnAttack;
     private boolean isOnDefence;
     private boolean isOnSpawn;
     private boolean isPassive;
     private boolean isOnDeath;
     private boolean isCombo;
+    private boolean isOnTurn;
 
+    //AttackArea section
+
+    private boolean isOnAttack;
     private boolean isEnemyImpact;
     private boolean isUsImpact;
     private boolean isMultipleImpact;
@@ -21,32 +25,26 @@ public class Information {
     private int lengthOfSquareOfCellsImpact;
     private boolean isImpactColumn;
     private boolean isImpactRow;
-    private boolean isKingsGuard;
     private boolean isImpactNeighbors;
+    private boolean isImpactItself;
+    private boolean isImpactAllArea;
+    //TODO fasele manhatanie
+    private boolean isImpactArea;
+    private int distanceOfImpactArea;
+
 
     //Attack section
 
     private boolean canIncreaseAP;
     private int amountOfIncreaseAP;
-
     private int increaseRemainTime;
     private boolean increaseAPPermanent;
 
-    private boolean isImpactAllArea;
-
-    private boolean isImpactArea;
-    private int distanceOfImpactArea;
-
-    private boolean isImpactItself;
-
-    private boolean isSpecialMinion;
 
     private boolean canHolyBuffAdd;
     private int timeOfHolyBuff;
-
     private boolean isHolyBuffPermanent;
     private int numberOfHolyBuff;
-    private boolean isHolyBuffPassive;
 
     private boolean canDisarmBuffAdd;
     private int timeOfDisarmBuff;
@@ -71,7 +69,6 @@ public class Information {
     private boolean canPowerBuffAdd;
     private int timeOfPowerBuff;
     private boolean isPowerBuffPermanent;
-    private boolean isGhazaPowerBuff;
 
     private boolean canRemoveBadBuffsOfOurselves;
     private boolean canRemoveGoodBuffsOfEnemy;
@@ -82,7 +79,6 @@ public class Information {
     private boolean canAddFieryBuffToCell;
     private int timeOfAddFieryBuffToCell;
 
-
     private boolean canAddPoisonBuffToCell;
     private int timeOfAddPoisonBuffToCell;
     private int decreaseHpOfPoisonBuffOfCell;
@@ -92,16 +88,14 @@ public class Information {
     private boolean canDoRangedAttack;
     private boolean canDoHybridAttack;
     private boolean canDoMeleeAttack;
-    private boolean isGhooleBozorg;
-    private int ghooleBozorgDamage;
     private boolean isAntiHollyBuff;
-    private boolean isZahhak;
     private boolean canIncreaseRangeOfAttack;
     private int amountOfIncreaseRangeOfAttack;
     private boolean canDoubleHp;
     private boolean canIncreaseMana;
     private int amountOfIncreaseMana;
-    private boolean canIncreaseManaAfter3Rounds;
+    private int timeOfIncreaseMana;
+    private int isIncreaseManaPermanent;
     private boolean canAddNefrineMarg;
 
     private boolean canKillHeroOfEnemyAfterRounds;
@@ -113,13 +107,11 @@ public class Information {
     private boolean poisonousDagger;
     private boolean shockHammer;
 
-    private boolean isMelee;
-    private boolean isRange;
-    private boolean isHybrid;
 
     private boolean forMelee;
     private boolean forRange;
     private boolean forHybrid;
+
     private boolean pareSimorgh;
     private int minOfPareSimorgh;
     private boolean isShamshireChini;
@@ -138,14 +130,6 @@ public class Information {
     private boolean antiAttackAgainstWeek;
     private boolean canAttackToHeroWhenDead;
     private int damageToHeroWhenDead;
-
-    public boolean isGhazaPowerBuff() {
-        return isGhazaPowerBuff;
-    }
-
-    public void setGhazaPowerBuff(boolean ghazaPowerBuff) {
-        isGhazaPowerBuff = ghazaPowerBuff;
-    }
 
     public int getChangePowerByWeakness() {
         return changePowerByWeakness;
@@ -453,30 +437,6 @@ public class Information {
         return canDoMeleeAttack;
     }
 
-    public void setGhooleBozorg(boolean ghooleBozorg) {
-        isGhooleBozorg = ghooleBozorg;
-    }
-
-    public boolean isGhooleBozorg() {
-        return isGhooleBozorg;
-    }
-
-    public void setGhooleBozorgDamage(int ghooleBozorgDamage) {
-        this.ghooleBozorgDamage = ghooleBozorgDamage;
-    }
-
-    public int getGhooleBozorgDamage() {
-        return ghooleBozorgDamage;
-    }
-
-    public void setZahhak(boolean zahhak) {
-        isZahhak = zahhak;
-    }
-
-    public boolean isZahhak() {
-        return isZahhak;
-    }
-
     public void setCanIncreaseRangeOfAttack(boolean canIncreaseRangeOfAttack) {
         this.canIncreaseRangeOfAttack = canIncreaseRangeOfAttack;
     }
@@ -499,14 +459,6 @@ public class Information {
 
     public boolean isCanIncreaseMana() {
         return canIncreaseMana;
-    }
-
-    public boolean isSpecialMinion() {
-        return isSpecialMinion;
-    }
-
-    public void setSpecialMinion(boolean specialMinion) {
-        isSpecialMinion = specialMinion;
     }
 
     public boolean isImpactArea() {
@@ -562,14 +514,6 @@ public class Information {
         this.amountOfIncreaseHPOfLivingCard = amountOfIncreaseHPOfLivingCard;
     }
 
-    public boolean isHolyBuffPassive() {
-        return isHolyBuffPassive;
-    }
-
-    public void setHolyBuffPassive(boolean holyBuffPassive) {
-        isHolyBuffPassive = holyBuffPassive;
-    }
-
     public boolean isCanIncreaseAP() {
         return canIncreaseAP;
     }
@@ -584,14 +528,6 @@ public class Information {
 
     public void setAmountOfIncreaseAP(int amountOfIncreaseAP) {
         this.amountOfIncreaseAP = amountOfIncreaseAP;
-    }
-
-    public boolean isCanIncreaseManaAfter3Rounds() {
-        return canIncreaseManaAfter3Rounds;
-    }
-
-    public void setCanIncreaseManaAfter3Rounds(boolean canIncreaseManaAfter3Rounds) {
-        this.canIncreaseManaAfter3Rounds = canIncreaseManaAfter3Rounds;
     }
 
     public int getAmountOfIncreaseMana() {
@@ -688,30 +624,6 @@ public class Information {
 
     public void setForHybrid(boolean forHybrid) {
         this.forHybrid = forHybrid;
-    }
-
-    public boolean isMelee() {
-        return isMelee;
-    }
-
-    public void setMelee(boolean melee) {
-        isMelee = melee;
-    }
-
-    public boolean isRange() {
-        return isRange;
-    }
-
-    public void setRange(boolean range) {
-        isRange = range;
-    }
-
-    public boolean isHybrid() {
-        return isHybrid;
-    }
-
-    public void setHybrid(boolean hybrid) {
-        isHybrid = hybrid;
     }
 
     public boolean isPareSimorgh() {
@@ -992,5 +904,29 @@ public class Information {
 
     public void setCombo(boolean combo) {
         isCombo = combo;
+    }
+
+    public boolean isOnTurn() {
+        return isOnTurn;
+    }
+
+    public void setOnTurn(boolean onTurn) {
+        this.isOnTurn = onTurn;
+    }
+
+    public int getTimeOfIncreaseMana() {
+        return timeOfIncreaseMana;
+    }
+
+    public void setTimeOfIncreaseMana(int timeOfIncreaseMana) {
+        this.timeOfIncreaseMana = timeOfIncreaseMana;
+    }
+
+    public int getIsIncreaseManaPermanent() {
+        return isIncreaseManaPermanent;
+    }
+
+    public void setIsIncreaseManaPermanent(int isIncreaseManaPermanent) {
+        this.isIncreaseManaPermanent = isIncreaseManaPermanent;
     }
 }
