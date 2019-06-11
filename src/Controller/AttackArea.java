@@ -97,24 +97,24 @@ public class AttackArea {
     // in ja miad mige che noe LivingCard hayi tahte tasire in lanati hastan
     // albate Cell hashoono mige behemoon khodeshoono kar nadare
 
-    public static ArrayList<Cell> getCells(Information information, Player player) {
+    public static ArrayList<Cell> getCellsOfPlayer(Information information, Player player) {
         ArrayList<Cell> impactCells = new ArrayList<>();
         if (information.isHeroImpact())
             impactCells.addAll(getCellOfLivingCard(player, (LivingCard) new Hero()));
         if (information.isMinionImpact())
             impactCells.addAll(getCellOfLivingCard(player, (LivingCard) new Minion()));
-        return impactCells;
+        return unique(impactCells);
     }
 
     public static ArrayList<Cell> getCellOfLivingCard(Player player, LivingCard livingCard) {
-        ArrayList<Cell> cellsOfHero = new ArrayList<>();
+        ArrayList<Cell> cellsOfLivingCards = new ArrayList<>();
         for (CollectionItem collectionItem : player.getAliveCards()) {
             if (collectionItem.getClass().equals(livingCard.getClass())) {
                 LivingCard livingCard1 = (LivingCard) collectionItem;
-                cellsOfHero.add(livingCard1.getCell());
+                cellsOfLivingCards.add(livingCard1.getCell());
             }
         }
-        return unique(cellsOfHero);
+        return unique(cellsOfLivingCards);
     }
 
     // tamoom shod :D
@@ -155,17 +155,37 @@ public class AttackArea {
         return unique(AttackArea.getImpactCellsOfAttack(livingCard, battle));
     }
 
+    private static ArrayList<Cell> unique(ArrayList<Cell> listOfCells) {
+        ArrayList<Cell> uniquedList = new ArrayList<>();
+        for(Cell cell : listOfCells) {
+            if (uniquedList.contains(cell))
+                continue;
+            uniquedList.add(cell);
+        }
+        return uniquedList;
+    }
+
+    public static ArrayList<Cell> merge(ArrayList<Cell> impactedCells, ArrayList<Cell> impactedCellsOfLivingCards) {
+        ArrayList<Cell> result = new ArrayList<>();
+        for (Cell cell : impactedCells)
+            if (impactedCellsOfLivingCards.contains(cell))
+                result.add(cell);
+        return unique(result);
+    }
+
+    ///////////////////////////////////////////////////////
     public static ArrayList<Cell> getImpactCells(CollectionItem collectionItem, Cell cell, Battle battle) {
         ArrayList<Cell> impactedCellsOfLivingCards = new ArrayList<>();
+        ArrayList<Cell> impactedCells = new ArrayList<>();
 
         Information information = collectionItem.getInformation();
 
         if (information.isEnemyImpact())
-            impactedCellsOfLivingCards.addAll(getCells(information, battle.getPlayerOff()));
+            impactedCellsOfLivingCards.addAll(getCellsOfPlayer(information, battle.getPlayerOff()));
         if (information.isUsImpact())
-            impactedCellsOfLivingCards.addAll(getCells(information, battle.getPlayerOn()));
+            impactedCellsOfLivingCards.addAll(getCellsOfPlayer(information, battle.getPlayerOn()));
+
         if (information.isLocationLimit()) {
-            ArrayList<Cell> impactedCells = new ArrayList<>();
             if (information.isSquareOfCellsImpact())
                 impactedCells.addAll(getSquareOfCells(cell, battle, information.getLengthOfSquareOfCellsImpact()));
             if (information.isImpactColumn())
@@ -177,50 +197,27 @@ public class AttackArea {
             if (information.isKingsGuard()) {
                 impactedCells = getNeighbors(battle.getPlayerOn().getHeroPosition(), battle);
             }
-            impactedCellsOfLivingCards = merge(impactedCells, impactedCellsOfLivingCards);
+            if(information.isImpactAllArea()){
+                impactedCells.addAll(getAllArea(battle));
+            }
+            impactedCells = unique(impactedCells);
         }
+        ArrayList<Cell> result = new ArrayList<>();
+        result.addAll(impactedCells);
+        result.addAll(impactedCellsOfLivingCards);
+        result = unique(result);
+        if(information.isLocationLimit())
+            result = merge(result, impactedCells);
+        if(information.isUsImpact() || information.isEnemyImpact())
+            result = merge(result, impactedCellsOfLivingCards);
         if(information.isImpactItself())
-            impactedCellsOfLivingCards.add(cell);
-        return unique(impactedCellsOfLivingCards);
+            result.add(cell);
+        return unique(result);
     }
 
-    private static ArrayList<Cell> unique(ArrayList<Cell> listOfCells) {
-        ArrayList<Cell> uniquedList = new ArrayList<>();
-        for(Cell cell : listOfCells) {
-            if (uniquedList.contains(cell))
-                continue;
-            uniquedList.add(cell);
-        }
-        return uniquedList;
-    }
 
     // tabe haye komaki
 
-    public static ArrayList<Cell> merge(ArrayList<Cell> impactedCells, ArrayList<Cell> impactedCellsOfLivingCards) {
-        ArrayList<Cell> result = new ArrayList<>();
-        for (Cell cell : impactedCells)
-            if (impactedCellsOfLivingCards.contains(cell))
-                result.add(cell);
-        return result;
-    }
 
-    public static ArrayList<Cell> getImpactCellsOfItem(Item item, Battle battle) {
-        ArrayList<Cell> impactCells = new ArrayList<>(), result = new ArrayList<>();
-        Information information = item.getInformation();
 
-        if (information.isEnemyImpact())
-            impactCells.addAll(getCells(information, battle.getPlayerOff()));
-        if (information.isUsImpact())
-            impactCells.addAll(getCells(information, battle.getPlayerOn()));
-        for (Cell cell : impactCells) {
-            LivingCard livingCard = cell.getLivingCard();
-            if (information.isForHybrid() && livingCard.getInformation().isCanDoHybridAttack())
-                result.add(cell);
-            if (information.isForMelee() && livingCard.getInformation().isCanDoMeleeAttack())
-                result.add(cell);
-            if (information.isForRange() && livingCard.getInformation().isCanDoRangedAttack())
-                result.add(cell);
-        }
-        return result;
-    }
 }
