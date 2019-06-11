@@ -11,6 +11,7 @@ public class Hero extends LivingCard {
     private int minOfPareSimorgh;
     private int coolDown, maxCoolDown;
 
+
     public void setMaxCoolDown(int maxCoolDown){
         this.maxCoolDown = maxCoolDown;
     }

@@ -11,7 +11,7 @@ import java.io.IOException;
 public class Generator {
     private static Application application;
 
-    private static String[] heroNames = {"DiveSefid", "Simorgh", "Ezhdaha", "Rakhsh", "Zahhak", "Kaveh", "Arash", "Afsaneh", "Esfandiar",
+    private static String[] heroNames = {"DiveSefid", "Simorgh", "EzhdehayeHaftSar", "Rakhsh", "Zahhak", "Kaveh", "Arash", "Afsaneh", "Esfandiar",
             "Rostam"};
     private static String[] spellNames = {"TotalDisarm", "AreaDispel", "Empower", "Fireball", "GodStrength", "HellFire", "LightingBolt",
             "PoisonLake", "Madness", "AllDisarm", "AllPoison", "Dispel", "HealthWithProfit", "GhazaBokhorJoonBegiri",
@@ -54,7 +54,7 @@ public class Generator {
     public static void createHeroes() throws IOException {
         Generator.DiveSefid();
         Generator.Simorgh();
-        Generator.Ezhdaha();
+        Generator.EzhdehayeHaftSar();
         Generator.Rakhsh();
         Generator.Zahhak();
         Generator.Kaveh();
@@ -105,6 +105,21 @@ public class Generator {
         Generator.createSiavash();
         Generator.createShahGhool();
         Generator.createArzhangeDiv();
+    }
+
+    public static void setHeroAttackArea(Hero hero, boolean isEnemy, boolean isUs, boolean isHero,
+                                         boolean isMinion, boolean isCell, boolean isNeighbor, boolean isMelee,
+                                         boolean isHybrid, boolean isRanged, int range){
+        hero.getInformation().setEnemyImpact(isEnemy);
+        hero.getInformation().setUsImpact(isUs);
+        hero.getInformation().setHeroImpact(isHero);
+        hero.getInformation().setMinionImpact(isMinion);
+        hero.getInformation().setCellImpact(isCell);
+        hero.getInformation().setImpactNeighbors(isNeighbor);
+        hero.getInformation().setCanDoMeleeAttack(isMelee);
+        hero.getInformation().setCanDoHybridAttack(isHybrid);
+        hero.getInformation().setCanDoRangedAttack(isRanged);
+        hero.setRangeOfAttack(range);
     }
 
     public static void setSpellAttackArea(Spell spell, boolean isUs, boolean isEnemy, boolean isHero, boolean isMinion,
@@ -462,66 +477,90 @@ public class Generator {
 
     public static void DiveSefid() throws IOException {
         Hero hero = new Hero("DiveSefid", 8000, 50, 4, "melee", 1, 2);
-        hero.getInformation().setCanDoMeleeAttack(true);
+        setHeroAttackArea(hero, false, true, true, false, false, false,  true, false, false, 0);
+        hero.getInformation().setCanPowerBuffAdd(true);
+        hero.getInformation().setChangeAPByPowerBuff(4);
+        hero.getInformation().setPowerBuffPermanent(true);
+        hero.getInformation().setImpactItself(true);
         Application.writeJSON(hero, "Data/CollectionItem/Hero/DiveSefid.json");
     }
 
     public static void Simorgh() throws IOException {
         Hero hero = new Hero("Simorgh", 9000, 50, 4, "melee", 3, 8);
-        hero.getInformation().setCanDoMeleeAttack(true);
+        setHeroAttackArea(hero, true, false, true, true, false, false,  true, false, false, 0);
+        hero.getInformation().setCanStunBuffAdd(true);
+        hero.getInformation().setTimeOfStunBuff(1);
+        hero.getInformation().setMultipleImpact(true);
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Simorgh.json");
     }
 
-    public static void Ezhdaha() throws IOException {
-        Hero hero = new Hero("Ezhdaha", 8000, 50, 4, "melee", 0, 1);
-        hero.getInformation().setCanDoMeleeAttack(true);
-        Application.writeJSON(hero, "Data/CollectionItem/Hero/Ezhdaha.json");
+    public static void EzhdehayeHaftSar() throws IOException {
+        Hero hero = new Hero("EzhdehayeHaftSar", 8000, 50, 4, "melee", 0, 1);
+        setHeroAttackArea(hero, true, true, true, true, false, false,  true, false, false, 0);
+        hero.getInformation().setCanDisarmBuffAdd(true);
+        hero.getInformation().setDisarmBuffPermanent(true);
+        Application.writeJSON(hero, "Data/CollectionItem/Hero/EzhdehayeHaftSar.json");
     }
 
     public static void Rakhsh() throws IOException {
         Hero hero = new Hero("Rakhsh", 8000, 50, 4, "melee", 1, 2);
-        hero.getInformation().setCanDoMeleeAttack(true);
+        setHeroAttackArea(hero, true, false, true, true, false, false,  true, false, false, 0);
+        hero.getInformation().setCanStunBuffAdd(true);
+        hero.getInformation().setTimeOfStunBuff(1);
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Rakhsh.json");
     }
 
     public static void Zahhak() throws IOException {
         Hero hero = new Hero("Zahhak", 10000, 50, 4, "melee", 1, 3);
-        hero.getInformation().setCanDoMeleeAttack(true);
+        //TODO
+        setHeroAttackArea(hero, false, true, true, false, false, false,  true, false, false, 0);
+
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Zahhak.json");
     }
 
     public static void Kaveh() throws IOException {
         Hero hero = new Hero("Kaveh", 8000, 50, 4, "melee", 1, 3);
-        hero.getInformation().setCanDoMeleeAttack(true);
+        setHeroAttackArea(hero, false, false, false, false, true, false,  true, false, false, 0);
+        hero.getInformation().setImpactAllArea(true);
+        hero.getInformation().setCellImpact(true);
+        hero.getInformation().setCanHolyBuffAdd(true);
+        hero.getInformation().setNumberOfHolyBuff(1);
+        hero.getInformation().setTimeOfHolyBuff(3);
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Kaveh.json");
     }
 
     public static void Arash() throws IOException {
         Hero hero = new Hero("Arash", 10000, 30, 2, "ranged", 2, 2);
-        hero.getInformation().setCanDoRangedAttack(true);
-        hero.setRangeOfAttack(6);
+        setHeroAttackArea(hero, true, true, true, true, true, false,  false, false, true, 6);
+        hero.getInformation().setImpactRow(true);
+        //TODO bayad dorost she esmesh
+        hero.getInformation().setCanDamageToEnemy(true);
+        hero.getInformation().setDamageToEnemy(4);
+        hero.getInformation().setMultipleImpact(true);
+        //TODO satre ghahremane havasemun bayad be ina bashe
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Arash.json");
     }
 
     public static void Afsaneh() throws IOException {
         Hero hero = new Hero("Afsaneh", 11000, 40, 3, "ranged", 1, 2);
-        hero.getInformation().setCanDoRangedAttack(true);
-        hero.setRangeOfAttack(3);
+        setHeroAttackArea(hero, true, false, true, true, false, false,  false, false, true, 3);
+        hero.getInformation().setCanRemoveGoodBuffsOfEnemy(true);
+
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Afsaneh.json");
     }
 
     public static void Esfandiar() throws IOException {
         Hero hero = new Hero("Esfandiar", 12000, 35, 3, "hybrid", 0, 1);
-        hero.getInformation().setCanDoHybridAttack(true);
-        hero.setRangeOfAttack(3);
+        setHeroAttackArea(hero, false, true, true, false, false, false,  true, false, false, 0);
+        //TODO che ashghalie in ?
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Esfandiar.json");
     }
 
     public static void Rostam() throws IOException {
         //chera mp o cooldown nadare?s
         Hero hero = new Hero("Rostam", 8000, 55, 7, "hybrid", 0, 0);
-        hero.getInformation().setCanDoHybridAttack(true);
-        hero.setRangeOfAttack(4);
+        setHeroAttackArea(hero, false, false, false, false, false, false,  false, true, false, 4);
+
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Rostam.json");
     }
 

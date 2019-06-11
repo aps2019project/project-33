@@ -373,7 +373,7 @@ public class Impact {
         if (hero.getName().equals("DiveSefid")) {
             Impact.addPowerBuffToCard(100, true, false, 0, 4, hero);
         }
-        if (hero.getName().equals("Ezhdaha")) {
+        if (hero.getName().equals("EzhdehayeHaftSar")) {
             LivingCard livingCard = cell.getLivingCard();
             if (livingCard == null) {
                 System.out.println("there isnt living card here");
