@@ -762,8 +762,11 @@ public class Generator {
         minion.setHP(5);
         minion.setAP(4);
         minion.setName("Jadogar");
-//TODO
+//TODO naghes
         setMinionAttackArea(minion, true, true, false, false, false, false, false, true, false, true, false, true,  true, false, false, 0);
+        minion.getInformation().setCanPowerBuffAdd(true);
+        minion.getInformation().setChangeAPByPowerBuff(2);
+        minion.getInformation().setCanWeaknessBuffAdd(true);
 
 
         Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Jadogar.json");
