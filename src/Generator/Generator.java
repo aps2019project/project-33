@@ -8,6 +8,8 @@ import Model.CollectionItem.Spell;
 
 import java.io.IOException;
 
+//TODO item haro ezafe nakardim
+
 public class Generator {
     private static Application application;
 
@@ -911,7 +913,7 @@ public class Generator {
         minion.setHP(14);
         minion.setAP(7);
         minion.setName("MareGhoolPeykar");
-
+//TODO baraxe holybuff
         setMinionAttackArea(minion, false, false, false, false, true, false, true, true, false, true, true, false, false, false, true, 5);
         minion.getInformation().setImpactArea(true);
         minion.getInformation().setDistanceOfImpactArea(2);

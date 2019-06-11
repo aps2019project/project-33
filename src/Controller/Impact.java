@@ -15,7 +15,7 @@ public class Impact {
 
     public static void addWeaknessToCard(int remainTime, boolean isPermanent, boolean isPassive, int changeHP, int changePower,
                                          LivingCard livingCard) {
-        WeaknessBuff weaknessBuff = new WeaknessBuff(remainTime, false, false, changeHP, changePower);
+        WeaknessBuff weaknessBuff = new WeaknessBuff(remainTime, isPermanent, isPassive, changeHP, changePower);
         livingCard.addNewBuff(weaknessBuff);
     }
 
@@ -46,23 +46,20 @@ public class Impact {
     }
 
     public static void removeBadBuffsOfLivingCard(LivingCard livingCard) {
-        ArrayList<Buff> effects = livingCard.getEffects();
-        int numberOfBuffs = effects.size();
-
+        ArrayList<Buff> LivingCardBuffs = livingCard.getEffects();
+        int numberOfBuffs = LivingCardBuffs.size();
+// TODO har turn bayad isactiva true shan
         for (int i = numberOfBuffs - 1; i > -1; i--) {
-            Buff buff = effects.get(i);
+            Buff buff = LivingCardBuffs.get(i);
             if (buff.isPassive()) {
                 buff.setIsActive(false);
                 continue;
             }
-            if (buff instanceof WeaknessBuff) effects.remove(i);
-            if (buff instanceof PoisonBuff) effects.remove(i);
-            if (buff instanceof StunBuff) effects.remove(i);
-            if (buff instanceof DisarmBuff) effects.remove(i);
-            if (buff instanceof HolyBuff){
-                if(((HolyBuff)buff).getShieldPower() < 0)
-                    effects.remove(i);
-            }
+            if (buff instanceof WeaknessBuff) LivingCardBuffs.remove(i);
+            if (buff instanceof PoisonBuff) LivingCardBuffs.remove(i);
+            if (buff instanceof StunBuff) LivingCardBuffs.remove(i);
+            if (buff instanceof DisarmBuff) LivingCardBuffs.remove(i);
+            //TODO holly buffe manfio che ghalati konim
         }
     }
 
