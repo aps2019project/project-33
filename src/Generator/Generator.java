@@ -1,10 +1,7 @@
 package Generator;
 
 import Controller.Application;
-import Model.CollectionItem.Hero;
-import Model.CollectionItem.Information;
-import Model.CollectionItem.Minion;
-import Model.CollectionItem.Spell;
+import Model.CollectionItem.*;
 
 import java.io.IOException;
 
@@ -28,6 +25,11 @@ public class Generator {
         createMinions();
         createSpells();
         createHeroes();
+        createItems();
+    }
+
+    public static void createItems() {
+
     }
 
     public static void createSpells() throws IOException {
@@ -109,9 +111,24 @@ public class Generator {
         Generator.createArzhangeDiv();
     }
 
+    public static void setItemDetails(Item item, String name, int price, boolean cellImpact, boolean enemyImpact, boolean usImpact, boolean heroImpact,
+                                      boolean minionImpact, boolean forRange, boolean forHybrid, boolean forMelee) {
+        item.setName(name);
+        item.setPrice(price);
+        item.getInformation().setCellImpact(cellImpact);
+        item.getInformation().setEnemyImpact(enemyImpact);
+        item.getInformation().setUsImpact(usImpact);
+        item.getInformation().setHeroImpact(heroImpact);
+        item.getInformation().setMinionImpact(minionImpact);
+        item.getInformation().setForRange(forRange);
+        item.getInformation().setForHybrid(forHybrid);
+        item.getInformation().setForMelee(forMelee);
+    }
+
+
     public static void setHeroAttackArea(Hero hero, boolean isEnemy, boolean isUs, boolean isHero,
                                          boolean isMinion, boolean isCell, boolean isNeighbor, boolean isMelee,
-                                         boolean isHybrid, boolean isRanged, int range){
+                                         boolean isHybrid, boolean isRanged, int range) {
         hero.getInformation().setEnemyImpact(isEnemy);
         hero.getInformation().setUsImpact(isUs);
         hero.getInformation().setHeroImpact(isHero);
@@ -479,7 +496,7 @@ public class Generator {
 
     public static void DiveSefid() throws IOException {
         Hero hero = new Hero("DiveSefid", 8000, 50, 4, "melee", 1, 2);
-        setHeroAttackArea(hero, false, true, true, false, false, false,  true, false, false, 0);
+        setHeroAttackArea(hero, false, true, true, false, false, false, true, false, false, 0);
         hero.getInformation().setCanPowerBuffAdd(true);
         hero.getInformation().setChangeAPByPowerBuff(4);
         hero.getInformation().setPowerBuffPermanent(true);
@@ -489,7 +506,7 @@ public class Generator {
 
     public static void Simorgh() throws IOException {
         Hero hero = new Hero("Simorgh", 9000, 50, 4, "melee", 3, 8);
-        setHeroAttackArea(hero, true, false, true, true, false, false,  true, false, false, 0);
+        setHeroAttackArea(hero, true, false, true, true, false, false, true, false, false, 0);
         hero.getInformation().setCanStunBuffAdd(true);
         hero.getInformation().setTimeOfStunBuff(1);
         hero.getInformation().setMultipleImpact(true);
@@ -498,7 +515,7 @@ public class Generator {
 
     public static void EzhdehayeHaftSar() throws IOException {
         Hero hero = new Hero("EzhdehayeHaftSar", 8000, 50, 4, "melee", 0, 1);
-        setHeroAttackArea(hero, true, true, true, true, false, false,  true, false, false, 0);
+        setHeroAttackArea(hero, true, true, true, true, false, false, true, false, false, 0);
         hero.getInformation().setCanDisarmBuffAdd(true);
         hero.getInformation().setDisarmBuffPermanent(true);
         Application.writeJSON(hero, "Data/CollectionItem/Hero/EzhdehayeHaftSar.json");
@@ -506,7 +523,7 @@ public class Generator {
 
     public static void Rakhsh() throws IOException {
         Hero hero = new Hero("Rakhsh", 8000, 50, 4, "melee", 1, 2);
-        setHeroAttackArea(hero, true, false, true, true, false, false,  true, false, false, 0);
+        setHeroAttackArea(hero, true, false, true, true, false, false, true, false, false, 0);
         hero.getInformation().setCanStunBuffAdd(true);
         hero.getInformation().setTimeOfStunBuff(1);
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Rakhsh.json");
@@ -515,14 +532,14 @@ public class Generator {
     public static void Zahhak() throws IOException {
         Hero hero = new Hero("Zahhak", 10000, 50, 4, "melee", 1, 3);
         //TODO
-        setHeroAttackArea(hero, false, true, true, false, false, false,  true, false, false, 0);
+        setHeroAttackArea(hero, false, true, true, false, false, false, true, false, false, 0);
 
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Zahhak.json");
     }
 
     public static void Kaveh() throws IOException {
         Hero hero = new Hero("Kaveh", 8000, 50, 4, "melee", 1, 3);
-        setHeroAttackArea(hero, false, false, false, false, true, false,  true, false, false, 0);
+        setHeroAttackArea(hero, false, false, false, false, true, false, true, false, false, 0);
         hero.getInformation().setImpactAllArea(true);
         hero.getInformation().setCellImpact(true);
         hero.getInformation().setCanHolyBuffAdd(true);
@@ -533,7 +550,7 @@ public class Generator {
 
     public static void Arash() throws IOException {
         Hero hero = new Hero("Arash", 10000, 30, 2, "ranged", 2, 2);
-        setHeroAttackArea(hero, true, true, true, true, true, false,  false, false, true, 6);
+        setHeroAttackArea(hero, true, true, true, true, true, false, false, false, true, 6);
         hero.getInformation().setImpactRow(true);
         //TODO bayad dorost she esmesh
         hero.getInformation().setCanDamageToEnemy(true);
@@ -545,7 +562,7 @@ public class Generator {
 
     public static void Afsaneh() throws IOException {
         Hero hero = new Hero("Afsaneh", 11000, 40, 3, "ranged", 1, 2);
-        setHeroAttackArea(hero, true, false, true, true, false, false,  false, false, true, 3);
+        setHeroAttackArea(hero, true, false, true, true, false, false, false, false, true, 3);
         hero.getInformation().setCanRemoveGoodBuffsOfEnemy(true);
 
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Afsaneh.json");
@@ -553,7 +570,7 @@ public class Generator {
 
     public static void Esfandiar() throws IOException {
         Hero hero = new Hero("Esfandiar", 12000, 35, 3, "hybrid", 0, 1);
-        setHeroAttackArea(hero, false, true, true, false, false, false,  true, false, false, 0);
+        setHeroAttackArea(hero, false, true, true, false, false, false, true, false, false, 0);
         //TODO che ashghalie in ?
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Esfandiar.json");
     }
@@ -561,7 +578,7 @@ public class Generator {
     public static void Rostam() throws IOException {
         //chera mp o cooldown nadare?s
         Hero hero = new Hero("Rostam", 8000, 55, 7, "hybrid", 0, 0);
-        setHeroAttackArea(hero, false, false, false, false, false, false,  false, true, false, 4);
+        setHeroAttackArea(hero, false, false, false, false, false, false, false, true, false, 4);
 
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Rostam.json");
     }
@@ -722,7 +739,7 @@ public class Generator {
         minion.setHP(10);
         minion.setAP(4);
         minion.setName("GhooleDoSar");
-        setMinionAttackArea(minion, false, true, false, false, false, false, true, false, true, true, false, false,  true, false, false, 0);
+        setMinionAttackArea(minion, false, true, false, false, false, false, true, false, true, true, false, false, true, false, false, 0);
         minion.getInformation().setCanRemoveGoodBuffsOfEnemy(true);
         Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/GhooleDoSar.json");
     }
@@ -746,7 +763,7 @@ public class Generator {
         minion.setHP(5);
         minion.setAP(7);
         minion.setName("Giv");
-        setMinionAttackArea(minion, false, false, true, false, false, false, false, false, false, false, false, false,  false, false, true, 5);
+        setMinionAttackArea(minion, false, false, true, false, false, false, false, false, false, false, false, false, false, false, true, 5);
         //anti shock ro motamen nistim
         minion.getInformation().setAntiShock(true);
         Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Giv.json");
@@ -759,7 +776,7 @@ public class Generator {
         minion.setHP(10);
         minion.setAP(14);
         minion.setName("GorazeVahshi");
-        setMinionAttackArea(minion, false, false, true, false, false, false, false, false, false, false, false, false,  true, false, false, 0);
+        setMinionAttackArea(minion, false, false, true, false, false, false, false, false, false, false, false, false, true, false, false, 0);
         minion.getInformation().setAntiDisarm(true);
         Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/GorazeVahshi.json");
     }
@@ -873,7 +890,7 @@ public class Generator {
         minion.setHP(10);
         minion.setAP(4);
         minion.setName("Jen");
-        setMinionAttackArea(minion, false, false, false, false, false, false, false, true, false, true, false, false,  false, false, true, 4);
+        setMinionAttackArea(minion, false, false, false, false, false, false, false, true, false, true, false, false, false, false, true, 4);
         minion.getInformation().setOnTurn(true);
         minion.getInformation().setCanPowerBuffAdd(true);
         minion.getInformation().setChangeAPByPowerBuff(1);
@@ -938,7 +955,7 @@ public class Generator {
         minion.setHP(3);
         minion.setAP(4);
         minion.setName("NaneSarma");
-        setMinionAttackArea(minion, false, false, false, false, true, false, true, false, false, true, true, true,  false, false, true, 4);
+        setMinionAttackArea(minion, false, false, false, false, true, false, true, false, false, true, true, true, false, false, true, 4);
         minion.getInformation().setCanStunBuffAdd(true);
         minion.getInformation().setTimeOfStunBuff(1);
         Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/NaneSarma.json");
@@ -1015,7 +1032,7 @@ public class Generator {
         minion.setHP(20);
         minion.setAP(12);
         minion.setName("Piran");
-        setMinionAttackArea(minion, false, false, true, false, false, false, false, false, false, false, false, false,  true, false, false, 0);
+        setMinionAttackArea(minion, false, false, true, false, false, false, false, false, false, false, false, false, true, false, false, 0);
         minion.getInformation().setAntiPoison(true);
         Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Piran.json");
     }
@@ -1039,7 +1056,7 @@ public class Generator {
         minion.setHP(10);
         minion.setAP(4);
         minion.setName("ShahGhool");
-        setMinionAttackArea(minion, false, false, false, false, false, true, true, false, true, true, false, false,  true, false, false, 0);
+        setMinionAttackArea(minion, false, false, false, false, false, true, true, false, true, true, false, false, true, false, false, 0);
         Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/ShahGhool.json");
     }
 
@@ -1090,10 +1107,71 @@ public class Generator {
         minion.setHP(8);
         minion.setAP(5);
         minion.setName("Siavash");
-        setMinionAttackArea(minion, false, false, false, true, false, false, true, false, true, false, false, false,  true, false, false, 0);
+        setMinionAttackArea(minion, false, false, false, true, false, false, true, false, true, false, false, false, true, false, false, 0);
         minion.getInformation().setCanDamageToEnemy(true);
         minion.getInformation().setDamageToEnemy(6);
         Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Siavash.json");
     }
 
+    //////////////////////////////////// items
+
+    public static void createAssassinationDagger() throws IOException {
+        Item item = new Item();
+        String name = "AssassinationDagger";
+        setItemDetails(item, name, 5000, false, false, false, false, false, false, false, false);
+        item.getInformation().setAssassinationDagger(true);
+
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+    }
+
+    public static void createTajeDanaei() throws IOException {
+        Item item = new Item();
+        String name = "TajeDanaei";
+        setItemDetails(item, name, 300, false, false, false, false, false, true, true, true);
+        item.getInformation().setCanIncreaseMana(true);
+        item.getInformation().setAmountOfIncreaseMana(1);
+        item.getInformation().setTimeOfIncreaseMana(3);
+
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+    }
+
+    public static void creaseNamuseSepar() throws IOException {
+        Item item = new Item();
+        String name = "NamuseSepar";
+        setItemDetails(item, name, 4000, false, false, true, true, false, true, true, true);
+        item.getInformation().setCanHolyBuffAdd(true);
+        item.getInformation().setNumberOfHolyBuff(12);
+        item.getInformation().setHolyBuffPermanent(true);
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+    }
+
+    public static void createKamaneDamul() throws IOException {
+        Item item = new Item();
+        String name = "KamaneDamul";
+        setItemDetails(item, name, 30000, false, true, false, true, true, true, true, false);
+        item.getInformation().setCanDisarmBuffAdd(true);
+        item.getInformation().setTimeOfDisarmBuff(1);
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+    }
+
+    public static void createNushDaru() throws IOException {
+        Item item = new Item();
+        String name = "NushDaru";
+        setItemDetails(item, name, 0, false, false, true, true, true, true, true, true);
+
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+
+    }
+
+    public static void createTireSeShakh() throws IOException {
+        Item item = new Item();
+        String name = "TireDoShakh";
+        setItemDetails(item, name, 0, false, false, true, true, true, true, true, false);
+        item.getInformation().setCanIncreaseAP(true);
+        item.getInformation().setAmountOfIncreaseAP(2);
+    }
+
+    public static void craetePareSimorgh() throws IOException {
+
+    }
 }

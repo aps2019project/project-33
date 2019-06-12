@@ -21,6 +21,8 @@ public class Player {
     private int flagTurns;
     private GraveYard graveYard = new GraveYard();
     private Account account;
+    private boolean haveAssassinationDagger;
+
     private boolean haveGhosleTamid, haveTerrorHood;
     private int timeOfGhosleTamid;
     private boolean canAddPoisonWhileAttacking, canAddStunWhileAttacking;
@@ -181,5 +183,13 @@ public class Player {
 
     public void setHaveTerrorHood(boolean haveTerrorHood) {
         this.haveTerrorHood = haveTerrorHood;
+    }
+
+    public boolean isHaveAssassinationDagger() {
+        return haveAssassinationDagger;
+    }
+
+    public void setHaveAssassinationDagger(boolean haveAssassinationDagger) {
+        this.haveAssassinationDagger = haveAssassinationDagger;
     }
 }
