@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Hero extends LivingCard {
     private int deadAfterRounds = 0;
     private boolean havePareSimorgh, haveAssassinationDagger, haveKingKiller;
+    private boolean haveSoulEater;
     private int minOfPareSimorgh;
     private int coolDown, maxCoolDown;
 
@@ -130,5 +131,15 @@ public class Hero extends LivingCard {
 
     public void setHaveKingKiller(boolean haveKingKiller) {
         this.haveKingKiller = haveKingKiller;
+    }
+
+    @Override
+    public boolean isHaveSoulEater() {
+        return haveSoulEater;
+    }
+
+    @Override
+    public void setHaveSoulEater(boolean haveSoulEater) {
+        this.haveSoulEater = haveSoulEater;
     }
 }

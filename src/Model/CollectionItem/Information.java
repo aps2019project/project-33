@@ -96,7 +96,7 @@ public class Information {
     private boolean canIncreaseMana;
     private int amountOfIncreaseMana;
     private int timeOfIncreaseMana;
-    private int isIncreaseManaPermanent;
+    private boolean isIncreaseManaPermanent;
     private boolean canAddNefrineMarg;
 
     private boolean canKillHeroOfEnemyAfterRounds;
@@ -923,11 +923,11 @@ public class Information {
         this.timeOfIncreaseMana = timeOfIncreaseMana;
     }
 
-    public int getIsIncreaseManaPermanent() {
+    public boolean getIsIncreaseManaPermanent() {
         return isIncreaseManaPermanent;
     }
 
-    public void setIsIncreaseManaPermanent(int isIncreaseManaPermanent) {
+    public void setIsIncreaseManaPermanent(boolean isIncreaseManaPermanent) {
         this.isIncreaseManaPermanent = isIncreaseManaPermanent;
     }
 

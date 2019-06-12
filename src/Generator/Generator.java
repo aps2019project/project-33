@@ -1115,14 +1115,6 @@ public class Generator {
 
     //////////////////////////////////// items
 
-    public static void createAssassinationDagger() throws IOException {
-        Item item = new Item();
-        String name = "AssassinationDagger";
-        setItemDetails(item, name, 5000, false, false, false, false, false, false, false, false);
-        item.getInformation().setAssassinationDagger(true);
-
-        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
-    }
 
     public static void createTajeDanaei() throws IOException {
         Item item = new Item();
@@ -1169,9 +1161,143 @@ public class Generator {
         setItemDetails(item, name, 0, false, false, true, true, true, true, true, false);
         item.getInformation().setCanIncreaseAP(true);
         item.getInformation().setAmountOfIncreaseAP(2);
+
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+
     }
 
     public static void craetePareSimorgh() throws IOException {
+        Item item = new Item();
+        String name = "PareSimorgh";
+        setItemDetails(item, name, 3500, false, true, false, true, false, true, true, false);
+        item.getInformation().setCanWeaknessBuffAdd(true);
+        item.getInformation().setWeaknessBuffPermanent(true);
+        item.getInformation().setChangeAPByWeakness(2);
+
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+
+    }
+
+    public static void createExir() throws IOException {
+        Item item = new Item();
+        String name = "Exir";
+        setItemDetails(item, name, 0, false, false, true, false, true, true, true, true);
+        item.getInformation().setCanPowerBuffAdd(true);
+        item.getInformation().setPowerBuffPermanent(true);
+        item.getInformation().setChangeHPByPowerBuff(3);
+        item.getInformation().setChangeAPByPowerBuff(3);
+
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+
+    }
+
+    public static void createMajuneMana() throws IOException {
+        Item item = new Item();
+        String name = "MajuneMana";
+        setItemDetails(item, name, 0, false, false, false, false, false, false, false, false);
+        item.getInformation().setCanIncreaseMana(true);
+        item.getInformation().setAmountOfIncreaseMana(3);
+        item.getInformation().setTimeOfIncreaseMana(1);
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+
+    }
+
+    public static void createMajuneRuinTani() throws IOException {
+        Item item = new Item();
+        String name = "MajuneRuinTani";
+        setItemDetails(item, name, 0, false, false, true, true, true, true, true, true);
+        item.getInformation().setCanHolyBuffAdd(true);
+        item.getInformation().setTimeOfHolyBuff(2);
+        item.getInformation().setNumberOfHolyBuff(10);
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+
+    }
+
+    public static void createNefrineMarg() throws IOException {
+        Item item = new Item();
+        String name = "NefrineMarg";
+        setItemDetails(item, name, 0, false, false, true, false, true, true, true, true);
+        item.getInformation().setCanAddNefrineMarg(true);
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+
+    }
+
+    public static void createRandomDamage() throws IOException {
+        Item item = new Item();
+        String name = "RandomDamage";
+        setItemDetails(item, name, 0, false, false, true, true, true, true, true, true);
+        item.getInformation().setCanPowerBuffAdd(true);
+        item.getInformation().setPowerBuffPermanent(true);
+        item.getInformation().setChangeAPByPowerBuff(2);
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+
+    }
+
+    public static void createTerrorHood() throws IOException {
+        //TODO che ghalati konim ino ?
+        Item item = new Item();
+        String name = "TerrorHood";
+        setItemDetails(item, name, 5000, false, true, false, true, true, true, true, true);
+
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+
+    }
+
+    public static void createBladesOfAgility() throws IOException {
+        Item item = new Item();
+        String name = "BladesOfAgility";
+        setItemDetails(item, name, 0, false, false, true, true, true, true, true, true);
+        item.getInformation().setCanPowerBuffAdd(true);
+        item.getInformation().setPowerBuffPermanent(true);
+        item.getInformation().setChangeAPByPowerBuff(6);
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+
+    }
+
+    public static void createKingWisdom() throws IOException {
+        Item item = new Item();
+        String name = "KingWisdom";
+        setItemDetails(item, name, 9000, false, false, false, false, false, false, false, false);
+        item.getInformation().setCanIncreaseMana(true);
+        item.getInformation().setIsIncreaseManaPermanent(true);
+        item.getInformation().setAmountOfIncreaseMana(1);
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+
+    }
+
+    public static void createAssassinationDagger() throws IOException {
+        Item item = new Item();
+        String name = "AssassinationDagger";
+        setItemDetails(item, name, 15000, false, false, false, false, false, false, false, false);
+        item.getInformation().setAssassinationDagger(true);
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+    }
+
+    public static void createPoisonousDagger() throws IOException {
+        //TODO inam felan nazadim
+        Item item = new Item();
+        String name = "PoisonousDagger";
+        setItemDetails(item, name, 7000, false, false, false, false, false, false, false, false);
+
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+
+    }
+
+    public static void createShockHammer() throws IOException {
+        Item item = new Item();
+        String name = "ShockHammer";
+        setItemDetails(item, name, 15000, false, true, false, true, true, true, true, true);
+        item.getInformation().setCanDisarmBuffAdd(true);
+        item.getInformation().setTimeOfDisarmBuff(1);
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+
+    }
+//TODO baghiasho nazadim hanuz
+    public static void createSoulEater() throws IOException {
+        Item item = new Item();
+        String name = "SoulEater";
+        setItemDetails(item, name, 25000, false, false, false, false, false, false, false, false);
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
 
     }
 }
