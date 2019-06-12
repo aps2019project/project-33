@@ -285,7 +285,7 @@ public class Impact {
                 addPoisonBuffToCell(information.getTimeOfPoisonBuff(), information.isPoisonBuffPermanent(), false, 1, cell);
             // karaye living card
             LivingCard livingCard = targetCell.getLivingCard();
-            if(livingCard == null) continue;
+            if (livingCard == null) continue;
             if (information.isCanDisarmBuffAdd())
                 addDisarmToCard(information.getTimeOfDisarmBuff(), information.isDisarmBuffPermanent(), false, livingCard);
             if (information.isCanRemoveBadBuffsOfOurselves() && battle.getPlayerOn().getAliveCards().contains(livingCard))
@@ -294,7 +294,22 @@ public class Impact {
                 removeGoodBuffsOfLivingCard(livingCard);
             if (information.isCanPowerBuffAdd())
                 addPowerBuffToCard(information.getTimeOfPowerBuff(), information.isPowerBuffPermanent(), false, information.getChangeHPByPowerBuff(), information.getChangeAPByPowerBuff(), livingCard);
-            if (information.iscan)
+
+            //todo
+//            if (information.isCanDamageToEnemy())
+//                damageToEnemy(battle, );
+            if (information.isCanPoisonBuffAdd())
+                addPoisonToCard(information.getTimeOfPoisonBuff(), information.isPoisonBuffPermanent(), false, 1, livingCard);
+            if (information.isCanHolyBuffAdd()) {
+                for (int i = 0; i < information.getNumberOfHolyBuff(); i++)
+                    addHolyToCard(information.getTimeOfHolyBuff(), information.isHolyBuffPermanent(), false, 1, livingCard );
+            }
+            if (information.isCanWeaknessBuffAdd())
+                addWeaknessToCard(information.getTimeOfWeaknessBuff(), information.isWeaknessBuffPermanent(), false, information.getChangeHPByWeakness(), information.getChangeAPByWeakness(), livingCard);
+            if (information.isCanKillMinionOfEnemy())
+                killMinionOfEnemy((Minion)livingCard);
+            if (information.isCanStunBuffAdd())
+                addStunToCard(information.getTimeOfStunBuff(), information.isStunBuffPermanent(), false, livingCard);
         }
     }
 
