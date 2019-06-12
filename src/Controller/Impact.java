@@ -3,6 +3,7 @@
 package Controller;
 
 import Model.Buffs.*;
+import Model.Collection;
 import Model.CollectionItem.*;
 import Model.Enviroment.Cell;
 
@@ -223,7 +224,57 @@ public class Impact {
     }
 
     public static void specialAttackOfMinion(Battle battle, Minion attacker, LivingCard defender) {
-        //TODO
+        //TODO agar multiple bood hamashun asar mmidim vagarna yekish
+        Information information = attacker.getInformation();
+        ArrayList<Cell> attackArea = AttackArea.getImpactCells(attacker, attacker.getCell(), battle);
+        if(!information.isMultipleImpact()){
+            if(!attackArea.contains(defender.getCell())){
+                System.out.println("defender isn't in range");
+                return;
+            }
+            attackArea.clear();
+            attackArea.add(defender.getCell());
+        }
+        for(Cell cell : attackArea){
+            LivingCard livingCard = cell.getLivingCard();
+            if(livingCard == null)
+                continue;
+            if(information.isCanHolyBuffAdd()){
+                Impact.addHolyToCard(information.getTimeOfHolyBuff(), information.isHolyBuffPermanent(), false, 1, livingCard);
+            }
+            if(information.isCanStunBuffAdd()){
+                Impact.addStunToCard(information.getTimeOfStunBuff(), information.isStunBuffPermanent(), false, livingCard);
+            }
+            if(attacker.getName().equals("PahlevaneFars")){
+                int damage = Impact.pahlevaneFarsChangeDamage(attacker, defender.getID());
+                damageToEnemy(battle, battle.getPlayerOn(), attacker, livingCard, damage);
+            }
+            if(information.isCanDisarmBuffAdd()){
+                Impact.addDisarmToCard(information.getTimeOfDisarmBuff(), information.isDisarmBuffPermanent(), false, livingCard);
+            }
+            if(information.isCanPowerBuffAdd()){
+                Impact.addPowerBuffToCard(information.getTimeOfPowerBuff(), information.isPowerBuffPermanent(), false, information.getChangeHPByPowerBuff(),
+                        information.getChangeAPByPowerBuff(), attacker);
+            }
+            if(information.isCanDamageToEnemy()){
+                Impact.damageToEnemy(battle, battle.getPlayerOn(), attacker, livingCard, information.getDamageToEnemy());
+            }
+            if(information.isCanPoisonBuffAdd()){
+                Impact.addPoisonToCard(information.getTimeOfPoisonBuff(), information.isPoisonBuffPermanent(), false, information.getDecreaseHPOfPoisonBuff(), livingCard);
+            }
+            if(information.isCanDecreaseHpNextRound()){
+                //TODO
+            }
+            if(information.isCanWeaknessBuffAdd()){
+                Impact.addWeaknessToCard(information.getTimeOfWeaknessBuff(), information.isWeaknessBuffPermanent(), false, information.getChangeHPByWeakness(),
+                        information.getChangeAPByWeakness(), livingCard);
+            }
+            // TODO ashkboos too defend handle she
+            if(information.isCanRemoveGoodBuffsOfEnemy()){
+                removeGoodBuffsOfLivingCard(livingCard);
+            }
+            //TODO siavash tuye death - ashkboos - giv - gorg - palang - gorge sefid
+        }
     }
 
 
