@@ -595,6 +595,10 @@ public class Battle {
                 return;
             }
             myLivingCards.add(myLivingCard);
+            if(!myLivingCard.getInformation().isCombo()){
+                System.out.println("Cards can not do combo attack");
+                return;
+            }
         }
         Impact.comboAttack(this, opponentLivingCard, myLivingCards);
         checkTurn();
