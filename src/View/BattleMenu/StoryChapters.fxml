@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.net.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="552.0" prefWidth="953.0" styleClass="PlayAnchor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BattleMenu.BattleMenuController">
+    <stylesheets>
+        <URL value="@../Button.css" />
+        <URL value="@BattleMenu.css" />
+    </stylesheets>
+    <children>
+        <Label fx:id="backButton" styleClass="BackButton" />
+        <Group layoutX="15.0" layoutY="25.0">
+            <children>
+                <Label fx:id="chapterOneButton" layoutX="85.0" layoutY="33.0" text="fight with &#10;DiveSefid&#10;  ">
+                    <styleClass>
+                        <String fx:value="ChooseType" />
+                        <String fx:value="StoryOne" />
+                    </styleClass>
+                </Label>
+                <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="85.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../resources/ui/sliding_panel/panel_trim_plate.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </Group>
+        <Group layoutX="256.0" layoutY="25.0">
+            <children>
+                <Label fx:id="chapterTwoButton" layoutX="85.0" layoutY="33.0" text="fight with Zahhak&#10;  ">
+                    <styleClass>
+                        <String fx:value="ChooseType" />
+                        <String fx:value="StoryTwo" />
+                    </styleClass>
+                </Label>
+                <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="85.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../resources/ui/sliding_panel/panel_trim_plate.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </Group>
+        <Group layoutX="493.0" layoutY="25.0">
+            <children>
+                <Label fx:id="chapterThreeButton" layoutX="85.0" layoutY="33.0" text="fight with Arash&#10;  ">
+                    <styleClass>
+                        <String fx:value="ChooseType" />
+                        <String fx:value="StoryThree" />
+                    </styleClass>
+                </Label>
+                <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="85.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../resources/ui/sliding_panel/panel_trim_plate.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </Group>
+    </children>
+</AnchorPane>
