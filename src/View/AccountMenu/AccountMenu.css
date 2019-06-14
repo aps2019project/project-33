@@ -1,0 +1,9 @@
+.BlackPane{
+    -fx-background-color:#051721;
+}
+
+.ImagePane{
+    -fx-background-image: url("../../resources/challenges/gate_007.jpg");
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+}

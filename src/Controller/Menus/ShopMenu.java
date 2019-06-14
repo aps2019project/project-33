@@ -105,7 +105,7 @@ public class ShopMenu extends Menu {
 
     public static void showMenu() {
         System.out.println("1. show collection");
-        System.out.println("2. search  [item name | card name]");
+        System.out.println("2. search [item name | card name]");
         System.out.println("3. search shop [item name | card name]");
         System.out.println("4. buy [card name | item name]");
         System.out.println("5. sell [card name | item name]");
