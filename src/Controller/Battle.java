@@ -398,7 +398,7 @@ public class Battle {
                 playerOn.getHand().removeCard(cardID);
                 playerOn.getHand().addNextCard(playerOn.getAccount().getCollection().getMainDeck());
                 Spell spell = (Spell) insertingCollectionItem;
-                spell.impactSpell(cell, this);
+                Impact.impactSpell(this, spell, cell);
             }
         }
         if(insertingCollectionItem instanceof Card)

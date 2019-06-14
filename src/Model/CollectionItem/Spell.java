@@ -10,13 +10,6 @@ import Controller.Battle;
 public class Spell extends Card {
     private int Mp, price;
 
-    public void impactSpell(Cell cell, Battle battle){
-        Impact.impactSpell(this, cell, battle);
-    }
-    public ArrayList<Cell> findImapctCell(Cell coordination){
-        return AttackArea.getImpactCellsOfSpell(this, coordination, this.getBattle());
-    }
-
     public void cellImpact(){}
 
     public static Spell createSpell(String spellName, String playerName) throws FileNotFoundException {
