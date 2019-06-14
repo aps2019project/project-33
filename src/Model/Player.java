@@ -2,7 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 
-import Model.CollectionItem.CollectableItem;
+import Model.CollectionItem.CollectibleItem;
 import Model.CollectionItem.CollectionItem;
 import Model.CollectionItem.Hero;
 import Model.CollectionItem.LivingCard;
@@ -11,7 +11,7 @@ import Model.Enviroment.Map1;
 
 public class Player {
     private ArrayList<LivingCard> aliveCards = new ArrayList<>();
-    private ArrayList<CollectableItem> collectableItems = new ArrayList<>();
+    private ArrayList<CollectibleItem> collectibleItems = new ArrayList<>();
     private CollectionItem selectedCollectionItem;
     private Cell heroPosition;
     private Mana mana = new Mana();
@@ -105,12 +105,12 @@ public class Player {
         this.mana = mana;
     }
 
-    public ArrayList<CollectableItem> getCollectableItems() {
-        return collectableItems;
+    public ArrayList<CollectibleItem> getCollectibleItems() {
+        return collectibleItems;
     }
 
-    public void addNewCollectableItems(CollectableItem collectableItem) {
-        collectableItems.add(collectableItem);
+    public void addNewCollectableItems(CollectibleItem collectibleItem) {
+        collectibleItems.add(collectibleItem);
     }
 
     public void insertCard(Map1 map, String cardName, int x, int y) {
@@ -118,7 +118,7 @@ public class Player {
     }
 
     public void showCollectableItems() {
-    //    CollectableItem.showInfo();
+    //    CollectibleItem.showInfo();
     }
 
     public void attack(String opponentID, String maCardID) {

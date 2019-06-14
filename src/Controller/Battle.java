@@ -23,7 +23,7 @@ public class Battle {
     private String type, mode;
     private LivingCard selectedCard;
     private Flag mainFlag;
-    private CollectableItem selectedCollectableItem;
+    private CollectibleItem selectedCollectibleItem;
     private Player winnerPlayer = null, loserPlayer = null;
     private ArrayList<Flag> flags = new ArrayList<>();
     private String estate = "none";
@@ -32,7 +32,7 @@ public class Battle {
 
     {
         this.selectedCard = null;
-        this.selectedCollectableItem = null;
+        this.selectedCollectibleItem = null;
     }
 
     // in be ehtemale khoobi momkene bug bokhore
@@ -224,7 +224,6 @@ public class Battle {
     }
 
     private void setCards(Player player) {
-        Hero hero;
         for (CollectionItem collectionItem : player.getAccount().getCollection().getMainDeck().getCards()) {
             if (collectionItem instanceof Item) continue;
             if (collectionItem instanceof Hero) ((Hero) collectionItem).setBattle(this);
@@ -310,10 +309,10 @@ public class Battle {
         return false;
     }
 
-    public boolean selectItem(String collectableItemID) {
-        for (CollectableItem collectableItem : playerOn.getCollectableItems())
-            if (collectableItem.getID().equals(collectableItemID)) {
-                this.selectedCollectableItem = collectableItem;
+    public boolean selectItem(String collectibleItemID) {
+        for (CollectibleItem collectibleItem : playerOn.getCollectibleItems())
+            if (collectibleItem.getID().equals(collectibleItemID)) {
+                this.selectedCollectibleItem = collectibleItem;
                 return true;
             }
         return false;
@@ -323,8 +322,8 @@ public class Battle {
         this.selectedCard = null;
     }
 
-    public void removeSelectedCollectableItem() {
-        this.selectedCollectableItem = null;
+    public void removeSelectedcollectibleItem() {
+        this.selectedCollectibleItem = null;
     }
 
     public ArrayList<Minion> getOurMinionsOFCells(ArrayList<Cell> impactCells) {
@@ -343,92 +342,14 @@ public class Battle {
         return minions;
     }
 
-    public Minion getRandomEnemyMinion() {
-        ArrayList<Minion> enemyMinions = new ArrayList<>();
-        for (LivingCard livingCard : playerOff.getAliveCards()) {
-            if (livingCard instanceof Minion)
-                enemyMinions.add((Minion) livingCard);
-        }
-        if (enemyMinions.size() == 0)
-            return null;
-        Random random = new Random();
-        int randomIndex = random.nextInt(enemyMinions.size());
-        Minion randomMinion = enemyMinions.get(randomIndex);
-        return randomMinion;
-    }
-
     public void minionOnSpawn(Minion minion) {
-        if (minion.getName().equals("Oghab")) {
-            LivingCard livingCard = (LivingCard) minion;
-            Impact.addPowerBuffToCard(10, true, true, 10, 0, livingCard);
-        }
-        //in moshkel dare too removegoodBuffs pak mishe
-        if (minion.getName().equals("MareGhoolPeikar")) {
-            for (Cell cell : this.getMap().getCells()) {
-                LivingCard livingCard = cell.getLivingCard();
-                if (livingCard == null)
-                    continue;
-                if (getDistance(cell.getX(), cell.getY(), minion.getPositionRow(), minion.getPositionColumn()) > 2)
-                    continue;
-                if (livingCard instanceof Minion) {
-                    Impact.addHolyToCard(10, true, false, -1, livingCard);
-                }
-            }
-        }
-
-        if (minion.getName().equals("NaneSarma")) {
-            Cell cell = this.getMap().getCellByCoordination(minion.getPositionRow(), minion.getPositionColumn());
-            ArrayList<Cell> neighbours = AttackArea.getNeighbors(cell, this);
-            ArrayList<Minion> ourMinions = getOurMinionsOFCells(neighbours);
-            for (Minion ourMinion : ourMinions) {
-                LivingCard livingCard = (LivingCard) ourMinion;
-                Impact.addStunToCard(1, false, false, livingCard);
-            }
-        }
-
-        if (minion.getName().equals("Bahman")) {
-            Minion randomMinion = getRandomEnemyMinion();
-            if (randomMinion != null) {
-                randomMinion.setHP(randomMinion.getHP() - 16);
-                Impact.checkAlive(this, (LivingCard) randomMinion);
-            }
-        }
-        if (minion.getName().equals("FoladZere")) {
-            Minion randomeMinion = getRandomEnemyMinion();
-            //   Minion copyMinion = (Minion)Application.copy(randomeMinion, Minion.class);
-            //TODO
-        }
+        if(minion.getInformation().isOnSpawn())
+            Impact.specialAttackOfMinion(this, minion, null);
     }
 
     public void endTurnMinion(Minion minion) {
-        if (minion.getName().equals("Jadogar")) {
-            Cell cell = this.getMap().getCellByCoordination(minion.getPositionRow(), minion.getPositionColumn());
-            ArrayList<Cell> neighbours = AttackArea.getNeighbors(cell, this);
-            ArrayList<Minion> ourMinions = getOurMinionsOFCells(neighbours);
-            ourMinions.add(minion);
-            for (Minion ourMinion : ourMinions) {
-                LivingCard livingCard = (LivingCard) ourMinion;
-                Impact.addPowerBuffToCard(10, true, true, 0, 2, livingCard);
-                Impact.addWeaknessToCard(10, true, true, 1, 0, livingCard);
-            }
-        }
-        if (minion.getName().equals("JadogarAzam")) {
-            Cell cell = this.getMap().getCellByCoordination(minion.getPositionRow(), minion.getPositionColumn());
-            ArrayList<Cell> neighbours = AttackArea.getNeighbors(cell, this);
-            ArrayList<Minion> ourMinions = getOurMinionsOFCells(neighbours);
-            for (Minion ourMinion : ourMinions) {
-                LivingCard livingCard = (LivingCard) ourMinion;
-                Impact.addPowerBuffToCard(10, true, true, 0, 2, livingCard);
-                Impact.addHolyToCard(10, true, true, 1, livingCard);
-            }
-        }
-        if (minion.getName().equals("Jen")) {
-            ArrayList<Minion> ourMinions = getOurMinionsOFCells(this.getMap().getCells());
-            for (Minion ourMinion : ourMinions) {
-                LivingCard livingCard = (LivingCard) ourMinion;
-                Impact.addPowerBuffToCard(10, true, true, 0, 1, livingCard);
-            }
-        }
+        if(minion.getInformation().isOnTurn())
+            Impact.specialAttackOfMinion(this, minion, null);
     }
 
     public void insertCardInMap(String cardID, int x, int y) {
@@ -485,6 +406,7 @@ public class Battle {
         handleFlags();
     }
 
+    //todo in ja masalan vaghti mire aya flag o chizaye dg behesh dade mishe ya diverte mese bazia ?
     public void moveCardTo(int x, int y) {
         if (selectedCard == null) {
             System.out.println("select a card");
@@ -517,10 +439,8 @@ public class Battle {
             Cell cell = map.getCellByCoordination(x, y);
             cell.insertCard(selectedCard.getID());
             this.selectedCard.setCanMove(false);
-            //tuye mode e flag bayad flago begire dastesh
         } else
             System.out.println("Invalid target !");
-        selectedCard.setCanMove(false);
         handleFlags();
         checkTurn();
     }
@@ -625,12 +545,12 @@ public class Battle {
 
     public void checkAliveCards(Player player) {
         for (LivingCard livingCard : player.getAliveCards())
-            Impact.checkAlive(this, livingCard);
+            livingCard.checkAlive(this);
         checkTurn();
     }
 
     public void endTurn() {
-        playerOn.getMana().configureMana(this);
+        playerOn.getMana().configureMana();
 
         canLivingCards(playerOn);
         canLivingCards(playerOff);
@@ -667,9 +587,9 @@ public class Battle {
         numberOfRounds++;
     }
 
-    public void showCollectables() {
-        for (CollectableItem collectableItem : playerOn.getCollectableItems()) {
-            System.out.println(collectableItem.getInfo());
+    public void showCollectibles() {
+        for (CollectibleItem collectibleItem : playerOn.getCollectibleItems()) {
+            System.out.println(collectibleItem.getInfo());
         }
     }
 
@@ -704,8 +624,8 @@ public class Battle {
     //TODO
     //in bayad az hand pak she
     public void useItem(int x, int y) {
-        if (selectedCollectableItem == null) {
-            System.out.println("select a collectable item");
+        if (selectedCollectibleItem == null) {
+            System.out.println("select a collectible item");
             return;
         }
         if (!isInMap(x, y)) {
@@ -713,7 +633,7 @@ public class Battle {
             return;
         }
         Cell cell = map.getCellByCoordination(x, y);
-        Impact.impactItem((Item) selectedCollectableItem, cell, this);
+        Impact.impactItem((Item) selectedCollectibleItem, cell, this);
         checkTurn();
     }
 
@@ -724,11 +644,11 @@ public class Battle {
 
     //bazi jaha bayad khali shan selecteditem o card
     public void showItemInfo() {
-        if (selectedCollectableItem == null) {
+        if (selectedCollectibleItem == null) {
             System.out.println("select an item");
             return;
         }
-        System.out.println(selectedCollectableItem.getInfo());
+        System.out.println(selectedCollectibleItem.getInfo());
     }
 
     //-----------------------------------------------
@@ -900,12 +820,12 @@ public class Battle {
         System.out.println("10. Show hand");
         System.out.println("11. Insert [card id] in (x, y)");
         System.out.println("12. End turn");
-        System.out.println("13. Show collectables");
-        System.out.println("14. Select [collectable id]");
+        System.out.println("13. Show collectibles");
+        System.out.println("14. Select [collectible id]");
         System.out.println("15. Show info");
         System.out.println("16. Use [location x, y]");
         System.out.println("17. Show Next Card");
-        System.out.println("18. Enter gravayard");
+        System.out.println("18. Enter graveyard");
         System.out.println("19. Help");
         System.out.println("20. End Game");
         System.out.println("21. Exit");
@@ -969,8 +889,8 @@ public class Battle {
             insertCardInMap(input[1], Integer.parseInt(input[3]), Integer.parseInt(input[4]));
         } else if (inputLine.equals("end turn"))
             endTurn();
-        else if (inputLine.equals("show collectables"))
-            showCollectables();
+        else if (inputLine.equals("show collectibles"))
+            showCollectibles();
         else if (inputLine.equals("show info"))
             showItemInfo();
         else if (inputLine.matches("use [\\d], [\\d]")) {
@@ -1036,12 +956,12 @@ public class Battle {
     }
 
     private void checkThings(Player player) {
-        player.getHero().checkPareSimorgh();
-        if (player.isHaveTerrorHood()) Impact.impactTerrorHood(player.getHeroPosition(), this);
-        if (player.getHero().isHaveKingKiller()) {
-            if (player.getHero().getDeadAfterRounds() == 0) player.getHero().kill();
-            else player.getHero().setDeadAfterRounds(player.getHero().getDeadAfterRounds() - 1);
-        }
+//        player.getHero().checkPareSimorgh();
+//        if (player.isHaveTerrorHood()) Impact.impactTerrorHood(player.getHeroPosition(), this);
+//        if (player.getHero().isHaveKingKiller()) {
+//            if (player.getHero().getDeadAfterRounds() == 0) player.getHero().kill();
+//            else player.getHero().setDeadAfterRounds(player.getHero().getDeadAfterRounds() - 1);
+//        }
     }
 
     private String readInput() {

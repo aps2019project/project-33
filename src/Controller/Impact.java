@@ -163,7 +163,7 @@ public class Impact {
     public static void damageToEnemy(Battle battle, Card myLivingCard, LivingCard opponentLivingCard, int damage) {
         if (opponentLivingCard.getInformation().isAntiShock()) return;
 
-        if(myLivingCard instanceof LivingCard) {
+        if (myLivingCard instanceof LivingCard) {
             LivingCard attacker = (LivingCard) myLivingCard;
             Information information = myLivingCard.getInformation();
 
@@ -231,8 +231,14 @@ public class Impact {
     public static void specialAttackOfMinion(Battle battle, Minion attacker, LivingCard defender) {
         //TODO agar multiple bood hamashun asar midim vagarna yekish
         Information information = attacker.getInformation();
+
         ArrayList<Cell> attackArea = AttackArea.getImpactCells(attacker, attacker.getCell(), battle);
-        if (!information.isMultipleImpact()) {
+        if (information.isRandomLivingCard()) {
+            Collections.shuffle(attackArea);
+            Cell targetCell = attackArea.get(0);
+            attackArea.clear();
+            attackArea.add(targetCell);
+        } else if (!information.isMultipleImpact()) {
             if (!attackArea.contains(defender.getCell())) {
                 System.out.println("defender isn't in range");
                 return;
@@ -354,11 +360,11 @@ public class Impact {
         }
     }
 
-    public static void impactSpellOfHero(Battle battle, Hero hero, Cell cell){
+    public static void impactSpellOfHero(Battle battle, Hero hero, Cell cell) {
         ArrayList<Cell> attackArea = AttackArea.getImpactCells(hero, cell, battle);
         Information information = hero.getInformation();
-        if(!information.isMultipleImpact()){
-            if(!attackArea.contains(cell)){
+        if (!information.isMultipleImpact()) {
+            if (!attackArea.contains(cell)) {
                 System.out.println("this cell is not in range");
                 return;
             }
@@ -366,26 +372,26 @@ public class Impact {
             attackArea.add(cell);
         }
 
-        for(Cell targetCell : attackArea){
-            if(information.isCanAddHolyBuffToCell())
+        for (Cell targetCell : attackArea) {
+            if (information.isCanAddHolyBuffToCell())
                 addHolyBuffToCell(information.getTimeOfHolyBuff(), information.isHolyBuffPermanent(), false, cell);
-            LivingCard livingCard =  targetCell.getLivingCard();
-            if(livingCard == null) continue;
-            if(information.isCanPowerBuffAdd())
+            LivingCard livingCard = targetCell.getLivingCard();
+            if (livingCard == null) continue;
+            if (information.isCanPowerBuffAdd())
                 addPowerBuffToCard(information.getTimeOfPowerBuff(), information.isPowerBuffPermanent(), false, information.getChangeHPByPowerBuff(), information.getChangeAPByPowerBuff(), livingCard);
-            if(information.isCanStunBuffAdd())
+            if (information.isCanStunBuffAdd())
                 addStunToCard(information.getTimeOfStunBuff(), information.isStunBuffPermanent(), false, livingCard);
-            if(information.isCanDisarmBuffAdd())
+            if (information.isCanDisarmBuffAdd())
                 addDisarmToCard(information.getTimeOfDisarmBuff(), information.isDisarmBuffPermanent(), false, livingCard);
-            if(information.isCanPoisonBuffAdd())
+            if (information.isCanPoisonBuffAdd())
                 addPoisonToCard(information.getTimeOfPoisonBuff(), information.isPoisonBuffPermanent(), false, 1, livingCard);
-            if(information.isCanDamageToEnemy())
+            if (information.isCanDamageToEnemy())
                 damageToEnemy(battle, hero, livingCard, information.getDamageToEnemy());
-            if(information.isCanRemoveGoodBuffsOfEnemy() && battle.getPlayerOff().getAliveCards().contains(livingCard))
+            if (information.isCanRemoveGoodBuffsOfEnemy() && battle.getPlayerOff().getAliveCards().contains(livingCard))
                 removeGoodBuffsOfLivingCard(livingCard);
-            if(information.isCanRemoveBadBuffsOfOurselves() && battle.getPlayerOn().getAliveCards().contains(livingCard))
+            if (information.isCanRemoveBadBuffsOfOurselves() && battle.getPlayerOn().getAliveCards().contains(livingCard))
                 removeBadBuffsOfLivingCard(livingCard);
-            if(information.isCanHolyBuffAdd())
+            if (information.isCanHolyBuffAdd())
                 addHolyToCard(information.getTimeOfHolyBuff(), information.isHolyBuffPermanent(), false, 1, livingCard);
         }
     }
@@ -400,13 +406,12 @@ public class Impact {
         if (information.isLocationLimit() || information.isUsImpact() || information.isEnemyImpact()) {
 
             ArrayList<Cell> attackArea = AttackArea.getImpactCells(item, cell, battle);
-            if(information.isRandomLivingCard()){
+            if (information.isRandomLivingCard()) {
                 Collections.shuffle(attackArea);
                 Cell targetCell = attackArea.get(0);
                 attackArea.clear();
                 attackArea.add(targetCell);
-            }
-            else {
+            } else {
                 if (!information.isMultipleImpact()) {
                     if (!attackArea.contains(cell)) {
                         System.out.println("this cell is not in range");
@@ -417,7 +422,7 @@ public class Impact {
                 }
             }
 
-            for(Cell targetCell : attackArea) {
+            for (Cell targetCell : attackArea) {
                 LivingCard livingCard = targetCell.getLivingCard();
                 if (livingCard == null) continue;
                 if (livingCard.getInformation().isCanDoMeleeAttack() && !information.isForMelee()) continue;

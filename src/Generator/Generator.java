@@ -653,8 +653,8 @@ public class Generator {
         minion.setHP(16);
         minion.setAP(9);
         minion.setName("Bahman");
-        //TODO vase randomesh
         setMinionAttackArea(minion, false, false, false, false, true, false, true, false, false, true, false, false, true, false, false, 0);
+        minion.getInformation().setRandomLivingCard(true);
         minion.getInformation().setCanDamageToEnemy(true);
         minion.getInformation().setDamageToEnemy(16);
 
