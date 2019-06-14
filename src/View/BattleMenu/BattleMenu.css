@@ -13,47 +13,47 @@
 }
 
 .SinglePlayer{
-    -fx-background-image: url("../../resources/play/play_mode_sandbox.jpg");
+    -fx-background-image: url("../../../resources/play/play_mode_sandbox.jpg");
 }
 
 .MultiPLayer{
-    -fx-background-image: url("../../resources/play/play_mode_arenagauntlet@2x.jpg");
+    -fx-background-image: url("../../../resources/play/play_mode_arenagauntlet@2x.jpg");
 }
 
 .CustomGame{
-    -fx-background-image: url("../../resources/play/play_mode_rankedladder.jpg");
+    -fx-background-image: url("../../../resources/play/play_mode_rankedladder.jpg");
 }
 
 .StoryGame{
-    -fx-background-image: url("../../resources/play/play_mode_unranked.jpg");
+    -fx-background-image: url("../../../resources/play/play_mode_unranked.jpg");
 }
 
 .KillEnemyHero{
-    -fx-background-image: url("../../resources/codex/chapter1_background@2x.jpg");
+    -fx-background-image: url("../../../resources/codex/chapter1_background@2x.jpg");
 }
 
 .HoldFlag{
-    -fx-background-image: url("../../resources/codex/chapter3_background@2x.jpg");
+    -fx-background-image: url("../../../resources/codex/chapter3_background@2x.jpg");
 }
 
 .TakeHalfOfFlag{
-    -fx-background-image: url("../../resources/codex/chapter2_background@2x.jpg");
+    -fx-background-image: url("../../../resources/codex/chapter2_background@2x.jpg");
 }
 
 .StoryOne{
-    -fx-background-image: url("../../resources/codex/chapter7_background@2x.jpg");
+    -fx-background-image: url("../../../resources/codex/chapter7_background@2x.jpg");
 }
 
 .StoryTwo{
-    -fx-background-image: url("../../resources/codex/chapter5_background@2x.jpg");
+    -fx-background-image: url("../../../resources/codex/chapter5_background@2x.jpg");
 }
 
 .StoryThree{
-    -fx-background-image: url("../../resources/codex/chapter6_background@2x.jpg");
+    -fx-background-image: url("../../../resources/codex/chapter6_background@2x.jpg");
 }
 
 
 .PlayAnchor{
-    -fx-background-image: url("../../resources/play/play_background.jpg");
+    -fx-background-image: url("../../../resources/play/play_background.jpg");
     -fx-cursor: hand;
 }

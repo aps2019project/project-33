@@ -33,7 +33,7 @@
                <children>
                         <ImageView fitHeight="78.0" fitWidth="200.0" layoutX="81.0" layoutY="22.0">
                             <image>
-                                <Image url="@../../out/production/resources/ui/brand_duelyst.png" />
+                                <Image url="@../../../out/production/resources/ui/brand_duelyst.png" />
                             </image>
                         </ImageView>
                </children></AnchorPane>
@@ -41,7 +41,7 @@
                     <children>
                         <ImageView fitHeight="99.0" fitWidth="144.0" layoutX="210.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../../resources/bnea/bnea-logo.png" />
+                                <Image url="@../../../resources/bnea/bnea-logo.png" />
                             </image>
                         </ImageView>
                         <Label fx:id="signUpModeButton" layoutX="172.0" layoutY="253.0" prefHeight="40.0" prefWidth="95.0" styleClass="SelectedButton" text="SIGN UP" textFill="WHITE" />
