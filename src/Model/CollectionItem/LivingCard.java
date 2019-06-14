@@ -8,7 +8,7 @@ import Model.Enviroment.Cell;
 import java.util.ArrayList;
 
 abstract public class LivingCard extends Card {
-    private int HP, rangeOfAttack, AP, changeHP, changePower, numberOfSameTypeInComboAttack,
+    private int HP, rangeOfAttack, AP, extraHP, extraAP, numberOfSameTypeInComboAttack,
     changeRangeOfAttack, numberOfDamaged, shield, decreasHPNextRound, decreaseHP2NextRound;
     private String counterAttackType, type;
     private ArrayList<Buff> effects = new ArrayList<>();
@@ -17,100 +17,47 @@ abstract public class LivingCard extends Card {
     private ArrayList<Item> Items = new ArrayList<>();
     //location mikhad
 
-
     public void addNewBuff(Buff buff){
         this.effects.add(buff);
     }
     public void deleteBuff(Buff buff){
         this.effects.remove(buff);
     }
-/*
-    public ArrayList<Cell> findImpactCellsOfAttack(){
-        return AttackArea.getImpactCellsOfAttack(this);
+
+    //Azad kardane flag, ezafe shodan be grave yard
+
+    //alan in az too cell pak mishe ? ya az too alive card haye player ?
+    public boolean checkAlive(Battle battle) {
+        if (this.getHP() <= 0) {
+
+            if (battle.getPlayerOn().getAliveCards().contains(this))
+                battle.getPlayerOn().getGraveYard().addCard(this);
+            else
+                battle.getPlayerOff().getGraveYard().addCard(this);
+
+            battle.removeAliveCard(this);
+            battle.handleFlags();
+
+            if (battle.getSelectedCard().getID().equals(this.getID()))
+                battle.removeSelectedCard();
+
+            if(this.getInformation().isOnDeath())
+                if(this instanceof Minion) Impact.specialAttackOfMinion(battle, (Minion)this, null);
+
+            return false;
+        }
+        return true;
     }
-*/
 
-/*
-    public void attack(String opponentID){
-        if(!canAttack){
-            System.out.println("This living card can't attack this round !");
-            return;
-        }
-
-        LivingCard opponentCard = CollectionItem.getLivingCardByID(opponentID);
-
-        ArrayList<Cell> impactCells = this.findImpactCellsOfAttack();
-        boolean canAttackToOpponent = false;
-        for(Cell cell : impactCells){
-            if(cell.getX() == opponentCard.getPositionRow() && cell.getY() == opponentCard.getPositionColumn())
-                canAttackToOpponent = true;
-        }
-        if(!canAttackToOpponent){
-            System.out.println("This opponent isn't in impact area !1");
-            return;
-        }
-
-        Impact.attack(this, this, opponentCard);
-
-        this.canAttack = false;
-    }
-*/
-
-/*
-    public ArrayList<Cell> findImpactCellsOfCounterAttack() {
-        return AttackArea.getImpactCellsOfCounterAttack(this);
-    }
-*/
-
-
-/*
-    public void counterAttack(String opponentID){
-        if(!canCounterAttack){
-            System.out.println("This living card can't counter attack");
-            return;
-        }
-
-        LivingCard opponentCard = CollectionItem.getLivingCardByID(opponentID);
-
-        boolean canConuterAttackToOpponent = false;
-        ArrayList<Cell> impactCells = this.findImpactCellsOfCounterAttack();
-        for(Cell cell : impactCells){
-            if(cell.getX() == opponentCard.getPositionRow() && cell.getY() == opponentCard.getPositionColumn())
-                canConuterAttackToOpponent = true;
-        }
-
-        if(!canConuterAttackToOpponent){
-            System.out.println("The opponent card is not in counter attack impact area !!");
-            return;
-        }
-        Impact.counterAttack(this, opponentCard);
-    }
-*/
     public Cell getCell(){
         return this.getBattle().getMap().getCellByCoordination(this.getPositionRow(), this.getPositionColumn());
     }
 
     //TODO
-    //ghataan in bayad avaz she
     public void handleAttack(Battle battle, int damage){
         damage = Integer.max(damage - this.getShield(), 0);
         this.setHP(this.getHP() - damage);
-
-        Impact.checkAlive(battle, this);
-    }
-
-    //TODO
-    //Azad kardane flag, ezafe shodan be grave yard
-    public void kill(){
-        if(this instanceof Minion)
-            onDeathOfMinion((Minion)this);
-        this.setHP(0);
-    }
-
-    private void onDeathOfMinion(Minion minion){
-        Impact.impactNefrineMarg(minion);
-        Impact.impactGhooleBozorg(minion);
-            Impact.damageToHeroWhenDead(minion);
+        this.checkAlive(battle);
     }
 
     public void increaseRangeOfAttack(int amount){
@@ -124,11 +71,11 @@ abstract public class LivingCard extends Card {
     }
 
     public void setCanMoveGreaterTwoCell(boolean canMoveGreaterTwoCell){
-        canMoveGreaterTwoCell = canMoveGreaterTwoCell;
+        this.canMoveGreaterTwoCell = canMoveGreaterTwoCell;
     }
 
     public int getHP() {
-        return HP;
+        return HP + extraHP;
     }
 
     public void setHP(int HP) {
@@ -144,7 +91,7 @@ abstract public class LivingCard extends Card {
     }
 
     public int getAP() {
-        return AP;
+        return AP + extraAP;
     }
 
     //TODO
@@ -153,19 +100,19 @@ abstract public class LivingCard extends Card {
         this.AP = AP;
     }
 
-    public int getChangeHP() {
-        return changeHP;
+    public int getExtraHP() {
+        return extraHP;
     }
 
-    public void setChangeHP(int changeHP) {
-        this.changeHP = changeHP;
+    public void setExtraHP(int extraHP) {
+        this.extraHP = extraHP;
     }
-    public int getChangePower() {
-        return changePower;
+    public int getExtraAP() {
+        return extraAP;
     }
 
-    public void setChangePower(int changePower) {
-        this.changePower = changePower;
+    public void setExtraAP(int extraAP) {
+        this.extraAP = extraAP;
     }
 
     public int getNumberOfSameTypeInComboAttack() {
@@ -268,12 +215,12 @@ abstract public class LivingCard extends Card {
         isAlive = alive;
     }
 
-    public void increaseHP(int amount) {
+    public void changeHP(int amount) {
         this.HP += amount;
     }
 
-    public void increaseAP(int amountOfIncreaseAP){
-        this.AP += amountOfIncreaseAP;
+    public void changeAP(int amount){
+        this.AP += amount;
     }
 
     public boolean isHaveShamshireChini() {
@@ -314,5 +261,13 @@ abstract public class LivingCard extends Card {
 
     public void setDecreaseHP2NextRound(int decreaseHP2NextRound) {
         this.decreaseHP2NextRound = decreaseHP2NextRound;
+    }
+
+    public void changeExtraAP(int amount){
+        this.extraHP += amount;
+    }
+
+    public void changeExtraHP(int amount){
+        this.extraHP += amount;
     }
 }

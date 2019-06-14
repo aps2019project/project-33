@@ -69,7 +69,7 @@ public class Hero extends LivingCard {
     public void checkPareSimorgh() {
         if (!this.havePareSimorgh) return;
         if (this.getHP() < minOfPareSimorgh) {
-            this.increaseHP(this.getHP());
+            this.changeHP(this.getHP());
             this.havePareSimorgh = false;
         }
     }

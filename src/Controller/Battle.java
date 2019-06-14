@@ -630,7 +630,7 @@ public class Battle {
     }
 
     public void endTurn() {
-        playerOn.getMana().configueMana(this);
+        playerOn.getMana().configureMana(this);
 
         canLivingCards(playerOn);
         canLivingCards(playerOff);
@@ -939,6 +939,7 @@ public class Battle {
             forfeitMatch();
             return;
         }
+
         if (inputLine.equals("game info"))
             showGameInfo();
         else if (inputLine.equals("show my minions"))
@@ -1050,9 +1051,6 @@ public class Battle {
             return Main.scanner.nextLine();
     }
 
-    public void addMareBozorg() {
-    }
-
     //Here is Setters && Getters
 
     public Player getPlayerOn() {
@@ -1110,7 +1108,6 @@ public class Battle {
     public void setMode(String mode) {
         this.mode = mode;
     }
-
 
     public int getPrize() {
         return prize;

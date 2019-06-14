@@ -1,12 +1,15 @@
 package Model;
 
 import Controller.Battle;
+import Model.Buffs.ManaBuff;
+
+import java.util.ArrayList;
 
 public class Mana {
-
     private int currentMana;
     private int maximumMana;
     private int changeManaByItem = 0;
+    private ArrayList<ManaBuff> manaBuffs = new ArrayList<>();
 
     public Boolean decreaseMana (int spendMana) {
         if (currentMana < spendMana) {
@@ -17,15 +20,13 @@ public class Mana {
         }
     }
 
-    public void configueMana (Battle battle){
-        if (maximumMana < 9) {
+    public void configureMana(){
+        if (maximumMana < 9)
             maximumMana++;
-        }
-        if(battle.getNumberOfRounds() >= 3){
-            maximumMana += changeManaByItem;
-            changeManaByItem = 0;
-        }
-        currentMana = maximumMana;
+        changeManaByItem = 0;
+        for(ManaBuff manaBuff : manaBuffs)
+            manaBuff.effect(this);
+        currentMana = Integer.min(maximumMana + changeManaByItem, 9);
     }
 
     public int getCurrentMana(){
@@ -44,11 +45,19 @@ public class Mana {
         this.maximumMana = maximumMana;
     }
 
-    public void increaseChangeManaByItem(){
-        this.changeManaByItem ++;
+    public void increaseChangeManaByItem(int amount){
+        this.changeManaByItem += amount;
     }
 
     public void increaseMaximumMana(int amountOfIncreaseMana) {
         this.maximumMana += amountOfIncreaseMana;
+    }
+
+    public void addManaBuff(ManaBuff manaBuff){
+        this.manaBuffs.add(manaBuff);
+    }
+
+    public ArrayList<ManaBuff> getManaBuffs() {
+        return manaBuffs;
     }
 }

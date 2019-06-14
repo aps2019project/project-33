@@ -94,9 +94,6 @@ public class AttackArea {
 
     // in ja ham tamoom mishe
 
-    // in ja miad mige che noe LivingCard hayi tahte tasire in lanati hastan
-    // albate Cell hashoono mige behemoon khodeshoono kar nadare
-
     public static ArrayList<Cell> getCellsOfPlayer(Information information, Player player) {
         ArrayList<Cell> impactCells = new ArrayList<>();
         if (information.isHeroImpact())
@@ -156,13 +153,13 @@ public class AttackArea {
     }
 
     private static ArrayList<Cell> unique(ArrayList<Cell> listOfCells) {
-        ArrayList<Cell> uniquedList = new ArrayList<>();
+        ArrayList<Cell> uniqueList = new ArrayList<>();
         for(Cell cell : listOfCells) {
-            if (uniquedList.contains(cell))
+            if (uniqueList.contains(cell))
                 continue;
-            uniquedList.add(cell);
+            uniqueList.add(cell);
         }
-        return uniquedList;
+        return uniqueList;
     }
 
     public static ArrayList<Cell> merge(ArrayList<Cell> impactedCells, ArrayList<Cell> impactedCellsOfLivingCards) {
@@ -174,6 +171,7 @@ public class AttackArea {
     }
 
     ///////////////////////////////////////////////////////
+
     public static ArrayList<Cell> getImpactCells(CollectionItem collectionItem, Cell cell, Battle battle) {
         ArrayList<Cell> impactedCellsOfLivingCards = new ArrayList<>();
         ArrayList<Cell> impactedCells = new ArrayList<>();
@@ -202,10 +200,12 @@ public class AttackArea {
             }
             impactedCells = unique(impactedCells);
         }
+
         ArrayList<Cell> result = new ArrayList<>();
         result.addAll(impactedCells);
         result.addAll(impactedCellsOfLivingCards);
         result = unique(result);
+
         if(information.isLocationLimit())
             result = merge(result, impactedCells);
         if(information.isUsImpact() || information.isEnemyImpact())
@@ -214,10 +214,4 @@ public class AttackArea {
             result.add(cell);
         return unique(result);
     }
-
-
-    // tabe haye komaki
-
-
-
 }

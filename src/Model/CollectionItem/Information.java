@@ -22,6 +22,7 @@ public class Information {
     private boolean isHeroImpact;
     private boolean isCellImpact;
     private boolean locationLimit;
+    private boolean randomLivingCard;
     private boolean isSquareOfCellsImpact;
     private int lengthOfSquareOfCellsImpact;
     private boolean isImpactColumn;
@@ -41,6 +42,7 @@ public class Information {
     private boolean increaseAPPermanent;
 
 
+    private boolean canAddHolyBuffToCell;
     private boolean canHolyBuffAdd;
     private int timeOfHolyBuff;
     private boolean isHolyBuffPermanent;
@@ -953,5 +955,21 @@ public class Information {
 
     public void setChangeAPByPowerBuff(int changeAPByPowerBuff) {
         this.changeAPByPowerBuff = changeAPByPowerBuff;
+    }
+
+    public boolean isCanAddHolyBuffToCell() {
+        return canAddHolyBuffToCell;
+    }
+
+    public void setCanAddHolyBuffToCell(boolean canAddHolyBuffToCell) {
+        this.canAddHolyBuffToCell = canAddHolyBuffToCell;
+    }
+
+    public boolean isRandomLivingCard() {
+        return randomLivingCard;
+    }
+
+    public void setRandomLivingCard(boolean randomLivingCard) {
+        this.randomLivingCard = randomLivingCard;
     }
 }

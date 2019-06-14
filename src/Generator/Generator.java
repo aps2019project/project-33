@@ -2,6 +2,8 @@ package Generator;
 
 import Controller.Application;
 import Model.CollectionItem.*;
+import sun.security.jgss.wrapper.GSSNameElement;
+import sun.security.x509.GeneralName;
 
 import java.io.IOException;
 
@@ -28,8 +30,27 @@ public class Generator {
         createItems();
     }
 
-    public static void createItems() {
-
+    public static void createItems() throws IOException {
+        Generator.createTajeDanaei();
+        Generator.creaseNamuseSepar();
+        Generator.createKamaneDamul();
+        Generator.createNushDaru();
+        Generator.createTireDoShakh();
+        Generator.createPareSimorgh();
+        Generator.createExir();
+        Generator.createMajuneMana();
+        Generator.createMajuneRuinTani();
+        Generator.createNefrineMarg();
+        Generator.createRandomDamage();
+        Generator.createTerrorHood();
+        Generator.createBladesOfAgility();
+        Generator.createKingWisdom();
+        Generator.createAssassinationDagger();
+        Generator.createPoisonousDagger();
+        Generator.createShockHammer();
+        Generator.createSoulEater();
+        Generator.createGhosleTamid();
+        Generator.createShamshireChini();
     }
 
     public static void createSpells() throws IOException {
@@ -542,7 +563,7 @@ public class Generator {
         setHeroAttackArea(hero, false, false, false, false, true, false, true, false, false, 0);
         hero.getInformation().setImpactAllArea(true);
         hero.getInformation().setCellImpact(true);
-        hero.getInformation().setCanHolyBuffAdd(true);
+        hero.getInformation().setCanAddHolyBuffToCell(true);
         hero.getInformation().setNumberOfHolyBuff(1);
         hero.getInformation().setTimeOfHolyBuff(3);
         Application.writeJSON(hero, "Data/CollectionItem/Hero/Kaveh.json");
@@ -1108,6 +1129,7 @@ public class Generator {
         minion.setAP(5);
         minion.setName("Siavash");
         setMinionAttackArea(minion, false, false, false, true, false, false, true, false, true, false, false, false, true, false, false, 0);
+        minion.getInformation().setMultipleImpact(true);
         minion.getInformation().setCanDamageToEnemy(true);
         minion.getInformation().setDamageToEnemy(6);
         Application.writeJSON(minion, "Data/CollectionItem/Card/LivingCard/Minion/Siavash.json");
@@ -1150,23 +1172,28 @@ public class Generator {
         Item item = new Item();
         String name = "NushDaru";
         setItemDetails(item, name, 0, false, false, true, true, true, true, true, true);
+        item.getInformation().setRandomLivingCard(true);
+        item.getInformation().setPowerBuffPermanent(true);
+        item.getInformation().setCanPowerBuffAdd(true);
+        item.getInformation().setChangeHPByPowerBuff(6);
 
         Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
 
     }
 
-    public static void createTireSeShakh() throws IOException {
+    public static void createTireDoShakh() throws IOException {
         Item item = new Item();
         String name = "TireDoShakh";
         setItemDetails(item, name, 0, false, false, true, true, true, true, true, false);
-        item.getInformation().setCanIncreaseAP(true);
-        item.getInformation().setAmountOfIncreaseAP(2);
+        item.getInformation().setRandomLivingCard(true);
+        item.getInformation().setPowerBuffPermanent(true);
+        item.getInformation().setCanPowerBuffAdd(true);
+        item.getInformation().setChangeAPByPowerBuff(6);
 
         Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
-
     }
 
-    public static void craetePareSimorgh() throws IOException {
+    public static void createPareSimorgh() throws IOException {
         Item item = new Item();
         String name = "PareSimorgh";
         setItemDetails(item, name, 3500, false, true, false, true, false, true, true, false);
@@ -1182,6 +1209,7 @@ public class Generator {
         Item item = new Item();
         String name = "Exir";
         setItemDetails(item, name, 0, false, false, true, false, true, true, true, true);
+        item.getInformation().setRandomLivingCard(true);
         item.getInformation().setCanPowerBuffAdd(true);
         item.getInformation().setPowerBuffPermanent(true);
         item.getInformation().setChangeHPByPowerBuff(3);
@@ -1206,6 +1234,7 @@ public class Generator {
         Item item = new Item();
         String name = "MajuneRuinTani";
         setItemDetails(item, name, 0, false, false, true, true, true, true, true, true);
+        item.getInformation().setRandomLivingCard(true);
         item.getInformation().setCanHolyBuffAdd(true);
         item.getInformation().setTimeOfHolyBuff(2);
         item.getInformation().setNumberOfHolyBuff(10);
@@ -1214,9 +1243,11 @@ public class Generator {
     }
 
     public static void createNefrineMarg() throws IOException {
+        //todo impactesho nazadam
         Item item = new Item();
         String name = "NefrineMarg";
         setItemDetails(item, name, 0, false, false, true, false, true, true, true, true);
+        item.getInformation().setRandomLivingCard(true);
         item.getInformation().setCanAddNefrineMarg(true);
         Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
 
@@ -1226,6 +1257,7 @@ public class Generator {
         Item item = new Item();
         String name = "RandomDamage";
         setItemDetails(item, name, 0, false, false, true, true, true, true, true, true);
+        item.getInformation().setRandomLivingCard(true);
         item.getInformation().setCanPowerBuffAdd(true);
         item.getInformation().setPowerBuffPermanent(true);
         item.getInformation().setChangeAPByPowerBuff(2);
@@ -1247,6 +1279,7 @@ public class Generator {
         Item item = new Item();
         String name = "BladesOfAgility";
         setItemDetails(item, name, 0, false, false, true, true, true, true, true, true);
+        item.getInformation().setRandomLivingCard(true);
         item.getInformation().setCanPowerBuffAdd(true);
         item.getInformation().setPowerBuffPermanent(true);
         item.getInformation().setChangeAPByPowerBuff(6);
@@ -1266,6 +1299,7 @@ public class Generator {
     }
 
     public static void createAssassinationDagger() throws IOException {
+        //todo impactesho nazadam
         Item item = new Item();
         String name = "AssassinationDagger";
         setItemDetails(item, name, 15000, false, false, false, false, false, false, false, false);
@@ -1284,6 +1318,7 @@ public class Generator {
     }
 
     public static void createShockHammer() throws IOException {
+        //todo inam nazadim
         Item item = new Item();
         String name = "ShockHammer";
         setItemDetails(item, name, 15000, false, true, false, true, true, true, true, true);
@@ -1292,7 +1327,8 @@ public class Generator {
         Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
 
     }
-//TODO baghiasho nazadim hanuz
+
+    //TODO baghiasho nazadim hanuz
     public static void createSoulEater() throws IOException {
         Item item = new Item();
         String name = "SoulEater";
@@ -1300,4 +1336,26 @@ public class Generator {
         Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
 
     }
+
+    public static void createGhosleTamid() throws IOException {
+        //todo inam nazadim
+        Item item = new Item();
+        String name = "GhosleTamid";
+        setItemDetails(item, name, 20000, false, false, true, false, true, true, true, true);
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+
+    }
+
+    public static void createShamshireChini() throws IOException {
+        Item item = new Item();
+        String name = "ShamshireChini";
+        setItemDetails(item, name, 0, false, false, true, true, true, false, false, true);
+        item.getInformation().setMultipleImpact(true);
+        item.getInformation().setCanPowerBuffAdd(true);
+        item.getInformation().setPowerBuffPermanent(true);
+        item.getInformation().setChangeAPByPowerBuff(5);
+        Application.writeJSON(item, "Data/CollectionItem/Item/" + name + ".json");
+    }
+
+
 }
