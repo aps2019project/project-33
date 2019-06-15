@@ -1,4 +1,4 @@
-package AccountMenu;
+package View.AccountMenu;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
