@@ -24,7 +24,7 @@
                 </Label>
                 <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="75.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../resources/ui/sliding_panel/panel_trim_plate.png" />
+                        <Image url="@../../../resources/ui/sliding_panel/panel_trim_plate.png" />
                     </image>
                 </ImageView>
             </children>
@@ -39,7 +39,7 @@
                 </Label>
                 <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="574.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../resources/ui/sliding_panel/panel_trim_plate.png" />
+                        <Image url="@../../../resources/ui/sliding_panel/panel_trim_plate.png" />
                     </image>
                 </ImageView>
             </children>
@@ -54,7 +54,7 @@
                 </Label>
                 <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="316.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../resources/ui/sliding_panel/panel_trim_plate.png" />
+                        <Image url="@../../../resources/ui/sliding_panel/panel_trim_plate.png" />
                     </image>
                 </ImageView>
             </children>
