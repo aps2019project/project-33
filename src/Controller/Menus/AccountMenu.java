@@ -12,21 +12,16 @@ import java.io.IOException;
 public class AccountMenu extends Menu {
 
     @Override
-    public void inputCommandLine() throws IOException {
-        System.out.println("Here is Account Menu");
-        System.out.println("For help, enter : show menu");
-
-        String inputLine = Main.scanner.nextLine();
+    public void inputCommandLine(String inputLine) throws IOException {
         inputLine = inputLine.trim();
         String[] input = inputLine.split("[ ]+");
         inputLine = inputLine.toLowerCase();
 
-        if (inputLine.matches("create account .*")) {
-            createAccount(input[2]);
+        if (inputLine.matches("create account [^\\s]+ [^\\s]+")) {
+            createAccount(input[2], input[3]);
             return;
-        } else if (inputLine.matches("login .*")) {
-            String username = input[1];
-            login(username);
+        } else if (inputLine.matches("login [^\\s]+ [^\\s]+")) {
+            login(input[1], input[2]);
             return;
         } else if (inputLine.equals("show leaderboard")) {
             Account.showLeaderBoard();
@@ -36,7 +31,6 @@ public class AccountMenu extends Menu {
             return;
         else
             System.out.println("Enter valid command");
-        this.inputCommandLine();
     }
 
     public static void showMenu() {
@@ -47,18 +41,14 @@ public class AccountMenu extends Menu {
         System.out.println("5. exit");
     }
 
-    private void createAccount(String username) throws IOException {
+    private void createAccount(String username, String password) {
         if (Account.getAccountByUsername(username) != null) {
             System.out.println("this username is used");
-            this.inputCommandLine();
             return;
         }
 
-        System.out.println("this username is ok, please enter password !");
-        String password = Main.scanner.nextLine();
         if(password.contains(" ")){
             System.out.println("password mustn't have space !!");
-            this.inputCommandLine();
             return;
         }
 
@@ -67,31 +57,23 @@ public class AccountMenu extends Menu {
         Main.application.setLoggedInAccount(account);
 
         System.out.println("The account is created");
-
-        new MainMenu().inputCommandLine();
     }
 
-    private void login(String username) throws IOException {
+    private void login(String username, String password) {
         Account account = Account.getAccountByUsername(username);
         if (account == null) {
             System.out.println("Invalid Username !!");
-            this.inputCommandLine();
             return;
         }
 
-        System.out.println("Enter password");
-
-        String password = Main.scanner.nextLine();
         if (!account.getPassword().equals(password)) {
             System.out.println("Invalid password !!");
-            this.inputCommandLine();
             return;
         }
 
         System.out.println("login complete !");
         Main.application.setLoggedInAccount(account);
-        new MainMenu().inputCommandLine();
-
         return;
     }
+
 }
