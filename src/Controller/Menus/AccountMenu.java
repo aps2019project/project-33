@@ -12,7 +12,7 @@ import java.io.IOException;
 public class AccountMenu extends Menu {
 
     @Override
-    public void inputCommandLine(String inputLine) throws IOException {
+    public void inputCommandLine(String inputLine) {
         inputLine = inputLine.trim();
         String[] input = inputLine.split("[ ]+");
         inputLine = inputLine.toLowerCase();

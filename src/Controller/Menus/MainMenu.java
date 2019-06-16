@@ -15,25 +15,28 @@ import java.util.ArrayList;
 
 public class MainMenu extends Menu {
 
-    public void inputCommandLine() throws IOException {
+    public void inputCommandLine(String inputLine) throws IOException {
         System.out.println("Here is Main menu");
         System.out.println("For help, enter : show menu");
 
-        String inputLine = Main.scanner.nextLine();
+//        String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
         inputLine = inputLine.toLowerCase();
         String[] input = inputLine.split("[ ]+");
 
         if (inputLine.equals("enter collection")) {
             CollectionMenu collectionMenu = new CollectionMenu();
-            collectionMenu.inputCommandLine();
+            //todo inam nemidnam bayad che konam
+            //            collectionMenu.inputCommandLine();
         } else if (inputLine.equals("enter shop menu")) {
             ShopMenu shopMenu = new ShopMenu();
-            shopMenu.inputCommandLine();
+            //todo nemidunam bayad ino chi kar konam
+            //            shopMenu.inputCommandLine();
         } else if (inputLine.equals("enter battle")) {
             BattleMenu battleMenu = new BattleMenu();
             battleMenu.handleDeck(Main.application.getLoggedInAccount());
-            battleMenu.inputCommandLine();
+            //todo inam dobare ye chiz azash pak kardam
+            //            battleMenu.inputCommandLine();
         } else if (inputLine.equals("save"))
             this.save();
         else if (inputLine.equals("logout")) {
@@ -45,7 +48,6 @@ public class MainMenu extends Menu {
             return;
         else
             System.out.println("Please enter valid command !!");
-        this.inputCommandLine();
     }
 
     public static void showMenu() {
@@ -89,7 +91,6 @@ public class MainMenu extends Menu {
 
     private void logout() throws IOException {
         Main.application.setLoggedInAccount(null);
-        new AccountMenu().inputCommandLine();
         return;
     }
 }

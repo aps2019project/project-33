@@ -12,33 +12,33 @@
 }
 
 .SilverButton{
-    -fx-background-image: url("../resources/ui/button_end_turn_enemy.png");
+    -fx-background-image: url("../../resources/ui/button_end_turn_enemy.png");
 }
 .SilverButton:hover{
     -fx-effect: dropshadow(three-pass-box, Gray, 1, 2, 0, 0);
 }
 
 .GreenButton{
-    -fx-background-image: url("../resources/ui/button_end_turn_finished.png");
+    -fx-background-image: url("../../resources/ui/button_end_turn_finished.png");
 }
 .GreenButton:hover{
-    -fx-background-image: url("../resources/ui/button_end_turn_finished_glow.png");
+    -fx-background-image: url("../../resources/ui/button_end_turn_finished_glow.png");
 }
 
 .YellowButton{
-    -fx-background-image: url("../resources/ui/button_end_turn_mine.png");
+    -fx-background-image: url("../../resources/ui/button_end_turn_mine.png");
 }
 
 .YellowButton:hover{
-    -fx-background-image: url("../resources/ui/button_end_turn_mine_glow.png");
+    -fx-background-image: url("../../resources/ui/button_end_turn_mine_glow.png");
 }
 
 .RedButton{
-    -fx-background-image: url("../resources/ui/button_cancel.png");
+    -fx-background-image: url("../../resources/ui/button_cancel.png");
 }
 
 .RedButton:hover{
-    -fx-background-image: url("../resources/ui/button_cancel_glow.png");
+    -fx-background-image: url("../../resources/ui/button_cancel_glow.png");
 }
 
 .NoFormButton{
@@ -57,7 +57,7 @@
     -fx-pref-height: 100px;
     -fx-pref-width: 100px;
     -fx-background-size: 100% 100%;
-    -fx-background-image: url("../resources/ui/button_back_corner.png");
+    -fx-background-image: url("../../resources/ui/button_back_corner.png");
 }
 
 .SelectedButton{

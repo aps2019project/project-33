@@ -14,18 +14,13 @@ public class CollectionMenu extends Menu {
     private boolean isFirstTime = true;
     private Collection collection = null;
 
-    public void setFirstTime(boolean flag) {
-        isFirstTime = flag;
-    }
-
     @Override
-
-    public void inputCommandLine() throws IOException {
+    public void inputCommandLine(String inputLine) throws IOException {
 
         System.out.println("Here is Collection Menu");
         System.out.println("For help, enter : show menu");
 
-        String inputLine = Main.scanner.nextLine();
+//        String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
         String[] input = inputLine.split("[ ]+");
         inputLine = inputLine.toLowerCase();
@@ -70,7 +65,6 @@ public class CollectionMenu extends Menu {
         } else
             System.out.println("Enter valid command line !");
 
-        this.inputCommandLine();
     }
 
     private void searchInCollection(Collection collection, String cardName) {
