@@ -1,6 +1,5 @@
 package Controller;
 
-import Controller.Menus.AccountMenu;
 import Model.*;
 import Model.CollectionItem.CollectionItem;
 import Model.CollectionItem.Item;
@@ -20,8 +19,7 @@ public class Application {
 
     public void runApplication() throws IOException {
         loadData();
-        AccountMenu accountMenu = new AccountMenu();
-        accountMenu.inputCommandLine();
+        Client client = Client.createClient();
     }
 
     public static Object copy(Object object, Class className) throws IOException {
