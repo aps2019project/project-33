@@ -1,8 +1,12 @@
 package Controller;
 
 import Generator.*;
+import View.View;
+
 import java.io.*;
 import java.util.Scanner;
+
+import static javafx.application.Application.launch;
 
 
 public class Main {
@@ -10,11 +14,7 @@ public class Main {
     public static Application application = new Application();
 
     public static void main(String[] args) throws IOException {
-        //Generator.createHeroes();
-        //    ShopGenerator.generate();
-
         application.runApplication();
-    //    Generator.createCards(application);
+        View.main(args);
     }
-
 }

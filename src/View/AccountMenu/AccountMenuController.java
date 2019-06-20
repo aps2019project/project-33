@@ -1,5 +1,6 @@
 package View.AccountMenu;
 
+import Controller.Client;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -49,12 +50,10 @@ public class AccountMenuController implements Initializable {
         enterButton.setOnMouseClicked(event -> {
             String username = usernameTextField.getText();
             String password = passwordTextFields.getText();
-            if(mode == Mode.logIn) {
-                //todo
-            }
-            else{
-                // hano moonde
-            }
+            if(mode == Mode.logIn)
+                Client.getClient().getAccountMenu().inputCommandLine("login " + username + " " + password);
+            else
+                Client.getClient().getAccountMenu().inputCommandLine("create " + username + " " + password);
             usernameTextField.clear();
             passwordTextFields.clear();
         });

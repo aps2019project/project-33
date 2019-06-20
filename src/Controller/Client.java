@@ -20,6 +20,10 @@ public class Client {
         return client;
     }
 
+    public static Client getClient(){
+        return Client.client;
+    }
+
     public AccountMenu getAccountMenu() {
         return accountMenu;
     }

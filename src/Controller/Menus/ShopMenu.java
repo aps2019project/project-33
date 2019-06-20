@@ -12,11 +12,11 @@ import java.util.ArrayList;
 public class ShopMenu extends Menu {
     private Collection shop = Main.application.getShop();
 
-    public void inputCommandLine() {
+    public void inputCommandLine(String inputLine) {
         System.out.println("Here is shop !");
         System.out.println("For help, enter : show menu");
 
-        String inputLine = Main.scanner.nextLine();
+//        String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
         String[] separatedInput = inputLine.split("[ ]+");
         inputLine = inputLine.toLowerCase();
@@ -43,7 +43,6 @@ public class ShopMenu extends Menu {
             return;
         else
             System.out.println("Please enter valid command line !");
-        this.inputCommandLine();
     }
 
     private void searchInCollection(String collectionItemName, Collection collection) {

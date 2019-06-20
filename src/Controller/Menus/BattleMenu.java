@@ -36,7 +36,7 @@ public class BattleMenu extends Menu {
     }
 
     @Override
-    public void inputCommandLine() throws FileNotFoundException {
+    public void inputCommandLine(String inputLine) throws FileNotFoundException {
         if (!checkDeck(Main.application.getLoggedInAccount())) {
             System.out.println("selected deck is invalid");
             return;
