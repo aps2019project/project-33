@@ -25,7 +25,7 @@
             <children>
                 <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="ImagePane">
                <children>
-                        <ImageView fitHeight="78.0" fitWidth="200.0" layoutX="81.0" layoutY="22.0">
+                        <ImageView fitHeight="83.0" fitWidth="239.0" layoutX="61.0" layoutY="22.0">
                             <image>
                                 <Image url="@../../../resources/ui/brand_duelyst.png" />
                             </image>
