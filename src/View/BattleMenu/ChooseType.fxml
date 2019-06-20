@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="545.0" prefWidth="989.0" styleClass="PlayAnchor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BattleMenu.BattleMenuController">
+<AnchorPane prefHeight="545.0" prefWidth="989.0" styleClass="PlayAnchor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.BattleMenu.BattleMenuController">
     <children>
         <Group layoutX="25.0" layoutY="-8.0">
             <children>

@@ -8,7 +8,6 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
 //akse duelyst chera nis
 public class AccountMenuController implements Initializable {
     public Label logInModeButton;
@@ -54,7 +53,7 @@ public class AccountMenuController implements Initializable {
             if(mode == Mode.logIn)
                 Client.getClient().getAccountMenu().inputCommandLine("login " + username + " " + password);
             else
-                Client.getClient().getAccountMenu().inputCommandLine("create " + username + " " + password);
+                Client.getClient().getAccountMenu().inputCommandLine("create account " + username + " " + password);
             usernameTextField.clear();
             passwordTextFields.clear();
         });

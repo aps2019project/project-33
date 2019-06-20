@@ -10,7 +10,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class AccountMenu extends Menu {
-
     @Override
     public void inputCommandLine(String inputLine) {
         inputLine = inputLine.trim();
