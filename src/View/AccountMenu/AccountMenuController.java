@@ -54,7 +54,7 @@ public class AccountMenuController implements Initializable {
             if(mode == Mode.logIn)
                 Client.getClient().getAccountMenu().inputCommandLine("login " + username + " " + password);
             else
-                Client.getClient().getAccountMenu().inputCommandLine("create " + username + " " + password);
+                Client.getClient().getAccountMenu().inputCommandLine("create account " + username + " " + password);
             usernameTextField.clear();
             passwordTextFields.clear();
         });
