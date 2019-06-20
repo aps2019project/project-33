@@ -8,7 +8,6 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
 //akse duelyst chera nis
 public class AccountMenuController implements Initializable {
     public Label logInModeButton;
