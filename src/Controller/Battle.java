@@ -20,7 +20,7 @@ public class Battle {
     private Map1 map = new Map1(5, 9);
     private boolean gameIsRunning;
     private int numberOfRounds, prize, numberOfFlags;
-    private String type, mode;
+    private String type, kind;
     private LivingCard selectedCard;
     private Flag mainFlag;
     private CollectibleItem selectedCollectibleItem;
@@ -28,7 +28,7 @@ public class Battle {
     private ArrayList<Flag> flags = new ArrayList<>();
     private String estate = "none";
 
-    private String[] modes = {"Kill_enemy's_hero", "Hold_flag", "Take_half_of_flags"};
+    private String[] kinds = {"Kill_enemy's_hero", "Hold_flag", "Take_half_of_flags"};
 
     {
         this.selectedCard = null;
@@ -143,8 +143,8 @@ public class Battle {
     }
 
     public void createFlagMode() {
-        //numberOfFlags chaande tuye mode e 3
-        if (this.mode.equals(modes[1]))
+        //numberOfFlags chaande tuye kind e 3
+        if (this.kind.equals(kinds[1]))
             numberOfFlags = 1;
         System.out.println(this.numberOfFlags);
         this.createFlags();
@@ -213,7 +213,7 @@ public class Battle {
         playerOff.getMana().setCurrentMana(playerOff.getMana().getMaximumMana());
 
 
-        if (!this.getMode().equals(modes[0])) {
+        if (!this.getKind().equals(kinds[0])) {
             this.createFlagMode();
         }
         // gitignore test
@@ -237,18 +237,18 @@ public class Battle {
         //remaining mana bayad bashe ya maximum
         System.out.println("my mana : " + playerOn.getMana().getCurrentMana());
         System.out.println("opponent mana : " + playerOff.getMana().getCurrentMana());
-        if (this.mode.equals(modes[0])) {
+        if (this.kind.equals(kinds[0])) {
             System.out.println("my hero HP : " + playerOn.getHero().getHP());
             System.out.println("opponent HP : " + playerOff.getHero().getHP());
         }
         //chera sotoon o satr midi biroon ?
-        if (this.mode.equals(modes[1])) {
+        if (this.kind.equals(kinds[1])) {
             System.out.println("flag position is : " + this.mainFlag.getPositionRow() + ", " + this.mainFlag.getPositionColumn());
             //usernamesh bayad chap she?
             if (this.mainFlag.getFlagOwner() != null)
                 System.out.println("flag owner is : " + this.mainFlag.getFlagOwner().getAccount().getUsername());
         }
-        if (this.mode.equals(modes[2])) {
+        if (this.kind.equals(kinds[2])) {
             //hamin shekli bayad bashe ? id e sarbaz bayad bede ya chi ?
             for (Flag flag : this.getFlags()) {
                 if (flag.getFlagOwner() != null) {
@@ -575,7 +575,7 @@ public class Battle {
         Player player = playerOff;
         playerOff = playerOn;
         playerOn = player;
-        if (this.getMode().equals(modes[1])) {
+        if (this.getKind().equals(kinds[1])) {
             if (this.mainFlag.getFlagOwner() != null)
                 mainFlag.setNumberOfGotRounds(mainFlag.getNumberOfGotRounds() + 1);
             else
@@ -654,7 +654,7 @@ public class Battle {
     //-----------------------------------------------
     //ta injaro khundam
     public void checkTurn() {
-        if (this.getMode().equals(modes[0])) {
+        if (this.getKind().equals(kinds[0])) {
             if (playerOn.getHero().getHP() <= 0) {
                 this.setLoserPlayer(playerOn);
                 this.setWinnerPlayer(playerOff);
@@ -664,7 +664,7 @@ public class Battle {
                 this.setWinnerPlayer(playerOn);
             }
         }
-        if (this.getMode().equals(modes[1])) {
+        if (this.getKind().equals(kinds[1])) {
             if (mainFlag.getNumberOfGotRounds() >= 6) {
                 Player winner = mainFlag.getFlagOwner();
                 this.setWinnerPlayer(winner);
@@ -675,7 +675,7 @@ public class Battle {
                 }
             }
         }
-        if (this.getMode().equals(modes[2])) {
+        if (this.getKind().equals(kinds[2])) {
             int numberOfPlayerOnFlags = 0, numberOfPlayerOffFlags = 0;
             for (Flag flag : flags) {
                 Player flagOwner = flag.getFlagOwner();
@@ -1013,20 +1013,12 @@ public class Battle {
         this.numberOfRounds = numberOfRounds;
     }
 
-    public String getType() {
-        return type;
+    public String getKind() {
+        return kind;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getMode() {
-        return mode;
-    }
-
-    public void setMode(String mode) {
-        this.mode = mode;
+    public void setKind(String kind) {
+        this.kind = kind;
     }
 
     public int getPrize() {
@@ -1076,5 +1068,13 @@ public class Battle {
 
     public LivingCard getSelectedCard() {
         return this.selectedCard;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

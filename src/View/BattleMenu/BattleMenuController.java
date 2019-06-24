@@ -1,18 +1,17 @@
 package View.BattleMenu;
 
-import javafx.event.EventHandler;
+import  Controller.Client;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
-
-import javax.jws.WebParam;
-import javax.tools.Diagnostic;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BattleMenuController implements Initializable {
+//type mishe single, multi
+//mode mishe custom ya story
+//kind mishe in ke kill bashe o ina ...
+// chaptersam ke hich
 
-    private String[] modes = {"Kill_enemy's_hero", "Hold_flag", "Take_half_of_flags"};
+public class BattleMenuController implements Initializable {
 
     private ChapterList chapter = null;
     private ModeList mode = null;
@@ -20,16 +19,16 @@ public class BattleMenuController implements Initializable {
     private TypeList type = null;
 
     enum ChapterList{
-        One, Two, Three;
+        One, Two, Three
     }
     enum ModeList{
-        Custom, Story;
+        Custom, Story
     }
     enum KindList{
-        KillEnemyHero, HoldFlag, TakeHalfOfFlags;
+        KillEnemyHero, HoldFlag, TakeHalfOfFlags
     }
     enum TypeList{
-        SinglePlayer, MultiPlayer;
+        SinglePlayer, MultiPlayer
     }
 
     public Label backButton;
@@ -49,7 +48,7 @@ public class BattleMenuController implements Initializable {
     public Label customGameButton;
 
     public void startGame(){
-        //TODO
+        Client.getClient().getBattleMenu().createGame(type.toString(), mode.toString(), kind.toString(), 0, 0, 0, );
     }
 
     @Override
