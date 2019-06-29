@@ -8,6 +8,7 @@ public class Client {
     private CollectionMenu collectionMenu = new CollectionMenu();
     private MainMenu mainMenu = new MainMenu();
     private ShopMenu shopMenu = new ShopMenu();
+    private MenuList currentMenu = null;
     private static Client client = null;
 
     private Client(){
@@ -44,4 +45,11 @@ public class Client {
         return shopMenu;
     }
 
+    public MenuList getCurrentMenu() {
+        return currentMenu;
+    }
+
+    public void setCurrentMenu(MenuList currentMenu) {
+        this.currentMenu = currentMenu;
+    }
 }

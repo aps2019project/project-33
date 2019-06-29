@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 //type mishe single, multi
 //mode mishe custom ya story
 //kind mishe in ke kill bashe o ina ...
-// chaptersam ke hich
+//chaptersam ke hich
 //address e story ha in goone bashad ke 3 4 ta story bashe, ke storyi esme taraf bashe
 
 public class BattleMenu {
@@ -24,21 +24,20 @@ public class BattleMenu {
     private String[] chapters = {"fight with DiveSefid", "fight with Zahhak",
             "fight with Arash"};
     private int[] prizeOfChapters = {500, 1000, 1500};
-    private int[] numberOfFlags = {0, 1, 5};
+    private int[] numberOfFlagsOfChapters = {0, 1, 5};
 
     private int numberOfDecksInCustomGame = 3;
     private int prizeOfCustomGame = 1000;
 
     //battle, player 1, player 2, prize, mode, numberOfFlag
 
-    public void createGame(String type, String mode, String chapter, String secondPlayer) throws FileNotFoundException {
+    public void createGame(String secondPlayer, String type, String mode, String chapter, String kind) throws FileNotFoundException {
 
+        //todo in ja kollan oomadim nafarate bazio moshakhas kardim -> Type
         if (!checkDeck(Main.application.getLoggedInAccount())) {
             System.out.println("selected deck is invalid");
             return;
         }
-
-
         //set players
         battle.setPlayerOn(new Player(Main.application.getLoggedInAccount()));
         chooseSecondPlayer(secondPlayer);
@@ -46,13 +45,15 @@ public class BattleMenu {
             System.out.println("Invalid rival");
             return;
         }
-
         //set battle details
         chooseType(type);
-        if(battle.getType("Single Player")) setSinglePlayerDetails
 
+        //todo in ja bayad berim badi, chie ? -? mode -> custom ya story
+        //todo number of flags felan fix e, ta bebinim badan khoda chi mikhad
+        if(type.equals("Single Player")) chooseMode(mode, chapter, kind, 1);
 
         battle.runGame();
+        Client.getClient().setCurrentMenu(MenuList.Battle);
     }
 
     private void chooseType(String type) {
@@ -69,7 +70,12 @@ public class BattleMenu {
         }
     }
 
-    private void customGame(String mode, String chapter) throws FileNotFoundException {
+    private boolean checkDeck(Account account) {
+        if (account.getCollection().getMainDeck() == null) return false;
+        return account.getCollection().getMainDeck().checkValidateDeck();
+    }
+
+    private void chooseMode(String mode, String chapter, String kind, int numberOfFlags) throws FileNotFoundException {
 
         if (mode.equals("Story")) {
             String address = "Data/Battle/Story/Story";
@@ -77,62 +83,27 @@ public class BattleMenu {
                 if (chapters[i].equals(chapter)) {
                     battle.setPrize(prizeOfChapters[i]);
                     battle.setKind(kinds[i]);
-                    battle.setNumberOfFlags(numberOfFlags[i]);
+                    battle.setNumberOfFlags(numberOfFlagsOfChapters[i]);
 
                     Deck deck = (Deck) Application.readJSON(Deck.class, address + i + ".json");
                     ((AI) battle.getPlayerOff()).selectMainDeck(deck);
                 }
             }
         }
-
         if (mode.equals("Custom Game")) {
             battle.setPrize(prizeOfCustomGame);
+            battle.setKind(kind);
+            String address = "Data/Battle/Custom/Custom";
+            for(int i = 0; i < kinds.length; i++){
+                if(kind.equals(kinds[i])){
+                    //todo in kheili bade vali chare i nist
+                    battle.setNumberOfFlags(numberOfFlagsOfChapters[i]);
 
-        }
-    }
-
-    private void setMode(String mode, int numberOfFlags) {
-        for (int i = 0; i < kinds.length; i++)
-            if (mode.equals(kinds[i])) {
-                battle.setKind(kinds[i]);
-                if (i == 2)
-                    battle.setNumberOfFlags(numberOfFlags);
-            }
-    }
-
-
-    private boolean checkDeck(Account account) {
-        if (account.getCollection().getMainDeck() == null) return false;
-        return account.getCollection().getMainDeck().checkValidateDeck();
-    }
-
-    public void story() throws FileNotFoundException {
-        if (!isRunning) return;
-        System.out.println("Levels :");
-        for (int i = 0; i < chapters.length; i++)
-            System.out.println(chapters[i] + ", Prize : " + prizeOfChapters[i]);
-        System.out.println("Enter number of level: ");
-        System.out.println("For choosing, enter : [Number of level]");
-        readInputs();
-        if (inputLine.matches("[\\d]+")) {
-            for (int i = 0; i < chapters.length; i++)
-                if (Integer.parseInt(inputLine) == i + 1) {
-                    selectAIMainDeck(i);
-                    battle.setKind(kinds[i]);
-                    battle.setPrize(prizeOfChapters[i]);
-                    if (i == 2)
-                        battle.setNumberOfFlags(5);
-                    return;
+                    Deck deck = (Deck) Application.readJSON(Deck.class, address + i + ".json");
+                    ((AI) battle.getPlayerOff()).selectMainDeck(deck);
                 }
+            }
         }
-        System.out.println("Enter valid level");
-        story();
-    }
-
-    private void selectAIMainDeck(int index) throws FileNotFoundException {
-        String address = "Data/Battle/Story/Story";
-        Deck deck = (Deck) Application.readJSON(Deck.class, address + index + ".json");
-        ((AI) battle.getPlayerOff()).selectMainDeck(deck);
     }
 
     public void handleDeck(Account account) throws FileNotFoundException {
