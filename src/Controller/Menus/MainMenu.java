@@ -3,7 +3,9 @@
 package Controller.Menus;
 
 import Controller.Application;
+import Controller.Client;
 import Controller.Main;
+import Controller.MenuList;
 import Model.Account;
 import Model.CollectionItem.CollectionItem;
 import Model.CollectionItem.LivingCard;
@@ -25,15 +27,29 @@ public class MainMenu extends Menu {
 
         if (inputLine.equals("enter collection")) {
             CollectionMenu collectionMenu = new CollectionMenu();
+
+            Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
+
             //todo inam nemidnam bayad che konam
             //            collectionMenu.inputCommandLine();
         } else if (inputLine.equals("enter shop menu")) {
             ShopMenu shopMenu = new ShopMenu();
+
+            //jadid
+            Client.getClient().setCurrentMenu(MenuList.ShopMenu);
+            //jadid
+
             //todo nemidunam bayad ino chi kar konam
             //            shopMenu.inputCommandLine();
         } else if (inputLine.equals("enter battle")) {
+
+            Client.getClient().setCurrentMenu(MenuList.Battle);
+
             BattleMenu battleMenu = new BattleMenu();
+
             battleMenu.handleDeck(Main.application.getLoggedInAccount());
+
+
             //todo inam dobare ye chiz azash pak kardam
             //            battleMenu.inputCommandLine();
         } else if (inputLine.equals("save"))
@@ -90,6 +106,7 @@ public class MainMenu extends Menu {
 
     private void logout() throws IOException {
         Main.application.setLoggedInAccount(null);
+        Client.getClient().setCurrentMenu(MenuList.AccountMenu);
         return;
     }
 }
