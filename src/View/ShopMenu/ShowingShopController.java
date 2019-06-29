@@ -3,6 +3,7 @@ package View.ShopMenu;
 import Controller.Client;
 import Controller.MenuList;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -23,8 +24,11 @@ public class ShowingShopController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(isFirstTime){
             VBox cardVbox = new VBox();
-            ImageView cardGif = new ImageView("../../../resources/unit_gifs/1.gif");
+            Image image = new Image("file:1.gif");
+            ImageView cardGif = new ImageView(image); //("../../../resources/codex/chapter19_background@2x.jpg");
             cardVbox.getChildren().add(cardGif);
+            cardVbox.setLayoutY(10);
+            cardVbox.setLayoutY(10);
             cardVboxes.add(cardVbox);
             nonBlurAnchor.getChildren().addAll(cardVboxes);
         }
