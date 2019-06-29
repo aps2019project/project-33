@@ -44,7 +44,7 @@ public class MainMenu extends Menu {
             //            shopMenu.inputCommandLine();
         } else if (inputLine.equals("enter battle")) {
 
-            Client.getClient().setCurrentMenu(MenuList.Battle);
+            Client.getClient().setCurrentMenu(MenuList.ChooseKind);
 
             BattleMenu battleMenu = new BattleMenu();
 
