@@ -836,7 +836,8 @@ public class Battle {
 
     public void runGame() throws FileNotFoundException {
         preProcess();
-        inputCommandLine();
+        //todo kollan in ja ha bayad befahmam bayad chi kar bokonam
+        //        inputCommandLine();
     }
 
     public void forfeitMatch() {
