@@ -12,6 +12,7 @@ public enum MenuList {
         if(this.equals(ChooseMode)) return "BattleMenu/ChooseMode.fxml";
         if(this.equals(ChooseKind)) return "BattleMenu/ChooseKind.fxml";
         if(this.equals(ChooseChapter)) return "BattleMenu/ChooseChapter.fxml";
+        return null;
     }
 }
 
