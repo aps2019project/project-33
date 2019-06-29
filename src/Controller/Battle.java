@@ -846,7 +846,7 @@ public class Battle {
         finishMatch();
     }
 
-    private void inputCommandLine(String inputLine) {
+    public void inputCommandLine(String inputLine) {
         System.out.println("Here is Battle");
         System.out.println("For help, enter : show menu");
 

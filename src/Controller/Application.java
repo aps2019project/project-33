@@ -53,6 +53,7 @@ public class Application {
 
         //Read ShopMenu
         File file = new File("Data/Memory/ShopMenu");
+
         if(Objects.requireNonNull(file.listFiles()).length > 0)
             Main.application.shop = (Collection) readJSON(Collection.class, "Data/Memory/ShopMenu/ShopMenu.json");
 

@@ -14,14 +14,19 @@ import java.util.ResourceBundle;
 //kind mishe in ke kill bashe o ina ...
 //chaptersam ke hich
 
-public class BattleMenuController implements Initializable {
-    private ChapterList chapter = null;
-    private ModeList mode = null;
-    private KindList kind = null;
-    private TypeList type = null;
+public class BattleMenuController {
+    protected static ChapterList chapter = null;
+    protected static ModeList mode = null;
+    protected static KindList kind = null;
+    protected static TypeList type = null;
 
     enum TypeList{
-        SinglePlayer, MultiPlayer
+        SinglePlayer, MultiPlayer;
+
+        public String toString(){
+            if(this.equals(SinglePlayer)) return "Single Player";
+            else return "Multi Player";
+        }
     }
     enum ModeList{
         Custom, Story
@@ -46,19 +51,7 @@ public class BattleMenuController implements Initializable {
         }
     }
 
-    public Label backButton;
-    public Label singlePlayerButton;
-    public Label multiPlayerButton;
-    public Label kindOneButton;
-    public Label kindThreeButton;
-    public Label kindTwoButton;
-    public Label chapterOneButton;
-    public Label chapterTwoButton;
-    public Label chapterThreeButton;
-    public Label storyButton;
-    public Label customGameButton;
-
-    public void startGame(){
+    public static void startGame(){
         String typeToString = null, modeToString = null, chapterToString = null, kindToString = null;
         if(type != null) typeToString = type.toString();
         if(mode != null) modeToString = mode.toString();
@@ -72,56 +65,10 @@ public class BattleMenuController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        singlePlayerButton.setOnMouseClicked(event -> {
-            type = TypeList.SinglePlayer;
-            Client.getClient().setCurrentMenu(MenuList.ChooseKind);
-        });
-
-        multiPlayerButton.setOnMouseClicked(event -> {
-            type = TypeList.MultiPlayer;
-            Client.getClient().setCurrentMenu(MenuList.ChooseKind);
-        });
-
-        kindOneButton.setOnMouseClicked(event -> {
-            kind = KindList.KillEnemyHero;
-            startGame();
-        });
-
-        kindTwoButton.setOnMouseClicked(event -> {
-            kind = KindList.HoldFlag;
-            startGame();
-        });
-
-        kindThreeButton.setOnMouseClicked(event -> {
-            kind = KindList.TakeHalfOfFlags;
-            startGame();
-        });
-
-        chapterOneButton.setOnMouseClicked(event -> {
-            chapter = ChapterList.One;
-            startGame();
-        });
-
-        chapterTwoButton.setOnMouseClicked(event -> {
-            chapter = ChapterList.Two;
-            startGame();
-        });
-
-        chapterThreeButton.setOnMouseClicked(event -> {
-            chapter = ChapterList.Three;
-            startGame();
-        });
-
-        storyButton.setOnMouseClicked(event -> {
-            mode = ModeList.Story;
-            Client.getClient().setCurrentMenu(MenuList.ChooseChapter);
-        });
-
-        customGameButton.setOnMouseClicked(event -> {
-            mode = ModeList.Custom;
-            Client.getClient().setCurrentMenu(MenuList.ChooseKind);
-        });
+    public static void relax(){
+        chapter = null;
+        mode = null;
+        type = null;
+        kind = null;
     }
 }

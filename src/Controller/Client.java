@@ -11,6 +11,8 @@ public class Client {
     private ShopMenu shopMenu = new ShopMenu();
     private MenuList currentMenu = MenuList.AccountMenu;
     private static Client client = null;
+    //todo in bayad ye jaei meghdar dehi she
+    private Battle runningBattle;
 
     private Client(){
 
@@ -52,5 +54,13 @@ public class Client {
 
     public void setCurrentMenu(MenuList currentMenu) {
         this.currentMenu = currentMenu;
+    }
+
+    public Battle getRunningBattle() {
+        return runningBattle;
+    }
+
+    public void setRunningBattle(Battle runningBattle) {
+        this.runningBattle = runningBattle;
     }
 }
