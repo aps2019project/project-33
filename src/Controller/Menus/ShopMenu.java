@@ -31,6 +31,9 @@ public class ShopMenu extends Menu {
             searchInCollection(separatedInput[2], collection);
         } else if (inputLine.matches("search .+")) {
             searchInCollection(separatedInput[1], this.shop);
+
+            Client.getClient().setCurrentMenu(MenuList.ShowingShop);
+
         } else if (inputLine.matches("buy .+")) {
             String collectionNameItem = separatedInput[1];
             this.buy(collectionNameItem);
