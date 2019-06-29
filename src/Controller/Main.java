@@ -9,6 +9,8 @@ import java.util.Scanner;
 import static javafx.application.Application.launch;
 
 
+//nemidunam khodamam
+
 public class Main {
     public static Scanner scanner = new Scanner(System.in);
     public static Application application = new Application();
