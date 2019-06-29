@@ -1,4 +1,4 @@
-package View.Shop;
+package View.ShopMenu;
 
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;

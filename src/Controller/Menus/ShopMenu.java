@@ -1,6 +1,8 @@
 package Controller.Menus;
 
+import Controller.Client;
 import Controller.Main;
+import Controller.MenuList;
 import Model.*;
 import Model.CollectionItem.CollectionItem;
 import Model.CollectionItem.Hero;
@@ -39,8 +41,9 @@ public class ShopMenu extends Menu {
             this.shop.showCollection("Buy Cost");
         else if (inputLine.equals("show menu"))
             ShopMenu.showMenu();
-        else if (inputLine.equals("exit"))
-            return;
+        else if (inputLine.equals("exit")){
+            Client.getClient().setCurrentMenu(MenuList.MainMenu);
+        }
         else
             System.out.println("Please enter valid command line !");
     }

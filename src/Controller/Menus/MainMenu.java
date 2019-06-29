@@ -70,7 +70,7 @@ public class MainMenu extends Menu {
 
     public static void showMenu() {
         System.out.println("1. Enter Collection");
-        System.out.println("2. Enter Shop Menu");
+        System.out.println("2. Enter ShopMenu Menu");
         System.out.println("3. Enter Battle");
         System.out.println("4. save");
         System.out.println("5. logout");
@@ -82,12 +82,12 @@ public class MainMenu extends Menu {
         //Save Accounts
         writeInFile("Account", Account.getAccounts());
         System.out.println("Account saving done :)");
-        //Save Shop
+        //Save ShopMenu
         {
-            String address = "Data/Memory/Shop/shop.json";
+            String address = "Data/Memory/ShopMenu/shop.json";
             Application.writeJSON(Main.application.getShop(), address);
         }
-        System.out.println("Shop saving done :)");
+        System.out.println("ShopMenu saving done :)");
         //Save All Spells
         writeInFile("Spell", CollectionItem.getAllSpells());
         System.out.println("Spell saving done :)");

@@ -43,7 +43,7 @@ public class MainMenuController implements Initializable {
 
         shop.setOnMouseClicked(event -> {
             try {
-                Client.getClient().getMainMenu().inputCommandLine("enter shop");
+                Client.getClient().getMainMenu().inputCommandLine("enter shop menu");
             } catch (IOException e) {
                 e.printStackTrace();
             }

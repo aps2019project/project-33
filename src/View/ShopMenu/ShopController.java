@@ -1,11 +1,13 @@
-package View.Shop;
+package View.ShopMenu;
 
+import Controller.Client;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import javax.swing.event.CaretListener;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,6 +26,14 @@ public class ShopController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        imagePane.setOnMouseClicked(event -> {
+            Client.getClient().getShopMenu().inputCommandLine("exit");
+        });
+        showLabel.setOnMouseClicked(event -> {
+            Client.getClient().getShopMenu().inputCommandLine("show");
+        });
+        showCollectionLabel.setOnMouseClicked(event -> {
+            Client.getClient().getShopMenu().inputCommandLine("show collection");
+        });
     }
 }

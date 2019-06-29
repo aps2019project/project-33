@@ -17,23 +17,23 @@ public class ShopGenerator {
         DeckGenerator deckGenerator = new DeckGenerator();
         for (int i = 0; i < numberOfEachCard; i++) {
             for (String heroName : deckGenerator.heroNames) {
-                Hero hero = Hero.createHero(heroName, "Shop");
+                Hero hero = Hero.createHero(heroName, "ShopMenu");
                 shop.addCollectionItemToCollection(hero.getID());
             }
             for (String spellName : deckGenerator.spellNames) {
-                Spell spell = Spell.createSpell(spellName, "Shop");
+                Spell spell = Spell.createSpell(spellName, "ShopMenu");
                 shop.addCollectionItemToCollection(spell.getID());
             }
             for(String itemName : deckGenerator.itemNames){
-                Item item = Item.createItem(itemName, "Shop");
+                Item item = Item.createItem(itemName, "ShopMenu");
                 shop.addCollectionItemToCollection(item.getID());
             }
             for(String minionName : deckGenerator.minionNames){
-                Minion minion = Minion.createMinion(minionName, "Shop");
+                Minion minion = Minion.createMinion(minionName, "ShopMenu");
                 shop.addCollectionItemToCollection(minion.getID());
             }
         }
-        Application.writeJSON(shop, "Data/Memory/Shop/Shop.json");
+        Application.writeJSON(shop, "Data/Memory/ShopMenu/ShopMenu.json");
     }
 }
 
