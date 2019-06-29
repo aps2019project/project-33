@@ -106,7 +106,7 @@ public class BattleMenu {
         }
     }
 
-    public void handleDeck(Account account) throws FileNotFoundException {
+    public static void handleDeck(Account account) throws FileNotFoundException {
         account.getCollection().createDeck(account.getUsername());
         account.getCollection().selectMainDeck(account.getUsername());
         for (int i = 0; i < 2; i++) {

@@ -1,0 +1,27 @@
+.BattleAnchor{
+    -fx-background-size: 100% 100%;
+    -fx-background-image: url("../../../resources/maps/battlemap2_middleground@2x.png");
+}
+
+.BattleButton{
+    -fx-fit-to-width: 50px;
+    -fx-fit-to-height: 50px;
+}
+
+.BattleButton:hover{
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, aqua, 5, 0.3, 0, 0);
+}
+
+.BattleRow{
+    -fx-pref-height: 100px;
+    -fx-alignment: center-left;
+    -fx-padding: 10px 10px 10px 10px;
+    -fx-end-margin: 10px;
+    -fx-start-margin: 10px;
+}
+
+.BattleTable{
+
+}
+

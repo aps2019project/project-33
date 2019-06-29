@@ -77,5 +77,4 @@ public class AccountMenu extends Menu {
         Main.application.setLoggedInAccount(account);
         Client.getClient().setCurrentMenu(MenuList.MainMenu);
     }
-
 }

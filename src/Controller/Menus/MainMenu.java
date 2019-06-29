@@ -21,19 +21,20 @@ public class MainMenu extends Menu {
         System.out.println("Here is Main menu");
         System.out.println("For help, enter : show menu");
 
-//        String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
         inputLine = inputLine.toLowerCase();
         String[] input = inputLine.split("[ ]+");
 
         if (inputLine.equals("enter collection")) {
-            CollectionMenu collectionMenu = new CollectionMenu();
+            //todo fek konam inam ezafie
+            //CollectionMenu collectionMenu = new CollectionMenu();
 
             Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
 
             //todo inam nemidnam bayad che konam
             //            collectionMenu.inputCommandLine();
         } else if (inputLine.equals("enter shop menu")) {
+            //todo fek konam inam ezafie
             ShopMenu shopMenu = new ShopMenu();
 
             //jadid
@@ -44,11 +45,12 @@ public class MainMenu extends Menu {
             //            shopMenu.inputCommandLine();
         } else if (inputLine.equals("enter battle")) {
 
-            Client.getClient().setCurrentMenu(MenuList.ChooseKind);
+            Client.getClient().setCurrentMenu(MenuList.ChooseType);
 
-            BattleMenu battleMenu = new BattleMenu();
+            //todo fek konam inam ezafie
+//            BattleMenu battleMenu = new BattleMenu();
 
-            battleMenu.handleDeck(Main.application.getLoggedInAccount());
+            BattleMenu.handleDeck(Main.application.getLoggedInAccount());
 
 
             //todo inam dobare ye chiz azash pak kardam
