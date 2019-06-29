@@ -51,6 +51,7 @@
 
 .NoFormButton:hover{
     -fx-effect: dropshadow(three-pass-box, white, 5, 0.3, 0, 0);
+    -fx-cursor: hand;
 }
 
 .BackButton{
@@ -58,6 +59,10 @@
     -fx-pref-width: 100px;
     -fx-background-size: 100% 100%;
     -fx-background-image: url("../../resources/ui/button_back_corner.png");
+}
+
+.BackButton:hover{
+    -fx-cursor: hand;
 }
 
 .SelectedButton{
@@ -73,4 +78,12 @@
     -fx-alignment: center;
     -fx-font-size: 20;
     -fx-text-fill: white;
+}
+
+.SelectedButton:hover{
+    -fx-cursor: hand;
+}
+
+.NotSelectedButton:hover{
+    -fx-cursor: hand;
 }

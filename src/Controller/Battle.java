@@ -845,11 +845,10 @@ public class Battle {
         finishMatch();
     }
 
-    private void inputCommandLine() {
+    private void inputCommandLine(String inputLine) {
         System.out.println("Here is Battle");
         System.out.println("For help, enter : show menu");
 
-        String inputLine = readInput();
         inputLine = inputLine.trim();
         String inputLineOriginal = inputLine;
         inputLine = inputLine.toLowerCase();
@@ -910,7 +909,6 @@ public class Battle {
             this.showMenu();
         } else
             System.out.println("Enter valid command");
-        this.inputCommandLine();
     }
 
     private void handleBuffs(Player player) {

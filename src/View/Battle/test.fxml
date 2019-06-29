@@ -1,14 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="View.Battle.Test"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="667.0" prefWidth="1105.0" styleClass="BattleAnchor" stylesheets="@Battle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Battle.BattleController">
+   <children>
+      <ImageView fx:id="forfeitButton" fitHeight="81.0" fitWidth="72.0" layoutX="1278.0" layoutY="581.0" pickOnBounds="true" preserveRatio="true" styleClass="BattleButton" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+         <image>
+            <Image url="@../../../resources/ui/utility_menu/settings@2x.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="gameInfoButton" fitHeight="81.0" fitWidth="72.0" layoutX="1196.0" layoutY="581.0" pickOnBounds="true" preserveRatio="true" styleClass="BattleButton" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="96.0">
+         <image>
+            <Image url="@../../../resources/ui/utility_menu/quests@2x.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="endTurnButton" layoutX="1064.0" layoutY="474.0" prefHeight="78.0" prefWidth="220.0" stylesheets="@../Button.css" text="End Turn" AnchorPane.bottomAnchor="93.0" AnchorPane.rightAnchor="0.0">
+         <styleClass>
+            <String fx:value="SilverButton" />
+            <String fx:value="Button" />
+         </styleClass>
+      </Label>
+      <VBox fx:id="table" layoutX="247.0" layoutY="150.0" prefHeight="388.0" prefWidth="632.0">
+         <children>
+            <HBox fx:id="hBox1" prefHeight="58.0" prefWidth="607.0" styleClass="BattleRow">
+               <children>
+                  <Label text="Label" />
+               </children>
+            </HBox>
+            <HBox fx:id="hBox2" prefHeight="58.0" prefWidth="607.0" styleClass="BattleRow">
+               <children>
+                  <Label text="Label" />
+               </children>
+            </HBox>
+            <HBox fx:id="hBox3" prefHeight="58.0" prefWidth="607.0" styleClass="BattleRow">
+               <children>
+                  <Label text="Label" />
+               </children>
+            </HBox>
+            <HBox fx:id="hBox4" prefHeight="58.0" prefWidth="607.0" styleClass="BattleRow">
+               <children>
+                  <Label text="Label" />
+               </children>
+            </HBox>
+            <HBox fx:id="hBox5" prefHeight="58.0" prefWidth="607.0" styleClass="BattleRow">
+               <children>
+                  <Label text="Label" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>

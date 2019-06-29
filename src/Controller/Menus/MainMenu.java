@@ -19,7 +19,6 @@ public class MainMenu extends Menu {
         System.out.println("Here is Main menu");
         System.out.println("For help, enter : show menu");
 
-//        String inputLine = Main.scanner.nextLine();
         inputLine = inputLine.trim();
         inputLine = inputLine.toLowerCase();
         String[] input = inputLine.split("[ ]+");
