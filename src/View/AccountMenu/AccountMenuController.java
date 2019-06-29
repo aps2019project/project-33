@@ -20,7 +20,7 @@ public class AccountMenuController implements Initializable {
     enum Mode{
         logIn, signUp
     }
-
+//
     private void selectMode(Label label){
         label.getStyleClass().clear();
         label.getStyleClass().add("SelectedButton");
