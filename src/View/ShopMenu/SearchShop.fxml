@@ -7,6 +7,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../Button.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ShopMenu.SearchShopController">
    <children>
@@ -17,7 +18,11 @@
       </AnchorPane>
       <AnchorPane fx:id="searchCollection" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TextField fx:id="nameField" layoutX="107.0" layoutY="86.0" opacity="0.33" prefHeight="38.0" prefWidth="193.0" promptText="ENTER NAME" style="-fx-background-color: black;" />
+            <TextField fx:id="nameField" layoutX="107.0" layoutY="86.0" opacity="0.62" prefHeight="38.0" prefWidth="193.0" promptText="ENTER NAME" style="-fx-background-color: black;" styleClass="TextField">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </TextField>
             <Label fx:id="searchButton" layoutX="300.0" layoutY="75.0" prefHeight="68.0" prefWidth="200.0" stylesheets="@../newButton.css" text="search">
                <styleClass>
                   <String fx:value="GreenButton" />
