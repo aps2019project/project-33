@@ -16,7 +16,7 @@ import java.io.FileNotFoundException;
 public class BattleMenu {
 
     private boolean isRunning = true;
-    private Battle battle = new Battle();
+    private Battle battle;
 
     private String[] types = {"Single Player", "Multi Player"};
     private String[] modes = {"Story", "Custom Game"};
@@ -32,6 +32,7 @@ public class BattleMenu {
     //battle, player 1, player 2, prize, mode, numberOfFlag
 
     public void createGame(String secondPlayer, String type, String mode, String chapter, String kind) throws FileNotFoundException {
+        initialize();
 
         //todo in ja kollan oomadim nafarate bazio moshakhas kardim -> Type
         if (!checkDeck(Main.application.getLoggedInAccount())) {
@@ -39,14 +40,16 @@ public class BattleMenu {
             return;
         }
         //set players
+        chooseType(type);
         battle.setPlayerOn(new Player(Main.application.getLoggedInAccount()));
         chooseSecondPlayer(secondPlayer);
         if (battle.getPlayerOff() == null || !checkDeck(battle.getPlayerOff().getAccount())) {
+            if(!checkDeck(battle.getPlayerOff().getAccount()))
+                System.out.println("invalid deck");
             System.out.println("Invalid rival");
             return;
         }
         //set battle details
-        chooseType(type);
 
         //todo in ja bayad berim badi, chie ? -? mode -> custom ya story
         //todo number of flags felan fix e, ta bebinim badan khoda chi mikhad
@@ -56,13 +59,20 @@ public class BattleMenu {
         Client.getClient().setCurrentMenu(MenuList.Battle);
     }
 
+    private void initialize() {
+        isRunning = true;
+        battle = new Battle();
+    }
+
     private void chooseType(String type) {
         battle.setType(type);
     }
 
     private void chooseSecondPlayer(String secondPlayer) {
-        if (battle.getType().equals("Single Player"))
+        System.out.println(battle.getType());
+        if (battle.getType().equals("Single Player")) {
             battle.setPlayerOff(new AI());
+        }
         else {
             Account account = Account.getAccountByUsername(secondPlayer);
             if (account != null)

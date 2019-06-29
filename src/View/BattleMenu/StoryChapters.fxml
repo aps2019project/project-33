@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="552.0" prefWidth="953.0" styleClass="PlayAnchor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.BattleMenu.BattleMenuController">
+<AnchorPane prefHeight="552.0" prefWidth="953.0" styleClass="PlayAnchor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.BattleMenu.StoryChapter">
     <stylesheets>
         <URL value="@../Button.css" />
         <URL value="@BattleMenu.css" />

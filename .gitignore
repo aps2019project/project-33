@@ -3,5 +3,9 @@
 *.json
 *.jpg
 *.png
+*.plist
+*.ttf
+*.m4a
+*.gif
 /resource/
 /output/production/resources/
