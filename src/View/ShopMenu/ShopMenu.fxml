@@ -21,16 +21,21 @@
                   <Image url="@../../../resources/ui/button_back_corner.png" />
                </image>
             </ImageView>
-            <VBox fx:id="vBox" layoutX="41.0" layoutY="85.0" prefHeight="308.0" prefWidth="385.0">
+            <VBox fx:id="vBox" layoutX="41.0" layoutY="134.0" prefHeight="344.0" prefWidth="549.0">
                <children>
                   <Label fx:id="showCollectionLabel" prefHeight="50.0" prefWidth="297.0" styleClass="NoFormButton" text="SHOW COLLECTION" />
-                  <Label fx:id="searchLabel" prefHeight="52.0" prefWidth="298.0" styleClass="NoFormButton" text="SEARCH" />
                   <Label fx:id="searchCollectionLabel" styleClass="NoFormButton" text="SEARCH COLLECTION" />
                   <Label fx:id="buyLabel" styleClass="NoFormButton" text="BUY" />
                   <Label fx:id="sellLabel" prefHeight="117.0" styleClass="NoFormButton" text="SELL" />
                   <Label fx:id="showLabel" styleClass="NoFormButton" text="SHOW" />
+                  <Label fx:id="searchLabel" prefHeight="52.0" prefWidth="142.0" styleClass="NoFormButton" text="SEARCH" />
                </children>
             </VBox>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../resources/ui/brand_duelyst.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>

@@ -1,6 +1,7 @@
 package View.ShopMenu;
 
 import Controller.Client;
+import Controller.MenuList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -34,6 +35,9 @@ public class ShopController implements Initializable {
         });
         showCollectionLabel.setOnMouseClicked(event -> {
             Client.getClient().getShopMenu().inputCommandLine("show collection");
+        });
+        searchLabel.setOnMouseClicked(event -> {
+            Client.getClient().setCurrentMenu(MenuList.SearchShop);
         });
     }
 }
