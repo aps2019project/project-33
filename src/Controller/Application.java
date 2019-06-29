@@ -62,6 +62,7 @@ public class Application {
         ArrayList<Object> arrayList = new ArrayList<>();
         File file = new File(address);
         int sizeOfFolder = Objects.requireNonNull(file.listFiles()).length;
+        System.out.println(sizeOfFolder + "****");
         for (int i = 0; i < sizeOfFolder; i++) {
             Object object = readJSON(Object.class, address + "/" + type + i + ".json");
             arrayList.add(object);
