@@ -1,6 +1,7 @@
 package Controller;
 
 import Controller.Menus.*;
+import Model.Account;
 
 public class Client {
     private AccountMenu accountMenu = new AccountMenu();
@@ -8,7 +9,7 @@ public class Client {
     private CollectionMenu collectionMenu = new CollectionMenu();
     private MainMenu mainMenu = new MainMenu();
     private ShopMenu shopMenu = new ShopMenu();
-    private MenuList currentMenu = null;
+    private MenuList currentMenu = MenuList.AccountMenu;
     private static Client client = null;
 
     private Client(){

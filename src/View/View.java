@@ -2,6 +2,7 @@ package View;
 
 import Controller.Client;
 import Controller.MenuList;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
@@ -20,18 +21,28 @@ public class View extends Application {
         primaryStage.setScene(new Scene(root));
 
 
-        Task task = new Task() {
+        AnimationTimer animationTimer = new AnimationTimer() {
             private MenuList previousMenu = MenuList.AccountMenu;
+            long unit = 1000000000, last = 0, fps = 10;
             @Override
-            protected Object call() throws Exception {
-                if(!Client.getClient().getCurrentMenu().equals(previousMenu)){
-                    previousMenu = Client.getClient().getCurrentMenu();
-                    showMenu(primaryStage, previousMenu);
+            public void handle(long now) {
+                if(last == 0) last = now;
+                if(now > last + unit / fps) {
+                    last = now;
+
+                    if (!Client.getClient().getCurrentMenu().equals(previousMenu)) {
+                        previousMenu = Client.getClient().getCurrentMenu();
+                        try {
+                            showMenu(primaryStage, previousMenu);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
-                Thread.sleep(200);
-                return null;
+
             }
         };
+        animationTimer.start();
 
 
         primaryStage.show();
