@@ -17,9 +17,10 @@
    <children>
       <VBox fx:id="vBox" layoutX="74.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Label fx:id="play" styleClass="NoFormButton" text="PLAY" />
+            <Label fx:id="battle" styleClass="NoFormButton" text="BATTLE" />
             <Label fx:id="shop" styleClass="NoFormButton" text="SHOP" />
             <Label fx:id="collection" styleClass="NoFormButton" text="COLLECTION" />
+            <Label fx:id="save" styleClass="NoFormButton" text="SAVE" />
          </children>
       </VBox>
       <ImageView fx:id="duelyst" fitHeight="36.0" fitWidth="200.0" layoutX="38.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
@@ -27,7 +28,7 @@
             <Image url="@../../../resources/ui/brand_duelyst.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="logout" fitHeight="54.0" fitWidth="56.0" layoutX="482.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0">
+      <ImageView fx:id="logout" fitHeight="54.0" fitWidth="56.0" layoutX="482.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true" styleClass="ImageButton" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0">
          <image>
             <Image url="@../../../resources/ui/utility_menu/settings.png" />
          </image>
