@@ -52,7 +52,6 @@
     -fx-background-image: url("../../../resources/codex/chapter6_background@2x.jpg");
 }
 
-
 .PlayAnchor{
     -fx-background-image: url("../../../resources/play/play_background.jpg");
     -fx-cursor: hand;
