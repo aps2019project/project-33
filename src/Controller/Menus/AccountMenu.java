@@ -8,30 +8,27 @@ import Controller.Main;
 import Controller.MenuList;
 import Model.*;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 public class AccountMenu extends Menu {
-    @Override
-    public void inputCommandLine(String inputLine) {
+
+    public ServerMassage inputCommandLine(String inputLine) {
         inputLine = inputLine.trim();
         String[] input = inputLine.split("[ ]+");
         inputLine = inputLine.toLowerCase();
 
         if (inputLine.matches("create account [^\\s]+ [^\\s]+")) {
-            createAccount(input[2], input[3]);
-            return;
+            return createAccount(input[2], input[3]);
         } else if (inputLine.matches("login [^\\s]+ [^\\s]+")) {
-            login(input[1], input[2]);
-            return;
+            return login(input[1], input[2]);
         } else if (inputLine.equals("show leaderboard")) {
             Account.showLeaderBoard();
+            //todo in kollan divert shode
+            return null;
         } else if (inputLine.equals("show menu")) {
             AccountMenu.showMenu();
+            return  null;
         } else if(inputLine.equals("exit"))
-            return;
-        else
-            System.out.println("Enter valid command");
+            return null;
+        return null;
     }
 
     public static void showMenu() {
@@ -42,15 +39,15 @@ public class AccountMenu extends Menu {
         System.out.println("5. exit");
     }
 
-    private void createAccount(String username, String password) {
+    private ServerMassage createAccount(String username, String password) {
         if (Account.getAccountByUsername(username) != null) {
             System.out.println("this username is used");
-            return;
+            return new ServerMassage(ServerMassage.Type.Error, ServerMassage.ErrorType.InvalidUsernameForSignUp);
         }
 
         if(password.contains(" ")){
             System.out.println("password mustn't have space !!");
-            return;
+            return new ServerMassage(ServerMassage.Type.Error, ServerMassage.ErrorType.InvalidPasswordForSignUp);
         }
 
         Account account = new Account(username, password, 100000);
@@ -59,22 +56,24 @@ public class AccountMenu extends Menu {
 
         System.out.println("The account is created");
         Client.getClient().setCurrentMenu(MenuList.MainMenu);
+        return new ServerMassage(ServerMassage.Type.Accept, null);
     }
 
-    private void login(String username, String password) {
+    private ServerMassage login(String username, String password) {
         Account account = Account.getAccountByUsername(username);
         if (account == null) {
             System.out.println("Invalid Username !!");
-            return;
+            return new ServerMassage(ServerMassage.Type.Error, ServerMassage.ErrorType.LogInFailed);
         }
 
         if (!account.getPassword().equals(password)) {
             System.out.println("Invalid password !!");
-            return;
+            return new ServerMassage(ServerMassage.Type.Error, ServerMassage.ErrorType.LogInFailed);
         }
 
         System.out.println("login complete !");
         Main.application.setLoggedInAccount(account);
         Client.getClient().setCurrentMenu(MenuList.MainMenu);
+        return new ServerMassage(ServerMassage.Type.Accept, null);
     }
 }

@@ -12,11 +12,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class View extends Application {
+    private static Stage primaryStage;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Hello World");
         Parent root = FXMLLoader.load(getClass().getResource("AccountMenu/AccountMenu.fxml"));
         primaryStage.setScene(new Scene(root));
+        View.primaryStage = primaryStage;
 
 
         AnimationTimer animationTimer = new AnimationTimer() {
@@ -59,5 +62,13 @@ public class View extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public static void setPrimaryStage(Stage primaryStage) {
+        View.primaryStage = primaryStage;
     }
 }

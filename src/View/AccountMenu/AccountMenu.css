@@ -8,3 +8,10 @@
     -fx-background-size: 100% 100%;
     -fx-background-repeat: no-repeat;
 }
+
+.ErrorText{
+    -fx-text-fill: red;
+    -fx-font-size: 15;
+    -fx-alignment: center;
+    -fx-font-weight: bold, italic;
+}

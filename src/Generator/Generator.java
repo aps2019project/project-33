@@ -22,8 +22,8 @@ public class Generator {
         application = setApplication;
     }
 
-    public static void createCards(Application settedApplication) throws IOException {
-        setApplication(settedApplication);
+    public static void createCards() throws IOException {
+        //setApplication(settedApplication);
         createMinions();
         createSpells();
         createHeroes();

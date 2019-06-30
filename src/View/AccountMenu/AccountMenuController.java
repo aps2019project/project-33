@@ -1,9 +1,14 @@
 package View.AccountMenu;
 
 import Controller.Client;
+import Controller.Menus.ServerMassage;
+import View.View;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Popup;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,6 +20,7 @@ public class AccountMenuController implements Initializable {
     public TextField passwordTextFields;
     public Label signUpModeButton;
     public Label enterButton;
+    public Label errorLabel;
     private Mode mode = Mode.logIn;
 
     enum Mode{
@@ -50,10 +56,12 @@ public class AccountMenuController implements Initializable {
         enterButton.setOnMouseClicked(event -> {
             String username = usernameTextField.getText();
             String password = passwordTextFields.getText();
+            ServerMassage serverMassage;
             if(mode == Mode.logIn)
-                Client.getClient().getAccountMenu().inputCommandLine("login " + username + " " + password);
+                serverMassage = Client.getClient().getAccountMenu().inputCommandLine("login " + username + " " + password);
             else
-                Client.getClient().getAccountMenu().inputCommandLine("create account " + username + " " + password);
+                serverMassage = Client.getClient().getAccountMenu().inputCommandLine("create account " + username + " " + password);
+            interpret(serverMassage);
             usernameTextField.clear();
             passwordTextFields.clear();
         });
@@ -67,5 +75,20 @@ public class AccountMenuController implements Initializable {
         });
 
         changeMode(Mode.signUp);
+    }
+
+    private void interpret(ServerMassage serverMassage) {
+        if(serverMassage.getType() == ServerMassage.Type.Accept) return;
+        usernameTextField.setStyle("-fx-border-color: red");
+        passwordTextFields.setStyle("-fx-border-color: red");
+        if(serverMassage.getErrorType() == ServerMassage.ErrorType.LogInFailed){
+            errorLabel.setText("Invalid username or password");
+        }
+        if(serverMassage.getErrorType() == ServerMassage.ErrorType.InvalidUsernameForSignUp){
+            errorLabel.setText("This account exists");
+        }
+        if(serverMassage.getErrorType() == ServerMassage.ErrorType.InvalidPasswordForSignUp){
+            errorLabel.setText("space in password !! ");
+        }
     }
 }

@@ -18,7 +18,7 @@ public class Sample implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Label label = new Label("salam");
+      /*  Label label = new Label("salam");
         Image image = new Image(Sample.class.getResourceAsStream("1.jpg"));
         ImageView imageView = new ImageView(image);
         imageView.setCache(true);
@@ -28,5 +28,5 @@ public class Sample implements Initializable
         imageView.setFitWidth(100);
         System.out.println(imageView);
         pane.getChildren().addAll(imageView, label);
-    }
+    */}
 }

@@ -15,7 +15,7 @@ public class CollectionMenu extends Menu {
     private boolean isFirstTime = true;
     private Collection collection = null;
 
-    @Override
+
     public void inputCommandLine(String inputLine) throws IOException {
 
         System.out.println("Here is Collection Menu");
