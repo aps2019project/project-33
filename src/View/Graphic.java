@@ -18,15 +18,16 @@ public class Graphic {
         for (CollectionItem collectionItem : collectionItems) {
             int row = index / 5, column = index % 5;
             VBox cardVbox = new VBox();
-            String address = "../../resources/unit_gifs/" + index % numberOfGifs + ".gif";
+            String address = "unit_gifs/" + index % numberOfGifs + ".gif";
             System.out.println("********* :" + address);
             Image image = new Image(Graphic.class.getResourceAsStream(address));
             ImageView cardGif = new ImageView(image);
             cardVbox.getChildren().add(cardGif);
 
-            Label label = new Label(collectionItem.getInfo());
-            cardVbox.getChildren().add(label);
 
+        /*    Label label = new Label(collectionItem.getInfo());
+            cardVbox.getChildren().add(label);
+*/
             cardVbox.setLayoutY(row * 50);
             cardVbox.setLayoutX(column * 50);
 
