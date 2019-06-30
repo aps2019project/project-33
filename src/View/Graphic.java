@@ -10,14 +10,17 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 
 public class Graphic {
+    public static int numberOfGifs = 69;
+
     public static ArrayList<VBox> createCards(ArrayList<CollectionItem> collectionItems) {
         int index = 0;
         ArrayList<VBox> cardVboxes = new ArrayList<>();
         for (CollectionItem collectionItem : collectionItems) {
             int row = index / 5, column = index % 5;
             VBox cardVbox = new VBox();
-
-            Image image = new Image(ShowingShopController.class.getResourceAsStream("../../resources/" + index + ".gif"));
+            String address = "../../resources/unit_gifs/" + index % numberOfGifs + ".gif";
+            System.out.println("********* :" + address);
+            Image image = new Image(Graphic.class.getResourceAsStream(address));
             ImageView cardGif = new ImageView(image);
             cardVbox.getChildren().add(cardGif);
 
