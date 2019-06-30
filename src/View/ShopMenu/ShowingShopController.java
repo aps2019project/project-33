@@ -26,6 +26,13 @@ public class ShowingShopController implements Initializable {
         if(isFirstTime){
             cardVboxes = Graphic.createCards(Client.getClient().getResultOfSearch());
             nonBlurAnchor.getChildren().addAll(cardVboxes);
+/*
+            VBox cardVbox = new VBox();
+            ImageView cardGif = new ImageView("../../../resources/unit_gifs/1.gif");
+            cardVbox.getChildren().add(cardGif);
+            cardVboxes.add(cardVbox);
+            nonBlurAnchor.getChildren().add(cardGif);
+*/
         }
         isFirstTime = false;
         backButton.setOnMouseClicked(event -> {

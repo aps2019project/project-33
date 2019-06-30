@@ -21,8 +21,7 @@ public class DeckGenerator {
             , "Piran", "Giv", "Bahman", "Ashkbos", "Iraj", "GhooleBozorg", "GhooleDoSar", "NaneSarma", "FoladZere", "Siavash"
             , "ShahGhool", "ArzhangeDiv"};
     public static String[] itemNames = {"TajeDanaei", "NamuseSepar", "KamaneDamul", "NushDaru", "TireDoShakh", "PareSimorgh", "Exir"
-            , "MajuneMana", "MajuneRuinTani", "NefrineMarg", "RandomDamage", "TerrorHood", "BladesOfAgility", "KingWisdom"
-            , "AssassinationDagger", "PoisonousDagger", "ShockHammer", "SoulEater", "GhosleTamid", "ShamshireChini"};
+            , "MajuneMana", "MajuneRuinTani", "NefrineMarg", "RandomDamage", "TerrorHood", "BladesOfAgility", "KingWisdom", "AssassinationDagger", "PoisonousDagger", "ShockHammer", "SoulEater", "GhosleTamid", "ShamshireChini"};
 
     private static int[] heroNumber = {1, 5, 7};
     private static int[][] spellNumber = {{1, 7, 10, 11, 12, 18, 20}, {2, 3, 5, 9, 8, 13, 19}, {6, 10, 12, 14, 15, 16, 17}};

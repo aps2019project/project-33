@@ -4,14 +4,12 @@ import Controller.Client;
 import Controller.MenuList;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Stack;
 
 public class View extends Application {
     @Override
@@ -44,7 +42,6 @@ public class View extends Application {
             }
         };
         animationTimer.start();
-
 
         primaryStage.show();
     }
