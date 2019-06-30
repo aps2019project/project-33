@@ -52,11 +52,14 @@ public class ShopMenu extends Menu {
     }
 
     private void searchInCollection(String collectionItemName, Collection collection) {
-        ArrayList<String> IDs = collection.search(collectionItemName);
+        ArrayList<CollectionItem> foundCollectionItems = collection.search(collectionItemName);
         System.out.println("Result of search :");
         int index = 0;
-        for (String ID : IDs)
-            System.out.println(++index + ". " + ID);
+        Client.getClient().setResultOfSearch(foundCollectionItems);
+        for (CollectionItem collectionItem : foundCollectionItems){
+            System.out.println(++index + ". " + collectionItem.getID());
+
+        }
     }
 
     private void sell(String collectionItemID, Collection collection) {
@@ -75,13 +78,13 @@ public class ShopMenu extends Menu {
     }
 
     public void buy(String name) {
-        ArrayList<String> Ids = this.shop.search(name);
-        if (Ids.size() == 0) {
+        ArrayList<CollectionItem> foundCollectionItems = this.shop.search(name);
+        if (foundCollectionItems.size() == 0) {
             System.out.println("There isn't this thing in shop");
             return;
         }
 
-        CollectionItem collectionItem = CollectionItem.getCollectionItemByID(Ids.get(0));
+        CollectionItem collectionItem = foundCollectionItems.get(0);
         if (collectionItem == null) {
             System.out.println("WTF !!");
             return;

@@ -2,7 +2,9 @@ package View.ShopMenu;
 
 import Controller.Client;
 import Controller.MenuList;
+import View.Graphic;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -22,10 +24,7 @@ public class ShowingShopController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(isFirstTime){
-            VBox cardVbox = new VBox();
-            ImageView cardGif = new ImageView("../../../resources/unit_gifs/1.gif");
-            cardVbox.getChildren().add(cardGif);
-            cardVboxes.add(cardVbox);
+            cardVboxes = Graphic.createCards(Client.getClient().getResultOfSearch());
             nonBlurAnchor.getChildren().addAll(cardVboxes);
         }
         isFirstTime = false;

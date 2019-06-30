@@ -2,6 +2,9 @@ package Controller;
 
 import Controller.Menus.*;
 import Model.Account;
+import Model.CollectionItem.CollectionItem;
+
+import java.util.ArrayList;
 
 public class Client {
     private AccountMenu accountMenu = new AccountMenu();
@@ -11,6 +14,7 @@ public class Client {
     private ShopMenu shopMenu = new ShopMenu();
     private MenuList currentMenu = MenuList.AccountMenu;
     private static Client client = null;
+    private ArrayList<CollectionItem> resultOfSearch = new ArrayList<>();
     //todo in bayad ye jaei meghdar dehi she
     private Battle runningBattle;
 
@@ -62,5 +66,13 @@ public class Client {
 
     public void setRunningBattle(Battle runningBattle) {
         this.runningBattle = runningBattle;
+    }
+
+    public ArrayList<CollectionItem> getResultOfSearch() {
+        return resultOfSearch;
+    }
+
+    public void setResultOfSearch(ArrayList<CollectionItem> result){
+        this.resultOfSearch = result;
     }
 }
