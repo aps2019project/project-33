@@ -7,5 +7,4 @@
 *.ttf
 *.m4a
 *.gif
-/resource/
-/output/production/resources/
+resources/
