@@ -10,6 +10,7 @@ import static javafx.application.Application.launch;
 
 
 //nemidunam khodamam
+//lanat be git
 
 public class Main {
     public static Scanner scanner = new Scanner(System.in);
