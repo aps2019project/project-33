@@ -2,8 +2,10 @@ package View.ShopMenu;
 
 import Controller.Client;
 import Controller.MenuList;
+import Model.CollectionItem.CollectionItem;
 import View.Graphic;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -19,13 +21,20 @@ public class ShowingShopController implements Initializable {
     public AnchorPane mainAnchor;
     public static boolean isFirstTime = true;
     public ImageView backButton;
-    public ArrayList<VBox> cardVboxes = new ArrayList<>();
+
+    public CollectionItem selectedCollectionItem;
+    public int selectedIndex = -1;
+
+    public static VBox cardsVbox = new VBox();
+    public Label buyLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(isFirstTime){
-            cardVboxes = Graphic.createCards(Client.getClient().getResultOfSearch());
-            nonBlurAnchor.getChildren().addAll(cardVboxes);
+            cardsVbox = Graphic.createCards(Client.getClient().getResultOfSearch());
+            nonBlurAnchor.getChildren().add(cardsVbox);
+            cardsVbox.setLayoutX(200);
+            cardsVbox.setLayoutY(200);
 /*
             VBox cardVbox = new VBox();
             ImageView cardGif = new ImageView("../../../resources/unit_gifs/1.gif");
@@ -35,9 +44,26 @@ public class ShowingShopController implements Initializable {
 */
         }
         isFirstTime = false;
+        int index = 0;
+        for(ImageView imageView : Graphic.imageViews){
+            if(selectedIndex != index)
+                imageView.getStyleClass().clear();
+            final int y = index;
+            imageView.setOnMouseClicked(event -> {
+                selectedIndex = y;
+                selectedCollectionItem = Client.getClient().getResultOfSearch().get(y);
+                imageView.setStyle("-fx-effect: dropshadow(three-pass-box, white, 5, 0.5, 0, 0);");
+            });
+            index++;
+        }
+
         backButton.setOnMouseClicked(event -> {
             Client.getClient().setCurrentMenu(MenuList.ShopMenu);
             isFirstTime = true;
+        });
+
+        buyLabel.setOnMouseClicked(event -> {
+            Client.getClient().getShopMenu().inputCommandLine("buy " + selectedCollectionItem.getName());
         });
     }
 }
