@@ -24,11 +24,9 @@ public class ShowingShopController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(isFirstTime){
             VBox cardVbox = new VBox();
-            Image image = new Image("file:1.gif");
+            Image image = new Image(ShowingShopController.class.getResourceAsStream("1.gif"));
             ImageView cardGif = new ImageView(image); //("../../../resources/codex/chapter19_background@2x.jpg");
             cardVbox.getChildren().add(cardGif);
-            cardVbox.setLayoutY(10);
-            cardVbox.setLayoutY(10);
             cardVboxes.add(cardVbox);
             nonBlurAnchor.getChildren().addAll(cardVboxes);
         }
