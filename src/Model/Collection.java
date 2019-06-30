@@ -141,14 +141,14 @@ public class Collection {
         return this.cards;
     }
 
-    public ArrayList<String> search(String cardName){
-        ArrayList<String> IDs = new ArrayList<>();
+    public ArrayList<CollectionItem> search(String cardName){
+        ArrayList<CollectionItem> foundCollectionItems = new ArrayList<>();
         for(CollectionItem collectionItem : this.getCards()){
             if(collectionItem.getName().equals(cardName)){
-                IDs.add(collectionItem.getID());
+                foundCollectionItems.add(collectionItem);
             }
         }
-        return IDs;
+        return foundCollectionItems;
     }
 
     public void showHeroes(String descriptionOfPrice){

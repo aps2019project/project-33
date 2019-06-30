@@ -6,6 +6,7 @@ package Controller.Menus;
 import Controller.Application;
 import Controller.Main;
 import Model.*;
+import Model.CollectionItem.CollectionItem;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,11 +69,11 @@ public class CollectionMenu extends Menu {
     }
 
     private void searchInCollection(Collection collection, String cardName) {
-        ArrayList<String> collectionItems = collection.search(cardName);
+        ArrayList<CollectionItem> collectionItems = collection.search(cardName);
         int index = 0;
         System.out.println("CollectionItems with this name :");
-        for (String string : collectionItems)
-            System.out.println(++index + " " + string);
+        for (CollectionItem collectionItem : collectionItems)
+            System.out.println(++index + " " + collectionItem.getID());
     }
 
     private void checkValidityOfDeck(String deckName, Collection collection) {

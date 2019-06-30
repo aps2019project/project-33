@@ -2,6 +2,7 @@ package View.ShopMenu;
 
 import Controller.Client;
 import Controller.MenuList;
+import View.Graphic;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,11 +24,7 @@ public class ShowingShopController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(isFirstTime){
-            VBox cardVbox = new VBox();
-            Image image = new Image(ShowingShopController.class.getResourceAsStream("1.gif"));
-            ImageView cardGif = new ImageView(image); //("../../../resources/codex/chapter19_background@2x.jpg");
-            cardVbox.getChildren().add(cardGif);
-            cardVboxes.add(cardVbox);
+            cardVboxes = Graphic.createCards(Client.getClient().getResultOfSearch());
             nonBlurAnchor.getChildren().addAll(cardVboxes);
         }
         isFirstTime = false;
