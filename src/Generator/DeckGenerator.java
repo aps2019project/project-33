@@ -12,16 +12,16 @@ public class DeckGenerator {
     public static String[] heroNames = {"DiveSefid", "Simorgh", "EzhdehayeHaftSar", "Rakhsh", "Zahhak", "Kaveh", "Arash", "Afsaneh", "Esfandiar",
             "Rostam"};
     public static String[] spellNames = {"TotalDisarm", "AreaDispel", "Empower", "Fireball", "GodStrength", "HellFire", "LightingBolt",
-            "PoisonLake", "Madness", "AllDisarm", "AllPoison", "Dispel", "HealthWithProfit", "GhazaBokhorJoonBegiri",
+            "PoisonLake", "Madness", "AllDisarm", "AllPoison", "Dispel", "HealthWithProfit", "PowerUp",
             "AllPower", "AllAttack", "Weakening", "Sacrifice", "KingsGuard", "Shock"};
     public static String[] minionNames = {"KamandareFars", "ShamshirzaneFars", "NeyzedareFars", "AsbSavareFars", "PahlevaneFars", "SepahSalareFars"
             , "KamandareTorani", "GholabsangdareTorani", "NeyzedareTorani", "JasoseTorani", "GorzdareTorani", "ShahzadeTorani", "DiveSiah"
-            , "GhooleSangAndaz", "Oghab", "DiveGorazSavar", "GhooleBozorg", "MareSami", "EzhdehayeAtashAndaz", "ShireDarande"
+            , "GhooleSangAndaz", "Oghab", "DiveGorazSavar", "GhooleTakCheshm", "MareSami", "EzhdehayeAtashAndaz", "ShireDarande"
             , "MareGhoolPeykar", "GorgeSefid", "Palang", "Gorg", "Jadogar", "JadogarAzam", "Jen", "GorazeVahshi"
-            , "Piran", "Giv", "Bahman", "Ashkbos", "Iraj", "GhooleBozorg2", "GhooleDoSar", "NaneSarma", "FoladZere", "Siavash"
+            , "Piran", "Giv", "Bahman", "Ashkbos", "Iraj", "GhooleBozorg", "GhooleDoSar", "NaneSarma", "FoladZere", "Siavash"
             , "ShahGhool", "ArzhangeDiv"};
-    public static String[] itemNames = {"TajeDanaei", "NamuseSepar", "KamaneDamul", "JunBaw", "TireSeShakh", "PareSimorgh", "Exir"
-            , "MajuneMana", "MajuneRueinTani", "NefrineMarg", "RandomDamage", "TerrorHood", "BladesOfAgility", "KingKiller"
+    public static String[] itemNames = {"TajeDanaei", "NamuseSepar", "KamaneDamul", "NushDaru", "TireDoShakh", "PareSimorgh", "Exir"
+            , "MajuneMana", "MajuneRuinTani", "NefrineMarg", "RandomDamage", "TerrorHood", "BladesOfAgility", "KingWisdom"
             , "AssassinationDagger", "PoisonousDagger", "ShockHammer", "SoulEater", "GhosleTamid", "ShamshireChini"};
 
     private static int[] heroNumber = {1, 5, 7};
