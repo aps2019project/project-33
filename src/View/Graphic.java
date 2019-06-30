@@ -17,7 +17,7 @@ public class Graphic {
             int row = index / 5, column = index % 5;
             VBox cardVbox = new VBox();
 
-            Image image = new Image(ShowingShopController.class.getResourceAsStream(index + ".gif"));
+            Image image = new Image(ShowingShopController.class.getResourceAsStream("../../resources/" + index + ".gif"));
             ImageView cardGif = new ImageView(image);
             cardVbox.getChildren().add(cardGif);
 
