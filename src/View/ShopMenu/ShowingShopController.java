@@ -46,13 +46,12 @@ public class ShowingShopController implements Initializable {
         isFirstTime = false;
         int index = 0;
         for(ImageView imageView : Graphic.imageViews){
-            if(selectedIndex != index)
-                imageView.getStyleClass().clear();
             final int y = index;
             imageView.setOnMouseClicked(event -> {
                 selectedIndex = y;
                 selectedCollectionItem = Client.getClient().getResultOfSearch().get(y);
                 imageView.setStyle("-fx-effect: dropshadow(three-pass-box, white, 5, 0.5, 0, 0);");
+                clearShadows();
             });
             index++;
         }
@@ -65,5 +64,14 @@ public class ShowingShopController implements Initializable {
         buyLabel.setOnMouseClicked(event -> {
             Client.getClient().getShopMenu().inputCommandLine("buy " + selectedCollectionItem.getName());
         });
+    }
+
+    public void clearShadows(){
+        int index = 0;
+        for(ImageView imageView : Graphic.imageViews) {
+            if (index != selectedIndex)
+                imageView.getStyleClass().clear();
+            index++;
+        }
     }
 }
