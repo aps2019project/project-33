@@ -34,53 +34,18 @@
       </Label>
       <VBox fx:id="table" layoutX="203.0" layoutY="169.0" prefHeight="355.0" prefWidth="627.0">
          <children>
-            <HBox fx:id="hBox1" prefHeight="67.0" prefWidth="632.0" styleClass="BattleRow">
+            <HBox fx:id="hBox1" alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="632.0" styleClass="BattleRow">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="Cell">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="Cell">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="Cell">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="Cell">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="Cell">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="Cell">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="Cell">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="Cell">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="Cell">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </VBox>
+                  <Pane fx:id="cellPane1" prefHeight="200.0" prefWidth="200.0" styleClass="CellPane">
+                     <children>
+                        <ImageView fx:id="cellImageView1" fitHeight="72.0" fitWidth="92.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../resources/unit_gifs/boss_borealjuggernaut_breathing.gif" />
+                           </image>
+                        </ImageView>
+                        <AnchorPane fx:id="cellAnchorPane1" prefHeight="61.0" prefWidth="85.0" styleClass="Cell" />
+                     </children>
+                  </Pane>
                </children>
                <VBox.margin>
                   <Insets />
@@ -293,7 +258,7 @@
                         <Image url="@../../../resources/unit_gifs/1.gif" />
                      </image>
                   </ImageView>
-                  <Label fx:id="handItemLabel1" prefHeight="31.0" prefWidth="40.0" styleClass="ManaLabel" text="3" />
+                  <Label fx:id="handItemLabel1" prefHeight="31.0" prefWidth="40.0" styleClass="ManaLabel" />
                </children>
             </VBox>
             <VBox fx:id="vBox2" prefHeight="121.0" prefWidth="120.0" styleClass="VBox">
@@ -303,7 +268,7 @@
                         <Image url="@../../../resources/unit_gifs/1.gif" />
                      </image>
                   </ImageView>
-                  <Label fx:id="handItemLabel2" prefHeight="31.0" prefWidth="40.0" styleClass="ManaLabel" text="3" />
+                  <Label fx:id="handItemLabel2" prefHeight="31.0" prefWidth="40.0" styleClass="ManaLabel" />
                </children>
             </VBox>
             <VBox fx:id="vBox3" prefHeight="121.0" prefWidth="120.0" styleClass="VBox">
@@ -313,7 +278,7 @@
                         <Image url="@../../../resources/unit_gifs/1.gif" />
                      </image>
                   </ImageView>
-                  <Label fx:id="handItemLabel3" prefHeight="31.0" prefWidth="40.0" styleClass="ManaLabel" text="3" />
+                  <Label fx:id="handItemLabel3" prefHeight="31.0" prefWidth="40.0" styleClass="ManaLabel" />
                </children>
             </VBox>
             <VBox fx:id="vBox4" prefHeight="121.0" prefWidth="120.0" styleClass="VBox">
@@ -323,7 +288,7 @@
                         <Image url="@../../../resources/unit_gifs/1.gif" />
                      </image>
                   </ImageView>
-                  <Label fx:id="handItemLabel4" prefHeight="31.0" prefWidth="40.0" styleClass="ManaLabel" text="3" />
+                  <Label fx:id="handItemLabel4" prefHeight="31.0" prefWidth="40.0" styleClass="ManaLabel" />
                </children>
             </VBox>
             <VBox fx:id="vBox5" prefHeight="121.0" prefWidth="120.0" styleClass="VBox">
@@ -333,7 +298,7 @@
                         <Image url="@../../../resources/unit_gifs/1.gif" />
                      </image>
                   </ImageView>
-                  <Label fx:id="handItemLabel5" prefHeight="31.0" prefWidth="40.0" styleClass="ManaLabel" text="3" />
+                  <Label fx:id="handItemLabel5" prefHeight="31.0" prefWidth="40.0" styleClass="ManaLabel" />
                </children>
             </VBox>
          </children>

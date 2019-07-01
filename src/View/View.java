@@ -17,7 +17,7 @@ public class View extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Hello World");
-        Parent root = FXMLLoader.load(getClass().getResource("AccountMenu/AccountMenu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Battle/Battle.fxml"));
         primaryStage.setScene(new Scene(root));
         View.primaryStage = primaryStage;
 
@@ -44,7 +44,7 @@ public class View extends Application {
 
             }
         };
-        animationTimer.start();
+//        animationTimer.start();
 
         primaryStage.show();
     }

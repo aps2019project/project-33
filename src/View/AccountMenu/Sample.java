@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -18,7 +19,9 @@ public class Sample implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-      /*  Label label = new Label("salam");
+        System.out.println("salam");
+        pane.setStyle("-fx-background-image: url(../../../resources/ui/activity_animation@2x.png)");
+        /*  Label label = new Label("salam");
         Image image = new Image(Sample.class.getResourceAsStream("1.jpg"));
         ImageView imageView = new ImageView(image);
         imageView.setCache(true);
