@@ -2,14 +2,13 @@ package View.Battle;
 
 import Controller.Client;
 import Model.CollectionItem.CollectionItem;
+import Model.CollectionItem.Item;
 import Model.CollectionItem.LivingCard;
+import Model.CollectionItem.Spell;
 import Model.Enviroment.Cell;
-import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -52,7 +51,7 @@ public class BattleController implements Initializable {
     private HBox[] rows;
     private ImageView[] handImages;
     private Label[] handManaLabels;
-    private HandItem[] handItems;
+    private HandUnit[] handUnits;
     private VBox[] handPanes;
     private SelectedCell selectedCell = null;
 
@@ -75,30 +74,31 @@ public class BattleController implements Initializable {
     //todo, end game
     //todo, exit
 
+    //todo, aslan nemidunam che juri gharare ye item ro asar bedim !
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         rows = new HBox[]{hBox1, hBox2, hBox3, hBox4, hBox5};
         handImages = new ImageView[]{handItemImage1, handItemImage2, handItemImage3, handItemImage4, handItemImage5};
         handManaLabels = new Label[]{handItemLabel1, handItemLabel2, handItemLabel3, handItemLabel4, handItemLabel5};
         handPanes = new VBox[]{vBox1, vBox2, vBox3, vBox4, vBox5};
-        handItems = new HandItem[handImages.length];
+        handUnits = new HandUnit[handImages.length];
+        for (int i = 0; i < handUnits.length; i++)
+            handUnits[i] = new HandUnit(handImages[i], handManaLabels[i], handPanes[i]);
+        //todo in ja hanooz meghdar dehi haye cell ha moonde
 
-        for (int i = 0; i < handItems.length; i++)
-            handItems[i] = new HandItem(handImages[i], handManaLabels[i], handPanes[i]);
+        for(int i = 0; i < handUnits.length; i ++){
+            int finalI = i;
+            handUnits[i].getImageView().setOnMouseClicked(event -> {
+                handUnits[finalI].select(this);
+            });
+        }
 
         //todo inja daram cell haro handle mikonam
         GraphicalCell graphicalCell = new GraphicalCell(cellPane1, cellImageView1, cellAnchorPane1,null);
         graphicalCell.getAnchorPane().setOnMouseClicked(event -> {
-            if(selectedCell == null){
-                if(graphicalCell.getCell().getLivingCard() == null) return;
-                selectedCell = new SelectedCell(SelectedCell.Type.LivingCard, SelectedCell.Location.Map, graphicalCell, null);
-            }
-            else{
-
-            }
+            graphicalCell.select(this);
         });
-        //cell.setCollectionItem(Client.getClient().getRunningBattle().getMap().getCellByCoordination(0, 0).getLivingCard());
-
 
         forfeitButton.setOnMouseClicked(event -> {
             Client.getClient().getRunningBattle().inputCommandLine("forfeit match");
@@ -111,7 +111,14 @@ public class BattleController implements Initializable {
         helpButton.setOnMouseClicked(event -> {
             //todo showing game info in where ?
         });
+    }
 
+    public void setSelectedCell(SelectedCell selectedCell) {
+        this.selectedCell = selectedCell;
+    }
+
+    public SelectedCell getSelectedCell() {
+        return selectedCell;
     }
 }
 
@@ -123,28 +130,69 @@ class SelectedCell{
         Hand, Map;
     }
     private GraphicalCell graphicalCell;
-    private HandItem handItem;
+    private HandUnit handUnit;
     private Type type;
     private Location location;
 
-    public SelectedCell(Type type, Location location, GraphicalCell graphicalCell, HandItem  handItem){
+    public SelectedCell(Type type, Location location, GraphicalCell graphicalCell, HandUnit handUnit){
         this.type = type;
         this.location = location;
         this.graphicalCell = graphicalCell;
-        this.handItem = handItem;
+        this.handUnit = handUnit;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+    public GraphicalCell getGraphicalCell() {
+        return graphicalCell;
+    }
+
+    public HandUnit getHandUnit() {
+        return handUnit;
     }
 }
 
-class HandItem {
+class HandUnit {
     private ImageView imageView;
     private Label manaLabel;
     private VBox pane;
     private CollectionItem collectionItem;
 
-    public HandItem(ImageView imageView, Label manaLabel, VBox pane) {
+    public HandUnit(ImageView imageView, Label manaLabel, VBox pane) {
         this.imageView = imageView;
         this.manaLabel = manaLabel;
         this.pane = pane;
+    }
+
+    public void select(BattleController battleController) {
+        if(collectionItem == null) return;
+        SelectedCell.Type type = null;
+        if(collectionItem instanceof Item) type = SelectedCell.Type.Item;
+        if(collectionItem instanceof Spell) type = SelectedCell.Type.Spell;
+        if(collectionItem instanceof LivingCard) type = SelectedCell.Type.LivingCard;
+        battleController.setSelectedCell(new SelectedCell(type, SelectedCell.Location.Hand, null, this));
+        Client.getClient().getRunningBattle().inputCommandLine("select " + collectionItem.getID());
+    }
+
+    public ImageView getImageView() {
+        return imageView;
+    }
+
+    public CollectionItem getCollectionItem() {
+        return collectionItem;
     }
 }
 
@@ -159,6 +207,29 @@ class GraphicalCell{
         this.imageView = imageView;
         this.anchorPane = anchorPane;
         this.cell = cell;
+    }
+
+    public void select(BattleController battleController) {
+        SelectedCell selectedCell = battleController.getSelectedCell();
+        if(selectedCell == null){
+            if(cell.getLivingCard() == null) return;
+            battleController.setSelectedCell(new SelectedCell(SelectedCell.Type.LivingCard, SelectedCell.Location.Map, this, null));
+            Client.getClient().getRunningBattle().inputCommandLine("select " + cell.getLivingCard().getID());
+        }
+        else{
+            if(selectedCell.getLocation() == SelectedCell.Location.Hand){
+                if(selectedCell.getType() == SelectedCell.Type.Item)
+                    Client.getClient().getRunningBattle().inputCommandLine("use " + cell.getX() + " " + cell.getY());
+                else {
+                    CollectionItem collectionItem = selectedCell.getHandUnit().getCollectionItem();
+                    Client.getClient().getRunningBattle().inputCommandLine(
+                            "insert " + collectionItem.getID() + " in (" + this.cell.getX() + ", " + this.cell.getY() + ")");
+                }
+            }
+            if(selectedCell.getLocation() == SelectedCell.Location.Map){
+                Client.getClient().getRunningBattle().inputCommandLine("move to (" + cell.getX() + ", " + cell.getY() + ")");
+            }
+        }
     }
 
     public void show(){

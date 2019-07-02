@@ -22,7 +22,8 @@ public class Hand1 {
     }
 
     //showMinion o showSpell tuye classashun ezafe beshan
-//pull kon
+    //pull kon
+
     public void showMinions(){
         for(CollectionItem collectionItem : handCards)
             if(collectionItem instanceof Minion){
@@ -37,6 +38,7 @@ public class Hand1 {
             }
         }
     }
+
     //nazadam
     public void showNextCard(Deck mainDeck){
         if(numberOfUsedDeckCollectionItems >= mainDeck.getCards().size() - 1){
@@ -94,5 +96,4 @@ public class Hand1 {
     public ArrayList<CollectionItem> getHandCards() {
         return handCards;
     }
-
 }

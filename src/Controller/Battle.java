@@ -857,9 +857,7 @@ public class Battle {
 
         if (inputLine.equals("forfeit match")) {
             forfeitMatch();
-            return;
         }
-
         if (inputLine.equals("game info"))
             showGameInfo();
         else if (inputLine.equals("show my minions"))
