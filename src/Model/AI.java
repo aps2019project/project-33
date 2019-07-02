@@ -50,8 +50,8 @@ public class AI extends Player {
             orders.add("select " + livingCard.getID());
             for (Cell cell : cells)
                 orders.add("move to (" + cell.getX() + ", " + cell.getY() + ")");
-//            for (LivingCard livingCard1 : opponentCards)
-//                orders.add("attack " + livingCard1.getID());
+            for (LivingCard livingCard1 : opponentCards)
+                orders.add("attack " + livingCard1.getID());
         }
 
         for (CollectionItem collectionItem : this.getHand().getHandCards()) {

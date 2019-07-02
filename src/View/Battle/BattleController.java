@@ -1,29 +1,23 @@
 package View.Battle;
 
-import Controller.Battle;
 import Controller.Client;
 import Controller.MenuList;
-import Model.Collection;
 import Model.CollectionItem.*;
 import Model.Enviroment.Cell;
 import Model.Hand1;
 import View.Graphic;
 import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class BattleController implements Initializable {
@@ -64,18 +58,13 @@ public class BattleController implements Initializable {
     private GraphicalCell[][] graphicalCells;
     private VBox cardInformationVBox;
 
-    //todo, show collectibles
-    //todo, show next card
-    //todo, show hand chie dg
-
+    //todo, in ke alan ma chand ta mana darim masalan moonde
     //todo, attack e combo
     //todo, special power of something
-    //todo, show info
     //todo, enter grave yard
-    //todo, help
     //todo, attack kone
-    //todo, in ke roo ye nafar click kardim biad info ro neshoon bede
 
+    //todo, in ke roo ye nafar click kardim biad info ro neshoon bede
     //todo, in ke betoone ye chizio select kone
     //todo, move kone
     //todo, insert konim roo ye chizi
@@ -117,12 +106,10 @@ public class BattleController implements Initializable {
                     graphicalCells[finalI][finalJ].select(this);
                 });
                 graphicalCells[i][j].getAnchorPane().setOnMouseEntered(event -> {
+                    if(graphicalCells[finalI][finalJ].getCell().getLivingCard() == null) return;;
                     rootOfPage.getChildren().remove(cardInformationVBox);
-                    ArrayList<CollectionItem> arrayList = new ArrayList<>();
-                    arrayList.add(graphicalCells[finalI][finalJ].getCell().getLivingCard());
-                    cardInformationVBox = Graphic.createCards(arrayList);
+                    cardInformationVBox = Graphic.createCard(graphicalCells[finalI][finalJ].getCell().getLivingCard(), 1);
                     rootOfPage.getChildren().add(cardInformationVBox);
-                    System.out.println(cardInformationVBox);
                 });
             }
         }
@@ -133,6 +120,14 @@ public class BattleController implements Initializable {
             int finalI = i;
             handUnits[i].getImageView().setOnMouseClicked(event -> {
                 handUnits[finalI].select(this);
+            });
+            handUnits[i].getImageView().setOnMouseEntered(event -> {
+                System.out.println("salam haji");
+                if(handUnits[finalI].getCollectionItem() == null) return;
+                rootOfPage.getChildren().remove(cardInformationVBox);
+                cardInformationVBox = Graphic.createCard(handUnits[finalI].getCollectionItem(), 1);
+                rootOfPage.getChildren().add(cardInformationVBox);
+
             });
         }
     }
@@ -187,16 +182,6 @@ public class BattleController implements Initializable {
 }
 
 class SelectedCell {
-    public void update() {
-        if (this.location == Location.Map) {
-            graphicalCell.getAnchorPane().getStyleClass().clear();
-            graphicalCell.getAnchorPane().getStyleClass().add("SelectedCellCover");
-        } else {
-            handUnit.getPane().getStyleClass().clear();
-            handUnit.getPane().getStyleClass().add("SelectedHandUnit");
-        }
-    }
-
     enum Type {
         Item, LivingCard, Spell;
     }
@@ -215,6 +200,16 @@ class SelectedCell {
         this.location = location;
         this.graphicalCell = graphicalCell;
         this.handUnit = handUnit;
+    }
+
+    public void update() {
+        if (this.location == Location.Map) {
+            graphicalCell.getAnchorPane().getStyleClass().clear();
+            graphicalCell.getAnchorPane().getStyleClass().add("SelectedCellCover");
+        } else {
+            handUnit.getPane().getStyleClass().clear();
+            handUnit.getPane().getStyleClass().add("SelectedHandUnit");
+        }
     }
 
     public Type getType() {
@@ -264,14 +259,6 @@ class HandUnit {
         Client.getClient().getRunningBattle().inputCommandLine("select " + collectionItem.getID(), Client.getClient().getUsername());
     }
 
-    public ImageView getImageView() {
-        return imageView;
-    }
-
-    public CollectionItem getCollectionItem() {
-        return collectionItem;
-    }
-
     public void update(int i) {
         Hand1 hand = Client.getClient().getRunningBattle().getPlayerOn().getHand();
         this.pane.getStyleClass().clear();
@@ -284,6 +271,15 @@ class HandUnit {
                 imageView.setImage(new Image(BattleController.class.getResource("1.gif").toExternalForm()));
             }
         }
+    }
+
+
+    public ImageView getImageView() {
+        return imageView;
+    }
+
+    public CollectionItem getCollectionItem() {
+        return collectionItem;
     }
 
     public VBox getPane() {
