@@ -30,6 +30,11 @@ public class ShopController implements Initializable {
         imagePane.setOnMouseClicked(event -> {
             Client.getClient().getShopMenu().inputCommandLine("exit");
         });
+
+        showCollectionLabel.setOnMouseClicked(event -> {
+            Client.getClient().setCurrentMenu(MenuList.ShowCollection);
+        });
+
         showLabel.setOnMouseClicked(event -> {
             Client.getClient().getShopMenu().inputCommandLine("show");
         });
