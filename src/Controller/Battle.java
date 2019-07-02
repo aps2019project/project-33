@@ -585,7 +585,8 @@ public class Battle {
         playerOff.getHero().setCoolDown(Math.max(0, playerOff.getHero().getCoolDown() - 1));
         Impact.activeBuffs(this);
         numberOfRounds++;
-
+        if(playerOn instanceof AI)
+            readInput();
     }
 
     public void showCollectibles() {

@@ -144,11 +144,11 @@ public class BattleController implements Initializable {
         }
 
         forfeitButton.setOnMouseClicked(event -> {
-            Client.getClient().getRunningBattle().inputCommandLine("forfeit match");
+            Client.getClient().getRunningBattle().inputCommandLine("forfeit match", Client.getClient().getUsername());
         });
 
         endTurnButton.setOnMouseClicked(event -> {
-            Client.getClient().getRunningBattle().inputCommandLine("end turn");
+            Client.getClient().getRunningBattle().inputCommandLine("end turn", Client.getClient().getUsername());
         });
 
         helpButton.setOnMouseClicked(event -> {
@@ -230,7 +230,7 @@ class HandUnit {
         if (collectionItem instanceof Spell) type = SelectedCell.Type.Spell;
         if (collectionItem instanceof LivingCard) type = SelectedCell.Type.LivingCard;
         battleController.setSelectedCell(new SelectedCell(type, SelectedCell.Location.Hand, null, this));
-        Client.getClient().getRunningBattle().inputCommandLine("select " + collectionItem.getID());
+        Client.getClient().getRunningBattle().inputCommandLine("select " + collectionItem.getID(), Client.getClient().getUsername());
     }
 
     public ImageView getImageView() {
@@ -307,19 +307,19 @@ class GraphicalCell {
             if (cell.getLivingCard() == null) return;
             System.out.println(cell.getLivingCard().getName());
             battleController.setSelectedCell(new SelectedCell(SelectedCell.Type.LivingCard, SelectedCell.Location.Map, this, null));
-            Client.getClient().getRunningBattle().inputCommandLine("select " + cell.getLivingCard().getID());
+            Client.getClient().getRunningBattle().inputCommandLine("select " + cell.getLivingCard().getID(), Client.getClient().getUsername());
         } else {
             if (selectedCell.getLocation() == SelectedCell.Location.Hand) {
                 if (selectedCell.getType() == SelectedCell.Type.Item)
-                    Client.getClient().getRunningBattle().inputCommandLine("use " + cell.getX() + " " + cell.getY());
+                    Client.getClient().getRunningBattle().inputCommandLine("use " + cell.getX() + " " + cell.getY(), Client.getClient().getUsername());
                 else {
                     CollectionItem collectionItem = selectedCell.getHandUnit().getCollectionItem();
                     Client.getClient().getRunningBattle().inputCommandLine(
-                            "insert " + collectionItem.getID() + " in (" + this.cell.getX() + ", " + this.cell.getY() + ")");
+                            "insert " + collectionItem.getID() + " in (" + this.cell.getX() + ", " + this.cell.getY() + ")", Client.getClient().getUsername());
                 }
             }
             if (selectedCell.getLocation() == SelectedCell.Location.Map) {
-                Client.getClient().getRunningBattle().inputCommandLine("move to (" + cell.getX() + ", " + cell.getY() + ")");
+                Client.getClient().getRunningBattle().inputCommandLine("move to (" + cell.getX() + ", " + cell.getY() + ")", Client.getClient().getUsername());
             }
         }
     }
