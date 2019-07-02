@@ -2,12 +2,16 @@ package View.Battle;
 
 import Controller.Battle;
 import Controller.Client;
+import Controller.MenuList;
+import Model.Collection;
 import Model.CollectionItem.*;
 import Model.Enviroment.Cell;
 import Model.Hand1;
+import View.Graphic;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,11 +21,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
+import java.awt.image.AreaAveragingScaleFilter;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class BattleController implements Initializable {
     private int numberOfRows = 5, numberOfColumns = 9;
+    public VBox cardInformationVBox;
     public ImageView forfeitButton;
     public ImageView gameInfoButton;
     public HBox hBox1;
@@ -48,28 +55,25 @@ public class BattleController implements Initializable {
     public VBox vBox4;
     public VBox vBox5;
 
-    public Pane cellPane1;
-    public ImageView cellImageView1;
-    public AnchorPane cellAnchorPane1;
-
     private HBox[] rows;
     private ImageView[] handImages;
     private Label[] handManaLabels;
     private HandUnit[] handUnits;
     private VBox[] handPanes;
     private SelectedCell selectedCell = null;
+    private GraphicalCell[][] graphicalCells;
 
     //todo, show collectibles
     //todo, show next card
+    //todo, show hand chie dg
 
-    //todo, in ke roo ye nafar click kardim biad info ro neshoon bede
     //todo, attack e combo
     //todo, special power of something
-    //todo, show hand chie dg
     //todo, show info
     //todo, enter grave yard
     //todo, help
     //todo, attack kone
+    //todo, in ke roo ye nafar click kardim biad info ro neshoon bede
 
     //todo, in ke betoone ye chizio select kone
     //todo, move kone
@@ -83,25 +87,54 @@ public class BattleController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        rows = new HBox[]{hBox1, hBox2, hBox3, hBox4, hBox5};
-        handImages = new ImageView[]{handItemImage1, handItemImage2, handItemImage3, handItemImage4, handItemImage5};
-        handManaLabels = new Label[]{handItemLabel1, handItemLabel2, handItemLabel3, handItemLabel4, handItemLabel5};
-        handPanes = new VBox[]{vBox1, vBox2, vBox3, vBox4, vBox5};
-        handUnits = new HandUnit[handImages.length];
-        GraphicalCell[][] graphicalCells = new GraphicalCell[numberOfRows][numberOfColumns];
+        setter();
+        update();
+        handUnitActions();
+        graphicalCellsActions();
 
-        for (int i = 0; i < handUnits.length; i++)
-            handUnits[i] = new HandUnit(handImages[i], handManaLabels[i], handPanes[i]);
+        forfeitButton.setOnMouseClicked(event -> {
+            Client.getClient().getRunningBattle().inputCommandLine("forfeit match", Client.getClient().getUsername());
+            Client.getClient().setCurrentMenu(MenuList.MainMenu);
+        });
 
-        for (int i = 0; i < numberOfRows; i++){
-            for(int j = 0; j < numberOfColumns; j++){
-                graphicalCells[i][j] = new GraphicalCell(Client.getClient().getRunningBattle().getMap().getCellByCoordination(i, j));
-                rows[i].getChildren().add(graphicalCells[i][j].getRoot());
+        endTurnButton.setOnMouseClicked(event -> {
+            selectedCell = null;
+            Client.getClient().getRunningBattle().inputCommandLine("end turn", Client.getClient().getUsername());
+        });
+
+        helpButton.setOnMouseClicked(event -> {
+            //todo showing game info in where ?
+        });
+    }
+
+    private void graphicalCellsActions() {
+        for (int i = 0; i < numberOfRows; i++) {
+            for (int j = 0; j < numberOfColumns; j++) {
+                int finalI = i;
+                int finalJ = j;
+                graphicalCells[i][j].getAnchorPane().setOnMouseClicked(event -> {
+                    graphicalCells[finalI][finalJ].select(this);
+                });
+                graphicalCells[i][j].getAnchorPane().setOnMouseEntered(event -> {
+                    ArrayList<CollectionItem> arrayList = new ArrayList<>();
+                    arrayList.add(graphicalCells[finalI][finalJ].getCell().getLivingCard());
+                    cardInformationVBox = Graphic.createCards(arrayList);
+                    System.out.println(cardInformationVBox);
+                });
             }
         }
+    }
 
-        //todo in ja hanooz meghdar dehi haye cell ha moonde
+    private void handUnitActions() {
+        for (int i = 0; i < handUnits.length; i++) {
+            int finalI = i;
+            handUnits[i].getImageView().setOnMouseClicked(event -> {
+                handUnits[finalI].select(this);
+            });
+        }
+    }
 
+    private void update() {
         AnimationTimer animationTimer = new AnimationTimer() {
             long last = 0, unit = 1000000000, fps = 100;
 
@@ -113,46 +146,32 @@ public class BattleController implements Initializable {
                     for (int i = 0; i < handUnits.length; i++)
                         handUnits[i].update(i);
                     for (int i = 0; i < numberOfRows; i++)
-                        for(int j = 0; j < numberOfColumns; j++)
+                        for (int j = 0; j < numberOfColumns; j++)
                             graphicalCells[i][j].update(i, j);
-                    if(selectedCell != null)
+                    if (selectedCell != null)
                         selectedCell.update();
                 }
             }
         };
         animationTimer.start();
+    }
 
-        System.out.println("are ta inja miad hade aghal");
-
-        for (int i = 0; i < handUnits.length; i++) {
-            int finalI = i;
-            handUnits[i].getImageView().setOnMouseClicked(event -> {
-                handUnits[finalI].select(this);
-            });
-        }
-
-        for (int i = 0; i < numberOfRows; i++){
-            for(int j = 0; j < numberOfColumns; j++){
-                int finalI = i;
-                int finalJ = j;
-                graphicalCells[i][j].getAnchorPane().setOnMouseClicked(event -> {
-                    graphicalCells[finalI][finalJ].select(this);
-                });
+    private void setter() {
+        rows = new HBox[]{hBox1, hBox2, hBox3, hBox4, hBox5};
+        handImages = new ImageView[]{handItemImage1, handItemImage2, handItemImage3, handItemImage4, handItemImage5};
+        handManaLabels = new Label[]{handItemLabel1, handItemLabel2, handItemLabel3, handItemLabel4, handItemLabel5};
+        handPanes = new VBox[]{vBox1, vBox2, vBox3, vBox4, vBox5};
+        handUnits = new HandUnit[handImages.length];
+        graphicalCells = new GraphicalCell[numberOfRows][numberOfColumns];
+        for (int i = 0; i < handUnits.length; i++)
+            handUnits[i] = new HandUnit(handImages[i], handManaLabels[i], handPanes[i]);
+        for (int i = 0; i < numberOfRows; i++) {
+            for (int j = 0; j < numberOfColumns; j++) {
+                graphicalCells[i][j] = new GraphicalCell(Client.getClient().getRunningBattle().getMap().getCellByCoordination(i, j));
+                rows[i].getChildren().add(graphicalCells[i][j].getRoot());
+                VBox.setMargin(graphicalCells[i][j].getRoot(), new Insets(5, 5, 5, 5));
             }
         }
-
-        forfeitButton.setOnMouseClicked(event -> {
-            Client.getClient().getRunningBattle().inputCommandLine("forfeit match", Client.getClient().getUsername());
-        });
-
-        endTurnButton.setOnMouseClicked(event -> {
-            selectedCell = null;
-            Client.getClient().getRunningBattle().inputCommandLine("end turn", Client.getClient().getUsername());
-        });
-
-        helpButton.setOnMouseClicked(event -> {
-            //todo showing game info in where ?
-        });
     }
 
     public void setSelectedCell(SelectedCell selectedCell) {
@@ -166,11 +185,10 @@ public class BattleController implements Initializable {
 
 class SelectedCell {
     public void update() {
-        if(this.location == Location.Map){
+        if (this.location == Location.Map) {
             graphicalCell.getAnchorPane().getStyleClass().clear();
             graphicalCell.getAnchorPane().getStyleClass().add("SelectedCellCover");
-        }
-        else{
+        } else {
             handUnit.getPane().getStyleClass().clear();
             handUnit.getPane().getStyleClass().add("SelectedHandUnit");
         }
@@ -258,7 +276,7 @@ class HandUnit {
         if (hand.getHandCards().size() > i) {
             if (this.collectionItem == null || !this.collectionItem.getID().equals(hand.getCollectionItemByIndex(i).getID())) {
                 this.collectionItem = hand.getCollectionItemByIndex(i);
-                if(collectionItem instanceof Item) this.manaLabel.setText("0");
+                if (collectionItem instanceof Item) this.manaLabel.setText("0");
                 else this.manaLabel.setText(Integer.toString(((Card) collectionItem).getMP()));
                 imageView.setImage(new Image(BattleController.class.getResource("1.gif").toExternalForm()));
             }
@@ -303,20 +321,18 @@ class GraphicalCell {
     public void update(int i, int j) {
         LivingCard livingCard = cell.getLivingCard();
         this.cell = Client.getClient().getRunningBattle().getMap().getCellByCoordination(i, j);
-        if(cell.getLivingCard() == null) {
+        if (cell.getLivingCard() == null) {
             anchorPane.getStyleClass().clear();
             anchorPane.getStyleClass().add("CellCover");
             imageView.setImage(null);
             return;
-        }
-        else if(!cell.getLivingCard().getID().equals(livingCard.getID()) || imageView.getImage() == null){
+        } else if (!cell.getLivingCard().getID().equals(livingCard.getID()) || imageView.getImage() == null) {
             imageView.setImage(new Image(this.getClass().getResource("1.gif").toExternalForm()));
         }
-        if(Client.getClient().getRunningBattle().getPlayerOn().haveCard(livingCard.getID())){
+        if (Client.getClient().getRunningBattle().getPlayerOn().haveCard(livingCard.getID())) {
             anchorPane.getStyleClass().clear();
             anchorPane.getStyleClass().add("OurCellCover");
-        }
-        else{
+        } else {
             anchorPane.getStyleClass().clear();
             anchorPane.getStyleClass().add("EnemyCellCover");
         }
@@ -335,8 +351,7 @@ class GraphicalCell {
                 if (selectedCell.getType() == SelectedCell.Type.Item) {
                     Client.getClient().getRunningBattle().inputCommandLine("use " + cell.getX() + " " + cell.getY(), Client.getClient().getUsername());
                     battleController.setSelectedCell(null);
-                }
-                else {
+                } else {
                     CollectionItem collectionItem = selectedCell.getHandUnit().getCollectionItem();
                     Client.getClient().getRunningBattle().inputCommandLine(
                             "insert " + collectionItem.getID() + " in (" + this.cell.getX() + ", " + this.cell.getY() + ")", Client.getClient().getUsername());
