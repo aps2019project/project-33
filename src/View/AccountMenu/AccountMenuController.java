@@ -23,28 +23,28 @@ public class AccountMenuController implements Initializable {
     public Label errorLabel;
     private Mode mode = Mode.logIn;
 
-    enum Mode{
+    enum Mode {
         logIn, signUp
     }
-//
-    private void selectMode(Label label){
+
+    //
+    private void selectMode(Label label) {
         label.getStyleClass().clear();
         label.getStyleClass().add("SelectedButton");
     }
 
-    private void notSelectMode(Label label){
+    private void notSelectMode(Label label) {
         label.getStyleClass().clear();
         label.getStyleClass().add("NotSelectedButton");
     }
 
-    private void changeMode(Mode mode){
+    private void changeMode(Mode mode) {
         this.mode = mode;
-        if(mode == Mode.logIn){
+        if (mode == Mode.logIn) {
             selectMode(logInModeButton);
             notSelectMode(signUpModeButton);
             enterButton.setText("LOG IN");
-        }
-        else{
+        } else {
             selectMode(signUpModeButton);
             notSelectMode(logInModeButton);
             enterButton.setText("SIGN UP");
@@ -57,7 +57,7 @@ public class AccountMenuController implements Initializable {
             String username = usernameTextField.getText();
             String password = passwordTextFields.getText();
             ServerMassage serverMassage;
-            if(mode == Mode.logIn)
+            if (mode == Mode.logIn)
                 serverMassage = Client.getClient().getAccountMenu().inputCommandLine("login " + username + " " + password);
             else
                 serverMassage = Client.getClient().getAccountMenu().inputCommandLine("create account " + username + " " + password);
@@ -78,16 +78,16 @@ public class AccountMenuController implements Initializable {
     }
 
     private void interpret(ServerMassage serverMassage) {
-        if(serverMassage.getType() == ServerMassage.Type.Accept) return;
+        if (serverMassage.getType() == ServerMassage.Type.Accept) return;
         usernameTextField.setStyle("-fx-border-color: red");
         passwordTextFields.setStyle("-fx-border-color: red");
-        if(serverMassage.getErrorType() == ServerMassage.ErrorType.LogInFailed){
+        if (serverMassage.getErrorType() == ServerMassage.ErrorType.LogInFailed) {
             errorLabel.setText("Invalid username or password");
         }
-        if(serverMassage.getErrorType() == ServerMassage.ErrorType.InvalidUsernameForSignUp){
+        if (serverMassage.getErrorType() == ServerMassage.ErrorType.InvalidUsernameForSignUp) {
             errorLabel.setText("This account exists");
         }
-        if(serverMassage.getErrorType() == ServerMassage.ErrorType.InvalidPasswordForSignUp){
+        if (serverMassage.getErrorType() == ServerMassage.ErrorType.InvalidPasswordForSignUp) {
             errorLabel.setText("space in password !! ");
         }
     }

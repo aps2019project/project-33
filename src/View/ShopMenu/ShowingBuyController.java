@@ -15,21 +15,22 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ShowingShopController implements Initializable {
+public class ShowingBuyController implements Initializable {
     public AnchorPane nonBlurAnchor;
     public AnchorPane blurAnchor;
     public AnchorPane mainAnchor;
-    public static boolean isFirstTime = true;
     public ImageView backButton;
+    public Label buyLabel;
 
     public CollectionItem selectedCollectionItem;
 
+    public static boolean isFirstTime = true;
     public static VBox cardsVbox = new VBox();
-    public Label buyLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (isFirstTime) {
+            nonBlurAnchor.getChildren().remove(cardsVbox);
             cardsVbox = Graphic.createCards(Client.getClient().getResultOfSearch());
             nonBlurAnchor.getChildren().add(cardsVbox);
             cardsVbox.setLayoutX(200);
@@ -55,6 +56,8 @@ public class ShowingShopController implements Initializable {
 
         buyLabel.setOnMouseClicked(event -> {
             Client.getClient().getShopMenu().inputCommandLine("buy " + selectedCollectionItem.getName());
+            Client.getClient().setCurrentMenu(MenuList.BuyMenu);
+            isFirstTime = true;
         });
     }
 

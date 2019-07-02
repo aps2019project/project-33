@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 
 import static com.sun.prism.paint.Color.WHITE;
 
-public class ShowCollectionController implements Initializable {
+public class ShopShowCollectionController implements Initializable {
     public ImageView backButton;
     public AnchorPane nonBlurAnchor;
     public AnchorPane blurAnchor;
@@ -43,7 +43,7 @@ public class ShowCollectionController implements Initializable {
         for (CollectionItem collectionItem : collectionItems)
             if (collectionItem instanceof Minion)
                 minions.add(collectionItem);
-        return collectionItems;
+        return minions;
     }
 
     public static ArrayList<CollectionItem> getSpells(ArrayList<CollectionItem> collectionItems) {
@@ -93,7 +93,7 @@ public class ShowCollectionController implements Initializable {
             mainVBox.setLayoutY(100);
             mainVBox.setLayoutX(100);
 
-            VBox.setMargin(mainVBox, new Insets(0, 0, 10, 0));
+            VBox.setMargin(mainVBox, new Insets(0, 0, 20, 0));
 
             mainAnchor.getChildren().add(mainVBox);
 
