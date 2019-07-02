@@ -8,9 +8,11 @@ import View.Graphic;
 import com.sun.prism.paint.Color;
 import com.sun.xml.internal.bind.v2.util.CollisionCheckStack;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -90,6 +92,9 @@ public class ShowCollectionController implements Initializable {
 
             mainVBox.setLayoutY(100);
             mainVBox.setLayoutX(100);
+
+            VBox.setMargin(mainVBox, new Insets(0, 0, 10, 0));
+
             mainAnchor.getChildren().add(mainVBox);
 
         }

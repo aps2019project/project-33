@@ -27,15 +27,19 @@ public class ShopController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        showCollectionLabel.setOnMouseClicked(event -> {
+            Client.getClient().getShopMenu().inputCommandLine("show collection");
+            Client.getClient().setCurrentMenu(MenuList.ShowCollection);
+        });
+
         imagePane.setOnMouseClicked(event -> {
             Client.getClient().getShopMenu().inputCommandLine("exit");
         });
+
         showLabel.setOnMouseClicked(event -> {
             Client.getClient().getShopMenu().inputCommandLine("show");
         });
-        showCollectionLabel.setOnMouseClicked(event -> {
-            Client.getClient().getShopMenu().inputCommandLine("show collection");
-        });
+
         searchLabel.setOnMouseClicked(event -> {
             Client.getClient().setCurrentMenu(MenuList.SearchShop);
         });
