@@ -6,6 +6,7 @@ import Model.Enviroment.Cell;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import Controller.Battle;
+import javafx.scene.control.Label;
 
 public class Spell extends Card {
     private int Mp, price;
@@ -38,10 +39,22 @@ public class Spell extends Card {
     }
 
     @Override
-    public String getInfo() {
-        String info;
-        info = "Type : Spell - Name : " + this.getName() + " - ID : " + this.getID() + " - MP : " + this.getMp() + " - Desc : " + this.getDescription();
-        return info;
+    public ArrayList<Label> getInfo() {
+        ArrayList<Label> labels = new ArrayList<>();
+
+        Label nameLabel = new Label("NAME : " + this.getName());
+        labels.add(nameLabel);
+
+        Label MPLabel = new Label("MP : " + this.getMP());
+        labels.add(MPLabel);
+
+        Label descLabel = new Label("DESC : " + this.getDescription());
+        labels.add(descLabel);
+
+        Label priceLabel = new Label("PRICE : " + this.getPrice());
+        labels.add(priceLabel);
+
+        return labels;
     }
 
     //Here is Setters && Getters

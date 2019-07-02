@@ -3,6 +3,7 @@ package Model.CollectionItem;
 import Controller.Application;
 import Controller.Impact;
 import Model.Collection;
+import javafx.scene.control.Label;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -27,9 +28,19 @@ public  class Item extends CollectionItem {
     }
 
     @Override
-    public String  getInfo(){
-        String info = "Name : " + this.getName() + " - ID : " + this.getID() + " - Desc " + this.getDescription();
-        return info;
+    public ArrayList<Label> getInfo() {
+        ArrayList<Label> labels = new ArrayList<>();
+
+        Label nameLabel = new Label("NAME : " + this.getName());
+        labels.add(nameLabel);
+
+        Label descLabel = new Label("DESC : " + this.getDescription());
+        labels.add(descLabel);
+
+        Label priceLabel = new Label("PRICE : " + this.getPrice());
+        labels.add(priceLabel);
+
+        return labels;
     }
 
     //Here is Setters && Getters

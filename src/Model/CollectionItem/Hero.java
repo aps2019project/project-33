@@ -1,6 +1,7 @@
 package Model.CollectionItem;
 
 import Controller.Application;
+import javafx.scene.control.Label;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -60,10 +61,25 @@ public class Hero extends LivingCard {
 
     //deghat konim ke description baraye hero hamoon tozihare special power e !!
     @Override
-    public String getInfo() {
-        String info = "Name : " + this.getName() + " - AP : " + this.getAP() + " - HP : "
-                + this.getHP() + " Class : " + this.getClass() + " Special power: " + this.getDescription();
-        return info;
+    public ArrayList<Label> getInfo() {
+        ArrayList<Label> labels = new ArrayList<>();
+
+        Label nameLabel = new Label("NAME : " + this.getName());
+        labels.add(nameLabel);
+
+        Label APLabel = new Label("AP : " + this.getAP());
+        labels.add(APLabel);
+
+        Label HPLabel = new Label("HP : " + this.getHP());
+        labels.add(HPLabel);
+
+        Label specialPowerLabel = new Label("SPECIAL POWER : " + this.getDescription());
+        labels.add(specialPowerLabel);
+
+        Label priceLabel = new Label("PRICE : " + this.getPrice());
+        labels.add(priceLabel);
+
+        return labels;
     }
 
     public void checkPareSimorgh() {

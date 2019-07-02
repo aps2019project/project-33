@@ -27,7 +27,7 @@ public class Collection {
     }
 
     public CollectionItem getCollectionItemByID(String ID){
-        for(CollectionItem collectionItem : this.getCards()){
+        for(CollectionItem collectionItem : this.getCollectionItems()){
             if(collectionItem.getID().equals(ID)){
                 return collectionItem;
             }
@@ -137,13 +137,13 @@ public class Collection {
         this.decks.add(deck);
     }
 
-    public ArrayList<CollectionItem> getCards(){
+    public ArrayList<CollectionItem> getCollectionItems(){
         return this.cards;
     }
 
     public ArrayList<CollectionItem> search(String cardName){
         ArrayList<CollectionItem> foundCollectionItems = new ArrayList<>();
-        for(CollectionItem collectionItem : this.getCards()){
+        for(CollectionItem collectionItem : this.getCollectionItems()){
             if(collectionItem.getName().equals(cardName)){
                 foundCollectionItems.add(collectionItem);
             }
@@ -154,7 +154,7 @@ public class Collection {
     public void showHeroes(String descriptionOfPrice){
         System.out.println("Heroes :");
         int numberOfHeroes = 0;
-        for(CollectionItem collectionItem : this.getCards()){
+        for(CollectionItem collectionItem : this.getCollectionItems()){
             if(collectionItem instanceof Hero){
                 numberOfHeroes++;
                 System.out.println(numberOfHeroes + " : " + collectionItem.getID() + " - " + descriptionOfPrice + " : " +
@@ -166,7 +166,7 @@ public class Collection {
     public void showItems(String descriptionOfPrice){
         System.out.println("Items :");
         int numberOfItems = 0;
-        for(CollectionItem collectionItem : this.getCards()){
+        for(CollectionItem collectionItem : this.getCollectionItems()){
             if(collectionItem instanceof Item){
                 numberOfItems++;
                 System.out.println(numberOfItems + " : " + collectionItem.getInfo() + " - " + descriptionOfPrice + " : " +
@@ -178,7 +178,7 @@ public class Collection {
     public void showCards(String descriptionOfPrice){
         System.out.println("Cards :");
         int numberOfCards = 0;
-        for(CollectionItem collectionItem : this.getCards()){
+        for(CollectionItem collectionItem : this.getCollectionItems()){
             if(collectionItem instanceof Spell || collectionItem instanceof Minion){
                 numberOfCards++;
                 System.out.println(numberOfCards + " : " + collectionItem.getInfo() + " - " + descriptionOfPrice + " : " +

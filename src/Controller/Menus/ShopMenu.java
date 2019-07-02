@@ -25,8 +25,10 @@ public class ShopMenu extends Menu {
 
         Collection collection = Main.application.getLoggedInAccount().getCollection();
 
-        if (inputLine.equals("show collection"))
+        if (inputLine.equals("show collection")){
+            Client.getClient().setResultOfSearch(collection.getCollectionItems());
             collection.showCollection("Sell Cost");
+        }
         else if (inputLine.matches("search collection .+")) {
             searchInCollection(separatedInput[2], collection);
         } else if (inputLine.matches("search .+")) {
@@ -58,7 +60,6 @@ public class ShopMenu extends Menu {
         Client.getClient().setResultOfSearch(foundCollectionItems);
         for (CollectionItem collectionItem : foundCollectionItems){
             System.out.println(++index + ". " + collectionItem.getID());
-
         }
     }
 
