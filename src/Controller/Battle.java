@@ -847,12 +847,12 @@ public class Battle {
         finishMatch();
     }
 
-    public void inputCommandLine(String inputLine) {
+    public void inputCommandLine(String inputLine, String clientUsername) {
         System.out.println("player on : " + playerOn.getAccount().getUsername());
         System.out.println("Here is Battle");
         System.out.println("For help, enter : show menu");
 
-        if(!Client.getClient().getAccount().getUsername().equals(playerOn.getAccount().getUsername())) return;
+        if(!clientUsername.equals(playerOn.getAccount().getUsername())) return;
 
         inputLine = inputLine.trim();
         String inputLineOriginal = inputLine;

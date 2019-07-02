@@ -56,6 +56,7 @@ public class AccountMenu extends Menu {
 
         System.out.println("The account is created");
         Client.getClient().setCurrentMenu(MenuList.MainMenu);
+        Client.getClient().setUsername(username);
         return new ServerMassage(ServerMassage.Type.Accept, null);
     }
 
@@ -74,6 +75,7 @@ public class AccountMenu extends Menu {
         System.out.println("login complete !");
         Main.application.setLoggedInAccount(account);
         Client.getClient().setCurrentMenu(MenuList.MainMenu);
+        Client.getClient().setUsername(username);
         return new ServerMassage(ServerMassage.Type.Accept, null);
     }
 }

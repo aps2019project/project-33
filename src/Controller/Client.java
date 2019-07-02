@@ -15,6 +15,7 @@ public class Client {
     private MenuList currentMenu = MenuList.AccountMenu;
     private static Client client = null;
     private ArrayList<CollectionItem> resultOfSearch = new ArrayList<>();
+    private String username;
     //todo in bayad ye jaei meghdar dehi she
     private Battle runningBattle;
 
@@ -74,5 +75,13 @@ public class Client {
 
     public void setResultOfSearch(ArrayList<CollectionItem> result){
         this.resultOfSearch = result;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
