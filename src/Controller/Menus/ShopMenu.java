@@ -5,8 +5,6 @@ import Controller.Main;
 import Controller.MenuList;
 import Model.*;
 import Model.CollectionItem.CollectionItem;
-import Model.CollectionItem.Hero;
-import Model.CollectionItem.LivingCard;
 import Model.CollectionItem.UsableItem;
 
 import java.util.ArrayList;
@@ -25,16 +23,16 @@ public class ShopMenu extends Menu {
 
         Collection collection = Main.application.getLoggedInAccount().getCollection();
 
-        if (inputLine.equals("show collection")){
+        if (inputLine.equals("show collection")) {
             Client.getClient().setResultOfSearch(collection.getCollectionItems());
             collection.showCollection("Sell Cost");
-        }
-        else if (inputLine.matches("search collection .+")) {
+            Client.getClient().setCurrentMenu(MenuList.ShopShowCollection);
+        } else if (inputLine.matches("search collection .+")) {
             searchInCollection(separatedInput[2], collection);
         } else if (inputLine.matches("search .+")) {
             searchInCollection(separatedInput[1], this.shop);
 
-            Client.getClient().setCurrentMenu(MenuList.ShowingShop);
+            Client.getClient().setCurrentMenu(MenuList.ShowingBuy);
 
         } else if (inputLine.matches("buy .+")) {
             String collectionNameItem = separatedInput[1];
@@ -46,10 +44,9 @@ public class ShopMenu extends Menu {
             this.shop.showCollection("Buy Cost");
         else if (inputLine.equals("show menu"))
             ShopMenu.showMenu();
-        else if (inputLine.equals("exit")){
+        else if (inputLine.equals("exit")) {
             Client.getClient().setCurrentMenu(MenuList.MainMenu);
-        }
-        else
+        } else
             System.out.println("Please enter valid command line !");
     }
 
@@ -58,7 +55,7 @@ public class ShopMenu extends Menu {
         System.out.println("Result of search :");
         int index = 0;
         Client.getClient().setResultOfSearch(foundCollectionItems);
-        for (CollectionItem collectionItem : foundCollectionItems){
+        for (CollectionItem collectionItem : foundCollectionItems) {
             System.out.println(++index + ". " + collectionItem.getID());
         }
     }
