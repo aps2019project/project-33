@@ -2,7 +2,6 @@ package View.BattleMenu;
 
 import Controller.Client;
 import Controller.MenuList;
-import Controller.Menus.BattleMenu;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
@@ -18,7 +17,7 @@ public class ChooseMode implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         storyButton.setOnMouseClicked(event -> {
             BattleMenuController.mode = BattleMenuController.ModeList.Story;
-            Client.getClient().setCurrentMenu(MenuList.ChooseChapter);
+            Client.getClient().setCurrentMenu(MenuList.StoryChapters);
         });
 
         customGameButton.setOnMouseClicked(event -> {

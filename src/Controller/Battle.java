@@ -855,10 +855,9 @@ public class Battle {
         inputLine = inputLine.toLowerCase();
         String[] input = inputLineOriginal.split("[ ]+");
 
-        if (inputLine.equals("forfeit match")) {
+        if (inputLine.equals("forfeit match"))
             forfeitMatch();
-        }
-        if (inputLine.equals("game info"))
+        else if (inputLine.equals("game info"))
             showGameInfo();
         else if (inputLine.equals("show my minions"))
             showMyMinions();

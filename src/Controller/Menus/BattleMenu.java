@@ -39,23 +39,27 @@ public class BattleMenu {
             System.out.println("selected deck is invalid");
             return;
         }
+
         //set players
         chooseType(type);
         battle.setPlayerOn(new Player(Main.application.getLoggedInAccount()));
         chooseSecondPlayer(secondPlayer);
-        if (battle.getPlayerOff() == null || !checkDeck(battle.getPlayerOff().getAccount())) {
-            if(!checkDeck(battle.getPlayerOff().getAccount()))
-                System.out.println("invalid deck");
-            System.out.println("Invalid rival");
-            return;
-        }
+        System.out.println(battle.getPlayerOn().getAccount().getUsername());
         //set battle details
 
         //todo in ja bayad berim badi, chie ? -? mode -> custom ya story
         //todo number of flags felan fix e, ta bebinim badan khoda chi mikhad
         if(type.equals("Single Player")) chooseMode(mode, chapter, kind, 1);
 
+        if (battle.getPlayerOff() == null || !checkDeck(battle.getPlayerOff().getAccount())) {
+            if(!checkDeck(battle.getPlayerOff().getAccount()))
+                System.out.println("invalid deck");
+            System.out.println("Invalid rival");
+            return;
+        }
+
         battle.runGame();
+        Client.getClient().setRunningBattle(battle);
         Client.getClient().setCurrentMenu(MenuList.Battle);
     }
 

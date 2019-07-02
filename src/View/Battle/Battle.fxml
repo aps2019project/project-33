@@ -255,7 +255,7 @@
                <children>
                   <ImageView fx:id="handItemImage1" fitHeight="92.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../resources/unit_gifs/1.gif" />
+                        <Image url="@1.gif" />
                      </image>
                   </ImageView>
                   <Label fx:id="handItemLabel1" prefHeight="31.0" prefWidth="40.0" styleClass="ManaLabel" />
