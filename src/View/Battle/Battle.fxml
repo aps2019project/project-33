@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="667.0" prefWidth="1105.0" styleClass="BattleAnchor" stylesheets="@Battle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Battle.BattleController">
+<AnchorPane fx:id="rootOfPage" prefHeight="667.0" prefWidth="1105.0" styleClass="BattleAnchor" stylesheets="@Battle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Battle.BattleController">
    <children>
       <ImageView fx:id="forfeitButton" fitHeight="81.0" fitWidth="72.0" layoutX="998.0" layoutY="574.0" pickOnBounds="true" preserveRatio="true" styleClass="BattleButton" AnchorPane.bottomAnchor="21.0" AnchorPane.rightAnchor="35.0">
          <image>
@@ -99,6 +99,5 @@
             </VBox>
          </children>
       </HBox>
-      <VBox fx:id="cardInformationVBox" layoutX="20.0" layoutY="86.0" prefHeight="237.0" prefWidth="151.0" />
    </children>
 </AnchorPane>
