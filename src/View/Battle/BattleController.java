@@ -28,7 +28,7 @@ import java.util.ResourceBundle;
 
 public class BattleController implements Initializable {
     private int numberOfRows = 5, numberOfColumns = 9;
-    public VBox cardInformationVBox;
+    public AnchorPane rootOfPage;
     public ImageView forfeitButton;
     public ImageView gameInfoButton;
     public HBox hBox1;
@@ -62,6 +62,7 @@ public class BattleController implements Initializable {
     private VBox[] handPanes;
     private SelectedCell selectedCell = null;
     private GraphicalCell[][] graphicalCells;
+    private VBox cardInformationVBox;
 
     //todo, show collectibles
     //todo, show next card
@@ -116,9 +117,11 @@ public class BattleController implements Initializable {
                     graphicalCells[finalI][finalJ].select(this);
                 });
                 graphicalCells[i][j].getAnchorPane().setOnMouseEntered(event -> {
+                    rootOfPage.getChildren().remove(cardInformationVBox);
                     ArrayList<CollectionItem> arrayList = new ArrayList<>();
                     arrayList.add(graphicalCells[finalI][finalJ].getCell().getLivingCard());
                     cardInformationVBox = Graphic.createCards(arrayList);
+                    rootOfPage.getChildren().add(cardInformationVBox);
                     System.out.println(cardInformationVBox);
                 });
             }
