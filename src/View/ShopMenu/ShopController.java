@@ -8,7 +8,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import javax.swing.event.CaretListener;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -29,7 +28,11 @@ public class ShopController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showCollectionLabel.setOnMouseClicked(event -> {
             Client.getClient().getShopMenu().inputCommandLine("show collection");
-            Client.getClient().setCurrentMenu(MenuList.ShowCollection);
+            Client.getClient().setCurrentMenu(MenuList.ShopShowCollection);
+        });
+
+        searchCollectionLabel.setOnMouseClicked(event -> {
+            Client.getClient().setCurrentMenu(MenuList.ShopSearchCollection);
         });
 
         imagePane.setOnMouseClicked(event -> {
