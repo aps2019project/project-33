@@ -9,10 +9,12 @@ import Model.CollectionItem.Spell;
 import Model.Enviroment.Cell;
 import Model.Hand1;
 import javafx.animation.AnimationTimer;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -22,6 +24,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class BattleController implements Initializable {
+    private int numberOfRows = 5, numberOfColumns = 9;
     public ImageView forfeitButton;
     public ImageView gameInfoButton;
     public HBox hBox1;
@@ -88,27 +91,40 @@ public class BattleController implements Initializable {
         handManaLabels = new Label[]{handItemLabel1, handItemLabel2, handItemLabel3, handItemLabel4, handItemLabel5};
         handPanes = new VBox[]{vBox1, vBox2, vBox3, vBox4, vBox5};
         handUnits = new HandUnit[handImages.length];
+        GraphicalCell[][] graphicalCells = new GraphicalCell[numberOfRows][numberOfColumns];
 
         for (int i = 0; i < handUnits.length; i++)
             handUnits[i] = new HandUnit(handImages[i], handManaLabels[i], handPanes[i]);
 
+        for (int i = 0; i < numberOfRows; i++){
+            for(int j = 0; j < numberOfColumns; j++){
+                graphicalCells[i][j] = new GraphicalCell(Client.getClient().getRunningBattle().getMap().getCellByCoordination(i, j));
+                rows[i].getChildren().add(graphicalCells[i][j].getRoot());
+            }
+        }
+
         //todo in ja hanooz meghdar dehi haye cell ha moonde
 
         AnimationTimer animationTimer = new AnimationTimer() {
-            long last = 0, unit = 1000000000, fps = 144;
+            long last = 0, unit = 1000000000, fps = 100;
+
             @Override
             public void handle(long now) {
-                if(last == 0) last = now;
-                if(now > last + unit / fps) {
+                if (last == 0) last = now;
+                if (now > last + unit / fps) {
                     last = now;
                     for (int i = 0; i < handUnits.length; i++)
                         handUnits[i].update(i);
+                    for (int i = 0; i < numberOfRows; i++)
+                        for(int j = 0; j < numberOfColumns; j++)
+                            graphicalCells[i][j].update(i, j);
                 }
             }
         };
         animationTimer.start();
 
         System.out.println("are ta inja miad hade aghal");
+
 
         for (int i = 0; i < handUnits.length; i++) {
             int finalI = i;
@@ -117,11 +133,15 @@ public class BattleController implements Initializable {
             });
         }
 
-        //todo inja daram cell haro handle mikonam
-        GraphicalCell graphicalCell = new GraphicalCell(cellPane1, cellImageView1, cellAnchorPane1, null);
-        graphicalCell.getAnchorPane().setOnMouseClicked(event -> {
-            graphicalCell.select(this);
-        });
+        for (int i = 0; i < numberOfRows; i++){
+            for(int j = 0; j < numberOfColumns; j++){
+                int finalI = i;
+                int finalJ = j;
+                graphicalCells[i][j].getAnchorPane().setOnMouseClicked(event -> {
+                    graphicalCells[finalI][finalJ].select(this);
+                });
+            }
+        }
 
         forfeitButton.setOnMouseClicked(event -> {
             Client.getClient().getRunningBattle().inputCommandLine("forfeit match");
@@ -211,7 +231,6 @@ class HandUnit {
         if (collectionItem instanceof LivingCard) type = SelectedCell.Type.LivingCard;
         battleController.setSelectedCell(new SelectedCell(type, SelectedCell.Location.Hand, null, this));
         Client.getClient().getRunningBattle().inputCommandLine("select " + collectionItem.getID());
-        System.out.println(type + " " + collectionItem.getName() + " " + collectionItem.getID());
     }
 
     public ImageView getImageView() {
@@ -224,7 +243,7 @@ class HandUnit {
 
     public void update(int i) {
         Hand1 hand = Client.getClient().getRunningBattle().getPlayerOn().getHand();
-        if(hand.getHandCards().size() > i) {
+        if (hand.getHandCards().size() > i) {
             if (this.collectionItem == null || !this.collectionItem.getID().equals(hand.getCollectionItemByIndex(i).getID())) {
                 this.collectionItem = hand.getCollectionItemByIndex(i);
                 imageView.setImage(new Image(BattleController.class.getResource("1.gif").toExternalForm()));
@@ -234,22 +253,59 @@ class HandUnit {
 }
 
 class GraphicalCell {
+    private int heightOfCell = 70, widthOfCell = 70;
     private Pane root;
     private AnchorPane anchorPane;
+
+
     private ImageView imageView;
     private Cell cell;
 
-    public GraphicalCell(Pane root, ImageView imageView, AnchorPane anchorPane, Cell cell) {
-        this.root = root;
-        this.imageView = imageView;
-        this.anchorPane = anchorPane;
+    public GraphicalCell(Cell cell) {
+        this.root = new Pane();
+        root.getStylesheets().add(getClass().getResource("Battle.css").toExternalForm());
+        root.getStyleClass().add("CellPane");
+
+        this.imageView = new ImageView();
+        root.getChildren().add(imageView);
+        imageView.setFitWidth(widthOfCell);
+        imageView.setFitHeight(heightOfCell);
+
+        this.anchorPane = new AnchorPane();
+        root.getChildren().add(anchorPane);
+        anchorPane.getStyleClass().add("CellCover");
+
         this.cell = cell;
+    }
+
+    public void update(int i, int j) {
+        LivingCard livingCard = cell.getLivingCard();
+        this.cell = Client.getClient().getRunningBattle().getMap().getCellByCoordination(i, j);
+        if(cell.getLivingCard() == null) {
+            root.getStyleClass().clear();
+            root.getStyleClass().add("CellCover");
+            imageView.setImage(null);
+            return;
+        }
+        else if(!cell.getLivingCard().getID().equals(livingCard.getID()) || imageView.getImage() == null){
+            imageView.setImage(new Image(this.getClass().getResource("1.gif").toExternalForm()));
+        }
+        if(Client.getClient().getRunningBattle().getPlayerOn().haveCard(livingCard.getID())){
+            root.getStyleClass().clear();
+            root.getStyleClass().add("OurCellCover");
+        }
+        else{
+            root.getStyleClass().clear();
+            root.getStyleClass().add("EnemyCellCover");
+        }
+
     }
 
     public void select(BattleController battleController) {
         SelectedCell selectedCell = battleController.getSelectedCell();
         if (selectedCell == null) {
             if (cell.getLivingCard() == null) return;
+            System.out.println(cell.getLivingCard().getName());
             battleController.setSelectedCell(new SelectedCell(SelectedCell.Type.LivingCard, SelectedCell.Location.Map, this, null));
             Client.getClient().getRunningBattle().inputCommandLine("select " + cell.getLivingCard().getID());
         } else {

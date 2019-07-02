@@ -585,6 +585,7 @@ public class Battle {
         playerOff.getHero().setCoolDown(Math.max(0, playerOff.getHero().getCoolDown() - 1));
         Impact.activeBuffs(this);
         numberOfRounds++;
+
     }
 
     public void showCollectibles() {
@@ -847,8 +848,11 @@ public class Battle {
     }
 
     public void inputCommandLine(String inputLine) {
+        System.out.println("player on : " + playerOn.getAccount().getUsername());
         System.out.println("Here is Battle");
         System.out.println("For help, enter : show menu");
+
+        if(!Client.getClient().getAccount().getUsername().equals(playerOn.getAccount().getUsername())) return;
 
         inputLine = inputLine.trim();
         String inputLineOriginal = inputLine;

@@ -35,6 +35,12 @@ public class Player {
         this.aliveCards.add(livingCard);
     }
 
+    public boolean haveCard(String ID){
+        for(LivingCard livingCard : aliveCards)
+            if(livingCard.getID().equals(ID)) return true;
+        return false;
+    }
+
     public void removeDeadCard(LivingCard deadCard){
         for(LivingCard livingCard : this.getAliveCards()){
             if(livingCard.getID().equals(deadCard.getID())){

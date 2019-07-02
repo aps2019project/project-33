@@ -43,21 +43,50 @@
     -fx-font-size: 20;
 }
 
-.Cell{
+.CellCover{
     -fx-pref-width: 70px;
     -fx-pref-height: 70px;
     -fx-opacity: 0.3;
     -fx-background-color: gray;
 }
 
-.Cell:hover{
+.CellCover:hover{
+    -fx-background-color: black;
+    -fx-opacity: 0.15;
+}
+
+.OurCellCover{
+    -fx-pref-width: 70px;
+    -fx-pref-height: 70px;
+    -fx-opacity: 0.3;
+    -fx-background-color: green;
+}
+
+.OurCellCover:hover{
     -fx-background-color: aqua;
+    -fx-opacity: 0.15;
+}
+
+.EnemyCellCover{
+    -fx-pref-width: 70px;
+    -fx-pref-height: 70px;
+    -fx-opacity: 0.3;
+    -fx-background-color: red;
+}
+
+.EnemyCellCover:hover{
+    -fx-background-color: yellow;
     -fx-opacity: 0.15;
 }
 
 .CellPane{
     -fx-pref-width: 70px;
     -fx-pref-height: 70px;
+}
+
+.CellImage{
+    -fx-fit-to-width: 70px;
+    -fx-fit-to-height: 70px;
 }
 
 .testAnchor{
