@@ -1,5 +1,7 @@
 package Model.CollectionItem;
 
+import javafx.scene.control.Label;
+
 import java.util.ArrayList;
 
 public abstract class CollectionItem {
@@ -80,7 +82,7 @@ public abstract class CollectionItem {
     }
 
     public                                                                                                                                                           void doImpact(String livingCardID){}
-    public abstract String getInfo();
+    public abstract ArrayList<Label> getInfo();
 
 
     //Here is Setters && Getters

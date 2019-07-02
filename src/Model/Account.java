@@ -141,7 +141,7 @@ public class Account {
 
     public int getNumberOfItems() {
         int numberOfItems = 0;
-        for(CollectionItem collectionItem : this.getCollection().getCards())
+        for(CollectionItem collectionItem : this.getCollection().getCollectionItems())
             if(collectionItem instanceof Item)
                 numberOfItems ++;
         return numberOfItems;

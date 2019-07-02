@@ -23,35 +23,27 @@ public class ShowingShopController implements Initializable {
     public ImageView backButton;
 
     public CollectionItem selectedCollectionItem;
-    public int selectedIndex = -1;
 
     public static VBox cardsVbox = new VBox();
     public Label buyLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(isFirstTime){
+        if (isFirstTime) {
             cardsVbox = Graphic.createCards(Client.getClient().getResultOfSearch());
             nonBlurAnchor.getChildren().add(cardsVbox);
             cardsVbox.setLayoutX(200);
             cardsVbox.setLayoutY(200);
-/*
-            VBox cardVbox = new VBox();
-            ImageView cardGif = new ImageView("../../../resources/unit_gifs/1.gif");
-            cardVbox.getChildren().add(cardGif);
-            cardVboxes.add(cardVbox);
-            nonBlurAnchor.getChildren().add(cardGif);
-*/
         }
         isFirstTime = false;
         int index = 0;
-        for(ImageView imageView : Graphic.imageViews){
+        for (VBox vBox : Graphic.vBoxes) {
             final int y = index;
-            imageView.setOnMouseClicked(event -> {
-                selectedIndex = y;
+            vBox.setOnMouseClicked(event -> {
                 selectedCollectionItem = Client.getClient().getResultOfSearch().get(y);
-                imageView.setStyle("-fx-effect: dropshadow(three-pass-box, white, 5, 0.5, 0, 0);");
                 clearShadows();
+                vBox.getStylesheets().add(Graphic.class.getResource("Card.css").toExternalForm());
+                vBox.getStyleClass().add("SelectedCard");
             });
             index++;
         }
@@ -66,12 +58,8 @@ public class ShowingShopController implements Initializable {
         });
     }
 
-    public void clearShadows(){
-        int index = 0;
-        for(ImageView imageView : Graphic.imageViews) {
-            if (index != selectedIndex)
-                imageView.getStyleClass().clear();
-            index++;
-        }
+    public void clearShadows() {
+        for (VBox vBox : Graphic.vBoxes)
+            vBox.getStyleClass().remove("SelectedCard");
     }
 }

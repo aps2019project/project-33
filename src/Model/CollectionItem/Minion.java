@@ -2,6 +2,7 @@ package Model.CollectionItem;
 
 import Controller.Application;
 import Model.Enviroment.Cell;
+import javafx.scene.control.Label;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -60,12 +61,30 @@ public class Minion extends LivingCard {
     }
 
     //deghat konim description hamoon special power o in harfas
+
     @Override
-    public String getInfo() {
-        String info = "Type : Minion - Name : " + this.getName() + " - ID: " + this.getID() + " - Class: " + this.getClass() + " - AP : " +
-                this.getAP() + " - HP : " + this.getHP() + " - MP : " + this.getMP() + " - Special power : "
-                + this.getDescription();
-        return info;
+    public ArrayList<Label> getInfo() {
+        ArrayList<Label> labels = new ArrayList<>();
+
+        Label nameLabel = new Label("NAME : " + this.getName());
+        labels.add(nameLabel);
+
+        Label APLabel = new Label("AP : " + this.getAP());
+        labels.add(APLabel);
+
+        Label HPLabel = new Label("HP : " + this.getHP());
+        labels.add(HPLabel);
+
+        Label specialPowerLabel = new Label("SPECIAL POWER : " + this.getDescription());
+        labels.add(specialPowerLabel);
+
+        Label MPLabel = new Label("MP : " + this.getMP());
+        labels.add(MPLabel);
+
+        Label priceLabel = new Label("PRICE : " + this.getPrice());
+        labels.add(priceLabel);
+
+        return labels;
     }
 
     public boolean isHaveNefrineMarg() {
