@@ -31,7 +31,6 @@ public class View extends Application {
                 if (last == 0) last = now;
                 if (now > last + unit / fps) {
                     last = now;
-
                     if (!Client.getClient().getCurrentMenu().equals(previousMenu)) {
                         previousMenu = Client.getClient().getCurrentMenu();
                         try {

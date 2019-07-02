@@ -951,8 +951,9 @@ public class Generator {
         minion.setHP(14);
         minion.setAP(7);
         minion.setName("MareGhoolPeykar");
-//TODO baraxe holybuff
+        //TODO baraxe holybuff
         setMinionAttackArea(minion, false, false, false, false, true, false, true, true, false, true, true, false, false, false, true, 5);
+        minion.getInformation().setMultipleImpact(true);
         minion.getInformation().setImpactArea(true);
         minion.getInformation().setDistanceOfImpactArea(2);
         Application.writeJSON(minion, "Data/CollectionItem/Minion/MareGhoolPeykar.json");
@@ -977,6 +978,7 @@ public class Generator {
         minion.setAP(4);
         minion.setName("NaneSarma");
         setMinionAttackArea(minion, false, false, false, false, true, false, true, false, false, true, true, true, false, false, true, 4);
+        minion.getInformation().setMultipleImpact(true);
         minion.getInformation().setCanStunBuffAdd(true);
         minion.getInformation().setTimeOfStunBuff(1);
         Application.writeJSON(minion, "Data/CollectionItem/Minion/NaneSarma.json");

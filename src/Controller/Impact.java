@@ -239,6 +239,8 @@ public class Impact {
             attackArea.clear();
             attackArea.add(targetCell);
         } else if (!information.isMultipleImpact()) {
+            //todo in ja exception mikhore
+            System.out.println(attacker.getName());
             if (!attackArea.contains(defender.getCell())) {
                 System.out.println("defender isn't in range");
                 return;

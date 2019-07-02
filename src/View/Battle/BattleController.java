@@ -2,10 +2,7 @@ package View.Battle;
 
 import Controller.Battle;
 import Controller.Client;
-import Model.CollectionItem.CollectionItem;
-import Model.CollectionItem.Item;
-import Model.CollectionItem.LivingCard;
-import Model.CollectionItem.Spell;
+import Model.CollectionItem.*;
 import Model.Enviroment.Cell;
 import Model.Hand1;
 import javafx.animation.AnimationTimer;
@@ -72,9 +69,9 @@ public class BattleController implements Initializable {
     //todo, show info
     //todo, enter grave yard
     //todo, help
+    //todo, attack kone
 
     //todo, in ke betoone ye chizio select kone
-    //todo, attack kone
     //todo, move kone
     //todo, insert konim roo ye chizi
     //todo, end turn -> in ke kharab nashe ham check konim ->>> kolliatesh done
@@ -118,13 +115,14 @@ public class BattleController implements Initializable {
                     for (int i = 0; i < numberOfRows; i++)
                         for(int j = 0; j < numberOfColumns; j++)
                             graphicalCells[i][j].update(i, j);
+                    if(selectedCell != null)
+                        selectedCell.update();
                 }
             }
         };
         animationTimer.start();
 
         System.out.println("are ta inja miad hade aghal");
-
 
         for (int i = 0; i < handUnits.length; i++) {
             int finalI = i;
@@ -148,6 +146,7 @@ public class BattleController implements Initializable {
         });
 
         endTurnButton.setOnMouseClicked(event -> {
+            selectedCell = null;
             Client.getClient().getRunningBattle().inputCommandLine("end turn", Client.getClient().getUsername());
         });
 
@@ -166,6 +165,17 @@ public class BattleController implements Initializable {
 }
 
 class SelectedCell {
+    public void update() {
+        if(this.location == Location.Map){
+            graphicalCell.getAnchorPane().getStyleClass().clear();
+            graphicalCell.getAnchorPane().getStyleClass().add("SelectedCellCover");
+        }
+        else{
+            handUnit.getPane().getStyleClass().clear();
+            handUnit.getPane().getStyleClass().add("SelectedHandUnit");
+        }
+    }
+
     enum Type {
         Item, LivingCard, Spell;
     }
@@ -243,12 +253,24 @@ class HandUnit {
 
     public void update(int i) {
         Hand1 hand = Client.getClient().getRunningBattle().getPlayerOn().getHand();
+        this.pane.getStyleClass().clear();
+        this.pane.getStyleClass().add("HandUnit");
         if (hand.getHandCards().size() > i) {
             if (this.collectionItem == null || !this.collectionItem.getID().equals(hand.getCollectionItemByIndex(i).getID())) {
                 this.collectionItem = hand.getCollectionItemByIndex(i);
+                if(collectionItem instanceof Item) this.manaLabel.setText("0");
+                else this.manaLabel.setText(Integer.toString(((Card) collectionItem).getMP()));
                 imageView.setImage(new Image(BattleController.class.getResource("1.gif").toExternalForm()));
             }
         }
+    }
+
+    public VBox getPane() {
+        return pane;
+    }
+
+    public void setPane(VBox pane) {
+        this.pane = pane;
     }
 }
 
@@ -282,8 +304,8 @@ class GraphicalCell {
         LivingCard livingCard = cell.getLivingCard();
         this.cell = Client.getClient().getRunningBattle().getMap().getCellByCoordination(i, j);
         if(cell.getLivingCard() == null) {
-            root.getStyleClass().clear();
-            root.getStyleClass().add("CellCover");
+            anchorPane.getStyleClass().clear();
+            anchorPane.getStyleClass().add("CellCover");
             imageView.setImage(null);
             return;
         }
@@ -291,12 +313,12 @@ class GraphicalCell {
             imageView.setImage(new Image(this.getClass().getResource("1.gif").toExternalForm()));
         }
         if(Client.getClient().getRunningBattle().getPlayerOn().haveCard(livingCard.getID())){
-            root.getStyleClass().clear();
-            root.getStyleClass().add("OurCellCover");
+            anchorPane.getStyleClass().clear();
+            anchorPane.getStyleClass().add("OurCellCover");
         }
         else{
-            root.getStyleClass().clear();
-            root.getStyleClass().add("EnemyCellCover");
+            anchorPane.getStyleClass().clear();
+            anchorPane.getStyleClass().add("EnemyCellCover");
         }
 
     }
@@ -310,16 +332,20 @@ class GraphicalCell {
             Client.getClient().getRunningBattle().inputCommandLine("select " + cell.getLivingCard().getID(), Client.getClient().getUsername());
         } else {
             if (selectedCell.getLocation() == SelectedCell.Location.Hand) {
-                if (selectedCell.getType() == SelectedCell.Type.Item)
+                if (selectedCell.getType() == SelectedCell.Type.Item) {
                     Client.getClient().getRunningBattle().inputCommandLine("use " + cell.getX() + " " + cell.getY(), Client.getClient().getUsername());
+                    battleController.setSelectedCell(null);
+                }
                 else {
                     CollectionItem collectionItem = selectedCell.getHandUnit().getCollectionItem();
                     Client.getClient().getRunningBattle().inputCommandLine(
                             "insert " + collectionItem.getID() + " in (" + this.cell.getX() + ", " + this.cell.getY() + ")", Client.getClient().getUsername());
+                    battleController.setSelectedCell(null);
                 }
             }
             if (selectedCell.getLocation() == SelectedCell.Location.Map) {
                 Client.getClient().getRunningBattle().inputCommandLine("move to (" + cell.getX() + ", " + cell.getY() + ")", Client.getClient().getUsername());
+                battleController.setSelectedCell(null);
             }
         }
     }

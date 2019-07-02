@@ -965,11 +965,8 @@ public class Battle {
 //        }
     }
 
-    private String readInput() {
-        if (playerOn instanceof AI) {
-            return ((AI) playerOn).outputSomeRandomOrder(this);
-        } else
-            return Main.scanner.nextLine();
+    private void readInput() {
+        ((AI) playerOn).outputSomeRandomOrder(this);
     }
 
     //Here is Setters && Getters

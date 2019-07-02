@@ -22,15 +22,22 @@
 
 }
 
-.VBox{
+.HandUnit{
     -fx-background-image: url("../../../resources/ui/rift_level_ring.png");
     -fx-background-size: 100% 100%;
     -fx-alignment: center;
 }
 
-.VBox:hover{
+.HandUnit:hover{
     -fx-background-image: url("../../../resources/ui/replace_outer_ring_shine@2x.png");
     -fx-cursor: hand;
+}
+
+.SelectedHandUnit{
+    -fx-background-image: url("../../../resources/ui/rift_level_ring.png");
+    -fx-background-size: 100% 100%;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(three-pass-box, red, 5, 0.3, 0, 0);
 }
 
 .ManaLabel{
@@ -77,6 +84,13 @@
 .EnemyCellCover:hover{
     -fx-background-color: yellow;
     -fx-opacity: 0.15;
+}
+
+.SelectedCellCover{
+    -fx-pref-width: 70px;
+    -fx-pref-height: 70px;
+    -fx-opacity: 0.3;
+    -fx-background-color: blue;
 }
 
 .CellPane{

@@ -38,7 +38,7 @@ abstract public class LivingCard extends Card {
             battle.removeAliveCard(this);
             battle.handleFlags();
 
-            if (battle.getSelectedCard().getID().equals(this.getID()))
+            if (battle.getSelectedCard() != null && battle.getSelectedCard().getID().equals(this.getID()))
                 battle.removeSelectedCard();
 
             if(this.getInformation().isOnDeath())
