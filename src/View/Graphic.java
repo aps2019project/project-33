@@ -52,7 +52,7 @@ public class Graphic {
         cardVbox.setPrefWidth(150);
         cardVbox.setPrefHeight(250);
         //add gif
-        String address = "unit_gifs/" + (index + 10) % numberOfGifs + ".gif";
+        String address = "unit_gifs/" + index + ".gif";
         Image image = new Image(Graphic.class.getResourceAsStream(address));
         ImageView cardGif = new ImageView(image);
         cardGif.setFitHeight(cardVbox.getPrefHeight() / 2);
