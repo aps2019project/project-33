@@ -17,9 +17,9 @@ public class Main {
     public static Application application = new Application();
 
     public static void main(String[] args) throws IOException {
-     /*   Generator.createCards(application);
+        Generator.createCards();
         ShopGenerator.generate();
-        DeckGenerator.deckGenerator();;*/
+        DeckGenerator.deckGenerator();;
         application.runApplication();
         View.main(args);
     }

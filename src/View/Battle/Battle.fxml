@@ -47,7 +47,7 @@
       </VBox>
       <HBox layoutX="214.0" layoutY="524.0" prefHeight="139.0" prefWidth="606.0">
          <children>
-            <VBox fx:id="vBox1" prefHeight="121.0" prefWidth="120.0" styleClass="VBox">
+            <VBox fx:id="vBox1" prefHeight="121.0" prefWidth="120.0" styleClass="HandUnit">
                <children>
                   <ImageView fx:id="handItemImage1" fitHeight="92.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -57,7 +57,7 @@
                   <Label fx:id="handItemLabel1" prefHeight="31.0" prefWidth="40.0" styleClass="ManaLabel" />
                </children>
             </VBox>
-            <VBox fx:id="vBox2" prefHeight="121.0" prefWidth="120.0" styleClass="VBox">
+            <VBox fx:id="vBox2" prefHeight="121.0" prefWidth="120.0" styleClass="HandUnit">
                <children>
                   <ImageView fx:id="handItemImage2" fitHeight="92.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -67,7 +67,7 @@
                   <Label fx:id="handItemLabel2" prefHeight="31.0" prefWidth="40.0" styleClass="ManaLabel" />
                </children>
             </VBox>
-            <VBox fx:id="vBox3" prefHeight="121.0" prefWidth="120.0" styleClass="VBox">
+            <VBox fx:id="vBox3" prefHeight="121.0" prefWidth="120.0" styleClass="HandUnit">
                <children>
                   <ImageView fx:id="handItemImage3" fitHeight="92.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -77,7 +77,7 @@
                   <Label fx:id="handItemLabel3" prefHeight="31.0" prefWidth="40.0" styleClass="ManaLabel" />
                </children>
             </VBox>
-            <VBox fx:id="vBox4" prefHeight="121.0" prefWidth="120.0" styleClass="VBox">
+            <VBox fx:id="vBox4" prefHeight="121.0" prefWidth="120.0" styleClass="HandUnit">
                <children>
                   <ImageView fx:id="handItemImage4" fitHeight="92.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -87,7 +87,7 @@
                   <Label fx:id="handItemLabel4" prefHeight="31.0" prefWidth="40.0" styleClass="ManaLabel" />
                </children>
             </VBox>
-            <VBox fx:id="vBox5" prefHeight="121.0" prefWidth="120.0" styleClass="VBox">
+            <VBox fx:id="vBox5" prefHeight="121.0" prefWidth="120.0" styleClass="HandUnit">
                <children>
                   <ImageView fx:id="handItemImage5" fitHeight="92.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                      <image>

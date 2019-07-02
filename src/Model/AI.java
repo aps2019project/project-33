@@ -50,8 +50,8 @@ public class AI extends Player {
             orders.add("select " + livingCard.getID());
             for (Cell cell : cells)
                 orders.add("move to (" + cell.getX() + ", " + cell.getY() + ")");
-            for (LivingCard livingCard1 : opponentCards)
-                orders.add("attack " + livingCard1.getID());
+//            for (LivingCard livingCard1 : opponentCards)
+//                orders.add("attack " + livingCard1.getID());
         }
 
         for (CollectionItem collectionItem : this.getHand().getHandCards()) {
@@ -60,14 +60,19 @@ public class AI extends Player {
         }
     }
 
-    public String outputSomeRandomOrder(Battle battle) {
+    public void outputSomeRandomOrder(Battle battle) {
         if (orders.size() == 0) preProcess(battle);
-        if (orders.size() == 1) {
-            orders.clear();
-            return "End turn";
+        while(orders.size() > 1) {
+            String result = orders.get(0);
+            orders.remove(0);
+            sendCommandToBattle(result, battle);
         }
-        String result = orders.get(0);
-        orders.remove(0);
-        return result;
+        String result = "End turn";
+        sendCommandToBattle(result, battle);
+        orders.clear();
+    }
+
+    void sendCommandToBattle(String command, Battle battle){
+        battle.inputCommandLine(command, this.getAccount().getUsername());
     }
 }
