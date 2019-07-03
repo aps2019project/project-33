@@ -22,7 +22,10 @@ public class ShopMenu extends Menu {
         inputLine = inputLine.toLowerCase();
 
         Collection collection = Main.application.getLoggedInAccount().getCollection();
-
+        if(inputLine.equals("show collection for sell")){
+            Client.getClient().setResultOfSearch(collection.getCollectionItems());
+            Client.getClient().setCurrentMenu(MenuList.SellMenu);
+        }
         if (inputLine.equals("show collection")) {
             Client.getClient().setResultOfSearch(collection.getCollectionItems());
             collection.showCollection("Sell Cost");

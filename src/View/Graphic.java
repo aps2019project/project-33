@@ -1,6 +1,6 @@
 package View;
 
-import Model.CollectionItem.CollectionItem;
+import Model.CollectionItem.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -16,6 +16,8 @@ public class Graphic {
     public static int numberOfGifs = 69;
     public static int numberOfColumns = 5;
     public static ArrayList<VBox> vBoxes = new ArrayList<>();
+
+
 
     public static VBox createCards(ArrayList<CollectionItem> collectionItems) {
         vBoxes.clear();
@@ -73,4 +75,40 @@ public class Graphic {
         return cardVbox;
     }
 
+    public static ArrayList<CollectionItem> getHeroes(ArrayList<CollectionItem> collectionItems) {
+        ArrayList<CollectionItem> heroes = new ArrayList<>();
+        for (CollectionItem collectionItem : collectionItems)
+            if (collectionItem instanceof Hero)
+                heroes.add(collectionItem);
+        return heroes;
+    }
+
+    public static ArrayList<CollectionItem> getMinions(ArrayList<CollectionItem> collectionItems) {
+        ArrayList<CollectionItem> minions = new ArrayList<>();
+        for (CollectionItem collectionItem : collectionItems)
+            if (collectionItem instanceof Minion)
+                minions.add(collectionItem);
+        return minions;
+    }
+
+    public static ArrayList<CollectionItem> getSpells(ArrayList<CollectionItem> collectionItems) {
+        ArrayList<CollectionItem> spells = new ArrayList<>();
+        for (CollectionItem collectionItem : collectionItems)
+            if (collectionItem instanceof Spell)
+                spells.add(collectionItem);
+        return spells;
+    }
+
+    public static ArrayList<CollectionItem> getItems(ArrayList<CollectionItem> collectionItems) {
+        ArrayList<CollectionItem> items = new ArrayList<>();
+        for (CollectionItem collectionItem : collectionItems)
+            if (collectionItem instanceof Item)
+                items.add(collectionItem);
+        return items;
+    }
+
+    public static void clearShadows(ArrayList<VBox> cardVboxes) {
+        for (VBox vBox : cardVboxes)
+            vBox.getStyleClass().remove("SelectedCard");
+    }
 }
