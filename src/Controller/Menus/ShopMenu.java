@@ -22,7 +22,7 @@ public class ShopMenu extends Menu {
         inputLine = inputLine.toLowerCase();
 
         Collection collection = Main.application.getLoggedInAccount().getCollection();
-        if(inputLine.equals("show collection for sell")){
+        if (inputLine.equals("show collection for sell")) {
             Client.getClient().setResultOfSearch(collection.getCollectionItems());
             Client.getClient().setCurrentMenu(MenuList.SellMenu);
         }
@@ -30,6 +30,10 @@ public class ShopMenu extends Menu {
             Client.getClient().setResultOfSearch(collection.getCollectionItems());
             collection.showCollection("Sell Cost");
             Client.getClient().setCurrentMenu(MenuList.ShopShowCollection);
+
+        } else if (inputLine.matches("search for show .+")) {
+            searchInCollection(separatedInput[3], this.shop);
+            Client.getClient().setCurrentMenu(MenuList.ShopShowSearch);
         } else if (inputLine.matches("search collection .+")) {
             searchInCollection(separatedInput[2], collection);
         } else if (inputLine.matches("search .+")) {
@@ -43,9 +47,11 @@ public class ShopMenu extends Menu {
         } else if (inputLine.matches("sell .+")) {
             String collectionItemName = separatedInput[1];
             this.sell(collectionItemName, collection);
-        } else if (inputLine.equals("show"))
+        } else if (inputLine.equals("show")) {
             this.shop.showCollection("Buy Cost");
-        else if (inputLine.equals("show menu"))
+            Client.getClient().setResultOfSearch(shop.getCollectionItems());
+            Client.getClient().setCurrentMenu(MenuList.ShowShop);
+        } else if (inputLine.equals("show menu"))
             ShopMenu.showMenu();
         else if (inputLine.equals("exit")) {
             Client.getClient().setCurrentMenu(MenuList.MainMenu);
