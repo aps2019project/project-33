@@ -47,9 +47,11 @@ public class ShopMenu extends Menu {
         } else if (inputLine.matches("sell .+")) {
             String collectionItemName = separatedInput[1];
             this.sell(collectionItemName, collection);
-        } else if (inputLine.equals("show"))
+        } else if (inputLine.equals("show")) {
             this.shop.showCollection("Buy Cost");
-        else if (inputLine.equals("show menu"))
+            Client.getClient().setResultOfSearch(shop.getCollectionItems());
+            Client.getClient().setCurrentMenu(MenuList.ShowShop);
+        } else if (inputLine.equals("show menu"))
             ShopMenu.showMenu();
         else if (inputLine.equals("exit")) {
             Client.getClient().setCurrentMenu(MenuList.MainMenu);

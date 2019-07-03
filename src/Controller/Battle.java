@@ -634,8 +634,11 @@ public class Battle {
             System.out.println("Invalid coordination");
             return;
         }
+        playerOn.getHand().removeCard(selectedCollectibleItem.getID());
+        playerOn.getHand().addNextCard(playerOn.getAccount().getCollection().getMainDeck());
         Cell cell = map.getCellByCoordination(x, y);
         Impact.impactItem((Item) selectedCollectibleItem, cell, this);
+
         checkTurn();
     }
 
