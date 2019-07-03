@@ -1,10 +1,13 @@
 package View.Battle;
 
+import Controller.Battle;
 import Controller.Client;
 import Controller.MenuList;
 import Model.CollectionItem.*;
 import Model.Enviroment.Cell;
 import Model.Hand1;
+import Model.Mana;
+import Model.Player;
 import View.Graphic;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.Initializable;
@@ -140,7 +143,6 @@ public class BattleController implements Initializable {
                 }
             });
             handUnits[i].getImageView().setOnMouseEntered(event -> {
-                System.out.println("salam haji");
                 if(handUnits[finalI].getCollectionItem() == null) return;
                 cardInformationArea.getChildren().remove(cardInformationVBox);
                 cardInformationVBox = Graphic.createCard(handUnits[finalI].getCollectionItem(), 1);
@@ -182,7 +184,7 @@ public class BattleController implements Initializable {
         manaArea.getChildren().clear();
         manaArea.getStylesheets().clear();
         manaArea.getStylesheets().add(this.getClass().getResource("Battle.css").toExternalForm());
-        for(int i = 0; i < maximumMana; i++){
+        for(int i = 0; i < Integer.max(maximumMana, currentMana); i++){
             Image image = null;
             try {
                 FileInputStream fileInputStream;
@@ -208,7 +210,7 @@ public class BattleController implements Initializable {
         Label maximumManaLabel = new Label(Integer.toString(maximumMana));
         maximumManaLabel.getStyleClass().add("MaximumManaLabel");
         manaArea.getChildren().addAll(currentManaLabel, separator, maximumManaLabel);
-    }
+     }
 
     private void setter() {
         rows = new HBox[]{hBox1, hBox2, hBox3, hBox4, hBox5};
@@ -398,13 +400,12 @@ class GraphicalCell {
         SelectedCell selectedCell = battleController.getSelectedCell();
         if (selectedCell == null) {
             if (cell.getLivingCard() == null) return;
-            System.out.println(cell.getLivingCard().getName());
             battleController.setSelectedCell(new SelectedCell(SelectedCell.Type.LivingCard, SelectedCell.Location.Map, this, null));
             Client.getClient().getRunningBattle().inputCommandLine("select " + cell.getLivingCard().getID(), Client.getClient().getUsername());
         } else {
             if (selectedCell.getLocation() == SelectedCell.Location.Hand) {
                 if (selectedCell.getType() == SelectedCell.Type.Item) {
-                    Client.getClient().getRunningBattle().inputCommandLine("use " + cell.getX() + " " + cell.getY(), Client.getClient().getUsername());
+                    Client.getClient().getRunningBattle().inputCommandLine("use " + cell.getX() + ", " + cell.getY(), Client.getClient().getUsername());
                     battleController.setSelectedCell(null);
                 } else {
                     CollectionItem collectionItem = selectedCell.getHandUnit().getCollectionItem();

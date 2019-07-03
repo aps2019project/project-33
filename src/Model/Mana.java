@@ -27,6 +27,7 @@ public class Mana {
         for(ManaBuff manaBuff : manaBuffs)
             manaBuff.effect(this);
         currentMana = Integer.min(maximumMana + changeManaByItem, 9);
+        System.out.println("iiiiiiiinjjjjjjjjjjjjaaaaaaaaarooooooooooooo" + maximumMana + " " + currentMana + " " + changeManaByItem);
     }
 
     public int getCurrentMana(){
