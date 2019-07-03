@@ -68,7 +68,7 @@ public class ShowShopController implements Initializable {
             ArrayList<CollectionItem> items = Graphic.getItems(collectionItems);
             addPart(items, "ITEMS:", mainVBox);
 
-            mainVBox.setLayoutY(100);
+            mainVBox.setLayoutY(150);
             mainVBox.setLayoutX(100);
 
             VBox.setMargin(mainVBox, new Insets(0, 0, 20, 0));
