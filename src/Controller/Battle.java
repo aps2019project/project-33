@@ -23,7 +23,7 @@ public class Battle {
     private String type, kind;
     private LivingCard selectedCard;
     private Flag mainFlag;
-    private CollectibleItem selectedCollectibleItem;
+    private Item selectedCollectibleItem;
     private Player winnerPlayer = null, loserPlayer = null;
     private ArrayList<Flag> flags = new ArrayList<>();
     private String estate = "none";
@@ -309,10 +309,12 @@ public class Battle {
         return false;
     }
 
+    //todo in ke kollan age az collectible estefade mikhaim bokonim ya na ro moshkakhas konim
     public boolean selectItem(String collectibleItemID) {
-        for (CollectibleItem collectibleItem : playerOn.getCollectibleItems())
-            if (collectibleItem.getID().equals(collectibleItemID)) {
-                this.selectedCollectibleItem = collectibleItem;
+        for (CollectionItem collectionItem : playerOn.getHand().getHandCards())
+            if (collectionItem instanceof Item && collectionItem.getID().equals(collectibleItemID)) {
+                System.out.println(collectibleItemID);
+                this.selectedCollectibleItem = (Item) collectionItem;
                 return true;
             }
         return false;
@@ -554,9 +556,6 @@ public class Battle {
 
         canLivingCards(playerOn);
         canLivingCards(playerOff);
-
-        playerOn.getMana().setCurrentMana(playerOn.getMana().getMaximumMana());
-        playerOff.getMana().setCurrentMana(playerOff.getMana().getMaximumMana());
 
         checkThings(playerOff);
         checkThings(playerOn);

@@ -441,8 +441,9 @@ public class Impact {
                     addWeaknessToCard(information.getTimeOfWeaknessBuff(), information.isWeaknessBuffPermanent(), false, information.getChangeHPByPowerBuff(), information.getChangeAPByWeakness(), livingCard);
             }
         } else {
-            if (information.isCanIncreaseMana())
+            if (information.isCanIncreaseMana()) {
                 addManaBuffToPlayer(battle.getPlayerOn(), information.getAmountOfIncreaseMana(), information.getTimeOfIncreaseMana());
+            }
         }
     }
 

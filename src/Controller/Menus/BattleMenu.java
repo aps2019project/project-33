@@ -123,18 +123,18 @@ public class BattleMenu {
     public static void handleDeck(Account account) throws FileNotFoundException {
         account.getCollection().createDeck(account.getUsername());
         account.getCollection().selectMainDeck(account.getUsername());
-        for (int i = 0; i < 2; i++) {
-            Spell spell = Spell.createSpell(DeckGenerator.spellNames[0], account.getUsername());
+        for (int i = 0; i < 5; i++) {
+            Spell spell = Spell.createSpell(DeckGenerator.spellNames[4], account.getUsername());
             account.getCollection().addCollectionItemToCollection(spell.getID());
             account.getCollection().addCollectionItemToDeck(spell.getID(), account.getUsername());
         }
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 5; i++) {
             Item item = Item.createItem(DeckGenerator.itemNames[0], account.getUsername());
             account.getCollection().addCollectionItemToCollection(item.getID());
             account.getCollection().addCollectionItemToDeck(item.getID(), account.getUsername());
         }
-        for (int i = 0; i < 15; i++) {
-            Minion minion = Minion.createMinion(DeckGenerator.minionNames[0], account.getUsername());
+        for (int i = 0; i < 10; i++) {
+            Minion minion = Minion.createMinion(DeckGenerator.minionNames[9], account.getUsername());
             account.getCollection().addCollectionItemToCollection(minion.getID());
             account.getCollection().addCollectionItemToDeck(minion.getID(), account.getUsername());
         }
