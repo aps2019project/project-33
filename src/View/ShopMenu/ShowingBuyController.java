@@ -42,7 +42,7 @@ public class ShowingBuyController implements Initializable {
             final int y = index;
             vBox.setOnMouseClicked(event -> {
                 selectedCollectionItem = Client.getClient().getResultOfSearch().get(y);
-                clearShadows();
+                Graphic.clearShadows(Graphic.vBoxes);
                 vBox.getStylesheets().add(Graphic.class.getResource("Card.css").toExternalForm());
                 vBox.getStyleClass().add("SelectedCard");
             });
@@ -55,14 +55,13 @@ public class ShowingBuyController implements Initializable {
         });
 
         buyLabel.setOnMouseClicked(event -> {
-            Client.getClient().getShopMenu().inputCommandLine("buy " + selectedCollectionItem.getName());
-            Client.getClient().setCurrentMenu(MenuList.BuyMenu);
-            isFirstTime = true;
+            if (selectedCollectionItem != null) {
+                Client.getClient().getShopMenu().inputCommandLine("buy " + selectedCollectionItem.getName());
+                Client.getClient().setCurrentMenu(MenuList.BuyMenu);
+
+                isFirstTime = true;
+            }
         });
     }
 
-    public void clearShadows() {
-        for (VBox vBox : Graphic.vBoxes)
-            vBox.getStyleClass().remove("SelectedCard");
-    }
 }

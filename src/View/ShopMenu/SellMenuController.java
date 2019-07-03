@@ -3,34 +3,32 @@ package View.ShopMenu;
 import Controller.Client;
 import Controller.MenuList;
 import Model.Collection;
-import Model.CollectionItem.*;
+import Model.CollectionItem.CollectionItem;
 import View.Graphic;
-import com.sun.prism.paint.Color;
-import com.sun.xml.internal.bind.v2.util.CollisionCheckStack;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import javax.swing.event.CaretListener;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static com.sun.prism.paint.Color.WHITE;
-
-public class ShopShowCollectionController implements Initializable {
-    public ImageView backButton;
-    public AnchorPane nonBlurAnchor;
-    public AnchorPane blurAnchor;
+public class SellMenuController implements Initializable {
     public AnchorPane mainAnchor;
+    public AnchorPane blurAnchor;
+    public AnchorPane nonBlurAnchor;
+    public ImageView backButton;
+    public Label sellLabel;
+
+    public CollectionItem selectedCollectionItem;
 
     public static boolean isFirstTime = true;
     public static VBox mainVBox = new VBox();
-    public static boolean canSell = false;
-
+    public static ArrayList<VBox> vBoxes = new ArrayList<>();
 
     public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) {
         Label label = new Label(labelText);
@@ -39,14 +37,19 @@ public class ShopShowCollectionController implements Initializable {
         vBox.getChildren().add(label);
 
         VBox partVBox = Graphic.createCards(collectionItems);
-        vBox.getChildren().add(partVBox);
-        VBox.setMargin(vBox, new Insets(0, 0, 20, 0));
-    }
 
+        vBox.getChildren().add(partVBox);
+
+        VBox.setMargin(vBox, new Insets(0, 0, 20, 0));
+
+        vBoxes.addAll(Graphic.vBoxes);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (isFirstTime) {
+            vBoxes.clear();
+            mainVBox.getChildren().clear();
 
             ArrayList<CollectionItem> collectionItems = Client.getClient().getResultOfSearch();
 
@@ -68,12 +71,33 @@ public class ShopShowCollectionController implements Initializable {
             VBox.setMargin(mainVBox, new Insets(0, 0, 20, 0));
 
             mainAnchor.getChildren().add(mainVBox);
-
         }
+
+        int index = 0;
+        for (VBox vBox : vBoxes) {
+            final int y = index;
+            vBox.setOnMouseClicked(event -> {
+                selectedCollectionItem = Client.getClient().getResultOfSearch().get(y);
+                Graphic.clearShadows(vBoxes);
+                vBox.getStylesheets().add(Graphic.class.getResource("Card.css").toExternalForm());
+                vBox.getStyleClass().add("SelectedCard");
+            });
+            index++;
+        }
+
         isFirstTime = false;
+
         backButton.setOnMouseClicked(event -> {
             Client.getClient().setCurrentMenu(MenuList.ShopMenu);
             isFirstTime = true;
+        });
+
+        sellLabel.setOnMouseClicked(event -> {
+            if (selectedCollectionItem != null) {
+                Client.getClient().getShopMenu().inputCommandLine("sell " + selectedCollectionItem.getID());
+                Client.getClient().setCurrentMenu(MenuList.ShopMenu);
+                isFirstTime = true;
+            }
         });
     }
 }

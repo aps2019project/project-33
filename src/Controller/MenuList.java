@@ -2,7 +2,7 @@ package Controller;
 
 public enum MenuList {
     AccountMenu, MainMenu, ShopMenu, CollectionMenu, ChooseType, ChooseMode, ChooseKind, StoryChapters, Battle, SearchShop,
-    ShowingBuy, ShopShowCollection, ShopSearchCollection, BuyMenu;
+    ShowingBuy, ShopShowCollection, ShopSearchCollection, BuyMenu, SellMenu;
 
     public String getAddressOfFile() {
         if (this.equals(AccountMenu)) return "AccountMenu/AccountMenu.fxml";
@@ -19,6 +19,7 @@ public enum MenuList {
         if (this.equals(ShopShowCollection)) return "ShopMenu/ShopShowCollection.fxml";
         if (this.equals(ShopSearchCollection)) return "ShopMenu/SearchCollection.fxml";
         if (this.equals(BuyMenu)) return "ShopMenu/Buy.fxml";
+        if (this.equals(SellMenu)) return "ShopMenu/SEllMenu.fxml";
         return null;
     }
 }
