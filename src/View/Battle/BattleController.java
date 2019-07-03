@@ -12,10 +12,12 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import sun.misc.Cleaner;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -103,7 +105,14 @@ public class BattleController implements Initializable {
                 int finalI = i;
                 int finalJ = j;
                 graphicalCells[i][j].getAnchorPane().setOnMouseClicked(event -> {
-                    graphicalCells[finalI][finalJ].select(this);
+                    if(event.getButton() == MouseButton.PRIMARY)
+                        graphicalCells[finalI][finalJ].select(this);
+                    if(event.getButton() == MouseButton.SECONDARY){
+                        graphicalCells[finalI][finalJ].attack(this);
+                    }
+                    if(event.getButton() == MouseButton.MIDDLE){
+                        graphicalCells[finalI][finalJ].specialAttack(this);
+                    }
                 });
                 graphicalCells[i][j].getAnchorPane().setOnMouseEntered(event -> {
                     if(graphicalCells[finalI][finalJ].getCell().getLivingCard() == null) return;;
@@ -119,7 +128,9 @@ public class BattleController implements Initializable {
         for (int i = 0; i < handUnits.length; i++) {
             int finalI = i;
             handUnits[i].getImageView().setOnMouseClicked(event -> {
-                handUnits[finalI].select(this);
+                if(event.getButton() == MouseButton.PRIMARY) {
+                    handUnits[finalI].select(this);
+                }
             });
             handUnits[i].getImageView().setOnMouseEntered(event -> {
                 System.out.println("salam haji");
@@ -364,8 +375,20 @@ class GraphicalCell {
         }
     }
 
-    public void show() {
-        //todo in ja hanooz nmd bayad che konam
+    public void attack(BattleController battleController) {
+        if(battleController.getSelectedCell() == null) return;
+        if(battleController.getSelectedCell().getLocation() != SelectedCell.Location.Map) return;
+        LivingCard livingCard = this.getCell().getLivingCard();
+        Client.getClient().getRunningBattle().inputCommandLine("attack " + livingCard.getID(), Client.getClient().getUsername());
+        battleController.setSelectedCell(null);
+    }
+
+    public void specialAttack(BattleController battleController) {
+        //todo nemidunam alan masalan in ke ye nafare addi bekhad special bezane oon var check shode ya na
+        if(battleController.getSelectedCell() == null) return;
+        if(battleController.getSelectedCell().getLocation() != SelectedCell.Location.Map) return;
+        Client.getClient().getRunningBattle().inputCommandLine("use special power (" + cell.getX() + ", " + cell.getY() + ")", Client.getClient().getUsername());
+        battleController.setSelectedCell(null);
     }
 
     public Pane getRoot() {
