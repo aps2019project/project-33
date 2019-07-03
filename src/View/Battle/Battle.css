@@ -106,3 +106,36 @@
 .testAnchor{
     -fx-background-color: gray;
 }
+
+.PlayerUserNameLabel{
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+
+.PlayerUserNameLabel:hover{
+    -fx-effect: dropshadow(three-pass-box, green, 8, 0.5, 0, 0);
+    -fx-font-size: 25;
+}
+
+.CurrentManaLabel {
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, green, 8, 0.3, 0, 0);
+
+}
+
+.MaximumManaLabel{
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, blue, 8, 0.3, 0, 0);
+}
+
+.Separator{
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+}

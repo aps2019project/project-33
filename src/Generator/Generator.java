@@ -551,7 +551,7 @@ public class Generator {
     }
 
     public static void Zahhak() throws IOException {
-        Hero hero = new Hero("Zahhak", 10000, 50, 4, "melee", 1, 3);
+        Hero hero = new Hero("Zahhak", 10000, 50, 2, "melee", 1, 3);
         //TODO
         setHeroAttackArea(hero, false, true, true, false, false, false, true, false, false, 0);
 

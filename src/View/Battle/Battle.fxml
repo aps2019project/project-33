@@ -99,5 +99,12 @@
             </VBox>
          </children>
       </HBox>
+      <VBox fx:id="cardInformationArea" layoutX="14.0" layoutY="309.0" prefHeight="329.0" prefWidth="198.0" />
+      <VBox fx:id="playerInformation" layoutX="14.0" layoutY="14.0" prefHeight="107.0" prefWidth="251.0">
+         <children>
+            <Label fx:id="playerUsernameLabel" styleClass="PlayerUserNameLabel" text="Label" />
+            <HBox fx:id="manaArea" prefHeight="100.0" prefWidth="200.0" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

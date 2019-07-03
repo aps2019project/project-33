@@ -17,13 +17,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import sun.misc.Cleaner;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class BattleController implements Initializable {
     private int numberOfRows = 5, numberOfColumns = 9;
+    public VBox cardInformationArea;
+    public Label playerUsernameLabel;
+    public HBox manaArea;
     public AnchorPane rootOfPage;
     public ImageView forfeitButton;
     public ImageView gameInfoButton;
@@ -58,14 +62,17 @@ public class BattleController implements Initializable {
     private VBox[] handPanes;
     private SelectedCell selectedCell = null;
     private GraphicalCell[][] graphicalCells;
+    private ImageView[] manaUnits;
     private VBox cardInformationVBox;
 
-    //todo, in ke alan ma chand ta mana darim masalan moonde
+    //todo, in ke alan chand ta mana darim masalan moonde
     //todo, attack e combo
-    //todo, special power of something
     //todo, enter grave yard
-    //todo, attack kone
+    //todo, in ke age ye jayi item i chizi has neshoon bedim
+    //todo, age khoone i sami chizi dasht neshoon bedim
 
+    //todo, attack kone
+    //todo, special power of something
     //todo, in ke roo ye nafar click kardim biad info ro neshoon bede
     //todo, in ke betoone ye chizio select kone
     //todo, move kone
@@ -116,9 +123,9 @@ public class BattleController implements Initializable {
                 });
                 graphicalCells[i][j].getAnchorPane().setOnMouseEntered(event -> {
                     if(graphicalCells[finalI][finalJ].getCell().getLivingCard() == null) return;;
-                    rootOfPage.getChildren().remove(cardInformationVBox);
+                    cardInformationArea.getChildren().remove(cardInformationVBox);
                     cardInformationVBox = Graphic.createCard(graphicalCells[finalI][finalJ].getCell().getLivingCard(), 1);
-                    rootOfPage.getChildren().add(cardInformationVBox);
+                    cardInformationArea.getChildren().add(cardInformationVBox);
                 });
             }
         }
@@ -135,10 +142,9 @@ public class BattleController implements Initializable {
             handUnits[i].getImageView().setOnMouseEntered(event -> {
                 System.out.println("salam haji");
                 if(handUnits[finalI].getCollectionItem() == null) return;
-                rootOfPage.getChildren().remove(cardInformationVBox);
+                cardInformationArea.getChildren().remove(cardInformationVBox);
                 cardInformationVBox = Graphic.createCard(handUnits[finalI].getCollectionItem(), 1);
-                rootOfPage.getChildren().add(cardInformationVBox);
-
+                cardInformationArea.getChildren().add(cardInformationVBox);
             });
         }
     }
@@ -146,7 +152,6 @@ public class BattleController implements Initializable {
     private void update() {
         AnimationTimer animationTimer = new AnimationTimer() {
             long last = 0, unit = 1000000000, fps = 100;
-
             @Override
             public void handle(long now) {
                 if (last == 0) last = now;
@@ -159,10 +164,50 @@ public class BattleController implements Initializable {
                             graphicalCells[i][j].update(i, j);
                     if (selectedCell != null)
                         selectedCell.update();
+                    updatePlayerInformation();
                 }
             }
         };
         animationTimer.start();
+    }
+
+    private void updatePlayerInformation() {
+        //update username
+        playerUsernameLabel.setText(Client.getClient().getRunningBattle().getPlayerOn().getAccount().getUsername());
+
+
+        //update mana units
+        int maximumMana = Client.getClient().getRunningBattle().getPlayerOn().getMana().getMaximumMana();
+        int currentMana = Client.getClient().getRunningBattle().getPlayerOn().getMana().getCurrentMana();
+        manaArea.getChildren().clear();
+        manaArea.getStylesheets().clear();
+        manaArea.getStylesheets().add(this.getClass().getResource("Battle.css").toExternalForm());
+        for(int i = 0; i < maximumMana; i++){
+            Image image = null;
+            try {
+                FileInputStream fileInputStream;
+                if(i < currentMana)
+                    fileInputStream = new FileInputStream("resources/ui/icon_mana@2x.png");
+                else
+                    fileInputStream = new FileInputStream("resources/ui/icon_mana_inactive@2x.png");
+                image = new Image(fileInputStream);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            ImageView imageView = new ImageView();
+            imageView.setImage(image);
+            imageView.setFitHeight(30);
+            imageView.setFitWidth(30);
+            manaArea.getChildren().add(imageView);
+        }
+        Label currentManaLabel = new Label(Integer.toString(currentMana));
+        currentManaLabel.getStyleClass().add("CurrentManaLabel");
+        Label separator = new Label("/");
+        separator.getStyleClass().add("Separator");
+        Label maximumManaLabel = new Label(Integer.toString(maximumMana));
+        maximumManaLabel.getStyleClass().add("MaximumManaLabel");
+        manaArea.getChildren().addAll(currentManaLabel, separator, maximumManaLabel);
     }
 
     private void setter() {
@@ -379,7 +424,8 @@ class GraphicalCell {
         if(battleController.getSelectedCell() == null) return;
         if(battleController.getSelectedCell().getLocation() != SelectedCell.Location.Map) return;
         LivingCard livingCard = this.getCell().getLivingCard();
-        Client.getClient().getRunningBattle().inputCommandLine("attack " + livingCard.getID(), Client.getClient().getUsername());
+        if(livingCard != null)
+            Client.getClient().getRunningBattle().inputCommandLine("attack " + livingCard.getID(), Client.getClient().getUsername());
         battleController.setSelectedCell(null);
     }
 
