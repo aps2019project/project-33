@@ -23,7 +23,7 @@ public class SearchShopController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         searchButton.setOnMouseClicked(event -> {
-            Client.getClient().getShopMenu().inputCommandLine("search " + nameField.getText());
+            Client.getClient().getShopMenu().inputCommandLine("search for show " + nameField.getText());
         });
 
         backButton.setOnMouseClicked(event -> {
