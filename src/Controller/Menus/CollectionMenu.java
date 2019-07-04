@@ -34,6 +34,8 @@ public class CollectionMenu extends Menu {
         }
 
         if (inputLine.equals("show")) {
+            Client.getClient().setResultOfSearch(collection.getCollectionItems());
+            Client.getClient().setCurrentMenu(MenuList.CollectionShowCollection);
             collection.showCollection("Sell Cost");
         } else if (inputLine.matches("search .*")) {
             searchInCollection(collection, input[1]);

@@ -1,6 +1,7 @@
 package View.CollectionMenu.CollectionMenu;
 
 import Controller.Client;
+import Controller.MenuList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -42,6 +43,15 @@ public class CollectionMenuController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        });
+
+        showLabel.setOnMouseClicked(event -> {
+            try {
+                Client.getClient().getCollectionMenu().inputCommandLine("show");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         });
     }
 }
