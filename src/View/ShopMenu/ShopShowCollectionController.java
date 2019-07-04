@@ -46,7 +46,7 @@ public class ShopShowCollectionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (isFirstTime) {
-
+            mainVBox.getChildren().clear();
             ArrayList<CollectionItem> collectionItems = Client.getClient().getResultOfSearch();
 
             ArrayList<CollectionItem> heroes = Graphic.getHeroes(collectionItems);
