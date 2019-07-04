@@ -52,7 +52,7 @@
 .NoFormButton{
     -fx-pref-height: 100px;
     -fx-pref-width: 350px;
-    -fx-font-size: 30;
+    -fx-font-size: 25;
     -fx-text-fill: white;
     -fx-alignment: center-left;
 }

@@ -4,7 +4,9 @@
 package Controller.Menus;
 
 import Controller.Application;
+import Controller.Client;
 import Controller.Main;
+import Controller.MenuList;
 import Model.*;
 import Model.CollectionItem.CollectionItem;
 
@@ -62,6 +64,7 @@ public class CollectionMenu extends Menu {
             CollectionMenu.showMenu();
         else if (inputLine.equals("exit")) {
             isFirstTime = true;
+            Client.getClient().setCurrentMenu(MenuList.MainMenu);
             return;
         } else
             System.out.println("Enter valid command line !");

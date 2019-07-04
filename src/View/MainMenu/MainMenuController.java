@@ -64,5 +64,13 @@ public class MainMenuController implements Initializable {
                 e.printStackTrace();
             }
         });
+
+        collection.setOnMouseClicked(event -> {
+            try {
+                Client.getClient().getMainMenu().inputCommandLine("enter collection");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

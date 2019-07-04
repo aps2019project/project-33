@@ -12,6 +12,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class ShowShopController implements Initializable {
 
     public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) {
         Label label = new Label(labelText);
-        label.setTextFill(javafx.scene.paint.Color.WHITE);
+        label.setTextFill(Color.NAVY);
         label.setStyle("-fx-font-size: 15");
         vBox.getChildren().add(label);
 
