@@ -193,6 +193,8 @@ public class AttackArea {
             if (information.isImpactNeighbors())
                 impactedCells.addAll(getNeighbors(cell, battle));
             if (information.isKingsGuard()) {
+                //todo, exception mikhore
+                System.out.println(battle.getPlayerOn().getHeroPosition());
                 impactedCells = getNeighbors(battle.getPlayerOn().getHeroPosition(), battle);
             }
             if(information.isImpactAllArea()){

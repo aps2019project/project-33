@@ -20,6 +20,7 @@ public class Mana {
         }
     }
 
+    //todo in ja momkene bug bokhore, nmd chera
     public void configureMana(){
         if (maximumMana < 9)
             maximumMana++;

@@ -7,6 +7,8 @@ import Model.Enviroment.Cell;
 
 import java.util.ArrayList;
 
+
+
 abstract public class LivingCard extends Card {
     private int HP, rangeOfAttack, AP, extraHP, extraAP, numberOfSameTypeInComboAttack,
     changeRangeOfAttack, numberOfDamaged, shield, decreasHPNextRound, decreaseHP2NextRound;
@@ -264,7 +266,7 @@ abstract public class LivingCard extends Card {
     }
 
     public void changeExtraAP(int amount){
-        this.extraHP += amount;
+        this.extraAP += amount;
     }
 
     public void changeExtraHP(int amount){

@@ -397,6 +397,7 @@ public class Battle {
             }
         } else {
             if (insertingCollectionItem instanceof Spell) {
+                System.out.println("baba man kheiiili khafanam");
                 playerOn.getHand().removeCard(cardID);
                 playerOn.getHand().addNextCard(playerOn.getAccount().getCollection().getMainDeck());
                 Spell spell = (Spell) insertingCollectionItem;
@@ -544,7 +545,7 @@ public class Battle {
         }
         checkTurn();
     }
-
+    //todo, concurrent nemidunam chi chi exception mikhore
     public void checkAliveCards(Player player) {
         for (LivingCard livingCard : player.getAliveCards())
             livingCard.checkAlive(this);
@@ -559,7 +560,6 @@ public class Battle {
 
         checkThings(playerOff);
         checkThings(playerOn);
-
 
         handleBuffs(playerOff);
         handleBuffs(playerOn);
@@ -851,10 +851,17 @@ public class Battle {
     }
 
     public void inputCommandLine(String inputLine, String clientUsername) {
-        System.out.println("player on : " + playerOn.getAccount().getUsername());
-        System.out.println("Here is Battle");
-        System.out.println("For help, enter : show menu");
-
+        if(!clientUsername.equals("admin")) {
+            System.out.println("player on : " + playerOn.getAccount().getUsername());
+            System.out.println("Here is Battle");
+            System.out.println("For help, enter : show menu");
+            System.out.println(kind);
+        }
+        for(Cell cell : map.getCells()){
+            if(cell.isHaveFlag()){
+                System.out.println(cell.getX() + "*" + cell.getY());
+            }
+        }
         if(!clientUsername.equals(playerOn.getAccount().getUsername())) return;
 
         inputLine = inputLine.trim();
@@ -948,6 +955,8 @@ public class Battle {
     public void handleBuffsOfCard(LivingCard livingCard) {
         //reset
         livingCard.setShield(0);
+        livingCard.setExtraAP(0);
+        livingCard.setExtraHP(0);
         livingCard.setCanCounterAttack(true);
         livingCard.setCanMove(true);
         livingCard.setCanAttack(true);

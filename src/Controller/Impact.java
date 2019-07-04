@@ -137,6 +137,7 @@ public class Impact {
         if (buff instanceof PowerBuff) {
             livingCard.changeExtraHP(((PowerBuff) buff).getChangeHP());
             livingCard.changeExtraAP(((PowerBuff) buff).getChangePower());
+            System.out.println("heeeeeeeeeeeeeeeeeeeei" + " " + livingCard.getExtraAP() + " " + livingCard.getExtraHP());
         }
 
         if (livingCard.getInformation().isAntiShock()) return;
@@ -328,10 +329,13 @@ public class Impact {
             attackArea.add(cell);
         }
 
+
+
         for (Cell targetCell : attackArea) {
             // karaye cell
-            if (information.isCanAddPoisonBuffToCell())
+            if (information.isCanAddPoisonBuffToCell()) {
                 addPoisonBuffToCell(information.getTimeOfPoisonBuff(), information.isPoisonBuffPermanent(), false, 1, cell);
+            }
             // karaye living card
             LivingCard livingCard = targetCell.getLivingCard();
             if (livingCard == null) continue;
@@ -342,8 +346,11 @@ public class Impact {
                 removeBadBuffsOfLivingCard(livingCard);
             if (information.isCanRemoveGoodBuffsOfEnemy() && battle.getPlayerOff().getAliveCards().contains(livingCard))
                 removeGoodBuffsOfLivingCard(livingCard);
-            if (information.isCanPowerBuffAdd())
+            if (information.isCanPowerBuffAdd()) {
+                System.out.println("ta injasham oomadam");
+                System.out.println("khafanam khafanam khafanam man");
                 addPowerBuffToCard(information.getTimeOfPowerBuff(), information.isPowerBuffPermanent(), false, information.getChangeHPByPowerBuff(), information.getChangeAPByPowerBuff(), livingCard);
+            }
 
             if (information.isCanDamageToEnemy())
                 damageToEnemy(battle, spell, livingCard, information.getDamageToEnemy());
