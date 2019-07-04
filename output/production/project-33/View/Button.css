@@ -1,0 +1,97 @@
+.Button{
+    -fx-pref-height: 100px;
+    -fx-pref-width: 300px;
+    -fx-font-size: 30;
+    -fx-text-fill: white;
+    -fx-alignment: center;
+    -fx-background-size: 100% 100%;
+ }
+
+.Button:hover{
+    -fx-cursor: hand;
+}
+
+.SilverButton{
+    -fx-background-image: url("../../resources/ui/button_end_turn_enemy.png");
+}
+.SilverButton:hover{
+    -fx-effect: dropshadow(three-pass-box, Gray, 1, 2, 0, 0);
+}
+
+.GreenButton{
+    -fx-background-image: url("../../resources/ui/button_end_turn_finished.png");
+}
+.GreenButton:hover{
+    -fx-background-image: url("../../resources/ui/button_end_turn_finished_glow.png");
+}
+
+.YellowButton{
+    -fx-background-image: url("../../resources/ui/button_end_turn_mine.png");
+}
+
+.YellowButton:hover{
+    -fx-background-image: url("../../resources/ui/button_end_turn_mine_glow.png");
+}
+
+.RedButton{
+    -fx-background-image: url("../../resources/ui/button_cancel.png");
+}
+
+.RedButton:hover{
+    -fx-background-image: url("../../resources/ui/button_cancel_glow.png");
+}
+
+.ImageButton:hover{
+    -fx-effect: dropshadow(three-pass-box, white, 5, 0.3, 0, 0);
+}
+
+.TextField{
+}
+
+
+.NoFormButton{
+    -fx-pref-height: 100px;
+    -fx-pref-width: 350px;
+    -fx-font-size: 30;
+    -fx-text-fill: white;
+    -fx-alignment: center-left;
+}
+
+.NoFormButton:hover{
+    -fx-effect: dropshadow(three-pass-box, white, 5, 0.3, 0, 0);
+    -fx-cursor: hand;
+}
+
+.BackButton{
+    -fx-pref-height: 100px;
+    -fx-pref-width: 100px;
+    -fx-background-size: 100% 100%;
+    -fx-background-image: url("../../resources/ui/button_back_corner.png");
+}
+
+.BackButton:hover{
+    -fx-cursor: hand;
+}
+
+.SelectedButton{
+    -fx-pref-width: 100px;
+    -fx-alignment: center;
+    -fx-font-size: 20;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(three-pass-box, aqua, 5, 0.3, 0, 0);
+}
+
+.NotSelectedButton{
+    -fx-pref-width: 100px;
+    -fx-alignment: center;
+    -fx-font-size: 20;
+    -fx-text-fill: white;
+}
+
+.SelectedButton:hover{
+    -fx-cursor: hand;
+}
+
+.NotSelectedButton:hover{
+    -fx-cursor: hand;
+}

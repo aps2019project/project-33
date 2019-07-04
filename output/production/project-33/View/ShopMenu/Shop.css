@@ -1,0 +1,9 @@
+.ShopImagePane{
+    -fx-background-image: url("../../../resources/codex/chapter19_background@2x.jpg");
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+}
+
+.ShopScrollPane{
+    -fx-background-color: #001f3f;
+}

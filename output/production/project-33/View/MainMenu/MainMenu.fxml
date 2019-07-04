@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="MainMenuImagePane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.MainMenuController">
+   <stylesheets>
+      <URL value="@../AccountMenu/AccountMenu.css" />
+      <URL value="@../BattleMenu/BattleMenu.css" />
+      <URL value="@../Button.css" />
+      <URL value="@mainMenu.css" />
+   </stylesheets>
+   <children>
+      <VBox fx:id="vBox" layoutX="74.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="battle" styleClass="NoFormButton" text="BATTLE" />
+            <Label fx:id="shop" styleClass="NoFormButton" text="SHOP" />
+            <Label fx:id="collection" styleClass="NoFormButton" text="COLLECTION" />
+            <Label fx:id="save" styleClass="NoFormButton" text="SAVE" />
+         </children>
+      </VBox>
+      <ImageView fx:id="duelyst" fitHeight="36.0" fitWidth="200.0" layoutX="38.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../resources/ui/brand_duelyst.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="logout" fitHeight="54.0" fitWidth="56.0" layoutX="482.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true" styleClass="ImageButton" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0">
+         <image>
+            <Image url="@../../../resources/ui/utility_menu/settings.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
