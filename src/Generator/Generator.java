@@ -242,9 +242,9 @@ public class Generator {
         setSpellAttackArea(spell, true, false, true, true, false, false, 0, false,
                 false, false, false);
 
-        spell.getInformation().setCanIncreaseAP(true);
-        spell.getInformation().setAmountOfIncreaseAP(2);
-        spell.getInformation().setIncreaseAPPermanent(true);
+        spell.getInformation().setCanPowerBuffAdd(true);
+        spell.getInformation().setPowerBuffPermanent(true);
+        spell.getInformation().setChangeAPByPowerBuff(2);
 
         Application.writeJSON(spell, "Data/CollectionItem/Spell/Empower.json");
     }
@@ -273,9 +273,9 @@ public class Generator {
         setSpellAttackArea(spell, true, false, true, false, false, false, 0, false,
                 false, false, false);
 
-        spell.getInformation().setCanIncreaseAP(true);
-        spell.getInformation().setIncreaseAPPermanent(true);
-        spell.getInformation().setAmountOfIncreaseAP(4);
+        spell.getInformation().setCanPowerBuffAdd(true);
+        spell.getInformation().setPowerBuffPermanent(true);
+        spell.getInformation().setChangeAPByPowerBuff(4);
 
         Application.writeJSON(spell, "Data/CollectionItem/Spell/GodStrength.json");
     }

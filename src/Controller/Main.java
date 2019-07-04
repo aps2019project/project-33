@@ -11,6 +11,7 @@ import static javafx.application.Application.launch;
 
 //nemidunam khodamam
 //lanat be git
+//todo, bugi ke hast ine ke ma increaase ap ro divert kardim o jash buff zadim, kari nadare faghat bayad handle konimesh
 
 public class Main {
     public static Scanner scanner = new Scanner(System.in);

@@ -26,6 +26,15 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+//todo, kollan flag catch nemishavad
+//todo, an che ke mande az battle.
+//1. tarahi e bakhshe custom
+//2. harekate peivaste, animationi
+//3. neshan dadane item ha o flag
+//4. namayeshe asare spell o buff moonde
+//5. asare khane
+//6. grave yard
+
 public class BattleController implements Initializable {
     private int numberOfRows = 5, numberOfColumns = 9;
     public VBox cardInformationArea;
@@ -121,6 +130,7 @@ public class BattleController implements Initializable {
                         graphicalCells[finalI][finalJ].attack(this);
                     }
                     if(event.getButton() == MouseButton.MIDDLE){
+                        System.out.println("yesssssssssssssssssssssss");
                         graphicalCells[finalI][finalJ].specialAttack(this);
                     }
                 });
@@ -349,12 +359,11 @@ class HandUnit {
     }
 }
 
+//todo, kollan be fana mire sare shabake
 class GraphicalCell {
     private int heightOfCell = 70, widthOfCell = 70;
     private Pane root;
     private AnchorPane anchorPane;
-
-
     private ImageView imageView;
     private Cell cell;
 
@@ -375,13 +384,23 @@ class GraphicalCell {
         this.cell = cell;
     }
 
+    //todo, in ke neshoon bede flag dare ya na kheili bad shod
     public void update(int i, int j) {
         LivingCard livingCard = cell.getLivingCard();
         this.cell = Client.getClient().getRunningBattle().getMap().getCellByCoordination(i, j);
         if (cell.getLivingCard() == null) {
             anchorPane.getStyleClass().clear();
             anchorPane.getStyleClass().add("CellCover");
-            imageView.setImage(null);
+            if(cell.isHaveFlag() && imageView.getImage() == null) {
+                try {
+                    FileInputStream fileInputStream = new FileInputStream("resources/ui/flag.gif");
+                    imageView.setImage(new Image(fileInputStream));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if(!cell.isHaveFlag())
+                imageView.setImage(null);
             return;
         } else if (!cell.getLivingCard().getID().equals(livingCard.getID()) || imageView.getImage() == null) {
             imageView.setImage(new Image(this.getClass().getResource("1.gif").toExternalForm()));
@@ -393,10 +412,10 @@ class GraphicalCell {
             anchorPane.getStyleClass().clear();
             anchorPane.getStyleClass().add("EnemyCellCover");
         }
-
     }
 
     public void select(BattleController battleController) {
+        System.out.println("this cell have flag : " + cell.isHaveFlag());
         SelectedCell selectedCell = battleController.getSelectedCell();
         if (selectedCell == null) {
             if (cell.getLivingCard() == null) return;

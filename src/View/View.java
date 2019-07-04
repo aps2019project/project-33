@@ -54,7 +54,7 @@ public class View extends Application {
 
         System.out.println(newMenu + " " + address);
 
-        Parent root = FXMLLoader.load(getClass().getResource(address));
+        Parent root = FXMLLoader.   load(getClass().getResource(address));
         primaryStage.setScene(new Scene(root));
 
     }
