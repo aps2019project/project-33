@@ -53,5 +53,9 @@ public class CollectionMenuController implements Initializable {
             }
 
         });
+
+        searchLabel.setOnMouseClicked(event -> {
+            Client.getClient().setCurrentMenu(MenuList.CollectionSearch);
+        });
     }
 }

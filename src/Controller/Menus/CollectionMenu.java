@@ -39,6 +39,7 @@ public class CollectionMenu extends Menu {
             collection.showCollection("Sell Cost");
         } else if (inputLine.matches("search .*")) {
             searchInCollection(collection, input[1]);
+            Client.getClient().setCurrentMenu(MenuList.CollectionShowSearch);
         } else if (inputLine.matches("create deck .*")) {
             String deckName = input[2];
             collection.createDeck(deckName);
@@ -75,6 +76,7 @@ public class CollectionMenu extends Menu {
 
     private void searchInCollection(Collection collection, String cardName) {
         ArrayList<CollectionItem> collectionItems = collection.search(cardName);
+        Client.getClient().setResultOfSearch(collectionItems);
         int index = 0;
         System.out.println("CollectionItems with this name :");
         for (CollectionItem collectionItem : collectionItems)

@@ -2,18 +2,19 @@
 
 <?import java.lang.String?>
 <?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="CollectionImagePane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CollectionMenu.Search.SearchController">
+<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" styleClass="CollectionImagePane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CollectionMenu.Search.SearchController">
    <stylesheets>
       <URL value="@../../Button.css" />
       <URL value="@../CollectionMenu.css" />
    </stylesheets>
    <children>
-      <ImageView fitHeight="81.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="backButton" fitHeight="81.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../resources/ui/button_back_corner.png" />
          </image>
@@ -22,5 +23,12 @@
             <String fx:value="ImageButton" />
          </styleClass>
       </ImageView>
+      <Label fx:id="searchLabel" layoutX="252.0" layoutY="34.0" style="-fx-font-size: 15;" stylesheets="@../../newButton.css" text="SEARCH">
+         <styleClass>
+            <String fx:value="GreenButton" />
+            <String fx:value="Button" />
+         </styleClass>
+      </Label>
+      <TextField fx:id="nameField" layoutX="75.0" layoutY="46.0" opacity="0.65" prefHeight="36.0" prefWidth="170.0" promptText="ENTER NAME" style="-fx-background-color: black;" />
    </children>
 </AnchorPane>
