@@ -61,5 +61,9 @@ public class CollectionMenuController implements Initializable {
         createDeckLabel.setOnMouseClicked(event -> {
             Client.getClient().setCurrentMenu(MenuList.CollectionCreateDeck);
         });
+
+        deleteDeckLabel.setOnMouseClicked(event -> {
+            Client.getClient().setCurrentMenu(MenuList.CollectionDeleteDeck);
+        });
     }
 }
