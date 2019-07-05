@@ -2,10 +2,11 @@ package Model;
 
 import Model.CollectionItem.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.*;
 
-public class Deck{
+public class Deck implements Serializable {
     private ArrayList<CollectionItem> cards = new ArrayList<>();
     private String name;
 

@@ -21,7 +21,7 @@ hand bayad dorost she, mogheye remove o avvale kar
 kar hayi ke tooye end turn bayad anjam she
 masalan joone ye seri chiz kam she
 ya ye seri buff emal shan rooye ye seri card
-show collectables tooye battle irad dare, choon jayi nayoomadim inaro tooye player add konim, va in ke bayad estefade nashode hasho begim
+show collectables tooye runningBattle irad dare, choon jayi nayoomadim inaro tooye player add konim, va in ke bayad estefade nashode hasho begim
 
 -------------------
 
@@ -39,7 +39,7 @@ help -> done
 handle attack -> done
 -------------
 ina:
-show card in battle
+show card in runningBattle
 combo attack bayad tuye speciale minion zade she
 addMare bozorg ?
 desc e carda :(

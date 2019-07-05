@@ -2,7 +2,9 @@ package Model;
 
 import Model.Account;
 
-public class Match {
+import java.io.Serializable;
+
+public class Match implements Serializable {
 
     private Account winner;
     private Account loser;

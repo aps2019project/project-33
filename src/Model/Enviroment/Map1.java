@@ -1,8 +1,9 @@
 package Model.Enviroment;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Map1 {
+public class Map1 implements Serializable {
 
     private ArrayList<Cell> cells = new ArrayList<>();
     private int height;

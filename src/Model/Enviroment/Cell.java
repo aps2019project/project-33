@@ -5,9 +5,10 @@ import Model.CollectionItem.CollectionItem;
 import Model.CollectionItem.Item;
 import Model.CollectionItem.LivingCard;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Cell {
+public class Cell implements Serializable {
     private int x, y;
     private LivingCard livingCard;
     private ArrayList<Buff> effects = new ArrayList<>();

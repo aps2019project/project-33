@@ -2,7 +2,9 @@ package Model.Buffs;
 
 import Model.Mana;
 
-public class ManaBuff {
+import java.io.Serializable;
+
+public class ManaBuff implements Serializable {
     private int amount, remainTime;
 
     public ManaBuff(int amount, int remainTime){

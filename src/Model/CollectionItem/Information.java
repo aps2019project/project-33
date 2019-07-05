@@ -1,6 +1,9 @@
 package Model.CollectionItem;
 
-public class Information {
+import java.io.Serializable;
+
+public class Information implements Serializable
+{
 
     //TODO ghoole bozorg ro divert kardim raft
     private boolean isKingsGuard;

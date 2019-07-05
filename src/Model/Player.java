@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import Model.CollectionItem.CollectibleItem;
@@ -9,7 +10,7 @@ import Model.CollectionItem.LivingCard;
 import Model.Enviroment.Cell;
 import Model.Enviroment.Map1;
 
-public class Player {
+public class Player implements Serializable {
     private ArrayList<LivingCard> aliveCards = new ArrayList<>();
     private ArrayList<CollectibleItem> collectibleItems = new ArrayList<>();
     private CollectionItem selectedCollectionItem;

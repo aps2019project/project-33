@@ -5,9 +5,10 @@ import Model.CollectionItem.Item;
 import Model.CollectionItem.Minion;
 import Model.CollectionItem.Spell;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Hand1 {
+public class Hand1 implements Serializable {
 
     private ArrayList<CollectionItem> handCards = new ArrayList<>();
     //havaset bashe to taghire in

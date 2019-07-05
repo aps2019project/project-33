@@ -5,10 +5,11 @@ import Model.CollectionItem.*;
 import Model.Enviroment.Cell;
 
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class AI extends Player {
+public class AI extends Player implements Serializable {
 
     ArrayList<String> orders = new ArrayList<>();
 

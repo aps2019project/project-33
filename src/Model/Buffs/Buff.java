@@ -2,8 +2,10 @@ package Model.Buffs;
 
 import Controller.*;
 
+import java.io.Serializable;
 
-public abstract class Buff {
+
+public abstract class Buff implements Serializable {
 
     private boolean isPermanent;
     private int remainTime;

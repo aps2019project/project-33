@@ -1,18 +1,29 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
+import Controller.Battle;
+import Controller.MenuList;
+import Controller.Menus.Menu;
 import Model.CollectionItem.CollectionItem;
 import Model.CollectionItem.Item;
 
-public class Account {
+public class Account implements Serializable {
+    public enum State {
+        Online, Offline, Busy;
+    }
 
     private static ArrayList<Account> accounts = new ArrayList<>();
+
     private ArrayList<Match> matches = new ArrayList<>();
     private Collection collection = new Collection();
     private String username;
     private String password;
     private int budget;
+    private State state;
+    private MenuList currentMenu;
+    private Battle runningBattle;
 
     //Constructor
 
@@ -24,78 +35,73 @@ public class Account {
 
     //methods
 
-    public int getNumberOfWins(){
+    public int getNumberOfWins() {
         int countOfWins = 0;
-        for(Match match : this.matches)
-            if(match.getWinner() == this){
-                countOfWins ++;
+        for (Match match : this.matches)
+            if (match.getWinner() == this) {
+                countOfWins++;
             }
         return countOfWins;
     }
 
-    public int getNumberOfLooses(){
+    public int getNumberOfLooses() {
         int countOfLooses = 0;
-        for(Match match : this.matches){
-            if(match.getLoser() == this)
-                countOfLooses ++;
+        for (Match match : this.matches) {
+            if (match.getLoser() == this)
+                countOfLooses++;
         }
         return countOfLooses;
     }
 
-    public static Account getAccountByUsername(String username){
-        for(Account account : Account.getAccounts()){
-            if(account.getUsername().equals(username))
+    public static Account getAccountByUsername(String username) {
+        for (Account account : Account.getAccounts()) {
+            if (account.getUsername().equals(username))
                 return account;
         }
         return null;
     }
 
-//    public static void createAccount(String username, String password){
-//        Account account = new Account(username, password);
-//        return;
-//    }
-
-    public void removeCollectionItem(CollectionItem collectionItem){
+    public void removeCollectionItem(CollectionItem collectionItem) {
 
     }
 
-    public void decreaseBudget(int cost){
+    public void decreaseBudget(int cost) {
         this.budget -= cost;
     }
-    public void increaseBudget(int income){
+
+    public void increaseBudget(int income) {
         this.budget += income;
     }
 
-    public static void showLeaderBoard(){
-        ArrayList<Account> accounts = Account.getAccounts();
-        sortArraysOfAccount(accounts);
-        int index = 1;
-        for(Account account : accounts){
-            System.out.println(index ++ + ". " + account.getUsername() + " " + "W: " + account.getNumberOfWins() + " "
-            + "L: " + account.getNumberOfLooses());
-        }
-    }
-
-    private static void sortArraysOfAccount(ArrayList<Account> accounts){
+    public static void sortArraysOfAccount(ArrayList<Account> accounts) {
         int sizeOfArray = accounts.size();
-        for(int i = 0; i < sizeOfArray; i ++)
-            for(int j = i + 1; j < sizeOfArray; j ++) {
+        for (int i = 0; i < sizeOfArray; i++)
+            for (int j = i + 1; j < sizeOfArray; j++) {
                 if (accounts.get(i).getNumberOfWins() > accounts.get(j).getNumberOfWins()) {
                     swap(accounts, i, j);
                 }
-                if(accounts.get(i).getNumberOfWins() == accounts.get(j).getNumberOfWins())
-                    if(accounts.get(i).getNumberOfLooses() < accounts.get(j).getNumberOfLooses())
+                if (accounts.get(i).getNumberOfWins() == accounts.get(j).getNumberOfWins())
+                    if (accounts.get(i).getNumberOfLooses() < accounts.get(j).getNumberOfLooses())
                         swap(accounts, i, j);
             }
     }
 
-    private static void swap(ArrayList<Account> account, int i, int j){
+    private static void swap(ArrayList<Account> account, int i, int j) {
         Account tmp = account.get(i);
         account.set(i, account.get(j));
         account.set(i, tmp);
     }
 
-    public void save(){}
+    public void save() {
+    }
+
+    public int getNumberOfItems() {
+        int numberOfItems = 0;
+        for (CollectionItem collectionItem : this.getCollection().getCollectionItems())
+            if (collectionItem instanceof Item)
+                numberOfItems++;
+        return numberOfItems;
+    }
 
     //Here is Setters && Getters
 
@@ -139,15 +145,6 @@ public class Account {
         this.budget = budget;
     }
 
-    public int getNumberOfItems() {
-        int numberOfItems = 0;
-        for(CollectionItem collectionItem : this.getCollection().getCollectionItems())
-            if(collectionItem instanceof Item)
-                numberOfItems ++;
-        return numberOfItems;
-    }
-
-
     public ArrayList<Match> getMatches() {
         return matches;
     }
@@ -156,7 +153,32 @@ public class Account {
         this.matches = matches;
     }
 
-    public void addMatch(Match match){
+    public void addMatch(Match match) {
         this.matches.add(match);
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public MenuList getCurrentMenu() {
+        return currentMenu;
+    }
+
+    public void setCurrentMenu(MenuList currentMenu) {
+        this.currentMenu = currentMenu;
+
+    }
+
+    public Battle getRunningBattle() {
+        return runningBattle;
+    }
+
+    public void setRunningBattle(Battle runningBattle) {
+        this.runningBattle = runningBattle;
     }
 }

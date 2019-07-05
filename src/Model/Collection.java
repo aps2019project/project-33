@@ -2,9 +2,10 @@ package Model;
 
 import Model.CollectionItem.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Collection {
+public class Collection implements Serializable {
     private ArrayList<CollectionItem> cards = new ArrayList<>();
     private Deck mainDeck;
     private ArrayList<Deck> decks = new ArrayList<>();

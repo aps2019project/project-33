@@ -3,9 +3,10 @@ package Model;
 import Controller.Battle;
 import Model.Buffs.ManaBuff;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Mana {
+public class Mana implements Serializable {
     private int currentMana;
     private int maximumMana;
     private int changeManaByItem = 0;
@@ -25,10 +26,9 @@ public class Mana {
         if (maximumMana < 9)
             maximumMana++;
         changeManaByItem = 0;
-        for(ManaBuff manaBuff : manaBuffs)
-            manaBuff.effect(this);
+        for(int i = manaBuffs.size() - 1; i > -1; i--)
+            manaBuffs.get(i).effect(this);
         currentMana = Integer.min(maximumMana + changeManaByItem, 9);
-        System.out.println("iiiiiiiinjjjjjjjjjjjjaaaaaaaaarooooooooooooo" + maximumMana + " " + currentMana + " " + changeManaByItem);
     }
 
     public int getCurrentMana(){

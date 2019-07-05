@@ -2,9 +2,10 @@ package Model.CollectionItem;
 
 import javafx.scene.control.Label;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class CollectionItem {
+public abstract class CollectionItem implements Serializable {
     private Information information = new Information();
     private String name;
     private String ID;

@@ -1,11 +1,13 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import Controller.*;
+
+import Controller.Server.ServerMain;
 import Model.CollectionItem.Card;
 import Model.CollectionItem.LivingCard;
 
-public class GraveYard {
+public class GraveYard implements Serializable {
     private ArrayList<Card> cards = new ArrayList<>();
 
     public void showInfo(String cardID){
@@ -36,7 +38,7 @@ public class GraveYard {
 
     public void inputCommandLine(){
         System.out.println("Here is GraveYard");
-        String inputLine = Main.scanner.nextLine();
+        String inputLine = ServerMain.scanner.nextLine();
         inputLine = inputLine.trim();
         inputLine = inputLine.toLowerCase();
         String[] input = inputLine.split("[ ]+");
