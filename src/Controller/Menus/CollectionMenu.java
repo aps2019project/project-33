@@ -108,7 +108,7 @@ public class CollectionMenu extends Menu {
         System.out.println("13. exit");
     }
 
-    private void save(Collection collection) {
+    private void save(Collection collectioKn) {
         Main.application.getLoggedInAccount().setCollection(collection);
     }
 }

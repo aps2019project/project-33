@@ -44,6 +44,7 @@ public class DeleteDeckController implements Initializable {
             mainAnchor.getChildren().remove(labelsVBox);
             deckLabels.clear();
             //TODO deckaro chejuri bayad begiram?
+            //TODO nabayad az collectione account bekhunam
             String username = Client.getClient().getUsername();
             Account account = Account.getAccountByUsername(username);
             Collection collection = account.getCollection();
@@ -54,13 +55,15 @@ public class DeleteDeckController implements Initializable {
                 Label label = new Label(deck.getName());
                 label.setTextFill(Color.WHITE);
 
-                label.getStylesheets().add(Graphic.class.getResource("Label.css").toExternalForm());
-                label.getStyleClass().add("DarkLabel");
+                label.getStylesheets().add(DeleteDeckController.class.getResource("Label.css").toExternalForm());
+                label.getStyleClass().add("DeckLabel");
 
                 labelsVBox.getChildren().add(label);
                 deckLabels.add(label);
             }
             VBox.setMargin(labelsVBox, new Insets(0, 0, 5, 0));
+            labelsVBox.setLayoutY(150);
+            labelsVBox.setLayoutX(150);
             mainAnchor.getChildren().add(labelsVBox);
         }
         isFirstTime = false;
