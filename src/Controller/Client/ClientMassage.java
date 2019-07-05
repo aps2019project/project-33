@@ -27,7 +27,7 @@ public class ClientMassage implements Serializable {
     }
 
     public enum ServerRequest{
-        GiveCurrentMenu, ChangeCurrentMenu, GiveRunningGame, GiveAccounts;
+        GiveCurrentMenu, ChangeCurrentMenu, GiveRunningGame, GiveAccounts, SendMassageInChat, GiveAllMassages;
     }
 
     private String authToken;
@@ -48,6 +48,9 @@ public class ClientMassage implements Serializable {
     //BattleRequest Instances
     private String collectionItemID;
     private int x, y;
+
+    //ServerRequest Instances
+    private String massage;
 
 
     public String getUsername() {
@@ -191,5 +194,13 @@ public class ClientMassage implements Serializable {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public String getMassage() {
+        return massage;
+    }
+
+    public void setMassage(String massage) {
+        this.massage = massage;
     }
 }

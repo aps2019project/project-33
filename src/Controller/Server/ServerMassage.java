@@ -3,6 +3,7 @@ package Controller.Server;
 import Controller.Battle;
 import Controller.MenuList;
 import Model.Account;
+import Model.Massage;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,6 +35,9 @@ public class ServerMassage implements Serializable {
     //Answer to runningBattle request
     private Battle runningBattle;
     private ArrayList<Account> accounts;
+
+    //Answer to GiveAllMassages
+    private ArrayList<Massage> massages;
 
 
     public Type getType() {
@@ -82,5 +86,13 @@ public class ServerMassage implements Serializable {
 
     public void setAccounts(ArrayList<Account> accounts) {
         this.accounts = accounts;
+    }
+
+    public ArrayList<Massage> getMassages() {
+        return massages;
+    }
+
+    public void setMassages(ArrayList<Massage> massages) {
+        this.massages = massages;
     }
 }

@@ -144,6 +144,23 @@ public class Client {
 
     //Server Commands
 
+    public synchronized ServerMassage sendMassageInChat(String massageText) throws IOException, ClassNotFoundException {
+        ClientMassage clientMassage = new ClientMassage();
+        clientMassage.setAuthToken(this.authToken);
+        clientMassage.setDestinationMenu(ClientMassage.Menu.Server);
+        clientMassage.setServerRequest(ClientMassage.ServerRequest.SendMassageInChat);
+        clientMassage.setMassage(massageText);
+        return sendAndReceive(clientMassage);
+    }
+
+    public ServerMassage getAllMassages() throws IOException, ClassNotFoundException {
+        ClientMassage clientMassage = new ClientMassage();
+        clientMassage.setAuthToken(this.authToken);
+        clientMassage.setDestinationMenu(ClientMassage.Menu.Server);
+        clientMassage.setServerRequest(ClientMassage.ServerRequest.GiveAllMassages);
+        return sendAndReceive(clientMassage);
+    }
+
     public synchronized ServerMassage getCurrentMenu() throws IOException, ClassNotFoundException {
         return getServerMassage(ClientMassage.ServerRequest.GiveCurrentMenu);
     }
@@ -208,4 +225,6 @@ public class Client {
     public Socket getSocket() {
         return socket;
     }
+
+
 }

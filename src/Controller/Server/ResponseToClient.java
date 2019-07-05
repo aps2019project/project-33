@@ -2,12 +2,14 @@ package Controller.Server;
 
 import Controller.Application;
 import Controller.Battle;
+import Controller.Client.Client;
 import Controller.Client.ClientMassage;
 import Controller.MenuList;
 import Controller.Menus.AccountMenu;
 import Controller.Menus.BattleMenu;
 import Controller.Menus.MainMenu;
 import Model.Account;
+import Model.Massage;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -104,6 +106,20 @@ public class ResponseToClient extends Thread {
             ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
             accounts = (ArrayList<Account>) Application.copy(accounts, ArrayList.class);
             serverMassage.setAccounts(accounts);
+            return serverMassage;
+        }
+        if(clientMassage.getServerRequest() == ClientMassage.ServerRequest.SendMassageInChat){
+            String massageText = clientMassage.getMassage();
+            Account account = Account.getAccountByUsername(clientMassage.getAuthToken());
+            if(account == null) return new ServerMassage(ServerMassage.Type.Error, ServerMassage.ErrorType.InvalidAuthToken);
+            Massage.addMassage(new Massage(massageText, account));
+            return new ServerMassage(ServerMassage.Type.Accept, null);
+        }
+        if(clientMassage.getServerRequest() == ClientMassage.ServerRequest.GiveAllMassages){
+            ArrayList<Massage> massages = Massage.getMassages();
+            massages = (ArrayList<Massage>) Application.copy(massages, ArrayList.class);
+            ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
+            serverMassage.setMassages(massages);
             return serverMassage;
         }
         return null;
