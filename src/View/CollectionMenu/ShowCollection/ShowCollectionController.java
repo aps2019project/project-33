@@ -1,6 +1,6 @@
 package View.CollectionMenu.ShowCollection;
 
-import Controller.Client;
+import Controller.Client.Client;
 import Controller.MenuList;
 import Model.CollectionItem.CollectionItem;
 import View.Graphic;
@@ -62,7 +62,8 @@ public class ShowCollectionController implements Initializable {
         }
         isFirstTime = false;
         backButton.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
+            //todo in bayad doros she
+            // Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
             isFirstTime = true;
         });
     }

@@ -1,7 +1,6 @@
 package View.CollectionMenu.CollectionMenu;
 
-import Controller.Client;
-import Controller.MenuList;
+import Controller.Client.Client;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;

@@ -1,13 +1,9 @@
 package View.BattleMenu;
 
-import  Controller.Client;
-import Controller.MenuList;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import Controller.Client.Client;
 
 import java.io.FileNotFoundException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.IOException;
 
 //type mishe single, multi
 //mode mishe custom ya story
@@ -51,18 +47,14 @@ public class BattleMenuController {
         }
     }
 
-    public static void startGame(){
+    public static void startGame() throws IOException, ClassNotFoundException {
         String typeToString = null, modeToString = null, chapterToString = null, kindToString = null;
         if(type != null) typeToString = type.toString();
         if(mode != null) modeToString = mode.toString();
         if(chapter != null) chapterToString = chapter.toString();
         if(kind != null) kindToString = kind.toString();
 
-        try {
-            Client.getClient().getBattleMenu().createGame(null, typeToString, modeToString , chapterToString, kindToString);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        Client.getClient().createGame(null, typeToString, modeToString , chapterToString, kindToString);
     }
 
     public static void relax(){

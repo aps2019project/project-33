@@ -1,10 +1,11 @@
 package View.BattleMenu;
 
-import Controller.Client;
+import Controller.Client.Client;
 import Controller.MenuList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -17,18 +18,29 @@ public class ChooseMode implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         storyButton.setOnMouseClicked(event -> {
             BattleMenuController.mode = BattleMenuController.ModeList.Story;
-            Client.getClient().setCurrentMenu(MenuList.StoryChapters);
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.StoryChapters);
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         customGameButton.setOnMouseClicked(event -> {
             BattleMenuController.mode = BattleMenuController.ModeList.Custom;
-            Client.getClient().setCurrentMenu(MenuList.ChooseKind);
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.ChooseKind);
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         backButton.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.MainMenu);
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.MainMenu);
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             BattleMenuController.relax();
         });
-
     }
 }
