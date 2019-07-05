@@ -30,6 +30,7 @@ public class CollectionMenu extends Menu {
         if (isFirstTime) {
             collection = (Collection) Application.copy(Main.application.getLoggedInAccount().getCollection(),
                     Collection.class);
+            Client.getClient().setCollection(collection);
             isFirstTime = false;
         }
 

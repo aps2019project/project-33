@@ -2,6 +2,7 @@ package Controller;
 
 import Controller.Menus.*;
 import Model.Account;
+import Model.Collection;
 import Model.CollectionItem.CollectionItem;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class Client {
     private static Client client = null;
     private ArrayList<CollectionItem> resultOfSearch = new ArrayList<>();
     private String username;
+    private Collection collection = new Collection();
     //todo in bayad ye jaei meghdar dehi she
     private Battle runningBattle;
 
@@ -83,5 +85,13 @@ public class Client {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Collection getCollection() {
+        return collection;
+    }
+
+    public void setCollection(Collection collection) {
+        this.collection = collection;
     }
 }
