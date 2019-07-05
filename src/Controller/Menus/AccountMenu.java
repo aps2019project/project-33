@@ -3,9 +3,11 @@
 
 package Controller.Menus;
 
-import Controller.Client;
-import Controller.Main;
+import Controller.Client.Client;
+import Controller.Client.ClientMassage;
+import Controller.Server.ServerMain;
 import Controller.MenuList;
+import Controller.Server.ServerMassage;
 import Model.*;
 
 public class AccountMenu extends Menu {
@@ -15,14 +17,12 @@ public class AccountMenu extends Menu {
         String[] input = inputLine.split("[ ]+");
         inputLine = inputLine.toLowerCase();
 
+        System.out.println(inputLine);
+
         if (inputLine.matches("create account [^\\s]+ [^\\s]+")) {
             return createAccount(input[2], input[3]);
         } else if (inputLine.matches("login [^\\s]+ [^\\s]+")) {
             return login(input[1], input[2]);
-        } else if (inputLine.equals("show leaderboard")) {
-            Account.showLeaderBoard();
-            //todo in kollan divert shode
-            return null;
         } else if (inputLine.equals("show menu")) {
             AccountMenu.showMenu();
             return  null;
@@ -34,9 +34,8 @@ public class AccountMenu extends Menu {
     public static void showMenu() {
         System.out.println("1. create account [username]");
         System.out.println("2. login [username]");
-        System.out.println("3. show leaderboard");
-        System.out.println("4. show menu");
-        System.out.println("5. exit");
+        System.out.println("3. show menu");
+        System.out.println("4. exit");
     }
 
     private ServerMassage createAccount(String username, String password) {
@@ -52,11 +51,11 @@ public class AccountMenu extends Menu {
 
         Account account = new Account(username, password, 100000);
         Account.getAccounts().add(account);
-        Main.application.setLoggedInAccount(account);
 
         System.out.println("The account is created");
-        Client.getClient().setCurrentMenu(MenuList.MainMenu);
-        Client.getClient().setUsername(username);
+
+        account.setState(Account.State.Online);
+        account.setCurrentMenu(MenuList.MainMenu);
         return new ServerMassage(ServerMassage.Type.Accept, null);
     }
 
@@ -73,9 +72,18 @@ public class AccountMenu extends Menu {
         }
 
         System.out.println("login complete !");
-        Main.application.setLoggedInAccount(account);
-        Client.getClient().setCurrentMenu(MenuList.MainMenu);
-        Client.getClient().setUsername(username);
+
+        account.setState(Account.State.Online);
+        account.setCurrentMenu(MenuList.MainMenu);
         return new ServerMassage(ServerMassage.Type.Accept, null);
+    }
+
+    public ServerMassage interpret(ClientMassage clientMassage) {
+        ServerMassage answer;
+        if(clientMassage.getAccountMenuRequest() == ClientMassage.AccountMenuRequest.LogIn)
+            answer = this.inputCommandLine("login " + clientMassage.getUsername() + " " + clientMassage.getPassword());
+        else
+            answer = this.inputCommandLine("create account " + clientMassage.getUsername() + " " + clientMassage.getPassword());
+        return answer;
     }
 }

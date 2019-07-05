@@ -1,7 +1,8 @@
 package View;
 
-import Controller.Client;
+import Controller.Client.Client;
 import Controller.MenuList;
+import View.Battle.BattleController;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +17,7 @@ public class View extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Account Menu");
         Parent root = FXMLLoader.load(getClass().getResource("AccountMenu/AccountMenu.fxml"));
         primaryStage.setScene(new Scene(root));
         View.primaryStage = primaryStage;
@@ -31,8 +32,17 @@ public class View extends Application {
                 if (last == 0) last = now;
                 if (now > last + unit / fps) {
                     last = now;
-                    if (!Client.getClient().getCurrentMenu().equals(previousMenu)) {
-                        previousMenu = Client.getClient().getCurrentMenu();
+                    MenuList currentMenu = null;
+                    try {
+                        currentMenu = Client.getClient().getCurrentMenu().getCurrentMenu();
+                    } catch (IOException | ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    if (!currentMenu.equals(previousMenu)) {
+                        if(previousMenu == MenuList.Battle)
+                            BattleController.getAnimationTimer().stop();
+
+                        previousMenu = currentMenu;
                         try {
                             showMenu(primaryStage, previousMenu);
                         } catch (IOException e) {
@@ -40,7 +50,6 @@ public class View extends Application {
                         }
                     }
                 }
-
             }
         };
         animationTimer.start();
@@ -54,7 +63,7 @@ public class View extends Application {
 
         System.out.println(newMenu + " " + address);
 
-        Parent root = FXMLLoader.   load(getClass().getResource(address));
+        Parent root = FXMLLoader.load(getClass().getResource(address));
         primaryStage.setScene(new Scene(root));
 
     }

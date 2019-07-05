@@ -1,7 +1,7 @@
 package Controller.Menus;
 
-import Controller.Client;
-import Controller.Main;
+import Controller.Client.Client;
+import Controller.Server.ServerMain;
 import Controller.MenuList;
 import Model.*;
 import Model.CollectionItem.CollectionItem;
@@ -10,36 +10,39 @@ import Model.CollectionItem.UsableItem;
 import java.util.ArrayList;
 
 public class ShopMenu extends Menu {
-    private Collection shop = Main.application.getShop();
+    private Collection shop = ServerMain.application.getShop();
 
     public void inputCommandLine(String inputLine) {
         System.out.println("Here is shop !");
         System.out.println("For help, enter : show menu");
 
-//        String inputLine = Main.scanner.nextLine();
+//        String inputLine = ServerMain.scanner.nextLine();
         inputLine = inputLine.trim();
         String[] separatedInput = inputLine.split("[ ]+");
         inputLine = inputLine.toLowerCase();
 
-        Collection collection = Main.application.getLoggedInAccount().getCollection();
+        Collection collection = null; //todo = ServerMain.application.getLoggedInAccount().getCollection();
         if (inputLine.equals("show collection for sell")) {
             Client.getClient().setResultOfSearch(collection.getCollectionItems());
-            Client.getClient().setCurrentMenu(MenuList.SellMenu);
+            //todo in bayad doros she
+            // Client.getClient().setCurrentMenu(MenuList.SellMenu);
         }
         if (inputLine.equals("show collection")) {
             Client.getClient().setResultOfSearch(collection.getCollectionItems());
             collection.showCollection("Sell Cost");
-            Client.getClient().setCurrentMenu(MenuList.ShopShowCollection);
+            //todo in bayad doros she
+            // Client.getClient().setCurrentMenu(MenuList.ShopShowCollection);
 
         } else if (inputLine.matches("search for show .+")) {
             searchInCollection(separatedInput[3], this.shop);
-            Client.getClient().setCurrentMenu(MenuList.ShopShowSearch);
+            //todo in bayad doros she
+            // Client.getClient().setCurrentMenu(MenuList.ShopShowSearch);
         } else if (inputLine.matches("search collection .+")) {
             searchInCollection(separatedInput[2], collection);
         } else if (inputLine.matches("search .+")) {
             searchInCollection(separatedInput[1], this.shop);
-
-            Client.getClient().setCurrentMenu(MenuList.ShowingBuy);
+            //todo in bayad doros she
+            // Client.getClient().setCurrentMenu(MenuList.ShowingBuy);
 
         } else if (inputLine.matches("buy .+")) {
             String collectionNameItem = separatedInput[1];
@@ -50,11 +53,13 @@ public class ShopMenu extends Menu {
         } else if (inputLine.equals("show")) {
             this.shop.showCollection("Buy Cost");
             Client.getClient().setResultOfSearch(shop.getCollectionItems());
-            Client.getClient().setCurrentMenu(MenuList.ShowShop);
+            //todo in bayad doros she
+            // Client.getClient().setCurrentMenu(MenuList.ShowShop);
         } else if (inputLine.equals("show menu"))
             ShopMenu.showMenu();
         else if (inputLine.equals("exit")) {
-            Client.getClient().setCurrentMenu(MenuList.MainMenu);
+            //todo in bayad doros she
+            // Client.getClient().setCurrentMenu(MenuList.MainMenu);
         } else
             System.out.println("Please enter valid command line !");
     }
@@ -76,7 +81,7 @@ public class ShopMenu extends Menu {
             return;
         }
 
-        Account customer = Main.application.getLoggedInAccount();
+        Account customer = null; //todo ServerMain.application.getLoggedInAccount();
         customer.increaseBudget(collectionItem.getPrice());
         this.shop.addCollectionItemToCollection(collectionItem.getID());
         collection.removeCollectionItemFromCollection(collectionItem.getID());
@@ -97,7 +102,7 @@ public class ShopMenu extends Menu {
             return;
         }
 
-        Account customer = Main.application.getLoggedInAccount();
+        Account customer = null; //todo ServerMain.application.getLoggedInAccount();
 
         if (collectionItem instanceof UsableItem) {
             if (customer.getNumberOfItems() == 3) {

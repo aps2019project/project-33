@@ -1,5 +1,6 @@
-package Controller;
+package Controller.Server;
 
+import Controller.Application;
 import Generator.*;
 import View.View;
 
@@ -13,7 +14,7 @@ import static javafx.application.Application.launch;
 //lanat be git
 //todo, bugi ke hast ine ke ma increaase ap ro divert kardim o jash buff zadim, kari nadare faghat bayad handle konimesh
 
-public class Main {
+public class ServerMain {
     public static Scanner scanner = new Scanner(System.in);
     public static Application application = new Application();
 
@@ -22,6 +23,5 @@ public class Main {
         ShopGenerator.generate();
         DeckGenerator.deckGenerator();;
         application.runApplication();
-        View.main(args);
     }
 }

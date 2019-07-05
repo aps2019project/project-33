@@ -1,5 +1,7 @@
 package Controller;
 
+import Controller.Client.ClientMassage;
+import Controller.Server.ServerMassage;
 import Model.*;
 import Model.Buffs.Buff;
 import Model.CollectionItem.*;
@@ -11,11 +13,12 @@ import Model.Enviroment.Cell;
 import Model.Enviroment.Map1;
 
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
 
-public class Battle {
+public class Battle implements Serializable {
     private Player playerOn, playerOff;
     private Map1 map = new Map1(5, 9);
     private boolean gameIsRunning;
@@ -345,12 +348,12 @@ public class Battle {
     }
 
     public void minionOnSpawn(Minion minion) {
-        if(minion.getInformation().isOnSpawn())
+        if (minion.getInformation().isOnSpawn())
             Impact.specialAttackOfMinion(this, minion, null);
     }
 
     public void endTurnMinion(Minion minion) {
-        if(minion.getInformation().isOnTurn())
+        if (minion.getInformation().isOnTurn())
             Impact.specialAttackOfMinion(this, minion, null);
     }
 
@@ -404,8 +407,8 @@ public class Battle {
                 Impact.impactSpell(this, spell, cell);
             }
         }
-        if(insertingCollectionItem instanceof Card)
-            playerOn.getMana().decreaseMana(((Card)insertingCollectionItem).getMP());
+        if (insertingCollectionItem instanceof Card)
+            playerOn.getMana().decreaseMana(((Card) insertingCollectionItem).getMP());
         handleFlags();
     }
 
@@ -518,7 +521,7 @@ public class Battle {
                 return;
             }
             myLivingCards.add(myLivingCard);
-            if(!myLivingCard.getInformation().isCombo()){
+            if (!myLivingCard.getInformation().isCombo()) {
                 System.out.println("Cards can not do combo attack");
                 return;
             }
@@ -545,10 +548,11 @@ public class Battle {
         }
         checkTurn();
     }
+
     //todo, concurrent nemidunam chi chi exception mikhore
     public void checkAliveCards(Player player) {
-        for (LivingCard livingCard : player.getAliveCards())
-            livingCard.checkAlive(this);
+        for(int i = player.getAliveCards().size() - 1; i > -1; i--)
+            player.getAliveCards().get(i).checkAlive(this);
         checkTurn();
     }
 
@@ -584,7 +588,7 @@ public class Battle {
         playerOff.getHero().setCoolDown(Math.max(0, playerOff.getHero().getCoolDown() - 1));
         Impact.activeBuffs(this);
         numberOfRounds++;
-        if(playerOn instanceof AI)
+        if (playerOn instanceof AI)
             readInput();
     }
 
@@ -717,7 +721,14 @@ public class Battle {
         System.out.println("the number of rounds is :" + numberOfRounds);
         Account winnerAccount = winnerPlayer.getAccount();
         winnerAccount.setBudget(winnerAccount.getBudget() + this.prize);
+        setupFree(playerOn);
+        setupFree(playerOff);
+    }
 
+    private void setupFree(Player player) {
+        player.getAccount().setRunningBattle(null);
+        player.getAccount().setState(Account.State.Online);
+        player.getAccount().setCurrentMenu(MenuList.MainMenu);
     }
 
     public void endGame() {
@@ -850,28 +861,29 @@ public class Battle {
         finishMatch();
     }
 
-    public void inputCommandLine(String inputLine, String clientUsername) {
-        if(!clientUsername.equals("admin")) {
-            System.out.println("player on : " + playerOn.getAccount().getUsername());
-            System.out.println("Here is Battle");
-            System.out.println("For help, enter : show menu");
-            System.out.println(kind);
-        }
-        for(Cell cell : map.getCells()){
-            if(cell.isHaveFlag()){
-                System.out.println(cell.getX() + "*" + cell.getY());
-            }
-        }
-        if(!clientUsername.equals(playerOn.getAccount().getUsername())) return;
-
+    public ServerMassage inputCommandLine(String inputLine, String clientUsername) {
         inputLine = inputLine.trim();
         String inputLineOriginal = inputLine;
         inputLine = inputLine.toLowerCase();
         String[] input = inputLineOriginal.split("[ ]+");
 
+        System.out.println(inputLine + " by " + clientUsername);
+
+        if (!clientUsername.equals("admin")) {
+            System.out.println("player on : " + playerOn.getAccount().getUsername());
+            System.out.println("Here is Battle");
+            System.out.println("For help, enter : show menu");
+            System.out.println(kind);
+        }
+
         if (inputLine.equals("forfeit match"))
             forfeitMatch();
-        else if (inputLine.equals("game info"))
+        if (inputLine.equals("enter graveyard"))
+            enterGraveYard();
+
+        if (!clientUsername.equals(playerOn.getAccount().getUsername())) return null;
+
+        if (inputLine.equals("game info"))
             showGameInfo();
         else if (inputLine.equals("show my minions"))
             showMyMinions();
@@ -909,18 +921,17 @@ public class Battle {
             useItem(Integer.parseInt(input[1]), Integer.parseInt(input[2]));
         } else if (inputLine.equals("show next card"))
             showNextCard();
-        else if (inputLine.equals("enter graveyard"))
-            enterGraveYard();
         else if (inputLine.equals("help"))
             help();
         else if (inputLine.equals("end game"))
             endGame();
         else if (inputLine.equals("exit"))
-            return;
+            return null;
         else if (inputLine.equals("show menu")) {
             this.showMenu();
-        } else
-            System.out.println("Enter valid command");
+        }
+
+        return null;
     }
 
     private void handleBuffs(Player player) {
@@ -1085,5 +1096,25 @@ public class Battle {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public ServerMassage interpret(ClientMassage clientMassage) {
+        if (clientMassage.getBattleRequest() == ClientMassage.BattleRequest.ForfeitMatch)
+            return inputCommandLine("forfeit match", clientMassage.getAuthToken());
+        if (clientMassage.getBattleRequest() == ClientMassage.BattleRequest.EndTurn)
+            return inputCommandLine("end turn", clientMassage.getAuthToken());
+        if(clientMassage.getBattleRequest() == ClientMassage.BattleRequest.Select)
+            return inputCommandLine("select " + clientMassage.getCollectionItemID(), clientMassage.getAuthToken());
+        if(clientMassage.getBattleRequest() == ClientMassage.BattleRequest.UseItem)
+            return inputCommandLine("use " + clientMassage.getX() + ", " + clientMassage.getY(), clientMassage.getAuthToken());
+        if(clientMassage.getBattleRequest() == ClientMassage.BattleRequest.InsertCard)
+            return inputCommandLine("insert " + clientMassage.getCollectionItemID() + " in (" + clientMassage.getX() + ", " + clientMassage.getY() + ")", clientMassage.getAuthToken());
+        if(clientMassage.getBattleRequest() == ClientMassage.BattleRequest.MoveCard)
+            return inputCommandLine("move to (" + clientMassage.getX() + ", " + clientMassage.getY() + ")", clientMassage.getAuthToken());
+        if(clientMassage.getBattleRequest() == ClientMassage.BattleRequest.Attack)
+            return inputCommandLine("attack " + clientMassage.getCollectionItemID(), clientMassage.getAuthToken());
+        if(clientMassage.getBattleRequest() == ClientMassage.BattleRequest.UseSpecialPower)
+            return inputCommandLine("use special power (" + clientMassage.getX() + ", " + clientMassage.getY() + ")", clientMassage.getAuthToken());
+        return null;
     }
 }

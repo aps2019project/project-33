@@ -1,8 +1,7 @@
 package View.ShopMenu;
 
-import Controller.Client;
+import Controller.Client.Client;
 import Controller.MenuList;
-import Model.Collection;
 import Model.CollectionItem.CollectionItem;
 import View.Graphic;
 import javafx.fxml.Initializable;
@@ -12,7 +11,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import javax.swing.event.CaretListener;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -88,14 +86,16 @@ public class SellMenuController implements Initializable {
         isFirstTime = false;
 
         backButton.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.ShopMenu);
+            //todo in bayad doros she
+            // Client.getClient().setCurrentMenu(MenuList.ShopMenu);
             isFirstTime = true;
         });
 
         sellLabel.setOnMouseClicked(event -> {
             if (selectedCollectionItem != null) {
                 Client.getClient().getShopMenu().inputCommandLine("sell " + selectedCollectionItem.getID());
-                Client.getClient().setCurrentMenu(MenuList.ShopMenu);
+                //todo in bayad doros she
+                // Client.getClient().setCurrentMenu(MenuList.ShopMenu);
                 isFirstTime = true;
             }
         });

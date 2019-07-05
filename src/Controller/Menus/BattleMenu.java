@@ -1,11 +1,15 @@
 package Controller.Menus;
 
 import Controller.*;
+import Controller.Client.ClientMassage;
+import Controller.Server.ServerMassage;
 import Generator.DeckGenerator;
 import Model.*;
 import Model.CollectionItem.*;
 
 import java.io.FileNotFoundException;
+
+//todo, in ja avale bazi darim setup mikonim, ye chiz shabihe hamin bayad anjam bedim baraye relax shodan
 
 //type mishe single, multi
 //mode mishe custom ya story
@@ -31,36 +35,43 @@ public class BattleMenu {
 
     //battle, player 1, player 2, prize, mode, numberOfFlag
 
-    public void createGame(String secondPlayer, String type, String mode, String chapter, String kind) throws FileNotFoundException {
+    public ServerMassage createGame(String firstPlayerUsername, String secondPlayerUsername, String type, String mode, String chapter, String kind) throws FileNotFoundException {
         initialize();
 
-        //todo in ja kollan oomadim nafarate bazio moshakhas kardim -> Type
-        if (!checkDeck(Main.application.getLoggedInAccount())) {
-            System.out.println("selected deck is invalid");
-            return;
-        }
+        Account firstPlayer = Account.getAccountByUsername(firstPlayerUsername);
+        if (!checkDeck(firstPlayer))
+            return new ServerMassage(ServerMassage.Type.Error, ServerMassage.ErrorType.InvalidDeckForFirstPlayer);
 
         //set players
         chooseType(type);
-        battle.setPlayerOn(new Player(Main.application.getLoggedInAccount()));
-        chooseSecondPlayer(secondPlayer);
-        System.out.println(battle.getPlayerOn().getAccount().getUsername());
+        battle.setPlayerOn(new Player(firstPlayer));
+        chooseSecondPlayer(secondPlayerUsername);
+        if(battle.getPlayerOff() == null)
+            return new ServerMassage(ServerMassage.Type.Error, ServerMassage.ErrorType.InvalidSecondPlayerUsername);
+
         //set battle details
 
         //todo in ja bayad berim badi, chie ? -? mode -> custom ya story
         //todo number of flags felan fix e, ta bebinim badan khoda chi mikhad
-        if(type.equals("Single Player")) chooseMode(mode, chapter, kind, 1);
+        if (type.equals("Single Player")) chooseMode(mode, chapter, kind, 1);
 
-        if (battle.getPlayerOff() == null || !checkDeck(battle.getPlayerOff().getAccount())) {
-            if(!checkDeck(battle.getPlayerOff().getAccount()))
-                System.out.println("invalid deck");
-            System.out.println("Invalid rival");
-            return;
-        }
+        if (!checkDeck(battle.getPlayerOff().getAccount()))
+            return new ServerMassage(ServerMassage.Type.Error, ServerMassage.ErrorType.InvalidDeckForSecondPlayer);
 
         battle.runGame();
-        Client.getClient().setRunningBattle(battle);
-        Client.getClient().setCurrentMenu(MenuList.Battle);
+
+        setupPlayersForBattle(battle.getPlayerOff());
+        setupPlayersForBattle(battle.getPlayerOn());
+
+        System.out.println("battle created");
+
+        return new ServerMassage(ServerMassage.Type.Accept, null);
+    }
+
+    private void setupPlayersForBattle(Player player) {
+        player.getAccount().setRunningBattle(battle);
+        player.getAccount().setState(Account.State.Busy);
+        player.getAccount().setCurrentMenu(MenuList.Battle);
     }
 
     private void initialize() {
@@ -76,8 +87,7 @@ public class BattleMenu {
         System.out.println(battle.getType());
         if (battle.getType().equals("Single Player")) {
             battle.setPlayerOff(new AI());
-        }
-        else {
+        } else {
             Account account = Account.getAccountByUsername(secondPlayer);
             if (account != null)
                 battle.setPlayerOff(new Player(account));
@@ -108,8 +118,8 @@ public class BattleMenu {
             battle.setPrize(prizeOfCustomGame);
             battle.setKind(kind);
             String address = "Data/Battle/Custom/Custom";
-            for(int i = 0; i < kinds.length; i++){
-                if(kind.equals(kinds[i])){
+            for (int i = 0; i < kinds.length; i++) {
+                if (kind.equals(kinds[i])) {
                     //todo in kheili bade vali chare i nist
                     battle.setNumberOfFlags(numberOfFlagsOfChapters[i]);
 
@@ -141,6 +151,10 @@ public class BattleMenu {
         Hero hero = Hero.createHero(DeckGenerator.heroNames[0], account.getUsername());
         account.getCollection().addCollectionItemToCollection(hero.getID());
         account.getCollection().addCollectionItemToDeck(hero.getID(), account.getUsername());
+    }
+
+    public ServerMassage interpret(ClientMassage clientMassage) throws FileNotFoundException {
+        return createGame(clientMassage.getAuthToken(), clientMassage.getSecondPlayerUsername(), clientMassage.getType(), clientMassage.getMode(), clientMassage.getChapter(), clientMassage.getKind());
     }
 }
 

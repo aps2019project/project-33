@@ -1,6 +1,6 @@
 package View.ShopMenu;
 
-import Controller.Client;
+import Controller.Client.Client;
 import Controller.MenuList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -22,7 +22,8 @@ public class BuyController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         backButton.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.ShopMenu);
+            //todo in bayad doros she
+            // Client.getClient().setCurrentMenu(MenuList.ShopMenu);
         });
 
         searchButton.setOnMouseClicked(event -> {

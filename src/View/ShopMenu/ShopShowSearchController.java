@@ -1,18 +1,14 @@
 package View.ShopMenu;
 
-import Controller.Client;
+import Controller.Client.Client;
 import Controller.MenuList;
-import Model.CollectionItem.CollectionItem;
 import View.Graphic;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ShopShowSearchController implements Initializable {
@@ -36,7 +32,8 @@ public class ShopShowSearchController implements Initializable {
         isFirstTime = false;
 
         backButton.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.ShopMenu);
+            //todo in bayad doros she
+            // Client.getClient().setCurrentMenu(MenuList.ShopMenu);
             isFirstTime = true;
         });
 

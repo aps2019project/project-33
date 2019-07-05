@@ -1,5 +1,8 @@
 package Controller.Menus;
 
+import Controller.Client.ClientMassage;
+import Controller.Server.ServerMassage;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 

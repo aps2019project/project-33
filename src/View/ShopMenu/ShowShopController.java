@@ -1,8 +1,7 @@
 package View.ShopMenu;
 
-import Controller.Client;
+import Controller.Client.Client;
 import Controller.MenuList;
-import Model.Collection;
 import Model.CollectionItem.CollectionItem;
 import View.Graphic;
 import javafx.fxml.Initializable;
@@ -79,7 +78,8 @@ public class ShowShopController implements Initializable {
         isFirstTime = false;
 
         backButton.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.ShopMenu);
+            //todo in bayad doros she
+            // Client.getClient().setCurrentMenu(MenuList.ShopMenu);
             isFirstTime = true;
         });
     }

@@ -1,6 +1,6 @@
 package View.ShopMenu;
 
-import Controller.Client;
+import Controller.Client.Client;
 import Controller.MenuList;
 import View.Graphic;
 import javafx.fxml.Initializable;
@@ -24,7 +24,8 @@ public class SearchCollectionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         backButton.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.ShopMenu);
+            //todo in bayad doros she
+            // Client.getClient().setCurrentMenu(MenuList.ShopMenu);
         });
 
         searchButton.setOnMouseClicked(event -> {

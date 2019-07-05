@@ -1,5 +1,8 @@
 package Controller;
 
+import Controller.Client.Client;
+import Controller.Server.Server;
+import Controller.Server.ServerMain;
 import Model.*;
 import Model.CollectionItem.CollectionItem;
 import Model.CollectionItem.Item;
@@ -15,11 +18,10 @@ import java.util.Objects;
 public class Application {
     private ArrayList<Account> accounts;
     private Collection shop = new Collection();
-    private Account loggedInAccount;
 
     public void runApplication() throws IOException {
         loadData();
-        Client client = Client.createClient();
+        new Server().run();
     }
 
     public static Object copy(Object object, Class className) throws IOException {
@@ -55,7 +57,7 @@ public class Application {
         File file = new File("Data/Memory/ShopMenu");
 
         if(Objects.requireNonNull(file.listFiles()).length > 0)
-            Main.application.shop = (Collection) readJSON(Collection.class, "Data/Memory/ShopMenu/ShopMenu.json");
+            ServerMain.application.shop = (Collection) readJSON(Collection.class, "Data/Memory/ShopMenu/ShopMenu.json");
 
     }
 
@@ -90,14 +92,6 @@ public class Application {
     }
 
     // Here is Setters && Getters
-
-    public Account getLoggedInAccount() {
-        return loggedInAccount;
-    }
-
-    public void setLoggedInAccount(Account loggedInAccount) {
-        this.loggedInAccount = loggedInAccount;
-    }
 
     public Collection getShop() {
         return shop;

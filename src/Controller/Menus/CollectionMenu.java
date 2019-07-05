@@ -4,8 +4,8 @@
 package Controller.Menus;
 
 import Controller.Application;
-import Controller.Client;
-import Controller.Main;
+import Controller.Client.Client;
+import Controller.Server.ServerMain;
 import Controller.MenuList;
 import Model.*;
 import Model.CollectionItem.CollectionItem;
@@ -17,25 +17,24 @@ public class CollectionMenu extends Menu {
     private boolean isFirstTime = true;
     private Collection collection = null;
 
-
     public void inputCommandLine(String inputLine) throws IOException {
 
         System.out.println("Here is Collection Menu");
         System.out.println("For help, enter : show menu");
 
-//        String inputLine = Main.scanner.nextLine();
+//        String inputLine = ServerMain.scanner.nextLine();
         inputLine = inputLine.trim();
         String[] input = inputLine.split("[ ]+");
         inputLine = inputLine.toLowerCase();
         if (isFirstTime) {
-            collection = (Collection) Application.copy(Main.application.getLoggedInAccount().getCollection(),
-                    Collection.class);
+            collection = null; //todo (Collection) Application.copy(ServerMain.application.getLoggedInAccount().getCollection(), Collection.class);
             isFirstTime = false;
         }
 
         if (inputLine.equals("show")) {
             Client.getClient().setResultOfSearch(collection.getCollectionItems());
-            Client.getClient().setCurrentMenu(MenuList.CollectionShowCollection);
+            //todo in bayad doros she
+            // Client.getClient().setCurrentMenu(MenuList.CollectionShowCollection);
             collection.showCollection("Sell Cost");
         } else if (inputLine.matches("search .*")) {
             searchInCollection(collection, input[1]);
@@ -66,7 +65,8 @@ public class CollectionMenu extends Menu {
             CollectionMenu.showMenu();
         else if (inputLine.equals("exit")) {
             isFirstTime = true;
-            Client.getClient().setCurrentMenu(MenuList.MainMenu);
+            //todo in bayad doros she
+            // Client.getClient().setCurrentMenu(MenuList.MainMenu);
             return;
         } else
             System.out.println("Enter valid command line !");
@@ -107,6 +107,7 @@ public class CollectionMenu extends Menu {
     }
 
     private void save(Collection collection) {
-        Main.application.getLoggedInAccount().setCollection(collection);
+
+        //todo ServerMain.application.getLoggedInAccount().setCollection(collection);
     }
 }

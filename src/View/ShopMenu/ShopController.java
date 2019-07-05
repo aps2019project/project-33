@@ -1,6 +1,6 @@
 package View.ShopMenu;
 
-import Controller.Client;
+import Controller.Client.Client;
 import Controller.MenuList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -31,11 +31,13 @@ public class ShopController implements Initializable {
         });
 
         searchCollectionLabel.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.ShopSearchCollection);
+            //todo in bayad doros she
+            // Client.getClient().setCurrentMenu(MenuList.ShopSearchCollection);
         });
 
         buyLabel.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.BuyMenu);
+            //todo in bayad doros she
+            // Client.getClient().setCurrentMenu(MenuList.BuyMenu);
         });
 
         sellLabel.setOnMouseClicked(event -> {
@@ -51,7 +53,8 @@ public class ShopController implements Initializable {
         });
 
         searchLabel.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.SearchShop);
+            //todo in bayad doros she
+            // Client.getClient().setCurrentMenu(MenuList.SearchShop);
         });
     }
 }
