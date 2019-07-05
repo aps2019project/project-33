@@ -3,8 +3,8 @@ package Controller;
 public enum MenuList {
     AccountMenu, MainMenu, ShopMenu, CollectionMenu, ChooseType, ChooseMode, ChooseKind, StoryChapters, Battle, SearchShop,
     ShowingBuy, ShopShowCollection, ShopSearchCollection, BuyMenu, SellMenu, ShopShowSearch, ShowShop, CollectionShowCollection,
-    CollectionSearch, CollectionShowSearch, CollectionCreateDeck, CollectionDeleteDeck, CollectionAddCardToDeck,
-    CollectionSelectAddingCard;
+    CollectionSearch, CollectionShowSearch, CollectionCreateDeck, CollectionDeleteDeck, CollectionSelectDeckForAdd,
+    CollectionAddCardToDeck, CollectionSelectDeckForRemove, CollectionRemoveCardFromDeck;
 
     public String getAddressOfFile() {
         if (this.equals(AccountMenu)) return "AccountMenu/AccountMenu.fxml";
@@ -29,8 +29,10 @@ public enum MenuList {
         if (this.equals(CollectionShowSearch)) return "CollectionMenu/Search/ShowSearch.fxml";
         if (this.equals(CollectionCreateDeck)) return "CollectionMenu/CreateDeck/CreateDeck.fxml";
         if (this.equals(CollectionDeleteDeck)) return "CollectionMenu/DeleteDeck/DeleteDeck.fxml";
-        if (this.equals(CollectionAddCardToDeck)) return "CollectionMenu/AddCardToDeck/AddCardToDeck.fxml";
-        if (this.equals(CollectionSelectAddingCard)) return "CollectionMenu/AddCardToDeck/SelectCard.fxml";
+        if (this.equals(CollectionSelectDeckForAdd)) return "CollectionMenu/AddCardToDeck/SelectDeck.fxml";
+        if (this.equals(CollectionAddCardToDeck)) return "CollectionMenu/AddCardToDeck/SelectCard.fxml";
+        if (this.equals(CollectionSelectDeckForRemove)) return "CollectionMenu/RemoveCardFromDeck/SelectDeck.fxml";
+        if (this.equals(CollectionRemoveCardFromDeck)) return "CollectionMenu/RemoveCardFromDeck/SelectCard.fxml";
         return null;
     }
 }

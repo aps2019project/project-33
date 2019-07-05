@@ -2,7 +2,6 @@ package View.CollectionMenu.AddCardToDeck;
 
 import Controller.Client;
 import Controller.MenuList;
-import Model.Account;
 import Model.Collection;
 import Model.Deck;
 import View.CollectionMenu.DeleteDeck.DeleteDeckController;
@@ -14,12 +13,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class AddCardToDeckController implements Initializable {
+public class SelectDeckController implements Initializable {
     public AnchorPane mainPane;
     public ImageView backButton;
     public ImageView duelystImage;
@@ -55,7 +53,7 @@ public class AddCardToDeckController implements Initializable {
                 deckLabels.add(label);
             }
             VBox.setMargin(labelsVBox, new Insets(0, 0, 5, 0));
-            labelsVBox.setLayoutY(150);
+            labelsVBox.setLayoutY(100);
             labelsVBox.setLayoutX(150);
             mainPane.getChildren().add(labelsVBox);
         }
@@ -75,7 +73,8 @@ public class AddCardToDeckController implements Initializable {
         okButton.setOnMouseClicked(event -> {
             try {
                 if (selectedDeck != null) {
-                    Client.getClient().setCurrentMenu(MenuList.CollectionSelectAddingCard);
+                    Client.getClient().setCurrentMenu(MenuList.CollectionAddCardToDeck);
+                    isFirstTime = true;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
