@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="545.0" prefWidth="616.0" styleClass="CollectionImagePane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CollectionMenu.CollectionMenu.CollectionMenuController">
+   <stylesheets>
+      <URL value="@../CollectionMenu.css" />
+      <URL value="@../../Button.css" />
+   </stylesheets>
+   <children>
+      <VBox layoutX="74.0" layoutY="89.0" prefHeight="427.0" prefWidth="475.0">
+         <children>
+            <Label fx:id="showLabel" styleClass="NoFormButton" text="SHOW" />
+            <Label fx:id="searchLabel" prefHeight="67.0" prefWidth="132.0" styleClass="NoFormButton" text="SEARCH" />
+            <Label fx:id="createDeckLabel" styleClass="NoFormButton" text="CREATE DECK" />
+            <Label fx:id="deleteDeckLabel" styleClass="NoFormButton" text="DELETE DECK" />
+            <Label fx:id="addToDeckLabel" styleClass="NoFormButton" text="ADD TO DECK" />
+            <Label fx:id="removeFromDeckLabel" styleClass="NoFormButton" text="REMOVE FROM DECK" />
+            <Label fx:id="validateDeckLabel" styleClass="NoFormButton" text="VALIDATE DECK" />
+            <Label fx:id="selectDeckLabel" styleClass="NoFormButton" text="SELECT DECK" />
+            <Label fx:id="showAllDecksLabel" styleClass="NoFormButton" text="SHOW ALL DECKS" />
+            <Label fx:id="showDeckLabel" styleClass="NoFormButton" text="SHOW DECK" />
+            <Label fx:id="saveLabel" styleClass="NoFormButton" text="SAVE" />
+         </children>
+      </VBox>
+      <ImageView fx:id="backButton" fitHeight="83.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../resources/ui/button_back_corner.png" />
+         </image>
+         <styleClass>
+            <String fx:value="BackButton" />
+            <String fx:value="ImageButton" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="duelystImage" fitHeight="150.0" fitWidth="200.0" layoutX="74.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../resources/ui/brand_duelyst.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
