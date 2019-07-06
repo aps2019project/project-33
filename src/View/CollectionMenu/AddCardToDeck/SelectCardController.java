@@ -2,6 +2,7 @@ package View.CollectionMenu.AddCardToDeck;
 
 import Controller.Client;
 import Controller.MenuList;
+import Model.Collection;
 import Model.CollectionItem.CollectionItem;
 import Model.Deck;
 import View.Graphic;
@@ -27,6 +28,11 @@ public class SelectCardController implements Initializable {
     public static boolean isFirstTime = true;
     public static VBox mainVBox = new VBox();
     public static ArrayList<VBox> vBoxes = new ArrayList<>();
+    public static int numberOfHeroes, numberOfMinions, numberOfSpells, numberOfItems;
+    ArrayList<CollectionItem> heroes = new ArrayList<>();
+    ArrayList<CollectionItem> minions = new ArrayList<>();
+    ArrayList<CollectionItem> spells = new ArrayList<>();
+    ArrayList<CollectionItem> items = new ArrayList<>();
 
     public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) {
         Label label = new Label(labelText);
@@ -43,10 +49,10 @@ public class SelectCardController implements Initializable {
         vBoxes.addAll(Graphic.vBoxes);
     }
 
-    public static ArrayList<CollectionItem> removeDeckCards(Deck deck, ArrayList<CollectionItem> collectionItems){
+    public static ArrayList<CollectionItem> removeDeckCards(Deck deck, ArrayList<CollectionItem> collectionItems) {
         ArrayList<CollectionItem> editedCollectionItems = new ArrayList<>();
-        for(CollectionItem collectionItem : collectionItems)
-            if(!deck.getCards().contains(collectionItem))
+        for (CollectionItem collectionItem : collectionItems)
+            if (!deck.getCards().contains(collectionItem))
                 editedCollectionItems.add(collectionItem);
         return editedCollectionItems;
     }
@@ -60,19 +66,23 @@ public class SelectCardController implements Initializable {
             ArrayList<CollectionItem> collectionItems = Client.getClient().getCollection().getCollectionItems();
             collectionItems = removeDeckCards(SelectDeckController.selectedDeck, collectionItems);
 
-            ArrayList<CollectionItem> heroes = Graphic.getHeroes(collectionItems);
+            heroes = Graphic.getHeroes(collectionItems);
             addPart(heroes, "HEROES:", mainVBox);
+            numberOfHeroes = heroes.size();
 
-            ArrayList<CollectionItem> minions = Graphic.getMinions(collectionItems);
+            minions = Graphic.getMinions(collectionItems);
             addPart(minions, "MINIONS:", mainVBox);
+            numberOfMinions = minions.size();
 
-            ArrayList<CollectionItem> spells = Graphic.getSpells(collectionItems);
+            spells = Graphic.getSpells(collectionItems);
             addPart(spells, "SPELLS:", mainVBox);
+            numberOfSpells = spells.size();
 
-            ArrayList<CollectionItem> items = Graphic.getItems(collectionItems);
+            items = Graphic.getItems(collectionItems);
             addPart(items, "ITEMS:", mainVBox);
+            numberOfItems = items.size();
 
-            mainVBox.setLayoutY(100);
+            mainVBox.setLayoutY(130);
             mainVBox.setLayoutX(150);
 
             VBox.setMargin(mainVBox, new Insets(0, 0, 20, 0));
@@ -82,9 +92,19 @@ public class SelectCardController implements Initializable {
 
         int index = 0;
         for (VBox vBox : vBoxes) {
-            final int y = index;
+            CollectionItem collectionItem;
+            if (index < numberOfHeroes) {
+                collectionItem = heroes.get(index);
+            } else if (index < numberOfHeroes + numberOfMinions) {
+                collectionItem = minions.get(index - numberOfHeroes);
+            } else if (index < numberOfHeroes + numberOfMinions + numberOfSpells) {
+                collectionItem = spells.get(index - (numberOfHeroes + numberOfMinions));
+            } else {
+                collectionItem = items.get(index - (numberOfHeroes + numberOfMinions + numberOfSpells));
+            }
+
             vBox.setOnMouseClicked(event -> {
-                selectedCollectionItem = Client.getClient().getResultOfSearch().get(y);
+                selectedCollectionItem = collectionItem;
                 Graphic.clearShadows(vBoxes);
                 vBox.getStylesheets().add(Graphic.class.getResource("Card.css").toExternalForm());
                 vBox.getStyleClass().add("SelectedCard");
@@ -103,7 +123,7 @@ public class SelectCardController implements Initializable {
             if (selectedCollectionItem != null) {
                 try {
                     Client.getClient().getCollectionMenu().inputCommandLine("add " + selectedCollectionItem.getID() +
-                            "to deck " + SelectDeckController.selectedDeck.getName());
+                            " to deck " + SelectDeckController.selectedDeck.getName());
                     Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
                     isFirstTime = true;
                 } catch (IOException e) {
@@ -111,6 +131,7 @@ public class SelectCardController implements Initializable {
                 }
                 Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
                 isFirstTime = true;
+                System.out.println();
             }
         });
     }

@@ -110,8 +110,10 @@ public class Collection {
     public void addCollectionItemToDeck(String ID, String deckName){
         Deck thisDeck = this.getDeckByName(deckName);
         CollectionItem collectionItem = this.getCollectionItemByID(ID);
-        if(this.validateInput(collectionItem, thisDeck))
+        if(this.validateInput(collectionItem, thisDeck)) {
             thisDeck.addCard(collectionItem);
+            System.out.println("DONE!");
+        }
     }
 
     public void deleteDeck(String deckName){

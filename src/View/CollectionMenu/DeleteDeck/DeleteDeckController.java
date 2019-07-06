@@ -62,7 +62,7 @@ public class DeleteDeckController implements Initializable {
                 deckLabels.add(label);
             }
             VBox.setMargin(labelsVBox, new Insets(0, 0, 5, 0));
-            labelsVBox.setLayoutY(100);
+            labelsVBox.setLayoutY(120);
             labelsVBox.setLayoutX(150);
             mainAnchor.getChildren().add(labelsVBox);
         }

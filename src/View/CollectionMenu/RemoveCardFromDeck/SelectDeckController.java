@@ -54,8 +54,8 @@ public class SelectDeckController implements Initializable {
                 deckLabels.add(label);
             }
             VBox.setMargin(labelsVBox, new Insets(0, 0, 5, 0));
-            labelsVBox.setLayoutY(100);
-            labelsVBox.setLayoutX(150);
+            labelsVBox.setLayoutY(120);
+            labelsVBox.setLayoutX(170);
             mainPane.getChildren().add(labelsVBox);
         }
         isFirstTime = false;
