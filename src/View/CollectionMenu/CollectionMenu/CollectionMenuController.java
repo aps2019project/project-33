@@ -22,11 +22,12 @@ public class CollectionMenuController implements Initializable {
     public Label removeFromDeckLabel;
     public Label validateDeckLabel;
     public Label selectDeckLabel;
-    public Label showAllDecksLabel;
     public Label showDeckLabel;
     public Label saveLabel;
     public ImageView backButton;
     public ImageView duelystImage;
+    public Label importDeckLabel;
+    public Label exportDeckLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -85,6 +86,14 @@ public class CollectionMenuController implements Initializable {
 
         showDeckLabel.setOnMouseClicked(event -> {
             Client.getClient().setCurrentMenu(MenuList.CollectionSelectDeckForShow);
+        });
+
+        importDeckLabel.setOnMouseClicked(event -> {
+            Client.getClient().setCurrentMenu(MenuList.CollectionImportDeck);
+        });
+
+        exportDeckLabel.setOnMouseClicked(event -> {
+            Client.getClient().setCurrentMenu(MenuList.CollectionExportDeck);
         });
     }
 }

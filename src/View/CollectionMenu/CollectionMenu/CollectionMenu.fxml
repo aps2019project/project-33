@@ -24,8 +24,9 @@
             <Label fx:id="removeFromDeckLabel" styleClass="NoFormButton" text="REMOVE FROM DECK" />
             <Label fx:id="validateDeckLabel" styleClass="NoFormButton" text="VALIDATE DECK" />
             <Label fx:id="selectDeckLabel" styleClass="NoFormButton" text="SELECT DECK" />
-            <Label fx:id="showAllDecksLabel" styleClass="NoFormButton" text="SHOW ALL DECKS" />
             <Label fx:id="showDeckLabel" styleClass="NoFormButton" text="SHOW DECK" />
+            <Label fx:id="importDeckLabel" styleClass="NoFormButton" text="IMPORT DECK" />
+            <Label fx:id="exportDeckLabel" styleClass="NoFormButton" text="EXPORT DECK" />
             <Label fx:id="saveLabel" styleClass="NoFormButton" text="SAVE" />
          </children>
       </VBox>
