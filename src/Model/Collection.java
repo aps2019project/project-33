@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.Client;
 import Model.CollectionItem.*;
 
 import java.util.ArrayList;
@@ -62,6 +63,8 @@ public class Collection {
             System.out.println("deck doesn't exist");
             return;
         }
+
+        Client.getClient().setResultOfSearch(deck.getCards());
         deck.showDeck(false);
     }
 

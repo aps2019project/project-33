@@ -4,6 +4,7 @@ import Controller.Client;
 import Controller.MenuList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -80,6 +81,10 @@ public class CollectionMenuController implements Initializable {
 
         selectDeckLabel.setOnMouseClicked(event -> {
             Client.getClient().setCurrentMenu(MenuList.CollectionSelectDeck);
+        });
+
+        showDeckLabel.setOnMouseClicked(event -> {
+            Client.getClient().setCurrentMenu(MenuList.CollectionSelectDeckForShow);
         });
     }
 }
