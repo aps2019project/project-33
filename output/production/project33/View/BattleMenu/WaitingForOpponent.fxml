@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="286.0" prefWidth="391.0" styleClass="ChooseSecondPlayerAnchorPane" stylesheets="@BattleMenu.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="CENTER" layoutX="59.0" layoutY="95.0" prefHeight="96.0" prefWidth="274.0" text="Waiting for Opponent ...." textFill="#363636">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

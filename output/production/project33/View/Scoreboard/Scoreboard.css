@@ -1,0 +1,28 @@
+.AnchorPane{
+    -fx-background-image: url("../../../resources/maps/shimzar/background@2x.jpg");
+    -fx-background-size: 100% 100%;
+}
+
+.ScoreboardAreaBackGround{
+    -fx-background-color: black;
+    -fx-opacity: 0.4;
+}
+
+.ScoreboardLabelOnline{
+    -fx-font-size: 30;
+    -fx-text-fill: #00d400;
+    -fx-alignment: center-left;
+}
+.ScoreboardLabelOnline:hover{
+    -fx-effect: dropshadow(three-pass-box, white, 5, 0.3, 0, 0);
+}
+
+.ScoreboardLabelOffline{
+    -fx-font-size: 30;
+    -fx-text-fill: #ff1e78;
+    -fx-alignment: center-left;
+}
+
+.ScoreboardLabelOffline:hover{
+    -fx-effect: dropshadow(three-pass-box, white, 5, 0.3, 0, 0);
+}

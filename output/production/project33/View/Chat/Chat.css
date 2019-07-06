@@ -1,0 +1,19 @@
+.AnchorPane{
+    -fx-background-image: url("../../../resources/maps/abyssian/background@2x.jpg");
+    -fx-background-size: 100% 100%;
+}
+
+.ChatAreaBackGround{
+    -fx-background-color: black;
+    -fx-opacity: 0.3;
+}
+
+.ChatMassage{
+    -fx-font-size: 25;
+    -fx-text-fill: white;
+}
+
+.SentButton{
+    -fx-background-image: url("../../../resources/ui/send.png");
+    -fx-background-size: 100% 100%;
+}

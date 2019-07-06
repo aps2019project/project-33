@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.net.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="554.0" prefWidth="847.0" styleClass="PlayAnchor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.BattleMenu.ChooseKind">
+    <stylesheets>
+        <URL value="@../Button.css" />
+        <URL value="@BattleMenu.css" />
+    </stylesheets>
+    <children>
+        <Group>
+            <children>
+                <Label fx:id="kindOneButton" layoutX="75.0" layoutY="74.0" text="Kill enemy's hero&#10;                 ">
+                    <styleClass>
+                        <String fx:value="ChooseType" />
+                        <String fx:value="KillEnemyHero" />
+                    </styleClass>
+                </Label>
+                <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="75.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../resources/ui/sliding_panel/panel_trim_plate.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </Group>
+        <Group>
+            <children>
+                <Label fx:id="kindThreeButton" layoutX="574.0" layoutY="74.0" text="Take Half of Flags&#10;         ">
+                    <styleClass>
+                        <String fx:value="ChooseType" />
+                        <String fx:value="TakeHalfOfFlag" />
+                    </styleClass>
+                </Label>
+                <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="574.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../resources/ui/sliding_panel/panel_trim_plate.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </Group>
+        <Group layoutX="8.0">
+            <children>
+                <Label fx:id="kindTwoButton" layoutX="316.0" layoutY="74.0" text="Hold flag&#10;         ">
+                    <styleClass>
+                        <String fx:value="ChooseType" />
+                        <String fx:value="HoldFlag" />
+                    </styleClass>
+                </Label>
+                <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="316.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../resources/ui/sliding_panel/panel_trim_plate.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </Group>
+        <Label fx:id="backButton" styleClass="BackButton" />
+    </children>
+</AnchorPane>

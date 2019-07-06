@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="189.0" prefWidth="489.0" styleClass="ChooseSecondPlayerAnchorPane" stylesheets="@BattleMenu.css" xmlns="http://javafx.com/javafx/8" fx:controller="View.BattleMenu.ChooseSecondPlayerController">
+   <children>
+      <TextField fx:id="textField" layoutX="29.0" layoutY="154.0" prefHeight="48.0" prefWidth="225.0" promptText="rival's username" styleClass="ChooseSecondPlayerTextField" />
+      <Label fx:id="playGame" layoutX="265.0" layoutY="131.0" stylesheets="@../Button.css" text="Play Game">
+         <styleClass>
+            <String fx:value="Button" />
+            <String fx:value="GreenButton" />
+         </styleClass>
+      </Label>
+      <Label fx:id="backButton" layoutY="4.0" stylesheets="@../Button.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <styleClass>
+            <String fx:value="BackButton" />
+            <String fx:value="ImageButton" />
+         </styleClass>
+      </Label>
+   </children>
+</AnchorPane>
