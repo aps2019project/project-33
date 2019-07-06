@@ -4,7 +4,8 @@ public enum MenuList {
     AccountMenu, MainMenu, ShopMenu, CollectionMenu, ChooseType, ChooseMode, ChooseKind, StoryChapters, Battle, SearchShop,
     ShowingBuy, ShopShowCollection, ShopSearchCollection, BuyMenu, SellMenu, ShopShowSearch, ShowShop, CollectionShowCollection,
     CollectionSearch, CollectionShowSearch, CollectionCreateDeck, CollectionDeleteDeck, CollectionSelectDeckForAdd,
-    CollectionAddCardToDeck, CollectionSelectDeckForRemove, CollectionRemoveCardFromDeck, CollectionValidateDeck;
+    CollectionAddCardToDeck, CollectionSelectDeckForRemove, CollectionRemoveCardFromDeck, CollectionValidateDeck,
+    CollectionSelectDeck;
 
     public String getAddressOfFile() {
         if (this.equals(AccountMenu)) return "AccountMenu/AccountMenu.fxml";
@@ -34,6 +35,7 @@ public enum MenuList {
         if (this.equals(CollectionSelectDeckForRemove)) return "CollectionMenu/RemoveCardFromDeck/SelectDeck.fxml";
         if (this.equals(CollectionRemoveCardFromDeck)) return "CollectionMenu/RemoveCardFromDeck/SelectCard.fxml";
         if (this.equals(CollectionValidateDeck)) return "CollectionMenu/ValidateDeck/ValidateDeck.fxml";
+        if (this.equals(CollectionSelectDeck)) return "CollectionMenu/SelectDeck/SelectDeck.fxml";
         return null;
     }
 }
