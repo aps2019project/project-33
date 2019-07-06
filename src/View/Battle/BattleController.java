@@ -161,7 +161,11 @@ public class BattleController implements Initializable {
                 graphicalCells[i][j].getAnchorPane().setOnMouseEntered(event -> {
                     if(graphicalCells[finalI][finalJ].getCell().getLivingCard() == null) return;;
                     cardInformationArea.getChildren().remove(cardInformationVBox);
-                    cardInformationVBox = Graphic.createCard(graphicalCells[finalI][finalJ].getCell().getLivingCard(), 1);
+                    try {
+                        cardInformationVBox = Graphic.createCard(graphicalCells[finalI][finalJ].getCell().getLivingCard(), 1);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                     cardInformationArea.getChildren().add(cardInformationVBox);
                 });
             }
@@ -183,7 +187,11 @@ public class BattleController implements Initializable {
             handUnits[i].getImageView().setOnMouseEntered(event -> {
                 if(handUnits[finalI].getCollectionItem() == null) return;
                 cardInformationArea.getChildren().remove(cardInformationVBox);
-                cardInformationVBox = Graphic.createCard(handUnits[finalI].getCollectionItem(), 1);
+                try {
+                    cardInformationVBox = Graphic.createCard(handUnits[finalI].getCollectionItem(), 1);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
                 cardInformationArea.getChildren().add(cardInformationVBox);
             });
         }
@@ -391,7 +399,7 @@ class HandUnit {
                 this.collectionItem = hand.getCollectionItemByIndex(i);
                 if (collectionItem instanceof Item) this.manaLabel.setText("0");
                 else this.manaLabel.setText(Integer.toString(((Card) collectionItem).getMP()));
-                imageView.setImage(new Image(BattleController.class.getResource("1.gif").toExternalForm()));
+                imageView.setImage(new Image(new FileInputStream("resources/unit_gifs/1.gif")));
             }
         }
     }
@@ -458,7 +466,7 @@ class GraphicalCell {
                 imageView.setImage(null);
             return;
         } else if (livingCard == null || !cell.getLivingCard().getID().equals(livingCard.getID()) || imageView.getImage() == null) {
-            imageView.setImage(new Image(this.getClass().getResource("1.gif").toExternalForm()));
+            imageView.setImage(new Image(new FileInputStream("resources/unit_gifs/1.gif")));
         }
         if (runningBattle.getPlayerOn().haveCard(cell.getLivingCard().getID())) {
             anchorPane.getStyleClass().clear();

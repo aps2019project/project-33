@@ -10,6 +10,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Graphic {
@@ -17,9 +19,7 @@ public class Graphic {
     public static int numberOfColumns = 5;
     public static ArrayList<VBox> vBoxes = new ArrayList<>();
 
-
-
-    public static VBox createCards(ArrayList<CollectionItem> collectionItems) {
+    public static VBox createCards(ArrayList<CollectionItem> collectionItems) throws FileNotFoundException {
         vBoxes.clear();
 
         int index = 0;
@@ -49,13 +49,13 @@ public class Graphic {
         return mainVBox;
     }
 
-    public static VBox createCard(CollectionItem collectionItem, int index){
+    public static VBox createCard(CollectionItem collectionItem, int index) throws FileNotFoundException {
         VBox cardVbox = new VBox();
         cardVbox.setPrefWidth(150);
         cardVbox.setPrefHeight(250);
         //add gif
-        String address = "unit_gifs/" + (index % 68)  + ".gif";
-        Image image = new Image(Graphic.class.getResourceAsStream(address));
+        String address = "resources/unit_gifs/" + (index % 68)  + ".gif";
+        Image image = new Image(new FileInputStream(address));
         ImageView cardGif = new ImageView(image);
         cardGif.setFitHeight(cardVbox.getPrefHeight() / 2);
         cardGif.setFitWidth(cardVbox.getPrefWidth());

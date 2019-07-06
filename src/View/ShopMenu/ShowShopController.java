@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -26,7 +27,7 @@ public class ShowShopController implements Initializable {
     public static boolean isFirstTime = true;
     public static VBox mainVBox = new VBox();
 
-    public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) {
+    public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) throws FileNotFoundException {
         Label label = new Label(labelText);
         label.setTextFill(Color.NAVY);
         label.setStyle("-fx-font-size: 15");
@@ -57,16 +58,32 @@ public class ShowShopController implements Initializable {
             collectionItems = unique(collectionItems);
 
             ArrayList<CollectionItem> heroes = Graphic.getHeroes(collectionItems);
-            addPart(heroes, "HEROES:", mainVBox);
+            try {
+                addPart(heroes, "HEROES:", mainVBox);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
 
             ArrayList<CollectionItem> minions = Graphic.getMinions(collectionItems);
-            addPart(minions, "MINIONS:", mainVBox);
+            try {
+                addPart(minions, "MINIONS:", mainVBox);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
 
             ArrayList<CollectionItem> spells = Graphic.getSpells(collectionItems);
-            addPart(spells, "SPELLS:", mainVBox);
+            try {
+                addPart(spells, "SPELLS:", mainVBox);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
 
             ArrayList<CollectionItem> items = Graphic.getItems(collectionItems);
-            addPart(items, "ITEMS:", mainVBox);
+            try {
+                addPart(items, "ITEMS:", mainVBox);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
 
             mainVBox.setLayoutY(150);
             mainVBox.setLayoutX(100);

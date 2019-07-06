@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -32,7 +33,12 @@ public class SearchCollectionController implements Initializable {
             Client.getClient().getShopMenu().inputCommandLine("search collection " + nameField.getText());
             searchCollection.getChildren().remove(searchButton);
             searchCollection.getChildren().remove(nameField);
-            VBox cardsVBox = Graphic.createCards(Client.getClient().getResultOfSearch());
+            VBox cardsVBox = null;
+            try {
+                cardsVBox = Graphic.createCards(Client.getClient().getResultOfSearch());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
             cardsVBox.setLayoutX(100);
             cardsVBox.setLayoutY(100);
             searchCollection.getChildren().add(cardsVBox);

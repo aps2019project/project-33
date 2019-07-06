@@ -70,10 +70,28 @@ public class Client {
 
     //BattleMenu Commands
 
-    public synchronized ServerMassage createGame(String secondPlayerUsername, String type, String mode, String chapter, String kind) throws IOException, ClassNotFoundException {
+    public ServerMassage answerToGame(ClientMassage.BattleMenuRequest battleMenuRequest) throws IOException, ClassNotFoundException {
         ClientMassage clientMassage = new ClientMassage();
         clientMassage.setAuthToken(this.authToken);
         clientMassage.setDestinationMenu(ClientMassage.Menu.BattleMenu);
+        clientMassage.setBattleMenuRequest(battleMenuRequest);
+        return sendAndReceive(clientMassage);
+    }
+
+    public synchronized ServerMassage startCreateMultiGame(String secondPlayerUsername, String type, String mode, String chapter, String kind) throws IOException, ClassNotFoundException {
+        return sendCreateGameCommand(secondPlayerUsername, type, mode, chapter, kind, ClientMassage.BattleMenuRequest.startMultiPlayerGame);
+
+    }
+
+    public synchronized ServerMassage createGame(String secondPlayerUsername, String type, String mode, String chapter, String kind) throws IOException, ClassNotFoundException {
+        return sendCreateGameCommand(secondPlayerUsername, type, mode, chapter, kind, ClientMassage.BattleMenuRequest.CreateSinglePlayerGame);
+    }
+
+    private ServerMassage sendCreateGameCommand(String secondPlayerUsername, String type, String mode, String chapter, String kind, ClientMassage.BattleMenuRequest battleMenuRequest) throws IOException, ClassNotFoundException {
+        ClientMassage clientMassage = new ClientMassage();
+        clientMassage.setAuthToken(this.authToken);
+        clientMassage.setDestinationMenu(ClientMassage.Menu.BattleMenu);
+        clientMassage.setBattleMenuRequest(battleMenuRequest);
         clientMassage.setSecondPlayerUsername(secondPlayerUsername);
         clientMassage.setType(type);
         clientMassage.setMode(mode);
@@ -225,6 +243,5 @@ public class Client {
     public Socket getSocket() {
         return socket;
     }
-
 
 }

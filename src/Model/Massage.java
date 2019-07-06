@@ -14,7 +14,9 @@ public class Massage implements Serializable {
     }
 
     public synchronized static void addMassage(Massage massage) {
-        massages.add(massage);
+        synchronized (massages) {
+            massages.add(massage);
+        }
     }
 
     public String getMassageText() {

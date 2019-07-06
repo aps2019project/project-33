@@ -48,6 +48,8 @@ public class DeckGenerator {
             }
             String address = "Data/Battle/Story/Story" + i + ".json";
             Application.writeJSON(deck, address);
+            address = "Data/Battle/Custom/Custom" + i + ".json";
+            Application.writeJSON(deck, address);
         }
     }
 }

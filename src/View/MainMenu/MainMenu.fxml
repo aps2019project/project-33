@@ -20,13 +20,14 @@
       <URL value="@mainMenu.css" />
    </stylesheets>
    <children>
-      <VBox fx:id="vBox" layoutX="74.0" layoutY="100.0" prefHeight="224.0" prefWidth="200.0">
+      <VBox fx:id="vBox" layoutX="74.0" layoutY="100.0" prefHeight="266.0" prefWidth="200.0">
          <children>
             <Label fx:id="battle" styleClass="NoFormButton" text="BATTLE" />
             <Label fx:id="shop" styleClass="NoFormButton" text="SHOP" />
             <Label fx:id="collection" styleClass="NoFormButton" text="COLLECTION" />
             <Label fx:id="save" styleClass="NoFormButton" text="SAVE" />
             <Label fx:id="scoreboard" prefHeight="61.0" prefWidth="200.0" styleClass="NoFormButton" text="SCOREBOARD" />
+            <Label fx:id="chat" prefHeight="61.0" prefWidth="200.0" styleClass="NoFormButton" text="CHAT" />
          </children>
       </VBox>
       <ImageView fx:id="duelyst" fitHeight="36.0" fitWidth="200.0" layoutX="38.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">

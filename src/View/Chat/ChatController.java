@@ -2,6 +2,7 @@ package View.Chat;
 
 import Controller.Client.Client;
 import Controller.MenuList;
+import Controller.Server.ServerMassage;
 import Model.Massage;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.Initializable;
@@ -18,8 +19,8 @@ import java.util.ResourceBundle;
 public class ChatController implements Initializable {
     public Label backButton;
     public TextArea massageField;
-    public ImageView sentButton;
     public VBox chatArea;
+    public Label sentButton;
 
     private AnimationTimer animationTimer;
 
@@ -42,6 +43,7 @@ public class ChatController implements Initializable {
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
+            massageField.clear();
         });
 
         animationTimer = new AnimationTimer() {
@@ -53,7 +55,8 @@ public class ChatController implements Initializable {
                     chatArea.getChildren().clear();
                     ArrayList<Massage> massages = null;
                     try {
-                        massages = Client.getClient().getAllMassages().getMassages();
+                        ServerMassage serverMassage = Client.getClient().getAllMassages();
+                        massages = serverMassage.getMassages();
                     } catch (IOException | ClassNotFoundException e) {
                         e.printStackTrace();
                     }

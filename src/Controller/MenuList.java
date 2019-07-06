@@ -1,8 +1,11 @@
 package Controller;
 
+import View.BattleMenu.AnswerToGameController;
+
 public enum MenuList {
     AccountMenu, MainMenu, ShopMenu, CollectionMenu, ChooseType, ChooseMode, ChooseKind, StoryChapters, Battle, SearchShop,
-    ShowingBuy, ShopShowCollection, ShopSearchCollection, BuyMenu, SellMenu, ShopShowSearch, ShowShop, CollectionShowCollection, Scoreboard;
+    ShowingBuy, ShopShowCollection, ShopSearchCollection, BuyMenu, SellMenu, ShopShowSearch, ShowShop, CollectionShowCollection
+    , Scoreboard, Chat, ChooseSecondPlayer, WaitingForOpponent, AnswerToGame;
 
     public String getAddressOfFile() {
         if (this.equals(AccountMenu)) return "AccountMenu/AccountMenu.fxml";
@@ -24,6 +27,10 @@ public enum MenuList {
         if (this.equals(CollectionMenu)) return "CollectionMenu/CollectionMenu/CollectionMenu.fxml";
         if (this.equals(CollectionShowCollection)) return "CollectionMenu/ShowCollection/ShowCollection.fxml";
         if (this.equals(Scoreboard)) return "Scoreboard/Scoreboard.fxml";
+        if (this.equals(Chat)) return "Chat/Chat.fxml";
+        if (this.equals(ChooseSecondPlayer)) return "BattleMenu/ChooseSecondPlayer.fxml";
+        if (this.equals(WaitingForOpponent)) return "BattleMenu/WaitingForOpponent.fxml";
+        if (this.equals(AnswerToGame)) return "BattleMenu/AnswerToGame.fxml";
         return null;
     }
 }

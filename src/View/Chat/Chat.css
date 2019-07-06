@@ -9,5 +9,11 @@
 }
 
 .ChatMassage{
+    -fx-font-size: 25;
+    -fx-text-fill: white;
+}
 
+.SentButton{
+    -fx-background-image: url("../../../resources/ui/send.png");
+    -fx-background-size: 100% 100%;
 }

@@ -109,18 +109,23 @@ public class ResponseToClient extends Thread {
             return serverMassage;
         }
         if(clientMassage.getServerRequest() == ClientMassage.ServerRequest.SendMassageInChat){
-            String massageText = clientMassage.getMassage();
-            Account account = Account.getAccountByUsername(clientMassage.getAuthToken());
-            if(account == null) return new ServerMassage(ServerMassage.Type.Error, ServerMassage.ErrorType.InvalidAuthToken);
-            Massage.addMassage(new Massage(massageText, account));
-            return new ServerMassage(ServerMassage.Type.Accept, null);
+            synchronized (Massage.getMassages()) {
+                String massageText = clientMassage.getMassage();
+                Account account = Account.getAccountByUsername(clientMassage.getAuthToken());
+                if (account == null)
+                    return new ServerMassage(ServerMassage.Type.Error, ServerMassage.ErrorType.InvalidAuthToken);
+                Massage.addMassage(new Massage(massageText, account));
+                return new ServerMassage(ServerMassage.Type.Accept, null);
+            }
         }
         if(clientMassage.getServerRequest() == ClientMassage.ServerRequest.GiveAllMassages){
-            ArrayList<Massage> massages = Massage.getMassages();
-            massages = (ArrayList<Massage>) Application.copy(massages, ArrayList.class);
-            ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
-            serverMassage.setMassages(massages);
-            return serverMassage;
+            synchronized (Massage.getMassages()) {
+                ArrayList<Massage> massages = Massage.getMassages();
+                massages = (ArrayList<Massage>) Application.copy(massages, ArrayList.class);
+                ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
+                serverMassage.setMassages(massages);
+                return serverMassage;
+            }
         }
         return null;
     }

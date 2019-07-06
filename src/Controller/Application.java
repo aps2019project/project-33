@@ -24,7 +24,7 @@ public class Application {
         new Server().run();
     }
 
-    public static Object copy(Object object, Class className) throws IOException {
+    public synchronized static Object copy(Object object, Class className) throws IOException {
         String address = "copy.json";
         writeJSON(object, address);
         Object copyObject = readJSON(className, address);
@@ -73,7 +73,7 @@ public class Application {
         return arrayList;
     }
 
-    public static Object readJSON(Class className, String address) throws FileNotFoundException {
+    public synchronized static Object readJSON(Class className, String address) throws FileNotFoundException {
         YaGsonBuilder builder = new YaGsonBuilder();
         YaGson yaGson = builder.create();
         BufferedReader bufferedReader = new BufferedReader(
@@ -83,7 +83,7 @@ public class Application {
         return object;
     }
 
-    public static void writeJSON(Object object, String address) throws IOException {
+    public synchronized static void writeJSON(Object object, String address) throws IOException {
         YaGsonBuilder builder = new YaGsonBuilder();
         YaGson yaGson = builder.create();
         FileWriter writer = new FileWriter(address);

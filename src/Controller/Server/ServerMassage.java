@@ -15,7 +15,7 @@ public class ServerMassage implements Serializable {
 
     public enum ErrorType implements Serializable {
         LogInFailed, InvalidPasswordForSignUp, InvalidUsernameForSignUp, InvalidAuthToken, InvalidDeckForFirstPlayer,
-        InvalidSecondPlayerUsername, InvalidDeckForSecondPlayer, RunningBattleNotFound;
+        InvalidSecondPlayerUsername, InvalidDeckForSecondPlayer, RunningBattleNotFound, PlayerAreNotAvailable;
     }
 
     public enum Command {

@@ -26,6 +26,7 @@ public class MainMenuController implements Initializable {
     public ImageView logout;
     public Label save;
     public Label scoreboard;
+    public Label chat;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -83,6 +84,14 @@ public class MainMenuController implements Initializable {
         scoreboard.setOnMouseClicked(event -> {
             try {
                 Client.getClient().changeCurrentMenu(MenuList.Scoreboard);
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
+
+        chat.setOnMouseClicked(event -> {
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.Chat);
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }

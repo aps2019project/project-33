@@ -28,7 +28,7 @@ public class ChooseType implements Initializable {
         multiPlayerButton.setOnMouseClicked(event -> {
             BattleMenuController.type = BattleMenuController.TypeList.MultiPlayer;
             try {
-                Client.getClient().changeCurrentMenu(MenuList.ChooseMode);
+                Client.getClient().changeCurrentMenu(MenuList.ChooseKind);
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }

@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,7 +25,11 @@ public class ShopShowSearchController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (isFirstTime) {
             nonBlurAnchor.getChildren().remove(cardsVbox);
-            cardsVbox = Graphic.createCards(Client.getClient().getResultOfSearch());
+            try {
+                cardsVbox = Graphic.createCards(Client.getClient().getResultOfSearch());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
             nonBlurAnchor.getChildren().add(cardsVbox);
             cardsVbox.setLayoutX(200);
             cardsVbox.setLayoutY(200);

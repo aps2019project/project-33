@@ -54,11 +54,12 @@ public class BattleMenu {
         //todo in ja bayad berim badi, chie ? -? mode -> custom ya story
         //todo number of flags felan fix e, ta bebinim badan khoda chi mikhad
         if (type.equals("Single Player")) chooseMode(mode, chapter, kind, 1);
+        else chooseKind(kind);
+
+        battle.runGame();
 
         if (!checkDeck(battle.getPlayerOff().getAccount()))
             return new ServerMassage(ServerMassage.Type.Error, ServerMassage.ErrorType.InvalidDeckForSecondPlayer);
-
-        battle.runGame();
 
         setupPlayersForBattle(battle.getPlayerOff());
         setupPlayersForBattle(battle.getPlayerOn());
@@ -97,6 +98,13 @@ public class BattleMenu {
     private boolean checkDeck(Account account) {
         if (account.getCollection().getMainDeck() == null) return false;
         return account.getCollection().getMainDeck().checkValidateDeck();
+    }
+
+    private void chooseKind(String kind) {
+        battle.setPrize(prizeOfCustomGame);
+        battle.setKind(kind);
+        if(!kind.equals("Kill_enemy's_hero"))
+            battle.setNumberOfFlags(1);
     }
 
     private void chooseMode(String mode, String chapter, String kind, int numberOfFlags) throws FileNotFoundException {
@@ -154,7 +162,51 @@ public class BattleMenu {
     }
 
     public ServerMassage interpret(ClientMassage clientMassage) throws FileNotFoundException {
-        return createGame(clientMassage.getAuthToken(), clientMassage.getSecondPlayerUsername(), clientMassage.getType(), clientMassage.getMode(), clientMassage.getChapter(), clientMassage.getKind());
+        if (clientMassage.getBattleMenuRequest() == ClientMassage.BattleMenuRequest.CreateSinglePlayerGame)
+            return createGame(clientMassage.getAuthToken(), clientMassage.getSecondPlayerUsername(), clientMassage.getType(), clientMassage.getMode(), clientMassage.getChapter(), clientMassage.getKind());
+        if (clientMassage.getBattleMenuRequest() == ClientMassage.BattleMenuRequest.startMultiPlayerGame)
+            return startCreateMultiPlayerGame(clientMassage);
+        if (clientMassage.getBattleMenuRequest() == ClientMassage.BattleMenuRequest.RejectGame)
+            return rejectMultiPlayerGame(clientMassage);
+        if (clientMassage.getBattleMenuRequest() == ClientMassage.BattleMenuRequest.AcceptGame)
+            return acceptMultiPlayerGame(clientMassage);
+        return null;
+    }
+
+    private ServerMassage rejectMultiPlayerGame(ClientMassage clientMassage) {
+        String username = clientMassage.getAuthToken();
+        Account account2 = Account.getAccountByUsername(username);
+        Account account1 = Account.getAccountByUsername(account2.getMultiPlayerGameInfo().getAuthToken());
+        account2.setMultiPlayerGameInfo(null);
+        account1.setState(Account.State.Online);
+        account2.setState(Account.State.Online);
+        account1.setCurrentMenu(MenuList.MainMenu);
+        account2.setCurrentMenu(MenuList.MainMenu);
+        return new ServerMassage(ServerMassage.Type.Accept, null);
+    }
+
+    private ServerMassage acceptMultiPlayerGame(ClientMassage clientMassage) throws FileNotFoundException {
+        String username = clientMassage.getAuthToken();
+        Account account2 = Account.getAccountByUsername(username);
+        ClientMassage previousClientMassage = account2.getMultiPlayerGameInfo();
+        account2.setMultiPlayerGameInfo(null);
+        return createGame(previousClientMassage.getAuthToken(), previousClientMassage.getSecondPlayerUsername(), previousClientMassage.getType(), previousClientMassage.getMode(), previousClientMassage.getChapter(), previousClientMassage.getKind());
+    }
+
+    private ServerMassage startCreateMultiPlayerGame(ClientMassage clientMassage) {
+        String username1 = clientMassage.getAuthToken();
+        String username2 = clientMassage.getSecondPlayerUsername();
+        Account account1 = Account.getAccountByUsername(username1), account2 = Account.getAccountByUsername(username2);
+        if(account1 == null || account2 == null)
+            return new ServerMassage(ServerMassage.Type.Error, ServerMassage.ErrorType.InvalidAuthToken);
+        if(account1.getState() != Account.State.Online || account2.getState() != Account.State.Online)
+            return new ServerMassage(ServerMassage.Type.Error, ServerMassage.ErrorType.PlayerAreNotAvailable);
+        account1.setState(Account.State.Busy);
+        account2.setState(Account.State.Busy);
+        account1.setCurrentMenu(MenuList.WaitingForOpponent);
+        account2.setCurrentMenu(MenuList.AnswerToGame);
+        account2.setMultiPlayerGameInfo(clientMassage);
+        return new ServerMassage(ServerMassage.Type.Accept, null);
     }
 }
 

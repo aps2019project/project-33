@@ -15,6 +15,7 @@ public class BattleMenuController {
     protected static ModeList mode = null;
     protected static KindList kind = null;
     protected static TypeList type = null;
+    protected static String secondPlayerUserName;
 
     enum TypeList{
         SinglePlayer, MultiPlayer;
@@ -24,8 +25,15 @@ public class BattleMenuController {
             else return "Multi Player";
         }
     }
-    enum ModeList{
-        Custom, Story
+
+    public static void startGame() throws IOException, ClassNotFoundException {
+        String typeToString = null, modeToString = null, chapterToString = null, kindToString = null;
+        if(type != null) typeToString = type.toString();
+        if(mode != null) modeToString = mode.toString();
+        if(chapter != null) chapterToString = chapter.toString();
+        if(kind != null) kindToString = kind.toString();
+
+        Client.getClient().createGame(secondPlayerUserName, typeToString, modeToString , chapterToString, kindToString);
     }
     enum KindList{
         KillEnemyHero, HoldFlag, TakeHalfOfFlags;
@@ -47,14 +55,24 @@ public class BattleMenuController {
         }
     }
 
-    public static void startGame() throws IOException, ClassNotFoundException {
+    public static void startMultiPlayerGame() throws IOException, ClassNotFoundException {
         String typeToString = null, modeToString = null, chapterToString = null, kindToString = null;
         if(type != null) typeToString = type.toString();
         if(mode != null) modeToString = mode.toString();
         if(chapter != null) chapterToString = chapter.toString();
         if(kind != null) kindToString = kind.toString();
 
-        Client.getClient().createGame(null, typeToString, modeToString , chapterToString, kindToString);
+        Client.getClient().startCreateMultiGame(secondPlayerUserName, typeToString, modeToString, chapterToString, kindToString);
+    }
+
+    enum ModeList{
+        Custom, Story;
+
+        public String toString(){
+            if(this.equals(Custom)) return "Custom Game";
+            if(this.equals(Story)) return "Story";
+            return null;
+        }
     }
 
     public static void relax(){

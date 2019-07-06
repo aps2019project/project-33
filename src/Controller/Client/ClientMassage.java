@@ -19,7 +19,7 @@ public class ClientMassage implements Serializable {
     }
 
     public enum BattleMenuRequest {
-        CreateGame;
+        CreateSinglePlayerGame, AcceptGame, RejectGame, startMultiPlayerGame;
     }
 
     public enum BattleRequest{

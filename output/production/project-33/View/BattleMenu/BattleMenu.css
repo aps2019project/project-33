@@ -56,3 +56,20 @@
     -fx-background-image: url("../../../resources/play/play_background.jpg");
     -fx-cursor: hand;
 }
+
+.ChooseSecondPlayerAnchorPane{
+    -fx-background-image: url("../../../resources/codex/chapter24_background@2x.jpg");
+    -fx-background-size: 100% 100%;
+}
+
+.ChooseSecondPlayerTextField{
+    -fx-background-color: black;
+    -fx-opacity: 0.75;
+    -fx-text-fill: white;
+    -fx-font-size: 25;
+}
+
+.AnswerToGameAnchorPane{
+    -fx-background-image: url("../../../resources/codex/chapter17_background@2x.jpg");
+    -fx-background-size: 100% 100%;
+}

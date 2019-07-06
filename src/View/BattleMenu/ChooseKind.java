@@ -2,6 +2,7 @@ package View.BattleMenu;
 
 import Controller.Client.Client;
 import Controller.MenuList;
+import View.Battle.BattleController;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
@@ -20,7 +21,10 @@ public class ChooseKind implements Initializable {
         kindOneButton.setOnMouseClicked(event -> {
             BattleMenuController.kind = BattleMenuController.KindList.KillEnemyHero;
             try {
-                BattleMenuController.startGame();
+                if(BattleMenuController.type == BattleMenuController.TypeList.SinglePlayer)
+                    BattleMenuController.startGame();
+                else
+                    Client.getClient().changeCurrentMenu(MenuList.ChooseSecondPlayer);
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
@@ -29,7 +33,10 @@ public class ChooseKind implements Initializable {
         kindTwoButton.setOnMouseClicked(event -> {
             BattleMenuController.kind = BattleMenuController.KindList.HoldFlag;
             try {
-                BattleMenuController.startGame();
+                if(BattleMenuController.type == BattleMenuController.TypeList.SinglePlayer)
+                    BattleMenuController.startGame();
+                else
+                    Client.getClient().changeCurrentMenu(MenuList.ChooseSecondPlayer);
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
@@ -38,7 +45,10 @@ public class ChooseKind implements Initializable {
         kindThreeButton.setOnMouseClicked(event -> {
             BattleMenuController.kind = BattleMenuController.KindList.TakeHalfOfFlags;
             try {
-                BattleMenuController.startGame();
+                if(BattleMenuController.type == BattleMenuController.TypeList.SinglePlayer)
+                    BattleMenuController.startGame();
+                else
+                    Client.getClient().changeCurrentMenu(MenuList.ChooseSecondPlayer);
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }

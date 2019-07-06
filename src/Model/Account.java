@@ -4,15 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import Controller.Battle;
+import Controller.Client.Client;
+import Controller.Client.ClientMassage;
 import Controller.MenuList;
 import Controller.Menus.Menu;
 import Model.CollectionItem.CollectionItem;
 import Model.CollectionItem.Item;
 
 public class Account implements Serializable {
-    public enum State {
-        Online, Offline, Busy;
-    }
+    private ClientMassage multiPlayerGameInfo;
 
     private static ArrayList<Account> accounts = new ArrayList<>();
 
@@ -24,6 +24,10 @@ public class Account implements Serializable {
     private State state;
     private MenuList currentMenu;
     private Battle runningBattle;
+
+    public ClientMassage getMultiPlayerGameInfo() {
+        return multiPlayerGameInfo;
+    }
 
     //Constructor
 
@@ -180,5 +184,13 @@ public class Account implements Serializable {
 
     public void setRunningBattle(Battle runningBattle) {
         this.runningBattle = runningBattle;
+    }
+
+    public void setMultiPlayerGameInfo(ClientMassage multiPlayerGameInfo) {
+        this.multiPlayerGameInfo = multiPlayerGameInfo;
+    }
+
+    public enum State {
+        Online, Offline, Busy, WaitingForGame, AnsweringToGame;
     }
 }
