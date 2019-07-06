@@ -75,7 +75,7 @@ public class ExportController implements Initializable {
             try {
                 if(selectedDeck != null) {
                     //todo neveshtan too file json
-                    Application.writeJSON(selectedDeck,  "../../../../Data/ExportedDecks/" + selectedDeck.getName() + ".json");
+                    Application.writeJSON(selectedDeck,  "Data/ExportedDecks/" + selectedDeck.getName() + ".json");
                     Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
                     isFirstTime = true;
                 }

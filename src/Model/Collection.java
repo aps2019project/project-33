@@ -119,6 +119,8 @@ public class Collection {
         }
     }
 
+
+
     public void deleteDeck(String deckName){
         Deck deck = this.getDeckByName(deckName);
         if(deck == null){
@@ -196,6 +198,10 @@ public class Collection {
         this.showHeroes(descriptionOfPrice);
         this.showItems(descriptionOfPrice);
         this.showCards(descriptionOfPrice);
+    }
+
+    public void addDeck(Deck deck){
+        this.decks.add(deck);
     }
 
     public Deck getMainDeck() {
