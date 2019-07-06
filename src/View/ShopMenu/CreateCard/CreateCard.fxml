@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="mainPane" prefHeight="582.0" prefWidth="838.0" styleClass="ShopImagePane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ShopMenu.CreateCard.CreateCardController">
+<AnchorPane fx:id="mainPane" prefHeight="900.0" prefWidth="1251.0" styleClass="ShopImagePane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ShopMenu.CreateCard.CreateCardController">
    <stylesheets>
       <URL value="@../Shop.css" />
       <URL value="@../../Button.css" />
@@ -27,23 +27,72 @@
             <String fx:value="ImageButton" />
          </styleClass>
       </ImageView>
-      <Label fx:id="createButton" layoutX="72.0" layoutY="14.0" text="CREATE">
+      <Label fx:id="createButton" layoutX="526.0" layoutY="696.0" style="-fx-font-size: 17;" text="CREATE">
          <styleClass>
             <String fx:value="Button" />
             <String fx:value="GreenButton" />
          </styleClass>
       </Label>
-      <VBox layoutX="76.0" layoutY="118.0" prefHeight="210.0" prefWidth="313.0">
+      <VBox layoutX="86.0" layoutY="115.0" prefHeight="499.0" prefWidth="250.0">
          <children>
-            <CheckBox mnemonicParsing="false" styleClass="CheckBox" text="ENEMNY IMPACT" />
-            <CheckBox mnemonicParsing="false" styleClass="CheckBox" text="US IMPACT" />
-            <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="235.0" styleClass="CheckBox" text="MULTIPLE IMPACT" />
-            <CheckBox mnemonicParsing="false" styleClass="CheckBox" text="MINION IMPACT" />
-            <CheckBox mnemonicParsing="false" styleClass="CheckBox" text="HERO IMPACT" />
-            <CheckBox mnemonicParsing="false" styleClass="CheckBox" text="CELL IMPACT" />
-            <CheckBox mnemonicParsing="false" styleClass="CheckBox" text="CheckBox" />
-         </children></VBox>
-      <ChoiceBox layoutX="314.0" layoutY="75.0" prefWidth="150.0" />
-      <TextField layoutX="83.0" layoutY="75.0" promptText="ENTER NAME" />
+            <CheckBox fx:id="isEnemy" mnemonicParsing="false" styleClass="CheckBox" text="ENEMNY IMPACT" />
+            <CheckBox fx:id="isUs" mnemonicParsing="false" styleClass="CheckBox" text="US IMPACT" />
+            <CheckBox fx:id="isMultiple" mnemonicParsing="false" prefHeight="30.0" prefWidth="235.0" styleClass="CheckBox" text="MULTIPLE IMPACT" />
+            <CheckBox fx:id="isMinion" mnemonicParsing="false" styleClass="CheckBox" text="MINION IMPACT" />
+            <CheckBox fx:id="isHero" mnemonicParsing="false" styleClass="CheckBox" text="HERO IMPACT" />
+            <CheckBox fx:id="isCell" mnemonicParsing="false" styleClass="CheckBox" text="CELL IMPACT" />
+            <CheckBox fx:id="isColumn" mnemonicParsing="false" styleClass="CheckBox" text="IMPACT COLUMN" />
+            <CheckBox fx:id="isRow" mnemonicParsing="false" styleClass="CheckBox" text="IMPACT ROW" />
+            <CheckBox fx:id="isNeighbour" mnemonicParsing="false" styleClass="CheckBox" text="IMPACT NEIGHBOURS" />
+            <CheckBox fx:id="isItSelf" mnemonicParsing="false" styleClass="CheckBox" text="IMPACT ITSELF" />
+            <CheckBox fx:id="isArea" mnemonicParsing="false" styleClass="CheckBox" text="IMPACT AREA" />
+            <TextField fx:id="distanceOfArea" prefHeight="25.0" prefWidth="150.0" promptText="ENTER DISTANCE" />
+            <CheckBox fx:id="isSquare" mnemonicParsing="false" styleClass="CheckBox" text="SQUARE OF CELLS " />
+            <TextField fx:id="lengthOfSquare" prefHeight="10.0" prefWidth="250.0" promptText="ENTER LENGTH OF SQUARE" />
+         </children>
+      </VBox>
+      <ChoiceBox fx:id="cardType" layoutX="486.0" layoutY="75.0" prefWidth="150.0" />
+      <TextField fx:id="nameField" layoutX="83.0" layoutY="75.0" promptText="ENTER NAME" />
+      <VBox layoutX="486.0" layoutY="115.0" prefHeight="499.0" prefWidth="250.0">
+         <children>
+            <CheckBox fx:id="isHoly" mnemonicParsing="false" styleClass="CheckBox" text="HOLY BUFF" />
+            <CheckBox fx:id="isHolyCell" mnemonicParsing="false" styleClass="CheckBox" text="IS FOR CELL" />
+            <TextField fx:id="timeOfHoly" promptText="ENTER TIME" />
+            <TextField fx:id="numberOfHolies" promptText="ENTER NUMBER OF BUFFS" />
+            <CheckBox fx:id="isIncreaseAP" mnemonicParsing="false" styleClass="CheckBox" text="INCREASE AP" />
+            <TextField fx:id="amountOfIncreaseAP" promptText="ENTER AMOUNT" />
+            <TextField fx:id="timeOfIncreaseAP" promptText="ENTER TIME" />
+            <CheckBox fx:id="isDisarm" mnemonicParsing="false" styleClass="CheckBox" text="DISARM BUFF" />
+            <TextField fx:id="timeOfDisarm" promptText="ENTER TIME" />
+            <CheckBox fx:id="isWeakness" mnemonicParsing="false" styleClass="CheckBox" text="WEAKNESS BUFF" />
+            <TextField fx:id="weaknessChangeHP" promptText="ENTER CHANGE HP" />
+            <TextField fx:id="weaknessChangeAP" promptText="ENTER CHANGE AP" />
+            <TextField fx:id="timeOfWeakness" promptText="ENTER TIME" />
+            <CheckBox fx:id="isPoison" mnemonicParsing="false" styleClass="CheckBox" text="POISON BUFF" />
+            <TextField fx:id="timeOfPoison" promptText="ENTER TIME" />
+            <TextField fx:id="poisonDecreaseHP" prefHeight="16.0" prefWidth="203.0" promptText="ENTER DECREASE HP" />
+         </children>
+      </VBox>
+      <ChoiceBox fx:id="AttackType" layoutX="903.0" layoutY="75.0" prefWidth="150.0" />
+      <VBox layoutX="903.0" layoutY="100.0" prefHeight="519.0" prefWidth="221.0">
+         <children>
+            <CheckBox fx:id="isIncreaseMana" mnemonicParsing="false" styleClass="CheckBox" text="INCREASE MANA" />
+            <TextField fx:id="timeOfIncreaseMana" promptText="ENTER TIME" />
+            <TextField fx:id="amountOfIncreaseMana" promptText="ENTER AMOUNT" />
+            <CheckBox fx:id="isFiery" mnemonicParsing="false" styleClass="CheckBox" text="FIERY BUFF" />
+            <TextField fx:id="timeOfFiery" promptText="ENTER TIME" />
+            <CheckBox fx:id="isPoisonToCell" mnemonicParsing="false" styleClass="CheckBox" text="POISON TO CELL" />
+            <TextField fx:id="timeOfPoisonCell" promptText="ENTER TIME" />
+            <TextField fx:id="poisonCellDecreaseHP" promptText="ENTER DECREASE HP" />
+            <CheckBox fx:id="isStun" mnemonicParsing="false" styleClass="CheckBox" text="STUN BUFF" />
+            <TextField fx:id="timeOfStun" promptText="ENTER TIME" />
+            <CheckBox fx:id="isPower" mnemonicParsing="false" styleClass="CheckBox" text="POWER BUFF" />
+            <TextField fx:id="timeOfPower" promptText="ENTER TIME" />
+            <TextField fx:id="powerChangeAP" promptText="ENTER CHANGE AP" />
+            <TextField fx:id="powerChangeHP" promptText="ENTER CHANGE HP" />
+            <CheckBox fx:id="isRemoveBadBuffs" mnemonicParsing="false" styleClass="CheckBox" text="REMOVE BAD BUFFS" />
+            <CheckBox fx:id="isRemoveGoodBuffs" mnemonicParsing="false" styleClass="CheckBox" text="REMOVE GOOD BUFFS" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

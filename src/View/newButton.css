@@ -56,8 +56,8 @@
 .CheckBox{
     -fx-pref-height: 50px;
     -fx-pref-width: 300px;
-    -fx-font-size: 20;
-    -fx-text-fill: white;
+    -fx-font-size: 17;
+    -fx-text-fill: BLACK;
     -fx-alignment: center-left;
 }
 

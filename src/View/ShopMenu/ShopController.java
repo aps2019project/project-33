@@ -23,6 +23,7 @@ public class ShopController implements Initializable {
     public AnchorPane nonBlurPane;
     public ImageView imagePane;
     public VBox vBox;
+    public Label createCardLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -52,6 +53,10 @@ public class ShopController implements Initializable {
 
         searchLabel.setOnMouseClicked(event -> {
             Client.getClient().setCurrentMenu(MenuList.SearchShop);
+        });
+
+        createCardLabel.setOnMouseClicked(event -> {
+            Client.getClient().setCurrentMenu(MenuList.ShopCreateCard);
         });
     }
 }
