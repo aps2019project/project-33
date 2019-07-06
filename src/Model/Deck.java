@@ -91,7 +91,7 @@ public class Deck{
         return null;
     }
 
-    //check kon ke 20 ta be hero e ya bedune hero
+    //check kon ke 20 ta ba hero e ya bedune hero
     public boolean checkValidateDeck(){
         ArrayList<CollectionItem> cards = this.getCards();
         if(cards.size() != 21)
