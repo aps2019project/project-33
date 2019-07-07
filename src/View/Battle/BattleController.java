@@ -3,15 +3,21 @@ package View.Battle;
 import Controller.Battle;
 import Controller.Client.Client;
 import Controller.Client.ClientMassage;
+import Controller.Server.Server;
 import Controller.Server.ServerMassage;
+import Model.Buffs.Buff;
 import Model.CollectionItem.*;
 import Model.Enviroment.Cell;
 import Model.Hand1;
 import View.Graphic;
 import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -19,6 +25,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -37,10 +44,11 @@ import java.util.ResourceBundle;
 
 public class BattleController implements Initializable {
     private int numberOfRows = 5, numberOfColumns = 9;
+    private static ImageView movingImageView = null;
+    public AnchorPane rootOfPage;
     public VBox cardInformationArea;
     public Label playerUsernameLabel;
     public HBox manaArea;
-    public AnchorPane rootOfPage;
     public ImageView forfeitButton;
     public ImageView gameInfoButton;
     public HBox hBox1;
@@ -77,25 +85,14 @@ public class BattleController implements Initializable {
     private ImageView[] manaUnits;
     private VBox cardInformationVBox;
     private static AnimationTimer animationTimer;
+    public Label remainTimeLabel;
+    private int timeOfMove = 500;
+    private int fps = 30;
+    private int counter;
 
     //todo, in ke alan chand ta mana darim masalan moonde
-    //todo, attack e combo
     //todo, enter grave yard
-    //todo, in ke age ye jayi item i chizi has neshoon bedim
-    //todo, age khoone i sami chizi dasht neshoon bedim
 
-    //todo, attack kone
-    //todo, special power of something
-    //todo, in ke roo ye nafar click kardim biad info ro neshoon bede
-    //todo, in ke betoone ye chizio select kone
-    //todo, move kone
-    //todo, insert konim roo ye chizi
-    //todo, end turn -> in ke kharab nashe ham check konim ->>> kolliatesh done
-    //todo, use ?!
-    //todo, end game
-    //todo, exit
-
-    //todo, aslan nemidunam che juri gharare ye item ro asar bedim !
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -130,27 +127,35 @@ public class BattleController implements Initializable {
         });
     }
 
+    public static ImageView getMovingImageView() {
+        return movingImageView;
+    }
+
+    public static void setMovingImageView(ImageView movingImageView) {
+        BattleController.movingImageView = movingImageView;
+    }
+
     private void graphicalCellsActions() {
         for (int i = 0; i < numberOfRows; i++) {
             for (int j = 0; j < numberOfColumns; j++) {
                 int finalI = i;
                 int finalJ = j;
                 graphicalCells[i][j].getAnchorPane().setOnMouseClicked(event -> {
-                    if(event.getButton() == MouseButton.PRIMARY) {
+                    if (event.getButton() == MouseButton.PRIMARY) {
                         try {
                             graphicalCells[finalI][finalJ].select(this);
                         } catch (IOException | ClassNotFoundException e) {
                             e.printStackTrace();
                         }
                     }
-                    if(event.getButton() == MouseButton.SECONDARY){
+                    if (event.getButton() == MouseButton.SECONDARY) {
                         try {
                             graphicalCells[finalI][finalJ].attack(this);
                         } catch (IOException | ClassNotFoundException e) {
                             e.printStackTrace();
                         }
                     }
-                    if(event.getButton() == MouseButton.MIDDLE){
+                    if (event.getButton() == MouseButton.MIDDLE) {
                         try {
                             graphicalCells[finalI][finalJ].specialAttack(this);
                         } catch (IOException | ClassNotFoundException e) {
@@ -159,7 +164,8 @@ public class BattleController implements Initializable {
                     }
                 });
                 graphicalCells[i][j].getAnchorPane().setOnMouseEntered(event -> {
-                    if(graphicalCells[finalI][finalJ].getCell().getLivingCard() == null) return;;
+                    if (graphicalCells[finalI][finalJ].getCell().getLivingCard() == null) return;
+                    ;
                     cardInformationArea.getChildren().remove(cardInformationVBox);
                     try {
                         cardInformationVBox = Graphic.createCard(graphicalCells[finalI][finalJ].getCell().getLivingCard(), 1);
@@ -176,7 +182,7 @@ public class BattleController implements Initializable {
         for (int i = 0; i < handUnits.length; i++) {
             int finalI = i;
             handUnits[i].getImageView().setOnMouseClicked(event -> {
-                if(event.getButton() == MouseButton.PRIMARY) {
+                if (event.getButton() == MouseButton.PRIMARY) {
                     try {
                         handUnits[finalI].select(this);
                     } catch (IOException | ClassNotFoundException e) {
@@ -185,7 +191,7 @@ public class BattleController implements Initializable {
                 }
             });
             handUnits[i].getImageView().setOnMouseEntered(event -> {
-                if(handUnits[finalI].getCollectionItem() == null) return;
+                if (handUnits[finalI].getCollectionItem() == null) return;
                 cardInformationArea.getChildren().remove(cardInformationVBox);
                 try {
                     cardInformationVBox = Graphic.createCard(handUnits[finalI].getCollectionItem(), 1);
@@ -199,11 +205,20 @@ public class BattleController implements Initializable {
 
     private void update() {
         animationTimer = new AnimationTimer() {
-            long last = 0, unit = 1000000000, fps = 10;
+            long last = 0, unit = 1000000000;
+            boolean isMove = false;
             @Override
             public void handle(long now) {
                 if (last == 0) last = now;
                 if (now > last + unit / fps) {
+                    if(!isMove && movingImageView != null){
+                        isMove = true;
+                        return;
+                    }
+                    if(isMove && counter > 0){
+                        counter --;
+                        return;
+                    }
                     ServerMassage serverMassage = null;
                     try {
                         serverMassage = Client.getClient().getRunningGame();
@@ -235,10 +250,57 @@ public class BattleController implements Initializable {
                     } catch (IOException | ClassNotFoundException e) {
                         e.printStackTrace();
                     }
+
+                    updateRemainTimeLabel(runningBattle);
+
+                    isMove = false;
+                    rootOfPage.getChildren().remove(movingImageView);
+                    movingImageView = null;
+                    counter = 0;
                 }
             }
         };
         animationTimer.start();
+    }
+
+    private void setter() throws IOException, ClassNotFoundException {
+        Battle battle = Client.getClient().getRunningGame().getRunningBattle();
+        rows = new HBox[]{hBox1, hBox2, hBox3, hBox4, hBox5};
+        handImages = new ImageView[]{handItemImage1, handItemImage2, handItemImage3, handItemImage4, handItemImage5};
+        handManaLabels = new Label[]{handItemLabel1, handItemLabel2, handItemLabel3, handItemLabel4, handItemLabel5};
+        handPanes = new VBox[]{vBox1, vBox2, vBox3, vBox4, vBox5};
+        handUnits = new HandUnit[handImages.length];
+        graphicalCells = new GraphicalCell[numberOfRows][numberOfColumns];
+        for (int i = 0; i < handUnits.length; i++)
+            handUnits[i] = new HandUnit(handImages[i], handManaLabels[i], handPanes[i]);
+        for (int i = 0; i < numberOfRows; i++) {
+            for (int j = 0; j < numberOfColumns; j++) {
+                graphicalCells[i][j] = new GraphicalCell(battle.getMap().getCellByCoordination(i, j));
+                rows[i].getChildren().add(graphicalCells[i][j].getRoot());
+                VBox.setMargin(graphicalCells[i][j].getRoot(), new Insets(5, 5, 5, 5));
+            }
+        }
+    }
+
+    private void updateRemainTimeLabel(Battle runningBattle) {
+        int remainTime = runningBattle.getRemainTimeOfTurn();
+        remainTimeLabel.setText(Integer.toString(remainTime));
+        remainTimeLabel.getStyleClass().clear();
+        if(remainTime >= 7) remainTimeLabel.getStyleClass().add("GreenTime");
+        if(remainTime < 7 && remainTime >= 4) remainTimeLabel.getStyleClass().add("BlackTime");
+        if(remainTime < 4) remainTimeLabel.getStyleClass().add("RedTime");
+    }
+
+    public static AnimationTimer getAnimationTimer() {
+        return animationTimer;
+    }
+
+    public void setSelectedCell(SelectedCell selectedCell) {
+        this.selectedCell = selectedCell;
+    }
+
+    public SelectedCell getSelectedCell() {
+        return selectedCell;
     }
 
     private void updatePlayerInformation(Battle runningBattle) throws IOException, ClassNotFoundException {
@@ -252,11 +314,11 @@ public class BattleController implements Initializable {
         manaArea.getChildren().clear();
         manaArea.getStylesheets().clear();
         manaArea.getStylesheets().add(this.getClass().getResource("Battle.css").toExternalForm());
-        for(int i = 0; i < Integer.max(maximumMana, currentMana); i++){
+        for (int i = 0; i < Integer.max(maximumMana, currentMana); i++) {
             Image image = null;
             try {
                 FileInputStream fileInputStream;
-                if(i < currentMana)
+                if (i < currentMana)
                     fileInputStream = new FileInputStream("resources/ui/icon_mana@2x.png");
                 else
                     fileInputStream = new FileInputStream("resources/ui/icon_mana_inactive@2x.png");
@@ -278,37 +340,34 @@ public class BattleController implements Initializable {
         Label maximumManaLabel = new Label(Integer.toString(maximumMana));
         maximumManaLabel.getStyleClass().add("MaximumManaLabel");
         manaArea.getChildren().addAll(currentManaLabel, separator, maximumManaLabel);
-     }
-
-    private void setter() throws IOException, ClassNotFoundException {
-        Battle battle = Client.getClient().getRunningGame().getRunningBattle();
-        rows = new HBox[]{hBox1, hBox2, hBox3, hBox4, hBox5};
-        handImages = new ImageView[]{handItemImage1, handItemImage2, handItemImage3, handItemImage4, handItemImage5};
-        handManaLabels = new Label[]{handItemLabel1, handItemLabel2, handItemLabel3, handItemLabel4, handItemLabel5};
-        handPanes = new VBox[]{vBox1, vBox2, vBox3, vBox4, vBox5};
-        handUnits = new HandUnit[handImages.length];
-        graphicalCells = new GraphicalCell[numberOfRows][numberOfColumns];
-        for (int i = 0; i < handUnits.length; i++)
-            handUnits[i] = new HandUnit(handImages[i], handManaLabels[i], handPanes[i]);
-        for (int i = 0; i < numberOfRows; i++) {
-            for (int j = 0; j < numberOfColumns; j++) {
-                graphicalCells[i][j] = new GraphicalCell(battle.getMap().getCellByCoordination(i, j));
-                rows[i].getChildren().add(graphicalCells[i][j].getRoot());
-                VBox.setMargin(graphicalCells[i][j].getRoot(), new Insets(5, 5, 5, 5));
-            }
-        }
     }
 
-    public static AnimationTimer getAnimationTimer() {
-        return animationTimer;
+    public AnchorPane getRootOfPage() {
+        return rootOfPage;
     }
 
-    public void setSelectedCell(SelectedCell selectedCell) {
-        this.selectedCell = selectedCell;
+    public int getTimeOfMove() {
+        return timeOfMove;
     }
 
-    public SelectedCell getSelectedCell() {
-        return selectedCell;
+    public void setTimeOfMove(int timeOfMove) {
+        this.timeOfMove = timeOfMove;
+    }
+
+    public int getFps() {
+        return fps;
+    }
+
+    public void setFps(int fps) {
+        this.fps = fps;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
     }
 }
 
@@ -422,7 +481,6 @@ class HandUnit {
     }
 }
 
-//todo, kollan be fana mire sare shabake
 class GraphicalCell {
     private int heightOfCell = 70, widthOfCell = 70;
     private Pane root;
@@ -447,38 +505,49 @@ class GraphicalCell {
         this.cell = cell;
     }
 
-    //todo, in ke neshoon bede flag dare ya na kheili bad shod
     public void update(Battle runningBattle, int i, int j) throws IOException, ClassNotFoundException {
         LivingCard livingCard = cell.getLivingCard();
         this.cell = runningBattle.getMap().getCellByCoordination(i, j);
+
         if (cell.getLivingCard() == null) {
             anchorPane.getStyleClass().clear();
             anchorPane.getStyleClass().add("CellCover");
-            if(cell.isHaveFlag() && imageView.getImage() == null) {
+            if (cell.isHaveFlag() && imageView.getImage() == null) {
                 try {
                     FileInputStream fileInputStream = new FileInputStream("resources/ui/flag.gif");
                     imageView.setImage(new Image(fileInputStream));
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
-            }
-            else if(!cell.isHaveFlag())
+            } else if (!cell.isHaveFlag())
                 imageView.setImage(null);
-            return;
         } else if (livingCard == null || !cell.getLivingCard().getID().equals(livingCard.getID()) || imageView.getImage() == null) {
             imageView.setImage(new Image(new FileInputStream("resources/unit_gifs/1.gif")));
         }
-        if (runningBattle.getPlayerOn().haveCard(cell.getLivingCard().getID())) {
-            anchorPane.getStyleClass().clear();
-            anchorPane.getStyleClass().add("OurCellCover");
-        } else {
-            anchorPane.getStyleClass().clear();
-            anchorPane.getStyleClass().add("EnemyCellCover");
+        if (cell.getLivingCard() != null) {
+            if (runningBattle.getPlayerOn().haveCard(cell.getLivingCard().getID())) {
+                anchorPane.getStyleClass().clear();
+                anchorPane.getStyleClass().add("OurCellCover");
+            } else {
+                anchorPane.getStyleClass().clear();
+                anchorPane.getStyleClass().add("EnemyCellCover");
+            }
+            if (cell.getLivingCard().getEffects().size() > 0) {
+                System.out.println(i + " " + j);
+                for (Buff buff : cell.getLivingCard().getEffects())
+                    System.out.println(buff);
+                anchorPane.getStyleClass().add("EffectInLivingCard");
+            }
+        }
+        if (cell.getEffects().size() > 0) {
+            System.out.println(i + " * " + j);
+            for (Buff buff : cell.getEffects())
+                System.out.println(buff);
+            anchorPane.getStyleClass().add("EffectInCell");
         }
     }
 
     public void select(BattleController battleController) throws IOException, ClassNotFoundException {
-        System.out.println("this cell have flag : " + cell.isHaveFlag());
         SelectedCell selectedCell = battleController.getSelectedCell();
         if (selectedCell == null) {
             if (cell.getLivingCard() == null) return;
@@ -487,7 +556,7 @@ class GraphicalCell {
         } else {
             if (selectedCell.getLocation() == SelectedCell.Location.Hand) {
                 if (selectedCell.getType() == SelectedCell.Type.Item) {
-                    Client.getClient().useItemInBattle(cell.getX() ,cell.getY());
+                    Client.getClient().useItemInBattle(cell.getX(), cell.getY());
                     battleController.setSelectedCell(null);
                 } else {
                     CollectionItem collectionItem = selectedCell.getHandUnit().getCollectionItem();
@@ -496,26 +565,54 @@ class GraphicalCell {
                 }
             }
             if (selectedCell.getLocation() == SelectedCell.Location.Map) {
-                Client.getClient().moveCardInBattle(cell.getX(), cell.getY());
+                ServerMassage serverMassage = Client.getClient().moveCardInBattle(cell.getX(), cell.getY());
                 battleController.setSelectedCell(null);
+                if (serverMassage.getType() == ServerMassage.Type.Accept)
+                    showGraphicalMove(selectedCell, this, battleController);
             }
         }
     }
 
+    private void showGraphicalMove(SelectedCell selectedCell, GraphicalCell graphicalCell, BattleController battleController) {
+
+        ImageView imageView = new ImageView();
+        imageView.setFitHeight(heightOfCell);
+        imageView.setFitWidth(widthOfCell);
+        imageView.setImage(selectedCell.getGraphicalCell().getImageView().getImage());
+        imageView.setX(selectedCell.getGraphicalCell().getImageView().localToScene(selectedCell.getGraphicalCell().imageView.getBoundsInLocal()).getMinX());
+        imageView.setY(selectedCell.getGraphicalCell().getImageView().localToScene(selectedCell.getGraphicalCell().imageView.getBoundsInLocal()).getMinY());
+
+        selectedCell.getGraphicalCell().getImageView().setImage(null);
+
+        System.out.println(imageView.getX() + " " + imageView.getY());
+
+        BattleController.setMovingImageView(imageView);
+        battleController.getRootOfPage().getChildren().add(imageView);
+
+        KeyValue xValue = new KeyValue(imageView.xProperty(), graphicalCell.getImageView().localToScene(graphicalCell.getImageView().getBoundsInLocal()).getMinX());
+        KeyValue yValue = new KeyValue(imageView.yProperty(), graphicalCell.getRoot().localToScene(graphicalCell.getImageView().getBoundsInLocal()).getMinY());
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(battleController.getTimeOfMove()), xValue, yValue);
+        Timeline timeline = new Timeline(keyFrame);
+        timeline.play();
+
+        battleController.setCounter(20);
+        //battleController.getTimeOfMove() / (1000 / battleController.getFps()) + 3
+    }
+
     public void attack(BattleController battleController) throws IOException, ClassNotFoundException {
-        if(battleController.getSelectedCell() == null) return;
-        if(battleController.getSelectedCell().getLocation() != SelectedCell.Location.Map) return;
+        if (battleController.getSelectedCell() == null) return;
+        if (battleController.getSelectedCell().getLocation() != SelectedCell.Location.Map) return;
         LivingCard livingCard = this.getCell().getLivingCard();
-        if(livingCard != null)
+        if (livingCard != null)
             Client.getClient().attackInBattle(livingCard.getID());
         battleController.setSelectedCell(null);
     }
 
     public void specialAttack(BattleController battleController) throws IOException, ClassNotFoundException {
         //todo nemidunam alan masalan in ke ye nafare addi bekhad special bezane oon var check shode ya na
-        if(battleController.getSelectedCell() == null) return;
-        if(battleController.getSelectedCell().getLocation() != SelectedCell.Location.Map) return;
-        Client.getClient().useSpecialPower(cell.getX(),cell.getY());
+        if (battleController.getSelectedCell() == null) return;
+        if (battleController.getSelectedCell().getLocation() != SelectedCell.Location.Map) return;
+        Client.getClient().useSpecialPower(cell.getX(), cell.getY());
         battleController.setSelectedCell(null);
     }
 
