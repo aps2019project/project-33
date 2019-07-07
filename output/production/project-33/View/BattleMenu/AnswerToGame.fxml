@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.net.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="253.0" prefWidth="637.0" styleClass="AnswerToGameAnchorPane" xmlns="http://javafx.com/javafx/8" fx:controller="View.BattleMenu.AnswerToGameController">
+   <children>
+      <Label fx:id="acceptButton" layoutX="323.0" layoutY="139.0" text="Accept">
+         <styleClass>
+            <String fx:value="Button" />
+            <String fx:value="YellowButton" />
+         </styleClass>
+      </Label>
+      <Label fx:id="rejectButton" layoutX="14.0" layoutY="139.0" text="Reject">
+         <styleClass>
+            <String fx:value="Button" />
+            <String fx:value="SilverButton" />
+         </styleClass>
+      </Label>
+      <Label fx:id="label" alignment="CENTER" layoutX="111.0" layoutY="31.0" prefHeight="21.0" prefWidth="424.0" text="Do you want to play ?" textAlignment="JUSTIFY" textFill="#9bab0a">
+         <font>
+            <Font name="System Bold Italic" size="31.0" />
+         </font></Label>
+   </children>
+   <stylesheets>
+      <URL value="@BattleMenu.css" />
+      <URL value="@../Button.css" />
+   </stylesheets>
+</AnchorPane>
