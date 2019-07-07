@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="554.0" prefWidth="847.0" styleClass="PlayAnchor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.BattleMenu.ChooseKind">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="585.0" prefWidth="865.0" styleClass="PlayAnchor" xmlns="http://javafx.com/javafx/8" fx:controller="View.BattleMenu.ChooseKind">
     <stylesheets>
         <URL value="@../Button.css" />
         <URL value="@BattleMenu.css" />
@@ -60,5 +60,12 @@
             </children>
         </Group>
         <Label fx:id="backButton" styleClass="BackButton" />
+      <Label fx:id="applyButton" layoutX="599.0" layoutY="537.0" text="Apply">
+         <styleClass>
+            <String fx:value="YellowButton" />
+            <String fx:value="SmallButton" />
+         </styleClass>
+      </Label>
+      <TextField fx:id="numberOfFlagField" layoutX="581.0" layoutY="506.0" styleClass="NumberOfFlagArea" />
     </children>
 </AnchorPane>
