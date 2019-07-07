@@ -1,0 +1,19 @@
+.ShowClientsAnchorPane{
+    -fx-background-image: url("../../../resources/codex/chapter23_background@2x.jpg");
+    -fx-background-size: 100% 100%;
+}
+
+.ClientArea{
+    -fx-background-color: black;
+    -fx-opacity: 0.45;
+}
+
+.OnlineLabel{
+    -fx-font-size: 25;
+    -fx-text-fill: green;
+}
+
+.OfflineLabel{
+    -fx-font-size: 25;
+    -fx-text-fill: #ff0086;
+}
