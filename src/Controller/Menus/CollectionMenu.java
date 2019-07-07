@@ -21,7 +21,7 @@ public class CollectionMenu extends Menu {
     private Collection collection = null;
 
     public ServerMassage inputCommandLine(String inputLine, String authToken) throws IOException {
-
+//todo collection bayad chi bashe akhar ?
         Account account = Account.getAccountByUsername(authToken);
 
         inputLine = inputLine.trim();
@@ -33,10 +33,13 @@ public class CollectionMenu extends Menu {
         }
 
         if (inputLine.equals("show")) {
+            account.setCurrentMenu(MenuList.CollectionShowCollection);
+            ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
+            serverMassage.setCollection(account.getCollection());
             Client.getClient().setResultOfSearch(collection.getCollectionItems());
             //todo in bayad doros she
             // Client.getClient().setCurrentMenu(MenuList.CollectionShowCollection);
-            collection.showCollection("Sell Cost");
+            return serverMassage;
         } else if (inputLine.matches("search .*")) {
             searchInCollection(collection, input[1]);
         } else if (inputLine.matches("create deck .*")) {
@@ -62,12 +65,13 @@ public class CollectionMenu extends Menu {
             collection.showDeck(input[2]);
         } else if (inputLine.equals("save")) {
             this.save(collection);
+            return new ServerMassage(ServerMassage.Type.Accept, null);
         } else if (inputLine.equals("show menu"))
             CollectionMenu.showMenu();
         else if (inputLine.equals("exit")) {
             isFirstTime = true;
             account.setCurrentMenu(MenuList.MainMenu);
-            return null;
+            return new ServerMassage(ServerMassage.Type.Accept, null);
             //todo in bayad doros she
             // Client.getClient().setCurrentMenu(MenuList.MainMenu);
         } else
@@ -112,11 +116,13 @@ public class CollectionMenu extends Menu {
 
         //todo ServerMain.application.getLoggedInAccount().setCollection(collection);
     }
-
     public ServerMassage interpret(ClientMassage clientMassage) throws IOException {
-        ServerMassage answer;
         if(clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.Exit)
             return this.inputCommandLine("exit", clientMassage.getAuthToken());
+        if(clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.Save)
+            return this.inputCommandLine("save", clientMassage.getAuthToken());
+        if(clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.Show)
+            return this.inputCommandLine("show", clientMassage.getAuthToken());
         return null;
     }
 }

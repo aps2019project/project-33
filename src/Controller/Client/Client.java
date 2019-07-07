@@ -69,12 +69,12 @@ public class Client {
         clientMassage.setMainMenuRequest(mainMenuRequest);
         return sendAndReceive(clientMassage);
     }
-
-    public synchronized ServerMassage exitCollectionMenu() throws IOException, ClassNotFoundException {
+//collection commands
+    public synchronized ServerMassage collectionMenuCommand(ClientMassage.CollectionMenuRequest collectionMenuRequest) throws IOException, ClassNotFoundException {
         ClientMassage clientMassage = new ClientMassage();
         clientMassage.setAuthToken(this.authToken);
         clientMassage.setDestinationMenu(ClientMassage.Menu.CollectionMenu);
-        clientMassage.setCollectionMenuRequest(ClientMassage.CollectionMenuRequest.Exit);
+        clientMassage.setCollectionMenuRequest(collectionMenuRequest);
         return sendAndReceive(clientMassage);
     }
 

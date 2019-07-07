@@ -31,7 +31,7 @@ public class ClientMassage implements Serializable {
     }
 
     public enum CollectionMenuRequest{
-        Exit;
+        Exit, Save, Show;
     }
 
     private String authToken;

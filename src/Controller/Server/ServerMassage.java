@@ -3,12 +3,24 @@ package Controller.Server;
 import Controller.Battle;
 import Controller.MenuList;
 import Model.Account;
+import Model.Collection;
+import Model.CollectionItem.CollectionItem;
 import Model.Massage;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ServerMassage implements Serializable {
+
+
+    public Collection getCollection() {
+        return collection;
+    }
+
+    public void setCollection(Collection collection) {
+        this.collection = collection;
+    }
+
     public enum Type implements Serializable {
         Error, Accept;
     }
@@ -39,6 +51,7 @@ public class ServerMassage implements Serializable {
     //Answer to GiveAllMassages
     private ArrayList<Massage> massages;
 
+    private Collection collection;
 
     public Type getType() {
         return type;

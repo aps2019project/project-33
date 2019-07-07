@@ -1,7 +1,9 @@
 package View.CollectionMenu.CollectionMenu;
 
 import Controller.Client.Client;
+import Controller.Client.ClientMassage;
 import Controller.MenuList;
+import Controller.Server.ServerMassage;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -29,11 +31,13 @@ public class CollectionMenuController implements Initializable {
     public Label importDeckLabel;
     public Label exportDeckLabel;
 
+    public static ServerMassage serverMassage;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         backButton.setOnMouseClicked(event -> {
             try {
-                Client.getClient().exitCollectionMenu();
+                Client.getClient().collectionMenuCommand(ClientMassage.CollectionMenuRequest.Exit);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
@@ -41,61 +45,126 @@ public class CollectionMenuController implements Initializable {
             }
         });
 
-   /*     createDeckLabel.setOnMouseClicked(event -> {
-            Client.getClient().changeCurrentMenu(MenuList.Collec);
+        createDeckLabel.setOnMouseClicked(event -> {
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.CollectionCreateDeck);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         saveLabel.setOnMouseClicked(event -> {
             try {
-                Client.getClient().saveCollectionMenu();
+                Client.getClient().collectionMenuCommand(ClientMassage.CollectionMenuRequest.Save);
             } catch (IOException e) {
                 e.printStackTrace();
-            }
-        });*/
-/*
-        showLabel.setOnMouseClicked(event -> {
-            try {
-                Client.getClient().getCollectionMenu().inputCommandLine("show");
-            } catch (IOException e) {
+            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-
         });
 
-
-
-
-
         deleteDeckLabel.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.CollectionDeleteDeck);
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.CollectionDeleteDeck);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         addToDeckLabel.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.CollectionSelectDeckForAdd);
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.CollectionSelectDeckForAdd);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         removeFromDeckLabel.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.CollectionSelectDeckForRemove);
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.CollectionSelectDeckForRemove);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
+
         validateDeckLabel.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.CollectionValidateDeck);
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.CollectionValidateDeck);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         selectDeckLabel.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.CollectionSelectDeck);
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.CollectionSelectDeck);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         showDeckLabel.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.CollectionSelectDeckForShow);
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.CollectionSelectDeckForShow);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         importDeckLabel.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.CollectionImportDeck);
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.CollectionImportDeck);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         exportDeckLabel.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.CollectionExportDeck);
-        });*/
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.CollectionExportDeck);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
+
+        showLabel.setOnMouseClicked(event -> {
+            try {
+                serverMassage = Client.getClient().collectionMenuCommand(ClientMassage.CollectionMenuRequest.Show);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        });
+
+        searchLabel.setOnMouseClicked(event -> {
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.CollectionSearch);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }
