@@ -319,11 +319,12 @@ public class Generator {
 //TODO faghat baraye celle
         setSpellAttackArea(spell, false, false, false, false, true, true, 3, false,
                 false, false, false);
-        spell.getInformation().setCellImpact(true);
 
+        spell.getInformation().setMultipleImpact(true);
+        spell.getInformation().setCellImpact(true);
         spell.getInformation().setCanAddPoisonBuffToCell(true);
         //TODO in tedad turna ro havasemun bashe
-        spell.getInformation().setTimeOfAddPoisonBuffToCell(1);
+        spell.getInformation().setTimeOfAddPoisonBuffToCell(5);
 
         Application.writeJSON(spell, "Data/CollectionItem/Spell/PoisonLake.json");
     }
