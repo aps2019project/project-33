@@ -1,9 +1,10 @@
 package View.CollectionMenu.CollectionMenu;
 
-import Controller.Client.Client;
-import Controller.Client.ClientMassage;
+import Controller.Client;
+import Controller.MenuList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -21,23 +22,21 @@ public class CollectionMenuController implements Initializable {
     public Label removeFromDeckLabel;
     public Label validateDeckLabel;
     public Label selectDeckLabel;
-    public Label showAllDecksLabel;
     public Label showDeckLabel;
     public Label saveLabel;
     public ImageView backButton;
     public ImageView duelystImage;
+    public Label importDeckLabel;
+    public Label exportDeckLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         backButton.setOnMouseClicked(event -> {
             try {
-                Client.getClient().exitCollectionMenu();
+                Client.getClient().getCollectionMenu().inputCommandLine("exit");
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
             }
-//                Client.getClient().getCollectionMenu().inputCommandLine("exit");
         });
 
         saveLabel.setOnMouseClicked(event -> {
@@ -55,6 +54,46 @@ public class CollectionMenuController implements Initializable {
                 e.printStackTrace();
             }
 
+        });
+
+        searchLabel.setOnMouseClicked(event -> {
+            Client.getClient().setCurrentMenu(MenuList.CollectionSearch);
+        });
+
+        createDeckLabel.setOnMouseClicked(event -> {
+            Client.getClient().setCurrentMenu(MenuList.CollectionCreateDeck);
+        });
+
+        deleteDeckLabel.setOnMouseClicked(event -> {
+            Client.getClient().setCurrentMenu(MenuList.CollectionDeleteDeck);
+        });
+
+        addToDeckLabel.setOnMouseClicked(event -> {
+            Client.getClient().setCurrentMenu(MenuList.CollectionSelectDeckForAdd);
+        });
+
+        removeFromDeckLabel.setOnMouseClicked(event -> {
+            Client.getClient().setCurrentMenu(MenuList.CollectionSelectDeckForRemove);
+        });
+
+        validateDeckLabel.setOnMouseClicked(event -> {
+            Client.getClient().setCurrentMenu(MenuList.CollectionValidateDeck);
+        });
+
+        selectDeckLabel.setOnMouseClicked(event -> {
+            Client.getClient().setCurrentMenu(MenuList.CollectionSelectDeck);
+        });
+
+        showDeckLabel.setOnMouseClicked(event -> {
+            Client.getClient().setCurrentMenu(MenuList.CollectionSelectDeckForShow);
+        });
+
+        importDeckLabel.setOnMouseClicked(event -> {
+            Client.getClient().setCurrentMenu(MenuList.CollectionImportDeck);
+        });
+
+        exportDeckLabel.setOnMouseClicked(event -> {
+            Client.getClient().setCurrentMenu(MenuList.CollectionExportDeck);
         });
     }
 }

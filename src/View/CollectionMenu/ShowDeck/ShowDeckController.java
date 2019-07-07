@@ -1,35 +1,31 @@
-package View.ShopMenu;
+package View.CollectionMenu.ShowDeck;
 
 import Controller.Client;
 import Controller.MenuList;
-import Model.Collection;
 import Model.CollectionItem.CollectionItem;
 import View.Graphic;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ShowShopController implements Initializable {
-
-    public ScrollPane scrollPane;
-    public AnchorPane anchorPane;
+public class ShowDeckController implements Initializable {
+    public AnchorPane mainPane;
     public ImageView backButton;
+    public ImageView duelystImage;
 
     public static boolean isFirstTime = true;
     public static VBox mainVBox = new VBox();
 
     public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) {
         Label label = new Label(labelText);
-        label.setTextFill(Color.NAVY);
+        label.setTextFill(javafx.scene.paint.Color.WHITE);
         label.setStyle("-fx-font-size: 15");
         vBox.getChildren().add(label);
 
@@ -38,24 +34,13 @@ public class ShowShopController implements Initializable {
         VBox.setMargin(vBox, new Insets(0, 0, 20, 0));
     }
 
-    public static ArrayList<CollectionItem> unique(ArrayList<CollectionItem> collectionItems){
-        ArrayList<CollectionItem> uniquedCollectionItems = new ArrayList<>();
-        for(CollectionItem collectionItem : collectionItems){
-            boolean find = false;
-            for(CollectionItem uniquedCollectionItem : uniquedCollectionItems)
-                if(uniquedCollectionItem.getName().equals(collectionItem.getName()))
-                    find = true;
-            if(!find)
-                uniquedCollectionItems.add(collectionItem);
-        }
-        return uniquedCollectionItems;
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(isFirstTime){
+        if (isFirstTime) {
+            mainVBox.getChildren().clear();
+            //todo server
             ArrayList<CollectionItem> collectionItems = Client.getClient().getResultOfSearch();
-            collectionItems = unique(collectionItems);
 
             ArrayList<CollectionItem> heroes = Graphic.getHeroes(collectionItems);
             addPart(heroes, "HEROES:", mainVBox);
@@ -69,17 +54,17 @@ public class ShowShopController implements Initializable {
             ArrayList<CollectionItem> items = Graphic.getItems(collectionItems);
             addPart(items, "ITEMS:", mainVBox);
 
-            mainVBox.setLayoutY(150);
+            mainVBox.setLayoutY(100);
             mainVBox.setLayoutX(100);
 
             VBox.setMargin(mainVBox, new Insets(0, 0, 20, 0));
 
-            anchorPane.getChildren().add(mainVBox);
+            mainPane.getChildren().add(mainVBox);
+
         }
         isFirstTime = false;
-
         backButton.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.ShopMenu);
+            Client.getClient().setCurrentMenu(MenuList.CollectionSelectDeckForShow);
             isFirstTime = true;
         });
     }

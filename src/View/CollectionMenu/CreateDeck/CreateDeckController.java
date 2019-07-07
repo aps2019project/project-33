@@ -1,21 +1,24 @@
-package View.CollectionMenu.Search;
+package View.CollectionMenu.CreateDeck;
 
 import Controller.Client;
 import Controller.MenuList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SearchController implements Initializable {
-    public ImageView backButton;
-    public Label searchLabel;
+public class CreateDeckController implements Initializable {
+    public AnchorPane mainPane;
     public TextField nameField;
-
+    public Label createLabel;
+    public ImageView duelystImage;
+    public ImageView backButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -23,9 +26,10 @@ public class SearchController implements Initializable {
             Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
         });
 
-        searchLabel.setOnMouseClicked(event -> {
+        createLabel.setOnMouseClicked(event -> {
             try {
-                Client.getClient().getCollectionMenu().inputCommandLine("search " + nameField.getText());
+                Client.getClient().getCollectionMenu().inputCommandLine("create deck " + nameField.getText());
+                nameField.setText("");
             } catch (IOException e) {
                 e.printStackTrace();
             }

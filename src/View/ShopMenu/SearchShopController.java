@@ -1,6 +1,6 @@
 package View.ShopMenu;
 
-import Controller.Client.Client;
+import Controller.Client;
 import Controller.MenuList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -27,8 +27,7 @@ public class SearchShopController implements Initializable {
         });
 
         backButton.setOnMouseClicked(event -> {
-            //todo in bayad doros she
-            // Client.getClient().setCurrentMenu(MenuList.ShopMenu);
+            Client.getClient().setCurrentMenu(MenuList.ShopMenu);
         });
     }
 }
