@@ -77,15 +77,16 @@ public class Account implements Serializable {
         this.budget += income;
     }
 
-    public static void sortArraysOfAccount(ArrayList<Account> accounts) {
+    public synchronized static void sortArraysOfAccount(ArrayList<Account> accounts) {
         int sizeOfArray = accounts.size();
         for (int i = 0; i < sizeOfArray; i++)
             for (int j = i + 1; j < sizeOfArray; j++) {
-                if (accounts.get(i).getNumberOfWins() > accounts.get(j).getNumberOfWins()) {
+                if (accounts.get(i).getNumberOfWins() < accounts.get(j).getNumberOfWins()) {
+                    System.out.println("salammm" + " " + i + " " + j);
                     swap(accounts, i, j);
                 }
                 if (accounts.get(i).getNumberOfWins() == accounts.get(j).getNumberOfWins())
-                    if (accounts.get(i).getNumberOfLooses() < accounts.get(j).getNumberOfLooses())
+                    if (accounts.get(i).getNumberOfLooses() > accounts.get(j).getNumberOfLooses())
                         swap(accounts, i, j);
             }
     }
@@ -93,7 +94,7 @@ public class Account implements Serializable {
     private static void swap(ArrayList<Account> account, int i, int j) {
         Account tmp = account.get(i);
         account.set(i, account.get(j));
-        account.set(i, tmp);
+        account.set(j, tmp);
     }
 
     public void save() {

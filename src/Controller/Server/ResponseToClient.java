@@ -104,9 +104,16 @@ public class ResponseToClient extends Thread {
         if (clientMassage.getServerRequest() == ClientMassage.ServerRequest.GiveAccounts) {
             synchronized (Account.getAccounts()) {
                 ArrayList<Account> accounts = new ArrayList<>();
+
                 for(Account account : Account.getAccounts())
                     accounts.add((Account) Application.copy(account, Account.class));
+                System.out.println("++++++");
+                for(Account account : accounts)
+                    System.out.println(account.getNumberOfWins() + " " + account.getUsername());
+                System.out.println("-----");
                 Account.sortArraysOfAccount(accounts);
+                for(Account account : accounts)
+                    System.out.println(account.getNumberOfWins() + " " + account.getUsername());
                 ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
                 serverMassage.setAccounts(accounts);
                 return serverMassage;
