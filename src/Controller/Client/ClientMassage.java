@@ -44,6 +44,7 @@ public class ClientMassage implements Serializable {
 
     //BattleMenuRequest Instances
     private String secondPlayerUsername, type, mode, chapter, kind;
+    private int numberOfFlag;
 
     //BattleRequest Instances
     private String collectionItemID;
@@ -202,5 +203,13 @@ public class ClientMassage implements Serializable {
 
     public void setMassage(String massage) {
         this.massage = massage;
+    }
+
+    public int getNumberOfFlag() {
+        return numberOfFlag;
+    }
+
+    public void setNumberOfFlag(int numberOfFlag) {
+        this.numberOfFlag = numberOfFlag;
     }
 }

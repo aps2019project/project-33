@@ -4,10 +4,12 @@ import Controller.MenuList;
 import Controller.Menus.*;
 import Controller.Server.ServerMassage;
 import Model.CollectionItem.CollectionItem;
+import javafx.animation.AnimationTimer;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -78,16 +80,16 @@ public class Client {
         return sendAndReceive(clientMassage);
     }
 
-    public synchronized ServerMassage startCreateMultiGame(String secondPlayerUsername, String type, String mode, String chapter, String kind) throws IOException, ClassNotFoundException {
-        return sendCreateGameCommand(secondPlayerUsername, type, mode, chapter, kind, ClientMassage.BattleMenuRequest.startMultiPlayerGame);
+    public synchronized ServerMassage startCreateMultiGame(String secondPlayerUsername, String type, String mode, String chapter, String kind, int numberOfFlag) throws IOException, ClassNotFoundException {
+        return sendCreateGameCommand(secondPlayerUsername, type, mode, chapter, kind, numberOfFlag, ClientMassage.BattleMenuRequest.startMultiPlayerGame);
 
     }
 
-    public synchronized ServerMassage createGame(String secondPlayerUsername, String type, String mode, String chapter, String kind) throws IOException, ClassNotFoundException {
-        return sendCreateGameCommand(secondPlayerUsername, type, mode, chapter, kind, ClientMassage.BattleMenuRequest.CreateSinglePlayerGame);
+    public synchronized ServerMassage createGame(String secondPlayerUsername, String type, String mode, String chapter, String kind, int numberOfFlag) throws IOException, ClassNotFoundException {
+        return sendCreateGameCommand(secondPlayerUsername, type, mode, chapter, kind, numberOfFlag, ClientMassage.BattleMenuRequest.CreateSinglePlayerGame);
     }
 
-    private ServerMassage sendCreateGameCommand(String secondPlayerUsername, String type, String mode, String chapter, String kind, ClientMassage.BattleMenuRequest battleMenuRequest) throws IOException, ClassNotFoundException {
+    private ServerMassage sendCreateGameCommand(String secondPlayerUsername, String type, String mode, String chapter, String kind, int numberOfFlag, ClientMassage.BattleMenuRequest battleMenuRequest) throws IOException, ClassNotFoundException {
         ClientMassage clientMassage = new ClientMassage();
         clientMassage.setAuthToken(this.authToken);
         clientMassage.setDestinationMenu(ClientMassage.Menu.BattleMenu);
@@ -97,6 +99,7 @@ public class Client {
         clientMassage.setMode(mode);
         clientMassage.setChapter(chapter);
         clientMassage.setKind(kind);
+        clientMassage.setNumberOfFlag(numberOfFlag);
         return sendAndReceive(clientMassage);
     }
 
@@ -184,7 +187,6 @@ public class Client {
     }
 
     public synchronized ServerMassage getRunningGame() throws IOException, ClassNotFoundException {
-        System.out.println("are miad inja ro");
         return getServerMassage(ClientMassage.ServerRequest.GiveRunningGame);
     }
 

@@ -1,9 +1,11 @@
 package Controller.Client;
 
+import Controller.Server.ServerMain;
 import View.View;
 
 import java.io.IOException;
-import java.util.Scanner;
+
+import static Controller.Client.ClientMassage.Menu.Server;
 
 //todo, alan baraye account ye running game gozashtim, bayad havasemoon bashe
 
