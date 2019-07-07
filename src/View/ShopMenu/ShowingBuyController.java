@@ -1,6 +1,5 @@
 package View.ShopMenu;
 
-import Controller.Client;
 import Controller.MenuList;
 import Model.CollectionItem.CollectionItem;
 import View.Graphic;
@@ -29,7 +28,7 @@ public class ShowingBuyController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (isFirstTime) {
+       /* if (isFirstTime) {
             nonBlurAnchor.getChildren().remove(cardsVbox);
             cardsVbox = Graphic.createCards(Client.getClient().getResultOfSearch());
             nonBlurAnchor.getChildren().add(cardsVbox);
@@ -61,7 +60,7 @@ public class ShowingBuyController implements Initializable {
 
                 isFirstTime = true;
             }
-        });
+        });*/
     }
 
 }

@@ -1,6 +1,5 @@
 package View.CollectionMenu.Search;
 
-import Controller.Client;
 import Controller.MenuList;
 import View.Graphic;
 import javafx.fxml.Initializable;
@@ -20,7 +19,7 @@ public class ShowSearchController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(isFirstTime){
+       /* if(isFirstTime){
             VBox vBox = Graphic.createCards(Client.getClient().getResultOfSearch());
             vBox.setLayoutY(100);
             vBox.setLayoutX(100);
@@ -31,6 +30,6 @@ public class ShowSearchController implements Initializable {
             Client.getClient().setCurrentMenu(MenuList.CollectionSearch);
             isFirstTime = true;
             mainPane.getChildren().clear();
-        });
+        });*/
     }
 }

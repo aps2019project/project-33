@@ -1,6 +1,5 @@
 package View.CollectionMenu.AddCardToDeck;
 
-import Controller.Client;
 import Controller.MenuList;
 import Model.Collection;
 import Model.CollectionItem.CollectionItem;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class SelectCardController implements Initializable {
-    public AnchorPane mainPane;
+   /* public AnchorPane mainPane;
     public ImageView duelystImage;
     public ImageView backButton;
     public Label okButton;
@@ -56,10 +55,10 @@ public class SelectCardController implements Initializable {
                 editedCollectionItems.add(collectionItem);
         return editedCollectionItems;
     }
-
+*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (isFirstTime) {
+        /*if (isFirstTime) {
             vBoxes.clear();
             mainVBox.getChildren().clear();
 
@@ -133,6 +132,6 @@ public class SelectCardController implements Initializable {
                 isFirstTime = true;
                 System.out.println();
             }
-        });
+        });*/
     }
 }

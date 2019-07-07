@@ -1,6 +1,5 @@
 package View.CollectionMenu.AddCardToDeck;
 
-import Controller.Client;
 import Controller.MenuList;
 import Model.Collection;
 import Model.Deck;
@@ -31,6 +30,7 @@ public class SelectDeckController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+/*
         if (isFirstTime) {
             selectedDeck = null;
             labelsVBox.getChildren().clear();
@@ -86,6 +86,7 @@ public class SelectDeckController implements Initializable {
             isFirstTime = true;
 
         });
+*/
     }
 
     public static void clearShadows() {

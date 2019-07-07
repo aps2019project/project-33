@@ -1,7 +1,6 @@
 package View.ShopMenu.CreateCard;
 
 import Controller.Application;
-import Controller.Client;
 import Controller.MenuList;
 import Model.CollectionItem.Hero;
 import Model.CollectionItem.Information;
@@ -87,7 +86,7 @@ public class CreateCardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        cardType.getItems().add("HERO");
+   /*     cardType.getItems().add("HERO");
         cardType.getItems().add("MINION");
         cardType.getItems().add("SPELL");
         cardType.getSelectionModel().selectFirst();
@@ -227,7 +226,7 @@ public class CreateCardController implements Initializable {
         backButton.setOnMouseClicked(event -> {
             Client.getClient().setCurrentMenu(MenuList.ShopMenu);
 
-        });
+        });*/
     }
 
     public static int getValue(String field) {

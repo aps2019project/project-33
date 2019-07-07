@@ -1,6 +1,5 @@
 package View.CollectionMenu.CreateDeck;
 
-import Controller.Client;
 import Controller.MenuList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -22,7 +21,7 @@ public class CreateDeckController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backButton.setOnMouseClicked(event -> {
+      /*  backButton.setOnMouseClicked(event -> {
             Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
         });
 
@@ -33,6 +32,6 @@ public class CreateDeckController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        });
+        });*/
     }
 }

@@ -1,6 +1,4 @@
 package View.ShopMenu;
-
-import Controller.Client;
 import Controller.MenuList;
 import Model.Collection;
 import Model.CollectionItem.CollectionItem;
@@ -30,7 +28,7 @@ public class SellMenuController implements Initializable {
     public static VBox mainVBox = new VBox();
     public static ArrayList<VBox> vBoxes = new ArrayList<>();
 
-    public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) {
+/*    public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) {
         Label label = new Label(labelText);
         label.setTextFill(javafx.scene.paint.Color.WHITE);
         label.setStyle("-fx-font-size: 15");
@@ -43,11 +41,11 @@ public class SellMenuController implements Initializable {
         VBox.setMargin(vBox, new Insets(0, 0, 20, 0));
 
         vBoxes.addAll(Graphic.vBoxes);
-    }
+    }*/
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (isFirstTime) {
+       /* if (isFirstTime) {
             vBoxes.clear();
             mainVBox.getChildren().clear();
 
@@ -98,6 +96,6 @@ public class SellMenuController implements Initializable {
                 Client.getClient().setCurrentMenu(MenuList.ShopMenu);
                 isFirstTime = true;
             }
-        });
+        });*/
     }
 }

@@ -1,6 +1,5 @@
 package View.CollectionMenu.RemoveCardFromDeck;
 
-import Controller.Client;
 import Controller.MenuList;
 import Model.Collection;
 import Model.CollectionItem.CollectionItem;
@@ -36,7 +35,7 @@ public class SelectCardController implements Initializable {
     public static ArrayList<CollectionItem> spells = new ArrayList<>();
     public static ArrayList<CollectionItem> items = new ArrayList<>();
 
-    public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) {
+ /*   public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) {
         Label label = new Label(labelText);
         label.setTextFill(javafx.scene.paint.Color.WHITE);
         label.setStyle("-fx-font-size: 15");
@@ -49,11 +48,11 @@ public class SelectCardController implements Initializable {
         VBox.setMargin(vBox, new Insets(0, 0, 20, 0));
 
         vBoxes.addAll(Graphic.vBoxes);
-    }
+    }*/
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (isFirstTime) {
+   /*     if (isFirstTime) {
             vBoxes.clear();
             mainVBox.getChildren().clear();
             Deck selectedDeck = View.CollectionMenu.RemoveCardFromDeck.SelectDeckController.selectedDeck;
@@ -129,6 +128,6 @@ public class SelectCardController implements Initializable {
                 isFirstTime = true;
             }
         });
-
+*/
     }
 }

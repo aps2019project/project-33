@@ -1,6 +1,5 @@
 package View.ShopMenu;
 
-import Controller.Client;
 import Controller.MenuList;
 import View.Graphic;
 import javafx.fxml.Initializable;
@@ -23,7 +22,7 @@ public class SearchCollectionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backButton.setOnMouseClicked(event -> {
+      /*  backButton.setOnMouseClicked(event -> {
             Client.getClient().setCurrentMenu(MenuList.ShopMenu);
         });
 
@@ -35,6 +34,6 @@ public class SearchCollectionController implements Initializable {
             cardsVBox.setLayoutX(100);
             cardsVBox.setLayoutY(100);
             searchCollection.getChildren().add(cardsVBox);
-        });
+        });*/
     }
 }

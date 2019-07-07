@@ -1,6 +1,5 @@
 package View.CollectionMenu.ShowDeck;
 
-import Controller.Client;
 import Controller.MenuList;
 import Model.CollectionItem.CollectionItem;
 import View.Graphic;
@@ -23,6 +22,7 @@ public class ShowDeckController implements Initializable {
     public static boolean isFirstTime = true;
     public static VBox mainVBox = new VBox();
 
+/*
     public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) {
         Label label = new Label(labelText);
         label.setTextFill(javafx.scene.paint.Color.WHITE);
@@ -33,10 +33,12 @@ public class ShowDeckController implements Initializable {
         vBox.getChildren().add(partVBox);
         VBox.setMargin(vBox, new Insets(0, 0, 20, 0));
     }
+*/
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+/*
         if (isFirstTime) {
             mainVBox.getChildren().clear();
             //todo server
@@ -67,5 +69,6 @@ public class ShowDeckController implements Initializable {
             Client.getClient().setCurrentMenu(MenuList.CollectionSelectDeckForShow);
             isFirstTime = true;
         });
+*/
     }
 }

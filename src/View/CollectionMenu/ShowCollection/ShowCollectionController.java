@@ -1,6 +1,5 @@
 package View.CollectionMenu.ShowCollection;
 
-import Controller.Client;
 import Controller.MenuList;
 import Model.CollectionItem.CollectionItem;
 import View.Graphic;
@@ -22,7 +21,7 @@ public class ShowCollectionController implements Initializable {
     public static boolean isFirstTime = true;
     public static VBox mainVBox = new VBox();
 
-    public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) {
+/*    public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) {
         Label label = new Label(labelText);
         label.setTextFill(javafx.scene.paint.Color.WHITE);
         label.setStyle("-fx-font-size: 15");
@@ -31,12 +30,12 @@ public class ShowCollectionController implements Initializable {
         VBox partVBox = Graphic.createCards(collectionItems);
         vBox.getChildren().add(partVBox);
         VBox.setMargin(vBox, new Insets(0, 0, 20, 0));
-    }
+    }*/
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (isFirstTime) {
+  /*      if (isFirstTime) {
             mainVBox.getChildren().clear();
             ArrayList<CollectionItem> collectionItems = Client.getClient().getResultOfSearch();
 
@@ -64,6 +63,6 @@ public class ShowCollectionController implements Initializable {
         backButton.setOnMouseClicked(event -> {
             Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
             isFirstTime = true;
-        });
+        });*/
     }
 }

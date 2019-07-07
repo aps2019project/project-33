@@ -1,6 +1,6 @@
 package View.CollectionMenu.CollectionMenu;
 
-import Controller.Client;
+import Controller.Client.Client;
 import Controller.MenuList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -33,13 +33,15 @@ public class CollectionMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         backButton.setOnMouseClicked(event -> {
             try {
-                Client.getClient().getCollectionMenu().inputCommandLine("exit");
+                Client.getClient().exitCollectionMenu();
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
         });
 
-        saveLabel.setOnMouseClicked(event -> {
+      /*  saveLabel.setOnMouseClicked(event -> {
             try {
                 Client.getClient().getCollectionMenu().inputCommandLine("save");
             } catch (IOException e) {
@@ -94,6 +96,6 @@ public class CollectionMenuController implements Initializable {
 
         exportDeckLabel.setOnMouseClicked(event -> {
             Client.getClient().setCurrentMenu(MenuList.CollectionExportDeck);
-        });
+        });*/
     }
 }

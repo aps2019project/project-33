@@ -1,7 +1,6 @@
 package View.CollectionMenu.ImportDeck;
 
 import Controller.Application;
-import Controller.Client;
 import Controller.MenuList;
 import Model.Account;
 import Model.Collection;
@@ -27,7 +26,7 @@ public class ImportController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backButton.setOnMouseClicked(event -> {
+      /*  backButton.setOnMouseClicked(event -> {
             Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
         });
 
@@ -61,6 +60,6 @@ public class ImportController implements Initializable {
                 e.printStackTrace();
                 //TODO
             }
-        });
+        });*/
     }
 }

@@ -1,7 +1,6 @@
 package View.CollectionMenu.DeleteDeck;
 
 import Controller.Application;
-import Controller.Client;
 import Controller.MenuList;
 import Model.Account;
 import Model.Collection;
@@ -38,7 +37,7 @@ public class DeleteDeckController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(isFirstTime){
+        /*if(isFirstTime){
             selectedDeck = null;
             labelsVBox.getChildren().clear();
             mainAnchor.getChildren().remove(labelsVBox);
@@ -93,7 +92,7 @@ public class DeleteDeckController implements Initializable {
             Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
             isFirstTime = true;
 
-        });
+        });*/
     }
 
     public static void clearShadows(){

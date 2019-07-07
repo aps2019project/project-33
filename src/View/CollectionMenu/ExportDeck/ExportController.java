@@ -1,7 +1,6 @@
 package View.CollectionMenu.ExportDeck;
 
 import Controller.Application;
-import Controller.Client;
 import Controller.MenuList;
 import Model.Collection;
 import Model.Deck;
@@ -34,7 +33,7 @@ public class ExportController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(isFirstTime){
+        /*if(isFirstTime){
             selectedDeck = null;
             labelsVBox.getChildren().clear();
             mainPane.getChildren().remove(labelsVBox);
@@ -87,7 +86,7 @@ public class ExportController implements Initializable {
         backButton.setOnMouseClicked(event -> {
             Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
             isFirstTime = true;
-        });
+        });*/
     }
 
     public static void clearShadows(){

@@ -1,6 +1,5 @@
 package View.CollectionMenu.ValidateDeck;
 
-import Controller.Client;
 import Controller.MenuList;
 import Model.Collection;
 import Model.Deck;
@@ -31,7 +30,7 @@ public class ValidateDeckController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(isFirstTime){
+        /*if(isFirstTime){
             validateLabel.setText("");
             selectedDeck = null;
             labelsVBox.getChildren().clear();
@@ -82,7 +81,7 @@ public class ValidateDeckController implements Initializable {
         backButton.setOnMouseClicked(event -> {
             Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
             isFirstTime = true;
-        });
+        });*/
     }
 
     public static void clearShadows() {

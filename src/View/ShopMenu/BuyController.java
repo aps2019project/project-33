@@ -1,6 +1,6 @@
 package View.ShopMenu;
 
-import Controller.Client;
+import Controller.Client.Client;
 import Controller.MenuList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -21,13 +21,13 @@ public class BuyController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backButton.setOnMouseClicked(event -> {
+      /*  backButton.setOnMouseClicked(event -> {
             Client.getClient().setCurrentMenu(MenuList.ShopMenu);
         });
 
         searchButton.setOnMouseClicked(event -> {
             Client.getClient().getShopMenu().inputCommandLine("search " + nameField.getText());
 
-        });
+        });*/
     }
 }

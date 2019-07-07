@@ -1,6 +1,4 @@
 package View.ShopMenu;
-
-import Controller.Client;
 import Controller.MenuList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -27,7 +25,7 @@ public class ShopController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        showCollectionLabel.setOnMouseClicked(event -> {
+        /*showCollectionLabel.setOnMouseClicked(event -> {
             Client.getClient().getShopMenu().inputCommandLine("show collection");
         });
 
@@ -57,6 +55,6 @@ public class ShopController implements Initializable {
 
         createCardLabel.setOnMouseClicked(event -> {
             Client.getClient().setCurrentMenu(MenuList.ShopCreateCard);
-        });
+        });*/
     }
 }
