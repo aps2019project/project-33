@@ -10,6 +10,7 @@ import Controller.Menus.BattleMenu;
 import Controller.Menus.MainMenu;
 import Model.Account;
 import Model.Massage;
+import com.sun.deploy.panel.AbstractRadioPropertyGroup;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -100,15 +101,18 @@ public class ResponseToClient extends Thread {
             answer.setRunningBattle(newBattle);
             return answer;
         }
-        if (clientMassage.getServerRequest() == ClientMassage.ServerRequest.GiveAccounts){
-            ArrayList<Account> accounts = Account.getAccounts();
-            Account.sortArraysOfAccount(accounts);
-            ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
-            accounts = (ArrayList<Account>) Application.copy(accounts, ArrayList.class);
-            serverMassage.setAccounts(accounts);
-            return serverMassage;
+        if (clientMassage.getServerRequest() == ClientMassage.ServerRequest.GiveAccounts) {
+            synchronized (Account.getAccounts()) {
+                ArrayList<Account> accounts = new ArrayList<>();
+                for(Account account : Account.getAccounts())
+                    accounts.add((Account) Application.copy(account, Account.class));
+                Account.sortArraysOfAccount(accounts);
+                ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
+                serverMassage.setAccounts(accounts);
+                return serverMassage;
+            }
         }
-        if(clientMassage.getServerRequest() == ClientMassage.ServerRequest.SendMassageInChat){
+        if (clientMassage.getServerRequest() == ClientMassage.ServerRequest.SendMassageInChat) {
             synchronized (Massage.getMassages()) {
                 String massageText = clientMassage.getMassage();
                 Account account = Account.getAccountByUsername(clientMassage.getAuthToken());
@@ -118,10 +122,11 @@ public class ResponseToClient extends Thread {
                 return new ServerMassage(ServerMassage.Type.Accept, null);
             }
         }
-        if(clientMassage.getServerRequest() == ClientMassage.ServerRequest.GiveAllMassages){
+        if (clientMassage.getServerRequest() == ClientMassage.ServerRequest.GiveAllMassages) {
             synchronized (Massage.getMassages()) {
-                ArrayList<Massage> massages = Massage.getMassages();
-                massages = (ArrayList<Massage>) Application.copy(massages, ArrayList.class);
+                ArrayList<Massage> massages = new ArrayList<>();
+                for (Massage massage : Massage.getMassages())
+                    massages.add(massage);
                 ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
                 serverMassage.setMassages(massages);
                 return serverMassage;

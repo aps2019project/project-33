@@ -2,7 +2,7 @@ package Controller.Server;
 
 import Controller.Application;
 import Generator.*;
-import View.View;
+import View.Server.ServerView;
 
 import java.io.*;
 import java.util.Scanner;
@@ -22,6 +22,14 @@ public class ServerMain {
         Generator.createCards();
         ShopGenerator.generate();
         DeckGenerator.deckGenerator();;
-        application.runApplication();
+        new Thread(() -> {
+            try {
+                application.runApplication();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+        ServerView.main(args);
     }
 }
