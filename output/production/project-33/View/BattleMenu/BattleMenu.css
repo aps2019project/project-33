@@ -73,3 +73,9 @@
     -fx-background-image: url("../../../resources/codex/chapter17_background@2x.jpg");
     -fx-background-size: 100% 100%;
 }
+
+.NumberOfFlagArea{
+    -fx-background-color: black;
+    -fx-opacity: 0.55;
+    -fx-text-fill: white;
+}

@@ -106,5 +106,6 @@
             <HBox fx:id="manaArea" prefHeight="100.0" prefWidth="200.0" />
          </children>
       </VBox>
+      <Label fx:id="remainTimeLabel" layoutX="1056.0" layoutY="22.0" text="Label" />
    </children>
 </AnchorPane>
