@@ -7,10 +7,10 @@ import Controller.Client.ClientMassage;
 import Controller.MenuList;
 import Controller.Menus.AccountMenu;
 import Controller.Menus.BattleMenu;
+import Controller.Menus.CollectionMenu;
 import Controller.Menus.MainMenu;
 import Model.Account;
 import Model.Massage;
-import com.sun.deploy.panel.AbstractRadioPropertyGroup;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -22,6 +22,7 @@ public class ResponseToClient extends Thread {
     private AccountMenu accountMenu = new AccountMenu();
     private MainMenu mainMenu = new MainMenu();
     private BattleMenu battleMenu = new BattleMenu();
+    private CollectionMenu collectionMenu = new CollectionMenu();
 
     private Socket socket;
     private ObjectInputStream objectInputStream;
@@ -56,6 +57,8 @@ public class ResponseToClient extends Thread {
     }
 
     private ServerMassage interpret(ClientMassage clientMassage) throws IOException {
+        if(clientMassage.getDestinationMenu() == ClientMassage.Menu.CollectionMenu)
+            return collectionMenu.interpret(clientMassage);
         if (clientMassage.getDestinationMenu() == ClientMassage.Menu.Server)
             return this.answer(clientMassage);
         if (clientMassage.getDestinationMenu() == ClientMassage.Menu.AccountMenu)

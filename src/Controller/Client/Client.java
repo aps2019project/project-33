@@ -70,6 +70,14 @@ public class Client {
         return sendAndReceive(clientMassage);
     }
 
+    public synchronized ServerMassage exitCollectionMenu() throws IOException, ClassNotFoundException {
+        ClientMassage clientMassage = new ClientMassage();
+        clientMassage.setAuthToken(this.authToken);
+        clientMassage.setDestinationMenu(ClientMassage.Menu.CollectionMenu);
+        clientMassage.setCollectionMenuRequest(ClientMassage.CollectionMenuRequest.Exit);
+        return sendAndReceive(clientMassage);
+    }
+
     //BattleMenu Commands
 
     public ServerMassage answerToGame(ClientMassage.BattleMenuRequest battleMenuRequest) throws IOException, ClassNotFoundException {

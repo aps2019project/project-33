@@ -30,6 +30,10 @@ public class ClientMassage implements Serializable {
         GiveCurrentMenu, ChangeCurrentMenu, GiveRunningGame, GiveAccounts, SendMassageInChat, GiveAllMassages;
     }
 
+    public enum CollectionMenuRequest{
+        Exit;
+    }
+
     private String authToken;
     private Menu destinationMenu;
     private ServerRequest serverRequest;
@@ -37,6 +41,7 @@ public class ClientMassage implements Serializable {
     private MainMenuRequest mainMenuRequest;
     private BattleMenuRequest battleMenuRequest;
     private BattleRequest battleRequest;
+    private CollectionMenuRequest collectionMenuRequest;
     private MenuList newMenu;
 
     //AccountMenuRequest Instances
@@ -76,6 +81,14 @@ public class ClientMassage implements Serializable {
 
     public void setDestinationMenu(Menu destinationMenu) {
         this.destinationMenu = destinationMenu;
+    }
+
+    public void setCollectionMenuRequest(CollectionMenuRequest collectionMenuRequest){
+        this.collectionMenuRequest = collectionMenuRequest;
+    }
+
+    public CollectionMenuRequest getCollectionMenuRequest(){
+        return this.collectionMenuRequest;
     }
 
     public AccountMenuRequest getAccountMenuRequest() {

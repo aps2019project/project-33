@@ -5,8 +5,11 @@ package Controller.Menus;
 
 import Controller.Application;
 import Controller.Client.Client;
+import Controller.Client.ClientMassage;
+import Controller.Server.Server;
 import Controller.Server.ServerMain;
 import Controller.MenuList;
+import Controller.Server.ServerMassage;
 import Model.*;
 import Model.CollectionItem.CollectionItem;
 
@@ -17,12 +20,10 @@ public class CollectionMenu extends Menu {
     private boolean isFirstTime = true;
     private Collection collection = null;
 
-    public void inputCommandLine(String inputLine) throws IOException {
+    public ServerMassage inputCommandLine(String inputLine, String authToken) throws IOException {
 
-        System.out.println("Here is Collection Menu");
-        System.out.println("For help, enter : show menu");
+        Account account = Account.getAccountByUsername(authToken);
 
-//        String inputLine = ServerMain.scanner.nextLine();
         inputLine = inputLine.trim();
         String[] input = inputLine.split("[ ]+");
         inputLine = inputLine.toLowerCase();
@@ -65,12 +66,13 @@ public class CollectionMenu extends Menu {
             CollectionMenu.showMenu();
         else if (inputLine.equals("exit")) {
             isFirstTime = true;
+            account.setCurrentMenu(MenuList.MainMenu);
+            return null;
             //todo in bayad doros she
             // Client.getClient().setCurrentMenu(MenuList.MainMenu);
-            return;
         } else
             System.out.println("Enter valid command line !");
-
+        return null;
     }
 
     private void searchInCollection(Collection collection, String cardName) {
@@ -109,5 +111,12 @@ public class CollectionMenu extends Menu {
     private void save(Collection collection) {
 
         //todo ServerMain.application.getLoggedInAccount().setCollection(collection);
+    }
+
+    public ServerMassage interpret(ClientMassage clientMassage) throws IOException {
+        ServerMassage answer;
+        if(clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.Exit)
+            return this.inputCommandLine("exit", clientMassage.getAuthToken());
+        return null;
     }
 }
