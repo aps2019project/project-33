@@ -1,0 +1,75 @@
+.ChooseType{
+    -fx-pref-height: 400px;
+    -fx-pref-width: 200px;
+    -fx-font-size: 25;
+    -fx-text-fill: White;
+    -fx-alignment: bottom-center;
+    -fx-background-size: 100% 100%;
+    -fx-effect: innershadow(two-pass-box, gray, 127.0, 0, 0, -100);
+}
+
+.ChooseType:hover{
+    -fx-effect: inherit;
+}
+
+.SinglePlayer{
+    -fx-background-image: url("../../../resources/play/play_mode_sandbox.jpg");
+}
+
+.MultiPLayer{
+    -fx-background-image: url("../../../resources/play/play_mode_arenagauntlet@2x.jpg");
+}
+
+.CustomGame{
+    -fx-background-image: url("../../../resources/play/play_mode_rankedladder.jpg");
+}
+
+.StoryGame{
+    -fx-background-image: url("../../../resources/play/play_mode_unranked.jpg");
+}
+
+.KillEnemyHero{
+    -fx-background-image: url("../../../resources/codex/chapter1_background@2x.jpg");
+}
+
+.HoldFlag{
+    -fx-background-image: url("../../../resources/codex/chapter3_background@2x.jpg");
+}
+
+.TakeHalfOfFlag{
+    -fx-background-image: url("../../../resources/codex/chapter2_background@2x.jpg");
+}
+
+.StoryOne{
+    -fx-background-image: url("../../../resources/codex/chapter7_background@2x.jpg");
+}
+
+.StoryTwo{
+    -fx-background-image: url("../../../resources/codex/chapter5_background@2x.jpg");
+}
+
+.StoryThree{
+    -fx-background-image: url("../../../resources/codex/chapter6_background@2x.jpg");
+}
+
+.PlayAnchor{
+    -fx-background-image: url("../../../resources/play/play_background.jpg");
+    -fx-cursor: hand;
+}
+
+.ChooseSecondPlayerAnchorPane{
+    -fx-background-image: url("../../../resources/codex/chapter24_background@2x.jpg");
+    -fx-background-size: 100% 100%;
+}
+
+.ChooseSecondPlayerTextField{
+    -fx-background-color: black;
+    -fx-opacity: 0.75;
+    -fx-text-fill: white;
+    -fx-font-size: 25;
+}
+
+.AnswerToGameAnchorPane{
+    -fx-background-image: url("../../../resources/codex/chapter17_background@2x.jpg");
+    -fx-background-size: 100% 100%;
+}

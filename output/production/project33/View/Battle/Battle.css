@@ -1,0 +1,141 @@
+.BattleAnchor{
+    -fx-background-size: 100% 100%;
+    -fx-background-image: url("../../../resources/maps/battlemap2_middleground@2x.png");
+}
+
+.BattleButton{
+    -fx-fit-to-width: 50px;
+    -fx-fit-to-height: 50px;
+}
+
+.BattleButton:hover{
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, aqua, 5, 0.3, 0, 0);
+}
+
+.BattleRow{
+    -fx-pref-height: 100px;
+    -fx-alignment: center-left;
+}
+
+.BattleTable{
+
+}
+
+.HandUnit{
+    -fx-background-image: url("../../../resources/ui/rift_level_ring.png");
+    -fx-background-size: 100% 100%;
+    -fx-alignment: center;
+}
+
+.HandUnit:hover{
+    -fx-background-image: url("../../../resources/ui/replace_outer_ring_shine@2x.png");
+    -fx-cursor: hand;
+}
+
+.SelectedHandUnit{
+    -fx-background-image: url("../../../resources/ui/rift_level_ring.png");
+    -fx-background-size: 100% 100%;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(three-pass-box, red, 5, 0.3, 0, 0);
+}
+
+.ManaLabel{
+    -fx-background-image: url("../../../resources/ui/icon_mana@2x.png");
+    -fx-background-size: 100% 100%;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 40px;
+    -fx-alignment: center;
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+}
+
+.CellCover{
+    -fx-pref-width: 70px;
+    -fx-pref-height: 70px;
+    -fx-opacity: 0.3;
+    -fx-background-color: gray;
+}
+
+.CellCover:hover{
+    -fx-background-color: black;
+    -fx-opacity: 0.15;
+}
+
+.OurCellCover{
+    -fx-pref-width: 70px;
+    -fx-pref-height: 70px;
+    -fx-opacity: 0.3;
+    -fx-background-color: green;
+}
+
+.OurCellCover:hover{
+    -fx-background-color: aqua;
+    -fx-opacity: 0.15;
+}
+
+.EnemyCellCover{
+    -fx-pref-width: 70px;
+    -fx-pref-height: 70px;
+    -fx-opacity: 0.3;
+    -fx-background-color: red;
+}
+
+.EnemyCellCover:hover{
+    -fx-background-color: yellow;
+    -fx-opacity: 0.15;
+}
+
+.SelectedCellCover{
+    -fx-pref-width: 70px;
+    -fx-pref-height: 70px;
+    -fx-opacity: 0.3;
+    -fx-background-color: blue;
+}
+
+.CellPane{
+    -fx-pref-width: 70px;
+    -fx-pref-height: 70px;
+}
+
+.CellImage{
+    -fx-fit-to-width: 70px;
+    -fx-fit-to-height: 70px;
+}
+
+.testAnchor{
+    -fx-background-color: gray;
+}
+
+.PlayerUserNameLabel{
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+
+.PlayerUserNameLabel:hover{
+    -fx-effect: dropshadow(three-pass-box, green, 8, 0.5, 0, 0);
+    -fx-font-size: 25;
+}
+
+.CurrentManaLabel {
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, green, 8, 0.3, 0, 0);
+
+}
+
+.MaximumManaLabel{
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, blue, 8, 0.3, 0, 0);
+}
+
+.Separator{
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+}

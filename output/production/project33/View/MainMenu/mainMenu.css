@@ -1,0 +1,5 @@
+.MainMenuImagePane{
+    -fx-background-image: url("../../../resources/codex/chapter11_background@2x.jpg");
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+}
