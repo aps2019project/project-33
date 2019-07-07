@@ -27,7 +27,6 @@ public class Application {
     public synchronized static Object copy(Object object, Class className) {
         YaGsonBuilder builder = new YaGsonBuilder();
         YaGson yaGson = builder.create();
-        System.out.println(object);
         String string = yaGson.toJson(object);
         return yaGson.fromJson(string, className);
     }

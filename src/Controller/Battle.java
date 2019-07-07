@@ -156,7 +156,7 @@ public class Battle implements Serializable {
         //numberOfFlags chaande tuye kind e 3
         if (this.kind.equals(kinds[1]))
             numberOfFlags = 1;
-        System.out.println(this.numberOfFlags);
+
         this.createFlags();
         for (Flag flag : this.getFlags()) {
             this.setFlagPosition(flag);
@@ -167,7 +167,6 @@ public class Battle implements Serializable {
             }
             cell.setHaveFlag(true);
         }
-        System.out.println(numberOfFlags);
         this.mainFlag = this.flags.get(0);
         this.mainFlag.setFlagOwner(null);
     }
@@ -602,6 +601,9 @@ public class Battle implements Serializable {
         numberOfRounds++;
         if (playerOn instanceof AI)
             readInput();
+
+        selectedCard = null;
+        selectedCollectibleItem = null;
     }
 
     public void showCollectibles() {
@@ -864,8 +866,6 @@ public class Battle implements Serializable {
 
     public void runGame() throws FileNotFoundException {
         preProcess();
-        //todo kollan in ja ha bayad befahmam bayad chi kar bokonam
-        //        inputCommandLine();
     }
 
     public void forfeitMatch() {
@@ -874,7 +874,7 @@ public class Battle implements Serializable {
         finishMatch();
     }
 
-    public ServerMassage inputCommandLine(String inputLine, String clientUsername) {
+    public synchronized ServerMassage inputCommandLine(String inputLine, String clientUsername) {
         inputLine = inputLine.trim();
         String inputLineOriginal = inputLine;
         inputLine = inputLine.toLowerCase();
@@ -882,24 +882,22 @@ public class Battle implements Serializable {
 
         System.out.println(inputLine + " by " + clientUsername);
 
+/*
         if (!clientUsername.equals("admin")) {
             System.out.println("player on : " + playerOn.getAccount().getUsername());
             System.out.println("Here is Battle");
             System.out.println("For help, enter : show menu");
             System.out.println(kind);
         }
+*/
 
         if (inputLine.equals("forfeit match"))
             forfeitMatch();
         if (inputLine.equals("enter graveyard"))
             enterGraveYard();
 
-
-        if (clientUsername.equals("sudo"))
-            System.out.println("man hamaro gaeidam asan ah");
-
         if (!clientUsername.equals("sudo") && !clientUsername.equals(playerOn.getAccount().getUsername()))
-            return null;
+            return new ServerMassage(ServerMassage.Type.Error, null);
 
         if (inputLine.equals("game info"))
             showGameInfo();
@@ -957,9 +955,9 @@ public class Battle implements Serializable {
             handleBuffsOfCard(livingCard);
 
         //decrease remain time
-        for (LivingCard livingCard : player.getAliveCards()) {
+        for (LivingCard livingCard : player.getAliveCards())
             decreaseTimeOfBuff(livingCard.getEffects());
-        }
+
         for (int i = 0; i < this.map.getHeight(); i++)
             for (int j = 0; j < this.map.getWidth(); j++) {
                 Cell cell = this.map.getCellByCoordination(i, j);
@@ -990,10 +988,15 @@ public class Battle implements Serializable {
         livingCard.setCanMove(true);
         livingCard.setCanAttack(true);
         //set
-        for (Buff buff : livingCard.getEffects())
+        for(int i = livingCard.getEffects().size() - 1; i > -1; i--){
+            Buff buff = livingCard.getEffects().get(i);
             Impact.impactBuffInLivingCard(buff, livingCard);
-        for (Buff buff : livingCard.getCell().getEffects())
+
+        }
+        for(int i = livingCard.getCell().getEffects().size() - 1; i > -1; i--) {
+            Buff buff = livingCard.getCell().getEffects().get(i);
             Impact.impactBuffInCell(buff, livingCard.getCell());
+        }
     }
 
     private void checkThings(Player player) {

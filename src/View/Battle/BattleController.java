@@ -584,8 +584,6 @@ class GraphicalCell {
 
         selectedCell.getGraphicalCell().getImageView().setImage(null);
 
-        System.out.println(imageView.getX() + " " + imageView.getY());
-
         BattleController.setMovingImageView(imageView);
         battleController.getRootOfPage().getChildren().add(imageView);
 

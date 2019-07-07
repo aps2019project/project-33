@@ -118,12 +118,15 @@ public class Impact {
         cell.addEffect(weaknessBuff);
     }
 
+    //todo,  buff roo cell kheili ghalte
+
     //todo alan vaghti ye khoone add mishe effectesh, bayad delete she az khodesh ya kheir
     public static void impactBuffInCell(Buff buff, Cell cell) {
         LivingCard livingCard = cell.getLivingCard();
         if (livingCard == null)
             return;
         impactBuffInLivingCard(buff, livingCard);
+        livingCard.getEffects().add(buff);
         cell.getEffects().remove(buff);
     }
 
@@ -137,7 +140,6 @@ public class Impact {
         if (buff instanceof PowerBuff) {
             livingCard.changeExtraHP(((PowerBuff) buff).getChangeHP());
             livingCard.changeExtraAP(((PowerBuff) buff).getChangePower());
-            System.out.println("heeeeeeeeeeeeeeeeeeeei" + " " + livingCard.getExtraAP() + " " + livingCard.getExtraHP());
         }
 
         if (livingCard.getInformation().isAntiShock()) return;

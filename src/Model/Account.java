@@ -82,7 +82,6 @@ public class Account implements Serializable {
         for (int i = 0; i < sizeOfArray; i++)
             for (int j = i + 1; j < sizeOfArray; j++) {
                 if (accounts.get(i).getNumberOfWins() < accounts.get(j).getNumberOfWins()) {
-                    System.out.println("salammm" + " " + i + " " + j);
                     swap(accounts, i, j);
                 }
                 if (accounts.get(i).getNumberOfWins() == accounts.get(j).getNumberOfWins())

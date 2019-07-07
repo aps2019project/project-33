@@ -150,11 +150,11 @@
 }
 
 .BlackTime{
-    -fx-font-size: 25;
+    -fx-font-size: 20;
     -fx-text-fill: black;
 }
 
 .RedTime{
-    -fx-font-size: 30;
+    -fx-font-size: 20;
     -fx-text-fill: red;
 }
