@@ -21,7 +21,7 @@ public class ServerMain {
     public static void main(String[] args) throws IOException {
         Generator.createCards();
         ShopGenerator.generate();
-        DeckGenerator.deckGenerator();;
+        DeckGenerator.deckGenerator();
         new Thread(() -> {
             try {
                 application.runApplication();

@@ -41,14 +41,18 @@ public class CollectionMenuController implements Initializable {
             }
         });
 
-      /*  saveLabel.setOnMouseClicked(event -> {
+   /*     createDeckLabel.setOnMouseClicked(event -> {
+            Client.getClient().changeCurrentMenu(MenuList.Collec);
+        });
+
+        saveLabel.setOnMouseClicked(event -> {
             try {
-                Client.getClient().getCollectionMenu().inputCommandLine("save");
+                Client.getClient().saveCollectionMenu();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        });
-
+        });*/
+/*
         showLabel.setOnMouseClicked(event -> {
             try {
                 Client.getClient().getCollectionMenu().inputCommandLine("show");
@@ -58,13 +62,9 @@ public class CollectionMenuController implements Initializable {
 
         });
 
-        searchLabel.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.CollectionSearch);
-        });
 
-        createDeckLabel.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.CollectionCreateDeck);
-        });
+
+
 
         deleteDeckLabel.setOnMouseClicked(event -> {
             Client.getClient().setCurrentMenu(MenuList.CollectionDeleteDeck);
