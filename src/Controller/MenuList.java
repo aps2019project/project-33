@@ -5,7 +5,11 @@ import View.BattleMenu.AnswerToGameController;
 public enum MenuList {
     AccountMenu, MainMenu, ShopMenu, CollectionMenu, ChooseType, ChooseMode, ChooseKind, StoryChapters, Battle, SearchShop,
     ShowingBuy, ShopShowCollection, ShopSearchCollection, BuyMenu, SellMenu, ShopShowSearch, ShowShop, CollectionShowCollection
-    , Scoreboard, Chat, ChooseSecondPlayer, WaitingForOpponent, AnswerToGame;
+    , Scoreboard, Chat, ChooseSecondPlayer, WaitingForOpponent, AnswerToGame,   CollectionSearch, CollectionShowSearch,
+    CollectionCreateDeck, CollectionDeleteDeck, CollectionSelectDeckForAdd,
+    CollectionAddCardToDeck, CollectionSelectDeckForRemove, CollectionRemoveCardFromDeck, CollectionValidateDeck,
+    CollectionSelectDeck, CollectionSelectDeckForShow, CollectionShowDeck, ShopCreateCard, CollectionExportDeck,
+    CollectionImportDeck;;
 
     public String getAddressOfFile() {
         if (this.equals(AccountMenu)) return "AccountMenu/AccountMenu.fxml";
@@ -31,6 +35,21 @@ public enum MenuList {
         if (this.equals(ChooseSecondPlayer)) return "BattleMenu/ChooseSecondPlayer.fxml";
         if (this.equals(WaitingForOpponent)) return "BattleMenu/WaitingForOpponent.fxml";
         if (this.equals(AnswerToGame)) return "BattleMenu/AnswerToGame.fxml";
+        if (this.equals(CollectionSearch)) return "CollectionMenu/Search/Search.fxml";
+        if (this.equals(CollectionShowSearch)) return "CollectionMenu/Search/ShowSearch.fxml";
+        if (this.equals(CollectionCreateDeck)) return "CollectionMenu/CreateDeck/CreateDeck.fxml";
+        if (this.equals(CollectionDeleteDeck)) return "CollectionMenu/DeleteDeck/DeleteDeck.fxml";
+        if (this.equals(CollectionSelectDeckForAdd)) return "CollectionMenu/AddCardToDeck/SelectDeck.fxml";
+        if (this.equals(CollectionAddCardToDeck)) return "CollectionMenu/AddCardToDeck/SelectCard.fxml";
+        if (this.equals(CollectionSelectDeckForRemove)) return "CollectionMenu/RemoveCardFromDeck/SelectDeck.fxml";
+        if (this.equals(CollectionRemoveCardFromDeck)) return "CollectionMenu/RemoveCardFromDeck/SelectCard.fxml";
+        if (this.equals(CollectionValidateDeck)) return "CollectionMenu/ValidateDeck/ValidateDeck.fxml";
+        if (this.equals(CollectionSelectDeck)) return "CollectionMenu/SelectDeck/SelectDeck.fxml";
+        if (this.equals(CollectionSelectDeckForShow)) return "CollectionMenu/ShowDeck/SelectDeck.fxml";
+        if (this.equals(CollectionShowDeck)) return "CollectionMenu/ShowDeck/ShowDeck.fxml";
+        if (this.equals(ShopCreateCard)) return "ShopMenu/CreateCard/CreateCard.fxml";
+        if (this.equals(CollectionImportDeck)) return "CollectionMenu/ImportDeck/Import.fxml";
+        if (this.equals(CollectionExportDeck)) return "CollectionMenu/ExportDeck/Export.fxml";
         return null;
     }
 }
