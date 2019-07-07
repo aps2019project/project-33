@@ -7,6 +7,15 @@
     -fx-background-size: 100% 100%;
  }
 
+.SmallButton{
+    -fx-pref-height: 50px;
+    -fx-pref-width: 150px;
+    -fx-font-size: 15;
+    -fx-text-fill: white;
+    -fx-alignment: center;
+    -fx-background-size: 100% 100%;
+}
+
 .Button:hover{
     -fx-cursor: hand;
 }

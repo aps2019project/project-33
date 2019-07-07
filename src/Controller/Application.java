@@ -24,19 +24,23 @@ public class Application {
         new Server().run();
     }
 
-    public synchronized static Object copy(Object object, Class className) throws IOException {
-        String address = "copy.json";
-        writeJSON(object, address);
-        Object copyObject = readJSON(className, address);
-        return copyObject;
+    public synchronized static Object copy(Object object, Class className) {
+        YaGsonBuilder builder = new YaGsonBuilder();
+        YaGson yaGson = builder.create();
+        System.out.println(object);
+        String string = yaGson.toJson(object);
+        return yaGson.fromJson(string, className);
     }
 
     public static void loadData() throws FileNotFoundException {
         ArrayList<Object> objects;
         //Read Account
         objects = readFromFile("Data/Memory/Accounts", "Account");
-        for (Object object : objects)
-            Account.getAccounts().add((Account) object);
+        for (Object object : objects) {
+            Account account = (Account) object;
+            account.setState(Account.State.Offline);
+            Account.getAccounts().add(account);
+        }
 
         //Read Spells
         objects = readFromFile("Data/Memory/Spells", "Spell");

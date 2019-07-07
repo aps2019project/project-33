@@ -214,6 +214,7 @@ public class AttackArea {
             result = merge(result, impactedCellsOfLivingCards);
         if(information.isImpactItself())
             result.add(cell);
+
         return unique(result);
     }
 }

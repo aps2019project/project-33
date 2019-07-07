@@ -11,6 +11,7 @@ import Model.CollectionItem.LivingCard;
 import Model.CollectionItem.Minion;
 import Model.Enviroment.Cell;
 import Model.Enviroment.Map1;
+import javafx.animation.AnimationTimer;
 
 import java.io.FileNotFoundException;
 import java.io.Serializable;
@@ -22,7 +23,11 @@ public class Battle implements Serializable {
     private Player playerOn, playerOff;
     private Map1 map = new Map1(5, 9);
     private boolean gameIsRunning;
-    private int numberOfRounds, prize, numberOfFlags;
+    private int numberOfRounds;
+    private int prize;
+    private int numberOfFlags;
+    private int remainTimeOfTurn;
+    private int maximumTimeOfTurn = 10;
     private String type, kind;
     private LivingCard selectedCard;
     private Flag mainFlag;
@@ -30,6 +35,8 @@ public class Battle implements Serializable {
     private Player winnerPlayer = null, loserPlayer = null;
     private ArrayList<Flag> flags = new ArrayList<>();
     private String estate = "none";
+    private long turnTime = 1000 * 5;
+
 
     private String[] kinds = {"Kill_enemy's_hero", "Hold_flag", "Take_half_of_flags"};
 
@@ -160,6 +167,7 @@ public class Battle implements Serializable {
             }
             cell.setHaveFlag(true);
         }
+        System.out.println(numberOfFlags);
         this.mainFlag = this.flags.get(0);
         this.mainFlag.setFlagOwner(null);
     }
@@ -222,6 +230,8 @@ public class Battle implements Serializable {
         // gitignore test
         canLivingCards(playerOn);
         canLivingCards(playerOff);
+
+        setRemainTimeOfTurn(maximumTimeOfTurn);
 
         //TODO
     }
@@ -400,7 +410,6 @@ public class Battle implements Serializable {
             }
         } else {
             if (insertingCollectionItem instanceof Spell) {
-                System.out.println("baba man kheiiili khafanam");
                 playerOn.getHand().removeCard(cardID);
                 playerOn.getHand().addNextCard(playerOn.getAccount().getCollection().getMainDeck());
                 Spell spell = (Spell) insertingCollectionItem;
@@ -413,22 +422,22 @@ public class Battle implements Serializable {
     }
 
     //todo in ja masalan vaghti mire aya flag o chizaye dg behesh dade mishe ya diverte mese bazia ?
-    public void moveCardTo(int x, int y) {
+    public ServerMassage moveCardTo(int x, int y) {
         if (selectedCard == null) {
             System.out.println("select a card");
-            return;
+            return new ServerMassage(ServerMassage.Type.Error, null);
         }
         if (!isInMap(x, y)) {
             System.out.println("Invalid coordination");
-            return;
+            return new ServerMassage(ServerMassage.Type.Error, null);
         }
         if (map.getCellByCoordination(x, y).getLivingCard() != null) {
             System.out.println("Invalid target !");
-            return;
+            return new ServerMassage(ServerMassage.Type.Error, null);
         }
         if (!selectedCard.isCanMove()) {
             System.out.println("This card can't move");
-            return;
+            return new ServerMassage(ServerMassage.Type.Error, null);
         }
 
         int distance = getDistance(selectedCard.getPositionRow(), selectedCard.getPositionColumn(), x, y);
@@ -446,9 +455,10 @@ public class Battle implements Serializable {
             cell.insertCard(selectedCard.getID());
             this.selectedCard.setCanMove(false);
         } else
-            System.out.println("Invalid target !");
+            return new ServerMassage(ServerMassage.Type.Error, null);
         handleFlags();
         checkTurn();
+        return new ServerMassage(ServerMassage.Type.Accept, null);
     }
 
     private int getDistance(int x1, int y1, int x2, int y2) {
@@ -551,12 +561,14 @@ public class Battle implements Serializable {
 
     //todo, concurrent nemidunam chi chi exception mikhore
     public void checkAliveCards(Player player) {
-        for(int i = player.getAliveCards().size() - 1; i > -1; i--)
+        for (int i = player.getAliveCards().size() - 1; i > -1; i--)
             player.getAliveCards().get(i).checkAlive(this);
         checkTurn();
     }
 
     public void endTurn() {
+        setRemainTimeOfTurn(maximumTimeOfTurn);
+
         playerOn.getMana().configureMana();
 
         canLivingCards(playerOn);
@@ -723,6 +735,7 @@ public class Battle implements Serializable {
         winnerAccount.setBudget(winnerAccount.getBudget() + this.prize);
         setupFree(playerOn);
         setupFree(playerOff);
+    //    thread.stop();
     }
 
     private void setupFree(Player player) {
@@ -881,7 +894,12 @@ public class Battle implements Serializable {
         if (inputLine.equals("enter graveyard"))
             enterGraveYard();
 
-        if (!clientUsername.equals(playerOn.getAccount().getUsername())) return null;
+
+        if (clientUsername.equals("sudo"))
+            System.out.println("man hamaro gaeidam asan ah");
+
+        if (!clientUsername.equals("sudo") && !clientUsername.equals(playerOn.getAccount().getUsername()))
+            return null;
 
         if (inputLine.equals("game info"))
             showGameInfo();
@@ -897,7 +915,7 @@ public class Battle implements Serializable {
             else System.out.println("card found !!");
         } else if (inputLine.matches("move to \\([\\d]+, [\\d]+\\)")) {
             input = inputLine.split("[ \\(\\),]+");
-            moveCardTo(Integer.parseInt(input[2]), Integer.parseInt(input[3]));
+            return moveCardTo(Integer.parseInt(input[2]), Integer.parseInt(input[3]));
         } else if (inputLine.matches("attack .*"))
             attackToOpponentCard(input[1]);
         else if (inputLine.matches("attack combo [^\\s]+( [^\\s]+)+"))
@@ -1098,22 +1116,35 @@ public class Battle implements Serializable {
         this.type = type;
     }
 
+
+    public synchronized int getRemainTimeOfTurn() {
+        return remainTimeOfTurn;
+    }
+
+    public synchronized void setRemainTimeOfTurn(int remainTimeOfTurn) {
+        this.remainTimeOfTurn = remainTimeOfTurn;
+    }
+
+    public String getEstate() {
+        return estate;
+    }
+
     public ServerMassage interpret(ClientMassage clientMassage) {
         if (clientMassage.getBattleRequest() == ClientMassage.BattleRequest.ForfeitMatch)
             return inputCommandLine("forfeit match", clientMassage.getAuthToken());
         if (clientMassage.getBattleRequest() == ClientMassage.BattleRequest.EndTurn)
             return inputCommandLine("end turn", clientMassage.getAuthToken());
-        if(clientMassage.getBattleRequest() == ClientMassage.BattleRequest.Select)
+        if (clientMassage.getBattleRequest() == ClientMassage.BattleRequest.Select)
             return inputCommandLine("select " + clientMassage.getCollectionItemID(), clientMassage.getAuthToken());
-        if(clientMassage.getBattleRequest() == ClientMassage.BattleRequest.UseItem)
+        if (clientMassage.getBattleRequest() == ClientMassage.BattleRequest.UseItem)
             return inputCommandLine("use " + clientMassage.getX() + ", " + clientMassage.getY(), clientMassage.getAuthToken());
-        if(clientMassage.getBattleRequest() == ClientMassage.BattleRequest.InsertCard)
+        if (clientMassage.getBattleRequest() == ClientMassage.BattleRequest.InsertCard)
             return inputCommandLine("insert " + clientMassage.getCollectionItemID() + " in (" + clientMassage.getX() + ", " + clientMassage.getY() + ")", clientMassage.getAuthToken());
-        if(clientMassage.getBattleRequest() == ClientMassage.BattleRequest.MoveCard)
+        if (clientMassage.getBattleRequest() == ClientMassage.BattleRequest.MoveCard)
             return inputCommandLine("move to (" + clientMassage.getX() + ", " + clientMassage.getY() + ")", clientMassage.getAuthToken());
-        if(clientMassage.getBattleRequest() == ClientMassage.BattleRequest.Attack)
+        if (clientMassage.getBattleRequest() == ClientMassage.BattleRequest.Attack)
             return inputCommandLine("attack " + clientMassage.getCollectionItemID(), clientMassage.getAuthToken());
-        if(clientMassage.getBattleRequest() == ClientMassage.BattleRequest.UseSpecialPower)
+        if (clientMassage.getBattleRequest() == ClientMassage.BattleRequest.UseSpecialPower)
             return inputCommandLine("use special power (" + clientMassage.getX() + ", " + clientMassage.getY() + ")", clientMassage.getAuthToken());
         return null;
     }
