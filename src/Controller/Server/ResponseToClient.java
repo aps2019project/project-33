@@ -2,7 +2,6 @@ package Controller.Server;
 
 import Controller.Application;
 import Controller.Battle;
-import Controller.Client.Client;
 import Controller.Client.ClientMassage;
 import Controller.MenuList;
 import Controller.Menus.AccountMenu;
@@ -99,15 +98,17 @@ public class ResponseToClient extends Thread {
             if (account.getRunningBattle() == null)
                 return new ServerMassage(ServerMassage.Type.Error, ServerMassage.ErrorType.RunningBattleNotFound);
             Battle battle = account.getRunningBattle();
-            Battle newBattle = (Battle) Application.copy(battle, Battle.class);
-            ServerMassage answer = new ServerMassage(ServerMassage.Type.Accept, null);
-            answer.setRunningBattle(newBattle);
-            return answer;
+            synchronized (battle) {
+                Battle newBattle = (Battle) Application.copy(battle, Battle.class);
+                ServerMassage answer = new ServerMassage(ServerMassage.Type.Accept, null);
+                answer.setRunningBattle(newBattle);
+                return answer;
+            }
         }
         if (clientMassage.getServerRequest() == ClientMassage.ServerRequest.GiveAccounts) {
             synchronized (Account.getAccounts()) {
                 ArrayList<Account> accounts = new ArrayList<>();
-                for(Account account : Account.getAccounts())
+                for (Account account : Account.getAccounts())
                     accounts.add((Account) Application.copy(account, Account.class));
                 Account.sortArraysOfAccount(accounts);
                 ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);

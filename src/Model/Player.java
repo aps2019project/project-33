@@ -46,7 +46,6 @@ public class Player implements Serializable {
         for(LivingCard livingCard : this.getAliveCards()){
             if(livingCard.getID().equals(deadCard.getID())){
                 this.aliveCards.remove(livingCard);
-                this.graveYard.addCard(deadCard);
                 break;
             }
         }
@@ -97,7 +96,11 @@ public class Player implements Serializable {
     }
 
     public Cell getHeroPosition() {
-        return heroPosition;
+        for(LivingCard livingCard : this.aliveCards){
+            if(livingCard instanceof Hero)
+                return livingCard.getCell();
+        }
+        return null;
     }
 
     public void setHeroPosition(Cell heroPosition) {

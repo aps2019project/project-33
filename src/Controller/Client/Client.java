@@ -34,7 +34,7 @@ public class Client {
     //todo in bayad ye jaei meghdar dehi she
 
     private Client() throws IOException {
-        socket = new Socket("127.0.0.1", 8000);
+        socket = new Socket(ip, port);
         objectInputStream = new ObjectInputStream(socket.getInputStream());
         objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
     }

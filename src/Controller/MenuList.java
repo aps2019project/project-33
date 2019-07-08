@@ -5,7 +5,7 @@ import View.BattleMenu.AnswerToGameController;
 public enum MenuList {
     AccountMenu, MainMenu, ShopMenu, CollectionMenu, ChooseType, ChooseMode, ChooseKind, StoryChapters, Battle, SearchShop,
     ShowingBuy, ShopShowCollection, ShopSearchCollection, BuyMenu, SellMenu, ShopShowSearch, ShowShop, CollectionShowCollection
-    , Scoreboard, Chat, ChooseSecondPlayer, WaitingForOpponent, AnswerToGame,   CollectionSearch, CollectionShowSearch,
+    , Scoreboard, Chat, ChooseSecondPlayer, WaitingForOpponent, AnswerToGame, GraveYard, CollectionSearch, CollectionShowSearch,
     CollectionCreateDeck, CollectionDeleteDeck, CollectionSelectDeckForAdd,
     CollectionAddCardToDeck, CollectionSelectDeckForRemove, CollectionRemoveCardFromDeck, CollectionValidateDeck,
     CollectionSelectDeck, CollectionSelectDeckForShow, CollectionShowDeck, ShopCreateCard, CollectionExportDeck,
@@ -50,6 +50,7 @@ public enum MenuList {
         if (this.equals(ShopCreateCard)) return "ShopMenu/CreateCard/CreateCard.fxml";
         if (this.equals(CollectionImportDeck)) return "CollectionMenu/ImportDeck/Import.fxml";
         if (this.equals(CollectionExportDeck)) return "CollectionMenu/ExportDeck/Export.fxml";
+        if (this.equals(GraveYard)) return "Battle/GraveYard.fxml";
         return null;
     }
 }

@@ -37,8 +37,12 @@ abstract public class LivingCard extends Card {
             else
                 battle.getPlayerOff().getGraveYard().addCard(this);
 
+            //todo moshkeli ke dare ine ke alan flag daste yeki bashe bad vel she bayad neshoon bedimesh, vali neshoon nemidim
+
             battle.removeAliveCard(this);
             battle.handleFlags();
+
+            this.getCell().removeCard();
 
             if (battle.getSelectedCard() != null && battle.getSelectedCard().getID().equals(this.getID()))
                 battle.removeSelectedCard();

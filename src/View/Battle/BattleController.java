@@ -14,6 +14,7 @@ import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -21,6 +22,7 @@ import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -43,6 +45,7 @@ import java.util.ResourceBundle;
 //6. grave yard
 
 public class BattleController implements Initializable {
+    public Label enterGraveYard;
     private int numberOfRows = 5, numberOfColumns = 9;
     private static ImageView movingImageView = null;
     public AnchorPane rootOfPage;
@@ -74,6 +77,7 @@ public class BattleController implements Initializable {
     public VBox vBox3;
     public VBox vBox4;
     public VBox vBox5;
+    public Label remainTimeLabel;
 
     private HBox[] rows;
     private ImageView[] handImages;
@@ -85,7 +89,6 @@ public class BattleController implements Initializable {
     private ImageView[] manaUnits;
     private VBox cardInformationVBox;
     private static AnimationTimer animationTimer;
-    public Label remainTimeLabel;
     private int timeOfMove = 500;
     private int fps = 30;
     private int counter;
@@ -140,6 +143,13 @@ public class BattleController implements Initializable {
             for (int j = 0; j < numberOfColumns; j++) {
                 int finalI = i;
                 int finalJ = j;
+                graphicalCells[i][j].getAnchorPane().setOnDragDropped(event -> {
+                    try {
+                        graphicalCells[finalI][finalJ].select(this);
+                    } catch (IOException | ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                });
                 graphicalCells[i][j].getAnchorPane().setOnMouseClicked(event -> {
                     if (event.getButton() == MouseButton.PRIMARY) {
                         try {
@@ -188,6 +198,13 @@ public class BattleController implements Initializable {
                     } catch (IOException | ClassNotFoundException e) {
                         e.printStackTrace();
                     }
+                }
+            });
+            handUnits[i].getImageView().setOnMouseDragged(event -> {
+                try {
+                    handUnits[finalI].select(this);
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
             });
             handUnits[i].getImageView().setOnMouseEntered(event -> {

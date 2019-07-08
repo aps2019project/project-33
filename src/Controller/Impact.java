@@ -236,6 +236,7 @@ public class Impact {
         Information information = attacker.getInformation();
 
         ArrayList<Cell> attackArea = AttackArea.getImpactCells(attacker, attacker.getCell(), battle);
+
         if (information.isRandomLivingCard()) {
             Collections.shuffle(attackArea);
             Cell targetCell = attackArea.get(0);
