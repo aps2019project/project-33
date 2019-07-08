@@ -35,7 +35,7 @@ public class Graphic {
                     break;
                 CollectionItem collectionItem = collectionItems.get(index);
 
-                VBox cardVbox = Graphic.createCard(collectionItem, index);
+                VBox cardVbox = Graphic.createCard(collectionItem, 1);
                 vBoxes.add(cardVbox);
 
                 hBox.getChildren().add(cardVbox);

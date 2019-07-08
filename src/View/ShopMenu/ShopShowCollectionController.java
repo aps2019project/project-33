@@ -49,6 +49,10 @@ public class ShopShowCollectionController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (isFirstTime) {
             mainVBox.getChildren().clear();
+            if(ShopController.serverMassage == null)
+                System.out.println("SERVER NULL E");
+            else if(ShopController.serverMassage.getCollection() == null)
+                System.out.println("COLLECTION NULLE");
             ArrayList<CollectionItem> collectionItems = ShopController.serverMassage.getCollection().getCollectionItems();
 
             ArrayList<CollectionItem> heroes = Graphic.getHeroes(collectionItems);

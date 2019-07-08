@@ -29,9 +29,15 @@ public class SellMenuController implements Initializable {
 
     public CollectionItem selectedCollectionItem;
 
+    public static int numberOfHeros, numberOfMinions, numberOfSpells, numberOfItems;
     public static boolean isFirstTime = true;
     public static VBox mainVBox = new VBox();
     public static ArrayList<VBox> vBoxes = new ArrayList<>();
+    public static ArrayList<CollectionItem> heroes = new ArrayList<>();
+    public static ArrayList<CollectionItem> minions = new ArrayList<>();
+    public static ArrayList<CollectionItem> spells = new ArrayList<>();
+    public static ArrayList<CollectionItem> items = new ArrayList<>();
+    ServerMassage serverMassage = null;
 
     public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) throws FileNotFoundException {
         Label label = new Label(labelText);
@@ -53,7 +59,7 @@ public class SellMenuController implements Initializable {
         if (isFirstTime) {
             vBoxes.clear();
             mainVBox.getChildren().clear();
-            ServerMassage serverMassage = null;
+
             try {
                 serverMassage = Client.getClient().shopMenuCommand(ClientMassage.ShopMenuRequest.GiveCollection,
                         null, null);
@@ -65,28 +71,32 @@ public class SellMenuController implements Initializable {
 
             ArrayList<CollectionItem> collectionItems = serverMassage.getCollection().getCollectionItems();
 
-            ArrayList<CollectionItem> heroes = Graphic.getHeroes(collectionItems);
+            heroes = Graphic.getHeroes(collectionItems);
+            numberOfHeros = heroes.size();
             try {
                 addPart(heroes, "HEROES:", mainVBox);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
 
-            ArrayList<CollectionItem> minions = Graphic.getMinions(collectionItems);
+            minions = Graphic.getMinions(collectionItems);
+            numberOfMinions = minions.size();
             try {
                 addPart(minions, "MINIONS:", mainVBox);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
 
-            ArrayList<CollectionItem> spells = Graphic.getSpells(collectionItems);
+            spells = Graphic.getSpells(collectionItems);
+            numberOfSpells = spells.size();
             try {
                 addPart(spells, "SPELLS:", mainVBox);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
 
-            ArrayList<CollectionItem> items = Graphic.getItems(collectionItems);
+            items = Graphic.getItems(collectionItems);
+            numberOfItems = items.size();
             try {
                 addPart(items, "ITEMS:", mainVBox);
             } catch (FileNotFoundException e) {
@@ -103,9 +113,21 @@ public class SellMenuController implements Initializable {
 
         int index = 0;
         for (VBox vBox : vBoxes) {
-            final int y = index;
+            CollectionItem collectionItem;
+            if(index < numberOfHeros){
+                collectionItem = heroes.get(index);
+            }
+            else if(index < numberOfHeros + numberOfMinions){
+                collectionItem = minions.get(index - numberOfHeros);
+            }
+            else if(index < numberOfHeros + numberOfMinions + numberOfSpells){
+                collectionItem = spells.get(index - (numberOfHeros + numberOfMinions));
+            }
+            else {
+                collectionItem = items.get(index - (numberOfHeros + numberOfMinions + numberOfSpells));
+            }
             vBox.setOnMouseClicked(event -> {
-                selectedCollectionItem = Client.getClient().getResultOfSearch().get(y);
+                selectedCollectionItem = collectionItem;
                 Graphic.clearShadows(vBoxes);
                 vBox.getStylesheets().add(Graphic.class.getResource("Card.css").toExternalForm());
                 vBox.getStyleClass().add("SelectedCard");

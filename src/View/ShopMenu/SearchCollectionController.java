@@ -43,9 +43,7 @@ public class SearchCollectionController implements Initializable {
             try {
                 serverMassage = Client.getClient().shopMenuCommand(ClientMassage.ShopMenuRequest.SearchInCollection,
                         null, nameField.getText());
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
             searchCollection.getChildren().remove(searchButton);
