@@ -1,3 +1,5 @@
+//done
+
 //Done
 //Json moonde
 
@@ -30,22 +32,20 @@ public class CollectionMenu extends Menu {
         inputLine = inputLine.trim();
         String[] input = inputLine.split("[ ]+");
         inputLine = inputLine.toLowerCase();
+
         if (isFirstTime) {
-            collection = null; //todo (Collection) Application.copy(ServerMain.application.getLoggedInAccount().getCollection(), Collection.class);
+            collection = (Collection) Application.copy(account.getCollection(), Collection.class);
             isFirstTime = false;
         }
 
         if (inputLine.equals("show")) {
             account.setCurrentMenu(MenuList.CollectionShowCollection);
             ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
-            serverMassage.setCollection(account.getCollection());
-            Client.getClient().setResultOfSearch(collection.getCollectionItems());
-            //todo in bayad doros she
-            // Client.getClient().setCurrentMenu(MenuList.CollectionShowCollection);
+            serverMassage.setCollection(collection);
             return serverMassage;
         } else if (inputLine.matches("search .*")) {
             ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
-            serverMassage.setCollectionItems(searchInCollection(account.getCollection(), input[1]));
+            serverMassage.setCollectionItems(searchInCollection(collection, input[1]));
             account.setCurrentMenu(MenuList.CollectionShowSearch);
             return serverMassage;
         } else if (inputLine.matches("create deck .*")) {
@@ -61,21 +61,21 @@ public class CollectionMenu extends Menu {
             return new ServerMassage(ServerMassage.Type.Accept, null);
         } else if (inputLine.matches("add .* to deck .*")) {
             String collectionItemId = input[1], deckName = input[4];
-            account.getCollection().addCollectionItemToDeck(collectionItemId, deckName);
+            collection.addCollectionItemToDeck(collectionItemId, deckName);
             account.setCurrentMenu(MenuList.CollectionMenu);
             return new ServerMassage(ServerMassage.Type.Accept, null);
         } else if (inputLine.matches("remove .* from .*")) {
             String collectionItemId = input[1], deckName = input[4];
-            account.getCollection().removeCollectionItemFromDeck(collectionItemId, deckName);
+            collection.removeCollectionItemFromDeck(collectionItemId, deckName);
             account.setCurrentMenu(MenuList.CollectionMenu);
             return new ServerMassage(ServerMassage.Type.Accept, null);
         } else if (inputLine.matches("validate deck .*")) {
             ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
-            serverMassage.setValidateDeck(checkValidityOfDeck(input[2], account.getCollection()));
+            serverMassage.setValidateDeck(checkValidityOfDeck(input[2], collection));
             return serverMassage;
         } else if (inputLine.matches("select deck .*")) {
             String deckName = input[2];
-            account.getCollection().selectMainDeck(deckName);
+            collection.selectMainDeck(deckName);
             account.setCurrentMenu(MenuList.CollectionMenu);
             return new ServerMassage(ServerMassage.Type.Accept, null);
         } else if (inputLine.equals("show all decks")) {
@@ -83,10 +83,10 @@ public class CollectionMenu extends Menu {
         } else if (inputLine.matches("show deck .*")) {
             account.setCurrentMenu(MenuList.CollectionShowDeck);
             ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
-            serverMassage.setDeck(account.getCollection().showDeck(input[2]));
+            serverMassage.setDeck(collection.showDeck(input[2]));
             return serverMassage;
         } else if (inputLine.equals("save")) {
-            this.save(collection);
+            this.save(collection, account);
             return new ServerMassage(ServerMassage.Type.Accept, null);
         } else if (inputLine.equals("show menu"))
             CollectionMenu.showMenu();
@@ -94,12 +94,9 @@ public class CollectionMenu extends Menu {
             isFirstTime = true;
             account.setCurrentMenu(MenuList.MainMenu);
             return new ServerMassage(ServerMassage.Type.Accept, null);
-            //todo in bayad doros she
-            // Client.getClient().setCurrentMenu(MenuList.MainMenu);
         } else if (inputLine.equals("give collection")) {
             ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
-            //todo collection chie ?
-            serverMassage.setCollection(account.getCollection());
+            serverMassage.setCollection(collection);
             return serverMassage;
         } else if (inputLine.equals("export deck")) {
             account.setCurrentMenu(MenuList.CollectionMenu);
@@ -173,9 +170,8 @@ public class CollectionMenu extends Menu {
         System.out.println("13. exit");
     }
 
-    private void save(Collection collection) {
-
-        //todo ServerMain.application.getLoggedInAccount().setCollection(collection);
+    private void save(Collection collection, Account account) {
+        account.setCollection(collection);
     }
 
     public ServerMassage interpret(ClientMassage clientMassage) throws IOException {

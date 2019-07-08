@@ -219,11 +219,13 @@ public class CreateCardController implements Initializable {
                         e.printStackTrace();
                     }
                 }
-         //       ServerMassage serverMassage = Client.getClient().shopMenuCommand(ClientMassage.ShopMenuRequest.CreateCard, )
-                Client.getClient().getShopMenu().getShop().addCollectionItemToCollection(ID);
+                //todo, in ja moonde hanooooooooooooz
+                //
+                //       ServerMassage serverMassage = Client.getClient().shopMenuCommand(ClientMassage.ShopMenuRequest.CreateCard, )
+            //    Client.getClient().getShopMenu().getShop().addCollectionItemToCollection(ID);
        //         Client.getClient().setCurrentMenu(MenuList.ShopMenu);
                 // todo inja ID basse ?
-                Client.getClient().getShopMenu().getShop().addCollectionItemToCollection(ID);
+            //    Client.getClient().getShopMenu().getShop().addCollectionItemToCollection(ID);
             }
         });
         backButton.setOnMouseClicked(event -> {

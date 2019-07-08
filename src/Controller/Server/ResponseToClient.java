@@ -43,8 +43,8 @@ public class ResponseToClient extends Thread {
             ClientMassage clientMassage;
             String clientMassageInJson = null;
             try {
-                clientMassageInJson = objectInputStream.readUTF();
-            } catch (IOException e) {
+                clientMassageInJson = (String) objectInputStream.readObject();
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
             clientMassage = castFromJson(clientMassageInJson);
@@ -52,7 +52,7 @@ public class ResponseToClient extends Thread {
             ServerMassage answer = null;
             try {
                 answer = interpret(clientMassage);
-                objectOutputStream.writeUTF(castToJson(answer));
+                objectOutputStream.writeObject(castToJson(answer));
                 objectOutputStream.flush();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -85,6 +85,7 @@ public class ResponseToClient extends Thread {
             return battleMenu.interpret(clientMassage);
         if (clientMassage.getDestinationMenu() == ClientMassage.Menu.Battle) {
             Battle battle = Account.getAccountByUsername(clientMassage.getAuthToken()).getRunningBattle();
+            if(battle == null) return new ServerMassage(ServerMassage.Type.Error, null);
             return battle.interpret(clientMassage);
         }
         return null;

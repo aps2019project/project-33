@@ -19,12 +19,10 @@ import java.util.ArrayList;
 
 //todo in auth token ha irad dashtan
 public class Client {
-    private CollectionMenu collectionMenu = new CollectionMenu();
-    private ShopMenu shopMenu = new ShopMenu();
 
     //network
     private int port = 8000;
-    private String ip = "192.168.197.163";
+    private String ip = "127.0.0.1";
     private Socket socket;
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
@@ -61,9 +59,9 @@ public class Client {
 
     private ServerMassage sendAndReceive(ClientMassage clientMassage) throws IOException, ClassNotFoundException {
         String clientMassageJson = castToJson(clientMassage);
-        objectOutputStream.writeUTF(clientMassageJson);
+        objectOutputStream.writeObject(clientMassageJson);
         objectOutputStream.flush();
-        return castFromJson(objectInputStream.readUTF());
+        return castFromJson((String) objectInputStream.readObject());
     }
 
     //AccountMenu Commands
@@ -257,14 +255,6 @@ public class Client {
 
     public static Client getClient() {
         return Client.client;
-    }
-
-    public CollectionMenu getCollectionMenu() {
-        return collectionMenu;
-    }
-
-    public ShopMenu getShopMenu() {
-        return shopMenu;
     }
 
     public ArrayList<CollectionItem> getResultOfSearch() {

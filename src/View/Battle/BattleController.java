@@ -242,6 +242,7 @@ public class BattleController implements Initializable {
                     } catch (IOException | ClassNotFoundException e) {
                         e.printStackTrace();
                     }
+                    if(serverMassage.getType() == ServerMassage.Type.Error) return;
                     Battle runningBattle = serverMassage.getRunningBattle();
 
                     last = now;

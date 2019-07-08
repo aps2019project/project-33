@@ -101,6 +101,7 @@ public class Battle implements Serializable {
     public void createHand(Player player) {
         Deck mainDeck = player.getAccount().getCollection().getMainDeck();
         mainDeck.shuffle();
+        findHero(player);
         for (int i = 0; i < 5; i++)
             player.getHand().addNextCard(mainDeck);
     }
@@ -207,8 +208,6 @@ public class Battle implements Serializable {
         this.setCards(playerOff);
         this.setCards(playerOn);
 
-        findHero(playerOff);
-        findHero(playerOn);
 
         this.createHand(playerOn);
         this.createHand(playerOff);
@@ -741,6 +740,13 @@ public class Battle implements Serializable {
         System.out.println("the number of rounds is :" + numberOfRounds);
         Account winnerAccount = winnerPlayer.getAccount();
         winnerAccount.setBudget(winnerAccount.getBudget() + this.prize);
+        winnerAccount.setCurrentMenu(MenuList.WinnerPage);
+        loserPlayer.getAccount().setCurrentMenu(MenuList.LoserPage);
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         setupFree(playerOn);
         setupFree(playerOff);
     }
@@ -748,7 +754,6 @@ public class Battle implements Serializable {
     private void setupFree(Player player) {
         player.getAccount().setRunningBattle(null);
         player.getAccount().setState(Account.State.Online);
-        player.getAccount().setCurrentMenu(MenuList.MainMenu);
     }
 
     public void endGame() {

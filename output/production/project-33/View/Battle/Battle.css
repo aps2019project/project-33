@@ -178,3 +178,24 @@
     -fx-opacity: 0.35;
     -fx-background-color: gold;
 }
+
+.WinnerPageAnchorPane{
+    -fx-background-image: url("../../../resources/codex/chapter17_background@2x.jpg");
+    -fx-background-size: 100% 100%;
+}
+
+.WinnerPageLabel{
+    -fx-alignment: center;
+    -fx-text-fill: gold;
+    -fx-font-size: 40;
+}
+.LooserPageAnchorPane{
+     -fx-background-image: url("../../../resources/codex/chapter19_background@2x.jpg");
+     -fx-background-size: 100% 100%;
+ }
+
+.LooserPageLabel{
+    -fx-alignment: center;
+    -fx-text-fill: red;
+    -fx-font-size: 40;
+}

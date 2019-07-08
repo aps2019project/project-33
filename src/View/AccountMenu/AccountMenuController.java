@@ -6,7 +6,13 @@ import Controller.Server.ServerMassage;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.util.Duration;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,6 +25,7 @@ public class AccountMenuController implements Initializable {
     public Label signUpModeButton;
     public Label enterButton;
     public Label errorLabel;
+    public AnchorPane root;
     private Mode mode = Mode.logIn;
 
     enum Mode {
@@ -50,6 +57,14 @@ public class AccountMenuController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Media pick = new Media(new File("resources/sfx/notification.m4a").toURI().toString()); // replace this with your own audio file
+        MediaPlayer player = new MediaPlayer(pick);
+        MediaView mediaView = new MediaView(player);
+        root.getChildren().add(mediaView);
+        player.setOnEndOfMedia(() -> player.seek(Duration.ZERO));
+        player.play();
+
+
         enterButton.setOnMouseClicked(event -> {
             String username = usernameTextField.getText();
             String password = passwordTextFields.getText();
