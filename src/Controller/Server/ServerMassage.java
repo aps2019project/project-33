@@ -30,6 +30,14 @@ public class ServerMassage implements Serializable {
         this.importedDeck = importedDeck;
     }
 
+    public ArrayList<CollectionItem> getCollectionItems() {
+        return collectionItems;
+    }
+
+    public void setCollectionItems(ArrayList<CollectionItem> collectionItems) {
+        this.collectionItems = collectionItems;
+    }
+
     public enum Type implements Serializable {
         Error, Accept;
     }
@@ -64,6 +72,9 @@ public class ServerMassage implements Serializable {
     private Collection collection;
 //import
     private Deck importedDeck;
+
+    //search collection
+    private ArrayList<CollectionItem> collectionItems;
 
     public Type getType() {
         return type;

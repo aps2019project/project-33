@@ -18,6 +18,14 @@ public class ClientMassage implements Serializable {
         this.deckName = deckName;
     }
 
+    public String getCollectionItemName() {
+        return collectionItemName;
+    }
+
+    public void setCollectionItemName(String collectionItemName) {
+        this.collectionItemName = collectionItemName;
+    }
+
     public enum Menu {
         AccountMenu, BattleMenu, ShopMenu, MainMenu, CollectionMenu, Server, Battle;
     }
@@ -43,7 +51,7 @@ public class ClientMassage implements Serializable {
     }
 
     public enum CollectionMenuRequest{
-        Exit, Save, Show, GiveCollection, AddCollectionItemToDeck, CreateDeck, DeleteDeck, Export, Import, RemoveFromDeck;
+        Exit, Save, Show, GiveCollection, AddCollectionItemToDeck, CreateDeck, DeleteDeck, Export, Import, RemoveFromDeck, Search;
     }
 
     private String authToken;
@@ -55,9 +63,11 @@ public class ClientMassage implements Serializable {
     private BattleRequest battleRequest;
     private CollectionMenuRequest collectionMenuRequest;
     private MenuList newMenu;
+
     private Deck selectedDeck;
     private CollectionItem selectedCollectionItem;
     private String deckName;
+    private String collectionItemName;
 
     //AccountMenuRequest Instances
     private String username, password;
