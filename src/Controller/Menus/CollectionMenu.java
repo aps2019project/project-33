@@ -73,7 +73,9 @@ public class CollectionMenu extends Menu {
             checkValidityOfDeck(input[2], collection);
         } else if (inputLine.matches("select deck .*")) {
             String deckName = input[2];
-            collection.selectMainDeck(deckName);
+            account.getCollection().selectMainDeck(deckName);
+            account.setCurrentMenu(MenuList.CollectionMenu);
+            return new ServerMassage(ServerMassage.Type.Accept, null);
         } else if (inputLine.equals("show all decks")) {
             collection.showAllDecks();
         } else if (inputLine.matches("show deck .*")) {
@@ -186,11 +188,11 @@ public class CollectionMenu extends Menu {
             return this.inputCommandLine("add " + collectionItemID + " to deck " + deckName, clientMassage.getAuthToken());
         }
         if (clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.CreateDeck) {
-            String deckName = clientMassage.getDeckName();
+            String deckName = clientMassage.getName();
             return this.inputCommandLine("create deck " + deckName, clientMassage.getAuthToken());
         }
         if (clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.DeleteDeck) {
-            String deckName = clientMassage.getDeckName();
+            String deckName = clientMassage.getName();
             return this.inputCommandLine("delete deck " + deckName, clientMassage.getAuthToken());
         }
         if (clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.Export) {
@@ -199,7 +201,7 @@ public class CollectionMenu extends Menu {
             return this.inputCommandLine("export deck", clientMassage.getAuthToken());
         }
         if (clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.Import) {
-            String deckName = clientMassage.getDeckName();
+            String deckName = clientMassage.getName();
             return this.inputCommandLine("import " + deckName, clientMassage.getAuthToken());
         }
         if(clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.RemoveFromDeck){
@@ -208,8 +210,12 @@ public class CollectionMenu extends Menu {
             return this.inputCommandLine("remove " + collectionItemID + " from " + deckName, clientMassage.getAuthToken());
         }
         if(clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.Search){
-            String collectionItemName = clientMassage.getCollectionItemName();
+            String collectionItemName = clientMassage.getName();
             return this.inputCommandLine("search " + collectionItemName, clientMassage.getAuthToken());
+        }
+        if(clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.SelectDeck){
+            String deckName = clientMassage.getName();
+            return this.inputCommandLine("select deck " + deckName, clientMassage.getAuthToken());
         }
         return null;
     }

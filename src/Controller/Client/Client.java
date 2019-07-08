@@ -87,7 +87,7 @@ public class Client {
         clientMassage.setCollectionMenuRequest(collectionMenuRequest);
         clientMassage.setSelectedCollectionItem(collectionItem);
         clientMassage.setSelectedDeck(deck);
-        clientMassage.setDeckName(name);
+        clientMassage.setName(name);
         return sendAndReceive(clientMassage);
     }
     //BattleMenu Commands

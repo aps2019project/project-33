@@ -9,21 +9,12 @@ import java.io.Serializable;
 
 public class ClientMassage implements Serializable {
 
-
-    public String getDeckName() {
-        return deckName;
+    public String getName() {
+        return name;
     }
 
-    public void setDeckName(String deckName) {
-        this.deckName = deckName;
-    }
-
-    public String getCollectionItemName() {
-        return collectionItemName;
-    }
-
-    public void setCollectionItemName(String collectionItemName) {
-        this.collectionItemName = collectionItemName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public enum Menu {
@@ -51,7 +42,8 @@ public class ClientMassage implements Serializable {
     }
 
     public enum CollectionMenuRequest{
-        Exit, Save, Show, GiveCollection, AddCollectionItemToDeck, CreateDeck, DeleteDeck, Export, Import, RemoveFromDeck, Search;
+        Exit, Save, Show, GiveCollection, AddCollectionItemToDeck, CreateDeck, DeleteDeck, Export, Import, RemoveFromDeck,
+        Search, SelectDeck;
     }
 
     private String authToken;
@@ -66,8 +58,7 @@ public class ClientMassage implements Serializable {
 
     private Deck selectedDeck;
     private CollectionItem selectedCollectionItem;
-    private String deckName;
-    private String collectionItemName;
+    private String name;
 
     //AccountMenuRequest Instances
     private String username, password;
