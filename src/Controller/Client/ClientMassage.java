@@ -66,7 +66,7 @@ public class ClientMassage implements Serializable {
     }
 
     public enum ShopMenuRequest{
-        CreateCard, Search, Buy, SearchInCollection, SearchInShop, Sell, GiveCollection, ShowCollection, GiveShop;
+        CreateCard, Search, Buy, SearchInCollection, SearchInShop, Sell, GiveCollection, ShowCollection, GiveShop, GiveBudget;
     }
 
     private String authToken;

@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,13 +29,32 @@ public class ShopController implements Initializable {
     public Label createCardLabel;
 
     public static ServerMassage serverMassage;
+    public static boolean isFirstTime = true;
+    public Label budgetLabel;
+    public Label budgetNameLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if(isFirstTime){
+            ServerMassage tempServerMassage = null;
+            try {
+                tempServerMassage = Client.getClient().shopMenuCommand(ClientMassage.ShopMenuRequest.GiveBudget, null,
+                        null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            budgetLabel.setTextFill(Color.WHITE);
+            budgetNameLabel.setTextFill(Color.WHITE);
+            budgetLabel.setText(Integer.toString(tempServerMassage.getBudget()));
+        }
+        isFirstTime = false;
         showCollectionLabel.setOnMouseClicked(event -> {
             try {
                 serverMassage = Client.getClient().shopMenuCommand(ClientMassage.ShopMenuRequest.GiveCollection, null, null);
                 System.out.println("HEEEEEEEEEEIIIIIIIII im here!");
+                isFirstTime = true;
                 Client.getClient().changeCurrentMenu(MenuList.ShopShowCollection);
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
@@ -44,6 +64,7 @@ public class ShopController implements Initializable {
         searchCollectionLabel.setOnMouseClicked(event -> {
             try {
                 Client.getClient().changeCurrentMenu(MenuList.ShopSearchCollection);
+                isFirstTime = true;
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
@@ -53,6 +74,7 @@ public class ShopController implements Initializable {
 
         buyLabel.setOnMouseClicked(event -> {
             try {
+                isFirstTime = true;
                 Client.getClient().changeCurrentMenu(MenuList.BuyMenu);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -63,6 +85,7 @@ public class ShopController implements Initializable {
 
         sellLabel.setOnMouseClicked(event -> {
             try {
+                isFirstTime = true;
                 Client.getClient().changeCurrentMenu(MenuList.SellMenu);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -73,6 +96,7 @@ public class ShopController implements Initializable {
 
         imagePane.setOnMouseClicked(event -> {
             try {
+                isFirstTime = true;
                 Client.getClient().changeCurrentMenu(MenuList.MainMenu);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -83,6 +107,7 @@ public class ShopController implements Initializable {
 
         showLabel.setOnMouseClicked(event -> {
             try {
+                isFirstTime = true;
                 Client.getClient().changeCurrentMenu(MenuList.ShowShop);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -93,6 +118,7 @@ public class ShopController implements Initializable {
 
         searchLabel.setOnMouseClicked(event -> {
             try {
+                isFirstTime = true;
                 Client.getClient().changeCurrentMenu(MenuList.SearchShop);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -103,6 +129,7 @@ public class ShopController implements Initializable {
 
         createCardLabel.setOnMouseClicked(event -> {
             try {
+                isFirstTime = true;
                 Client.getClient().changeCurrentMenu(MenuList.ShopCreateCard);
             } catch (IOException e) {
                 e.printStackTrace();
