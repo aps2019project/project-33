@@ -550,7 +550,7 @@ class GraphicalCell {
             } else if (!cell.isHaveFlag())
                 imageView.setImage(null);
         } else if (livingCard == null || !cell.getLivingCard().getID().equals(livingCard.getID()) || imageView.getImage() == null) {
-            imageView.setImage(new Image(new FileInputStream("resources/unit_gifs/0.gif")));
+            imageView.setImage(new Image(new FileInputStream("resources/unit_gifs/1.gif")));
         }
         if (cell.getLivingCard() != null) {
             System.out.println(cell.getX() + " " + cell.getY());
