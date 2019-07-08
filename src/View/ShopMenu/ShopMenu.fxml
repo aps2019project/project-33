@@ -29,7 +29,6 @@
                   <Label fx:id="sellLabel" prefHeight="117.0" styleClass="NoFormButton" text="SELL" />
                   <Label fx:id="showLabel" styleClass="NoFormButton" text="SHOW" />
                   <Label fx:id="searchLabel" prefHeight="52.0" prefWidth="142.0" styleClass="NoFormButton" text="SEARCH" />
-                  <Label fx:id="createCardLabel" styleClass="NoFormButton" text="CREATE CARD" />
                </children>
             </VBox>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
@@ -37,7 +36,7 @@
                   <Image url="@../../../resources/ui/brand_duelyst.png" />
                </image>
             </ImageView>
-            <Label fx:id="budgetLabel" layoutX="294.0" layoutY="32.0" prefHeight="17.0" prefWidth="0.0" style="-fx-font-size: 20; -fx-background-color: DARKRED;" />
+            <Label fx:id="budgetLabel" layoutX="294.0" layoutY="32.0" prefHeight="30.0" prefWidth="100.0" style="-fx-font-size: 20; -fx-background-color: DARKRED;" />
             <Label fx:id="budgetNameLabel" layoutX="214.0" layoutY="32.0" style="-fx-font-size: 20; -fx-background-color: DARKRED;" text="BUDGET:" />
          </children>
       </AnchorPane>

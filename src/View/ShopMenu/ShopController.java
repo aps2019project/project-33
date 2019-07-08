@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,7 +27,6 @@ public class ShopController implements Initializable {
     public AnchorPane nonBlurPane;
     public ImageView imagePane;
     public VBox vBox;
-    public Label createCardLabel;
 
     public static ServerMassage serverMassage;
     public static boolean isFirstTime = true;
@@ -48,6 +48,8 @@ public class ShopController implements Initializable {
             budgetLabel.setTextFill(Color.WHITE);
             budgetNameLabel.setTextFill(Color.WHITE);
             budgetLabel.setText(Integer.toString(tempServerMassage.getBudget()));
+            budgetLabel.setTextAlignment(TextAlignment.CENTER);
+            System.out.println(tempServerMassage.getBudget() + "_-_-_-");
         }
         isFirstTime = false;
         showCollectionLabel.setOnMouseClicked(event -> {
@@ -127,15 +129,5 @@ public class ShopController implements Initializable {
             }
         });
 
-        createCardLabel.setOnMouseClicked(event -> {
-            try {
-                isFirstTime = true;
-                Client.getClient().changeCurrentMenu(MenuList.ShopCreateCard);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        });
     }
 }
