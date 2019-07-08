@@ -12,6 +12,7 @@ import View.View;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -37,7 +38,8 @@ public class ShopControllerServer implements Initializable {
     public static VBox mainVBox = new VBox();
     public Label createCardLabel;
 
-    public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) throws FileNotFoundException {
+    public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox,
+                               ArrayList<Integer> numbers) throws FileNotFoundException {
         Label label = new Label(labelText);
         label.setTextFill(Color.NAVY);
         label.setStyle("-fx-font-size: 15");
@@ -46,23 +48,31 @@ public class ShopControllerServer implements Initializable {
         VBox partVBox = Graphic.createCards(collectionItems);
         vBox.getChildren().add(partVBox);
         VBox.setMargin(vBox, new Insets(0, 0, 20, 0));
+        int index = 0;
+        for(VBox vBox1 : Graphic.vBoxes){
+            Label numberLabel = new Label();
+            numberLabel.setText(Integer.toString(numbers.get(index)));
+            numberLabel.setAlignment(Pos.CENTER);
+            vBox1.getChildren().add(numberLabel);
+            index++;
+        }
     }
 
     public static ArrayList<Integer> numberOfCollectionItems = new ArrayList<>();
 
-    public static ArrayList<CollectionItem> calcNumberOfCollectionItems (ArrayList<CollectionItem> collectionItems){
+    public static ArrayList<CollectionItem> calcNumberOfCollectionItems(ArrayList<CollectionItem> collectionItems) {
         ArrayList<CollectionItem> uniqued = new ArrayList<>();
-        for(CollectionItem collectionItem : collectionItems){
+        for (CollectionItem collectionItem : collectionItems) {
             int number = 0;
-            for(CollectionItem tempCollectionItem : collectionItems){
-                if(collectionItem.getName().equals(tempCollectionItem.getName()))
-                    number ++;
+            for (CollectionItem tempCollectionItem : collectionItems) {
+                if (collectionItem.getName().equals(tempCollectionItem.getName()))
+                    number++;
             }
             boolean find = false;
-            for(CollectionItem tempCollectionItem : uniqued)
-                if(tempCollectionItem.getName().equals(collectionItem.getName()))
+            for (CollectionItem tempCollectionItem : uniqued)
+                if (tempCollectionItem.getName().equals(collectionItem.getName()))
                     find = true;
-            if(!find){
+            if (!find) {
                 uniqued.add(collectionItem);
                 numberOfCollectionItems.add(number);
             }
@@ -72,7 +82,7 @@ public class ShopControllerServer implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(isFirstTime){
+        if (isFirstTime) {
             mainVBox.getChildren().clear();
             Collection shop = ServerMain.application.getShop();
             ArrayList<CollectionItem> collectionItems = shop.getCollectionItems();
@@ -80,29 +90,62 @@ public class ShopControllerServer implements Initializable {
             collectionItems = calcNumberOfCollectionItems(collectionItems);
 
             ArrayList<CollectionItem> heroes = Graphic.getHeroes(collectionItems);
+            ArrayList<Integer> numberOfHero = new ArrayList<>();
+            for (CollectionItem collectionItem : heroes) {
+                int number = 0;
+                for (CollectionItem tempCollectionItem : shop.getCollectionItems())
+                    if (collectionItem.getName().equals(tempCollectionItem.getName()))
+                        number++;
+                numberOfHero.add(number);
+            }
+
             try {
-                addPart(heroes, "HEROES:", mainVBox);
+                addPart(heroes, "HEROES:", mainVBox, numberOfHero);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
 
             ArrayList<CollectionItem> minions = Graphic.getMinions(collectionItems);
+            ArrayList<Integer> numberOfMinion = new ArrayList<>();
+            for (CollectionItem collectionItem : minions) {
+                int number = 0;
+                for (CollectionItem tempCollectionItem : shop.getCollectionItems())
+                    if (collectionItem.getName().equals(tempCollectionItem.getName()))
+                        number++;
+                numberOfMinion.add(number);
+            }
             try {
-                addPart(minions, "MINIONS:", mainVBox);
+                addPart(minions, "MINIONS:", mainVBox, numberOfMinion);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
 
             ArrayList<CollectionItem> spells = Graphic.getSpells(collectionItems);
+            ArrayList<Integer> numberOfSpell = new ArrayList<>();
+            for (CollectionItem collectionItem : spells) {
+                int number = 0;
+                for (CollectionItem tempCollectionItem : shop.getCollectionItems())
+                    if (collectionItem.getName().equals(tempCollectionItem.getName()))
+                        number++;
+                numberOfSpell.add(number);
+            }
             try {
-                addPart(spells, "SPELLS:", mainVBox);
+                addPart(spells, "SPELLS:", mainVBox, numberOfSpell);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
 
             ArrayList<CollectionItem> items = Graphic.getItems(collectionItems);
+            ArrayList<Integer> numberOfItem = new ArrayList<>();
+            for (CollectionItem collectionItem : items) {
+                int number = 0;
+                for (CollectionItem tempCollectionItem : shop.getCollectionItems())
+                    if (collectionItem.getName().equals(tempCollectionItem.getName()))
+                        number++;
+                numberOfItem.add(number);
+            }
             try {
-                addPart(items, "ITEMS:", mainVBox);
+                addPart(items, "ITEMS:", mainVBox, numberOfItem);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
