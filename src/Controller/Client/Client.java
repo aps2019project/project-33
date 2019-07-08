@@ -107,9 +107,15 @@ public class Client {
         return sendAndReceive(clientMassage);
     }
     //shop menu commands
-    public synchronized ServerMassage shopMenuCommand(ClientMassage.ShopMenuRequest shopMenuRequest, CollectionItem collectionItem){
-  //      if(shopMenuRequest.equals())
-        return null;
+    public synchronized ServerMassage shopMenuCommand(ClientMassage.ShopMenuRequest shopMenuRequest, CollectionItem collectionItem,
+                                                      String name) throws IOException, ClassNotFoundException {
+        ClientMassage clientMassage = new ClientMassage();
+        clientMassage.setAuthToken(this.authToken);
+        clientMassage.setDestinationMenu(ClientMassage.Menu.CollectionMenu);
+        clientMassage.setShopMenuRequest(shopMenuRequest);
+        clientMassage.setCreatedCollectionitem(collectionItem);
+        clientMassage.setName(name);
+        return sendAndReceive(clientMassage);
     }
     //BattleMenu Commands
 

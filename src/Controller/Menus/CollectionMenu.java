@@ -39,7 +39,6 @@ public class CollectionMenu extends Menu {
             account.setCurrentMenu(MenuList.CollectionShowCollection);
             ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
             serverMassage.setCollection(account.getCollection());
-            Client.getClient().setResultOfSearch(collection.getCollectionItems());
             //todo in bayad doros she
             // Client.getClient().setCurrentMenu(MenuList.CollectionShowCollection);
             return serverMassage;

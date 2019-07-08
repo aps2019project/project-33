@@ -54,6 +54,14 @@ public class ServerMassage implements Serializable {
         this.validateDeck = validateDeck;
     }
 
+    public Collection getShopCollection() {
+        return shopCollection;
+    }
+
+    public void setShopCollection(Collection shopCollection) {
+        this.shopCollection = shopCollection;
+    }
+
     public enum Type implements Serializable {
         Error, Accept;
     }
@@ -61,7 +69,7 @@ public class ServerMassage implements Serializable {
     public enum ErrorType implements Serializable {
         LogInFailed, InvalidPasswordForSignUp, InvalidUsernameForSignUp, InvalidAuthToken, InvalidDeckForFirstPlayer,
         InvalidSecondPlayerUsername, InvalidDeckForSecondPlayer, RunningBattleNotFound, PlayerAreNotAvailable,
-        InvalidDeckNameForCreate, InvalidDeckNameForImport;
+        InvalidDeckNameForCreate, InvalidDeckNameForImport, NotFoundCollectionItem, LowBudget, WTF, CantBuyItem;
     }
 
     public enum Command {
@@ -95,6 +103,8 @@ public class ServerMassage implements Serializable {
     private Deck deck;
     //validate deck
     private Boolean validateDeck;
+//show shop
+    private Collection shopCollection;
 
     public Type getType() {
         return type;

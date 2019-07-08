@@ -2,12 +2,10 @@ package Controller.Server;
 
 import Controller.Application;
 import Controller.Battle;
+import Controller.Client.Client;
 import Controller.Client.ClientMassage;
 import Controller.MenuList;
-import Controller.Menus.AccountMenu;
-import Controller.Menus.BattleMenu;
-import Controller.Menus.CollectionMenu;
-import Controller.Menus.MainMenu;
+import Controller.Menus.*;
 import Model.Account;
 import Model.Massage;
 
@@ -22,6 +20,7 @@ public class ResponseToClient extends Thread {
     private MainMenu mainMenu = new MainMenu();
     private BattleMenu battleMenu = new BattleMenu();
     private CollectionMenu collectionMenu = new CollectionMenu();
+    private ShopMenu shopMenu = new ShopMenu();
 
     private Socket socket;
     private ObjectInputStream objectInputStream;
@@ -56,6 +55,8 @@ public class ResponseToClient extends Thread {
     }
 
     private ServerMassage interpret(ClientMassage clientMassage) throws IOException {
+        if(clientMassage.getDestinationMenu() == ClientMassage.Menu.ShopMenu)
+            return shopMenu.interpret(clientMassage);
         if(clientMassage.getDestinationMenu() == ClientMassage.Menu.CollectionMenu)
             return collectionMenu.interpret(clientMassage);
         if (clientMassage.getDestinationMenu() == ClientMassage.Menu.Server)
