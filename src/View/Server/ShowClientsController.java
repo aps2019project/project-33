@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 
 public class ShowClientsController implements Initializable {
     public VBox vBox;
+    public Label shopLabel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -37,5 +38,8 @@ public class ShowClientsController implements Initializable {
             }
         };
         animationTimer.start();
+        shopLabel.setOnMouseClicked(event -> {
+
+        });
     }
 }

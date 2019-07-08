@@ -22,7 +22,7 @@ public class Client {
 
     //network
     private int port = 8000;
-    private String ip = "127.0.0.1";
+    private String ip = "192.168.197.163";
     private Socket socket;
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
