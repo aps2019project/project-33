@@ -1,11 +1,16 @@
 package View.Server;
 
 import Model.Account;
+import View.View;
 import javafx.animation.AnimationTimer;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -39,6 +44,13 @@ public class ShowClientsController implements Initializable {
         };
         animationTimer.start();
         shopLabel.setOnMouseClicked(event -> {
+            Parent root = null;
+            try {
+                root = FXMLLoader.load(getClass().getResource("Shop.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            ServerView.primaryStage.setScene(new Scene(root));
 
         });
     }

@@ -2,6 +2,7 @@ package View.Server;
 
 import Controller.Client.Client;
 import Controller.MenuList;
+import Controller.Server.Server;
 import View.Battle.BattleController;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -13,7 +14,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ServerView extends Application {
-    private static Stage primaryStage;
+    public static Stage primaryStage;
 
     public static void main(String[] args) {
         launch(args);
@@ -25,7 +26,6 @@ public class ServerView extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("ShowClients.fxml"));
         primaryStage.setScene(new Scene(root));
         ServerView.primaryStage = primaryStage;
-
         primaryStage.show();
     }
 }

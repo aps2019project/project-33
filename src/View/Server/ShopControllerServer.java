@@ -8,8 +8,12 @@ import Controller.Server.ServerMassage;
 import Model.Collection;
 import Model.CollectionItem.CollectionItem;
 import View.Graphic;
+import View.View;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
@@ -82,6 +86,7 @@ public class ShopControllerServer implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(isFirstTime){
+            mainVBox.getChildren().clear();
             Collection shop = ServerMain.application.getShop();
             ArrayList<CollectionItem> collectionItems = shop.getCollectionItems();
             collectionItems = unique(collectionItems);
@@ -124,18 +129,26 @@ public class ShopControllerServer implements Initializable {
         isFirstTime = false;
 
         backButton.setOnMouseClicked(event -> {
+            Parent root = null;
             try {
-                Client.getClient().changeCurrentMenu(MenuList.ShopMenu);
+                root = FXMLLoader.load(getClass().getResource("ShowClients.fxml"));
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
             }
+            ServerView.primaryStage.setScene(new Scene(root));
+
             isFirstTime = true;
         });
 
-       /* createCardLabel.setOnMouseClicked(event -> {
+        createCardLabel.setOnMouseClicked(event -> {
+            Parent root = null;
+            try {
+                root = FXMLLoader.load(getClass().getResource("CreateCard.fxml"));
+                ServerView.primaryStage.setScene(new Scene(root));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        });*/
+        });
     }
 }
