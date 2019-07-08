@@ -63,12 +63,11 @@ public class SellMenuController implements Initializable {
             try {
                 serverMassage = Client.getClient().shopMenuCommand(ClientMassage.ShopMenuRequest.GiveCollection,
                         null, null);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
 
+            System.out.println(serverMassage.getCollection());
             ArrayList<CollectionItem> collectionItems = serverMassage.getCollection().getCollectionItems();
 
             heroes = Graphic.getHeroes(collectionItems);

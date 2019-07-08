@@ -36,9 +36,7 @@ public class ShopController implements Initializable {
                 serverMassage = Client.getClient().shopMenuCommand(ClientMassage.ShopMenuRequest.GiveCollection, null, null);
                 System.out.println("HEEEEEEEEEEIIIIIIIII im here!");
                 Client.getClient().changeCurrentMenu(MenuList.ShopShowCollection);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
         });
