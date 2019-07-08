@@ -8,8 +8,6 @@ import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -20,7 +18,7 @@ public class Client {
 
     //network
     private int port = 8000;
-    private String ip = "127.0.0.1";
+    private String ip = "192.168.197.163";
     private Socket socket;
     private Scanner input;
     private PrintStream output;

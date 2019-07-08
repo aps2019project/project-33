@@ -887,9 +887,15 @@ public class Battle implements Serializable {
         preProcess();
     }
 
-    public void forfeitMatch() {
-        this.setWinnerPlayer(playerOff);
-        this.setLoserPlayer(playerOn);
+    public void forfeitMatch(String authToken) {
+        if(playerOn.getAccount().getUsername().equals(authToken)) {
+            this.setWinnerPlayer(playerOff);
+            this.setLoserPlayer(playerOn);
+        }
+        else{
+            this.setWinnerPlayer(playerOn);
+            this.setLoserPlayer(playerOff);
+        }
         finishMatch();
     }
 
@@ -919,7 +925,7 @@ public class Battle implements Serializable {
                 return serverMassage;
             }
             if (inputLine.equals("forfeit match"))
-                forfeitMatch();
+                forfeitMatch(clientUsername);
             if (inputLine.equals("enter graveyard"))
                 enterGraveYard();
 
