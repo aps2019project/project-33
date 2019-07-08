@@ -4,6 +4,7 @@ import Controller.Battle;
 import Controller.MenuList;
 import Model.Account;
 import Model.Collection;
+import Model.CollectionItem.Card;
 import Model.CollectionItem.CollectionItem;
 import Model.Deck;
 import Model.Massage;
@@ -62,6 +63,12 @@ public class ServerMassage implements Serializable {
         this.shopCollection = shopCollection;
     }
 
+    private ArrayList<Card> graveYard;
+
+    public ArrayList<Card> getGraveYard() {
+        return graveYard;
+    }
+
     public enum Type implements Serializable {
         Error, Accept;
     }
@@ -79,6 +86,10 @@ public class ServerMassage implements Serializable {
     public ServerMassage(Type type, ErrorType errorType) {
         this.type = type;
         this.errorType = errorType;
+    }
+
+    public void setGraveYard(ArrayList<Card> graveYard) {
+        this.graveYard = graveYard;
     }
 
     private Type type;

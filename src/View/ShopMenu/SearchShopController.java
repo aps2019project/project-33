@@ -33,9 +33,7 @@ public class SearchShopController implements Initializable {
                 serverMassage = Client.getClient().shopMenuCommand(ClientMassage.ShopMenuRequest.SearchInShop,
                         null, nameField.getText());
                 Client.getClient().changeCurrentMenu(MenuList.ShopShowSearch);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
 

@@ -3,6 +3,7 @@ package View.Battle;
 import Controller.Battle;
 import Controller.Client.Client;
 import Controller.Client.ClientMassage;
+import Controller.MenuList;
 import Controller.Server.Server;
 import Controller.Server.ServerMassage;
 import Model.Buffs.Buff;
@@ -23,6 +24,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -120,6 +122,14 @@ public class BattleController implements Initializable {
             selectedCell = null;
             try {
                 Client.getClient().battleCommand(ClientMassage.BattleRequest.EndTurn);
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
+
+        enterGraveYard.setOnMouseClicked(event -> {
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.GraveYard);
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }

@@ -2,7 +2,6 @@ package Controller.Server;
 
 import Controller.Application;
 import Controller.Battle;
-import Controller.Client.Client;
 import Controller.Client.ClientMassage;
 import Controller.MenuList;
 import Controller.Menus.*;
@@ -11,11 +10,10 @@ import Model.Massage;
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ResponseToClient extends Thread {
     private AccountMenu accountMenu = new AccountMenu();
@@ -25,13 +23,13 @@ public class ResponseToClient extends Thread {
     private ShopMenu shopMenu = new ShopMenu();
 
     private Socket socket;
-    private ObjectInputStream objectInputStream;
-    private ObjectOutputStream objectOutputStream;
+    private Scanner input;
+    private PrintStream output;
 
     public ResponseToClient(Socket socket) throws IOException {
         this.socket = socket;
-        this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-        this.objectInputStream = new ObjectInputStream(socket.getInputStream());
+        output = new PrintStream(socket.getOutputStream());
+        input = new Scanner(socket.getInputStream());
     }
 
     //todo in che mozakhrafi bood ? age aval output ro doros konam bad input ok mishe, vali bar aks na :| :| :| :| :|
@@ -41,18 +39,14 @@ public class ResponseToClient extends Thread {
         while (true) {
             ClientMassage clientMassage;
             String clientMassageInJson = null;
-            try {
-                clientMassageInJson = (String) objectInputStream.readObject();
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+            clientMassageInJson = input.nextLine();
             clientMassage = castFromJson(clientMassageInJson);
             if(clientMassage == null) continue;;
             ServerMassage answer = null;
             try {
                 answer = interpret(clientMassage);
-                objectOutputStream.writeObject(castToJson(answer));
-                objectOutputStream.flush();
+                output.println(castToJson(answer));
+                output.flush();
             } catch (IOException e) {
                 e.printStackTrace();
             }
