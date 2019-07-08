@@ -46,6 +46,10 @@ public class ClientMassage implements Serializable {
         Search, SelectDeck, ShowDeck, ValidateDeck;
     }
 
+    public enum ShopMenuRequest{
+        CreateCard;
+    }
+
     private String authToken;
     private Menu destinationMenu;
     private ServerRequest serverRequest;

@@ -3,8 +3,11 @@ package Controller.Client;
 import Controller.MenuList;
 import Controller.Menus.*;
 import Controller.Server.ServerMassage;
+import Model.Collection;
 import Model.CollectionItem.CollectionItem;
 import Model.Deck;
+import com.gilecode.yagson.YaGson;
+import com.gilecode.yagson.YaGsonBuilder;
 import javafx.animation.AnimationTimer;
 
 import java.io.IOException;
@@ -21,7 +24,7 @@ public class Client {
 
     //network
     private int port = 8000;
-    private String ip = "127.0.0.1";
+    private String ip = "192.168.197.163";
     private Socket socket;
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
@@ -44,10 +47,23 @@ public class Client {
         client = new Client();
     }
 
+    private ServerMassage castFromJson(String serverMassageJson){
+        YaGsonBuilder yaGsonBuilder = new YaGsonBuilder();
+        YaGson yaGson = yaGsonBuilder.create();
+        return yaGson.fromJson(serverMassageJson, ServerMassage.class);
+    }
+
+    private String castToJson(ClientMassage clientMassage){
+        YaGsonBuilder yaGsonBuilder = new YaGsonBuilder();
+        YaGson yaGson = yaGsonBuilder.create();
+        return yaGson.toJson(clientMassage);
+    }
+
     private ServerMassage sendAndReceive(ClientMassage clientMassage) throws IOException, ClassNotFoundException {
-        objectOutputStream.writeUnshared(clientMassage);
+        String clientMassageJson = castToJson(clientMassage);
+        objectOutputStream.writeUTF(clientMassageJson);
         objectOutputStream.flush();
-        return (ServerMassage) objectInputStream.readUnshared();
+        return castFromJson(objectInputStream.readUTF());
     }
 
     //AccountMenu Commands
@@ -89,6 +105,11 @@ public class Client {
         clientMassage.setSelectedDeck(deck);
         clientMassage.setName(name);
         return sendAndReceive(clientMassage);
+    }
+    //shop menu commands
+    public synchronized ServerMassage shopMenuCommand(ClientMassage.ShopMenuRequest shopMenuRequest, CollectionItem collectionItem){
+  //      if(shopMenuRequest.equals())
+        return null;
     }
     //BattleMenu Commands
 
