@@ -42,18 +42,19 @@ public class ShopMenu extends Menu {
         } else if (inputLine.matches("search for show .+")) {
             ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
             serverMassage.setCollectionItems(searchInCollection(separatedInput[3], this.shop));
+            return serverMassage;
             //todo in bayad doros she
             // Client.getClient().setCurrentMenu(MenuList.ShopShowSearch);
         } else if (inputLine.matches("search collection .+")) {
             ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
             serverMassage.setCollectionItems(searchInCollection(separatedInput[2], account.getCollection()));
-            searchInCollection(separatedInput[2], collection);
+            return serverMassage;
         } else if (inputLine.matches("search .+")) {
             ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
-            serverMassage.setCollectionItems(searchInCollection(separatedInput[3], this.shop));
+            serverMassage.setCollectionItems(searchInCollection(separatedInput[1], this.shop));
             //todo in bayad doros she
             // Client.getClient().setCurrentMenu(MenuList.ShowingBuy);
-
+            return serverMassage;
         } else if (inputLine.matches("buy .+")) {
             String collectionNameItem = separatedInput[1];
             return this.buy(collectionNameItem, authToken);
@@ -90,7 +91,6 @@ public class ShopMenu extends Menu {
         ArrayList<CollectionItem> foundCollectionItems = collection.search(collectionItemName);
         System.out.println("Result of search :");
         int index = 0;
-        Client.getClient().setResultOfSearch(foundCollectionItems);
         for (CollectionItem collectionItem : foundCollectionItems) {
             System.out.println(++index + ". " + collectionItem.getID());
         }

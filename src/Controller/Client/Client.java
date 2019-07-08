@@ -109,7 +109,7 @@ public class Client {
                                                       String name) throws IOException, ClassNotFoundException {
         ClientMassage clientMassage = new ClientMassage();
         clientMassage.setAuthToken(this.authToken);
-        clientMassage.setDestinationMenu(ClientMassage.Menu.CollectionMenu);
+        clientMassage.setDestinationMenu(ClientMassage.Menu.ShopMenu);
         clientMassage.setShopMenuRequest(shopMenuRequest);
         clientMassage.setCreatedCollectionitem(collectionItem);
         clientMassage.setName(name);
