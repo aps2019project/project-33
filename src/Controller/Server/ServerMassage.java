@@ -69,6 +69,14 @@ public class ServerMassage implements Serializable {
         return graveYard;
     }
 
+    public int getBudget() {
+        return budget;
+    }
+
+    public void setBudget(int budget) {
+        this.budget = budget;
+    }
+
     public enum Type implements Serializable {
         Error, Accept;
     }
@@ -103,6 +111,8 @@ public class ServerMassage implements Serializable {
 
     //Answer to GiveAllMassages
     private ArrayList<Massage> massages;
+    //give budget
+    private int budget;
 // give collection and show
     private Collection collection;
 //import

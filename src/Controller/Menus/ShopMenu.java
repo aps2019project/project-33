@@ -40,7 +40,7 @@ public class ShopMenu extends Menu {
             // Client.getClient().setCurrentMenu(MenuList.ShopShowCollection);
 
         } else if (inputLine.matches("search for show .+")) {
-               ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
+            ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
             serverMassage.setCollectionItems(searchInCollection(separatedInput[3], this.shop));
             return serverMassage;
             //todo in bayad doros she
@@ -72,17 +72,19 @@ public class ShopMenu extends Menu {
         else if (inputLine.equals("exit")) {
             //todo in bayad doros she
             // Client.getClient().setCurrentMenu(MenuList.MainMenu);
-        } else if(inputLine.equals("give collection")){
+        } else if (inputLine.equals("give collection")) {
             ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
             serverMassage.setCollection(account.getCollection());
             return serverMassage;
-        }
-        else if(inputLine.equals("give shop")){
+        } else if (inputLine.equals("give shop")) {
             ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
             serverMassage.setShopCollection(this.shop);
             return serverMassage;
-        }
-        else
+        } else if (inputLine.equals("give budget")) {
+            ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
+            serverMassage.setBudget(account.getBudget());
+            return serverMassage;
+        } else
             System.out.println("Please enter valid command line !");
         return null;
     }
@@ -158,31 +160,33 @@ public class ShopMenu extends Menu {
         System.out.println("8. exit");
     }
 
-    public ServerMassage interpret(ClientMassage clientMassage){
-        if(clientMassage.getShopMenuRequest() == ClientMassage.ShopMenuRequest.Search){
+    public ServerMassage interpret(ClientMassage clientMassage) {
+        if (clientMassage.getShopMenuRequest() == ClientMassage.ShopMenuRequest.GiveBudget)
+            return this.inputCommandLine("give budget", clientMassage.getAuthToken());
+        if (clientMassage.getShopMenuRequest() == ClientMassage.ShopMenuRequest.Search) {
             String name = clientMassage.getName();
             return this.inputCommandLine("search " + name, clientMassage.getAuthToken());
         }
-        if(clientMassage.getShopMenuRequest() == ClientMassage.ShopMenuRequest.Buy){
+        if (clientMassage.getShopMenuRequest() == ClientMassage.ShopMenuRequest.Buy) {
             String collectionItemName = clientMassage.getName();
             return this.inputCommandLine("buy " + collectionItemName, clientMassage.getAuthToken());
         }
-        if(clientMassage.getShopMenuRequest() == ClientMassage.ShopMenuRequest.SearchInCollection){
+        if (clientMassage.getShopMenuRequest() == ClientMassage.ShopMenuRequest.SearchInCollection) {
             String collectionItemName = clientMassage.getName();
             return this.inputCommandLine("search collection " + collectionItemName, clientMassage.getAuthToken());
         }
-        if (clientMassage.getShopMenuRequest() == ClientMassage.ShopMenuRequest.SearchInShop){
+        if (clientMassage.getShopMenuRequest() == ClientMassage.ShopMenuRequest.SearchInShop) {
             String collectionItemName = clientMassage.getName();
             return this.inputCommandLine("search for show " + collectionItemName, clientMassage.getAuthToken());
         }
-        if(clientMassage.getShopMenuRequest() == ClientMassage.ShopMenuRequest.GiveCollection){
+        if (clientMassage.getShopMenuRequest() == ClientMassage.ShopMenuRequest.GiveCollection) {
             return this.inputCommandLine("give collection", clientMassage.getAuthToken());
         }
-        if(clientMassage.getShopMenuRequest() == ClientMassage.ShopMenuRequest.Sell){
+        if (clientMassage.getShopMenuRequest() == ClientMassage.ShopMenuRequest.Sell) {
             String collectionItemID = clientMassage.getName();
             return this.inputCommandLine("sell " + collectionItemID, clientMassage.getAuthToken());
         }
-        if(clientMassage.getShopMenuRequest() == ClientMassage.ShopMenuRequest.GiveShop){
+        if (clientMassage.getShopMenuRequest() == ClientMassage.ShopMenuRequest.GiveShop) {
             return this.inputCommandLine("give shop", clientMassage.getAuthToken());
         }
         return null;

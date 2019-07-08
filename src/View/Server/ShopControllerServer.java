@@ -50,7 +50,7 @@ public class ShopControllerServer implements Initializable {
 
     public static ArrayList<Integer> numberOfCollectionItems = new ArrayList<>();
 
-    public static void calcNumberOfCollectionItems (ArrayList<CollectionItem> collectionItems){
+    public static ArrayList<CollectionItem> calcNumberOfCollectionItems (ArrayList<CollectionItem> collectionItems){
         ArrayList<CollectionItem> uniqued = new ArrayList<>();
         for(CollectionItem collectionItem : collectionItems){
             int number = 0;
@@ -67,20 +67,7 @@ public class ShopControllerServer implements Initializable {
                 numberOfCollectionItems.add(number);
             }
         }
-    }
-
-    public static ArrayList<CollectionItem> unique(ArrayList<CollectionItem> collectionItems){
-        ArrayList<CollectionItem> uniquedCollectionItems = new ArrayList<>();
-        for(CollectionItem collectionItem : collectionItems){
-            boolean find = false;
-            for(CollectionItem uniquedCollectionItem : uniquedCollectionItems)
-                if(uniquedCollectionItem.getName().equals(collectionItem.getName()))
-                    find = true;
-            if(!find) {
-                uniquedCollectionItems.add(collectionItem);
-            }
-        }
-        return uniquedCollectionItems;
+        return uniqued;
     }
 
     @Override
@@ -89,7 +76,8 @@ public class ShopControllerServer implements Initializable {
             mainVBox.getChildren().clear();
             Collection shop = ServerMain.application.getShop();
             ArrayList<CollectionItem> collectionItems = shop.getCollectionItems();
-            collectionItems = unique(collectionItems);
+            calcNumberOfCollectionItems(collectionItems);
+            collectionItems = calcNumberOfCollectionItems(collectionItems);
 
             ArrayList<CollectionItem> heroes = Graphic.getHeroes(collectionItems);
             try {
