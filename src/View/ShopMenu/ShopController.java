@@ -1,11 +1,15 @@
 package View.ShopMenu;
+import Controller.Client.Client;
+import Controller.Client.ClientMassage;
 import Controller.MenuList;
+import Controller.Server.ServerMassage;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,38 +27,88 @@ public class ShopController implements Initializable {
     public VBox vBox;
     public Label createCardLabel;
 
+    public static ServerMassage serverMassage;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        /*showCollectionLabel.setOnMouseClicked(event -> {
-            Client.getClient().getShopMenu().inputCommandLine("show collection");
+        showCollectionLabel.setOnMouseClicked(event -> {
+            try {
+                serverMassage = Client.getClient().shopMenuCommand(ClientMassage.ShopMenuRequest.GiveCollection, null, null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         searchCollectionLabel.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.ShopSearchCollection);
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.ShopSearchCollection);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         buyLabel.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.BuyMenu);
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.BuyMenu);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         sellLabel.setOnMouseClicked(event -> {
-            Client.getClient().getShopMenu().inputCommandLine("show collection for sell");
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.SellMenu);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         imagePane.setOnMouseClicked(event -> {
-            Client.getClient().getShopMenu().inputCommandLine("exit");
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.MainMenu);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         showLabel.setOnMouseClicked(event -> {
-            Client.getClient().getShopMenu().inputCommandLine("show");
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.ShowShop);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         searchLabel.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.SearchShop);
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.SearchShop);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         createCardLabel.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.ShopCreateCard);
-        });*/
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.ShopCreateCard);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

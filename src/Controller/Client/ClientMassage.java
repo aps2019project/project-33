@@ -9,12 +9,31 @@ import java.io.Serializable;
 
 public class ClientMassage implements Serializable {
 
+    public ClientMassage() {
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public ShopMenuRequest getShopMenuRequest() {
+        return shopMenuRequest;
+    }
+
+    public void setShopMenuRequest(ShopMenuRequest shopMenuRequest) {
+        this.shopMenuRequest = shopMenuRequest;
+    }
+
+    public CollectionItem getCreatedCollectionitem() {
+        return createdCollectionitem;
+    }
+
+    public void setCreatedCollectionitem(CollectionItem createdCollectionitem) {
+        this.createdCollectionitem = createdCollectionitem;
     }
 
     public enum Menu {
@@ -47,7 +66,7 @@ public class ClientMassage implements Serializable {
     }
 
     public enum ShopMenuRequest{
-        CreateCard;
+        CreateCard, Search, Buy, SearchInCollection, SearchInShop, Sell, GiveCollection, ShowCollection, GiveShop;
     }
 
     private String authToken;
@@ -59,6 +78,7 @@ public class ClientMassage implements Serializable {
     private BattleRequest battleRequest;
     private CollectionMenuRequest collectionMenuRequest;
     private MenuList newMenu;
+    private ShopMenuRequest shopMenuRequest;
 
     private Deck selectedDeck;
     private CollectionItem selectedCollectionItem;
@@ -77,7 +97,8 @@ public class ClientMassage implements Serializable {
 
     //ServerRequest Instances
     private String massage;
-
+//create card
+    private CollectionItem createdCollectionitem;
 
     public String getUsername() {
         return username;

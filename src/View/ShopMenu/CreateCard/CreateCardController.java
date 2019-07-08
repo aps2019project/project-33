@@ -87,7 +87,7 @@ public class CreateCardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        cardType.getItems().add("HERO");
+       /* cardType.getItems().add("HERO");
         cardType.getItems().add("MINION");
         cardType.getItems().add("SPELL");
         cardType.getSelectionModel().selectFirst();
@@ -200,6 +200,8 @@ public class CreateCardController implements Initializable {
                     minion.setHP(getValue(HPField.getText()));
                     minion.setAP(getValue(APField.getText()));
                     try {
+                        ServerMassage serverMassage = Client.getClient().shopMenuCommand(ClientMassage.ShopMenuRequest.CreateCard,
+                                (CollectionItem) minion);
                         Application.writeJSON(minion, "Data/collectionItem/Minion/" + minion.getName() + ".json");
                         minion = Minion.createMinion(minion.getName(), "SHOP");
                         ID = minion.getID();
@@ -212,6 +214,8 @@ public class CreateCardController implements Initializable {
                     spell.setInformation(information);
                     spell.setPrice(getValue(priceField.getText()));
                     try {
+                        ServerMassage serverMassage = Client.getClient().shopMenuCommand(ClientMassage.ShopMenuRequest.CreateCard,
+                                (CollectionItem) spell);
                         Application.writeJSON(spell, "Data/collectionItem/Spell/" + spell.getName() + ".json");
                         spell = Spell.createSpell(spell.getName(), "SHOP");
                         ID = spell.getID();
@@ -237,7 +241,7 @@ public class CreateCardController implements Initializable {
                 e.printStackTrace();
             }
 
-        });
+        });*/
     }
 
     public static int getValue(String field) {
