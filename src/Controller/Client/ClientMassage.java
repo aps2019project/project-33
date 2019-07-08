@@ -2,10 +2,22 @@ package Controller.Client;
 
 import Controller.Battle;
 import Controller.MenuList;
+import Model.CollectionItem.CollectionItem;
+import Model.Deck;
 
 import java.io.Serializable;
 
 public class ClientMassage implements Serializable {
+
+
+    public String getDeckName() {
+        return deckName;
+    }
+
+    public void setDeckName(String deckName) {
+        this.deckName = deckName;
+    }
+
     public enum Menu {
         AccountMenu, BattleMenu, ShopMenu, MainMenu, CollectionMenu, Server, Battle;
     }
@@ -31,7 +43,7 @@ public class ClientMassage implements Serializable {
     }
 
     public enum CollectionMenuRequest{
-        Exit, Save, Show;
+        Exit, Save, Show, GiveCollection, AddCollectionItemToDeck, CreateDeck, DeleteDeck, Export, Import;
     }
 
     private String authToken;
@@ -43,6 +55,9 @@ public class ClientMassage implements Serializable {
     private BattleRequest battleRequest;
     private CollectionMenuRequest collectionMenuRequest;
     private MenuList newMenu;
+    private Deck selectedDeck;
+    private CollectionItem selectedCollectionItem;
+    private String deckName;
 
     //AccountMenuRequest Instances
     private String username, password;
@@ -224,5 +239,21 @@ public class ClientMassage implements Serializable {
 
     public void setNumberOfFlag(int numberOfFlag) {
         this.numberOfFlag = numberOfFlag;
+    }
+
+    public Deck getSelectedDeck() {
+        return selectedDeck;
+    }
+
+    public void setSelectedDeck(Deck selectedDeck) {
+        this.selectedDeck = selectedDeck;
+    }
+
+    public CollectionItem getSelectedCollectionItem() {
+        return selectedCollectionItem;
+    }
+
+    public void setSelectedCollectionItem(CollectionItem selectedCollectionItem) {
+        this.selectedCollectionItem = selectedCollectionItem;
     }
 }

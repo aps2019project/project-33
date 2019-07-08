@@ -1,6 +1,10 @@
 package View.CollectionMenu.CreateDeck;
 
+import Controller.Client.Client;
+import Controller.Client.ClientMassage;
 import Controller.MenuList;
+import Controller.Server.Server;
+import Controller.Server.ServerMassage;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -21,17 +25,25 @@ public class CreateDeckController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-      /*  backButton.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
+        backButton.setOnMouseClicked(event -> {
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.CollectionMenu);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         createLabel.setOnMouseClicked(event -> {
             try {
-                Client.getClient().getCollectionMenu().inputCommandLine("create deck " + nameField.getText());
-                nameField.setText("");
+                ServerMassage serverMassage = Client.getClient().collectionMenuCommand(ClientMassage.CollectionMenuRequest.CreateDeck,
+                        null, null, nameField.getText());
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
-        });*/
+        });
     }
 }

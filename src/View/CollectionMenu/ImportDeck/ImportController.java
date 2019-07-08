@@ -1,7 +1,11 @@
 package View.CollectionMenu.ImportDeck;
 
 import Controller.Application;
+import Controller.Client.Client;
+import Controller.Client.ClientMassage;
 import Controller.MenuList;
+import Controller.Server.Server;
+import Controller.Server.ServerMassage;
 import Model.Account;
 import Model.Collection;
 import Model.CollectionItem.*;
@@ -14,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,40 +31,35 @@ public class ImportController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-      /*  backButton.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
+        backButton.setOnMouseClicked(event -> {
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.CollectionMenu);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         importButton.setOnMouseClicked(event -> {
-            String address = "Data/ExportedDecks/" + nameField.getText() + ".json";
+            ServerMassage serverMassage = null;
             try {
-                Deck importedDeck = (Deck) Application.readJSON(Deck.class, address);
-                Collection collection = Client.getClient().getCollection();
-                Deck deck = new Deck(importedDeck.getName());
-                for(CollectionItem collectionItem : importedDeck.getCards()){
-                    if(collectionItem instanceof Hero){
-                        Hero hero = Hero.createHero(collectionItem.getName(), Client.getClient().getUsername());
-                        deck.getCards().add(hero);
-                    }
-                    if (collectionItem instanceof Minion){
-                        Minion minion = Minion.createMinion(collectionItem.getName(), Client.getClient().getUsername());
-                        deck.getCards().add(minion);
-                    }
-                    if(collectionItem instanceof Spell){
-                        Spell spell = Spell.createSpell(collectionItem.getName(), Client.getClient().getUsername());
-                        deck.getCards().add(spell);
-                    }
-                    if(collectionItem instanceof Item){
-                        Item item = Item.createItem(collectionItem.getName(), Client.getClient().getUsername());
-                        deck.getCards().add(item);
-                    }
-                }
-                collection.addDeck(deck);
-                Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
-            } catch (FileNotFoundException e) {
+                serverMassage = Client.getClient().collectionMenuCommand(ClientMassage.CollectionMenuRequest.Import,
+                        null, null, nameField.getText());
+            } catch (IOException e) {
                 e.printStackTrace();
-                //TODO
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
-        });*/
+            if(serverMassage.getType() == ServerMassage.Type.Accept) {
+                try {
+                    Client.getClient().changeCurrentMenu(MenuList.CollectionMenu);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

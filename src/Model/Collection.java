@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.Server.ServerMassage;
 import Model.CollectionItem.*;
 
 import java.io.Serializable;
@@ -9,6 +10,10 @@ public class Collection implements Serializable {
     private ArrayList<CollectionItem> cards = new ArrayList<>();
     private Deck mainDeck;
     private ArrayList<Deck> decks = new ArrayList<>();
+
+    public void addDeck(Deck deck){
+        this.decks.add(deck);
+    }
 
     public void selectMainDeck(String deckName) {
         Deck deck = this.getDeckByName(deckName);
@@ -128,14 +133,15 @@ public class Collection implements Serializable {
         return this.decks;
     }
 
-    public void createDeck(String deckName){
+    public ServerMassage createDeck(String deckName){
         Deck deck = this.getDeckByName(deckName);
         if(deck != null){
             System.out.println("a deck with this name already exists");
-            return;
+            return new ServerMassage(ServerMassage.Type.Error, ServerMassage.ErrorType.InvalidDeckNameForCreate);
         }
         deck = new Deck(deckName);
         this.decks.add(deck);
+        return new ServerMassage(ServerMassage.Type.Accept, null);
     }
 
     public ArrayList<CollectionItem> getCollectionItems(){

@@ -1,6 +1,9 @@
 package View.CollectionMenu.AddCardToDeck;
 
+import Controller.Client.Client;
+import Controller.Client.ClientMassage;
 import Controller.MenuList;
+import Controller.Server.ServerMassage;
 import Model.Collection;
 import Model.CollectionItem.CollectionItem;
 import Model.Deck;
@@ -12,13 +15,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class SelectCardController implements Initializable {
-   /* public AnchorPane mainPane;
+    public AnchorPane mainPane;
     public ImageView duelystImage;
     public ImageView backButton;
     public Label okButton;
@@ -33,7 +37,7 @@ public class SelectCardController implements Initializable {
     ArrayList<CollectionItem> spells = new ArrayList<>();
     ArrayList<CollectionItem> items = new ArrayList<>();
 
-    public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) {
+    public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) throws FileNotFoundException {
         Label label = new Label(labelText);
         label.setTextFill(javafx.scene.paint.Color.WHITE);
         label.setStyle("-fx-font-size: 15");
@@ -55,30 +59,56 @@ public class SelectCardController implements Initializable {
                 editedCollectionItems.add(collectionItem);
         return editedCollectionItems;
     }
-*/
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        /*if (isFirstTime) {
+        if (isFirstTime) {
             vBoxes.clear();
             mainVBox.getChildren().clear();
 
-            ArrayList<CollectionItem> collectionItems = Client.getClient().getCollection().getCollectionItems();
+
+            ServerMassage serverMassage = null;
+            try {
+                serverMassage = Client.getClient().collectionMenuCommand(ClientMassage.CollectionMenuRequest.GiveCollection);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            Collection collection = serverMassage.getCollection();
+            ArrayList<CollectionItem> collectionItems = collection.getCollectionItems();
             collectionItems = removeDeckCards(SelectDeckController.selectedDeck, collectionItems);
 
             heroes = Graphic.getHeroes(collectionItems);
-            addPart(heroes, "HEROES:", mainVBox);
+            try {
+                addPart(heroes, "HEROES:", mainVBox);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
             numberOfHeroes = heroes.size();
 
             minions = Graphic.getMinions(collectionItems);
-            addPart(minions, "MINIONS:", mainVBox);
+            try {
+                addPart(minions, "MINIONS:", mainVBox);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
             numberOfMinions = minions.size();
 
             spells = Graphic.getSpells(collectionItems);
-            addPart(spells, "SPELLS:", mainVBox);
+            try {
+                addPart(spells, "SPELLS:", mainVBox);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
             numberOfSpells = spells.size();
 
             items = Graphic.getItems(collectionItems);
-            addPart(items, "ITEMS:", mainVBox);
+            try {
+                addPart(items, "ITEMS:", mainVBox);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
             numberOfItems = items.size();
 
             mainVBox.setLayoutY(130);
@@ -114,24 +144,31 @@ public class SelectCardController implements Initializable {
         isFirstTime = false;
 
         backButton.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.CollectionSelectDeckForAdd);
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.CollectionSelectDeckForAdd);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             isFirstTime = true;
         });
 
         okButton.setOnMouseClicked(event -> {
             if (selectedCollectionItem != null) {
                 try {
-                    Client.getClient().getCollectionMenu().inputCommandLine("add " + selectedCollectionItem.getID() +
-                            " to deck " + SelectDeckController.selectedDeck.getName());
-                    Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
+                    ServerMassage serverMassage = Client.getClient().collectionMenuCommand(ClientMassage.CollectionMenuRequest.AddCollectionItemToDeck,
+                            SelectDeckController.selectedDeck, selectedCollectionItem, null);
+
                     isFirstTime = true;
                 } catch (IOException e) {
                     e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
-                Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
                 isFirstTime = true;
                 System.out.println();
             }
-        });*/
+        });
     }
 }

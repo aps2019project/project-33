@@ -5,6 +5,7 @@ import Controller.MenuList;
 import Model.Account;
 import Model.Collection;
 import Model.CollectionItem.CollectionItem;
+import Model.Deck;
 import Model.Massage;
 
 import java.io.Serializable;
@@ -21,13 +22,22 @@ public class ServerMassage implements Serializable {
         this.collection = collection;
     }
 
+    public Deck getImportedDeck() {
+        return importedDeck;
+    }
+
+    public void setImportedDeck(Deck importedDeck) {
+        this.importedDeck = importedDeck;
+    }
+
     public enum Type implements Serializable {
         Error, Accept;
     }
 
     public enum ErrorType implements Serializable {
         LogInFailed, InvalidPasswordForSignUp, InvalidUsernameForSignUp, InvalidAuthToken, InvalidDeckForFirstPlayer,
-        InvalidSecondPlayerUsername, InvalidDeckForSecondPlayer, RunningBattleNotFound, PlayerAreNotAvailable;
+        InvalidSecondPlayerUsername, InvalidDeckForSecondPlayer, RunningBattleNotFound, PlayerAreNotAvailable,
+        InvalidDeckNameForCreate, InvalidDeckNameForImport;
     }
 
     public enum Command {
@@ -50,8 +60,10 @@ public class ServerMassage implements Serializable {
 
     //Answer to GiveAllMassages
     private ArrayList<Massage> massages;
-
+// give collection and show
     private Collection collection;
+//import
+    private Deck importedDeck;
 
     public Type getType() {
         return type;

@@ -1,7 +1,11 @@
 package View.CollectionMenu.ExportDeck;
 
 import Controller.Application;
+import Controller.Client.Client;
+import Controller.Client.ClientMassage;
 import Controller.MenuList;
+import Controller.Server.Server;
+import Controller.Server.ServerMassage;
 import Model.Collection;
 import Model.Deck;
 import View.CollectionMenu.DeleteDeck.DeleteDeckController;
@@ -33,14 +37,22 @@ public class ExportController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        /*if(isFirstTime){
+        if(isFirstTime){
             selectedDeck = null;
             labelsVBox.getChildren().clear();
             mainPane.getChildren().remove(labelsVBox);
             deckLabels.clear();
             //TODO deckaro chejuri bayad begiram?
             //TODO nabayad az collectione account bekhunam
-            Collection collection = Client.getClient().getCollection();
+            ServerMassage serverMassage = null;
+            try {
+                serverMassage = Client.getClient().collectionMenuCommand(ClientMassage.CollectionMenuRequest.GiveCollection);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            Collection collection = serverMassage.getCollection();
             decks = collection.getDecks();
 
             for(Deck deck : decks){
@@ -74,19 +86,28 @@ public class ExportController implements Initializable {
             try {
                 if(selectedDeck != null) {
                     //todo neveshtan too file json
+                    ServerMassage serverMassage = Client.getClient().collectionMenuCommand(ClientMassage.CollectionMenuRequest.Export,
+                            selectedDeck, null, null);
                     Application.writeJSON(selectedDeck,  "Data/ExportedDecks/" + selectedDeck.getName() + ".json");
-                    Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
                     isFirstTime = true;
                 }
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
         });
 
         backButton.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.CollectionMenu);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             isFirstTime = true;
-        });*/
+        });
     }
 
     public static void clearShadows(){
