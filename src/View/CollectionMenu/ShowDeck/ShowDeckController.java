@@ -1,36 +1,29 @@
-package View.ShopMenu;
+package View.CollectionMenu.ShowDeck;
 
 import Controller.MenuList;
-import Model.Collection;
-import Model.CollectionItem.*;
+import Model.CollectionItem.CollectionItem;
 import View.Graphic;
-import com.sun.prism.paint.Color;
-import com.sun.xml.internal.bind.v2.util.CollisionCheckStack;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static com.sun.prism.paint.Color.WHITE;
-
-public class ShopShowCollectionController implements Initializable {
+public class ShowDeckController implements Initializable {
+    public AnchorPane mainPane;
     public ImageView backButton;
-    public AnchorPane nonBlurAnchor;
-    public AnchorPane blurAnchor;
-    public AnchorPane mainAnchor;
+    public ImageView duelystImage;
 
     public static boolean isFirstTime = true;
     public static VBox mainVBox = new VBox();
 
-
-/*    public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) {
+/*
+    public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) {
         Label label = new Label(labelText);
         label.setTextFill(javafx.scene.paint.Color.WHITE);
         label.setStyle("-fx-font-size: 15");
@@ -39,13 +32,16 @@ public class ShopShowCollectionController implements Initializable {
         VBox partVBox = Graphic.createCards(collectionItems);
         vBox.getChildren().add(partVBox);
         VBox.setMargin(vBox, new Insets(0, 0, 20, 0));
-    }*/
+    }
+*/
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-     /*   if (isFirstTime) {
+/*
+        if (isFirstTime) {
             mainVBox.getChildren().clear();
+            //todo server
             ArrayList<CollectionItem> collectionItems = Client.getClient().getResultOfSearch();
 
             ArrayList<CollectionItem> heroes = Graphic.getHeroes(collectionItems);
@@ -65,13 +61,14 @@ public class ShopShowCollectionController implements Initializable {
 
             VBox.setMargin(mainVBox, new Insets(0, 0, 20, 0));
 
-            mainAnchor.getChildren().add(mainVBox);
+            mainPane.getChildren().add(mainVBox);
 
         }
         isFirstTime = false;
         backButton.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.ShopMenu);
+            Client.getClient().setCurrentMenu(MenuList.CollectionSelectDeckForShow);
             isFirstTime = true;
-        });*/
+        });
+*/
     }
 }

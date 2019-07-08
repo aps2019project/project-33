@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" styleClass="CollectionImagePane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CollectionMenu.AddCardToDeck.SelectDeckController">
+   <children>
+      <ImageView fx:id="backButton" fitHeight="82.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../resources/ui/button_back_corner.png" />
+         </image>
+         <styleClass>
+            <String fx:value="BackButton" />
+            <String fx:value="ImageButton" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="duelystImage" fitHeight="150.0" fitWidth="200.0" layoutX="65.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+         <styleClass>
+            <String fx:value="BackButton" />
+            <String fx:value="ImageButton" />
+         </styleClass>
+         <image>
+            <Image url="@../../../../resources/ui/brand_duelyst.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="okButton" layoutX="80.0" layoutY="55.0" text="OK">
+         <styleClass>
+            <String fx:value="GreenButton" />
+            <String fx:value="Button" />
+         </styleClass>
+      </Label>
+   </children>
+   <stylesheets>
+      <URL value="@../CollectionMenu.css" />
+      <URL value="@../../Button.css" />
+      <URL value="@../../newButton.css" />
+   </stylesheets>
+</AnchorPane>

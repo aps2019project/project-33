@@ -1,6 +1,4 @@
 package View.ShopMenu;
-
-import Controller.Client.Client;
 import Controller.MenuList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -23,21 +21,20 @@ public class ShopController implements Initializable {
     public AnchorPane nonBlurPane;
     public ImageView imagePane;
     public VBox vBox;
+    public Label createCardLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        showCollectionLabel.setOnMouseClicked(event -> {
+        /*showCollectionLabel.setOnMouseClicked(event -> {
             Client.getClient().getShopMenu().inputCommandLine("show collection");
         });
 
         searchCollectionLabel.setOnMouseClicked(event -> {
-            //todo in bayad doros she
-            // Client.getClient().setCurrentMenu(MenuList.ShopSearchCollection);
+            Client.getClient().setCurrentMenu(MenuList.ShopSearchCollection);
         });
 
         buyLabel.setOnMouseClicked(event -> {
-            //todo in bayad doros she
-            // Client.getClient().setCurrentMenu(MenuList.BuyMenu);
+            Client.getClient().setCurrentMenu(MenuList.BuyMenu);
         });
 
         sellLabel.setOnMouseClicked(event -> {
@@ -53,8 +50,11 @@ public class ShopController implements Initializable {
         });
 
         searchLabel.setOnMouseClicked(event -> {
-            //todo in bayad doros she
-            // Client.getClient().setCurrentMenu(MenuList.SearchShop);
+            Client.getClient().setCurrentMenu(MenuList.SearchShop);
         });
+
+        createCardLabel.setOnMouseClicked(event -> {
+            Client.getClient().setCurrentMenu(MenuList.ShopCreateCard);
+        });*/
     }
 }

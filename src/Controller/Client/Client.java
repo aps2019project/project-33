@@ -4,6 +4,7 @@ import Controller.MenuList;
 import Controller.Menus.*;
 import Controller.Server.ServerMassage;
 import Model.CollectionItem.CollectionItem;
+import Model.Deck;
 import javafx.animation.AnimationTimer;
 
 import java.io.IOException;
@@ -69,7 +70,26 @@ public class Client {
         clientMassage.setMainMenuRequest(mainMenuRequest);
         return sendAndReceive(clientMassage);
     }
+//collection commands
+    public synchronized ServerMassage collectionMenuCommand(ClientMassage.CollectionMenuRequest collectionMenuRequest) throws IOException, ClassNotFoundException {
+        ClientMassage clientMassage = new ClientMassage();
+        clientMassage.setAuthToken(this.authToken);
+        clientMassage.setDestinationMenu(ClientMassage.Menu.CollectionMenu);
+        clientMassage.setCollectionMenuRequest(collectionMenuRequest);
+        return sendAndReceive(clientMassage);
+    }
 
+    public synchronized ServerMassage collectionMenuCommand(ClientMassage.CollectionMenuRequest collectionMenuRequest,
+                                                            Deck deck, CollectionItem collectionItem, String deckName) throws IOException, ClassNotFoundException {
+        ClientMassage clientMassage = new ClientMassage();
+        clientMassage.setAuthToken(this.authToken);
+        clientMassage.setDestinationMenu(ClientMassage.Menu.CollectionMenu);
+        clientMassage.setCollectionMenuRequest(collectionMenuRequest);
+        clientMassage.setSelectedCollectionItem(collectionItem);
+        clientMassage.setSelectedDeck(deck);
+        clientMassage.setDeckName(deckName);
+        return sendAndReceive(clientMassage);
+    }
     //BattleMenu Commands
 
     public ServerMassage answerToGame(ClientMassage.BattleMenuRequest battleMenuRequest) throws IOException, ClassNotFoundException {

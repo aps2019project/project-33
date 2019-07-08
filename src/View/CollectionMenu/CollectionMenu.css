@@ -1,0 +1,9 @@
+.CollectionImagePane{
+    -fx-background-image: url("../../../resources/maps/abyssian/background.jpg");
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+}
+
+.CollectionScrollPane{
+    -fx-background-color: #DDDDDD;
+}

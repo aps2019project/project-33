@@ -21,14 +21,13 @@ public class BuyController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backButton.setOnMouseClicked(event -> {
-            //todo in bayad doros she
-            // Client.getClient().setCurrentMenu(MenuList.ShopMenu);
+      /*  backButton.setOnMouseClicked(event -> {
+            Client.getClient().setCurrentMenu(MenuList.ShopMenu);
         });
 
         searchButton.setOnMouseClicked(event -> {
             Client.getClient().getShopMenu().inputCommandLine("search " + nameField.getText());
 
-        });
+        });*/
     }
 }

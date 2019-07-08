@@ -1,17 +1,17 @@
 package View.ShopMenu;
 
-import Controller.Client.Client;
 import Controller.MenuList;
 import Model.CollectionItem.CollectionItem;
 import View.Graphic;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.io.FileNotFoundException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ShowingBuyController implements Initializable {
@@ -28,13 +28,9 @@ public class ShowingBuyController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (isFirstTime) {
+       /* if (isFirstTime) {
             nonBlurAnchor.getChildren().remove(cardsVbox);
-            try {
-                cardsVbox = Graphic.createCards(Client.getClient().getResultOfSearch());
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            cardsVbox = Graphic.createCards(Client.getClient().getResultOfSearch());
             nonBlurAnchor.getChildren().add(cardsVbox);
             cardsVbox.setLayoutX(200);
             cardsVbox.setLayoutY(200);
@@ -53,20 +49,18 @@ public class ShowingBuyController implements Initializable {
         }
 
         backButton.setOnMouseClicked(event -> {
-            //todo in bayad doros she
-            // Client.getClient().setCurrentMenu(MenuList.ShopMenu);
+            Client.getClient().setCurrentMenu(MenuList.ShopMenu);
             isFirstTime = true;
         });
 
         buyLabel.setOnMouseClicked(event -> {
             if (selectedCollectionItem != null) {
                 Client.getClient().getShopMenu().inputCommandLine("buy " + selectedCollectionItem.getName());
-                //todo in bayad doros she
-                // Client.getClient().setCurrentMenu(MenuList.BuyMenu);
+                Client.getClient().setCurrentMenu(MenuList.BuyMenu);
 
                 isFirstTime = true;
             }
-        });
+        });*/
     }
 
 }

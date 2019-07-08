@@ -2,7 +2,9 @@ package View.CollectionMenu.ShowCollection;
 
 import Controller.Client.Client;
 import Controller.MenuList;
+import Model.Collection;
 import Model.CollectionItem.CollectionItem;
+import View.CollectionMenu.CollectionMenu.CollectionMenuController;
 import View.Graphic;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -12,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -39,7 +42,8 @@ public class ShowCollectionController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (isFirstTime) {
             mainVBox.getChildren().clear();
-            ArrayList<CollectionItem> collectionItems = Client.getClient().getResultOfSearch();
+            Collection collection = CollectionMenuController.serverMassage.getCollection();
+            ArrayList<CollectionItem> collectionItems = collection.getCollectionItems();
 
             ArrayList<CollectionItem> heroes = Graphic.getHeroes(collectionItems);
             try {
@@ -78,9 +82,15 @@ public class ShowCollectionController implements Initializable {
 
         }
         isFirstTime = false;
+
         backButton.setOnMouseClicked(event -> {
-            //todo in bayad doros she
-            // Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.CollectionMenu);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             isFirstTime = true;
         });
     }

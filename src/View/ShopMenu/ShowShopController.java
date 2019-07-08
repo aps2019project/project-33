@@ -1,7 +1,7 @@
 package View.ShopMenu;
 
-import Controller.Client.Client;
 import Controller.MenuList;
+import Model.Collection;
 import Model.CollectionItem.CollectionItem;
 import View.Graphic;
 import javafx.fxml.Initializable;
@@ -13,7 +13,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -27,7 +26,7 @@ public class ShowShopController implements Initializable {
     public static boolean isFirstTime = true;
     public static VBox mainVBox = new VBox();
 
-    public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) throws FileNotFoundException {
+/*    public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) {
         Label label = new Label(labelText);
         label.setTextFill(Color.NAVY);
         label.setStyle("-fx-font-size: 15");
@@ -36,7 +35,7 @@ public class ShowShopController implements Initializable {
         VBox partVBox = Graphic.createCards(collectionItems);
         vBox.getChildren().add(partVBox);
         VBox.setMargin(vBox, new Insets(0, 0, 20, 0));
-    }
+    }*/
 
     public static ArrayList<CollectionItem> unique(ArrayList<CollectionItem> collectionItems){
         ArrayList<CollectionItem> uniquedCollectionItems = new ArrayList<>();
@@ -53,37 +52,21 @@ public class ShowShopController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(isFirstTime){
+    /*    if(isFirstTime){
             ArrayList<CollectionItem> collectionItems = Client.getClient().getResultOfSearch();
             collectionItems = unique(collectionItems);
 
             ArrayList<CollectionItem> heroes = Graphic.getHeroes(collectionItems);
-            try {
-                addPart(heroes, "HEROES:", mainVBox);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            addPart(heroes, "HEROES:", mainVBox);
 
             ArrayList<CollectionItem> minions = Graphic.getMinions(collectionItems);
-            try {
-                addPart(minions, "MINIONS:", mainVBox);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            addPart(minions, "MINIONS:", mainVBox);
 
             ArrayList<CollectionItem> spells = Graphic.getSpells(collectionItems);
-            try {
-                addPart(spells, "SPELLS:", mainVBox);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            addPart(spells, "SPELLS:", mainVBox);
 
             ArrayList<CollectionItem> items = Graphic.getItems(collectionItems);
-            try {
-                addPart(items, "ITEMS:", mainVBox);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            addPart(items, "ITEMS:", mainVBox);
 
             mainVBox.setLayoutY(150);
             mainVBox.setLayoutX(100);
@@ -95,9 +78,8 @@ public class ShowShopController implements Initializable {
         isFirstTime = false;
 
         backButton.setOnMouseClicked(event -> {
-            //todo in bayad doros she
-            // Client.getClient().setCurrentMenu(MenuList.ShopMenu);
+            Client.getClient().setCurrentMenu(MenuList.ShopMenu);
             isFirstTime = true;
-        });
+        });*/
     }
 }

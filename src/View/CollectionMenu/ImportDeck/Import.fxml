@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" styleClass="CollectionImagePane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CollectionMenu.ImportDeck.ImportController">
+   <children>
+      <ImageView fx:id="duelystImage" fitHeight="150.0" fitWidth="200.0" layoutX="63.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../resources/ui/brand_duelyst.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="backButton" fitHeight="80.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../resources/ui/button_back_corner.png" />
+         </image>
+         <styleClass>
+            <String fx:value="BackButton" />
+            <String fx:value="ImageButton" />
+         </styleClass>
+      </ImageView>
+      <Label fx:id="importButton" layoutX="63.0" layoutY="59.0" style="-fx-font-size: 17;" text="IMPORT">
+         <styleClass>
+            <String fx:value="Button" />
+            <String fx:value="GreenButton" />
+         </styleClass>
+      </Label>
+      <TextField fx:id="nameField" layoutX="233.0" layoutY="74.0" opacity="0.49" prefHeight="31.0" prefWidth="170.0" promptText="ENTER DECK NAME" style="-fx-background-color: black;" />
+   </children>
+   <stylesheets>
+      <URL value="@../../Button.css" />
+      <URL value="@../../newButton.css" />
+      <URL value="@../CollectionMenu.css" />
+   </stylesheets>
+</AnchorPane>

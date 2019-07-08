@@ -1,7 +1,6 @@
 package View.ShopMenu;
-
-import Controller.Client.Client;
 import Controller.MenuList;
+import Model.Collection;
 import Model.CollectionItem.CollectionItem;
 import View.Graphic;
 import javafx.fxml.Initializable;
@@ -11,7 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.io.FileNotFoundException;
+import javax.swing.event.CaretListener;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -29,7 +28,7 @@ public class SellMenuController implements Initializable {
     public static VBox mainVBox = new VBox();
     public static ArrayList<VBox> vBoxes = new ArrayList<>();
 
-    public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) throws FileNotFoundException {
+/*    public static void addPart(ArrayList<CollectionItem> collectionItems, String labelText, VBox vBox) {
         Label label = new Label(labelText);
         label.setTextFill(javafx.scene.paint.Color.WHITE);
         label.setStyle("-fx-font-size: 15");
@@ -42,43 +41,27 @@ public class SellMenuController implements Initializable {
         VBox.setMargin(vBox, new Insets(0, 0, 20, 0));
 
         vBoxes.addAll(Graphic.vBoxes);
-    }
+    }*/
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (isFirstTime) {
+       /* if (isFirstTime) {
             vBoxes.clear();
             mainVBox.getChildren().clear();
 
             ArrayList<CollectionItem> collectionItems = Client.getClient().getResultOfSearch();
 
             ArrayList<CollectionItem> heroes = Graphic.getHeroes(collectionItems);
-            try {
-                addPart(heroes, "HEROES:", mainVBox);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            addPart(heroes, "HEROES:", mainVBox);
 
             ArrayList<CollectionItem> minions = Graphic.getMinions(collectionItems);
-            try {
-                addPart(minions, "MINIONS:", mainVBox);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            addPart(minions, "MINIONS:", mainVBox);
 
             ArrayList<CollectionItem> spells = Graphic.getSpells(collectionItems);
-            try {
-                addPart(spells, "SPELLS:", mainVBox);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            addPart(spells, "SPELLS:", mainVBox);
 
             ArrayList<CollectionItem> items = Graphic.getItems(collectionItems);
-            try {
-                addPart(items, "ITEMS:", mainVBox);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            addPart(items, "ITEMS:", mainVBox);
 
             mainVBox.setLayoutY(100);
             mainVBox.setLayoutX(100);
@@ -103,18 +86,16 @@ public class SellMenuController implements Initializable {
         isFirstTime = false;
 
         backButton.setOnMouseClicked(event -> {
-            //todo in bayad doros she
-            // Client.getClient().setCurrentMenu(MenuList.ShopMenu);
+            Client.getClient().setCurrentMenu(MenuList.ShopMenu);
             isFirstTime = true;
         });
 
         sellLabel.setOnMouseClicked(event -> {
             if (selectedCollectionItem != null) {
                 Client.getClient().getShopMenu().inputCommandLine("sell " + selectedCollectionItem.getID());
-                //todo in bayad doros she
-                // Client.getClient().setCurrentMenu(MenuList.ShopMenu);
+                Client.getClient().setCurrentMenu(MenuList.ShopMenu);
                 isFirstTime = true;
             }
-        });
+        });*/
     }
 }
