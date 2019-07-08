@@ -1,7 +1,5 @@
 package Controller;
 
-import View.BattleMenu.AnswerToGameController;
-
 public enum MenuList {
     AccountMenu, MainMenu, ShopMenu, CollectionMenu, ChooseType, ChooseMode, ChooseKind, StoryChapters, Battle, SearchShop,
     ShowingBuy, ShopShowCollection, ShopSearchCollection, BuyMenu, SellMenu, ShopShowSearch, ShowShop, CollectionShowCollection
@@ -9,7 +7,7 @@ public enum MenuList {
     CollectionCreateDeck, CollectionDeleteDeck, CollectionSelectDeckForAdd,
     CollectionAddCardToDeck, CollectionSelectDeckForRemove, CollectionRemoveCardFromDeck, CollectionValidateDeck,
     CollectionSelectDeck, CollectionSelectDeckForShow, CollectionShowDeck, ShopCreateCard, CollectionExportDeck,
-    CollectionImportDeck;;
+    CollectionImportDeck, WinnerPage, LoserPage;
 
     public String getAddressOfFile() {
         if (this.equals(AccountMenu)) return "AccountMenu/AccountMenu.fxml";
@@ -51,6 +49,8 @@ public enum MenuList {
         if (this.equals(CollectionImportDeck)) return "CollectionMenu/ImportDeck/Import.fxml";
         if (this.equals(CollectionExportDeck)) return "CollectionMenu/ExportDeck/Export.fxml";
         if (this.equals(GraveYard)) return "Battle/GraveYard.fxml";
+        if (this.equals(WinnerPage)) return "Battle/WinnerPage.fxml";
+        if (this.equals(LoserPage)) return "Battle/LoserPage.fxml";
         return null;
     }
 }
