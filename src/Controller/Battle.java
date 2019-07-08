@@ -27,7 +27,7 @@ public class Battle implements Serializable {
     private int prize;
     private int numberOfFlags;
     private int remainTimeOfTurn;
-    private int maximumTimeOfTurn = 20;
+    private int maximumTimeOfTurn = 50;
     private String type, kind;
     private LivingCard selectedCard;
     private Flag mainFlag;
@@ -160,7 +160,7 @@ public class Battle implements Serializable {
         for (Flag flag : this.getFlags()) {
             this.setFlagPosition(flag);
             Cell cell = this.getMap().getCellByCoordination(flag.getPositionRow(), flag.getPositionColumn());
-            while (cell.isHaveFlag()) {
+            while (cell.isHaveFlag() || cell.getLivingCard() != null) {
                 this.setFlagPosition(flag);
                 cell = this.getMap().getCellByCoordination(flag.getPositionRow(), flag.getPositionColumn());
             }
@@ -814,6 +814,7 @@ public class Battle implements Serializable {
     }
 
     public void handleFlags() {
+        //in ja oonaei ke mordan ro doros mikonim
         for (Flag flag : flags) {
             if (flag.getFlagLivingCard() == null)
                 continue;
@@ -823,21 +824,29 @@ public class Battle implements Serializable {
                 flag.setNumberOfGotRounds(0);
             }
         }
+
+
         for (Flag flag : flags) {
             LivingCard livingCard = flag.getFlagLivingCard();
             if (livingCard != null) {
                 flag.setPositionColumn(livingCard.getPositionColumn());
                 flag.setPositionRow(livingCard.getPositionRow());
+                Cell cell = this.getMap().getCellByCoordination(flag.getPositionRow(), flag.getPositionColumn());
+                cell.setHaveFlag(false);
             }
         }
+
         for (Flag flag : flags) {
             Cell cell = this.getMap().getCellByCoordination(flag.getPositionRow(), flag.getPositionColumn());
             LivingCard livingCard = cell.getLivingCard();
-            if (livingCard == null)
+            if (livingCard == null) {
+                cell.setHaveFlag(true);
                 continue;
+            }
             if (flag.getFlagLivingCard() == null) {
                 flag.setFlagLivingCard(livingCard);
                 flag.setFlagOwner(getOwnerOfLivingCard(livingCard));
+                cell.setHaveFlag(false);
             }
         }
     }
@@ -1161,5 +1170,9 @@ public class Battle implements Serializable {
         if (clientMassage.getBattleRequest() == ClientMassage.BattleRequest.UseSpecialPower)
             return inputCommandLine("use special power (" + clientMassage.getX() + ", " + clientMassage.getY() + ")", clientMassage.getAuthToken());
         return null;
+    }
+
+    public int getMaximumTimeOfTurn() {
+        return maximumTimeOfTurn;
     }
 }

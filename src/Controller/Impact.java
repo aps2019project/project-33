@@ -239,6 +239,7 @@ public class Impact {
 
         if (information.isRandomLivingCard()) {
             Collections.shuffle(attackArea);
+            System.out.println(attacker.getName());
             Cell targetCell = attackArea.get(0);
             attackArea.clear();
             attackArea.add(targetCell);

@@ -10,6 +10,8 @@ import Controller.Menus.CollectionMenu;
 import Controller.Menus.MainMenu;
 import Model.Account;
 import Model.Massage;
+import com.gilecode.yagson.YaGson;
+import com.gilecode.yagson.YaGsonBuilder;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -38,21 +40,36 @@ public class ResponseToClient extends Thread {
     @Override
     public void run() {
         while (true) {
-            ClientMassage clientMassage = null;
+            ClientMassage clientMassage;
+            String clientMassageInJson = null;
             try {
-                clientMassage = (ClientMassage) objectInputStream.readUnshared();
-            } catch (IOException | ClassNotFoundException e) {
+                clientMassageInJson = objectInputStream.readUTF();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
+            clientMassage = castFromJson(clientMassageInJson);
+            if(clientMassage == null) continue;;
             ServerMassage answer = null;
             try {
                 answer = interpret(clientMassage);
-                objectOutputStream.writeUnshared(answer);
+                objectOutputStream.writeUTF(castToJson(answer));
                 objectOutputStream.flush();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    private ClientMassage castFromJson(String clientMassageInJson) {
+        YaGsonBuilder yaGsonBuilder = new YaGsonBuilder();
+        YaGson yaGson = yaGsonBuilder.create();
+        return yaGson.fromJson(clientMassageInJson, ClientMassage.class);
+    }
+
+    private String castToJson(ServerMassage serverMassage){
+        YaGsonBuilder yaGsonBuilder = new YaGsonBuilder();
+        YaGson yaGson = yaGsonBuilder.create();
+        return yaGson.toJson(serverMassage);
     }
 
     private ServerMassage interpret(ClientMassage clientMassage) throws IOException {

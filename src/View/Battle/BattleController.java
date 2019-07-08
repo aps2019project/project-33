@@ -303,9 +303,9 @@ public class BattleController implements Initializable {
         int remainTime = runningBattle.getRemainTimeOfTurn();
         remainTimeLabel.setText(Integer.toString(remainTime));
         remainTimeLabel.getStyleClass().clear();
-        if(remainTime >= 7) remainTimeLabel.getStyleClass().add("GreenTime");
-        if(remainTime < 7 && remainTime >= 4) remainTimeLabel.getStyleClass().add("BlackTime");
-        if(remainTime < 4) remainTimeLabel.getStyleClass().add("RedTime");
+        if(remainTime >= runningBattle.getMaximumTimeOfTurn() * 2 / 3) remainTimeLabel.getStyleClass().add("GreenTime");
+        if(remainTime < runningBattle.getMaximumTimeOfTurn() * 2 / 3 && remainTime >= runningBattle.getMaximumTimeOfTurn()/ 3) remainTimeLabel.getStyleClass().add("BlackTime");
+        if(remainTime < runningBattle.getMaximumTimeOfTurn() / 3) remainTimeLabel.getStyleClass().add("RedTime");
     }
 
     public static AnimationTimer getAnimationTimer() {
@@ -542,6 +542,7 @@ class GraphicalCell {
             imageView.setImage(new Image(new FileInputStream("resources/unit_gifs/1.gif")));
         }
         if (cell.getLivingCard() != null) {
+            System.out.println(cell.getX() + " " + cell.getY());
             if (runningBattle.getPlayerOn().haveCard(cell.getLivingCard().getID())) {
                 anchorPane.getStyleClass().clear();
                 anchorPane.getStyleClass().add("OurCellCover");
