@@ -12,10 +12,12 @@ import Controller.MenuList;
 import Controller.Server.ServerMassage;
 import Model.*;
 import Model.CollectionItem.*;
+import com.sun.xml.internal.bind.v2.util.CollisionCheckStack;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class CollectionMenu extends Menu {
     private boolean isFirstTime = true;
@@ -42,7 +44,10 @@ public class CollectionMenu extends Menu {
             // Client.getClient().setCurrentMenu(MenuList.CollectionShowCollection);
             return serverMassage;
         } else if (inputLine.matches("search .*")) {
-            searchInCollection(collection, input[1]);
+            ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
+            serverMassage.setCollectionItems(searchInCollection(account.getCollection(), input[1]));
+            account.setCurrentMenu(MenuList.CollectionShowSearch);
+            return serverMassage;
         } else if (inputLine.matches("create deck .*")) {
             String deckName = input[2];
             ServerMassage serverMassage = collection.createDeck(deckName);
@@ -61,16 +66,25 @@ public class CollectionMenu extends Menu {
             return new ServerMassage(ServerMassage.Type.Accept, null);
         } else if (inputLine.matches("remove .* from .*")) {
             String collectionItemId = input[1], deckName = input[4];
-            collection.removeCollectionItemFromDeck(collectionItemId, deckName);
+            account.getCollection().removeCollectionItemFromDeck(collectionItemId, deckName);
+            account.setCurrentMenu(MenuList.CollectionMenu);
+            return new ServerMassage(ServerMassage.Type.Accept, null);
         } else if (inputLine.matches("validate deck .*")) {
-            checkValidityOfDeck(input[2], collection);
+            ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
+            serverMassage.setValidateDeck(checkValidityOfDeck(input[2], account.getCollection()));
+            return serverMassage;
         } else if (inputLine.matches("select deck .*")) {
             String deckName = input[2];
-            collection.selectMainDeck(deckName);
+            account.getCollection().selectMainDeck(deckName);
+            account.setCurrentMenu(MenuList.CollectionMenu);
+            return new ServerMassage(ServerMassage.Type.Accept, null);
         } else if (inputLine.equals("show all decks")) {
             collection.showAllDecks();
         } else if (inputLine.matches("show deck .*")) {
-            collection.showDeck(input[2]);
+            account.setCurrentMenu(MenuList.CollectionShowDeck);
+            ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
+            serverMassage.setDeck(account.getCollection().showDeck(input[2]));
+            return serverMassage;
         } else if (inputLine.equals("save")) {
             this.save(collection);
             return new ServerMassage(ServerMassage.Type.Accept, null);
@@ -130,21 +144,17 @@ public class CollectionMenu extends Menu {
         return new ServerMassage(ServerMassage.Type.Accept, null);
     }
 
-    private void searchInCollection(Collection collection, String cardName) {
-        ArrayList<CollectionItem> collectionItems = collection.search(cardName);
-        int index = 0;
-        System.out.println("CollectionItems with this name :");
-        for (CollectionItem collectionItem : collectionItems)
-            System.out.println(++index + " " + collectionItem.getID());
+    private ArrayList<CollectionItem> searchInCollection(Collection collection, String cardName) {
+        return collection.search(cardName);
     }
 
-    private void checkValidityOfDeck(String deckName, Collection collection) {
+    private boolean checkValidityOfDeck(String deckName, Collection collection) {
         Deck deck = collection.getDeckByName(deckName);
         if (deck == null) {
             System.out.println("This deck doesn't exist");
-            return;
+            return false;
         }
-        System.out.println("validity state of " + deckName + " is : " + deck.checkValidateDeck());
+        return deck.checkValidateDeck();
     }
 
     public static void showMenu() {
@@ -183,11 +193,11 @@ public class CollectionMenu extends Menu {
             return this.inputCommandLine("add " + collectionItemID + " to deck " + deckName, clientMassage.getAuthToken());
         }
         if (clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.CreateDeck) {
-            String deckName = clientMassage.getDeckName();
+            String deckName = clientMassage.getName();
             return this.inputCommandLine("create deck " + deckName, clientMassage.getAuthToken());
         }
         if (clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.DeleteDeck) {
-            String deckName = clientMassage.getDeckName();
+            String deckName = clientMassage.getName();
             return this.inputCommandLine("delete deck " + deckName, clientMassage.getAuthToken());
         }
         if (clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.Export) {
@@ -196,8 +206,29 @@ public class CollectionMenu extends Menu {
             return this.inputCommandLine("export deck", clientMassage.getAuthToken());
         }
         if (clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.Import) {
-            String deckName = clientMassage.getDeckName();
+            String deckName = clientMassage.getName();
             return this.inputCommandLine("import " + deckName, clientMassage.getAuthToken());
+        }
+        if(clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.RemoveFromDeck){
+            String deckName = clientMassage.getSelectedDeck().getName();
+            String collectionItemID = clientMassage.getSelectedCollectionItem().getID();
+            return this.inputCommandLine("remove " + collectionItemID + " from " + deckName, clientMassage.getAuthToken());
+        }
+        if(clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.Search){
+            String collectionItemName = clientMassage.getName();
+            return this.inputCommandLine("search " + collectionItemName, clientMassage.getAuthToken());
+        }
+        if(clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.SelectDeck){
+            String deckName = clientMassage.getName();
+            return this.inputCommandLine("select deck " + deckName, clientMassage.getAuthToken());
+        }
+        if(clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.ShowDeck){
+            String deckName = clientMassage.getSelectedDeck().getName();
+            return this.inputCommandLine("show deck " + deckName, clientMassage.getAuthToken());
+        }
+        if(clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.ValidateDeck){
+            String deckName = clientMassage.getSelectedDeck().getName();
+            return this.inputCommandLine("validate deck " + deckName, clientMassage.getAuthToken());
         }
         return null;
     }

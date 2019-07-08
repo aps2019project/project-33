@@ -9,13 +9,12 @@ import java.io.Serializable;
 
 public class ClientMassage implements Serializable {
 
-
-    public String getDeckName() {
-        return deckName;
+    public String getName() {
+        return name;
     }
 
-    public void setDeckName(String deckName) {
-        this.deckName = deckName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public enum Menu {
@@ -43,7 +42,8 @@ public class ClientMassage implements Serializable {
     }
 
     public enum CollectionMenuRequest{
-        Exit, Save, Show, GiveCollection, AddCollectionItemToDeck, CreateDeck, DeleteDeck, Export, Import, RemoveFromDeck;
+        Exit, Save, Show, GiveCollection, AddCollectionItemToDeck, CreateDeck, DeleteDeck, Export, Import, RemoveFromDeck,
+        Search, SelectDeck, ShowDeck, ValidateDeck;
     }
 
     private String authToken;
@@ -55,9 +55,10 @@ public class ClientMassage implements Serializable {
     private BattleRequest battleRequest;
     private CollectionMenuRequest collectionMenuRequest;
     private MenuList newMenu;
+
     private Deck selectedDeck;
     private CollectionItem selectedCollectionItem;
-    private String deckName;
+    private String name;
 
     //AccountMenuRequest Instances
     private String username, password;

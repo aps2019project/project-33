@@ -1,6 +1,10 @@
 package View.CollectionMenu.SelectDeck;
 
+import Controller.Client.Client;
+import Controller.Client.ClientMassage;
 import Controller.MenuList;
+import Controller.Server.Server;
+import Controller.Server.ServerMassage;
 import Model.Account;
 import Model.Collection;
 import Model.Deck;
@@ -33,14 +37,22 @@ public class SelectDeckController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-      /*  if(isFirstTime){
+        if(isFirstTime){
             selectedDeck = null;
             labelsVBox.getChildren().clear();
             mainPane.getChildren().remove(labelsVBox);
             deckLabels.clear();
             //TODO deckaro chejuri bayad begiram?
             //TODO nabayad az collectione account bekhunam
-            Collection collection = Client.getClient().getCollection();
+            ServerMassage serverMassage = null;
+            try {
+                serverMassage = Client.getClient().collectionMenuCommand(ClientMassage.CollectionMenuRequest.GiveCollection);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            Collection collection = serverMassage.getCollection();
             decks = collection.getDecks();
 
             for(Deck deck : decks){
@@ -73,19 +85,27 @@ public class SelectDeckController implements Initializable {
         okButton.setOnMouseClicked(event -> {
             try {
                 if(selectedDeck != null) {
-                    Client.getClient().getCollectionMenu().inputCommandLine("select deck " + selectedDeck.getName());
-                    Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
+                    ServerMassage serverMassage = Client.getClient().collectionMenuCommand(ClientMassage.CollectionMenuRequest.SelectDeck,
+                            selectedDeck, null, null);
                     isFirstTime = true;
                 }
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
         });
 
         backButton.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.CollectionMenu);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             isFirstTime = true;
-        });*/
+        });
     }
 
     public static void clearShadows(){

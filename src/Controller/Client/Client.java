@@ -80,14 +80,14 @@ public class Client {
     }
 
     public synchronized ServerMassage collectionMenuCommand(ClientMassage.CollectionMenuRequest collectionMenuRequest,
-                                                            Deck deck, CollectionItem collectionItem, String deckName) throws IOException, ClassNotFoundException {
+                                                            Deck deck, CollectionItem collectionItem, String name) throws IOException, ClassNotFoundException {
         ClientMassage clientMassage = new ClientMassage();
         clientMassage.setAuthToken(this.authToken);
         clientMassage.setDestinationMenu(ClientMassage.Menu.CollectionMenu);
         clientMassage.setCollectionMenuRequest(collectionMenuRequest);
         clientMassage.setSelectedCollectionItem(collectionItem);
         clientMassage.setSelectedDeck(deck);
-        clientMassage.setDeckName(deckName);
+        clientMassage.setName(name);
         return sendAndReceive(clientMassage);
     }
     //BattleMenu Commands
