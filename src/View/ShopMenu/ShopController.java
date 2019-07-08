@@ -34,6 +34,7 @@ public class ShopController implements Initializable {
         showCollectionLabel.setOnMouseClicked(event -> {
             try {
                 serverMassage = Client.getClient().shopMenuCommand(ClientMassage.ShopMenuRequest.GiveCollection, null, null);
+                Client.getClient().changeCurrentMenu(MenuList.ShopShowCollection);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
