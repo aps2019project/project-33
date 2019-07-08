@@ -1,11 +1,12 @@
 package View.ShopMenu.CreateCard;
 
 import Controller.Application;
+import Controller.Client.Client;
+import Controller.Client.ClientMassage;
 import Controller.MenuList;
-import Model.CollectionItem.Hero;
-import Model.CollectionItem.Information;
-import Model.CollectionItem.Minion;
-import Model.CollectionItem.Spell;
+import Controller.Menus.ShopMenu;
+import Controller.Server.ServerMassage;
+import Model.CollectionItem.*;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -86,7 +87,7 @@ public class CreateCardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-   /*     cardType.getItems().add("HERO");
+        cardType.getItems().add("HERO");
         cardType.getItems().add("MINION");
         cardType.getItems().add("SPELL");
         cardType.getSelectionModel().selectFirst();
@@ -180,6 +181,8 @@ public class CreateCardController implements Initializable {
                         hero.setRangeOfAttack(getValue(rangeOfAttack.getText()));
                         hero.setHP(getValue(HPField.getText()));
                         hero.setAP(getValue(APField.getText()));
+                        ServerMassage serverMassage = Client.getClient().shopMenuCommand(ClientMassage.ShopMenuRequest.CreateCard,
+                                (CollectionItem)hero);
                         Application.writeJSON(hero, "Data/collectionItem/Hero/" + hero.getName() + ".json");
                         hero = Hero.createHero(hero.getName(), "SHOP");
                         ID = hero.getID();
@@ -216,17 +219,23 @@ public class CreateCardController implements Initializable {
                         e.printStackTrace();
                     }
                 }
-
+         //       ServerMassage serverMassage = Client.getClient().shopMenuCommand(ClientMassage.ShopMenuRequest.CreateCard, )
                 Client.getClient().getShopMenu().getShop().addCollectionItemToCollection(ID);
-                Client.getClient().setCurrentMenu(MenuList.ShopMenu);
+       //         Client.getClient().setCurrentMenu(MenuList.ShopMenu);
                 // todo inja ID basse ?
                 Client.getClient().getShopMenu().getShop().addCollectionItemToCollection(ID);
             }
         });
         backButton.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.ShopMenu);
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.ShopMenu);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
 
-        });*/
+        });
     }
 
     public static int getValue(String field) {
