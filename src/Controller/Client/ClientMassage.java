@@ -43,7 +43,7 @@ public class ClientMassage implements Serializable {
     }
 
     public enum CollectionMenuRequest{
-        Exit, Save, Show, GiveCollection, AddCollectionItemToDeck, CreateDeck, DeleteDeck, Export, Import;
+        Exit, Save, Show, GiveCollection, AddCollectionItemToDeck, CreateDeck, DeleteDeck, Export, Import, RemoveFromDeck;
     }
 
     private String authToken;

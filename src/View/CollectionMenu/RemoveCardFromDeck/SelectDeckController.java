@@ -1,6 +1,9 @@
 package View.CollectionMenu.RemoveCardFromDeck;
 
+import Controller.Client.Client;
+import Controller.Client.ClientMassage;
 import Controller.MenuList;
+import Controller.Server.ServerMassage;
 import Model.Collection;
 import Model.Deck;
 import View.CollectionMenu.DeleteDeck.DeleteDeckController;
@@ -12,6 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+import javax.swing.event.CaretListener;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -31,7 +36,7 @@ public class SelectDeckController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-/*
+
         if (isFirstTime) {
             selectedDeck = null;
             labelsVBox.getChildren().clear();
@@ -39,9 +44,16 @@ public class SelectDeckController implements Initializable {
             deckLabels.clear();
             //TODO deckaro chejuri bayad begiram?
             //TODO nabayad az collectione account bekhunam
-            Collection collection = Client.getClient().getCollection();
+            ServerMassage serverMassage = null;
+            try {
+                serverMassage = Client.getClient().collectionMenuCommand(ClientMassage.CollectionMenuRequest.GiveCollection);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            Collection collection = serverMassage.getCollection();
             decks = collection.getDecks();
-            System.out.println(decks.size() + " +++++++++");
 
             for (Deck deck : decks) {
                 Label label = new Label(deck.getName());
@@ -70,11 +82,10 @@ public class SelectDeckController implements Initializable {
             index++;
         }
 
-        System.out.println(" ::::::::::::: " + index);
         okButton.setOnMouseClicked(event -> {
             try {
                 if (selectedDeck != null) {
-                    Client.getClient().setCurrentMenu(MenuList.CollectionRemoveCardFromDeck);
+                    Client.getClient().changeCurrentMenu(MenuList.CollectionRemoveCardFromDeck);
                     isFirstTime = true;
                 }
             } catch (Exception e) {
@@ -83,11 +94,17 @@ public class SelectDeckController implements Initializable {
         });
 
         backButton.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.CollectionMenu);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             isFirstTime = true;
 
         });
-*/
+
     }
 
     public static void clearShadows() {
