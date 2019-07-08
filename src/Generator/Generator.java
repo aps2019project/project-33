@@ -492,7 +492,7 @@ public class Generator {
         spell.setPrice(1750);
         spell.setMp(9);
         spell.setName("KingsGuard");
-//TODO akhare kar ezafe konim
+        //TODO akhare kar ezafe konim
         setSpellAttackArea(spell, false, true, false, true, true, false, 0, true,
                 false, false, true);
 

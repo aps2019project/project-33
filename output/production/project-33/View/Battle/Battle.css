@@ -150,11 +150,31 @@
 }
 
 .BlackTime{
-    -fx-font-size: 25;
+    -fx-font-size: 20;
     -fx-text-fill: black;
 }
 
 .RedTime{
-    -fx-font-size: 30;
+    -fx-font-size: 20;
     -fx-text-fill: red;
+}
+
+.GraveYard{
+    -fx-text-fill: black;
+    -fx-font-size: 20;
+}
+
+.GraveYard:hover{
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, aqua, 8, 0.3, 0, 0);
+}
+
+.GraveYardAnchorPane{
+    -fx-background-image: url("../../../resources/codex/chapter1_background@2x.jpg");
+    -fx-background-size: 100% 100%;
+}
+
+.GraveYardAreaBackGround{
+    -fx-opacity: 0.35;
+    -fx-background-color: gold;
 }

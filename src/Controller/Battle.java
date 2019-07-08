@@ -27,7 +27,7 @@ public class Battle implements Serializable {
     private int prize;
     private int numberOfFlags;
     private int remainTimeOfTurn;
-    private int maximumTimeOfTurn = 10;
+    private int maximumTimeOfTurn = 20;
     private String type, kind;
     private LivingCard selectedCard;
     private Flag mainFlag;
@@ -153,7 +153,6 @@ public class Battle implements Serializable {
     }
 
     public void createFlagMode() {
-        //numberOfFlags chaande tuye kind e 3
         if (this.kind.equals(kinds[1]))
             numberOfFlags = 1;
 
@@ -208,14 +207,13 @@ public class Battle implements Serializable {
         this.setCards(playerOff);
         this.setCards(playerOn);
 
-        this.createHand(playerOn);
-        this.createHand(playerOff);
-
         findHero(playerOff);
         findHero(playerOn);
 
-        this.putHeroes();
+        this.createHand(playerOn);
+        this.createHand(playerOff);
 
+        this.putHeroes();
 
         playerOn.getMana().setMaximumMana(2);
         playerOff.getMana().setMaximumMana(3);
@@ -223,9 +221,9 @@ public class Battle implements Serializable {
         playerOff.getMana().setCurrentMana(playerOff.getMana().getMaximumMana());
 
 
-        if (!this.getKind().equals(kinds[0])) {
+        if (!this.getKind().equals(kinds[0]))
             this.createFlagMode();
-        }
+
         // gitignore test
         canLivingCards(playerOn);
         canLivingCards(playerOff);
@@ -443,6 +441,8 @@ public class Battle implements Serializable {
         int maxDistanceCanCardGo = 2;
         if (this.selectedCard.getCanMoveGreaterTwoCell()) maxDistanceCanCardGo = Integer.MAX_VALUE;
 
+        System.out.println(distance + " " + maxDistanceCanCardGo);
+
         if (distance <= maxDistanceCanCardGo && distance < Integer.MAX_VALUE) {
             Cell lastCell = map.getCellByCoordination(selectedCard.getPositionRow(), selectedCard.getPositionColumn());
             lastCell.removeCard();
@@ -464,23 +464,25 @@ public class Battle implements Serializable {
         int[][] dis = new int[map.getHeight()][map.getWidth()];
         for (int i = 0; i < map.getHeight(); i++)
             for (int j = 0; j < map.getWidth(); j++)
-                dis[i][j] = Integer.MAX_VALUE;
+                dis[i][j] = Integer.MAX_VALUE / 10;
         dis[x1][y1] = 0;
         int[] dx = {-1, 0, 1, 0}, dy = {0, 1, 0, -1};
-        for (int i = 0; i < map.getHeight(); i++)
-            for (int j = 0; j < map.getWidth(); j++)
-                for (int t = 0; t < 4; t++) {
-                    int newX = i + dx[t], newY = j + dy[t];
-                    if (!isInMap(newX, newY))
-                        continue;
-                    LivingCard livingCard = map.getCellByCoordination(newX, newY).getLivingCard();
-                    if (livingCard != null) {
-                        Deck deck = playerOn.getAccount().getCollection().getMainDeck();
-                        if (deck.findCollectionItemInDeck(livingCard.getID()) == null)
+        for(int k = 0; k < map.getWidth() * map.getWidth(); k++) {
+            for (int i = 0; i < map.getHeight(); i++)
+                for (int j = 0; j < map.getWidth(); j++)
+                    for (int t = 0; t < 4; t++) {
+                        int newX = i + dx[t], newY = j + dy[t];
+                        if (!isInMap(newX, newY))
                             continue;
+                        LivingCard livingCard = map.getCellByCoordination(newX, newY).getLivingCard();
+                        if (livingCard != null) {
+                            Deck deck = playerOn.getAccount().getCollection().getMainDeck();
+                            if (deck.findCollectionItemInDeck(livingCard.getID()) == null)
+                                continue;
+                        }
+                        dis[i][j] = Integer.min(dis[i][j], dis[newX][newY] + 1);
                     }
-                    dis[i][j] = Integer.min(dis[i][j], dis[newX][newY] + 1);
-                }
+        }
         return dis[x2][y2];
     }
 
@@ -539,7 +541,6 @@ public class Battle implements Serializable {
         checkTurn();
     }
 
-
     //TODO
 
     public void showHand() {
@@ -558,7 +559,6 @@ public class Battle implements Serializable {
         checkTurn();
     }
 
-    //todo, concurrent nemidunam chi chi exception mikhore
     public void checkAliveCards(Player player) {
         for (int i = player.getAliveCards().size() - 1; i > -1; i--)
             player.getAliveCards().get(i).checkAlive(this);
@@ -589,15 +589,19 @@ public class Battle implements Serializable {
         Player player = playerOff;
         playerOff = playerOn;
         playerOn = player;
+
         if (this.getKind().equals(kinds[1])) {
             if (this.mainFlag.getFlagOwner() != null)
                 mainFlag.setNumberOfGotRounds(mainFlag.getNumberOfGotRounds() + 1);
             else
                 mainFlag.setNumberOfGotRounds(0);
         }
+
         playerOn.getHero().setCoolDown(Math.max(0, playerOn.getHero().getCoolDown() - 1));
         playerOff.getHero().setCoolDown(Math.max(0, playerOff.getHero().getCoolDown() - 1));
+
         Impact.activeBuffs(this);
+
         numberOfRounds++;
         if (playerOn instanceof AI)
             readInput();
@@ -675,6 +679,8 @@ public class Battle implements Serializable {
 
     //-----------------------------------------------
     //ta injaro khundam
+
+    //todo, momkene bazi mosavi she khob
     public void checkTurn() {
         if (this.getKind().equals(kinds[0])) {
             if (playerOn.getHero().getHP() <= 0) {
@@ -737,7 +743,6 @@ public class Battle implements Serializable {
         winnerAccount.setBudget(winnerAccount.getBudget() + this.prize);
         setupFree(playerOn);
         setupFree(playerOff);
-    //    thread.stop();
     }
 
     private void setupFree(Player player) {
@@ -875,12 +880,13 @@ public class Battle implements Serializable {
     }
 
     public synchronized ServerMassage inputCommandLine(String inputLine, String clientUsername) {
-        inputLine = inputLine.trim();
-        String inputLineOriginal = inputLine;
-        inputLine = inputLine.toLowerCase();
-        String[] input = inputLineOriginal.split("[ ]+");
+        synchronized (this) {
+            inputLine = inputLine.trim();
+            String inputLineOriginal = inputLine;
+            inputLine = inputLine.toLowerCase();
+            String[] input = inputLineOriginal.split("[ ]+");
 
-        System.out.println(inputLine + " by " + clientUsername);
+            System.out.println(inputLine + " by " + clientUsername);
 
 /*
         if (!clientUsername.equals("admin")) {
@@ -891,63 +897,68 @@ public class Battle implements Serializable {
         }
 */
 
-        if (inputLine.equals("forfeit match"))
-            forfeitMatch();
-        if (inputLine.equals("enter graveyard"))
-            enterGraveYard();
+            if (inputLine.equals("forfeit match"))
+                forfeitMatch();
+            if (inputLine.equals("enter graveyard"))
+                enterGraveYard();
 
-        if (!clientUsername.equals("sudo") && !clientUsername.equals(playerOn.getAccount().getUsername()))
-            return new ServerMassage(ServerMassage.Type.Error, null);
+            if (!clientUsername.equals("sudo") && !clientUsername.equals(playerOn.getAccount().getUsername()))
+                return new ServerMassage(ServerMassage.Type.Error, null);
 
-        if (inputLine.equals("game info"))
-            showGameInfo();
-        else if (inputLine.equals("show my minions"))
-            showMyMinions();
-        else if (inputLine.equals("show opponent minions"))
-            showOpponentMinions();
-        else if (inputLine.matches("show card info .*"))
-            showCardInfo(input[3]);
-        else if (inputLine.matches("select .*")) {
-            boolean isFound = selectCard(input[1]) || selectItem(input[1]);
-            if (!isFound) System.out.println("Can't find this card");
-            else System.out.println("card found !!");
-        } else if (inputLine.matches("move to \\([\\d]+, [\\d]+\\)")) {
-            input = inputLine.split("[ \\(\\),]+");
-            return moveCardTo(Integer.parseInt(input[2]), Integer.parseInt(input[3]));
-        } else if (inputLine.matches("attack .*"))
-            attackToOpponentCard(input[1]);
-        else if (inputLine.matches("attack combo [^\\s]+( [^\\s]+)+"))
-            comboAttackToOpponentCard(input);
-        else if (inputLine.matches("use special power \\([\\d]+, [\\d]+\\)")) {
-            input = inputLine.split("[ \\(\\),]+");
-            useSpecialPower(Integer.parseInt(input[3]), Integer.parseInt(input[4]));
-        } else if (inputLine.equals("show hand"))
-            showHand();
-        else if (inputLine.matches("insert [^\\s]+ in \\([\\d]+, [\\d]+\\)")) {
-            input = inputLineOriginal.split("[ \\(\\),]+");
-            insertCardInMap(input[1], Integer.parseInt(input[3]), Integer.parseInt(input[4]));
-        } else if (inputLine.equals("end turn"))
-            endTurn();
-        else if (inputLine.equals("show collectibles"))
-            showCollectibles();
-        else if (inputLine.equals("show info"))
-            showItemInfo();
-        else if (inputLine.matches("use [\\d], [\\d]")) {
-            input = inputLine.split("[ \\(\\),]+");
-            useItem(Integer.parseInt(input[1]), Integer.parseInt(input[2]));
-        } else if (inputLine.equals("show next card"))
-            showNextCard();
-        else if (inputLine.equals("help"))
-            help();
-        else if (inputLine.equals("end game"))
-            endGame();
-        else if (inputLine.equals("exit"))
+            if (inputLine.equals("game info"))
+                showGameInfo();
+            else if (inputLine.equals("show my minions"))
+                showMyMinions();
+            else if (inputLine.equals("show opponent minions"))
+                showOpponentMinions();
+            else if (inputLine.matches("show card info .*"))
+                showCardInfo(input[3]);
+            else if (inputLine.matches("select .*")) {
+                boolean isFound = selectCard(input[1]) || selectItem(input[1]);
+                if (!isFound) System.out.println("Can't find this card");
+                else System.out.println("card found !!");
+            } else if (inputLine.matches("move to \\([\\d]+, [\\d]+\\)")) {
+                input = inputLine.split("[ \\(\\),]+");
+                return moveCardTo(Integer.parseInt(input[2]), Integer.parseInt(input[3]));
+            } else if (inputLine.matches("attack .*"))
+                attackToOpponentCard(input[1]);
+            else if (inputLine.matches("attack combo [^\\s]+( [^\\s]+)+"))
+                comboAttackToOpponentCard(input);
+            else if (inputLine.matches("use special power \\([\\d]+, [\\d]+\\)")) {
+                input = inputLine.split("[ \\(\\),]+");
+                useSpecialPower(Integer.parseInt(input[3]), Integer.parseInt(input[4]));
+            } else if (inputLine.equals("show hand"))
+                showHand();
+            else if (inputLine.matches("insert [^\\s]+ in \\([\\d]+, [\\d]+\\)")) {
+                input = inputLineOriginal.split("[ \\(\\),]+");
+                insertCardInMap(input[1], Integer.parseInt(input[3]), Integer.parseInt(input[4]));
+            } else if (inputLine.equals("end turn"))
+                endTurn();
+            else if (inputLine.equals("show collectibles"))
+                showCollectibles();
+            else if (inputLine.equals("show info"))
+                showItemInfo();
+            else if (inputLine.matches("use [\\d], [\\d]")) {
+                input = inputLine.split("[ \\(\\),]+");
+                useItem(Integer.parseInt(input[1]), Integer.parseInt(input[2]));
+            } else if (inputLine.equals("show next card"))
+                showNextCard();
+            else if (inputLine.equals("help"))
+                help();
+            else if (inputLine.equals("end game"))
+                endGame();
+            else if (inputLine.equals("exit"))
+                return null;
+            else if (inputLine.equals("show menu")) {
+                this.showMenu();
+            }
+
+            for(Flag flag : this.flags){
+                System.out.println(flag.getPositionRow() + " " + flag.getPositionColumn() + " " + flag.getFlagOwner());
+            }
+
             return null;
-        else if (inputLine.equals("show menu")) {
-            this.showMenu();
         }
-
-        return null;
     }
 
     private void handleBuffs(Player player) {
