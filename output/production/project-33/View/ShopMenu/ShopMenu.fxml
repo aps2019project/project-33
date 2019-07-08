@@ -16,7 +16,7 @@
       </AnchorPane>
       <AnchorPane fx:id="nonBlurPane" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fx:id="imagePane" fitHeight="85.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true" styleClass="ImageButton">
+            <ImageView fx:id="imagePane" fitHeight="77.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true" styleClass="ImageButton">
                <image>
                   <Image url="@../../../resources/ui/button_back_corner.png" />
                </image>
@@ -29,9 +29,10 @@
                   <Label fx:id="sellLabel" prefHeight="117.0" styleClass="NoFormButton" text="SELL" />
                   <Label fx:id="showLabel" styleClass="NoFormButton" text="SHOW" />
                   <Label fx:id="searchLabel" prefHeight="52.0" prefWidth="142.0" styleClass="NoFormButton" text="SEARCH" />
+                  <Label fx:id="createCardLabel" styleClass="NoFormButton" text="CREATE CARD" />
                </children>
             </VBox>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../resources/ui/brand_duelyst.png" />
                </image>
