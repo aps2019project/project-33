@@ -1,21 +1,19 @@
 package Controller.Client;
 
 import Controller.MenuList;
-import Controller.Menus.*;
 import Controller.Server.ServerMassage;
-import Model.Collection;
 import Model.CollectionItem.CollectionItem;
 import Model.Deck;
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
-import javafx.animation.AnimationTimer;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.PrintStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 //todo in auth token ha irad dashtan
 public class Client {
@@ -24,8 +22,8 @@ public class Client {
     private int port = 8000;
     private String ip = "192.168.197.163";
     private Socket socket;
-    private ObjectInputStream objectInputStream;
-    private ObjectOutputStream objectOutputStream;
+    private Scanner input;
+    private PrintStream output;
 
     //logical details
     private static Client client = null;
@@ -36,8 +34,8 @@ public class Client {
 
     private Client() throws IOException {
         socket = new Socket(ip, port);
-        objectInputStream = new ObjectInputStream(socket.getInputStream());
-        objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+        input = new Scanner(socket.getInputStream());
+        output = new PrintStream(socket.getOutputStream());
     }
 
     public static void createClient() throws IOException {
@@ -59,9 +57,9 @@ public class Client {
 
     private ServerMassage sendAndReceive(ClientMassage clientMassage) throws IOException, ClassNotFoundException {
         String clientMassageJson = castToJson(clientMassage);
-        objectOutputStream.writeObject(clientMassageJson);
-        objectOutputStream.flush();
-        return castFromJson((String) objectInputStream.readObject());
+        output.println(clientMassageJson);
+        output.flush();
+        return castFromJson(input.nextLine());
     }
 
     //AccountMenu Commands
@@ -149,6 +147,14 @@ public class Client {
     }
 
     //Battle Commands
+
+    public synchronized ServerMassage graveYardCommand() throws IOException, ClassNotFoundException {
+        ClientMassage clientMassage = new ClientMassage();
+        clientMassage.setAuthToken(this.authToken);
+        clientMassage.setDestinationMenu(ClientMassage.Menu.Battle);
+        clientMassage.setBattleRequest(ClientMassage.BattleRequest.GiveGraveYard);
+        return sendAndReceive(clientMassage);
+    }
 
     public synchronized ServerMassage battleCommand(ClientMassage.BattleRequest battleRequest) throws IOException, ClassNotFoundException {
         ClientMassage clientMassage = new ClientMassage();

@@ -53,7 +53,7 @@ public class ClientMassage implements Serializable {
     }
 
     public enum BattleRequest{
-        ForfeitMatch, EndTurn, Select, UseItem, InsertCard, MoveCard, Attack, UseSpecialPower
+        ForfeitMatch, EndTurn, Select, UseItem, InsertCard, MoveCard, Attack, UseSpecialPower, GiveGraveYard
     }
 
     public enum ServerRequest{

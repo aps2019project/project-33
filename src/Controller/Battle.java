@@ -934,7 +934,14 @@ public class Battle implements Serializable {
             System.out.println(kind);
         }
 */
-
+            if(inputLine.equals("give grave yard")){
+                ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
+                if(playerOn.getAccount().getUsername().equals(clientUsername))
+                    serverMassage.setGraveYard(playerOn.getGraveYard().getCards());
+                else
+                    serverMassage.setGraveYard(playerOff.getGraveYard().getCards());
+                return serverMassage;
+            }
             if (inputLine.equals("forfeit match"))
                 forfeitMatch();
             if (inputLine.equals("enter graveyard"))
@@ -1187,6 +1194,10 @@ public class Battle implements Serializable {
     }
 
     public ServerMassage interpret(ClientMassage clientMassage) {
+
+        if(clientMassage.getBattleRequest() == ClientMassage.BattleRequest.GiveGraveYard){
+            return inputCommandLine("give grave yard", clientMassage.getAuthToken());
+        }
         if (clientMassage.getBattleRequest() == ClientMassage.BattleRequest.ForfeitMatch)
             return inputCommandLine("forfeit match", clientMassage.getAuthToken());
         if (clientMassage.getBattleRequest() == ClientMassage.BattleRequest.EndTurn)

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="670.0" prefWidth="983.0" styleClass="GraveYardAnchorPane" stylesheets="@Battle.css" xmlns="http://javafx.com/javafx/8" fx:controller="View.Battle.GraveYardController">
    <children>
-      <GridPane layoutX="48.0" layoutY="35.0" prefHeight="600.0" prefWidth="887.0">
+      <GridPane fx:id="grid" layoutX="48.0" layoutY="35.0" prefHeight="600.0" prefWidth="887.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -17,8 +17,14 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="GraveYardAreaBackGround" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="GraveYardAreaBackGround" stylesheets="@../Button.css" />
          </children>
       </GridPane>
+      <Label fx:id="back" stylesheets="@../Button.css">
+         <styleClass>
+            <String fx:value="BackButton" />
+            <String fx:value="ImageButton" />
+         </styleClass>
+      </Label>
    </children>
 </AnchorPane>
