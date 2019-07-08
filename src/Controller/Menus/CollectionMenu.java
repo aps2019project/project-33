@@ -70,7 +70,9 @@ public class CollectionMenu extends Menu {
             account.setCurrentMenu(MenuList.CollectionMenu);
             return new ServerMassage(ServerMassage.Type.Accept, null);
         } else if (inputLine.matches("validate deck .*")) {
-            checkValidityOfDeck(input[2], collection);
+            ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
+            serverMassage.setValidateDeck(checkValidityOfDeck(input[2], account.getCollection()));
+            return serverMassage;
         } else if (inputLine.matches("select deck .*")) {
             String deckName = input[2];
             account.getCollection().selectMainDeck(deckName);
@@ -79,7 +81,10 @@ public class CollectionMenu extends Menu {
         } else if (inputLine.equals("show all decks")) {
             collection.showAllDecks();
         } else if (inputLine.matches("show deck .*")) {
-            collection.showDeck(input[2]);
+            account.setCurrentMenu(MenuList.CollectionShowDeck);
+            ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
+            serverMassage.setDeck(account.getCollection().showDeck(input[2]));
+            return serverMassage;
         } else if (inputLine.equals("save")) {
             this.save(collection);
             return new ServerMassage(ServerMassage.Type.Accept, null);
@@ -143,13 +148,13 @@ public class CollectionMenu extends Menu {
         return collection.search(cardName);
     }
 
-    private void checkValidityOfDeck(String deckName, Collection collection) {
+    private boolean checkValidityOfDeck(String deckName, Collection collection) {
         Deck deck = collection.getDeckByName(deckName);
         if (deck == null) {
             System.out.println("This deck doesn't exist");
-            return;
+            return false;
         }
-        System.out.println("validity state of " + deckName + " is : " + deck.checkValidateDeck());
+        return deck.checkValidateDeck();
     }
 
     public static void showMenu() {
@@ -216,6 +221,14 @@ public class CollectionMenu extends Menu {
         if(clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.SelectDeck){
             String deckName = clientMassage.getName();
             return this.inputCommandLine("select deck " + deckName, clientMassage.getAuthToken());
+        }
+        if(clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.ShowDeck){
+            String deckName = clientMassage.getSelectedDeck().getName();
+            return this.inputCommandLine("show deck " + deckName, clientMassage.getAuthToken());
+        }
+        if(clientMassage.getCollectionMenuRequest() == ClientMassage.CollectionMenuRequest.ValidateDeck){
+            String deckName = clientMassage.getSelectedDeck().getName();
+            return this.inputCommandLine("validate deck " + deckName, clientMassage.getAuthToken());
         }
         return null;
     }

@@ -62,13 +62,8 @@ public class Collection implements Serializable {
         this.cards.add(collectionItem);
     }
 
-    public void showDeck(String deckName){
-        Deck deck = this.getDeckByName(deckName);
-        if(deck == null){
-            System.out.println("deck doesn't exist");
-            return;
-        }
-        deck.showDeck(false);
+    public Deck showDeck(String deckName){
+        return this.getDeckByName(deckName);
     }
 
     public void showAllDecks(){

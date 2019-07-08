@@ -1,6 +1,9 @@
 package View.CollectionMenu.ValidateDeck;
 
+import Controller.Client.Client;
+import Controller.Client.ClientMassage;
 import Controller.MenuList;
+import Controller.Server.ServerMassage;
 import Model.Collection;
 import Model.Deck;
 import View.CollectionMenu.DeleteDeck.DeleteDeckController;
@@ -11,7 +14,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import sun.font.CoreMetrics;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -30,7 +35,7 @@ public class ValidateDeckController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        /*if(isFirstTime){
+        if(isFirstTime){
             validateLabel.setText("");
             selectedDeck = null;
             labelsVBox.getChildren().clear();
@@ -38,7 +43,15 @@ public class ValidateDeckController implements Initializable {
             deckLabels.clear();
             //TODO deckaro chejuri bayad begiram?
             //TODO nabayad az collectione account bekhunam
-            Collection collection = Client.getClient().getCollection();
+            ServerMassage serverMassage = null;
+            try {
+                serverMassage = Client.getClient().collectionMenuCommand(ClientMassage.CollectionMenuRequest.GiveCollection);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            Collection collection = serverMassage.getCollection();
             decks = collection.getDecks();
 
             for (Deck deck : decks) {
@@ -63,7 +76,17 @@ public class ValidateDeckController implements Initializable {
             label.setOnMouseClicked(event -> {
                 selectedDeck = decks.get(temp);
                 //todo in ro tu shabake bayad doros konam
-                boolean validity = selectedDeck.checkValidateDeck();
+                ServerMassage serverMassage = null;
+                try {
+                    serverMassage = Client.getClient().collectionMenuCommand(ClientMassage.CollectionMenuRequest.ValidateDeck,
+                            selectedDeck, null, null);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+                boolean validity = serverMassage.getValidateDeck();
                 String showString = "";
                 if(validity)
                     showString = "VALID";
@@ -79,9 +102,15 @@ public class ValidateDeckController implements Initializable {
         }
 
         backButton.setOnMouseClicked(event -> {
-            Client.getClient().setCurrentMenu(MenuList.CollectionMenu);
+            try {
+                Client.getClient().changeCurrentMenu(MenuList.CollectionMenu);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             isFirstTime = true;
-        });*/
+        });
     }
 
     public static void clearShadows() {
