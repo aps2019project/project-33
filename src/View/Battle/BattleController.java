@@ -550,7 +550,7 @@ class GraphicalCell {
             } else if (!cell.isHaveFlag())
                 imageView.setImage(null);
         } else if (livingCard == null || !cell.getLivingCard().getID().equals(livingCard.getID()) || imageView.getImage() == null) {
-            imageView.setImage(new Image(new FileInputStream("resources/unit_gifs/1.gif")));
+            imageView.setImage(new Image(new FileInputStream("resources/unit_gifs/0.gif")));
         }
         if (cell.getLivingCard() != null) {
             System.out.println(cell.getX() + " " + cell.getY());
@@ -568,7 +568,7 @@ class GraphicalCell {
                 anchorPane.getStyleClass().add("EffectInLivingCard");
             }
         }
-        if (cell.getEffects().size() > 0) {
+        if (cell.getEffects().size() > 0 || cell.getItems().size() > 0) {
             System.out.println(i + " * " + j);
             for (Buff buff : cell.getEffects())
                 System.out.println(buff);
@@ -670,5 +670,4 @@ class GraphicalCell {
     public Cell getCell() {
         return cell;
     }
-
 }

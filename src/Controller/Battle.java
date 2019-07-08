@@ -2,6 +2,7 @@ package Controller;
 
 import Controller.Client.ClientMassage;
 import Controller.Server.ServerMassage;
+import Generator.DeckGenerator;
 import Model.*;
 import Model.Buffs.Buff;
 import Model.CollectionItem.*;
@@ -208,7 +209,6 @@ public class Battle implements Serializable {
         this.setCards(playerOff);
         this.setCards(playerOn);
 
-
         this.createHand(playerOn);
         this.createHand(playerOff);
 
@@ -223,6 +223,8 @@ public class Battle implements Serializable {
         if (!this.getKind().equals(kinds[0]))
             this.createFlagMode();
 
+        createUsableItem(3);
+
         // gitignore test
         canLivingCards(playerOn);
         canLivingCards(playerOff);
@@ -231,6 +233,28 @@ public class Battle implements Serializable {
 
         //TODO
     }
+
+    private void createUsableItem(int numberOfUsableItem) throws FileNotFoundException {
+        for (int i = 0; i < numberOfUsableItem; i++) {
+            Item item = Item.createItem(DeckGenerator.itemNames[i], "admin");
+            setItemLocation(item);
+        }
+    }
+
+    private void setItemLocation(Item item) {
+        Random random = new Random();
+
+        int row = random.nextInt(this.getMap().getHeight());
+        int column = random.nextInt(this.getMap().getWidth());
+        Cell cell = map.getCellByCoordination(row, column);
+        while (cell.getLivingCard() != null) {
+            row = random.nextInt(this.getMap().getHeight());
+            column = random.nextInt(this.getMap().getWidth());
+            cell = map.getCellByCoordination(row, column);
+        }
+        cell.getItems().add(item);
+    }
+
 
     private void setCards(Player player) {
         for (CollectionItem collectionItem : player.getAccount().getCollection().getMainDeck().getCards()) {
@@ -466,7 +490,7 @@ public class Battle implements Serializable {
                 dis[i][j] = Integer.MAX_VALUE / 10;
         dis[x1][y1] = 0;
         int[] dx = {-1, 0, 1, 0}, dy = {0, 1, 0, -1};
-        for(int k = 0; k < map.getWidth() * map.getWidth(); k++) {
+        for (int k = 0; k < map.getWidth() * map.getWidth(); k++) {
             for (int i = 0; i < map.getHeight(); i++)
                 for (int j = 0; j < map.getWidth(); j++)
                     for (int t = 0; t < 4; t++) {
@@ -980,7 +1004,7 @@ public class Battle implements Serializable {
                 this.showMenu();
             }
 
-            for(Flag flag : this.flags){
+            for (Flag flag : this.flags) {
                 System.out.println(flag.getPositionRow() + " " + flag.getPositionColumn() + " " + flag.getFlagOwner());
             }
 
@@ -1026,14 +1050,19 @@ public class Battle implements Serializable {
         livingCard.setCanMove(true);
         livingCard.setCanAttack(true);
         //set
-        for(int i = livingCard.getEffects().size() - 1; i > -1; i--){
+        for (int i = livingCard.getEffects().size() - 1; i > -1; i--) {
             Buff buff = livingCard.getEffects().get(i);
             Impact.impactBuffInLivingCard(buff, livingCard);
 
         }
-        for(int i = livingCard.getCell().getEffects().size() - 1; i > -1; i--) {
+        for (int i = livingCard.getCell().getEffects().size() - 1; i > -1; i--) {
             Buff buff = livingCard.getCell().getEffects().get(i);
             Impact.impactBuffInCell(buff, livingCard.getCell());
+        }
+        for (int i = livingCard.getCell().getItems().size() - 1; i > -1; i--) {
+            Item item = livingCard.getCell().getItems().get(i);
+            Impact.impactItem(item, livingCard.getCell(), this);
+            livingCard.getCell().getItems().remove(item);
         }
     }
 

@@ -3,12 +3,14 @@ package Model.CollectionItem;
 import Controller.Application;
 import Controller.Impact;
 import Model.Collection;
+import Model.Enviroment.Cell;
 import javafx.scene.control.Label;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public  class Item extends CollectionItem {
+    private Cell cell;
 
     public static Item createItem(String itemName, String playerName) throws FileNotFoundException {
         String address = "Data/CollectionItem/Item/" + itemName + ".json";
@@ -41,6 +43,14 @@ public  class Item extends CollectionItem {
         labels.add(priceLabel);
 
         return labels;
+    }
+
+    public Cell getCell() {
+        return cell;
+    }
+
+    public void setCell(Cell cell) {
+        this.cell = cell;
     }
 
     //Here is Setters && Getters

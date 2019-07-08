@@ -40,7 +40,7 @@ public class ShopMenu extends Menu {
             // Client.getClient().setCurrentMenu(MenuList.ShopShowCollection);
 
         } else if (inputLine.matches("search for show .+")) {
-            ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
+               ServerMassage serverMassage = new ServerMassage(ServerMassage.Type.Accept, null);
             serverMassage.setCollectionItems(searchInCollection(separatedInput[3], this.shop));
             return serverMassage;
             //todo in bayad doros she
