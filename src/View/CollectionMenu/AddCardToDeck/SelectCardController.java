@@ -54,9 +54,14 @@ public class SelectCardController implements Initializable {
 
     public static ArrayList<CollectionItem> removeDeckCards(Deck deck, ArrayList<CollectionItem> collectionItems) {
         ArrayList<CollectionItem> editedCollectionItems = new ArrayList<>();
-        for (CollectionItem collectionItem : collectionItems)
-            if (!deck.getCards().contains(collectionItem))
+        for (CollectionItem collectionItem : collectionItems){
+            boolean find = false;
+            for(CollectionItem tempCollectionItem : deck.getCards())
+                if(tempCollectionItem.getID().equals(collectionItem.getID()))
+                    find = true;
+            if (!find)
                 editedCollectionItems.add(collectionItem);
+        }
         return editedCollectionItems;
     }
 
