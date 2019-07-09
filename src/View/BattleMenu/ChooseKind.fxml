@@ -66,6 +66,13 @@
             <String fx:value="SmallButton" />
          </styleClass>
       </Label>
-      <TextField fx:id="numberOfFlagField" layoutX="581.0" layoutY="506.0" styleClass="NumberOfFlagArea" />
+      <TextField fx:id="numberOfFlagField" layoutX="581.0" layoutY="506.0" promptText="number of flags" styleClass="NumberOfFlagArea" />
+      <TextField fx:id="maximumTimeOfTurnField" layoutX="339.0" layoutY="506.0" promptText="maximum time " styleClass="NumberOfFlagArea" />
+      <Label fx:id="applyTimeButton" layoutX="357.0" layoutY="537.0" text="Apply">
+         <styleClass>
+            <String fx:value="YellowButton" />
+            <String fx:value="SmallButton" />
+         </styleClass>
+      </Label>
     </children>
 </AnchorPane>

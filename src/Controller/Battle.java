@@ -1000,9 +1000,10 @@ public class Battle implements Serializable {
                 endGame();
             else if (inputLine.equals("exit"))
                 return null;
-            else if (inputLine.equals("show menu")) {
+            else if (inputLine.equals("show menu"))
                 this.showMenu();
-            }
+            else if (inputLine.equals("fast forward"))
+                this.fastForward();
 
             for (Flag flag : this.flags) {
                 System.out.println(flag.getPositionRow() + " " + flag.getPositionColumn() + " " + flag.getFlagOwner());
@@ -1010,6 +1011,11 @@ public class Battle implements Serializable {
 
             return null;
         }
+    }
+
+    private void fastForward() {
+        this.maximumTimeOfTurn /= 2;
+        this.remainTimeOfTurn /= 2;
     }
 
     private void handleBuffs(Player player) {
@@ -1220,10 +1226,17 @@ public class Battle implements Serializable {
             return inputCommandLine("attack " + clientMassage.getCollectionItemID(), clientMassage.getAuthToken());
         if (clientMassage.getBattleRequest() == ClientMassage.BattleRequest.UseSpecialPower)
             return inputCommandLine("use special power (" + clientMassage.getX() + ", " + clientMassage.getY() + ")", clientMassage.getAuthToken());
+        if (clientMassage.getBattleRequest() == ClientMassage.BattleRequest.FastForward){
+            return inputCommandLine("fast forward", clientMassage.getAuthToken());
+        }
         return null;
     }
 
     public int getMaximumTimeOfTurn() {
         return maximumTimeOfTurn;
+    }
+
+    public void setMaximumTimeOfTurn(int maximumTimeOfTurn) {
+        this.maximumTimeOfTurn = maximumTimeOfTurn;
     }
 }

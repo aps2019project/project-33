@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="189.0" prefWidth="489.0" styleClass="ChooseSecondPlayerAnchorPane" stylesheets="@BattleMenu.css" xmlns="http://javafx.com/javafx/8" fx:controller="View.BattleMenu.ChooseSecondPlayerController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="root" prefHeight="189.0" prefWidth="489.0" styleClass="ChooseSecondPlayerAnchorPane" stylesheets="@BattleMenu.css" xmlns="http://javafx.com/javafx/8" fx:controller="View.BattleMenu.ChooseSecondPlayerController">
    <children>
       <TextField fx:id="textField" layoutX="29.0" layoutY="154.0" prefHeight="48.0" prefWidth="225.0" promptText="rival's username" styleClass="ChooseSecondPlayerTextField" />
       <Label fx:id="playGame" layoutX="265.0" layoutY="131.0" stylesheets="@../Button.css" text="Play Game">

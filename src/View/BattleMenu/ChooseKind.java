@@ -3,9 +3,11 @@ package View.BattleMenu;
 import Controller.Client.Client;
 import Controller.MenuList;
 import View.View;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -20,6 +22,8 @@ public class ChooseKind implements Initializable {
     public TextField numberOfFlagField;
     public Label applyButton;
     public AnchorPane root;
+    public TextField maximumTimeOfTurnField;
+    public Label applyTimeButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -78,5 +82,11 @@ public class ChooseKind implements Initializable {
             BattleMenuController.numberOfFlag = Integer.parseInt(string);
         });
 
+        applyTimeButton.setOnMouseClicked(event -> {
+            String string = maximumTimeOfTurnField.getText();
+            maximumTimeOfTurnField.clear();
+            if(!string.matches("[\\d]+")) return;
+            BattleMenuController.maximumTimeOfTurn = Integer.parseInt(string);
+        });
     }
 }

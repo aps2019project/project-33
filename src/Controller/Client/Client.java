@@ -121,16 +121,16 @@ public class Client {
         return sendAndReceive(clientMassage);
     }
 
-    public synchronized ServerMassage startCreateMultiGame(String secondPlayerUsername, String type, String mode, String chapter, String kind, int numberOfFlag) throws IOException, ClassNotFoundException {
-        return sendCreateGameCommand(secondPlayerUsername, type, mode, chapter, kind, numberOfFlag, ClientMassage.BattleMenuRequest.startMultiPlayerGame);
+    public synchronized ServerMassage startCreateMultiGame(String secondPlayerUsername, String type, String mode, String chapter, String kind, int numberOfFlag, int timeOfTurn) throws IOException, ClassNotFoundException {
+        return sendCreateGameCommand(secondPlayerUsername, type, mode, chapter, kind, numberOfFlag, timeOfTurn, ClientMassage.BattleMenuRequest.startMultiPlayerGame);
 
     }
 
-    public synchronized ServerMassage createGame(String secondPlayerUsername, String type, String mode, String chapter, String kind, int numberOfFlag) throws IOException, ClassNotFoundException {
-        return sendCreateGameCommand(secondPlayerUsername, type, mode, chapter, kind, numberOfFlag, ClientMassage.BattleMenuRequest.CreateSinglePlayerGame);
+    public synchronized ServerMassage createGame(String secondPlayerUsername, String type, String mode, String chapter, String kind, int numberOfFlag, int maximumTimeOfTurn) throws IOException, ClassNotFoundException {
+        return sendCreateGameCommand(secondPlayerUsername, type, mode, chapter, kind, numberOfFlag, maximumTimeOfTurn, ClientMassage.BattleMenuRequest.CreateSinglePlayerGame);
     }
 
-    private ServerMassage sendCreateGameCommand(String secondPlayerUsername, String type, String mode, String chapter, String kind, int numberOfFlag, ClientMassage.BattleMenuRequest battleMenuRequest) throws IOException, ClassNotFoundException {
+    private ServerMassage sendCreateGameCommand(String secondPlayerUsername, String type, String mode, String chapter, String kind, int numberOfFlag, int timeOfTurn, ClientMassage.BattleMenuRequest battleMenuRequest) throws IOException, ClassNotFoundException {
         ClientMassage clientMassage = new ClientMassage();
         clientMassage.setAuthToken(this.authToken);
         clientMassage.setDestinationMenu(ClientMassage.Menu.BattleMenu);
@@ -140,11 +140,16 @@ public class Client {
         clientMassage.setMode(mode);
         clientMassage.setChapter(chapter);
         clientMassage.setKind(kind);
+        clientMassage.setTimeOfTurn(timeOfTurn);
         clientMassage.setNumberOfFlag(numberOfFlag);
         return sendAndReceive(clientMassage);
     }
 
     //Battle Commands
+
+    public ServerMassage fastForward() throws IOException, ClassNotFoundException {
+        return battleCommand(ClientMassage.BattleRequest.FastForward);
+    }
 
     public synchronized ServerMassage graveYardCommand() throws IOException, ClassNotFoundException {
         ClientMassage clientMassage = new ClientMassage();

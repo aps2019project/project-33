@@ -91,12 +91,14 @@ public class BattleMenu {
         return account.getCollection().getMainDeck().checkValidateDeck();
     }
 
-    public ServerMassage createGame(String firstPlayerUsername, String secondPlayerUsername, String type, String mode, String chapter, String kind, int numberOfFlag) throws FileNotFoundException {
+    public ServerMassage createGame(String firstPlayerUsername, String secondPlayerUsername, String type, String mode, String chapter, String kind, int numberOfFlag, int timeOfTurn) throws FileNotFoundException {
         initialize();
 
         Account firstPlayer = Account.getAccountByUsername(firstPlayerUsername);
         if (!checkDeck(firstPlayer))
             return new ServerMassage(ServerMassage.Type.Error, ServerMassage.ErrorType.InvalidDeckForFirstPlayer);
+
+        battle.setMaximumTimeOfTurn(timeOfTurn);
 
         //set players
         chooseType(type);
@@ -167,7 +169,7 @@ public class BattleMenu {
 
     public ServerMassage interpret(ClientMassage clientMassage) throws FileNotFoundException {
         if (clientMassage.getBattleMenuRequest() == ClientMassage.BattleMenuRequest.CreateSinglePlayerGame)
-            return createGame(clientMassage.getAuthToken(), clientMassage.getSecondPlayerUsername(), clientMassage.getType(), clientMassage.getMode(), clientMassage.getChapter(), clientMassage.getKind(), clientMassage.getNumberOfFlag());
+            return createGame(clientMassage.getAuthToken(), clientMassage.getSecondPlayerUsername(), clientMassage.getType(), clientMassage.getMode(), clientMassage.getChapter(), clientMassage.getKind(), clientMassage.getNumberOfFlag(), clientMassage.getTimeOfTurn());
         if (clientMassage.getBattleMenuRequest() == ClientMassage.BattleMenuRequest.startMultiPlayerGame)
             return startCreateMultiPlayerGame(clientMassage);
         if (clientMassage.getBattleMenuRequest() == ClientMassage.BattleMenuRequest.RejectGame)
@@ -194,7 +196,7 @@ public class BattleMenu {
         Account account2 = Account.getAccountByUsername(username);
         ClientMassage previousClientMassage = account2.getMultiPlayerGameInfo();
         account2.setMultiPlayerGameInfo(null);
-        return createGame(previousClientMassage.getAuthToken(), previousClientMassage.getSecondPlayerUsername(), previousClientMassage.getType(), previousClientMassage.getMode(), previousClientMassage.getChapter(), previousClientMassage.getKind(), clientMassage.getNumberOfFlag());
+        return createGame(previousClientMassage.getAuthToken(), previousClientMassage.getSecondPlayerUsername(), previousClientMassage.getType(), previousClientMassage.getMode(), previousClientMassage.getChapter(), previousClientMassage.getKind(), clientMassage.getNumberOfFlag(), clientMassage.getTimeOfTurn());
     }
 
     private ServerMassage startCreateMultiPlayerGame(ClientMassage clientMassage) {

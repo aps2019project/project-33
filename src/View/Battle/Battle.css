@@ -199,3 +199,13 @@
     -fx-text-fill: red;
     -fx-font-size: 40;
 }
+
+.FastForward{
+    -fx-background-image: url("../../../resources/ui/dialogue_carat.png");
+    -fx-background-size: 100% 100%;
+}
+
+.FastForward:hover{
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, aqua, 8, 0.3, 0, 0);
+}

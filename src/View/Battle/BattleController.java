@@ -15,12 +15,14 @@ import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -43,9 +45,11 @@ import java.util.ResourceBundle;
 //6. grave yard
 
 public class BattleController implements Initializable {
+    private static ImageView movingImageView = null;
+    public Label fastForwardButton;
+
     public Label enterGraveYard;
     private int numberOfRows = 5, numberOfColumns = 9;
-    private static ImageView movingImageView = null;
     public AnchorPane rootOfPage;
     public VBox cardInformationArea;
     public Label playerUsernameLabel;
@@ -94,7 +98,6 @@ public class BattleController implements Initializable {
     //todo, in ke alan chand ta mana darim masalan moonde
     //todo, enter grave yard
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         View.addMusic("resources/sfx/Background.mp3", rootOfPage, false);
@@ -123,6 +126,15 @@ public class BattleController implements Initializable {
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
+        });
+
+        fastForwardButton.setOnMouseClicked(event -> {
+            try {
+                Client.getClient().fastForward();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            timeOfMove /= 2;
         });
 
         enterGraveYard.setOnMouseClicked(event -> {

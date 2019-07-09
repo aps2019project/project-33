@@ -108,5 +108,6 @@
       </VBox>
       <Label fx:id="remainTimeLabel" layoutX="1056.0" layoutY="22.0" text="Label" />
       <Label fx:id="enterGraveYard" layoutX="1004.0" layoutY="68.0" styleClass="GraveYard" text="Grave Yard" />
+      <Label fx:id="fastForwardButton" layoutX="998.0" layoutY="13.0" prefHeight="40.0" prefWidth="40.0" styleClass="FastForward" />
    </children>
 </AnchorPane>
