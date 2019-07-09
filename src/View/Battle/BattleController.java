@@ -188,7 +188,8 @@ public class BattleController implements Initializable {
                     ;
                     cardInformationArea.getChildren().remove(cardInformationVBox);
                     try {
-                        cardInformationVBox = Graphic.createCard(graphicalCells[finalI][finalJ].getCell().getLivingCard(), 1);
+                        String name = graphicalCells[finalI][finalJ].getCell().getLivingCard().getName();
+                        cardInformationVBox = Graphic.createCard(graphicalCells[finalI][finalJ].getCell().getLivingCard(), name);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -221,7 +222,8 @@ public class BattleController implements Initializable {
                 if (handUnits[finalI].getCollectionItem() == null) return;
                 cardInformationArea.getChildren().remove(cardInformationVBox);
                 try {
-                    cardInformationVBox = Graphic.createCard(handUnits[finalI].getCollectionItem(), 1);
+                    String name = handUnits[finalI].getCollectionItem().getName();
+                    cardInformationVBox = Graphic.createCard(handUnits[finalI].getCollectionItem(), name);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }

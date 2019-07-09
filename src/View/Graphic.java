@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Graphic {
     public static int numberOfGifs = 69;
@@ -34,8 +35,7 @@ public class Graphic {
                 if(index >= size)
                     break;
                 CollectionItem collectionItem = collectionItems.get(index);
-
-                VBox cardVbox = Graphic.createCard(collectionItem, 1);
+                VBox cardVbox = Graphic.createCard(collectionItem, collectionItem.getName());
                 vBoxes.add(cardVbox);
 
                 hBox.getChildren().add(cardVbox);
@@ -49,13 +49,27 @@ public class Graphic {
         return mainVBox;
     }
 
-    public static VBox createCard(CollectionItem collectionItem, int index) throws FileNotFoundException {
+    public static VBox createCard(CollectionItem collectionItem, String cardName) throws FileNotFoundException {
         VBox cardVbox = new VBox();
         cardVbox.setPrefWidth(150);
         cardVbox.setPrefHeight(250);
         //add gif
-        String address = "resources/unit_gifs/" + (index % 68)  + ".gif";
-        Image image = new Image(new FileInputStream(address));
+        String type = ".gif";
+        if(collectionItem instanceof Spell)
+            type = ".png";
+        String address = "resources/unit_gifs/" + cardName  + type;
+        System.out.println(address + "*******");
+        Image image;
+        try{
+            image = new Image(new FileInputStream(address));
+        }
+        catch (Exception e){
+            System.out.println(":(((((((((");
+            Random random = new Random();
+            int randomNumber = random.nextInt(18) + 50;
+            address = "resources/unit_gifs/" + randomNumber  + ".gif";
+            image = new Image(new FileInputStream(address));
+        }
         ImageView cardGif = new ImageView(image);
         cardGif.setFitHeight(cardVbox.getPrefHeight() / 2);
         cardGif.setFitWidth(cardVbox.getPrefWidth());
