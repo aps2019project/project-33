@@ -4,27 +4,23 @@ import Controller.Battle;
 import Controller.Client.Client;
 import Controller.Client.ClientMassage;
 import Controller.MenuList;
-import Controller.Server.Server;
 import Controller.Server.ServerMassage;
 import Model.Buffs.Buff;
 import Model.CollectionItem.*;
 import Model.Enviroment.Cell;
 import Model.Hand1;
 import View.Graphic;
+import View.View;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseDragEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -101,6 +97,8 @@ public class BattleController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        View.addMusic("resources/sfx/Background.mp3", rootOfPage, false);
+
         try {
             setter();
         } catch (IOException | ClassNotFoundException e) {
@@ -598,8 +596,10 @@ class GraphicalCell {
             if (selectedCell.getLocation() == SelectedCell.Location.Map) {
                 ServerMassage serverMassage = Client.getClient().moveCardInBattle(cell.getX(), cell.getY());
                 battleController.setSelectedCell(null);
-                if (serverMassage.getType() == ServerMassage.Type.Accept)
+                if (serverMassage.getType() == ServerMassage.Type.Accept) {
+                    View.addMusic("resources/sfx/move.m4a", battleController.getRootOfPage(), false);
                     showGraphicalMove(selectedCell, this, battleController);
+                }
             }
         }
     }
@@ -632,8 +632,12 @@ class GraphicalCell {
         if (battleController.getSelectedCell() == null) return;
         if (battleController.getSelectedCell().getLocation() != SelectedCell.Location.Map) return;
         LivingCard livingCard = this.getCell().getLivingCard();
-        if (livingCard != null)
-            Client.getClient().attackInBattle(livingCard.getID());
+        if (livingCard != null) {
+            ServerMassage serverMassage = Client.getClient().attackInBattle(livingCard.getID());
+            if(serverMassage.getType() == ServerMassage.Type.Accept) {
+                View.addMusic("resources/sfx/attack.m4a", battleController.getRootOfPage(), false);
+            }
+        }
         battleController.setSelectedCell(null);
     }
 

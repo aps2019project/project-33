@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="563.0" prefWidth="873.0" styleClass="AnchorPane" stylesheets="@Chat.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Chat.ChatController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="root" prefHeight="563.0" prefWidth="873.0" styleClass="AnchorPane" stylesheets="@Chat.css" xmlns="http://javafx.com/javafx/8" fx:controller="View.Chat.ChatController">
    <children>
       <Label fx:id="backButton" layoutY="4.0" stylesheets="@../Button.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <styleClass>

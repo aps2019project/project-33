@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0" styleClass="WinnerPageAnchorPane" stylesheets="@Battle.css" xmlns="http://javafx.com/javafx/8" fx:controller="View.Battle.WinnerPageController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="root" prefHeight="400.0" prefWidth="600.0" styleClass="WinnerPageAnchorPane" stylesheets="@Battle.css" xmlns="http://javafx.com/javafx/8" fx:controller="View.Battle.WinnerPageController">
    <children>
       <Label contentDisplay="CENTER" layoutX="79.0" layoutY="77.0" prefHeight="192.0" prefWidth="443.0" styleClass="WinnerPageLabel" text="congratulations !! &#10;You Won !" textAlignment="CENTER">
          <font>

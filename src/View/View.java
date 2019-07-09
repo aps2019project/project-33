@@ -8,8 +8,15 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
+import java.io.File;
 import java.io.IOException;
 
 public class View extends Application {
@@ -21,7 +28,6 @@ public class View extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("AccountMenu/AccountMenu.fxml"));
         primaryStage.setScene(new Scene(root));
         View.primaryStage = primaryStage;
-
 
         AnimationTimer animationTimer = new AnimationTimer() {
             private MenuList previousMenu = MenuList.AccountMenu;
@@ -78,5 +84,15 @@ public class View extends Application {
 
     public static void setPrimaryStage(Stage primaryStage) {
         View.primaryStage = primaryStage;
+    }
+
+    public static void addMusic(String address, AnchorPane root, boolean repeat){
+        Media pick = new Media(new File(address).toURI().toString());
+        MediaPlayer player = new MediaPlayer(pick);
+        MediaView mediaView = new MediaView(player);
+        root.getChildren().add(mediaView);
+        if (repeat)
+            player.setCycleCount(-1);
+        player.play();
     }
 }

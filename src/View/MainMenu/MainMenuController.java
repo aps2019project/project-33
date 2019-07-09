@@ -4,11 +4,10 @@ import Controller.Client.Client;
 import Controller.Client.ClientMassage;
 import Controller.MenuList;
 import Controller.Server.ServerMassage;
-import javafx.event.EventHandler;
+import View.View;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -30,6 +29,7 @@ public class MainMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         collection.setOnMouseClicked(event -> {
             try {
                 Client.getClient().mainMenuCommand(ClientMassage.MainMenuRequest.EnterCollectionMenu);
