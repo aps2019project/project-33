@@ -53,6 +53,7 @@ public class ShopControllerServer implements Initializable {
             Label numberLabel = new Label();
             numberLabel.setText(Integer.toString(numbers.get(index)));
             numberLabel.setAlignment(Pos.CENTER);
+            numberLabel.setTextFill(Color.WHITE);
             vBox1.getChildren().add(numberLabel);
             index++;
         }

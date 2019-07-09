@@ -65,7 +65,7 @@ public class CollectionMenu extends Menu {
             account.setCurrentMenu(MenuList.CollectionMenu);
             return new ServerMassage(ServerMassage.Type.Accept, null);
         } else if (inputLine.matches("remove .* from .*")) {
-            String collectionItemId = input[1], deckName = input[4];
+            String collectionItemId = input[1], deckName = input[3];
             collection.removeCollectionItemFromDeck(collectionItemId, deckName);
             account.setCurrentMenu(MenuList.CollectionMenu);
             return new ServerMassage(ServerMassage.Type.Accept, null);
