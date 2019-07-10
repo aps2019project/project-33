@@ -35,7 +35,7 @@ public class Graphic {
                 if(index >= size)
                     break;
                 CollectionItem collectionItem = collectionItems.get(index);
-                VBox cardVbox = Graphic.createCard(collectionItem, collectionItem.getName());
+                VBox cardVbox = Graphic.createCard(collectionItem);
                 vBoxes.add(cardVbox);
 
                 hBox.getChildren().add(cardVbox);
@@ -49,25 +49,31 @@ public class Graphic {
         return mainVBox;
     }
 
-    public static VBox createCard(CollectionItem collectionItem, String cardName) throws FileNotFoundException {
-        VBox cardVbox = new VBox();
-        cardVbox.setPrefWidth(150);
-        cardVbox.setPrefHeight(250);
-        //add gif
+    public static Image setPic(CollectionItem collectionItem) throws FileNotFoundException {
         String type = ".gif";
         if(collectionItem instanceof Spell)
             type = ".png";
-        String address = "resources/unit_gifs/" + cardName  + type;
+        String address = "resources/unit_gifs/" + collectionItem.getName()  + type;
         Image image;
         try{
             image = new Image(new FileInputStream(address));
         }
         catch (Exception e){
-            int randomNumber = getHash(cardName) % numberOfGifs + 50;
+            int randomNumber = getHash(collectionItem.getName()) % numberOfGifs + 50;
             address = "resources/unit_gifs/" + randomNumber + ".gif";
             image = new Image(new FileInputStream(address));
         }
-        ImageView cardGif = new ImageView(image);
+        return image;
+    }
+
+    public static VBox createCard(CollectionItem collectionItem) throws FileNotFoundException {
+        VBox cardVbox = new VBox();
+        cardVbox.setPrefWidth(150);
+        cardVbox.setPrefHeight(250);
+        //add gif
+
+        ImageView cardGif = new ImageView(setPic(collectionItem));
+
         cardGif.setFitHeight(cardVbox.getPrefHeight() / 2);
         cardGif.setFitWidth(cardVbox.getPrefWidth());
         cardVbox.getChildren().add(cardGif);
