@@ -199,7 +199,7 @@ public class BattleController implements Initializable {
                     cardInformationArea.getChildren().remove(cardInformationVBox);
                     try {
                         String name = graphicalCells[finalI][finalJ].getCell().getLivingCard().getName();
-                        cardInformationVBox = Graphic.createCard(graphicalCells[finalI][finalJ].getCell().getLivingCard(), name);
+                        cardInformationVBox = Graphic.createCard(graphicalCells[finalI][finalJ].getCell().getLivingCard());
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -233,7 +233,7 @@ public class BattleController implements Initializable {
                 cardInformationArea.getChildren().remove(cardInformationVBox);
                 try {
                     String name = handUnits[finalI].getCollectionItem().getName();
-                    cardInformationVBox = Graphic.createCard(handUnits[finalI].getCollectionItem(), name);
+                    cardInformationVBox = Graphic.createCard(handUnits[finalI].getCollectionItem());
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -498,7 +498,8 @@ class HandUnit {
                 this.collectionItem = hand.getCollectionItemByIndex(i);
                 if (collectionItem instanceof Item) this.manaLabel.setText("0");
                 else this.manaLabel.setText(Integer.toString(((Card) collectionItem).getMP()));
-                imageView.setImage(new Image(new FileInputStream("resources/unit_gifs/1.gif")));
+                imageView.setImage(Graphic.setPic(collectionItem));
+            //    imageView.setImage(new Image(new FileInputStream("resources/unit_gifs/1.gif")));
             }
         }
     }
@@ -562,7 +563,8 @@ class GraphicalCell {
             } else if (!cell.isHaveFlag())
                 imageView.setImage(null);
         } else if (livingCard == null || !cell.getLivingCard().getID().equals(livingCard.getID()) || imageView.getImage() == null) {
-            imageView.setImage(new Image(new FileInputStream("resources/unit_gifs/1.gif")));
+            imageView.setImage(Graphic.setPic(cell.getLivingCard()));
+        //    imageView.setImage(new Image(new FileInputStream("resources/unit_gifs/1.gif")));
         }
         if (cell.getLivingCard() != null) {
             System.out.println(cell.getX() + " " + cell.getY());
