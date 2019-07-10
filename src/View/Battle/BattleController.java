@@ -4,13 +4,13 @@ import Controller.Battle;
 import Controller.Client.Client;
 import Controller.Client.ClientMassage;
 import Controller.MenuList;
-import Controller.Server.Server;
 import Controller.Server.ServerMassage;
 import Model.Buffs.Buff;
 import Model.CollectionItem.*;
 import Model.Enviroment.Cell;
 import Model.Hand1;
 import View.Graphic;
+import View.View;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -19,11 +19,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -47,9 +45,11 @@ import java.util.ResourceBundle;
 //6. grave yard
 
 public class BattleController implements Initializable {
+    private static ImageView movingImageView = null;
+    public Label fastForwardButton;
+
     public Label enterGraveYard;
     private int numberOfRows = 5, numberOfColumns = 9;
-    private static ImageView movingImageView = null;
     public AnchorPane rootOfPage;
     public VBox cardInformationArea;
     public Label playerUsernameLabel;
@@ -98,9 +98,10 @@ public class BattleController implements Initializable {
     //todo, in ke alan chand ta mana darim masalan moonde
     //todo, enter grave yard
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        View.addMusic("resources/sfx/Background.mp3", rootOfPage, false);
+
         try {
             setter();
         } catch (IOException | ClassNotFoundException e) {
@@ -125,6 +126,15 @@ public class BattleController implements Initializable {
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
+        });
+
+        fastForwardButton.setOnMouseClicked(event -> {
+            try {
+                Client.getClient().fastForward();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            timeOfMove /= 2;
         });
 
         enterGraveYard.setOnMouseClicked(event -> {
@@ -598,8 +608,10 @@ class GraphicalCell {
             if (selectedCell.getLocation() == SelectedCell.Location.Map) {
                 ServerMassage serverMassage = Client.getClient().moveCardInBattle(cell.getX(), cell.getY());
                 battleController.setSelectedCell(null);
-                if (serverMassage.getType() == ServerMassage.Type.Accept)
+                if (serverMassage.getType() == ServerMassage.Type.Accept) {
+                    View.addMusic("resources/sfx/move.m4a", battleController.getRootOfPage(), false);
                     showGraphicalMove(selectedCell, this, battleController);
+                }
             }
         }
     }
@@ -632,8 +644,12 @@ class GraphicalCell {
         if (battleController.getSelectedCell() == null) return;
         if (battleController.getSelectedCell().getLocation() != SelectedCell.Location.Map) return;
         LivingCard livingCard = this.getCell().getLivingCard();
-        if (livingCard != null)
-            Client.getClient().attackInBattle(livingCard.getID());
+        if (livingCard != null) {
+            ServerMassage serverMassage = Client.getClient().attackInBattle(livingCard.getID());
+            if(serverMassage.getType() == ServerMassage.Type.Accept) {
+                View.addMusic("resources/sfx/attack.m4a", battleController.getRootOfPage(), false);
+            }
+        }
         battleController.setSelectedCell(null);
     }
 

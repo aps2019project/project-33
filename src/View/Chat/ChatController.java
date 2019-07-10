@@ -4,11 +4,12 @@ import Controller.Client.Client;
 import Controller.MenuList;
 import Controller.Server.ServerMassage;
 import Model.Massage;
+import View.View;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -21,11 +22,13 @@ public class ChatController implements Initializable {
     public TextArea massageField;
     public VBox chatArea;
     public Label sentButton;
+    public AnchorPane root;
 
     private AnimationTimer animationTimer;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         backButton.setOnMouseClicked(event -> {
             animationTimer.stop();
             try {

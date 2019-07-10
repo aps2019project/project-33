@@ -1,15 +1,14 @@
 package View.BattleMenu;
 
-import Controller.Battle;
 import Controller.Client.Client;
 import Controller.MenuList;
-import Controller.Menus.BattleMenu;
-import View.Battle.BattleController;
+import View.View;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,9 +21,13 @@ public class ChooseKind implements Initializable {
     public Label backButton;
     public TextField numberOfFlagField;
     public Label applyButton;
+    public AnchorPane root;
+    public TextField maximumTimeOfTurnField;
+    public Label applyTimeButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         kindOneButton.setOnMouseClicked(event -> {
             BattleMenuController.kind = BattleMenuController.KindList.KillEnemyHero;
             BattleMenuController.numberOfFlag = 0;
@@ -79,5 +82,11 @@ public class ChooseKind implements Initializable {
             BattleMenuController.numberOfFlag = Integer.parseInt(string);
         });
 
+        applyTimeButton.setOnMouseClicked(event -> {
+            String string = maximumTimeOfTurnField.getText();
+            maximumTimeOfTurnField.clear();
+            if(!string.matches("[\\d]+")) return;
+            BattleMenuController.maximumTimeOfTurn = Integer.parseInt(string);
+        });
     }
 }

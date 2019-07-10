@@ -16,6 +16,7 @@ public class BattleMenuController {
     protected static KindList kind = null;
     protected static TypeList type = null;
     protected static String secondPlayerUserName;
+    protected static int maximumTimeOfTurn = 50;
     protected static int numberOfFlag;
 
     enum TypeList{
@@ -34,7 +35,7 @@ public class BattleMenuController {
         if(chapter != null) chapterToString = chapter.toString();
         if(kind != null) kindToString = kind.toString();
 
-        Client.getClient().createGame(secondPlayerUserName, typeToString, modeToString , chapterToString, kindToString, numberOfFlag);
+        Client.getClient().createGame(secondPlayerUserName, typeToString, modeToString , chapterToString, kindToString, numberOfFlag, maximumTimeOfTurn);
     }
     enum KindList{
         KillEnemyHero, HoldFlag, TakeHalfOfFlags;
@@ -63,7 +64,7 @@ public class BattleMenuController {
         if(chapter != null) chapterToString = chapter.toString();
         if(kind != null) kindToString = kind.toString();
 
-        Client.getClient().startCreateMultiGame(secondPlayerUserName, typeToString, modeToString, chapterToString, kindToString, numberOfFlag);
+        Client.getClient().startCreateMultiGame(secondPlayerUserName, typeToString, modeToString, chapterToString, kindToString, numberOfFlag, maximumTimeOfTurn);
     }
 
     enum ModeList{

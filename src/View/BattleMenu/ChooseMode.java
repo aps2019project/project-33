@@ -2,8 +2,10 @@ package View.BattleMenu;
 
 import Controller.Client.Client;
 import Controller.MenuList;
+import View.View;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -13,9 +15,11 @@ public class ChooseMode implements Initializable {
     public Label customGameButton;
     public Label storyButton;
     public Label backButton;
+    public AnchorPane root;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         storyButton.setOnMouseClicked(event -> {
             BattleMenuController.mode = BattleMenuController.ModeList.Story;
             try {

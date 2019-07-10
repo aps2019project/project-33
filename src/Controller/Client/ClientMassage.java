@@ -8,34 +8,6 @@ import Model.Deck;
 import java.io.Serializable;
 
 public class ClientMassage implements Serializable {
-
-    public ClientMassage() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public ShopMenuRequest getShopMenuRequest() {
-        return shopMenuRequest;
-    }
-
-    public void setShopMenuRequest(ShopMenuRequest shopMenuRequest) {
-        this.shopMenuRequest = shopMenuRequest;
-    }
-
-    public CollectionItem getCreatedCollectionitem() {
-        return createdCollectionitem;
-    }
-
-    public void setCreatedCollectionitem(CollectionItem createdCollectionitem) {
-        this.createdCollectionitem = createdCollectionitem;
-    }
-
     public enum Menu {
         AccountMenu, BattleMenu, ShopMenu, MainMenu, CollectionMenu, Server, Battle;
     }
@@ -52,9 +24,7 @@ public class ClientMassage implements Serializable {
         CreateSinglePlayerGame, AcceptGame, RejectGame, startMultiPlayerGame;
     }
 
-    public enum BattleRequest{
-        ForfeitMatch, EndTurn, Select, UseItem, InsertCard, MoveCard, Attack, UseSpecialPower, GiveGraveYard
-    }
+    private int numberOfFlag, timeOfTurn;
 
     public enum ServerRequest{
         GiveCurrentMenu, ChangeCurrentMenu, GiveRunningGame, GiveAccounts, SendMassageInChat, GiveAllMassages;
@@ -89,7 +59,8 @@ public class ClientMassage implements Serializable {
 
     //BattleMenuRequest Instances
     private String secondPlayerUsername, type, mode, chapter, kind;
-    private int numberOfFlag;
+    //create card
+    private CollectionItem createdCollectionitem;
 
     //BattleRequest Instances
     private String collectionItemID;
@@ -97,8 +68,9 @@ public class ClientMassage implements Serializable {
 
     //ServerRequest Instances
     private String massage;
-//create card
-    private CollectionItem createdCollectionitem;
+
+    public ClientMassage() {
+    }
 
     public String getUsername() {
         return username;
@@ -282,4 +254,42 @@ public class ClientMassage implements Serializable {
     public void setSelectedCollectionItem(CollectionItem selectedCollectionItem) {
         this.selectedCollectionItem = selectedCollectionItem;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ShopMenuRequest getShopMenuRequest() {
+        return shopMenuRequest;
+    }
+
+    public void setShopMenuRequest(ShopMenuRequest shopMenuRequest) {
+        this.shopMenuRequest = shopMenuRequest;
+    }
+
+    public CollectionItem getCreatedCollectionitem() {
+        return createdCollectionitem;
+    }
+
+    public void setCreatedCollectionitem(CollectionItem createdCollectionitem) {
+        this.createdCollectionitem = createdCollectionitem;
+    }
+
+    public int getTimeOfTurn() {
+        return timeOfTurn;
+    }
+
+    public void setTimeOfTurn(int timeOfTurn) {
+        this.timeOfTurn = timeOfTurn;
+    }
+
+    public enum BattleRequest{
+        ForfeitMatch, EndTurn, Select, UseItem, InsertCard, MoveCard, Attack, UseSpecialPower, GiveGraveYard, FastForward
+    }
+
+
 }

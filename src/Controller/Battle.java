@@ -12,7 +12,6 @@ import Model.CollectionItem.LivingCard;
 import Model.CollectionItem.Minion;
 import Model.Enviroment.Cell;
 import Model.Enviroment.Map1;
-import javafx.animation.AnimationTimer;
 
 import java.io.FileNotFoundException;
 import java.io.Serializable;
@@ -516,10 +515,10 @@ public class Battle implements Serializable {
         return true;
     }
 
-    public void attackToOpponentCard(String opponentID) {
+    public ServerMassage attackToOpponentCard(String opponentID) {
         if (selectedCard == null) {
             System.out.println("Select a card");
-            return;
+            return new ServerMassage(ServerMassage.Type.Error, null);
         }
         ArrayList<LivingCard> opponentAliveCards = playerOff.getAliveCards();
         LivingCard opponentLivingCard = null;
@@ -528,10 +527,11 @@ public class Battle implements Serializable {
                 opponentLivingCard = livingCard;
         if (opponentLivingCard == null) {
             System.out.println("Invalid card id");
-            return;
+            return new ServerMassage(ServerMassage.Type.Error, null);
         }
         Impact.attack(this, this.selectedCard, opponentLivingCard);
         checkTurn();
+        return new ServerMassage(ServerMassage.Type.Accept, null);
     }
 
     public void comboAttackToOpponentCard(String[] input) {
@@ -972,7 +972,7 @@ public class Battle implements Serializable {
                 input = inputLine.split("[ \\(\\),]+");
                 return moveCardTo(Integer.parseInt(input[2]), Integer.parseInt(input[3]));
             } else if (inputLine.matches("attack .*"))
-                attackToOpponentCard(input[1]);
+                return attackToOpponentCard(input[1]);
             else if (inputLine.matches("attack combo [^\\s]+( [^\\s]+)+"))
                 comboAttackToOpponentCard(input);
             else if (inputLine.matches("use special power \\([\\d]+, [\\d]+\\)")) {
@@ -1000,9 +1000,10 @@ public class Battle implements Serializable {
                 endGame();
             else if (inputLine.equals("exit"))
                 return null;
-            else if (inputLine.equals("show menu")) {
+            else if (inputLine.equals("show menu"))
                 this.showMenu();
-            }
+            else if (inputLine.equals("fast forward"))
+                this.fastForward();
 
             for (Flag flag : this.flags) {
                 System.out.println(flag.getPositionRow() + " " + flag.getPositionColumn() + " " + flag.getFlagOwner());
@@ -1010,6 +1011,11 @@ public class Battle implements Serializable {
 
             return null;
         }
+    }
+
+    private void fastForward() {
+        this.maximumTimeOfTurn /= 2;
+        this.remainTimeOfTurn /= 2;
     }
 
     private void handleBuffs(Player player) {
@@ -1220,10 +1226,17 @@ public class Battle implements Serializable {
             return inputCommandLine("attack " + clientMassage.getCollectionItemID(), clientMassage.getAuthToken());
         if (clientMassage.getBattleRequest() == ClientMassage.BattleRequest.UseSpecialPower)
             return inputCommandLine("use special power (" + clientMassage.getX() + ", " + clientMassage.getY() + ")", clientMassage.getAuthToken());
+        if (clientMassage.getBattleRequest() == ClientMassage.BattleRequest.FastForward){
+            return inputCommandLine("fast forward", clientMassage.getAuthToken());
+        }
         return null;
     }
 
     public int getMaximumTimeOfTurn() {
         return maximumTimeOfTurn;
+    }
+
+    public void setMaximumTimeOfTurn(int maximumTimeOfTurn) {
+        this.maximumTimeOfTurn = maximumTimeOfTurn;
     }
 }

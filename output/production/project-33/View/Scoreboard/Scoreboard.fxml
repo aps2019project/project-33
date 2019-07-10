@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="621.0" prefWidth="898.0" styleClass="AnchorPane" stylesheets="@Scoreboard.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Scoreboard.ScoreboardController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="root" prefHeight="621.0" prefWidth="898.0" styleClass="AnchorPane" stylesheets="@Scoreboard.css" xmlns="http://javafx.com/javafx/8" fx:controller="View.Scoreboard.ScoreboardController">
    <children>
       <Label fx:id="backButton" layoutY="4.0" stylesheets="@../Button.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <styleClass>

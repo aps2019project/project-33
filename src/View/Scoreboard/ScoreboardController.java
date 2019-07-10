@@ -3,11 +3,10 @@ package View.Scoreboard;
 import Controller.Client.Client;
 import Controller.MenuList;
 import Model.Account;
+import View.View;
 import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -19,6 +18,7 @@ import java.util.ResourceBundle;
 public class ScoreboardController implements Initializable {
     public Label backButton;
     public VBox scoreboardPane;
+    public AnchorPane root;
     private ArrayList<Account> accounts = new ArrayList<>();
     private static AnimationTimer animationTimer;
 

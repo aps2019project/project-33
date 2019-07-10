@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="253.0" prefWidth="637.0" styleClass="AnswerToGameAnchorPane" xmlns="http://javafx.com/javafx/8" fx:controller="View.BattleMenu.AnswerToGameController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="root" prefHeight="253.0" prefWidth="637.0" styleClass="AnswerToGameAnchorPane" xmlns="http://javafx.com/javafx/8" fx:controller="View.BattleMenu.AnswerToGameController">
    <children>
       <Label fx:id="acceptButton" layoutX="323.0" layoutY="139.0" text="Accept">
          <styleClass>

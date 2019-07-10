@@ -2,8 +2,10 @@ package View.BattleMenu;
 
 import Controller.Client.Client;
 import Controller.MenuList;
+import View.View;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -14,9 +16,11 @@ public class StoryChapter implements Initializable {
     public Label chapterOneButton;
     public Label chapterTwoButton;
     public Label chapterThreeButton;
+    public AnchorPane root;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         chapterOneButton.setOnMouseClicked(event -> {
             BattleMenuController.chapter = BattleMenuController.ChapterList.One;
             try {
