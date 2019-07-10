@@ -11,24 +11,14 @@
 
 <AnchorPane fx:id="rootOfPage" prefHeight="667.0" prefWidth="1105.0" styleClass="BattleAnchor" stylesheets="@Battle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Battle.BattleController">
    <children>
-      <ImageView fx:id="forfeitButton" fitHeight="81.0" fitWidth="72.0" layoutX="998.0" layoutY="574.0" pickOnBounds="true" preserveRatio="true" styleClass="BattleButton" AnchorPane.bottomAnchor="21.0" AnchorPane.rightAnchor="35.0">
+      <ImageView fx:id="forfeitButton" fitHeight="81.0" fitWidth="72.0" layoutX="1017.0" layoutY="581.0" pickOnBounds="true" preserveRatio="true" styleClass="BattleButton" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="16.0">
          <image>
             <Image url="@../../../resources/ui/utility_menu/settings@2x.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="gameInfoButton" fitHeight="81.0" fitWidth="72.0" layoutX="926.0" layoutY="574.0" pickOnBounds="true" preserveRatio="true" styleClass="BattleButton" AnchorPane.bottomAnchor="21.0" AnchorPane.rightAnchor="107.0">
-         <image>
-            <Image url="@../../../resources/ui/utility_menu/quests@2x.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="helpButton" fitHeight="117.0" fitWidth="72.0" layoutX="854.0" layoutY="574.0" pickOnBounds="true" preserveRatio="true" styleClass="BattleButton" AnchorPane.bottomAnchor="21.0" AnchorPane.rightAnchor="179.0">
-         <image>
-            <Image url="@../../../resources/ui/ranked_chevron_empty@2x.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="endTurnButton" layoutX="812.0" layoutY="474.0" prefHeight="78.0" prefWidth="220.0" stylesheets="@../Button.css" text="End Turn" AnchorPane.bottomAnchor="93.0" AnchorPane.rightAnchor="-7.0">
+      <Label fx:id="endTurnButton" layoutX="820.0" layoutY="474.0" prefHeight="78.0" prefWidth="220.0" stylesheets="@../Button.css" text="End Turn" AnchorPane.bottomAnchor="93.0" AnchorPane.rightAnchor="1.134765625">
          <styleClass>
-            <String fx:value="SilverButton" />
+            <String fx:value="YellowButton" />
             <String fx:value="Button" />
          </styleClass>
       </Label>
@@ -99,7 +89,7 @@
             </VBox>
          </children>
       </HBox>
-      <VBox fx:id="cardInformationArea" layoutX="14.0" layoutY="309.0" prefHeight="329.0" prefWidth="198.0" />
+      <VBox fx:id="cardInformationArea" layoutX="14.0" layoutY="154.0" prefHeight="329.0" prefWidth="198.0" />
       <VBox fx:id="playerInformation" layoutX="14.0" layoutY="14.0" prefHeight="107.0" prefWidth="251.0">
          <children>
             <Label fx:id="playerUsernameLabel" styleClass="PlayerUserNameLabel" text="Label" />
@@ -109,5 +99,12 @@
       <Label fx:id="remainTimeLabel" layoutX="1056.0" layoutY="22.0" text="Label" />
       <Label fx:id="enterGraveYard" layoutX="1004.0" layoutY="68.0" styleClass="GraveYard" text="Grave Yard" />
       <Label fx:id="fastForwardButton" layoutX="998.0" layoutY="13.0" prefHeight="40.0" prefWidth="40.0" styleClass="FastForward" />
+      <Label fx:id="sendCheatButton" layoutX="38.0" layoutY="592.0" stylesheets="@../Button.css" text="CHEAT!" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="38.0">
+         <styleClass>
+            <String fx:value="SilverButton" />
+            <String fx:value="SmallButton" />
+         </styleClass>
+      </Label>
+      <TextField fx:id="cheatText" layoutX="20.0" layoutY="559.0" promptText="enter cheat" styleClass="NumberOfFlagArea" stylesheets="@../BattleMenu/BattleMenu.css" AnchorPane.bottomAnchor="77.0" AnchorPane.leftAnchor="20.0" />
    </children>
 </AnchorPane>

@@ -21,6 +21,8 @@ import java.io.IOException;
 
 public class View extends Application {
     private static Stage primaryStage;
+    public static MediaView mediaView;
+    public static AnchorPane mainRoot;
 
     @Override
     public void start(Stage primaryStage) throws Exception {

@@ -20,6 +20,10 @@ public class ClientMassage implements Serializable {
         EnterCollectionMenu, EnterShopMenu, EnterBattleMenu, Save, LogOut;
     }
 
+    //BattleRequest Instances
+    private String collectionItemID, cheatText;
+
+
     public enum BattleMenuRequest {
         CreateSinglePlayerGame, AcceptGame, RejectGame, startMultiPlayerGame;
     }
@@ -62,8 +66,9 @@ public class ClientMassage implements Serializable {
     //create card
     private CollectionItem createdCollectionitem;
 
-    //BattleRequest Instances
-    private String collectionItemID;
+    public String getCheatText() {
+        return cheatText;
+    }
     private int x, y;
 
     //ServerRequest Instances
@@ -287,9 +292,12 @@ public class ClientMassage implements Serializable {
         this.timeOfTurn = timeOfTurn;
     }
 
-    public enum BattleRequest{
-        ForfeitMatch, EndTurn, Select, UseItem, InsertCard, MoveCard, Attack, UseSpecialPower, GiveGraveYard, FastForward
+    public void setCheatText(String cheatText) {
+        this.cheatText = cheatText;
     }
 
+    public enum BattleRequest{
+        ForfeitMatch, EndTurn, Select, UseItem, InsertCard, MoveCard, Attack, UseSpecialPower, GiveGraveYard, FastForward, Cheat
+    }
 
 }

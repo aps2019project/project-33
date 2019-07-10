@@ -19,6 +19,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -46,16 +47,17 @@ import java.util.ResourceBundle;
 
 public class BattleController implements Initializable {
     private static ImageView movingImageView = null;
-    public Label fastForwardButton;
+    public Label sendCheatButton;
 
+    public Label fastForwardButton;
     public Label enterGraveYard;
+    public TextField cheatText;
     private int numberOfRows = 5, numberOfColumns = 9;
     public AnchorPane rootOfPage;
     public VBox cardInformationArea;
     public Label playerUsernameLabel;
     public HBox manaArea;
     public ImageView forfeitButton;
-    public ImageView gameInfoButton;
     public HBox hBox1;
     public HBox hBox2;
     public HBox hBox3;
@@ -63,7 +65,6 @@ public class BattleController implements Initializable {
     public HBox hBox5;
     public Label endTurnButton;
     public VBox table;
-    public ImageView helpButton;
     public ImageView handItemImage1;
     public Label handItemLabel1;
     public ImageView handItemImage2;
@@ -100,7 +101,6 @@ public class BattleController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        View.addMusic("resources/sfx/Background.mp3", rootOfPage, false);
 
         try {
             setter();
@@ -145,9 +145,16 @@ public class BattleController implements Initializable {
             }
         });
 
-        helpButton.setOnMouseClicked(event -> {
-            //todo showing game info in where ?
+        sendCheatButton.setOnMouseClicked(event -> {
+            String string = cheatText.getText();
+            cheatText.clear();
+            try {
+                Client.getClient().sendCheatText(string);
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
+
     }
 
     public static ImageView getMovingImageView() {

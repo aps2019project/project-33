@@ -1229,7 +1229,16 @@ public class Battle implements Serializable {
         if (clientMassage.getBattleRequest() == ClientMassage.BattleRequest.FastForward){
             return inputCommandLine("fast forward", clientMassage.getAuthToken());
         }
+        if (clientMassage.getBattleRequest() == ClientMassage.BattleRequest.Cheat)
+            return cheat(clientMassage.getCheatText(), clientMassage.getAuthToken());
         return null;
+    }
+
+    private ServerMassage cheat(String cheatText, String authToken) {
+        synchronized (this){
+            System.out.println(cheatText + " " + authToken);
+        }
+        return new ServerMassage(ServerMassage.Type.Accept, null);
     }
 
     public int getMaximumTimeOfTurn() {

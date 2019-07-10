@@ -147,6 +147,16 @@ public class Client {
 
     //Battle Commands
 
+    public ServerMassage sendCheatText(String string) throws IOException, ClassNotFoundException {
+        ClientMassage clientMassage = new ClientMassage();
+        clientMassage.setAuthToken(this.authToken);
+        clientMassage.setDestinationMenu(ClientMassage.Menu.Battle);
+        clientMassage.setBattleRequest(ClientMassage.BattleRequest.Cheat);
+        clientMassage.setCheatText(string);
+        return sendAndReceive(clientMassage);
+    }
+
+
     public ServerMassage fastForward() throws IOException, ClassNotFoundException {
         return battleCommand(ClientMassage.BattleRequest.FastForward);
     }
