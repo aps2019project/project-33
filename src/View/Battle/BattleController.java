@@ -101,6 +101,7 @@ public class BattleController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //View.addMusic("");
 
         try {
             setter();
