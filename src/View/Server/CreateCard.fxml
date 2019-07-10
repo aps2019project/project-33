@@ -16,6 +16,7 @@
       <URL value="@Shop.css" />
       <URL value="@../Button.css" />
       <URL value="@../newButton.css" />
+      <URL value="@Shop.css" />
    </stylesheets>
    <children>
       <VBox layoutX="547.0" layoutY="636.0" prefHeight="234.0" prefWidth="158.0">
@@ -70,9 +71,6 @@
             <CheckBox fx:id="isHolyCell" mnemonicParsing="false" styleClass="CheckBox" text="IS FOR CELL" />
             <TextField fx:id="timeOfHoly" promptText="ENTER TIME" />
             <TextField fx:id="numberOfHolies" promptText="ENTER NUMBER OF BUFFS" />
-            <CheckBox fx:id="isIncreaseAP" mnemonicParsing="false" styleClass="CheckBox" text="INCREASE AP" />
-            <TextField fx:id="amountOfIncreaseAP" promptText="ENTER AMOUNT" />
-            <TextField fx:id="timeOfIncreaseAP" promptText="ENTER TIME" />
             <CheckBox fx:id="isDisarm" mnemonicParsing="false" styleClass="CheckBox" text="DISARM BUFF" />
             <TextField fx:id="timeOfDisarm" promptText="ENTER TIME" />
             <CheckBox fx:id="isWeakness" mnemonicParsing="false" styleClass="CheckBox" text="WEAKNESS BUFF" />
@@ -82,6 +80,8 @@
             <CheckBox fx:id="isPoison" mnemonicParsing="false" styleClass="CheckBox" text="POISON BUFF" />
             <TextField fx:id="timeOfPoison" promptText="ENTER TIME" />
             <TextField fx:id="poisonDecreaseHP" prefHeight="16.0" prefWidth="203.0" promptText="ENTER DECREASE HP" />
+            <CheckBox fx:id="isRemoveGoodBuffs" mnemonicParsing="false" styleClass="CheckBox" text="REMOVE GOOD BUFFS" />
+            <CheckBox fx:id="isRemoveBadBuffs" mnemonicParsing="false" styleClass="CheckBox" text="REMOVE BAD BUFFS" />
          </children>
       </VBox>
       <VBox layoutX="903.0" layoutY="100.0" prefHeight="519.0" prefWidth="221.0">
@@ -100,8 +100,6 @@
             <TextField fx:id="timeOfPower" promptText="ENTER TIME" />
             <TextField fx:id="powerChangeAP" promptText="ENTER CHANGE AP" />
             <TextField fx:id="powerChangeHP" promptText="ENTER CHANGE HP" />
-            <CheckBox fx:id="isRemoveBadBuffs" mnemonicParsing="false" styleClass="CheckBox" text="REMOVE BAD BUFFS" />
-            <CheckBox fx:id="isRemoveGoodBuffs" mnemonicParsing="false" styleClass="CheckBox" text="REMOVE GOOD BUFFS" />
          </children>
       </VBox>
       <Label fx:id="errorLabel" layoutX="583.0" layoutY="49.0" style="-fx-font-size: 20;" />
