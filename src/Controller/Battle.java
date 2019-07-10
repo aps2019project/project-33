@@ -1237,21 +1237,27 @@ public class Battle implements Serializable {
 
     private ServerMassage cheat(String cheatText, String authToken) {
         synchronized (this){
-            Player player = playerOn;
-            if(playerOff.getAccount().getUsername().equals(authToken))
-                player = playerOff;
+            Player cheater = playerOn, other = playerOff;
+            if(playerOff.getAccount().getUsername().equals(authToken)){
+                cheater = playerOff;
+                other = playerOn;
+            }
 
             if(cheatText.equals("kill enemy's hero")){
-                player.getHero().setHP(0);
+                other.getHero().setHP(0);
             }
             if(cheatText.equals("heal hero")){
-                player.getHero().setHP(100);
+                cheater.getHero().setHP(100);
             }
             if(cheatText.equals("powerful hero")){
                 PowerBuff powerBuff = new PowerBuff(100, true, false, 0, 20);
-                player.getHero().addNewBuff(powerBuff);
+                cheater.getHero().addNewBuff(powerBuff);
             }
-
+            if(cheatText.equals("freez enemy's hero")){
+                other.getHero().setCanMove(false);
+                other.getHero().setCanAttack(false);
+                other.getHero().setCanCounterAttack(false);
+            }
             System.out.println(cheatText + " " + authToken);
         }
         return new ServerMassage(ServerMassage.Type.Accept, null);
