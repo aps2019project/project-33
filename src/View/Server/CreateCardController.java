@@ -51,9 +51,6 @@ public class CreateCardController implements Initializable {
     public CheckBox isHolyCell;
     public TextField timeOfHoly;
     public TextField numberOfHolies;
-    public CheckBox isIncreaseAP;
-    public TextField amountOfIncreaseAP;
-    public TextField timeOfIncreaseAP;
     public CheckBox isDisarm;
     public TextField timeOfDisarm;
     public CheckBox isWeakness;
@@ -66,8 +63,6 @@ public class CreateCardController implements Initializable {
     public CheckBox isIncreaseMana;
     public TextField timeOfIncreaseMana;
     public TextField amountOfIncreaseMana;
-    public CheckBox isFiery;
-    public TextField timeOfFiery;
     public CheckBox isPoisonToCell;
     public TextField timeOfPoisonCell;
     public TextField poisonCellDecreaseHP;
@@ -143,9 +138,6 @@ public class CreateCardController implements Initializable {
                 information.setCanAddHolyBuffToCell(isHolyCell.isSelected());
                 information.setTimeOfHolyBuff(getValue(timeOfHoly.getText()));
                 information.setNumberOfHolyBuff(getValue(numberOfHolies.getText()));
-                information.setCanIncreaseAP(isIncreaseAP.isSelected());
-                information.setAmountOfIncreaseAP(getValue(amountOfIncreaseAP.getText()));
-                information.setIncreaseRemainTime(getValue(timeOfIncreaseAP.getText()));
                 information.setCanDisarmBuffAdd(isDisarm.isSelected());
                 information.setTimeOfDisarmBuff(getValue(timeOfDisarm.getText()));
                 information.setCanWeaknessBuffAdd(isWeakness.isSelected());
@@ -164,8 +156,6 @@ public class CreateCardController implements Initializable {
                 information.setCanIncreaseMana(isIncreaseMana.isSelected());
                 information.setTimeOfIncreaseMana(getValue(timeOfIncreaseMana.getText()));
                 information.setAmountOfIncreaseMana(getValue(amountOfIncreaseMana.getText()));
-                information.setCanAddFieryBuffToCell(isFiery.isSelected());
-                information.setTimeOfAddFieryBuffToCell(getValue(timeOfFiery.getText()));
                 information.setCanAddPoisonBuffToCell(isPoisonToCell.isSelected());
                 information.setTimeOfAddPoisonBuffToCell(getValue(timeOfPoisonCell.getText()));
                 information.setDecreaseHpOfPoisonBuffOfCell(getValue(poisonCellDecreaseHP.getText()));

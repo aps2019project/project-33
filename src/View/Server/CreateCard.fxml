@@ -80,8 +80,6 @@
             <CheckBox fx:id="isPoison" mnemonicParsing="false" styleClass="CheckBox" text="POISON BUFF" />
             <TextField fx:id="timeOfPoison" promptText="ENTER TIME" />
             <TextField fx:id="poisonDecreaseHP" prefHeight="16.0" prefWidth="203.0" promptText="ENTER DECREASE HP" />
-            <CheckBox fx:id="isRemoveGoodBuffs" mnemonicParsing="false" styleClass="CheckBox" text="REMOVE GOOD BUFFS" />
-            <CheckBox fx:id="isRemoveBadBuffs" mnemonicParsing="false" styleClass="CheckBox" text="REMOVE BAD BUFFS" />
          </children>
       </VBox>
       <VBox layoutX="903.0" layoutY="100.0" prefHeight="519.0" prefWidth="221.0">
@@ -89,8 +87,6 @@
             <CheckBox fx:id="isIncreaseMana" mnemonicParsing="false" styleClass="CheckBox" text="INCREASE MANA" />
             <TextField fx:id="timeOfIncreaseMana" promptText="ENTER TIME" />
             <TextField fx:id="amountOfIncreaseMana" promptText="ENTER AMOUNT" />
-            <CheckBox fx:id="isFiery" mnemonicParsing="false" styleClass="CheckBox" text="FIERY BUFF" />
-            <TextField fx:id="timeOfFiery" promptText="ENTER TIME" />
             <CheckBox fx:id="isPoisonToCell" mnemonicParsing="false" styleClass="CheckBox" text="POISON TO CELL" />
             <TextField fx:id="timeOfPoisonCell" promptText="ENTER TIME" />
             <TextField fx:id="poisonCellDecreaseHP" promptText="ENTER DECREASE HP" />
@@ -100,6 +96,8 @@
             <TextField fx:id="timeOfPower" promptText="ENTER TIME" />
             <TextField fx:id="powerChangeAP" promptText="ENTER CHANGE AP" />
             <TextField fx:id="powerChangeHP" promptText="ENTER CHANGE HP" />
+            <CheckBox fx:id="isRemoveGoodBuffs" mnemonicParsing="false" styleClass="CheckBox" text="REMOVE GOOD BUFFS" />
+            <CheckBox fx:id="isRemoveBadBuffs" mnemonicParsing="false" styleClass="CheckBox" text="REMOVE BAD BUFFS" />
          </children>
       </VBox>
       <Label fx:id="errorLabel" layoutX="583.0" layoutY="49.0" style="-fx-font-size: 20;" />
