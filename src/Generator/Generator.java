@@ -739,6 +739,9 @@ public class Generator {
         minion.setName("GhooleTakCheshm");
 
         setMinionAttackArea(minion, false, false, false, true, false, false, true, true, false, true, true, true, true, false, false, 0);
+        minion.getInformation().setMultipleImpact(true);
+        minion.getInformation().setCanDamageToEnemy(true);
+        minion.getInformation().setDamageToEnemy(2);
         Application.writeJSON(minion, "Data/CollectionItem/Minion/GhooleTakCheshm.json");
     }
 

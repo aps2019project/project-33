@@ -21,8 +21,7 @@ import java.io.IOException;
 
 public class View extends Application {
     private static Stage primaryStage;
-    public static MediaView mediaView;
-    public static AnchorPane mainRoot;
+    public static MediaPlayer previousMediaPlayer;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -88,7 +87,8 @@ public class View extends Application {
         View.primaryStage = primaryStage;
     }
 
-    public static void addMusic(String address, AnchorPane root, boolean repeat){
+    public static void addMusic(String address, AnchorPane root, boolean repeat, boolean clear){
+        if (clear && previousMediaPlayer != null) previousMediaPlayer.stop();
         Media pick = new Media(new File(address).toURI().toString());
         MediaPlayer player = new MediaPlayer(pick);
         MediaView mediaView = new MediaView(player);
@@ -96,5 +96,6 @@ public class View extends Application {
         if (repeat)
             player.setCycleCount(-1);
         player.play();
+        if (clear) previousMediaPlayer = player;
     }
 }

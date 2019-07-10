@@ -19,7 +19,7 @@ public class WinnerPageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        View.addMusic("resources/sfx/victory.m4a", root, false);
+        View.addMusic("resources/sfx/victory.m4a", root, false, false);
 
         continueButton.setOnMouseClicked(event -> {
             try {

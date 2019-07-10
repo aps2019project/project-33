@@ -101,7 +101,7 @@ public class BattleController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //View.addMusic("");
+        View.addMusic("resources/sfx/battle.mp3", rootOfPage, true, true);
 
         try {
             setter();
@@ -510,6 +510,11 @@ class HandUnit {
             //    imageView.setImage(new Image(new FileInputStream("resources/unit_gifs/1.gif")));
             }
         }
+        else {
+            imageView.setImage(null);
+            collectionItem = null;
+            manaLabel.setText(null);
+        }
     }
 
 
@@ -619,7 +624,7 @@ class GraphicalCell {
                 ServerMassage serverMassage = Client.getClient().moveCardInBattle(cell.getX(), cell.getY());
                 battleController.setSelectedCell(null);
                 if (serverMassage.getType() == ServerMassage.Type.Accept) {
-                    View.addMusic("resources/sfx/move.m4a", battleController.getRootOfPage(), false);
+                    View.addMusic("resources/sfx/move.m4a", battleController.getRootOfPage(), false, false);
                     showGraphicalMove(selectedCell, this, battleController);
                 }
             }
@@ -657,7 +662,7 @@ class GraphicalCell {
         if (livingCard != null) {
             ServerMassage serverMassage = Client.getClient().attackInBattle(livingCard.getID());
             if(serverMassage.getType() == ServerMassage.Type.Accept) {
-                View.addMusic("resources/sfx/attack.m4a", battleController.getRootOfPage(), false);
+                View.addMusic("resources/sfx/attack.m4a", battleController.getRootOfPage(), false, false);
             }
         }
         battleController.setSelectedCell(null);

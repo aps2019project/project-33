@@ -135,6 +135,6 @@ public class Graphic {
         for(int i = 0; i < size; i++){
             hash += name.charAt(i);
         }
-        return hash;
+        return hash % 10;
     }
 }

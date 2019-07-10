@@ -53,7 +53,7 @@ public class AccountMenuController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        View.addMusic("resources/sfx/Background.mp3", root, true);
+        View.addMusic("resources/sfx/Background.mp3", root, true, true);
 
         enterButton.setOnMouseClicked(event -> {
             String username = usernameTextField.getText();

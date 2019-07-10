@@ -29,6 +29,7 @@ public class MainMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        View.addMusic("resources/sfx/Background.mp3", anchorPane, true, true);
 
         collection.setOnMouseClicked(event -> {
             try {

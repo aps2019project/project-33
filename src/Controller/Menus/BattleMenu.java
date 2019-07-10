@@ -51,7 +51,7 @@ public class BattleMenu {
             account.getCollection().addCollectionItemToDeck(item.getID(), account.getUsername());
         }
         for (int i = 0; i < 10; i++) {
-            Minion minion = Minion.createMinion(DeckGenerator.minionNames[9], account.getUsername());
+            Minion minion = Minion.createMinion(DeckGenerator.minionNames[16], account.getUsername());
             account.getCollection().addCollectionItemToCollection(minion.getID());
             account.getCollection().addCollectionItemToDeck(minion.getID(), account.getUsername());
         }

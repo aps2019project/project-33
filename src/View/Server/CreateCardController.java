@@ -143,9 +143,6 @@ public class CreateCardController implements Initializable {
                 information.setCanAddHolyBuffToCell(isHolyCell.isSelected());
                 information.setTimeOfHolyBuff(getValue(timeOfHoly.getText()));
                 information.setNumberOfHolyBuff(getValue(numberOfHolies.getText()));
-                information.setCanIncreaseAP(isIncreaseAP.isSelected());
-                information.setAmountOfIncreaseAP(getValue(amountOfIncreaseAP.getText()));
-                information.setIncreaseRemainTime(getValue(timeOfIncreaseAP.getText()));
                 information.setCanDisarmBuffAdd(isDisarm.isSelected());
                 information.setTimeOfDisarmBuff(getValue(timeOfDisarm.getText()));
                 information.setCanWeaknessBuffAdd(isWeakness.isSelected());

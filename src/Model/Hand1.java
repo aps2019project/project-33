@@ -75,6 +75,7 @@ public class Hand1 implements Serializable {
             System.out.println("main deck is empty");
             return;
         }
+        System.out.println(numberOfUsedDeckCollectionItems);
         handCards.add(mainDeck.getCards().get(numberOfUsedDeckCollectionItems));
         numberOfUsedDeckCollectionItems++;
     }
@@ -97,4 +98,9 @@ public class Hand1 implements Serializable {
     public ArrayList<CollectionItem> getHandCards() {
         return handCards;
     }
+
+    public int getNumberOfUsedDeckCollectionItems() {
+        return numberOfUsedDeckCollectionItems;
+    }
+
 }
