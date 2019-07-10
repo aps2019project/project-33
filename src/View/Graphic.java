@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Graphic {
-    public static int numberOfGifs = 69;
+    public static int numberOfGifs = 19;
     public static int numberOfColumns = 5;
     public static ArrayList<VBox> vBoxes = new ArrayList<>();
 
@@ -58,16 +58,13 @@ public class Graphic {
         if(collectionItem instanceof Spell)
             type = ".png";
         String address = "resources/unit_gifs/" + cardName  + type;
-        System.out.println(address + "*******");
         Image image;
         try{
             image = new Image(new FileInputStream(address));
         }
         catch (Exception e){
-            System.out.println(":(((((((((");
-            Random random = new Random();
-            int randomNumber = random.nextInt(18) + 50;
-            address = "resources/unit_gifs/" + randomNumber  + ".gif";
+            int randomNumber = getHash(cardName) % numberOfGifs + 50;
+            address = "resources/unit_gifs/" + randomNumber + ".gif";
             image = new Image(new FileInputStream(address));
         }
         ImageView cardGif = new ImageView(image);
@@ -124,5 +121,14 @@ public class Graphic {
     public static void clearShadows(ArrayList<VBox> cardVboxes) {
         for (VBox vBox : cardVboxes)
             vBox.getStyleClass().remove("SelectedCard");
+    }
+
+    public static int getHash(String name){
+        int hash = 0;
+        int size = name.length();
+        for(int i = 0; i < size; i++){
+            hash += name.charAt(i);
+        }
+        return hash;
     }
 }
