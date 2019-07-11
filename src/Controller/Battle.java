@@ -6,6 +6,7 @@ import Generator.DeckGenerator;
 import Model.*;
 import Model.Buffs.Buff;
 import Model.Buffs.ManaBuff;
+import Model.Buffs.PowerBuff;
 import Model.CollectionItem.*;
 import Model.CollectionItem.CollectionItem;
 import Model.CollectionItem.Flag;
@@ -1238,17 +1239,30 @@ public class Battle implements Serializable {
 
     private ServerMassage cheat(String cheatText, String authToken) {
         synchronized (this){
-            Player player1, player2;
-            if(authToken.equals(playerOn.getAccount().getUsername())){
-                player1 = playerOn;
-                player2 = playerOff;
+            Player cheater = playerOn, other = playerOff;
+            if(playerOff.getAccount().getUsername().equals(authToken)){
+                cheater = playerOff;
+                other = playerOn;
             }
-            else{
-                player1 = playerOff;
-                player2 = playerOn;
+
+            if(cheatText.equals("kill enemy's hero")){
+                other.getHero().setHP(0);
             }
-            if(cheatText.equals("mana"))
-                player1.getMana().addManaBuff(new ManaBuff(100, 10000));
+            if(cheatText.equals("heal hero")){
+                cheater.getHero().setHP(100);
+            }
+            if(cheatText.equals("powerful hero")){
+                PowerBuff powerBuff = new PowerBuff(100, true, false, 0, 20);
+                cheater.getHero().addNewBuff(powerBuff);
+            }
+            if(cheatText.equals("freez enemy's hero")){
+                other.getHero().setCanMove(false);
+                other.getHero().setCanAttack(false);
+                other.getHero().setCanCounterAttack(false);
+            }
+            if (cheatText.equals("mana"))
+                cheater.getMana().addManaBuff(new ManaBuff(100, 10000));
+            System.out.println(cheatText + " " + authToken);
         }
         return new ServerMassage(ServerMassage.Type.Accept, null);
     }
