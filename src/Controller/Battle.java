@@ -5,6 +5,7 @@ import Controller.Server.ServerMassage;
 import Generator.DeckGenerator;
 import Model.*;
 import Model.Buffs.Buff;
+import Model.Buffs.ManaBuff;
 import Model.CollectionItem.*;
 import Model.CollectionItem.CollectionItem;
 import Model.CollectionItem.Flag;
@@ -13,6 +14,7 @@ import Model.CollectionItem.Minion;
 import Model.Enviroment.Cell;
 import Model.Enviroment.Map1;
 
+import javax.swing.text.html.ImageView;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -1236,7 +1238,17 @@ public class Battle implements Serializable {
 
     private ServerMassage cheat(String cheatText, String authToken) {
         synchronized (this){
-            System.out.println(cheatText + " " + authToken);
+            Player player1, player2;
+            if(authToken.equals(playerOn.getAccount().getUsername())){
+                player1 = playerOn;
+                player2 = playerOff;
+            }
+            else{
+                player1 = playerOff;
+                player2 = playerOn;
+            }
+            if(cheatText.equals("mana"))
+                player1.getMana().addManaBuff(new ManaBuff(100, 10000));
         }
         return new ServerMassage(ServerMassage.Type.Accept, null);
     }
